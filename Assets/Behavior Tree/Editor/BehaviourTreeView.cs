@@ -4,7 +4,7 @@ using UnityEditor;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-
+//Charles
 public class BehaviourTreeView : GraphView
 {
     public Action<NodeView> OnNodeSelected;
@@ -80,7 +80,7 @@ public class BehaviourTreeView : GraphView
         DeleteElements(graphElements);
         graphViewChanged += OnGraphViewChanged;
 
-        if(tree.rootNode == null)
+        if (tree.rootNode == null)
         {
             tree.rootNode = tree.CreateNode(typeof(RootNode)) as RootNode;
             EditorUtility.SetDirty(tree);
@@ -95,11 +95,11 @@ public class BehaviourTreeView : GraphView
             var children = tree.GetChildren(n);
             children.ForEach(c =>
             {
-               NodeView parentView = FindNodeView(n);
-               NodeView childView  = FindNodeView(c);
+                NodeView parentView = FindNodeView(n);
+                NodeView childView = FindNodeView(c);
 
-               Edge edge = parentView.output.ConnectTo(childView.input);
-               AddElement(edge);
+                Edge edge = parentView.output.ConnectTo(childView.input);
+                AddElement(edge);
             });
         });
     }
@@ -142,7 +142,7 @@ public class BehaviourTreeView : GraphView
                 tree.AddChild(parentView.node, childView.node);
             });
         }
-        if(graphViewChange.movedElements != null)
+        if (graphViewChange.movedElements != null)
         {
             nodes.ForEach((n) =>
             {

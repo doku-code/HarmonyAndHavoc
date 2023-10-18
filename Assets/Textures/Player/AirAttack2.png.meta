@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -108,7 +108,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: AirAttack2_0
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 64
+        width: 26
+        height: 41
+      alignment: 9
+      pivot: {x: 0.6923077, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8831b4e5d5e8eb245bb035d18ad2d61c
+      internalID: -88247396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack2_1
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 64
+        width: 82
+        height: 40
+      alignment: 9
+      pivot: {x: 0.2195122, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b107e5ef9b1f224a9be9079b804f4d4
+      internalID: -717767826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack2_2
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 64
+        width: 75
+        height: 37
+      alignment: 9
+      pivot: {x: 0.24000001, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7bfc5491c2fc384fa69c0e025f7291e
+      internalID: 266074343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack2_3
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 62
+        width: 53
+        height: 39
+      alignment: 9
+      pivot: {x: 0.33962265, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47e5d6ba9fe3b8d4aa073b030c6f05a4
+      internalID: 1722695031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +203,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      AirAttack2_0: -88247396
+      AirAttack2_1: -717767826
+      AirAttack2_2: 266074343
+      AirAttack2_3: 1722695031
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

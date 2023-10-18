@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -108,7 +108,301 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: DeathBlood_0
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 58
+        width: 27
+        height: 54
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5457ac20ace0c424a8db767acf10abac
+      internalID: 2063495677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_1
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 58
+        width: 40
+        height: 51
+      alignment: 9
+      pivot: {x: 0.45000002, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 131aa48d9ba1c4a40a60f79b811168b7
+      internalID: 1543796956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_2
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 58
+        width: 51
+        height: 57
+      alignment: 9
+      pivot: {x: 0.43137255, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 974dd40595bce2d42abdfd4b93966b81
+      internalID: 217616047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_4
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 58
+        width: 48
+        height: 56
+      alignment: 9
+      pivot: {x: 0.4375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c67e438a65e2c44f9da7feb483c66e3
+      internalID: -772455419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_6
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 58
+        width: 42
+        height: 53
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a853d56283f84634287f31d07a9d6281
+      internalID: 1747202583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_8
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 58
+        width: 43
+        height: 37
+      alignment: 9
+      pivot: {x: 0.44186047, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47c5ad1c992dc3147b9fd17dc521cd3b
+      internalID: 1220916170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_9
+      rect:
+        serializedVersion: 2
+        x: 1096
+        y: 58
+        width: 34
+        height: 37
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 130c31fb0bba1a948b3cd6ad99d4c46e
+      internalID: -2015836796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_10
+      rect:
+        serializedVersion: 2
+        x: 1267
+        y: 58
+        width: 35
+        height: 37
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd8c9eb280ebe8747961073520289c83
+      internalID: -1537028635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_11
+      rect:
+        serializedVersion: 2
+        x: 1436
+        y: 58
+        width: 36
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c6797bba5384a24fa0cd4acc0063d93
+      internalID: -1538507819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_12
+      rect:
+        serializedVersion: 2
+        x: 1606
+        y: 58
+        width: 41
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83a05631f6686184f930538a13a89c1c
+      internalID: 155612789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_13
+      rect:
+        serializedVersion: 2
+        x: 1776
+        y: 58
+        width: 47
+        height: 36
+      alignment: 9
+      pivot: {x: 0.4468085, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22c7f652b5602494aabe73fefa516027
+      internalID: 224833204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_14
+      rect:
+        serializedVersion: 2
+        x: 1947
+        y: 58
+        width: 59
+        height: 33
+      alignment: 9
+      pivot: {x: 0.42372882, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfc27e9bb99f3a146aa66070fbd0482a
+      internalID: -1861642282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_15
+      rect:
+        serializedVersion: 2
+        x: 2116
+        y: 58
+        width: 58
+        height: 27
+      alignment: 9
+      pivot: {x: 0.37931034, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 502dc77261eccb34b9f73626f38a4e99
+      internalID: 347836175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeathBlood_16
+      rect:
+        serializedVersion: 2
+        x: 2286
+        y: 58
+        width: 59
+        height: 15
+      alignment: 9
+      pivot: {x: 0.37288135, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87c7e6888b6aa5c44abcc9f4e927127d
+      internalID: -170954454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +413,24 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DeathBlood_0: 2063495677
+      DeathBlood_1: 1543796956
+      DeathBlood_10: -1537028635
+      DeathBlood_11: -1538507819
+      DeathBlood_12: 155612789
+      DeathBlood_13: 224833204
+      DeathBlood_14: -1861642282
+      DeathBlood_15: 347836175
+      DeathBlood_16: -170954454
+      DeathBlood_2: 217616047
+      DeathBlood_3: 384790650
+      DeathBlood_4: -772455419
+      DeathBlood_5: -1335955163
+      DeathBlood_6: 1747202583
+      DeathBlood_7: -1582197873
+      DeathBlood_8: 1220916170
+      DeathBlood_9: -2015836796
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

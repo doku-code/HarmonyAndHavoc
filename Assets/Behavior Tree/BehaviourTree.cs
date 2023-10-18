@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 #if UNITY_EDITOR
 using UnityEditor.Experimental.GraphView;
 #endif
+//Charles
+
 [CreateAssetMenu]
 public class BehaviourTree : ScriptableObject
 {
@@ -30,9 +32,9 @@ public class BehaviourTree : ScriptableObject
         Undo.RecordObject(this, "Behaviour Tree (CreateNode)");
         nodes.Add(node);
 
-        if(!Application.isPlaying)
+        if (!Application.isPlaying)
         {
-        AssetDatabase.AddObjectToAsset(node, this);
+            AssetDatabase.AddObjectToAsset(node, this);
         }
         Undo.RegisterCreatedObjectUndo(node, "Behaviour Tree (CreateNode)");
 
@@ -48,9 +50,9 @@ public class BehaviourTree : ScriptableObject
         AssetDatabase.SaveAssets();
     }
     public void AddChild(Node parent, Node child)
-    { 
+    {
         DecoratorNode decorator = parent as DecoratorNode;
-        if(decorator)
+        if (decorator)
         {
             Undo.RecordObject(decorator, "Behaviour Tree (AddChild");
             decorator.child = child;
@@ -123,7 +125,7 @@ public class BehaviourTree : ScriptableObject
     }
     public void Traverse(Node node, System.Action<Node> visiter)
     {
-        if(node)
+        if (node)
         {
             visiter.Invoke(node);
             var children = GetChildren(node);

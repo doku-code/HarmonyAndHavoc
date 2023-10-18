@@ -1,9 +1,10 @@
 using System;
 using UnityEngine.UIElements;
 using UnityEditor;
+//Charles
 public class InspectorView : VisualElement
 {
-    public new class UxmlFactory : UxmlFactory<InspectorView, VisualElement.UxmlTraits>{}
+    public new class UxmlFactory : UxmlFactory<InspectorView, VisualElement.UxmlTraits> { }
 
     Editor editor;
     public InspectorView()
@@ -17,11 +18,13 @@ public class InspectorView : VisualElement
         UnityEngine.Object.DestroyImmediate(editor);
 
         editor = Editor.CreateEditor(nodeView.node);
-        IMGUIContainer container = new IMGUIContainer(() => { 
-            if(editor.target)
+        IMGUIContainer container = new IMGUIContainer(() =>
+        {
+            if (editor.target)
             {
                 editor.OnInspectorGUI();
-            }});
+            }
+        });
         Add(container);
     }
 }

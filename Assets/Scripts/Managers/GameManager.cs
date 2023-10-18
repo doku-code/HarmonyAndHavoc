@@ -17,6 +17,6 @@ namespace AF
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
-        }\
+        }
     }
 }

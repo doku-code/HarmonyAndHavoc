@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Charles 
+//Charles
 [System.Serializable]
 public class RandomFailure : ActionNode
 {

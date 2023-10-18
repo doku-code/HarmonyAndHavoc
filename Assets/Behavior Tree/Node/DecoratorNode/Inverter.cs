@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Charles
 
 [System.Serializable]
 public class Inverter : DecoratorNode
@@ -28,7 +29,7 @@ public class Inverter : DecoratorNode
             case State.FAILURE:
                 return State.SUCCESS;
             case State.SUCCESS:
-                return State.FAILURE    ;
+                return State.FAILURE;
         }
         return State.FAILURE;
     }
