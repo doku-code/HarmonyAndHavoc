@@ -46,15 +46,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Dash"",
-                    ""type"": ""Button"",
-                    ""id"": ""b9796594-904f-4632-a980-21a03394d74e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""87c1551b-9792-43f0-9690-6dd086331f2c"",
@@ -82,9 +73,36 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ComboAttack"",
+                    ""name"": ""Knowledge1"",
+                    ""type"": ""Button"",
+                    ""id"": ""b9796594-904f-4632-a980-21a03394d74e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Knowledge2"",
                     ""type"": ""Button"",
                     ""id"": ""9ca74c14-c4a6-4e59-81cb-aae00018338b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Knowledge3"",
+                    ""type"": ""Button"",
+                    ""id"": ""1350a012-6c9f-414c-a10b-a0a520528efd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Knowledge4"",
+                    ""type"": ""Button"",
+                    ""id"": ""c76af7ee-c931-41df-a38e-bda8a97daa89"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -308,28 +326,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5599658c-6989-4724-8993-cf512790b312"",
-                    ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bd824ea6-656c-49b5-8d73-be2e065e05e3"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""32488cd8-1e2f-48d1-bd3c-76f8415b6ad0"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
@@ -375,7 +371,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7c55cc57-f8db-4980-8f90-4be5897e8e14"",
-                    ""path"": ""<Keyboard>/j"",
+                    ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -386,7 +382,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8ae921be-79ca-495f-bf47-1bf15d3cb88f"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -397,22 +393,22 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0d4c487e-b5ca-4de9-85af-5e1bda767e9d"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ComboAttack"",
+                    ""action"": ""Knowledge2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""4bd8bbb2-8f96-4ed5-b4e4-ccf3de9c6ac1"",
-                    ""path"": ""<Keyboard>/k"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ComboAttack"",
+                    ""action"": ""Knowledge2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -430,7 +426,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7cb371c2-dea0-4106-a093-ed25b47b8818"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -481,6 +477,72 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5599658c-6989-4724-8993-cf512790b312"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Knowledge1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd824ea6-656c-49b5-8d73-be2e065e05e3"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Knowledge1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""514cc57d-f8f4-4009-a656-b770d937a567"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Knowledge3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e73f4711-826b-4b53-bb80-527d6b1bf63f"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Knowledge3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbe714d9-c515-4e2c-bf69-bd4017f38e7b"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Knowledge4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0febcf3-b345-42f0-a2db-8b67e8448f99"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Knowledge4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -491,11 +553,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Cancel = m_Player.FindAction("Cancel", throwIfNotFound: true);
         m_Player_BasicAttack = m_Player.FindAction("BasicAttack", throwIfNotFound: true);
-        m_Player_ComboAttack = m_Player.FindAction("ComboAttack", throwIfNotFound: true);
+        m_Player_Knowledge1 = m_Player.FindAction("Knowledge1", throwIfNotFound: true);
+        m_Player_Knowledge2 = m_Player.FindAction("Knowledge2", throwIfNotFound: true);
+        m_Player_Knowledge3 = m_Player.FindAction("Knowledge3", throwIfNotFound: true);
+        m_Player_Knowledge4 = m_Player.FindAction("Knowledge4", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_SlideDown = m_Player.FindAction("SlideDown", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
@@ -562,11 +626,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Cancel;
     private readonly InputAction m_Player_BasicAttack;
-    private readonly InputAction m_Player_ComboAttack;
+    private readonly InputAction m_Player_Knowledge1;
+    private readonly InputAction m_Player_Knowledge2;
+    private readonly InputAction m_Player_Knowledge3;
+    private readonly InputAction m_Player_Knowledge4;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_SlideDown;
     private readonly InputAction m_Player_Inventory;
@@ -576,11 +642,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
         public InputAction @BasicAttack => m_Wrapper.m_Player_BasicAttack;
-        public InputAction @ComboAttack => m_Wrapper.m_Player_ComboAttack;
+        public InputAction @Knowledge1 => m_Wrapper.m_Player_Knowledge1;
+        public InputAction @Knowledge2 => m_Wrapper.m_Player_Knowledge2;
+        public InputAction @Knowledge3 => m_Wrapper.m_Player_Knowledge3;
+        public InputAction @Knowledge4 => m_Wrapper.m_Player_Knowledge4;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @SlideDown => m_Wrapper.m_Player_SlideDown;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
@@ -599,9 +667,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Dash.started += instance.OnDash;
-            @Dash.performed += instance.OnDash;
-            @Dash.canceled += instance.OnDash;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
@@ -611,9 +676,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @BasicAttack.started += instance.OnBasicAttack;
             @BasicAttack.performed += instance.OnBasicAttack;
             @BasicAttack.canceled += instance.OnBasicAttack;
-            @ComboAttack.started += instance.OnComboAttack;
-            @ComboAttack.performed += instance.OnComboAttack;
-            @ComboAttack.canceled += instance.OnComboAttack;
+            @Knowledge1.started += instance.OnKnowledge1;
+            @Knowledge1.performed += instance.OnKnowledge1;
+            @Knowledge1.canceled += instance.OnKnowledge1;
+            @Knowledge2.started += instance.OnKnowledge2;
+            @Knowledge2.performed += instance.OnKnowledge2;
+            @Knowledge2.canceled += instance.OnKnowledge2;
+            @Knowledge3.started += instance.OnKnowledge3;
+            @Knowledge3.performed += instance.OnKnowledge3;
+            @Knowledge3.canceled += instance.OnKnowledge3;
+            @Knowledge4.started += instance.OnKnowledge4;
+            @Knowledge4.performed += instance.OnKnowledge4;
+            @Knowledge4.canceled += instance.OnKnowledge4;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -633,9 +707,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Dash.started -= instance.OnDash;
-            @Dash.performed -= instance.OnDash;
-            @Dash.canceled -= instance.OnDash;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
@@ -645,9 +716,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @BasicAttack.started -= instance.OnBasicAttack;
             @BasicAttack.performed -= instance.OnBasicAttack;
             @BasicAttack.canceled -= instance.OnBasicAttack;
-            @ComboAttack.started -= instance.OnComboAttack;
-            @ComboAttack.performed -= instance.OnComboAttack;
-            @ComboAttack.canceled -= instance.OnComboAttack;
+            @Knowledge1.started -= instance.OnKnowledge1;
+            @Knowledge1.performed -= instance.OnKnowledge1;
+            @Knowledge1.canceled -= instance.OnKnowledge1;
+            @Knowledge2.started -= instance.OnKnowledge2;
+            @Knowledge2.performed -= instance.OnKnowledge2;
+            @Knowledge2.canceled -= instance.OnKnowledge2;
+            @Knowledge3.started -= instance.OnKnowledge3;
+            @Knowledge3.performed -= instance.OnKnowledge3;
+            @Knowledge3.canceled -= instance.OnKnowledge3;
+            @Knowledge4.started -= instance.OnKnowledge4;
+            @Knowledge4.performed -= instance.OnKnowledge4;
+            @Knowledge4.canceled -= instance.OnKnowledge4;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -678,11 +758,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnDash(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnBasicAttack(InputAction.CallbackContext context);
-        void OnComboAttack(InputAction.CallbackContext context);
+        void OnKnowledge1(InputAction.CallbackContext context);
+        void OnKnowledge2(InputAction.CallbackContext context);
+        void OnKnowledge3(InputAction.CallbackContext context);
+        void OnKnowledge4(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnSlideDown(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
