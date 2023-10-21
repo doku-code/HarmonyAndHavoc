@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "b9796594-904f-4632-a980-21a03394d74e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "87c1551b-9792-43f0-9690-6dd086331f2c",
@@ -60,9 +51,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ComboAttack",
+                    "name": "Knowledge1",
+                    "type": "Button",
+                    "id": "b9796594-904f-4632-a980-21a03394d74e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Knowledge2",
                     "type": "Button",
                     "id": "9ca74c14-c4a6-4e59-81cb-aae00018338b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Knowledge3",
+                    "type": "Button",
+                    "id": "1350a012-6c9f-414c-a10b-a0a520528efd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Knowledge4",
+                    "type": "Button",
+                    "id": "c76af7ee-c931-41df-a38e-bda8a97daa89",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -286,28 +304,6 @@
                 },
                 {
                     "name": "",
-                    "id": "5599658c-6989-4724-8993-cf512790b312",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bd824ea6-656c-49b5-8d73-be2e065e05e3",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "32488cd8-1e2f-48d1-bd3c-76f8415b6ad0",
                     "path": "<Gamepad>/start",
                     "interactions": "",
@@ -353,7 +349,7 @@
                 {
                     "name": "",
                     "id": "7c55cc57-f8db-4980-8f90-4be5897e8e14",
-                    "path": "<Keyboard>/j",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -364,7 +360,7 @@
                 {
                     "name": "",
                     "id": "8ae921be-79ca-495f-bf47-1bf15d3cb88f",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -375,22 +371,22 @@
                 {
                     "name": "",
                     "id": "0d4c487e-b5ca-4de9-85af-5e1bda767e9d",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ComboAttack",
+                    "action": "Knowledge2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "4bd8bbb2-8f96-4ed5-b4e4-ccf3de9c6ac1",
-                    "path": "<Keyboard>/k",
+                    "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ComboAttack",
+                    "action": "Knowledge2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -408,7 +404,7 @@
                 {
                     "name": "",
                     "id": "7cb371c2-dea0-4106-a093-ed25b47b8818",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -457,6 +453,72 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5599658c-6989-4724-8993-cf512790b312",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Knowledge1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd824ea6-656c-49b5-8d73-be2e065e05e3",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Knowledge1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "514cc57d-f8f4-4009-a656-b770d937a567",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Knowledge3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e73f4711-826b-4b53-bb80-527d6b1bf63f",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Knowledge3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fbe714d9-c515-4e2c-bf69-bd4017f38e7b",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Knowledge4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0febcf3-b345-42f0-a2db-8b67e8448f99",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Knowledge4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

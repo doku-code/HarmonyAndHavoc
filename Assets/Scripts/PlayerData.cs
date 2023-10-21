@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using AF;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace AF
@@ -17,39 +15,68 @@ namespace AF
         COMBO_ATTACK,
         DEFAULT
     }
+
+    public enum AvalaibleKnowledgePosition
+    {
+        NOT_AVALAIBLE,
+        POSITION1,
+        POSITION2,
+        POSITION3,
+        POSITION4
+    }
     
     [CreateAssetMenu(fileName = "PlayerData", menuName = "PlayerData")]
     public class PlayerData : ScriptableObject
     {
-        
         [SerializeField] private int orderUpgradeValue;
         [SerializeField] private int playerBaseDamage;
         [SerializeField] private Knowledge[] knowledgeBank;
         public delegate void ParametersLessDelegate();
         public ParametersLessDelegate OnDeadDelegate;
 
-        public Dictionary<KnowledgeID, bool> KnownKnowledgeDictionary;
-        public Dictionary<KnowledgeID, bool> AvalaibleKnowledgeDictionary;
+        //Trouver un moyen d'initialiser les dictionnaire avec le JSON
+        //public Dictionary<KnowledgeID, bool> knownKnowledgeDictionary;
+        public Dictionary<KnowledgeID, bool> KnownKnowledgeDictionary { get; set; }
+        public Dictionary<KnowledgeID, AvalaibleKnowledgePosition> AvalaibleKnowledgeDictionary;
         public Dictionary<KnowledgeID, Knowledge> EveryKnowledgeDictionary;
         
-        
         private int knowledgeSlots;
-        public int KnowledgeSlots { get; set; }
+        public int KnowledgeSlots
+        {
+            get { return knowledgeSlots;}
+            set { knowledgeSlots = value; }
+        }
 
         private int actualOrder;
-        public int ActualOrder { get; set; }
+        public int ActualOrder         
+        {
+            get { return actualOrder;}
+            set { actualOrder = value; }
+        }
 
         private int maxOrder;
-        public int MaxOrder { get; set; }
+        public int MaxOrder         {
+            get { return maxOrder;}
+            set { maxOrder = value; }
+        }
 
         private int actualChaos;
-        public int ActualChaos { get; set; }
+        public int ActualChaos         {
+            get { return actualChaos;}
+            set { actualChaos = value; }
+        }
 
         private int maxChaos;
-        public int MaxChaos { get; set; }
+        public int MaxChaos         {
+            get { return maxChaos;}
+            set { maxChaos = value; }
+        }
 
         private int gold;
-        public int Gold { get; set; }
+        public int Gold         {
+            get { return gold;}
+            set { gold = value; }
+        }
 
         private int orderFragments;
         public int OrderFragments
@@ -64,19 +91,25 @@ namespace AF
         }
 
         private int weaponUpgrade;
-        public int WeaponUpgdrade { get; set; }
+        public int WeaponUpgdrade         {
+            get { return weaponUpgrade;}
+            set { weaponUpgrade = value; }
+        }
 
         private int armorUpgrade;
-        public int ArmorUpgrade { get; set; }
+        public int ArmorUpgrade         {
+            get { return armorUpgrade;}
+            set { armorUpgrade = value; }
+        }
 
-        private void Awake()
+        private void InitializeData()
         {
             for (int i = 0; i < Enum.GetNames(typeof(KnowledgeID)).Length; i++)
             {
                 KnowledgeID currentID = (KnowledgeID)i;
                 
                 KnownKnowledgeDictionary.Add(currentID , false);
-                AvalaibleKnowledgeDictionary.Add(currentID, false);
+                AvalaibleKnowledgeDictionary.Add(currentID, AvalaibleKnowledgePosition.NOT_AVALAIBLE);
                 
                 for (int j = 0; j < knowledgeBank.Length; j++)
                 {

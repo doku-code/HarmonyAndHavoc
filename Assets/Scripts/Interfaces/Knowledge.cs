@@ -9,6 +9,6 @@ namespace AF
     {
         public int damageBoost;
         public KnowledgeID ID;
-        public void ExecuteKnowledge() { }
+        public abstract void ExecuteKnowledge();
     }
 }
