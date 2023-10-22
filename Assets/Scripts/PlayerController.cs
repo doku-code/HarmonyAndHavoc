@@ -1,3 +1,4 @@
+using AF;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -22,41 +23,50 @@ namespace JFM
         public WallJumpingState _wallJumpingState;
         public WallGrippingState _wallGrippingState;
         public AirborneState _airborneState;
+        public CrouchedState _crouchedState;
+        public CrouchedAttackState _crouchedAttackState;
+        public BasicAttackState _basicAttackState;
         public DashingState _dashingState;
         public LadderClimbingState _ladderClimbingState;
-        public LedgeClimbingState _ledgeClimbingState;
-
-        /*public FallingState _fallingState;
         public LandingState _landingState;
-        */
+
         [SerializeField] private float walkSpeed = 1.0f;
         [SerializeField] private float walkAcceleration = 10.0f;
         //[SerializeField] private float runSpeed = 4.0f;
         [SerializeField] private float ladderSpeed = 3.0f;
         [SerializeField] private float ladderAcceleration = 10.0f;
+        [SerializeField] private float groundLadderDistance = 1.2f;
         [SerializeField] private float jumpForce = 3.0f;
         [SerializeField] private int baseNumJumps = 1;
         [SerializeField] private float airSpeedMultiplier = 100.0f;
-        [SerializeField] private float dashForce = 3.0f;
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private LayerMask ladderLayer;
 
         [SerializeField] private float groundDistance = 1.0f;
+        [SerializeField] private Vector2 groundBoxSize = new Vector2(0.95f, 0.01f);
         [SerializeField] private float wallDistance = 0.6f;
-
         [SerializeField] private float wallJumpDuration = 1.0f;
         [SerializeField] private float ledgeAnimationDuration = 1.0f;
-        [SerializeField] private float dashDuration = 1.0f;
+        [SerializeField] private float dashForce = 3.0f;
+        [SerializeField] private float groundDashForce = 60.0f;
+        [SerializeField] private float groundDashDeceleration = 1000.0f;
+        [SerializeField] private float groundDashBailOutNormalizedTime = 0.4f;
+        // In degrees
+        [SerializeField] private float groundDashAngle = 0.0f;
+        // In degrees
+        [SerializeField] private float dashDiagAngle = 45.0f;        
         [SerializeField] private float wallGripForce = 1000.0f;        
-
         // In degrees
         [SerializeField] private float wallJumpAngle = 45.0f;
-        // In degrees
-        [SerializeField] private float dashAngle = 0.0f;
-        // In degrees
-        [SerializeField] private float dashDiagAngle = 45.0f;
+
+        [SerializeField] private float heightDamage = 3.0f;
+        [SerializeField] private float landingHeight = 2.0f;
+
+        private float highestAirborneY;
 
         private int numJumps;
+        private bool hasDashed;
+        private Vector2 dashDirection;
 
         private bool isFacingRight = true;
         private Vector2 moveInput;
@@ -66,8 +76,46 @@ namespace JFM
         
         private GameObject frontWall;
         private GameObject beneathObject;
+        private Vector2 beneathObjectPosition;
 
         private bool isGrippingToWall;
+
+        [SerializeField] private Vector2 spriteBoxProbeSize = new Vector2(0.9414063f, 0.3f);
+        private Vector2 colliderOffset;
+        private Vector2 colliderSize;
+        [SerializeField] private Vector2 spriteBoxProbeOffset = new Vector2(0.0f, 0.0f);        
+
+        [SerializeField] private PlayerData playerData;
+        private Knowledge lastKnowledge;
+
+        private string[] knowledgeInputNames =
+        {
+            "Knowledge1",
+            "Knowledge2",
+            "Knowledge3",
+            "Knowledge4"
+        };
+
+        private int[] knowledgeIndices;
+
+        private bool _isGrounded;
+        private Vector2 _groundDirection;
+        private Vector2 _groundDirection2;
+
+        public bool IsEventGrounded
+        {
+            get => _isGrounded;
+        }
+
+        public Vector2 GroundDirection
+        {
+            get => _groundDirection;
+        }
+
+        public Vector2 GroundDirection2
+        {
+            get => _groundDirection2;
+        }
 
         public float WalkSpeed
         {
@@ -78,11 +126,6 @@ namespace JFM
         {
             get => walkAcceleration;
         }
-
-        /* public float RunSpeed
-         {
-             get => runSpeed;
-         }*/
 
         public float JumpForce
         {
@@ -118,17 +161,12 @@ namespace JFM
         {
             get => ledgeAnimationDuration;
         }
-
-        public float DashDuration
-        {
-            get => dashDuration;
-        }
-
+                
         public bool IsFacingRight
         {
             get => isFacingRight;
         }
-
+        
         public LayerMask GroundLayer
         {
             get => groundLayer;
@@ -139,125 +177,187 @@ namespace JFM
             get => ladderLayer;
         }
 
+        public Vector2 ColliderOffset
+        {
+            get => colliderOffset;
+        }
+        public Vector2 ColliderSize
+        {
+            get => colliderSize;
+        }
+
+        public Vector2 DashDirection
+        {
+            get => dashDirection;
+        }
+
+        public float GroundDashDeceleration
+        {
+            get => groundDashDeceleration;
+        }
+
+        public float GroundDashBailOutNormalizedTime
+        {
+            get => groundDashBailOutNormalizedTime;
+        }
+
+        public PlayerData Data 
+        { 
+            get => playerData; 
+        }
+
         public bool GetIsGrippingToWall()
         { 
             return isGrippingToWall; 
+        }
+
+        public Vector2 GetBeneathObjectPosition()
+        {
+            return beneathObjectPosition;
+        }
+
+        public void SetHighestAirborneY()
+        {
+            SetHighestAirborneY(false);
+        }
+
+        public void SetHighestAirborneY(bool force)
+        {
+            if (highestAirborneY < transform.position.y || force)
+            {
+                highestAirborneY = transform.position.y;
+            }
         }
 
         public void Turn()
         {
             isFacingRight = !isFacingRight;
             GetComponent<SpriteRenderer>().flipX = !isFacingRight;
-        }  
+            rb.velocity = new Vector2(0.0f, rb.velocity.y);
+        }
 
         public bool CanTurn()
         {
-            //Debug.Log($"isFacingRight ({isFacingRight}) && moveInput.x ({moveInput.x})");
             return (isFacingRight && moveInput.x < 0) || (!isFacingRight && moveInput.x > 0);
         }
 
         public Vector2 MoveInput
         {
             get => moveInput;
+            set => moveInput = value;
         }
 
-        public bool CanJump()
+        public void SetAirborneInfo()
         {
-            //Debug.Log($" rb.velocity.y = {rb.velocity.y}");
-            bool grounded = IsGrounded();
+            bool grounded = IsCastGrounded() && rb.velocity.y < 0.0f;
             bool grippingToWall = IsGrippingToWall();
             if (grounded || grippingToWall)
             {
-                //Debug.Log("OH Non");
                 numJumps = baseNumJumps;
-            }
+                hasDashed = false;
+            }            
+        }
 
-            return numJumps > 0;
+        public bool WillJump()
+        {            
+            return inputTriggers["Jump"] && numJumps > 0;
         }
 
         public void Jump()
         {           
             numJumps--;
-            rb.drag = 0.0f;
-            //rb.velocity = new Vector2(rb.velocity.x, 0.0f);
-            //Debug.Log($"rb.velocity (before)={rb.velocity}");
+            
             if (isGrippingToWall)
             {
-                float angle = wallJumpAngle * Mathf.Deg2Rad;// Mathf.PI / 2.0f * 0.5f;// 8.0f / 9.0f;
+                float angle = wallJumpAngle * Mathf.Deg2Rad;
                 Debug.Log($"JUMP from wall {IsFacingRight}  {(IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle)}  {Mathf.Cos(angle)}");
                 Vector3 v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * jumpForce * 1.0f;
-                rb.AddForce(v, ForceMode2D.Impulse);
-                //moveInput += new Vector2((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * jumpForce * 1.0f;
-                Debug.Log($"v={v}");
+                rb.AddForce(v, ForceMode2D.Impulse);                
             }
             else
             {                    
-                rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
-                //moveInput += Vector2.up * jumpForce;
+                rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);                
             }
-            //Debug.Log($"numJumps = {numJumps}  rb.velocity (after) ={rb.velocity}");
-            
+        }                
+
+        // Will the Player go in Landing state?
+        public bool WillLand()
+        {
+            float highestY = highestAirborneY;
+            highestAirborneY = transform.position.y;
+
+            if (highestY - transform.position.y > heightDamage )
+            {
+                Debug.Log(" ~ ~ ~ D A M A G E ~ ~ ~");
+
+                return true;
+            }
+
+            if (highestY - transform.position.y > landingHeight)
+            {
+                return true;
+            }
+
+            return false;
+        }        
+
+        public bool GetInputTriggersFromKnowledge(KnowledgeID knowledge)
+        {
+            return inputTriggers[knowledgeInputNames[knowledgeIndices[(int)knowledge]]];
+        }
+
+        public void SetInputTriggersFromKnowledge(KnowledgeID knowledge, bool value)
+        {
+            inputTriggers[knowledgeInputNames[knowledgeIndices[(int)knowledge]]] = value;
         }
         
-        public bool CanDash()
+        public bool WillDash()
         {
-            return inputTriggers["Dash"] && moveInput != Vector2.zero;
+            int knowledgeIndex = (int)playerData.AvalaibleKnowledgeDictionary[KnowledgeID.DASH];
+            
+            return !hasDashed && knowledgeIndex > 0 && inputTriggers[knowledgeInputNames[knowledgeIndex - 1]] && moveInput != Vector2.zero;
         }
 
         public void Dash()
         {
-            //numJumps--;
-
-            //Debug.Log($"rb.velocity (before)={rb.velocity}");
+            hasDashed = true;
+            
             if (CanTurn())
             {
-                //Debug.Log("Can Turn");
                 Turn();
             }
+            
             Vector3 v;
             if (moveInput.y != 0.0f)
             {
                 if (moveInput.x != 0.0f)
                 {
                     float angle = dashDiagAngle * Mathf.Deg2Rad;
-                    Debug.Log($"Dashing {IsFacingRight}  {(IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle)}  {Mathf.Cos(angle)}");
                     v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * dashForce;
                 }
                 else
                 {
-                    //Debug.Log($"Dashing {IsFacingRight}  {(IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle)}  {Mathf.Cos(angle)}");
                     v = Vector3.up * moveInput.y * dashForce;                    
                 }
             }
             else
             {
-                float angle = dashAngle * Mathf.Deg2Rad;
-                Debug.Log($"Dashing {IsFacingRight}  {(IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle)}  {Mathf.Cos(angle)}");
-                v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * dashForce;
+                float angle = groundDashAngle * Mathf.Deg2Rad;
+                v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * groundDashForce;
             }
-            rb.AddForce(v, ForceMode2D.Impulse);            
-            Debug.Log($"v={v}");
-            
-            //Debug.Log($"numJumps = {numJumps}  rb.velocity (after) ={rb.velocity}");
+            rb.AddForce(v, ForceMode2D.Impulse);
 
-        }
+            dashDirection = moveInput;
 
-        /*public bool IsInFrontOfWall()
-        {
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0, 0.0f), isFacingRight ? Vector2.right : -Vector2.right, wallDistance, groundLayer);
-            //Debug.DrawRay(transform.position + new Vector3(0, 0.0f, 0.0f), (isFacingRight ? Vector2.right : -Vector2.right) * wallDistance, Color.green);
-
-            return (hit.collider is not null);
-        }
-        */
+            moveInput = Vector2.zero;                     
+        }             
         
         private void SetFrontWallInfo()
         {
             if (frontWall is null)
             {
                 RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0, 0.0f), isFacingRight ? Vector2.right : -Vector2.right, wallDistance, groundLayer);
-                Debug.DrawRay(transform.position + new Vector3(0, 0.0f, 0.0f), (isFacingRight ? Vector2.right : -Vector2.right) * wallDistance, Color.green);
-
+                
                 if(hit.collider is null)
                 {
                     return;
@@ -271,108 +371,159 @@ namespace JFM
         {
             if (beneathObject is null)
             {
-                RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0, 0.0f), isFacingRight ? Vector2.right : -Vector2.right, 0.0f, ladderLayer);
-                //Debug.DrawRay(transform.position + new Vector3(0, 0.0f, 0.0f), (isFacingRight ? Vector2.right : -Vector2.right) * 0.01f, Color.green);
-
+                RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y) + spriteBoxProbeOffset, spriteBoxProbeSize, 0.0f, isFacingRight ? Vector2.right : -Vector2.right, 0.0f, ladderLayer);
+                
                 if (hit.collider is null)
                 {
-                    //Debug.Log("Oh non ^$%$#%&@$%@%^$%&");
+                    beneathObject = null;
+
                     return;
                 }
 
                 beneathObject = hit.transform.gameObject;
+                beneathObjectPosition = new Vector2(Mathf.Floor(hit.point.x), Mathf.Floor(hit.point.y));
             }
         }
 
         public bool IsInFrontOfObjectLayer(Vector2 offset, int layerMask)
         {            
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + offset, isFacingRight ? Vector2.right : -Vector2.right, 0.0f, layerMask);
-            //Debug.DrawRay(transform.position + new Vector3(0, 0.0f, 0.0f), (isFacingRight ? Vector2.right : -Vector2.right) * 0.01f, Color.green);
-
+            
             return (hit.collider is not null);            
         }
 
-        // Checks front wall
         public bool CanClimbLadder()
         {
             SetBeneathObjectInfo();
+            
+            return (beneathObject is not null && (1 << beneathObject.layer) == (int)ladderLayer);
+        }
 
-            if (beneathObject is not null)
-            {
-                //Debug.Log($"%%%% Test {moveInput.x} {hit.collider is not null}");
-                //Debug.Log($"%%%% {1 << beneathObject.layer} == {(int)ladderLayer} {moveInput.x == 0.0f} {Mathf.Abs(rb.velocity.x) <= 0.5f}");
-            }
-            return (beneathObject is not null && (1 << beneathObject.layer) == (int)ladderLayer);// && moveInput.x == 0.0f);//&& Mathf.Abs(rb.velocity.x) <= 0.5f);
+        public bool WillClimbLadder()
+        {
+            SetBeneathObjectInfo();
+            
+            return (moveInput.x == 0.0f && moveInput.y != 0.0f && beneathObject is not null && (1 << beneathObject.layer) == (int)ladderLayer);
+        }
+
+        public bool WillClimbDownLadder()
+        {                        
+            return (moveInput.x == 0.0f && moveInput.y < 0.0f && Raycast(true, ladderLayer, Vector2.zero, groundLadderDistance));
         }
 
         public bool CanGripToWall()
         {
             SetFrontWallInfo();
-
-            //Debug.Log($"%%%% Test {moveInput.x} {hit.collider is not null}");
-
+            
             return (frontWall is not null && (1 << frontWall.layer) == (int)groundLayer && ((isFacingRight && moveInput.x > 0) || (!isFacingRight && moveInput.x < 0)) && Mathf.Abs(rb.velocity.x) <= 0.5f);
         }
 
         // Checks back wall
         public bool IsGrippingToWall()
-        {
+        {            
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), isFacingRight ? -Vector2.right : Vector2.right, wallDistance, groundLayer);
             
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0, 0.0f), isFacingRight ? -Vector2.right : Vector2.right, groundDistance, groundLayer);
-            //Debug.DrawRay(transform.position + new Vector3(0, 0.0f, 0.0f), (isFacingRight ? -Vector2.right : Vector2.right) * groundDistance, Color.blue);
-            //return hit.transform is not null && hit.transform.gameObject.layer == groundLayer && ((isFacingRight && moveInput.x > 0) || (!isFacingRight && moveInput.x < 0));
-            //Debug.Log($"%%%% Test {moveInput.x} {hit.collider is not null}");
-
             if (hit.collider is not null && ((!isFacingRight && moveInput.x > 0) || (isFacingRight && moveInput.x < 0)) && Mathf.Abs(rb.velocity.x) <= 0.5f)
             {
-                isGrippingToWall = true;
-                //Debug.Log("YEAH");
+                isGrippingToWall = true;                
             }
             else
             {
-                //Debug.Log($"hit.collider = {hit.collider} && (({!isFacingRight} && {moveInput.x > 0}) || ({isFacingRight} && {moveInput.x < 0})) && {rb.velocity.x} <= 0.0001f {Mathf.Abs(rb.velocity.x) <= 0.0001f}");
                 isGrippingToWall = false;
             }
-
 
             return isGrippingToWall;
         }
 
-
-        public bool IsGrounded() 
+        public bool IsCastGrounded()
         {
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0, 0.2f), Vector2.down, 1.325f, groundLayer);
-            //Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0.0f), Vector3.down * 1.325f, Color.blue);
-
-            if (hit.collider is null || rb.velocity.y > 0.0f)
-            //if (hit.collider is null || moveInput.y > 0.0f)
-            {
-                isGrounded = false;
-                ground = null;
-                //Debug.Log("Not Grounded.");
-                return false;
-            }
-
-            //if (hit.transform is null && hit.transform.gameObject.layer == groundLayer)
-            //{
-
-            isGrounded = true;
-            ground = hit.collider.gameObject;
-            //Debug.Log("Grounded.");
-            return true;
-            /*} 
-            else
-            {
-                isGrounded = false;
-                Debug.Log("Not Grounded.");
-                return false;
-            }*/
+            return IsCastGrounded(false);
         }
 
+        public bool IsCastGrounded(bool limitToRay)
+        {
+            return IsCastGrounded(limitToRay, groundLayer | ladderLayer, Vector2.zero);
+        }
+
+        public bool IsCastGrounded(bool limitToRay, int layerMask)
+        {
+            return IsCastGrounded(limitToRay, layerMask, Vector2.zero);
+        }
+
+        public bool IsCastGrounded(bool limitToRay, int layerMask, Vector2 offset) 
+        {
+            RaycastHit2D hit;
+            if (limitToRay)
+            {
+                hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + offset, Vector2.down, groundDistance, layerMask);
+            }
+            else
+            {
+                hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y) + offset, groundBoxSize, 0.0f, Vector2.down, groundDistance, layerMask);
+            }
+
+            return (hit.collider is not null);// && rb.velocity.y < -0.001f);            
+        }
+
+        public bool Raycast(bool limitToRay, int layerMask, Vector2 offset, float distance)
+        {
+            RaycastHit2D hit;
+            if (limitToRay)
+            {
+                hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + offset, Vector2.down, distance, layerMask);
+            }
+            else
+            {
+                hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y) + offset, groundBoxSize, 0.0f, Vector2.down, distance, layerMask);
+            }
+
+            return (hit.collider is not null);
+        }
+
+        public bool IsHorizontalDirection(Vector2 direction)
+        {
+            return direction == Vector2.right || direction == Vector2.left;
+        }
+
+        public bool IsVerticalDirection(Vector2 direction)
+        {
+            return direction == Vector2.up || direction == Vector2.down;
+        }
+
+        // Event "isGrounded" is used for edge cases that aren't correctly covered by ray- or boxcasts. For example, 
+        // the sprite boxcast size ("GroundBoxSize") cannot be too wide (too close to 1) as it breaks the WallSlide cast.
+        public void OnCollisionEnter2D(Collision2D collision)
+        {
+            _groundDirection = collision.GetContact(0).normal;
+            if (collision.contactCount > 1)
+            {
+                _groundDirection2 = collision.GetContact(1).normal;
+                for (int i = 1; i < collision.contactCount; i++)
+                {
+                    //Debug.Log($"_groundDirection{i+1}={collision.GetContact(1).normal})");
+                }
+            }
+            else
+            {
+                _groundDirection2 = Vector2.zero;
+            }
+            
+            _isGrounded = true;
+        }
+
+        public void OnCollisionExit2D(Collision2D collision)
+        {
+            _isGrounded = false;
+        }
+        
         void Awake()
         {
             _animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
+                        
+            BoxCollider2D bc = GetComponent<BoxCollider2D>();
+            colliderOffset = bc.offset;
+            colliderSize = bc.size;
 
             InputSetup();
             _walkingState = new WalkingState(_animator, this);
@@ -380,10 +531,22 @@ namespace JFM
             _wallJumpingState = new WallJumpingState(_animator, this);
             _wallGrippingState = new WallGrippingState(_animator, this);
             _airborneState = new AirborneState(_animator, this);
+            _crouchedState = new CrouchedState(_animator, this);
+            _crouchedAttackState = new CrouchedAttackState(_animator, this);
+            _basicAttackState = new BasicAttackState(_animator, this);
             _dashingState = new DashingState(_animator, this);
             _ladderClimbingState = new LadderClimbingState(_animator, this);
-            _ledgeClimbingState = new LedgeClimbingState(_animator, this);
+            _landingState = new LandingState(_animator, this);  
             _idleState = new IdleState(_animator, this);
+
+            playerData.InitializeData();
+            playerData.AvalaibleKnowledgeDictionary[KnowledgeID.DASH] = AvalaibleKnowledgePosition.POSITION1;
+
+            knowledgeIndices = new int[Enum.GetNames(typeof(KnowledgeID)).Length];
+            knowledgeIndices[(int)KnowledgeID.DASH] = 0;
+            //knowledgeIndices[(int)KnowledgeID.WALL_SLIDE] = 1;        // Wall slide does not have a button, it's the D-pad!
+            knowledgeIndices[(int)KnowledgeID.GROUND_SLIDE] = 2;
+            //knowledgeIndices[(int)KnowledgeID.DOUBLE_JUMP] = 3;       // Double jump does not have a dedicated button, it's the jump button!
         }
 
         private void Start()
@@ -393,24 +556,14 @@ namespace JFM
 
         private void FixedUpdate()
         {
+            SetAirborneInfo();
+
             frontWall = null;
+            SetFrontWallInfo();
             beneathObject = null;
+            SetBeneathObjectInfo();
 
-            //Debug.Log($"moveInput.x = {moveInput.x}");
-            _currentState = _currentState.Process();
-
-            if (isGrounded)
-            {
-                //moveInput.y = 0.0f;
-                //rb.drag = 4.48f;                
-            }
-            else
-            {
-                rb.drag = 0.0f;                
-            }
-
-            //moveInput -= Vector2.up * rb.gravityScale * Time.fixedDeltaTime;
-            //moveInput.x = 0.0f;
+            _currentState = _currentState.Process();            
         }
 
         private void InputSetup()
@@ -428,29 +581,37 @@ namespace JFM
 
             playerInputManager.Player.Move.performed += OnInputMove;
             playerInputManager.Player.Jump.performed += OnInputTrigger;
-            playerInputManager.Player.Dash.performed += OnInputTrigger;
+            playerInputManager.Player.Knowledge1.performed += OnInputTrigger;
+            playerInputManager.Player.Knowledge2.performed += OnInputTrigger;
+            playerInputManager.Player.Knowledge3.performed += OnInputTrigger;
+            playerInputManager.Player.Knowledge4.performed += OnInputTrigger;
+            playerInputManager.Player.BasicAttack.performed += OnInputTrigger;
 
             playerInputManager.Player.Move.canceled += OnInputMove;
             playerInputManager.Player.Jump.canceled += OnInputTrigger;                        
-            playerInputManager.Player.Dash.canceled += OnInputTrigger;
+            playerInputManager.Player.Knowledge1.canceled += OnInputTrigger;
+            playerInputManager.Player.Knowledge2.canceled += OnInputTrigger;
+            playerInputManager.Player.Knowledge3.canceled += OnInputTrigger;
+            playerInputManager.Player.Knowledge4.canceled += OnInputTrigger;
+            playerInputManager.Player.BasicAttack.canceled += OnInputTrigger;
         }
 
         private void SetInputDictionnary()
         {
             inputTriggers.Add("Move", false);
             inputTriggers.Add("Jump", false);
-            inputTriggers.Add("Dash", false);
+            inputTriggers.Add("Knowledge1", false);
+            inputTriggers.Add("Knowledge2", false);
+            inputTriggers.Add("Knowledge3", false);
+            inputTriggers.Add("Knowledge4", false);
+            inputTriggers.Add("BasicAttack", false);
         }
 
         void OnInputTrigger(InputAction.CallbackContext context)
         {
             //Debug.Log("context.action.name = " + context.action.name);
             if (context.action.phase == InputActionPhase.Performed)
-            {
-                /*if(context.action.name == "Jump")
-                {
-                    Debug.Log("Jump!!!!!");
-                }*/
+            {                
                 inputTriggers[context.action.name] = true;
             }
             else if (context.action.phase == InputActionPhase.Canceled)
@@ -461,19 +622,16 @@ namespace JFM
 
         void OnInputMove(InputAction.CallbackContext context)
         {
-            //Debug.Log("context.action.name = " + context.action.name);
             OnInputTrigger(context);
-            //if (inputTriggers[context.action.name])
-            //{                
-            moveInput = context.ReadValue<Vector2>();// * WalkSpeed;
-            //Debug.Log($"moveInput = {moveInput}");
-            //}            
+            moveInput = context.ReadValue<Vector2>();
+            //Debug.Log($"moveInput = {moveInput}");                        
         }
 
         private void OnEnable()
         {
             playerInputManager.Player.Enable();
         }
+
         private void OnDisable()
         {
             playerInputManager.Player.Disable();
@@ -482,8 +640,6 @@ namespace JFM
         public void ChangeState(PlayerState nextState)
         {
             _currentState.SetNextState(nextState);            
-        }
-
-
+        }        
     }
 }

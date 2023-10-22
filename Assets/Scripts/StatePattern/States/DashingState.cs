@@ -9,11 +9,16 @@ namespace JFM
      * This state is meant to prevent the player to go in opposite direction 
      * as his input will be in direction of the wall that initiated the walljump.
      * 
+     * IMPORTANT NOTICE: Use 'Continuous' Collision Detection setting in Rigidbody2D, else
+     * it will have a chance of passing through some walls.
+     * 
      * * * * * * * * * * * * * * */
     public class DashingState : PlayerState
     {
         private float startTime;
-        
+        private float animationClipLength;
+        private int animatorLayer = 0;
+
         public DashingState(Animator animator, PlayerController player)
             : base(animator, player)
         {
@@ -22,19 +27,25 @@ namespace JFM
 
         public override void Enter()
         {
-            //animator.SetTrigger("isIdle");
+            animator.SetTrigger("Dash");
             player.Dash();
-            player.inputTriggers["Dash"] = false;
+            //player.SetInputTriggersFromKnowledge(AF.KnowledgeID.DASH, false);
             startTime = Time.time;
+
+            //         lastKnowledge = player.Data.Knowledges.find_if()
+
+            if (animationClipLength == 0.0f)
+            {
+                animationClipLength = animator.GetCurrentAnimatorStateInfo(animatorLayer).length;
+            }
 
             base.Enter();
         }
 
         public override void Update()
         {
-
-            //Debug.Log($"player.MoveInput.y={player.MoveInput.y}");
-            if (player.IsGrounded())// && player.rb.velocity.y < 0)// player.MoveInput.y < 0)
+            float elapsedTime = Time.time - startTime;        
+            if ((player.DashDirection.y == 0.0f && elapsedTime > animationClipLength * player.GroundDashBailOutNormalizedTime) && player.IsCastGrounded() )//&& player.rb.velocity.y < 0)// player.MoveInput.y < 0)
             {
                 player.ChangeState(player._idleState);
                 return;
@@ -44,25 +55,34 @@ namespace JFM
             {
                 player.ChangeState(player._wallGrippingState);
                 return;
-            }                  
+            }
 
-            /*if (player.CanJump() && player.inputTriggers["Jump"])
-            {
-                Debug.Log("TEST --------");
-                player.ChangeState(player._jumpingState);
-                return;
-            }*/
-
-            if(Time.time - startTime > player.DashDuration)
+            if (player.DashDirection.y != 0.0f && player.rb.velocity.y < 0.0f)
             {
                 player.ChangeState(player._airborneState);
                 return;
+            }
+
+            if (player.WillClimbLadder())
+            {
+                player.ChangeState(player._ladderClimbingState);
+                return;
+            }
+
+            if (elapsedTime > animationClipLength)
+            {
+                player.ChangeState(player._idleState);
+                return;
+            }
+            else if (player.DashDirection.y == 0.0f)
+            {
+                player.rb.AddForce(-player.rb.velocity * player.GroundDashDeceleration * Time.fixedDeltaTime, ForceMode2D.Force);
             }
         }
 
         public override void Exit()
         {
-            //animator.ResetTrigger("isIdle");
+            animator.ResetTrigger("Dash");
             player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
             base.Exit();
         }

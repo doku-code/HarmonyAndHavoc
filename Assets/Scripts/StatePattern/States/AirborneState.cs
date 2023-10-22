@@ -13,19 +13,28 @@ namespace JFM
         }
 
         public override void Enter()
-        {
-            //animator.SetTrigger("isIdle");
-            
+        {            
+            animator.SetBool("IsFalling", true);
             base.Enter();
         }
 
         public override void Update()
         {
 
-            //Debug.Log($"player.MoveInput.y={player.MoveInput.y}");
-            if (player.IsGrounded())
+            player.SetHighestAirborneY();
+
+            // When the Player is in a corner, all normals are the same, so I use in addition a raycast.
+            if ((player.IsEventGrounded && (player.IsVerticalDirection(player.GroundDirection) || player.IsVerticalDirection(player.GroundDirection2))) || player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f))
             {
-                player.ChangeState(player._idleState);
+                if (player.WillLand())
+                {
+                    player.ChangeState(player._landingState);
+                }
+                else
+                {
+                    Debug.Log("test 2.");
+                    player.ChangeState(player._idleState);
+                }
                 return;
             }
 
@@ -35,14 +44,13 @@ namespace JFM
                 return;
             }
 
-            if (player.CanClimbLadder())
+            if (player.WillClimbLadder())
             {
-                Debug.Log("YESSSSS");
                 player.ChangeState(player._ladderClimbingState);
                 return;
             }
 
-            if (player.CanDash())
+            if (player.WillDash())
             {
                 player.ChangeState(player._dashingState);
                 return;
@@ -58,7 +66,7 @@ namespace JFM
                 player.rb.AddForce((player.IsFacingRight ? Vector3.right : -Vector3.right) * player.WalkSpeed * player.AirSpeedMultiplier * Time.fixedDeltaTime);
             }
 
-            if (player.CanJump() && player.inputTriggers["Jump"])
+            if (player.WillJump())
             {                
                 player.Jump();
             }
@@ -66,7 +74,7 @@ namespace JFM
 
         public override void Exit()
         {
-            //animator.ResetTrigger("isIdle");
+            animator.SetBool("IsFalling", false);
             base.Exit();
         }
     }

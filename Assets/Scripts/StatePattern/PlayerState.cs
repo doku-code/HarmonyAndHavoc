@@ -5,6 +5,14 @@ using UnityEngine.AI;
 
 namespace JFM
 {
+    /* * * * * * * * * * * * * * * 
+     * 
+     * To avoid stucking on the tilemapped floor, do this:
+     *   For the TilemapCollider2D check the box "Used by Composite".
+     *   Then add the Component CompositeCollider2D (Found under Physics2D). This will automatically add a Rigidbody2D to your object if it doesn't have one already.
+     *   Change the "Body Type" of the Rigidbody2D to Kinematic unless you want physical interaction with the tilemap.
+     * 
+     * * * * * * * * * * * * * * */
     public class PlayerState
     {
         public enum STATE
@@ -13,13 +21,16 @@ namespace JFM
             WALK,
             RUN,
             JUMP,
+            CROUCH,
+            CROUCH_ATTACK,
             WALLGRIP,
             WALLJUMP,
             AIRBORNE,
+            LAND,
             DASH,
             LADDER,
             LEDGE,
-            NORMAL_ATTACK
+            BASIC_ATTACK
         };
 
         public enum EVENT

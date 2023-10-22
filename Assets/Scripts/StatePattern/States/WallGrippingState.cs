@@ -14,26 +14,31 @@ namespace JFM
 
         public override void Enter()
         {
-            //animator.SetTrigger("isIdle");
+            animator.SetBool("IsWallSliding", true);
             player.Turn();
-            //player.inputTriggers["Jump"] = false;
+            player.inputTriggers["Jump"] = false;
             base.Enter();
         }
 
         public override void Update()
         {
+            player.SetHighestAirborneY(true);
 
-            //Debug.Log($"player.MoveInput.y={player.MoveInput.y}");
-            if (player.IsGrounded())
+            // When the Player is in a corner, all normals are the same, so I use in addition a raycast.
+            if (((player.IsEventGrounded && (player.IsVerticalDirection(player.GroundDirection) || player.IsVerticalDirection(player.GroundDirection2))) || player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f)) && player.rb.velocity.y >= 0.0f)
             {
                 player.ChangeState(player._idleState);
                 return;
             }
 
-            //Debug.Log($"player.CanJump() = {player.CanJump()} && player.inputTriggers[\"Jump\"] = {player.inputTriggers["Jump"]}");
-            if (player.CanJump() && player.inputTriggers["Jump"])
+            if(!player.IsGrippingToWall())
             {
-                //Debug.Log("OUIIIIIII");
+                player.ChangeState(player._airborneState);
+                return;
+            }
+
+            if (player.WillJump())
+            {
                 player.ChangeState(player._wallJumpingState);
                 return;
             }
@@ -49,7 +54,7 @@ namespace JFM
 
         public override void Exit()
         {
-            //animator.ResetTrigger("isIdle");
+            animator.SetBool("IsWallSliding", false);
             base.Exit();
         }
     }

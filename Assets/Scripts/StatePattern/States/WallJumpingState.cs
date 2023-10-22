@@ -22,7 +22,7 @@ namespace JFM
 
         public override void Enter()
         {
-            //animator.SetTrigger("isIdle");
+            animator.SetTrigger("Dash");
             player.Jump();
             player.inputTriggers["Jump"] = false;
             startTime = Time.time;
@@ -33,8 +33,7 @@ namespace JFM
         public override void Update()
         {
 
-            //Debug.Log($"player.MoveInput.y={player.MoveInput.y}");
-            if (player.IsGrounded())
+            if (player.IsCastGrounded())
             {
                 player.ChangeState(player._idleState);
                 return;
@@ -46,9 +45,8 @@ namespace JFM
                 return;
             }                  
 
-            if (player.CanJump() && player.inputTriggers["Jump"])
+            if (player.WillJump())
             {
-                //Debug.Log("TEST --------");
                 player.ChangeState(player._jumpingState);
                 return;
             }
@@ -62,7 +60,7 @@ namespace JFM
 
         public override void Exit()
         {
-            //animator.ResetTrigger("isIdle");
+            animator.ResetTrigger("Dash");
             base.Exit();
         }
     }

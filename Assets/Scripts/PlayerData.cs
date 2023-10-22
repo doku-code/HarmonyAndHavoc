@@ -102,8 +102,12 @@ namespace AF
             set { armorUpgrade = value; }
         }
 
-        private void InitializeData()
+        public void InitializeData()
         {
+            KnownKnowledgeDictionary = new Dictionary<KnowledgeID, bool>();
+            AvalaibleKnowledgeDictionary = new Dictionary<KnowledgeID, AvalaibleKnowledgePosition>();
+            EveryKnowledgeDictionary = new Dictionary<KnowledgeID, Knowledge>();
+
             for (int i = 0; i < Enum.GetNames(typeof(KnowledgeID)).Length; i++)
             {
                 KnowledgeID currentID = (KnowledgeID)i;
