@@ -29,7 +29,7 @@ namespace JFM
         {
             animator.SetTrigger("Dash");
             player.Dash();
-            //player.SetInputTriggersFromKnowledge(AF.KnowledgeID.DASH, false);
+            player.SetInputTriggersFromKnowledge(AF.KnowledgeID.DASH, false);
             startTime = Time.time;
 
             //         lastKnowledge = player.Data.Knowledges.find_if()
@@ -47,6 +47,8 @@ namespace JFM
             float elapsedTime = Time.time - startTime;        
             if ((player.DashDirection.y == 0.0f && elapsedTime > animationClipLength * player.GroundDashBailOutNormalizedTime) && player.IsCastGrounded() )//&& player.rb.velocity.y < 0)// player.MoveInput.y < 0)
             {
+                Debug.Log("===== ok");
+                player.idleState.nFrames = 3;
                 player.ChangeState(player.idleState);
                 return;
             }
@@ -62,7 +64,7 @@ namespace JFM
                 player.ChangeState(player.airborneState);
                 return;
             }
-
+            
             if (player.WillClimbLadder())
             {
                 player.ChangeState(player.ladderClimbingState);

@@ -354,7 +354,7 @@ namespace JFM
 
             dashDirection = moveInput;
 
-            moveInput = Vector2.zero;                     
+            //moveInput = Vector2.zero;                     
         }             
         
         private void SetFrontWallInfo()
