@@ -24,40 +24,42 @@ namespace JFM
         {
             player.SetHighestAirborneY();
 
-            if (player.IsEventGrounded && player.rb.velocity.y < -0.001f)
+            //if (player.IsEventGrounded && player.rb.velocity.y < -0.001f)
+            if (player.IsGrounded())
             {
                 if (player.WillLand())
                 {
-                    player.ChangeState(player._landingState);
+                    player.ChangeState(player.landingState);
                 }
                 else
                 {
-                    player.ChangeState(player._idleState);
+                    Debug.Log("F*****!");
+                    player.ChangeState(player.idleState);
                 }
                 return;
             }
             
-            if(player.CanGripToWall())
+            if(player.WillGripToWall())
             {
-                player.ChangeState(player._wallGrippingState);
+                player.ChangeState(player.wallGrippingState);
                 return;
             }
 
             if (player.WillClimbLadder())
             {
-                player.ChangeState(player._ladderClimbingState);
+                player.ChangeState(player.ladderClimbingState);
                 return;
             }
 
             if (player.WillDash())
             {
-                player.ChangeState(player._dashingState);
+                player.ChangeState(player.dashingState);
                 return;
             }
 
             if(player.rb.velocity.y < 0.0f)
             {
-                player.ChangeState(player._airborneState);
+                player.ChangeState(player.airborneState);
                 return;
             }
 

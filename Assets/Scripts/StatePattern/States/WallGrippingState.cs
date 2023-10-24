@@ -15,7 +15,10 @@ namespace JFM
         public override void Enter()
         {
             animator.SetBool("IsWallSliding", true);
-            player.Turn();
+            if ((player.IsFacingRight && player.MoveInput.x > 0) || (!player.IsFacingRight && player.MoveInput.x < 0))
+            {
+                player.Turn();
+            }
             player.inputTriggers["Jump"] = false;
             base.Enter();
         }
@@ -25,27 +28,30 @@ namespace JFM
             player.SetHighestAirborneY(true);
 
             // When the Player is in a corner, all normals are the same, so I use in addition a raycast.
-            if (((player.IsEventGrounded && (player.IsVerticalDirection(player.GroundDirection) || player.IsVerticalDirection(player.GroundDirection2))) || player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f)) && player.rb.velocity.y >= 0.0f)
+            //if (((player.IsEventGrounded && (player.IsVerticalDirection(player.GroundDirection) || player.IsVerticalDirection(player.GroundDirection2))) || player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f)) && player.rb.velocity.y >= 0.0f)
+            if (player.IsGrounded(false) && player.rb.velocity.y >= 0.0f)
             {
-                player.ChangeState(player._idleState);
+                Debug.Log("HEYYYY!!");
+                player.idleState.nFrames = 3;
+                player.ChangeState(player.idleState);
                 return;
             }
 
             if(!player.IsGrippingToWall())
             {
-                player.ChangeState(player._airborneState);
+                player.ChangeState(player.airborneState);
                 return;
             }
 
             if (player.WillJump())
             {
-                player.ChangeState(player._wallJumpingState);
+                player.ChangeState(player.wallJumpingState);
                 return;
             }
 
             if (!player.inputTriggers["Move"] || !((player.MoveInput.x > 0 && !player.IsFacingRight) || (player.MoveInput.x < 0 && player.IsFacingRight)))
             {
-                player.ChangeState(player._airborneState);
+                player.ChangeState(player.airborneState);
                 return;
             }
 

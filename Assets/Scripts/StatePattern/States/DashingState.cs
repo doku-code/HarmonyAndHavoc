@@ -47,33 +47,34 @@ namespace JFM
             float elapsedTime = Time.time - startTime;        
             if ((player.DashDirection.y == 0.0f && elapsedTime > animationClipLength * player.GroundDashBailOutNormalizedTime) && player.IsCastGrounded() )//&& player.rb.velocity.y < 0)// player.MoveInput.y < 0)
             {
-                player.ChangeState(player._idleState);
+                player.ChangeState(player.idleState);
                 return;
             }
 
-            if (player.CanGripToWall() && player.inputTriggers["Move"])
+            if (player.WillGripToWall())// && player.inputTriggers["Move"])
             {
-                player.ChangeState(player._wallGrippingState);
+                player.ChangeState(player.wallGrippingState);
                 return;
             }
 
             if (player.DashDirection.y != 0.0f && player.rb.velocity.y < 0.0f)
             {
-                player.ChangeState(player._airborneState);
+                player.ChangeState(player.airborneState);
                 return;
             }
 
             if (player.WillClimbLadder())
             {
-                player.ChangeState(player._ladderClimbingState);
+                player.ChangeState(player.ladderClimbingState);
                 return;
             }
 
             if (elapsedTime > animationClipLength)
             {
-                player.ChangeState(player._idleState);
+                player.ChangeState(player.idleState);
                 return;
             }
+            // Let rigidbody have a little deceleration when dashing on the ground
             else if (player.DashDirection.y == 0.0f)
             {
                 player.rb.AddForce(-player.rb.velocity * player.GroundDashDeceleration * Time.fixedDeltaTime, ForceMode2D.Force);

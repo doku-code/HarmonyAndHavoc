@@ -28,36 +28,37 @@ namespace JFM
             {
                 if (player.WillLand())
                 {
-                    player.ChangeState(player._landingState);
+                    player.ChangeState(player.landingState);
                 }
                 else
                 {
                     Debug.Log("test 2.");
-                    player.ChangeState(player._idleState);
+                    player.idleState.nFrames = 3;
+                    player.ChangeState(player.idleState);
                 }
                 return;
             }
 
-            if (player.CanGripToWall())
+            if (player.WillGripToWall())
             {
-                player.ChangeState(player._wallGrippingState);
+                player.ChangeState(player.wallGrippingState);
                 return;
             }
 
             if (player.WillClimbLadder())
             {
-                player.ChangeState(player._ladderClimbingState);
+                player.ChangeState(player.ladderClimbingState);
                 return;
             }
 
             if (player.WillDash())
             {
-                player.ChangeState(player._dashingState);
+                player.ChangeState(player.dashingState);
                 return;
             }
 
             if (player.CanTurn())
-            {
+            {                                
                 player.Turn();
             }
 

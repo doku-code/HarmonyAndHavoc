@@ -35,13 +35,13 @@ namespace JFM
         {
             if (!player.IsCastGrounded())
             {
-                player.ChangeState(player._airborneState);
+                player.ChangeState(player.airborneState);
                 return;
             }
 
             if (!player.inputTriggers["Move"] || player.MoveInput.y >= 0.0f)
             {
-                player.ChangeState(player._idleState);
+                player.ChangeState(player.idleState);
                 return;
             }
 
@@ -55,7 +55,7 @@ namespace JFM
             }
             else if (Time.time - startTime >= animationClipLength)
             {
-                player.ChangeState(player._crouchedState);
+                player.ChangeState(player.crouchedState);
                 return;
             }                        
         }

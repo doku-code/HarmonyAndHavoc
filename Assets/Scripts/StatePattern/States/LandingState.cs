@@ -35,7 +35,7 @@ namespace JFM
         {
             if (Time.time - startTime >= animationClipLength)
             {
-                player.ChangeState(player._idleState);
+                player.ChangeState(player.idleState);
                 return;
             }            
         }

@@ -7,6 +7,7 @@ namespace JFM
     public class IdleState : PlayerState
     {
         private float oldGravityScale;
+        public int nFrames;
 
         public IdleState(Animator animator, PlayerController player)
             : base(animator, player)
@@ -25,51 +26,58 @@ namespace JFM
 
         public override void Update()
         {
-            if( !player.IsEventGrounded && !player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f))
+            if(nFrames > 0)
             {
-                player.ChangeState(player._airborneState);
+                nFrames--;
+                return;
+            }
+            
+            //if( !player.IsEventGrounded && !player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f))
+            if (!player.IsGrounded(false))
+            {
+                player.ChangeState(player.airborneState);
                 return;
             }
 
             if (player.inputTriggers["Move"] && player.MoveInput.x != 0.0f && player.MoveInput.y == 0.0f)
             {
-                player.ChangeState(player._walkingState);
+                player.ChangeState(player.walkingState);
                 return;
             }
 
             if (player.WillClimbDownLadder())
             {
-                player.ChangeState(player._ladderClimbingState);
+                player.ChangeState(player.ladderClimbingState);
                 return;
             }
 
             if (player.inputTriggers["Move"] && player.MoveInput.y < 0.0f)
             {
-                player.ChangeState(player._crouchedState);
+                player.ChangeState(player.crouchedState);
                 return;
             }
 
             if (player.WillClimbLadder())
             {
-                player.ChangeState(player._ladderClimbingState);
+                player.ChangeState(player.ladderClimbingState);
                 return;
             }
 
             if (player.WillDash())
             {
-                player.ChangeState(player._dashingState);
+                player.ChangeState(player.dashingState);
                 return;
             }
 
             if (player.WillJump())
             {
-                player.ChangeState(player._jumpingState);
+                player.ChangeState(player.jumpingState);
                 return;
             }
 
             if (player.inputTriggers["BasicAttack"])
             {
-                player.ChangeState(player._basicAttackState);
+                player.ChangeState(player.basicAttackState);
                 return;
             }
 

@@ -20,21 +20,22 @@ namespace JFM
 
         public override void Update()
         {
-            if (!(player.IsEventGrounded && (player.IsVerticalDirection(player.GroundDirection) || player.IsVerticalDirection(player.GroundDirection2))) && !player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f))
+            //if (!(player.IsEventGrounded && (player.IsVerticalDirection(player.GroundDirection) || player.IsVerticalDirection(player.GroundDirection2))) && !player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f))
+            if(!player.IsGrounded(false))
             {
-                player.ChangeState(player._airborneState);
+                player.ChangeState(player.airborneState);
                 return;
             }
 
             if (player.MoveInput.x == 0.0f)
             {
-                player.ChangeState(player._idleState);
+                player.ChangeState(player.idleState);
                 return;
             }
 
             if (player.WillDash())
             {
-                player.ChangeState(player._dashingState);
+                player.ChangeState(player.dashingState);
                 return;
             }
 
@@ -45,13 +46,13 @@ namespace JFM
             
             if(player.WillClimbLadder())
             {
-                player.ChangeState(player._ladderClimbingState);
+                player.ChangeState(player.ladderClimbingState);
                 return;
             }
 
             if (player.WillJump())
             {
-                player.ChangeState(player._jumpingState);
+                player.ChangeState(player.jumpingState);
                 return;
             }
 

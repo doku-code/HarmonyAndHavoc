@@ -35,25 +35,25 @@ namespace JFM
 
             if (player.IsCastGrounded())
             {
-                player.ChangeState(player._idleState);
+                player.ChangeState(player.idleState);
                 return;
             }
 
-            if (player.CanGripToWall() && player.inputTriggers["Move"])
+            if (player.WillGripToWall())// && player.inputTriggers["Move"])
             {
-                player.ChangeState(player._wallGrippingState);
+                player.ChangeState(player.wallGrippingState);
                 return;
             }                  
 
             if (player.WillJump())
             {
-                player.ChangeState(player._jumpingState);
+                player.ChangeState(player.jumpingState);
                 return;
             }
 
             if(Time.time - startTime > player.WallJumpDuration)
             {
-                player.ChangeState(player._airborneState);
+                player.ChangeState(player.airborneState);
                 return;
             }
         }

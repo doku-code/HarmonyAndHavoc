@@ -56,19 +56,19 @@ namespace JFM
             }
             else if (player.MoveInput.x != 0.0f)
             {                
-                player.ChangeState(player._airborneState);
+                player.ChangeState(player.airborneState);
                 return;
             }
 
             if (player.inputTriggers["Jump"])
             {
-                player.ChangeState(player._airborneState);
+                player.ChangeState(player.airborneState);
                 return;
             }
 
             if(!player.CanClimbLadder())
             {
-                player.ChangeState(player._idleState);
+                player.ChangeState(player.idleState);
                 
                 return;
             }
@@ -93,7 +93,7 @@ namespace JFM
                 {
                     player.rb.velocity = new Vector2(player.rb.velocity.x, player.ColliderSize.y / 2.0f);
                     player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
-                    player.ChangeState(player._idleState);
+                    player.ChangeState(player.idleState);
 
                     return;
                 }
@@ -110,7 +110,7 @@ namespace JFM
 
             if (player.IsCastGrounded(true, player.GroundLayer))
             {
-                player.ChangeState(player._idleState);
+                player.ChangeState(player.idleState);
                 return;
             }
         }

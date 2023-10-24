@@ -26,7 +26,7 @@ namespace JFM
         {
             if (!player.IsCastGrounded())
             {
-                player.ChangeState(player._airborneState);
+                player.ChangeState(player.airborneState);
                 return;
             }
 
@@ -37,19 +37,19 @@ namespace JFM
 
             if (player.MoveInput.y >= 0.0f)
             {
-                player.ChangeState(player._idleState);
+                player.ChangeState(player.idleState);
                 return;
             }            
 
             if (player.inputTriggers["BasicAttack"] && player.MoveInput.y < 0.0f)
             {
-                player.ChangeState(player._crouchedAttackState);
+                player.ChangeState(player.crouchedAttackState);
                 return;
             }
 
             if (player.WillClimbDownLadder())
             {
-                player.ChangeState(player._ladderClimbingState);
+                player.ChangeState(player.ladderClimbingState);
                 return;
             }
         }

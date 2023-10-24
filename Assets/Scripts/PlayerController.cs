@@ -12,23 +12,23 @@ namespace JFM
         private PlayerInput playerInputManager;
         public Dictionary<string, bool> inputTriggers = new();
 
-        [NonSerialized] public Animator _animator;
+        [NonSerialized] public Animator animator;
         [NonSerialized] public Rigidbody2D rb;
 
-        private PlayerState _currentState;
-        public IdleState _idleState;
-        public WalkingState _walkingState;
+        private PlayerState currentState;
+        public IdleState idleState;
+        public WalkingState walkingState;
         
-        public JumpingState _jumpingState;
-        public WallJumpingState _wallJumpingState;
-        public WallGrippingState _wallGrippingState;
-        public AirborneState _airborneState;
-        public CrouchedState _crouchedState;
-        public CrouchedAttackState _crouchedAttackState;
-        public BasicAttackState _basicAttackState;
-        public DashingState _dashingState;
-        public LadderClimbingState _ladderClimbingState;
-        public LandingState _landingState;
+        public JumpingState jumpingState;
+        public WallJumpingState wallJumpingState;
+        public WallGrippingState wallGrippingState;
+        public AirborneState airborneState;
+        public CrouchedState crouchedState;
+        public CrouchedAttackState crouchedAttackState;
+        public BasicAttackState basicAttackState;
+        public DashingState dashingState;
+        public LadderClimbingState ladderClimbingState;
+        public LandingState landingState;
 
         [SerializeField] private float walkSpeed = 1.0f;
         [SerializeField] private float walkAcceleration = 10.0f;
@@ -98,23 +98,23 @@ namespace JFM
 
         private int[] knowledgeIndices;
 
-        private bool _isGrounded;
-        private Vector2 _groundDirection;
-        private Vector2 _groundDirection2;
+        private bool isEventGrounded;
+        private Vector2 groundDirection;
+        private Vector2 groundDirection2;
 
         public bool IsEventGrounded
         {
-            get => _isGrounded;
+            get => isEventGrounded;
         }
 
         public Vector2 GroundDirection
         {
-            get => _groundDirection;
+            get => groundDirection;
         }
 
         public Vector2 GroundDirection2
         {
-            get => _groundDirection2;
+            get => groundDirection2;
         }
 
         public float WalkSpeed
@@ -155,6 +155,11 @@ namespace JFM
         public float WallJumpDuration
         {
             get => wallJumpDuration;
+        }
+
+        public float WallDistance
+        {
+            get => wallDistance;
         }
 
         public float LedgeAnimationDuration
@@ -246,7 +251,7 @@ namespace JFM
             get => moveInput;
             set => moveInput = value;
         }
-
+        
         public void SetAirborneInfo()
         {
             bool grounded = IsCastGrounded() && rb.velocity.y < 0.0f;
@@ -411,11 +416,15 @@ namespace JFM
             return (moveInput.x == 0.0f && moveInput.y < 0.0f && Raycast(true, ladderLayer, Vector2.zero, groundLadderDistance));
         }
 
-        public bool CanGripToWall()
+        public bool WillGripToWall()
         {
             SetFrontWallInfo();
-            
-            return (frontWall is not null && (1 << frontWall.layer) == (int)groundLayer && ((isFacingRight && moveInput.x > 0) || (!isFacingRight && moveInput.x < 0)) && Mathf.Abs(rb.velocity.x) <= 0.5f);
+
+            bool backWallHit = Raycast(true, groundLayer, Vector2.zero, wallDistance, isFacingRight ? -Vector2.right : Vector2.right);
+
+            bool front = frontWall is not null && (1 << frontWall.layer) == (int)groundLayer && ((isFacingRight && moveInput.x > 0) || (!isFacingRight && moveInput.x < 0));
+            bool back = backWallHit && ((isFacingRight && moveInput.x < 0) || (!isFacingRight && moveInput.x > 0));
+            return (front || back) && Mathf.Abs(rb.velocity.x) <= 0.5f;
         }
 
         // Checks back wall
@@ -467,17 +476,40 @@ namespace JFM
 
         public bool Raycast(bool limitToRay, int layerMask, Vector2 offset, float distance)
         {
+            return Raycast(limitToRay, layerMask, offset, distance, Vector2.down);
+        }
+
+        public bool Raycast(bool limitToRay, int layerMask, Vector2 offset, float distance, Vector2 direction)
+        {
+            return Raycast(limitToRay, layerMask, offset, distance, direction, false);
+        }
+
+        public bool Raycast(bool limitToRay, int layerMask, Vector2 offset, float distance, Vector2 direction, bool willBreak)
+        {
             RaycastHit2D hit;
             if (limitToRay)
             {
-                hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + offset, Vector2.down, distance, layerMask);
+                hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + offset, direction, distance, layerMask);
+                Debug.DrawRay(new Vector2(transform.position.x, transform.position.y) + offset, direction * distance, Color.yellow);
+                if(willBreak)
+                    Debug.Break();
             }
             else
             {
-                hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y) + offset, groundBoxSize, 0.0f, Vector2.down, distance, layerMask);
+                hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y) + offset, groundBoxSize, 0.0f, direction, distance, layerMask);
             }
 
             return (hit.collider is not null);
+        }
+
+        public bool IsGrounded()
+        {
+            return IsGrounded(true);
+        }
+
+        public bool IsGrounded(bool testVelocity)
+        {
+            return ((isEventGrounded && (IsVerticalDirection(groundDirection) || IsVerticalDirection(groundDirection2))) || Raycast(true, groundLayer | ladderLayer, Vector2.zero, 0.2f)) && (rb.velocity.y < -0.001f || !testVelocity);
         }
 
         public bool IsHorizontalDirection(Vector2 direction)
@@ -494,31 +526,32 @@ namespace JFM
         // the sprite boxcast size ("GroundBoxSize") cannot be too wide (too close to 1) as it breaks the WallSlide cast.
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            _groundDirection = collision.GetContact(0).normal;
+            groundDirection = collision.GetContact(0).normal;
+            Debug.Log($"groundDirection={collision.GetContact(0).normal})");
             if (collision.contactCount > 1)
             {
-                _groundDirection2 = collision.GetContact(1).normal;
+                groundDirection2 = collision.GetContact(1).normal;
                 for (int i = 1; i < collision.contactCount; i++)
                 {
-                    //Debug.Log($"_groundDirection{i+1}={collision.GetContact(1).normal})");
+                    Debug.Log($"groundDirection{i+1}={collision.GetContact(1).normal})");
                 }
             }
             else
             {
-                _groundDirection2 = Vector2.zero;
+                groundDirection2 = Vector2.zero;
             }
             
-            _isGrounded = true;
+            isEventGrounded = true;
         }
 
         public void OnCollisionExit2D(Collision2D collision)
         {
-            _isGrounded = false;
+            isEventGrounded = false;
         }
         
         void Awake()
         {
-            _animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
                         
             BoxCollider2D bc = GetComponent<BoxCollider2D>();
@@ -526,18 +559,18 @@ namespace JFM
             colliderSize = bc.size;
 
             InputSetup();
-            _walkingState = new WalkingState(_animator, this);
-            _jumpingState = new JumpingState(_animator, this);
-            _wallJumpingState = new WallJumpingState(_animator, this);
-            _wallGrippingState = new WallGrippingState(_animator, this);
-            _airborneState = new AirborneState(_animator, this);
-            _crouchedState = new CrouchedState(_animator, this);
-            _crouchedAttackState = new CrouchedAttackState(_animator, this);
-            _basicAttackState = new BasicAttackState(_animator, this);
-            _dashingState = new DashingState(_animator, this);
-            _ladderClimbingState = new LadderClimbingState(_animator, this);
-            _landingState = new LandingState(_animator, this);  
-            _idleState = new IdleState(_animator, this);
+            walkingState = new WalkingState(animator, this);
+            jumpingState = new JumpingState(animator, this);
+            wallJumpingState = new WallJumpingState(animator, this);
+            wallGrippingState = new WallGrippingState(animator, this);
+            airborneState = new AirborneState(animator, this);
+            crouchedState = new CrouchedState(animator, this);
+            crouchedAttackState = new CrouchedAttackState(animator, this);
+            basicAttackState = new BasicAttackState(animator, this);
+            dashingState = new DashingState(animator, this);
+            ladderClimbingState = new LadderClimbingState(animator, this);
+            landingState = new LandingState(animator, this);  
+            idleState = new IdleState(animator, this);
 
             playerData.InitializeData();
             playerData.AvalaibleKnowledgeDictionary[KnowledgeID.DASH] = AvalaibleKnowledgePosition.POSITION1;
@@ -551,7 +584,7 @@ namespace JFM
 
         private void Start()
         {
-            _currentState = _idleState;
+            currentState = idleState;
         }
 
         private void FixedUpdate()
@@ -563,7 +596,7 @@ namespace JFM
             beneathObject = null;
             SetBeneathObjectInfo();
 
-            _currentState = _currentState.Process();            
+            currentState = currentState.Process();            
         }
 
         private void InputSetup()
@@ -639,7 +672,7 @@ namespace JFM
 
         public void ChangeState(PlayerState nextState)
         {
-            _currentState.SetNextState(nextState);            
+            currentState.SetNextState(nextState);            
         }        
     }
 }
