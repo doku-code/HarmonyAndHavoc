@@ -50,6 +50,8 @@ namespace JFM
                 return;
             }
 
+
+
             if (player.WillJump())
             {
                 player.ChangeState(player.jumpingState);
