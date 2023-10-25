@@ -574,13 +574,13 @@ namespace JFM
         public void OnCollisionEnter2D(Collision2D collision)
         {
             groundDirection = collision.GetContact(0).normal;
-            Debug.Log($"groundDirection={collision.GetContact(0).normal})");
+            //Debug.Log($"groundDirection={collision.GetContact(0).normal})");
             if (collision.contactCount > 1)
             {
                 groundDirection2 = collision.GetContact(1).normal;
                 for (int i = 1; i < collision.contactCount; i++)
                 {
-                    Debug.Log($"groundDirection{i+1}={collision.GetContact(1).normal})");
+                    //Debug.Log($"groundDirection{i+1}={collision.GetContact(1).normal})");
                 }
             }
             else

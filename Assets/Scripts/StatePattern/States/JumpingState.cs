@@ -14,7 +14,7 @@ namespace JFM
 
         public override void Enter()
         {
-            animator.SetBool("IsJumping", true);
+            animator.SetTrigger("Jump");
             player.Jump();
             player.inputTriggers["Jump"] = false;
             base.Enter();
@@ -24,7 +24,6 @@ namespace JFM
         {
             player.SetHighestAirborneY();
 
-            //if (player.IsEventGrounded && player.rb.velocity.y < -0.001f)
             if (player.IsGrounded())
             {
                 if (player.WillLand())
@@ -32,8 +31,7 @@ namespace JFM
                     player.ChangeState(player.landingState);
                 }
                 else
-                {
-                    Debug.Log("F*****!");
+                {                    
                     player.ChangeState(player.idleState);
                 }
                 return;
@@ -81,7 +79,7 @@ namespace JFM
 
         public override void Exit()
         {
-            animator.SetBool("IsJumping", false);
+            animator.ResetTrigger("Jump");
             base.Exit();
         }
     }

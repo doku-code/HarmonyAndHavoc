@@ -37,7 +37,15 @@ namespace JFM
 
             if (player.MoveInput.y >= 0.0f)
             {
-                player.ChangeState(player.idleState);
+                if (player.MoveInput.x != 0.0f)
+                {
+                    player.ChangeState(player.walkingState);
+                }
+                else
+                {
+                    player.idleState.nFrames = 1;
+                    player.ChangeState(player.idleState);
+                }
                 return;
             }            
 

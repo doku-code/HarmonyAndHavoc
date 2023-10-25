@@ -97,11 +97,6 @@ namespace JFM
 
                 if (!player.Raycast(true, player.LadderLayer, Vector2.zero, 0.0f) && player.MoveInput.y > 0.0f)
                 {
-                    //player.rb.velocity = new Vector2(player.rb.velocity.x, player.LadderGettingUpForce);
-                    //player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
-
-                    Debug.Log("Ca passe ici.");
-
                     player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f);
                     player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
                     float y = Mathf.Floor(player.HitInfo.probePoint.y);

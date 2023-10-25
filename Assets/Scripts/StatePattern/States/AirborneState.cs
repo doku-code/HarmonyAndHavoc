@@ -42,7 +42,6 @@ namespace JFM
                 }
                 else
                 {
-                    Debug.Log("test 2.");
                     player.idleState.nFrames = 3;
                     player.ChangeState(player.idleState);
                 }

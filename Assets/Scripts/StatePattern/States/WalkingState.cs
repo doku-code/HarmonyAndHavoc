@@ -33,6 +33,12 @@ namespace JFM
                 return;
             }
 
+            if(player.MoveInput.y < 0.0f)
+            {
+                player.ChangeState(player.crouchedState);
+                return;
+            }
+
             if (player.WillDash())
             {
                 player.ChangeState(player.dashingState);

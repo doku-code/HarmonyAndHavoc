@@ -4,6 +4,13 @@ using UnityEngine;
 
 namespace JFM
 {
+    /* * * * * * * * * * * * * * * * * * * * 
+     * 
+     * You may have to set the default sprite displayed by the SpriteRenderer to something like an idle frame, 
+     * because when having a multiple-layered animator, it can sometimes display this default sprite between two animations.
+     *       
+     * * * * * * * * * * * * * * * * * * * */
+
     public class IdleState : PlayerState
     {
         private float oldGravityScale;
@@ -31,10 +38,7 @@ namespace JFM
                 nFrames--;
                 return;
             }
-            
-            
-
-            //if( !player.IsEventGrounded && !player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f))
+      
             if (!player.IsGrounded(false))
             {
                 player.ChangeState(player.airborneState);
@@ -49,7 +53,6 @@ namespace JFM
 
             if (player.WillClimbDownLadder())
             {
-                Debug.Log("Ca passe ici aussi.");
                 float ladderX = Mathf.Floor(player.HitInfo.probePoint.x) + 0.5f - player.ColliderOffset.x;
                 player.transform.position = new Vector3(ladderX, player.transform.position.y, player.transform.position.z);
                 player.ChangeState(player.ladderClimbingState);
