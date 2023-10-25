@@ -38,7 +38,7 @@ namespace JFM
                 player.ChangeState(player.airborneState);
                 return;
             }
-
+            
             if (player.inputTriggers["Move"] && player.MoveInput.x != 0.0f && player.MoveInput.y == 0.0f)
             {
                 player.ChangeState(player.walkingState);
