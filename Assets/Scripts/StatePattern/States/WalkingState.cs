@@ -50,7 +50,21 @@ namespace JFM
                 return;
             }
 
+            if (!player.Raycast(true, player.LadderLayer, Vector2.up * 0.2f, 0.0f) &&
+                player.Raycast(true, player.LadderLayer, Vector2.zero, 0.0f) && 
+                player.MoveInput.x != 0.0f)
+            {
 
+                //player.rb.velocity = new Vector2(player.rb.velocity.x, player.LadderPushUpForce);
+                //player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
+
+                player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f);
+                player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
+                float y = Mathf.Floor(player.HitInfo.hit.point.y) + 1;
+                player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
+
+                //return;
+            }
 
             if (player.WillJump())
             {

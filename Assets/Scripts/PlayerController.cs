@@ -7,6 +7,13 @@ using UnityEngine.InputSystem;
 
 namespace JFM
 {
+    public struct RaycastHit2DInfo
+    {
+        public bool hasHit;
+        public RaycastHit2D hit;
+        public Vector2 probePoint;
+    }
+
     public class PlayerController : MonoBehaviour
     {       
         private PlayerInput playerInputManager;
@@ -35,7 +42,8 @@ namespace JFM
         //[SerializeField] private float runSpeed = 4.0f;
         [SerializeField] private float ladderSpeed = 3.0f;
         [SerializeField] private float ladderAcceleration = 10.0f;
-        [SerializeField] private float groundLadderDistance = 1.2f;
+        [SerializeField] private float ladderGettingUpForce = 1.0f;
+        [SerializeField] private float ladderPushUpForce = 2.0f;
         [SerializeField] private float jumpForce = 3.0f;
         [SerializeField] private int baseNumJumps = 1;
         [SerializeField] private float airSpeedMultiplier = 100.0f;
@@ -83,7 +91,9 @@ namespace JFM
         [SerializeField] private Vector2 spriteBoxProbeSize = new Vector2(0.9414063f, 0.3f);
         private Vector2 colliderOffset;
         private Vector2 colliderSize;
-        [SerializeField] private Vector2 spriteBoxProbeOffset = new Vector2(0.0f, 0.0f);        
+        [SerializeField] private Vector2 spriteBoxProbeOffset = new Vector2(0.0f, 0.0f);
+        
+        private RaycastHit2DInfo hitInfo;
 
         [SerializeField] private PlayerData playerData;
         private Knowledge lastKnowledge;
@@ -115,6 +125,11 @@ namespace JFM
         public Vector2 GroundDirection2
         {
             get => groundDirection2;
+        }
+
+        public RaycastHit2DInfo HitInfo
+        {
+            get => hitInfo;
         }
 
         public float WalkSpeed
@@ -150,6 +165,16 @@ namespace JFM
         public float LadderAcceleration
         {
             get => ladderAcceleration;
+        }
+
+        public float LadderGettingUpForce
+        {
+            get => ladderGettingUpForce;
+        }
+
+        public float LadderPushUpForce
+        {
+            get => ladderPushUpForce;
         }
 
         public float WallJumpDuration
@@ -410,10 +435,14 @@ namespace JFM
             
             return (moveInput.x == 0.0f && moveInput.y != 0.0f && beneathObject is not null && (1 << beneathObject.layer) == (int)ladderLayer);
         }
-
+        
         public bool WillClimbDownLadder()
-        {                        
-            return (moveInput.x == 0.0f && moveInput.y < 0.0f && Raycast(true, ladderLayer, Vector2.zero, groundLadderDistance));
+        {
+            bool h2 = Raycast(true, ladderLayer, Vector2.down * 0.2f, groundDistance);
+
+            //Debug.Log($"h2={h2}");
+
+            return moveInput.x == 0.0f && moveInput.y < 0.0f && h2;
         }
 
         public bool WillGripToWall()
@@ -486,12 +515,20 @@ namespace JFM
 
         public bool Raycast(bool limitToRay, int layerMask, Vector2 offset, float distance, Vector2 direction, bool willBreak)
         {
+            return Raycast(limitToRay, layerMask, offset, distance, direction, false, false);
+        }
+
+        public bool Raycast(bool limitToRay, int layerMask, Vector2 offset, float distance, Vector2 direction, bool willBreak, bool willDraw)
+        {
             RaycastHit2D hit;
             if (limitToRay)
             {
                 hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + offset, direction, distance, layerMask);
-                Debug.DrawRay(new Vector2(transform.position.x, transform.position.y) + offset, direction * distance, Color.yellow);
-                if(willBreak)
+                
+                if (willDraw)
+                    Debug.DrawRay(new Vector2(transform.position.x, transform.position.y) + offset, direction * distance, Color.yellow);
+
+                if (willBreak)
                     Debug.Break();
             }
             else
@@ -499,8 +536,18 @@ namespace JFM
                 hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y) + offset, groundBoxSize, 0.0f, direction, distance, layerMask);
             }
 
-            return (hit.collider is not null);
-        }
+            hitInfo.hit = hit;
+            if(hit.collider is not null)
+            {
+                hitInfo.probePoint = hit.point;
+                hitInfo.hasHit = true;
+                return true;
+            }
+
+            hitInfo.probePoint = new Vector2(transform.position.x, transform.position.y) + offset + direction * distance;
+            hitInfo.hasHit = false;
+            return false;
+        }      
 
         public bool IsGrounded()
         {

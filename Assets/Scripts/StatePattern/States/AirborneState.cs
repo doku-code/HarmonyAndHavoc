@@ -24,7 +24,17 @@ namespace JFM
             player.SetHighestAirborneY();
 
             // When the Player is in a corner, all normals are the same, so I use in addition a raycast.
-            if ((player.IsEventGrounded && (player.IsVerticalDirection(player.GroundDirection) || player.IsVerticalDirection(player.GroundDirection2))) || player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f))
+            if (
+                    (
+                        player.IsEventGrounded && 
+                        (player.IsVerticalDirection(player.GroundDirection) || player.IsVerticalDirection(player.GroundDirection2))
+                    )
+                    || 
+                    (
+                        !player.Raycast(true, player.LadderLayer, Vector2.zero, 0.0f) && 
+                        player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f)
+                    )
+                )
             {
                 if (player.WillLand())
                 {

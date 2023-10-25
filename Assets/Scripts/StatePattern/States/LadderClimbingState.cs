@@ -73,6 +73,12 @@ namespace JFM
                 return;
             }
 
+            if (player.IsCastGrounded(true, player.GroundLayer) && player.MoveInput.y < 0.0f)
+            {                
+                player.ChangeState(player.idleState);
+                return;
+            }
+
             if (player.inputTriggers["Move"] && player.MoveInput.y != 0.0f)
             {
                 animator.SetFloat("MotionSpeed", 1);
@@ -91,8 +97,15 @@ namespace JFM
 
                 if (!player.Raycast(true, player.LadderLayer, Vector2.zero, 0.0f) && player.MoveInput.y > 0.0f)
                 {
-                    player.rb.velocity = new Vector2(player.rb.velocity.x, player.ColliderSize.y / 2.0f);
+                    //player.rb.velocity = new Vector2(player.rb.velocity.x, player.LadderGettingUpForce);
+                    //player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
+
+                    Debug.Log("Ca passe ici.");
+
+                    player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f);
                     player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
+                    float y = Mathf.Floor(player.HitInfo.probePoint.y);
+                    player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);                    
                     player.ChangeState(player.idleState);
 
                     return;
@@ -105,14 +118,7 @@ namespace JFM
             {
                 animator.SetFloat("MotionSpeed", 0);
                 player.rb.velocity = Vector2.zero;                
-            }
-            
-
-            if (player.IsCastGrounded(true, player.GroundLayer))
-            {
-                player.ChangeState(player.idleState);
-                return;
-            }
+            }            
         }
 
         public override void Exit()

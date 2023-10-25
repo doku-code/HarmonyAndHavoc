@@ -8,7 +8,7 @@ namespace JFM
     {
         private float oldGravityScale;
         public int nFrames;
-
+       
         public IdleState(Animator animator, PlayerController player)
             : base(animator, player)
         {
@@ -16,7 +16,7 @@ namespace JFM
         }
 
         public override void Enter()
-        {
+        {           
             animator.SetBool("IsIdle", true);
             player.rb.velocity = Vector2.zero;
             oldGravityScale = player.rb.gravityScale;
@@ -32,6 +32,8 @@ namespace JFM
                 return;
             }
             
+            
+
             //if( !player.IsEventGrounded && !player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f))
             if (!player.IsGrounded(false))
             {
@@ -47,6 +49,9 @@ namespace JFM
 
             if (player.WillClimbDownLadder())
             {
+                Debug.Log("Ca passe ici aussi.");
+                float ladderX = Mathf.Floor(player.HitInfo.probePoint.x) + 0.5f - player.ColliderOffset.x;
+                player.transform.position = new Vector3(ladderX, player.transform.position.y, player.transform.position.z);
                 player.ChangeState(player.ladderClimbingState);
                 return;
             }
