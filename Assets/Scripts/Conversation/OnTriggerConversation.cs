@@ -1,0 +1,36 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class OnTriggerConversation : MonoBehaviour
+{
+    [SerializeField] GameObject conversationPanel;
+    [SerializeField] ConversationManager questionIdx;
+    [SerializeField] bool resetConversation;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            Debug.Log("Je trigger le trigger");
+            conversationPanel.SetActive(true);
+
+            if(resetConversation)
+            {
+                questionIdx.LoadConversation(0);
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (conversationPanel != null)
+        {
+            conversationPanel.SetActive(false);
+
+            if(resetConversation)
+            {
+                questionIdx.questionIndex = 0;
+            }
+        }
+    }
+}
