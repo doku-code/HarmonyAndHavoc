@@ -1,76 +1,100 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
-[System.Serializable]
-public class Answer
+namespace charles
 {
-    public string answerText;
-}
-[System.Serializable]
-public class Question
-{
-    public string questionText;
-    public Answer[] answers;
-}
-public class ConversationManager : MonoBehaviour
-{
-    [SerializeField] public Question[] Conversations;
-
-    [Header("UI")]
-
-    [SerializeField] private TMP_Text questionText;
-    [SerializeField] private Button firstAnswerButton;
-    [SerializeField] private Button secondAnswerButton;
-    [SerializeField] private Button thirdAnswerButton;
-
-
-    public int questionIndex = 0;
-    private void Start()
+    [System.Serializable]
+    public class Answer
     {
-        LoadConversation(questionIndex);
+        public string answerText;
     }
-    public void LoadConversation(int index)
+    [System.Serializable]
+    public class Question
     {
-        if (index < Conversations.Length)
+        public string questionText;
+        public Answer[] answers;
+    }
+    public class ConversationManager : MonoBehaviour
+    {
+        [SerializeField] public Question[] Conversations;
+
+        [Header("UI")]
+
+        [SerializeField] private TMP_Text questionText;
+        [SerializeField] private Button firstAnswerButton;
+        [SerializeField] private Button secondAnswerButton;
+        [SerializeField] private Button thirdAnswerButton;
+
+        private bool buttonPressed = false;
+        [SerializeField] private float typingSpeed = 0.2f;
+        public int questionIndex = 0;
+        private void Start()
         {
-            questionText.text = Conversations[index].questionText;
-            Answer[] answers = Conversations[index].answers;
-
-            for (int i = 0; i < 3; i++)
+            LoadConversation(questionIndex);
+        }
+        public IEnumerator ShowText()
+        {
+            while (questionIndex < Conversations.Length)
             {
-                Button answerButton = null;
-                switch (i)
-                {
-                    case 0:
-                        answerButton = firstAnswerButton;
-                        firstAnswerButton.gameObject.SetActive(false);
-                        break;
-                    case 1:
-                        answerButton = secondAnswerButton;
-                        secondAnswerButton.gameObject.SetActive(false);
-                        break;
-                    case 2:
-                        answerButton = thirdAnswerButton;
-                        thirdAnswerButton.gameObject.SetActive(false);
-                        break;
-                }
+                string question = Conversations[questionIndex].questionText;
 
-                if (i < answers.Length)
+                questionText.text = "";
+                for (int i = 0; i < question.Length; i++)
                 {
-                    answerButton.interactable = true;
-                    answerButton.GetComponentInChildren<TMP_Text>().text = answers[i].answerText;
+                    questionText.text += question[i];
+                    yield return new WaitForSeconds(typingSpeed);
                 }
-                else
+                yield return new WaitForSeconds(1.0f);
+
+                buttonPressed = false;
+                yield return new WaitUntil(() => buttonPressed);
+
+                questionIndex++;
+            }
+        }
+        public void LoadConversation(int index)
+        {
+            buttonPressed = false;
+            if (index < Conversations.Length)
+            {
+                questionText.text = Conversations[index].questionText;
+                Answer[] answers = Conversations[index].answers;
+
+                for (int i = 0; i < 3; i++)
                 {
-                    answerButton.interactable = false;
+                    Button answerButton = null;
+                    switch (i)
+                    {
+                        case 0:
+                            answerButton = firstAnswerButton;
+                            break;
+                        case 1:
+                            answerButton = secondAnswerButton;
+                            break;
+                        case 2:
+                            answerButton = thirdAnswerButton;
+                            break;
+                    }
+
+                    if (i < answers.Length)
+                    {
+                        answerButton.interactable = true;
+                        answerButton.GetComponentInChildren<TMP_Text>().text = answers[i].answerText;
+                    }
+                    else
+                    {
+                        answerButton.interactable = false;
+                    }
                 }
             }
         }
-    }
-    public void OnAnswerSubmitted(int answerIndex)
-    {
-        questionIndex++;
-        LoadConversation(questionIndex);
+        public void OnAnswerSubmitted(int answerIndex)
+        {
+            questionIndex++;
+            buttonPressed = true;
+            LoadConversation(questionIndex);
+        }
     }
 }

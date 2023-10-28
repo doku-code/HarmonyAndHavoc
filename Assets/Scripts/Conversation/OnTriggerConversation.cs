@@ -2,34 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnTriggerConversation : MonoBehaviour
+namespace charles
 {
-    [SerializeField] GameObject conversationPanel;
-    [SerializeField] ConversationManager questionIdx;
-    [SerializeField] bool resetConversation;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class OnTriggerConversation : MonoBehaviour
     {
-        if(collision.CompareTag("Player"))
-        {
-            Debug.Log("Je trigger le trigger");
-            conversationPanel.SetActive(true);
+        [SerializeField] GameObject conversationPanel;
+        [SerializeField] ConversationManager questionIdx;
+        [SerializeField] bool resetConversation;
 
-            if(resetConversation)
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
             {
-                questionIdx.LoadConversation(0);
+                StartCoroutine(questionIdx.ShowText());
+                conversationPanel.SetActive(true);
+
+                if (resetConversation)
+                {
+                    questionIdx.LoadConversation(0);
+                }
             }
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (conversationPanel != null)
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            conversationPanel.SetActive(false);
-
-            if(resetConversation)
+            if (conversationPanel != null)
             {
-                questionIdx.questionIndex = 0;
+                conversationPanel.SetActive(false);
+
+                if (resetConversation)
+                {
+                    questionIdx.questionIndex = 0;
+
+                }
             }
         }
     }

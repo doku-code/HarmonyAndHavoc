@@ -34565,11 +34565,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Conversations:
   - questionText: This is such a sunny day!
+    answers:
+    - answerText: asdasdasdasd
+  - questionText: asdasdasdasd
     answers: []
   questionText: {fileID: 169941734}
   firstAnswerButton: {fileID: 146092465}
   secondAnswerButton: {fileID: 1156379926}
   thirdAnswerButton: {fileID: 954476534}
+  typingSpeed: 0.08
   questionIndex: 0
 --- !u!4 &1091151886
 Transform:
