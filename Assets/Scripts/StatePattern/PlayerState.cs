@@ -29,6 +29,8 @@ namespace JFM
             LAND,
             DASH,
             LADDER,
+            STAIRS_UP,
+            STAIRS_DOWN,
             LEDGE,
             BASIC_ATTACK
         };

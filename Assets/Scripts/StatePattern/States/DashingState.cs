@@ -47,7 +47,6 @@ namespace JFM
             float elapsedTime = Time.time - startTime;        
             if ((player.DashDirection.y == 0.0f && elapsedTime > animationClipLength * player.GroundDashBailOutNormalizedTime) && player.IsCastGrounded() )//&& player.rb.velocity.y < 0)// player.MoveInput.y < 0)
             {
-                Debug.Log("===== ok");
                 player.idleState.nFrames = 3;
                 player.ChangeState(player.idleState);
                 return;
@@ -80,7 +79,10 @@ namespace JFM
             else if (player.DashDirection.y == 0.0f)
             {
                 player.rb.AddForce(-player.rb.velocity * player.GroundDashDeceleration * Time.fixedDeltaTime, ForceMode2D.Force);
+                return;
             }
+
+            player.ContinueDash();
         }
 
         public override void Exit()

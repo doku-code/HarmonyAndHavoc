@@ -33,8 +33,7 @@ Transform:
   m_LocalPosition: {x: 21.62, y: 7.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1009224314719890208}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1595143377643639229
@@ -55,6 +54,23 @@ MonoBehaviour:
   ladderAcceleration: 1000
   ladderGettingUpForce: 1
   ladderPushUpForce: 2
+  stairsDistanceLow: 0
+  stairsDistanceHigh: 0
+  stairsRayLength: 0.71
+  stairsVelocityRayLengthFactor: 0.5
+  stairsMinHeight: 0.32
+  stairsHeight1: 0
+  stairsDistanceLow2: 0.09
+  stairsDistanceHigh2: 0.1
+  stairsRayLength2: 0.1
+  stairsVelocityRayLengthFactor2: 0.5
+  stairsMinHeight2: 0.19
+  stairsHeight2: 0.44
+  stairsUpAngle: 45
+  stairsDownAngle: 49.4
+  stairsGroundDistance: 0.2
+  stairsSpeed: 5.54
+  stairsAcceleration: 2000
   jumpForce: 12
   baseNumJumps: 1
   airSpeedMultiplier: 100
@@ -64,7 +80,7 @@ MonoBehaviour:
   ladderLayer:
     serializedVersion: 2
     m_Bits: 64
-  groundDistance: 0.2
+  groundDistance: 0.1
   groundBoxSize: {x: 0.5, y: 0.01}
   wallDistance: 0.4
   wallJumpDuration: 1
@@ -73,6 +89,7 @@ MonoBehaviour:
   groundDashForce: 60
   groundDashDeceleration: 1000
   groundDashBailOutNormalizedTime: 0.4
+  groundDashAcceleration: 500
   groundDashAngle: 1
   dashDiagAngle: 45
   wallGripForce: 1000
@@ -147,9 +164,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -2009618855
+  m_SortingLayer: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 1741466463, guid: b36fe43c4a3fb5d4dbfe6140c21426ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -227,70 +244,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1001 &2888807489372084046
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8792474215422815423}
-    m_Modifications:
-    - target: {fileID: 2744494487057349742, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744494487057349742, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744494487057349742, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744494487057349742, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744494487057349742, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744494487057349742, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744494487057349742, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744494487057349742, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744494487057349742, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744494487057349742, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744494487057349742, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7501488609290161489, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-      propertyPath: m_Name
-      value: ParrallaxBGTEST
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8088844544936036555, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
---- !u!4 &1009224314719890208 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2744494487057349742, guid: 9303716162708194eb22edcdbdf4dba7, type: 3}
-  m_PrefabInstance: {fileID: 2888807489372084046}
-  m_PrefabAsset: {fileID: 0}

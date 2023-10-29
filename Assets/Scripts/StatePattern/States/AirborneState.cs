@@ -25,16 +25,16 @@ namespace JFM
 
             // When the Player is in a corner, all normals are the same, so I use in addition a raycast.
             if (
-                    (
-                        player.IsEventGrounded && 
-                        (player.IsVerticalDirection(player.GroundDirection) || player.IsVerticalDirection(player.GroundDirection2))
-                    )
-                    || 
-                    (
-                        !player.Raycast(true, player.LadderLayer, Vector2.zero, 0.0f) && 
-                        player.Raycast(true, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f)
-                    )
+                (
+                    player.IsEventGrounded && 
+                    (player.IsVerticalDirection(player.GroundDirection) || player.IsVerticalDirection(player.GroundDirection2))
                 )
+                || 
+                (
+                    !player.Raycast(false, player.LadderLayer, Vector2.zero, 0.0f) && 
+                    player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.zero, 0.2f)
+                )
+            )
             {
                 if (player.WillLand())
                 {
@@ -45,6 +45,29 @@ namespace JFM
                     player.idleState.nFrames = 3;
                     player.ChangeState(player.idleState);
                 }
+                return;
+            }
+
+            float angle = 45 * Mathf.Deg2Rad;
+            float side = player.IsFacingRight ? 1.0f : -1.0f;
+            float distance = player.StairsGroundDistance;
+            Vector2 vec = new Vector2(side * Mathf.Cos(angle), -Mathf.Sin(angle));
+
+            if (!player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.zero, Mathf.Sin(angle) * distance, Vector2.down) &&//, false, true) &&
+                player.Raycast(false, player.GroundLayer, Vector2.right * side * (player.ColliderSize.x / 2), distance, vec) && //, false, true) &&
+                player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.down * player.StairsMinHeight2 * 2.5f, 0.1f, Vector2.down) //, false, true)
+            )
+            {
+                player.ChangeState(player.stairsClimbingUpState);
+                return;
+            }
+            vec = new Vector2(-side * Mathf.Cos(angle), -Mathf.Sin(angle));
+            if (!player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.zero, Mathf.Sin(angle) * distance, Vector2.down) && //, false, true) && 
+                player.Raycast(false, player.GroundLayer, Vector2.right * -side * (player.ColliderSize.x / 2), distance, vec) && //, false, true) &&
+                player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.down * player.StairsMinHeight2 * 2.5f, 0.1f, Vector2.down) //, false, true)
+            )
+            {
+                player.ChangeState(player.stairsClimbingDownState);
                 return;
             }
 

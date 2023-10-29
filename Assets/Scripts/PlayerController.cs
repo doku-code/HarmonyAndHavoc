@@ -35,6 +35,8 @@ namespace JFM
         public BasicAttackState basicAttackState;
         public DashingState dashingState;
         public LadderClimbingState ladderClimbingState;
+        public StairsClimbingUpState stairsClimbingUpState;
+        public StairsClimbingDownState stairsClimbingDownState;
         public LandingState landingState;
 
         [SerializeField] private float walkSpeed = 1.0f;
@@ -44,6 +46,26 @@ namespace JFM
         [SerializeField] private float ladderAcceleration = 10.0f;
         [SerializeField] private float ladderGettingUpForce = 1.0f;
         [SerializeField] private float ladderPushUpForce = 2.0f;
+        
+        [SerializeField] private float stairsDistanceLow = 0.6f;
+        [SerializeField] private float stairsDistanceHigh = 0.8f;
+        [SerializeField] private float stairsRayLength = 0.1f;
+        [SerializeField] private float stairsVelocityRayLengthFactor = 0.5f;
+        [SerializeField] private float stairsMinHeight = 0.0f;
+        [SerializeField] private float stairsHeight1 = 0.2f;
+
+        [SerializeField] private float stairsDistanceLow2 = 0.6f;
+        [SerializeField] private float stairsDistanceHigh2 = 0.8f;
+        [SerializeField] private float stairsRayLength2 = 0.1f;
+        [SerializeField] private float stairsVelocityRayLengthFactor2 = 0.5f;
+        [SerializeField] private float stairsMinHeight2 = 0.0f;
+        [SerializeField] private float stairsHeight2 = 0.2f;
+        // In degrees
+        [SerializeField] private float stairsUpAngle = 45.0f;
+        [SerializeField] private float stairsDownAngle = 70.0f;
+        [SerializeField] private float stairsGroundDistance = 0.2f;
+        [SerializeField] private float stairsSpeed = 30.0f;
+        [SerializeField] private float stairsAcceleration = 1000.0f;
         [SerializeField] private float jumpForce = 3.0f;
         [SerializeField] private int baseNumJumps = 1;
         [SerializeField] private float airSpeedMultiplier = 100.0f;
@@ -52,13 +74,14 @@ namespace JFM
 
         [SerializeField] private float groundDistance = 1.0f;
         [SerializeField] private Vector2 groundBoxSize = new Vector2(0.95f, 0.01f);
-        [SerializeField] private float wallDistance = 0.6f;
+        [SerializeField] private float wallDistance = 0.4f;
         [SerializeField] private float wallJumpDuration = 1.0f;
         [SerializeField] private float ledgeAnimationDuration = 1.0f;
         [SerializeField] private float dashForce = 3.0f;
         [SerializeField] private float groundDashForce = 60.0f;
         [SerializeField] private float groundDashDeceleration = 1000.0f;
         [SerializeField] private float groundDashBailOutNormalizedTime = 0.4f;
+        [SerializeField] private float groundDashAcceleration = 500.0f;
         // In degrees
         [SerializeField] private float groundDashAngle = 0.0f;
         // In degrees
@@ -115,6 +138,11 @@ namespace JFM
         public bool IsEventGrounded
         {
             get => isEventGrounded;
+        }
+
+        public float GroundDistance
+        {
+            get => groundDistance;
         }
 
         public Vector2 GroundDirection
@@ -175,6 +203,36 @@ namespace JFM
         public float LadderPushUpForce
         {
             get => ladderPushUpForce;
+        }
+
+        public float StairsGroundDistance
+        {
+            get => stairsGroundDistance;
+        }
+
+        public float StairsMinHeight2
+        {
+            get => stairsMinHeight2;
+        }
+
+        public float StairsSpeed
+        {
+            get => stairsSpeed;
+        }
+
+        public float StairsAcceleration
+        {
+            get => stairsAcceleration;
+        }
+
+        public float StairsUpAngle
+        {
+            get => stairsUpAngle;
+        }
+
+        public float StairsDownAngle
+        {
+            get => stairsDownAngle;
         }
 
         public float WallJumpDuration
@@ -369,19 +427,43 @@ namespace JFM
                 {
                     v = Vector3.up * moveInput.y * dashForce;                    
                 }
+
+                rb.AddForce(v, ForceMode2D.Impulse);
+            }
+            else
+            {
+                float angle = groundDashAngle * Mathf.Deg2Rad;
+                v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * groundDashForce * groundDashAcceleration * Time.fixedDeltaTime;
+                rb.AddForce(v, ForceMode2D.Force);
+            }            
+
+            dashDirection = moveInput;            
+        }
+
+        public void ContinueDash()
+        {
+            Vector3 v;
+            if (dashDirection.y != 0.0f)
+            {
+                /*if (dashDirection.x != 0.0f)
+                {
+                    float angle = dashDiagAngle * Mathf.Deg2Rad;
+                    v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * dashForce;
+                }
+                else
+                {
+                    v = Vector3.up * moveInput.y * dashForce;
+                }*/
             }
             else
             {
                 float angle = groundDashAngle * Mathf.Deg2Rad;
                 v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * groundDashForce;
-            }
-            rb.AddForce(v, ForceMode2D.Impulse);
 
-            dashDirection = moveInput;
+                rb.AddForce(v, ForceMode2D.Force);
+            }            
+        }
 
-            //moveInput = Vector2.zero;                     
-        }             
-        
         private void SetFrontWallInfo()
         {
             if (frontWall is null)
@@ -438,7 +520,7 @@ namespace JFM
         
         public bool WillClimbDownLadder()
         {
-            bool h2 = Raycast(true, ladderLayer, Vector2.down * 0.2f, groundDistance);
+            bool h2 = Raycast(false, ladderLayer, Vector2.down * 0.2f, groundDistance);
 
             //Debug.Log($"h2={h2}");
 
@@ -449,7 +531,7 @@ namespace JFM
         {
             SetFrontWallInfo();
 
-            bool backWallHit = Raycast(true, groundLayer, Vector2.zero, wallDistance, isFacingRight ? -Vector2.right : Vector2.right);
+            bool backWallHit = Raycast(false, groundLayer, Vector2.zero, wallDistance, isFacingRight ? -Vector2.right : Vector2.right);
 
             bool front = frontWall is not null && (1 << frontWall.layer) == (int)groundLayer && ((isFacingRight && moveInput.x > 0) || (!isFacingRight && moveInput.x < 0));
             bool back = backWallHit && ((isFacingRight && moveInput.x < 0) || (!isFacingRight && moveInput.x > 0));
@@ -471,6 +553,24 @@ namespace JFM
             }
 
             return isGrippingToWall;
+        }
+
+        public bool WillClimbUpStairs()
+        {
+            Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
+            bool lowHit = Raycast(false, groundLayer, Vector2.up * stairsHeight1 + v * stairsDistanceLow, stairsRayLength, v);//, false, true);
+            bool highHit = Raycast(false, groundLayer, Vector2.up * stairsMinHeight + v * stairsDistanceHigh, stairsRayLength, v);//, false, true);
+            return lowHit && !highHit;
+        }
+
+        public bool WillClimbDownStairs()
+        {
+            Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
+            bool lowHit = Raycast(false, groundLayer, Vector2.down * stairsMinHeight2 + v * stairsDistanceLow2, stairsRayLength2, v);//, false, true);
+            bool highHit = Raycast(false, groundLayer, Vector2.down * stairsHeight2 + v * stairsDistanceHigh2, stairsRayLength2, v);//, false, true);
+
+            bool groundHit = Raycast(false, groundLayer | ladderLayer, Vector2.zero, groundDistance, Vector2.down);//, false, true);
+            return lowHit && !highHit && groundHit;
         }
 
         public bool IsCastGrounded()
@@ -503,25 +603,25 @@ namespace JFM
             return (hit.collider is not null);// && rb.velocity.y < -0.001f);            
         }
 
-        public bool Raycast(bool limitToRay, int layerMask, Vector2 offset, float distance)
+        public bool Raycast(bool doBoxCast, int layerMask, Vector2 offset, float distance)
         {
-            return Raycast(limitToRay, layerMask, offset, distance, Vector2.down);
+            return Raycast(doBoxCast, layerMask, offset, distance, Vector2.down);
         }
 
-        public bool Raycast(bool limitToRay, int layerMask, Vector2 offset, float distance, Vector2 direction)
+        public bool Raycast(bool doBoxCast, int layerMask, Vector2 offset, float distance, Vector2 direction)
         {
-            return Raycast(limitToRay, layerMask, offset, distance, direction, false);
+            return Raycast(doBoxCast, layerMask, offset, distance, direction, false);
         }
 
-        public bool Raycast(bool limitToRay, int layerMask, Vector2 offset, float distance, Vector2 direction, bool willBreak)
+        public bool Raycast(bool doBoxCast, int layerMask, Vector2 offset, float distance, Vector2 direction, bool willBreak)
         {
-            return Raycast(limitToRay, layerMask, offset, distance, direction, false, false);
+            return Raycast(doBoxCast, layerMask, offset, distance, direction, false, false);
         }
 
-        public bool Raycast(bool limitToRay, int layerMask, Vector2 offset, float distance, Vector2 direction, bool willBreak, bool willDraw)
+        public bool Raycast(bool doBoxCast, int layerMask, Vector2 offset, float distance, Vector2 direction, bool willBreak, bool willDraw)
         {
             RaycastHit2D hit;
-            if (limitToRay)
+            if (!doBoxCast)
             {
                 hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + offset, direction, distance, layerMask);
                 
@@ -556,7 +656,7 @@ namespace JFM
 
         public bool IsGrounded(bool testVelocity)
         {
-            return ((isEventGrounded && (IsVerticalDirection(groundDirection) || IsVerticalDirection(groundDirection2))) || Raycast(true, groundLayer | ladderLayer, Vector2.zero, 0.2f)) && (rb.velocity.y < -0.001f || !testVelocity);
+            return ((isEventGrounded && (IsVerticalDirection(groundDirection) || IsVerticalDirection(groundDirection2))) || Raycast(false, groundLayer | ladderLayer, Vector2.zero, 0.2f)) && (rb.velocity.y < -0.001f || !testVelocity);
         }
 
         public bool IsHorizontalDirection(Vector2 direction)
@@ -616,6 +716,8 @@ namespace JFM
             basicAttackState = new BasicAttackState(animator, this);
             dashingState = new DashingState(animator, this);
             ladderClimbingState = new LadderClimbingState(animator, this);
+            stairsClimbingUpState = new StairsClimbingUpState(animator, this);
+            stairsClimbingDownState = new StairsClimbingDownState(animator, this);
             landingState = new LandingState(animator, this);  
             idleState = new IdleState(animator, this);
 

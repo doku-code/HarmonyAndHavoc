@@ -83,6 +83,18 @@ namespace JFM
                 return;
             }
 
+            if (player.WillClimbUpStairs())
+            {
+                player.ChangeState(player.stairsClimbingUpState);
+                return;
+            }
+
+            if (player.WillClimbDownStairs())
+            {
+                player.ChangeState(player.stairsClimbingDownState);
+                return;
+            }
+
             if (player.inputTriggers["BasicAttack"])
             {
                 player.ChangeState(player.basicAttackState);
