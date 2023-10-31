@@ -25,8 +25,6 @@ namespace JFM
             player.rb.velocity = Vector2.zero;
             startTime = Time.time;
 
-            //         lastKnowledge = player.Data.Knowledges.find_if()
-
             base.Enter();
         }
 

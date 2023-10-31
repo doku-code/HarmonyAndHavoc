@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputManagerEntry;
 
 namespace JFM
 {
@@ -44,22 +45,25 @@ namespace JFM
         //[SerializeField] private float runSpeed = 4.0f;
         [SerializeField] private float ladderSpeed = 3.0f;
         [SerializeField] private float ladderAcceleration = 10.0f;
-        [SerializeField] private float ladderGettingUpForce = 1.0f;
+        //[SerializeField] private float ladderGettingUpForce = 1.0f;
         [SerializeField] private float ladderPushUpForce = 2.0f;
         
-        [SerializeField] private float stairsDistanceLow = 0.6f;
-        [SerializeField] private float stairsDistanceHigh = 0.8f;
-        [SerializeField] private float stairsRayLength = 0.1f;
-        [SerializeField] private float stairsVelocityRayLengthFactor = 0.5f;
-        [SerializeField] private float stairsMinHeight = 0.0f;
-        [SerializeField] private float stairsHeight1 = 0.2f;
+        //[SerializeField] private float stairsUpDistanceLow = 0.6f;
+        [SerializeField] private float stairsUpDistanceHigh = 0.8f;
+        [SerializeField] private float stairsUpDistanceHigh2 = 0.8f;
+        [SerializeField] private float stairsUpRayLength = 0.1f;
+        [SerializeField] private float stairsUpMinHeight = 0.0f;
+        [SerializeField] private float stairsUpHeight = 0.2f;
+        [SerializeField] private float stairsUpHeight2 = 0.2f;
+        [SerializeField] private float stairsUpDeceleration = 2f;
 
-        [SerializeField] private float stairsDistanceLow2 = 0.6f;
-        [SerializeField] private float stairsDistanceHigh2 = 0.8f;
-        [SerializeField] private float stairsRayLength2 = 0.1f;
-        [SerializeField] private float stairsVelocityRayLengthFactor2 = 0.5f;
-        [SerializeField] private float stairsMinHeight2 = 0.0f;
-        [SerializeField] private float stairsHeight2 = 0.2f;
+        [SerializeField] private float stairsDownDistanceLow = 0.6f;
+        [SerializeField] private float stairsDownDistanceHigh = 0.8f;
+        [SerializeField] private float stairsDownRayLength = 0.1f;        
+        [SerializeField] private float stairsDownMinHeight = 0.0f;
+        [SerializeField] private float stairsDownHeight = 0.2f;
+        [SerializeField] private float stairsDownGroundX = 0.3f;
+        [SerializeField] private float stairsDownDeceleration = 0.3f;
         // In degrees
         [SerializeField] private float stairsUpAngle = 45.0f;
         [SerializeField] private float stairsDownAngle = 70.0f;
@@ -68,7 +72,7 @@ namespace JFM
         [SerializeField] private float stairsAcceleration = 1000.0f;
         [SerializeField] private float jumpForce = 3.0f;
         [SerializeField] private int baseNumJumps = 1;
-        [SerializeField] private float airSpeedMultiplier = 100.0f;
+        [SerializeField] private float airAcceleration = 100.0f;
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private LayerMask ladderLayer;
 
@@ -134,6 +138,7 @@ namespace JFM
         private bool isEventGrounded;
         private Vector2 groundDirection;
         private Vector2 groundDirection2;
+        public Collision2D collision;
 
         public bool IsEventGrounded
         {
@@ -175,9 +180,9 @@ namespace JFM
             get => jumpForce;
         }
 
-        public float AirSpeedMultiplier
+        public float AirAcceleration
         {
-            get => airSpeedMultiplier;
+            get => airAcceleration;
         }
 
         public float WallGripForce
@@ -194,12 +199,12 @@ namespace JFM
         {
             get => ladderAcceleration;
         }
-
+        /*
         public float LadderGettingUpForce
         {
             get => ladderGettingUpForce;
         }
-
+        */
         public float LadderPushUpForce
         {
             get => ladderPushUpForce;
@@ -210,9 +215,34 @@ namespace JFM
             get => stairsGroundDistance;
         }
 
-        public float StairsMinHeight2
+        public float StairsUpDistanceHigh
         {
-            get => stairsMinHeight2;
+            get => stairsUpDistanceHigh;
+        }
+
+        public float StairsUpDistanceHigh2
+        {
+            get => stairsUpDistanceHigh2;
+        }
+
+        public float StairsUpHeight
+        {
+            get => stairsUpHeight;
+        }
+
+        public float StairsUpHeight2
+        {
+            get => stairsUpHeight2;
+        }
+
+        public float StairsDownHeight
+        {
+            get => stairsDownHeight;
+        }
+
+        public float StairsDownMinHeight
+        {
+            get => stairsDownMinHeight;
         }
 
         public float StairsSpeed
@@ -225,6 +255,16 @@ namespace JFM
             get => stairsAcceleration;
         }
 
+        public float StairsDownDeceleration
+        {
+            get => stairsDownDeceleration;
+        }
+
+        public float StairsUpDeceleration
+        {
+            get => stairsUpDeceleration;
+        }
+
         public float StairsUpAngle
         {
             get => stairsUpAngle;
@@ -233,6 +273,11 @@ namespace JFM
         public float StairsDownAngle
         {
             get => stairsDownAngle;
+        }
+
+        public float StairsDownGroundX
+        {
+            get => stairsDownGroundX;
         }
 
         public float WallJumpDuration
@@ -337,7 +382,7 @@ namespace JFM
         
         public void SetAirborneInfo()
         {
-            bool grounded = IsCastGrounded() && rb.velocity.y < 0.0f;
+            bool grounded = IsCastGrounded(); // && rb.velocity.y < 0.0f;
             bool grippingToWall = IsGrippingToWall();
             if (grounded || grippingToWall)
             {
@@ -347,7 +392,7 @@ namespace JFM
         }
 
         public bool WillJump()
-        {            
+        {
             return inputTriggers["Jump"] && numJumps > 0;
         }
 
@@ -468,8 +513,9 @@ namespace JFM
         {
             if (frontWall is null)
             {
-                RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0, 0.0f), isFacingRight ? Vector2.right : -Vector2.right, wallDistance, groundLayer);
-                
+                RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0, colliderSize.y/2.0f), isFacingRight ? Vector2.right : -Vector2.right, wallDistance, groundLayer);
+                //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y), (isFacingRight ? Vector2.right : -Vector2.right) * wallDistance, Color.yellow);
+
                 if(hit.collider is null)
                 {
                     return;
@@ -535,6 +581,7 @@ namespace JFM
 
             bool front = frontWall is not null && (1 << frontWall.layer) == (int)groundLayer && ((isFacingRight && moveInput.x > 0) || (!isFacingRight && moveInput.x < 0));
             bool back = backWallHit && ((isFacingRight && moveInput.x < 0) || (!isFacingRight && moveInput.x > 0));
+            //Debug.Log($"({front} || {back}) && {Mathf.Abs(rb.velocity.x) <= 0.5f}");
             return (front || back) && Mathf.Abs(rb.velocity.x) <= 0.5f;
         }
 
@@ -558,19 +605,104 @@ namespace JFM
         public bool WillClimbUpStairs()
         {
             Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
-            bool lowHit = Raycast(false, groundLayer, Vector2.up * stairsHeight1 + v * stairsDistanceLow, stairsRayLength, v);//, false, true);
-            bool highHit = Raycast(false, groundLayer, Vector2.up * stairsMinHeight + v * stairsDistanceHigh, stairsRayLength, v);//, false, true);
-            return lowHit && !highHit;
+            /*bool lowHit = Raycast(false, groundLayer | ladderLayer, Vector2.up * stairsUpHeight + v * stairsUpDistanceLow, stairsUpRayLength, v, false, true);
+            bool highHit = Raycast(false, groundLayer | ladderLayer, Vector2.up * stairsUpMinHeight + v * stairsUpDistanceHigh, stairsUpRayLength, v, false, true);
+            bool highHit2 = Raycast(false, groundLayer | ladderLayer, Vector2.up * stairsUpMinHeight + v * stairsUpDistanceLow, stairsUpRayLength, v, false, true);
+            return lowHit && !highHit && !highHit2 && moveInput.x != 0.0f;*/
+
+            if(FindStairsAtPoint(v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight) != 0)
+            {
+                return moveInput.x != 0.0f;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool WillClimbDownStairs()
         {
             Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
-            bool lowHit = Raycast(false, groundLayer, Vector2.down * stairsMinHeight2 + v * stairsDistanceLow2, stairsRayLength2, v);//, false, true);
-            bool highHit = Raycast(false, groundLayer, Vector2.down * stairsHeight2 + v * stairsDistanceHigh2, stairsRayLength2, v);//, false, true);
+            /*bool lowHit = Raycast(false, groundLayer | ladderLayer, Vector2.down * stairsDownMinHeight + v * stairsDownDistanceLow, stairsDownRayLength, v);//, false, true);
+            bool highHit = Raycast(false, groundLayer | ladderLayer, Vector2.down * stairsDownHeight + v * stairsDownDistanceHigh, stairsDownRayLength, v);//, false, true);
 
-            bool groundHit = Raycast(false, groundLayer | ladderLayer, Vector2.zero, groundDistance, Vector2.down);//, false, true);
-            return lowHit && !highHit && groundHit;
+            bool groundHit = Raycast(false, groundLayer | ladderLayer, -v * stairsDownGroundX, stairsGroundDistance, Vector2.down);//, false, true);
+            //Debug.Log($"{lowHit} && {!highHit} && {groundHit}");
+            return lowHit && !highHit && groundHit && rb.velocity.y <= 0.0f && moveInput.x != 0.0f;
+            */
+            int stairsSide = FindStairsBeneath();
+            //Debug.Log($"stairsSide={stairsSide}");
+            return stairsSide != 0 && rb.velocity.y <= 0.0f && ((moveInput.x < 0.0f && stairsSide > 0)|| (moveInput.x > 0.0f && stairsSide < 0) );
+        }
+
+        public int stairsSide = 0;
+        
+        public int FindStairsBeneath()
+        {
+            Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
+            return FindStairsBeneath(v * colliderSize.x / 2.0f + v * stairsDownGroundX, -v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight);
+        }
+
+        public int FindStairsBeneath(Vector2 offset1, Vector2 offset2)
+        {
+            
+            int retValue = 0;
+            //bool foundStairsBeneath = false;
+            //bool stairsDirectionIsRight = false;
+            //Vector2 offset2 = v * colliderSize.x / 2.0f + v * stairsDownGroundX;
+
+            if ((retValue=FindStairsAtPoint(offset1)) == 0)
+            {
+                //offset2 = -v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight;
+                if ((retValue = FindStairsAtPoint(offset2)) == 0)
+                {
+                    return 0;
+                }
+
+                return retValue;
+            }
+
+            return retValue;
+        }
+
+        public int FindStairsAtPoint(Vector2 offset)
+        {
+            Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
+            int retValue = 0;
+            //bool foundStairsBeneath = false;
+            //bool stairsDirectionIsRight = false;
+            RaycastHit2D hit = Physics2D.Raycast(rb.position + offset, Vector2.down, StairsDownHeight, GroundLayer);
+            Debug.DrawRay(transform.position + new Vector3(offset.x, offset.y, transform.position.z), Vector3.down * StairsDownHeight, Color.yellow);
+
+            if (hit.collider is not null)
+            {
+                RaycastHit2D hit2 = Physics2D.Raycast(rb.position + v * 0.02f + offset, Vector2.down, StairsDownHeight, GroundLayer);
+                Debug.DrawRay(transform.position + (IsFacingRight ? Vector3.right : -Vector3.right) * 0.02f + new Vector3(offset.x, offset.y, transform.position.z), Vector3.down * StairsDownHeight, Color.yellow);
+                float diff = hit2.point.y - hit.point.y;
+                if (hit2.collider is not null)
+                {
+                    if (diff > 0.01f)
+                    {
+                        //Debug.Log($"{hit2.point.y} < {hit.point.y}");
+                        //foundStairsBeneath = true;
+                        //stairsDirectionIsRight = IsFacingRight;
+                        retValue = isFacingRight ? 1 : -1;
+                    }
+                    else if (diff < -0.01f)
+                    {
+                        //Debug.Log($"{hit2.point.y} > {hit.point.y}");
+                        //foundStairsBeneath = true;
+                        //stairsDirectionIsRight = !IsFacingRight;
+                        retValue = isFacingRight ? -1 : 1;
+                    }
+
+                    //Debug.Log($"diff = {diff}");
+                }
+            }
+            //Debug.Log($"With offset ({offset}) stairsSide={retValue}");
+            //stairsSide = retValue;
+
+            return retValue;
         }
 
         public bool IsCastGrounded()
@@ -656,7 +788,19 @@ namespace JFM
 
         public bool IsGrounded(bool testVelocity)
         {
-            return ((isEventGrounded && (IsVerticalDirection(groundDirection) || IsVerticalDirection(groundDirection2))) || Raycast(false, groundLayer | ladderLayer, Vector2.zero, 0.2f)) && (rb.velocity.y < -0.001f || !testVelocity);
+            bool directionFound = false;
+            if (isEventGrounded)
+            {
+                for (int i = 0; i < collision.contactCount && !directionFound; i++)
+                {
+                    directionFound = IsVerticalDirection(collision.GetContact(i).normal);
+                    //Debug.Log($"Searching direction={collision.GetContact(i).normal}");
+                }
+            }
+            //return ((isEventGrounded && directionFound) || Raycast(false, groundLayer | ladderLayer, Vector2.zero, 0.2f)) && (rb.velocity.y < -0.001f || !testVelocity);
+            //Debug.Log($"{isEventGrounded} && {directionFound} && ({rb.velocity.y < -0.001f} || {!testVelocity})");
+            //return isEventGrounded && directionFound && (rb.velocity.y < -0.001f || !testVelocity);
+            return Raycast(false, groundLayer | ladderLayer, Vector2.zero, 0.2f) && (rb.velocity.y < -0.001f || !testVelocity);
         }
 
         public bool IsHorizontalDirection(Vector2 direction)
@@ -666,21 +810,26 @@ namespace JFM
 
         public bool IsVerticalDirection(Vector2 direction)
         {
-            return direction == Vector2.up || direction == Vector2.down;
+            Vector2 differenceUp = direction - Vector2.up;
+            Vector2 differenceDown = direction - Vector2.down;
+            return (Mathf.Abs(differenceUp.x) < 0.01f && Mathf.Abs(differenceUp.y) < 0.01f) ||
+                (Mathf.Abs(differenceDown.x) < 0.01f && Mathf.Abs(differenceDown.y) < 0.01f);
+            //return direction == Vector2.up || direction == Vector2.down;
         }
-
+        
         // Event "isGrounded" is used for edge cases that aren't correctly covered by ray- or boxcasts. For example, 
         // the sprite boxcast size ("GroundBoxSize") cannot be too wide (too close to 1) as it breaks the WallSlide cast.
         public void OnCollisionEnter2D(Collision2D collision)
         {
+            //Debug.Log("OnCollisionEnter2D() was called.");
             groundDirection = collision.GetContact(0).normal;
-            //Debug.Log($"groundDirection={collision.GetContact(0).normal})");
+            //Debug.Log($"groundDirection={collision.GetContact(0).normal} groundPoint={collision.GetContact(0).point}");
             if (collision.contactCount > 1)
             {
                 groundDirection2 = collision.GetContact(1).normal;
                 for (int i = 1; i < collision.contactCount; i++)
                 {
-                    //Debug.Log($"groundDirection{i+1}={collision.GetContact(1).normal})");
+                    //Debug.Log($"groundDirection{i+1}={collision.GetContact(i).normal} groundPoint{i + 1}={collision.GetContact(i).point}");
                 }
             }
             else
@@ -689,10 +838,35 @@ namespace JFM
             }
             
             isEventGrounded = true;
+            this.collision = collision;
         }
+
+        public void OnCollisionStay2D(Collision2D collision)
+        {
+            //Debug.Log("OnCollisionStay2D() was called.");
+            groundDirection = collision.GetContact(0).normal;
+            //Debug.Log($"groundDirection={collision.GetContact(0).normal} groundPoint={collision.GetContact(0).point}");
+            if (collision.contactCount > 1)
+            {
+                groundDirection2 = collision.GetContact(1).normal;
+                for (int i = 1; i < collision.contactCount; i++)
+                {
+                    //Debug.Log($"groundDirection{i + 1}={collision.GetContact(i).normal} groundPoint{i + 1}={collision.GetContact(i).point}");
+                }
+            }
+            else
+            {
+                groundDirection2 = Vector2.zero;
+            }
+
+            isEventGrounded = true;
+            this.collision = collision;
+        }
+
 
         public void OnCollisionExit2D(Collision2D collision)
         {
+            //Debug.Log("OnCollisionExit2D() was called.");
             isEventGrounded = false;
         }
         

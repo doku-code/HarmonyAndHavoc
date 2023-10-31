@@ -6,6 +6,9 @@ namespace JFM
 {
     public class WalkingState : PlayerState
     {
+        private float oldGravityScale;
+        public bool willBreak;
+
         public WalkingState(Animator animator, PlayerController player)
             : base(animator, player)
         {
@@ -15,13 +18,41 @@ namespace JFM
         public override void Enter()
         {
             animator.SetBool("IsRunning", true);
+            oldGravityScale = player.rb.gravityScale;
+
             base.Enter();
         }
 
         public override void Update()
         {
-            if(!player.IsGrounded(false))
+            if(willBreak)
             {
+                Debug.Log($"rb.totalForce={player.rb.totalForce}");
+                Debug.Break();
+            }
+
+            if (player.CanTurn())
+            {
+                player.Turn();
+            }
+
+            if (player.WillClimbUpStairs())
+            {
+                player.ChangeState(player.stairsClimbingUpState);
+                return;
+            }
+
+            if (player.WillClimbDownStairs())
+            {
+                player.ChangeState(player.stairsClimbingDownState);
+                return;
+            }
+
+            //if (!player.IsGrounded(false))
+            if (!player.IsCastGrounded(false))
+            {
+                Debug.Log($"rb.totalForce={player.rb.totalForce}");
+                //Debug.Break();
                 player.ChangeState(player.airborneState);
                 return;
             }
@@ -43,11 +74,6 @@ namespace JFM
                 player.ChangeState(player.dashingState);
                 return;
             }
-
-            if (player.CanTurn())
-            {
-                player.Turn();                
-            }
             
             if(player.WillClimbLadder())
             {
@@ -55,15 +81,24 @@ namespace JFM
                 return;
             }
 
-            // Adjust for ladder
-            if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.2f, 0.0f) &&
-                player.Raycast(false, player.LadderLayer, Vector2.zero, 0.0f) && 
+            // Adjust for walking on ladders
+            if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
+                player.Raycast(false, player.LadderLayer, Vector2.zero, 0.01f, Vector2.up) && //, false, true) &&
                 player.MoveInput.x != 0.0f)
             {
+                //Debug.Log("Adjusting for ladders");
                 player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f);
                 player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
-                float y = Mathf.Floor(player.HitInfo.hit.point.y) + 1;
+                float y = Mathf.Floor(player.HitInfo.hit.point.y) + 1 + player.rb.gravityScale * -Physics2D.gravity.y * player.LadderPushUpForce * Time.fixedDeltaTime;
                 player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
+
+                player.rb.gravityScale = 0.0f;
+
+                Debug.Log("OH NOOOOOO!");
+            }
+            else
+            {
+                player.rb.gravityScale = oldGravityScale;
             }
 
             if (player.WillJump())
@@ -71,19 +106,7 @@ namespace JFM
                 player.ChangeState(player.jumpingState);
                 return;
             }
-
-            if(player.WillClimbUpStairs())
-            {
-                player.ChangeState(player.stairsClimbingUpState);
-                return;
-            }
-
-            if (player.WillClimbDownStairs())
-            {
-                player.ChangeState(player.stairsClimbingDownState);
-                return;
-            }
-
+            
             // Add force but limit speed
             if (player.rb.velocity.magnitude < player.WalkSpeed)
             {
@@ -98,7 +121,9 @@ namespace JFM
 
         public override void Exit()
         {
+            player.rb.gravityScale = oldGravityScale;
             animator.SetBool("IsRunning", false);
+            willBreak = false;
             base.Exit();
         }
     }
