@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace JFM
 { 
@@ -16,11 +18,10 @@ namespace JFM
      * * * * * * * * * * * * * * * * * * * */ 
     public class StairsClimbingUpState : PlayerState
     {
-        private float oldGravityScale;
-        private bool isCentering;
-        private float targetX;
-        private float playerSide;
         private int nFrames;
+        private float stairsEndY;
+        private bool stairsEndIsSet;
+        private bool reachedTop;
 
         public StairsClimbingUpState(Animator animator, PlayerController player)
             : base(animator, player)
@@ -32,7 +33,9 @@ namespace JFM
         {
             nFrames = 0;
             animator.SetBool("IsRunning", true);
-            
+            stairsEndIsSet = false;
+            reachedTop = false;
+
             base.Enter();
         }
 
@@ -40,10 +43,46 @@ namespace JFM
         {
             float angle = 45 * Mathf.Deg2Rad;
             float side = player.IsFacingRight ? 1.0f : -1.0f;
-            Vector2 vec = new Vector2(side * Mathf.Cos(angle), -Mathf.Sin(angle));            
-            if (!player.Raycast(false, player.GroundLayer, Vector2.right * side * (player.ColliderSize.x / 2), player.StairsGroundDistance, vec) && //, false, true) &&
+            Vector2 vec = new Vector2(side * Mathf.Cos(angle), -Mathf.Sin(angle));
+
+
+
+
+            /*if (                
+                (player.Raycast(false, player.GroundLayer, Vector2.right * side * (player.ColliderSize.x / 2), player.StairsGroundDistance, vec) &&//, false, true) &&
+                player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.zero, Mathf.Sin(angle) * player.StairsGroundDistance, Vector2.down) &&//, false, true) &&
+                nFrames > 1) || reachedTop
+            )*/
+            if (reachedTop)
+            {
+                Debug.Log($"reachedTop={reachedTop}");
+                player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f);
+                //player.transform.position = new Vector3(player.transform.position.x, stairsEndY, player.transform.position.z);
+                player.rb.MovePosition(new Vector2(player.transform.position.x, stairsEndY));
+                player.rb.totalForce = Vector2.zero;
+                //player.walkingState.willBreak = true;
+                //Debug.Break();
+                player.ChangeState(player.walkingState);
+                return;
+            }
+
+
+
+            /*if (!player.Raycast(false, player.GroundLayer, Vector2.right * side * (player.ColliderSize.x / 2), player.StairsGroundDistance, vec) && //, false, true) &&
                 !player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.zero, Mathf.Sin(angle) * player.StairsGroundDistance, Vector2.down)) //, false, true))
             {
+                player.ChangeState(player.airborneState);
+                return;
+            }*/
+
+            Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
+
+            int foundStairsBeneath = player.FindStairsBeneath(v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, v * player.StairsUpDistanceHigh2 + Vector2.up * player.StairsUpHeight2);
+            player.stairsSide = foundStairsBeneath;
+            //Debug.Log($"After: {player.stairsSide}");
+            if (!player.IsCastGrounded(false) && foundStairsBeneath == 0)
+            {
+                //Debug.Break();
                 player.ChangeState(player.airborneState);
                 return;
             }
@@ -54,15 +93,7 @@ namespace JFM
                 return;
             }
 
-            if (                
-                player.Raycast(false, player.GroundLayer, Vector2.right * side * (player.ColliderSize.x / 2), player.StairsGroundDistance, vec) &&//, false, true) &&
-                player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.zero, Mathf.Sin(angle) * player.StairsGroundDistance, Vector2.down) &&//, false, true) &&
-                nFrames > 1                
-            )
-            {
-                player.ChangeState(player.walkingState);
-                return;
-            }
+            
 
             if (player.MoveInput.y < 0.0f)
             {
@@ -92,19 +123,51 @@ namespace JFM
                 player.ChangeState(player.jumpingState);
                 return;
             }
+            float speedFactor = 1.0f;
+
+            if (!player.Raycast(false, player.GroundLayer, Vector2.up * player.ColliderSize.y / 2.0f + (player.IsFacingRight ? Vector2.right : -Vector2.right) * 2.5f * player.ColliderSize.x, 0.01f, (player.IsFacingRight ? Vector2.right : -Vector2.right), false, false) && !stairsEndIsSet)
+            {
+                //Debug.Log("Starting deceleration!");
+
+                RaycastHit2D hit = Physics2D.Raycast(player.HitInfo.probePoint, Vector2.down, 2.0f, player.GroundLayer);
+
+                if (hit.collider is not null)
+                {
+                    stairsEndIsSet = true;
+                    stairsEndY = hit.point.y;
+                    Debug.Log($"stairsEndY={stairsEndY}");
+                }
+            }
+
+            if (stairsEndIsSet)
+            {
+                speedFactor = Mathf.Min(1 / Mathf.Max((player.HitInfo.probePoint.y - stairsEndY) * player.StairsUpDeceleration, 0.001f), 1.0f);                
+            }
+
+            float stairsSpeed = player.StairsSpeed;// * speedFactor;
 
             // Add force but limit speed
-            if (player.rb.velocity.magnitude < player.StairsSpeed)
-            {
-                angle = player.StairsUpAngle * Mathf.Deg2Rad;
-                Vector3 v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * player.StairsSpeed * player.StairsAcceleration * Time.fixedDeltaTime;
+            if (player.rb.velocity.magnitude < stairsSpeed)
+            {                
+                angle = player.StairsUpAngle * Mathf.Deg2Rad;                
+                v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * stairsSpeed * player.StairsAcceleration * Time.fixedDeltaTime;
 
                 player.rb.AddForce(v, ForceMode2D.Force);
 
-                if (player.rb.velocity.magnitude > player.StairsSpeed)
+                if (player.rb.velocity.magnitude > stairsSpeed)
                 {
-                    player.rb.velocity = player.rb.velocity.normalized * player.StairsSpeed;
+                    player.rb.velocity = player.rb.velocity.normalized * stairsSpeed;
                 }
+            }
+
+            Vector2 newPosition = new Vector2(player.transform.position.x, player.transform.position.y) + player.rb.velocity * Time.fixedDeltaTime;
+            if (newPosition.y > stairsEndY && stairsEndIsSet)
+            {
+                //player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - (newPosition.y - stairsEndY), player.transform.position.z);
+                player.rb.MovePosition(new Vector2(player.transform.position.x, player.transform.position.y - (newPosition.y - stairsEndY)));
+                //player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f);
+                reachedTop = true;
+                Debug.Log("Testtttttttt");
             }
 
             nFrames++;
@@ -113,7 +176,6 @@ namespace JFM
         public override void Exit()
         {
             animator.SetBool("IsRunning", false);
-            //player.rb.gravityScale = oldGravityScale;
             base.Exit();
         }
     }

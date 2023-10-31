@@ -58,7 +58,7 @@ namespace JFM
                 return;
             }
 
-            if (player.DashDirection.y != 0.0f && player.rb.velocity.y < 0.0f)
+            if (player.DashDirection.y != 0.0f && player.rb.velocity.y < -0.5f)
             {
                 player.ChangeState(player.airborneState);
                 return;

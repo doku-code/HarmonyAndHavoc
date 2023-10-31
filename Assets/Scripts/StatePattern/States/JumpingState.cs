@@ -24,7 +24,8 @@ namespace JFM
         {
             player.SetHighestAirborneY();
 
-            if (player.IsGrounded())
+            //if (player.IsGrounded())
+            if (player.IsCastGrounded(false) && player.rb.velocity.y < -0.001f)
             {
                 if (player.WillLand())
                 {
@@ -66,15 +67,21 @@ namespace JFM
                 player.Turn();
             }
 
-            if (player.MoveInput.x != 0.0f)
+            // Add force but limit speed
+            if (player.MoveInput.x != 0.0f && player.rb.velocity.magnitude < player.WalkSpeed)
             {
-                player.rb.AddForce((player.IsFacingRight ? Vector3.right : -Vector3.right) * player.WalkSpeed * player.AirSpeedMultiplier * Time.fixedDeltaTime);
+                player.rb.AddForce((player.IsFacingRight ? Vector3.right : -Vector3.right) * player.WalkSpeed * player.AirAcceleration * Time.fixedDeltaTime);
+
+                if (player.rb.velocity.magnitude > player.WalkSpeed)
+                {
+                    player.rb.velocity = player.rb.velocity.normalized * player.WalkSpeed;
+                }
             }
 
             if (player.WillJump())
-            {                
+            {
                 player.Jump();
-            }
+            }            
         }
 
         public override void Exit()

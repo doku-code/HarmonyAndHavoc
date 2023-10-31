@@ -16,11 +16,7 @@ namespace JFM
      * 
      * * * * * * * * * * * * * * * * * * * */
     public class StairsClimbingDownState : PlayerState
-    {
-        private float oldGravityScale;
-        private bool isCentering;
-        private float targetX;
-        private float playerSide;
+    {        
         private int nFrames;
 
         public StairsClimbingDownState(Animator animator, PlayerController player)
@@ -34,18 +30,31 @@ namespace JFM
             nFrames = 0;
             animator.SetBool("IsRunning", true);           
             player.rb.velocity = Vector2.zero;
+            player.rb.totalForce = Vector2.zero;
 
             base.Enter();
         }
 
         public override void Update()
         {
-            float angle = 45 * Mathf.Deg2Rad;                        
+            float angle = 45 * Mathf.Deg2Rad;
             float side = player.IsFacingRight ? 1.0f : -1.0f;
-            Vector2 vec = new Vector2(-side * Mathf.Cos(angle), -Mathf.Sin(angle));
-            if (!player.Raycast(false, player.GroundLayer, Vector2.right * -side * (player.ColliderSize.x / 2), player.StairsGroundDistance, vec) && //, false, true) &&
-                !player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.zero, Mathf.Sin(angle) * player.StairsGroundDistance, Vector2.down) //, false, true) 
-                )
+            float distance = player.StairsGroundDistance;
+            Vector2 vec;
+            vec = new Vector2(-side * Mathf.Cos(angle), -Mathf.Sin(angle));
+            /*if (!player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.zero, Mathf.Sin(angle) * distance, Vector2.down, false, false) &&
+                !player.Raycast(false, player.GroundLayer, Vector2.right * -side * (player.ColliderSize.x / 2), distance, vec, false, false) &&
+                !player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.down * player.StairsDownMinHeight * 2.5f, 0.1f, Vector2.down, false, false)
+            )
+            {
+                player.ChangeState(player.airborneState);
+                return;
+            }*/
+            Vector2 v = player.IsFacingRight ? -Vector2.right : Vector2.right;
+
+            int foundStairsBeneath = player.FindStairsBeneath();
+            player.stairsSide = foundStairsBeneath;
+            if (!player.IsCastGrounded(false) && foundStairsBeneath == 0)
             {
                 player.ChangeState(player.airborneState);
                 return;
@@ -97,16 +106,16 @@ namespace JFM
             }
 
             // Add force but limit speed
-            if (player.rb.velocity.magnitude < player.StairsSpeed)
+            if (player.rb.velocity.magnitude < player.StairsSpeed * player.StairsDownDeceleration)
             {
                 angle = player.StairsDownAngle * Mathf.Deg2Rad;
-                Vector3 v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), -Mathf.Sin(angle)) * player.StairsSpeed * player.StairsAcceleration * Time.fixedDeltaTime;
+                v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), -Mathf.Sin(angle)) * player.StairsSpeed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
 
                 player.rb.AddForce(v, ForceMode2D.Force);
 
-                if (player.rb.velocity.magnitude > player.StairsSpeed)
+                if (player.rb.velocity.magnitude > player.StairsSpeed * player.StairsDownDeceleration)
                 {
-                    player.rb.velocity = player.rb.velocity.normalized * player.StairsSpeed;
+                    player.rb.velocity = player.rb.velocity.normalized * player.StairsSpeed * player.StairsDownDeceleration;
                 }
             }
 
@@ -116,7 +125,6 @@ namespace JFM
         public override void Exit()
         {
             animator.SetBool("IsRunning", false);
-            //player.rb.gravityScale = oldGravityScale;
             base.Exit();
         }
     }

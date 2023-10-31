@@ -33,13 +33,26 @@ namespace JFM
 
         public override void Update()
         {
-            if(nFrames > 0)
+            if (nFrames > 0)
             {
                 nFrames--;
                 return;
             }
-      
-            if (!player.IsGrounded(false))
+
+            Vector2 v;
+            //Debug.Log($"Before: {player.stairsSide}");
+            if (player.stairsSide != 0)
+            {
+                v = player.stairsSide == -1 ? -Vector2.right : Vector2.right;
+            }
+            else
+            {
+                v = Vector2.zero;
+            }
+            int foundStairsBeneath = player.FindStairsBeneath();
+            bool stairsAreRightSide = foundStairsBeneath == 1;
+            player.stairsSide = foundStairsBeneath;
+            if (!player.IsCastGrounded(false) && foundStairsBeneath == 0)
             {
                 player.ChangeState(player.airborneState);
                 return;
