@@ -112,6 +112,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ConsoleDebug",
+                    "type": "Button",
+                    "id": "8eebc05e-4665-435b-bfaf-427ad683b2fa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -519,6 +528,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Knowledge4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "74830784-6257-4cd0-aa04-3281b8d24c87",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ConsoleDebug",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

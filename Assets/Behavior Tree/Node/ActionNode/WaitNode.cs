@@ -3,7 +3,7 @@ using UnityEngine;
 //Charles
 public class WaitNode : ActionNode
 {
-    public float duration = 1;
+    public float duration = 1f;
     private float startTime;
 
     protected override void OnStart()

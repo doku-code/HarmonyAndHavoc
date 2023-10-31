@@ -12,12 +12,13 @@ EditorBuildSettings:
     path: Assets/Scenes/StatePatternTilemapped.unity
     guid: bbfacb9cc3c22084eb1ff0e5fd86b608
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 410c9fa19b66f3843be483b381ffb6f2
+  - enabled: 1
     path: Assets/Scenes/Village.unity
     guid: a9a85c4cf955f1f49b76d5e0251b3a9d
   - enabled: 1
     path: Assets/Scenes/Test Scene for Conversation.unity
     guid: 52dc0f38397ae1140b71549e2e9ee660
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 410c9fa19b66f3843be483b381ffb6f2
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: f031fcdeeadc3804aaed37002907b158, type: 2}

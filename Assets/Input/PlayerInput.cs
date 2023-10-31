@@ -134,6 +134,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ConsoleDebug"",
+                    ""type"": ""Button"",
+                    ""id"": ""8eebc05e-4665-435b-bfaf-427ad683b2fa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -543,6 +552,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Knowledge4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74830784-6257-4cd0-aa04-3281b8d24c87"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConsoleDebug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -563,6 +583,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_SlideDown = m_Player.FindAction("SlideDown", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
+        m_Player_ConsoleDebug = m_Player.FindAction("ConsoleDebug", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -636,6 +657,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_SlideDown;
     private readonly InputAction m_Player_Inventory;
+    private readonly InputAction m_Player_ConsoleDebug;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -652,6 +674,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @SlideDown => m_Wrapper.m_Player_SlideDown;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
+        public InputAction @ConsoleDebug => m_Wrapper.m_Player_ConsoleDebug;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -697,6 +720,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @ConsoleDebug.started += instance.OnConsoleDebug;
+            @ConsoleDebug.performed += instance.OnConsoleDebug;
+            @ConsoleDebug.canceled += instance.OnConsoleDebug;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -737,6 +763,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @ConsoleDebug.started -= instance.OnConsoleDebug;
+            @ConsoleDebug.performed -= instance.OnConsoleDebug;
+            @ConsoleDebug.canceled -= instance.OnConsoleDebug;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -768,5 +797,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnSlideDown(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnConsoleDebug(InputAction.CallbackContext context);
     }
 }
