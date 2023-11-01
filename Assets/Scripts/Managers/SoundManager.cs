@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 
 namespace AF
 {
     public class SoundManager : MonoBehaviour
     {
         [SerializeField] private AudioMixer audioMixer;
-        //[SerializeField] private AudioMixerGroup fxGroup;
+        [SerializeField] private AudioSource clipPlayerSource;
+        [SerializeField] private AudioClip[] ClipsToPlay;
         
         public static SoundManager Instance { get; private set; }
 
@@ -25,32 +27,23 @@ namespace AF
         
         public void SetAmbientVolume(float volume)
         {
-            audioMixer.SetFloat("Ambient", Mathf.Log10(volume) * 20);
+            audioMixer.SetFloat("Ambient", volume);
         }
 
         public void SetFXVolume(float volume)
         {
-            audioMixer.SetFloat("FX", Mathf.Log10(volume) * 20);
+            audioMixer.SetFloat("FX", volume);
         }
 
         public void SetMasterVolume(float volume)
         {
-            audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
-        }
-        
-        /*public void SetAmbientSound(AudioClip clip)
-        {
-            audioMixer.SetFloat("Ambient", Mathf.Log10(volume) * 20);
+            audioMixer.SetFloat("Master", volume);
         }
 
-        public void SetFXSound(AudioClip clip)
+        public void PlayAClip(int index)
         {
-            audioMixer.SetFloat("FX", Mathf.Log10(volume) * 20);
+            clipPlayerSource.clip = ClipsToPlay[index];
+            clipPlayerSource.Play();
         }
-
-        public void SetMasterSound(AudioClip clip)
-        {
-            audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
-        }*/
     }
 }
