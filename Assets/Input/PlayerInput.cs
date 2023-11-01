@@ -143,6 +143,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Return"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d8ab6af-cac8-4d97-8844-471288f7892f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -563,6 +572,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""ConsoleDebug"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e6b40a8-cd60-4f14-a186-6ba95b15ac98"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Return"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -584,6 +604,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_SlideDown = m_Player.FindAction("SlideDown", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
         m_Player_ConsoleDebug = m_Player.FindAction("ConsoleDebug", throwIfNotFound: true);
+        m_Player_Return = m_Player.FindAction("Return", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -658,6 +679,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SlideDown;
     private readonly InputAction m_Player_Inventory;
     private readonly InputAction m_Player_ConsoleDebug;
+    private readonly InputAction m_Player_Return;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -675,6 +697,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @SlideDown => m_Wrapper.m_Player_SlideDown;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
         public InputAction @ConsoleDebug => m_Wrapper.m_Player_ConsoleDebug;
+        public InputAction @Return => m_Wrapper.m_Player_Return;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -723,6 +746,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ConsoleDebug.started += instance.OnConsoleDebug;
             @ConsoleDebug.performed += instance.OnConsoleDebug;
             @ConsoleDebug.canceled += instance.OnConsoleDebug;
+            @Return.started += instance.OnReturn;
+            @Return.performed += instance.OnReturn;
+            @Return.canceled += instance.OnReturn;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -766,6 +792,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ConsoleDebug.started -= instance.OnConsoleDebug;
             @ConsoleDebug.performed -= instance.OnConsoleDebug;
             @ConsoleDebug.canceled -= instance.OnConsoleDebug;
+            @Return.started -= instance.OnReturn;
+            @Return.performed -= instance.OnReturn;
+            @Return.canceled -= instance.OnReturn;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -798,5 +827,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSlideDown(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnConsoleDebug(InputAction.CallbackContext context);
+        void OnReturn(InputAction.CallbackContext context);
     }
 }

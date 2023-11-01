@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.InputManagerEntry;
+//using static UnityEngine.InputManagerEntry;
 
 namespace JFM
 {

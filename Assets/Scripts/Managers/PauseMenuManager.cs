@@ -6,31 +6,31 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEngine.InputSystem.InputAction;
 
 namespace charles
 {
-    public class MainMenuManager : MonoBehaviour
+    public class PauseMenuManager : MonoBehaviour
     {
+        private bool isPauseMenuOpen = false;
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private InputActionReference[] actionsToRebind;
 
         [Header("Panel")]
-        [SerializeField] private GameObject mainPanel;
+        [SerializeField] private GameObject pausePanel;
         [SerializeField] private GameObject settingsPanel;
         [SerializeField] private GameObject soundPanel;
-        [SerializeField] private GameObject creditPanel;
         [SerializeField] private GameObject displayPanel;
         [SerializeField] private GameObject controlPanel;
 
         [Header("Event System Object")]
-        [SerializeField] private GameObject mainMenuFirstObj;
+        [SerializeField] private GameObject pauseMenuFirstObj;
         [SerializeField] private GameObject settingFirstObj;
         [SerializeField] private GameObject soundSettingsFirstObj;
-        [SerializeField] private GameObject creditFirstObj;
         [SerializeField] private GameObject displayFirstObj;
         [SerializeField] private GameObject controlFirstObj;
 
-        [Header("Display Settings UI ")]
+        [Header("Display Settings UI")]
         [SerializeField] private Toggle toggleBtnVSYNC;
         [SerializeField] private TMP_Dropdown qualityPreset;
         [SerializeField] private TMP_Dropdown windowModePreset;
@@ -47,62 +47,91 @@ namespace charles
 
         void Awake()
         {
-            OpenMainMenu();
+            DontDestroyOnLoad(this);
+            EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
         }
-        public void OpenMainMenu()
+        #region PauseFunc
+        public void PauseMenu(CallbackContext value)
         {
-            mainPanel.SetActive(true);
+            if (value.performed)
+            {
+                if (!isPauseMenuOpen)
+                {
+                    isPauseMenuOpen = true;
+                    pausePanel.SetActive(true);
+                    settingsPanel.SetActive(false);
+                    soundPanel.SetActive(false);
+                    displayPanel.SetActive(false);
+                    controlPanel.SetActive(false);
+                    Time.timeScale = 0;
+                   EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+                }
+                else
+                {
+                    isPauseMenuOpen = false;
+                    pausePanel.SetActive(false);
+                    settingsPanel.SetActive(false);
+                    soundPanel.SetActive(false);
+                    displayPanel.SetActive(false);
+                    controlPanel.SetActive(false);
+                    Time.timeScale = 1;
+                   EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+                }
+            }
+        }
+        public void ContinueGame()
+        {
+            isPauseMenuOpen = false;
+            pausePanel.SetActive(false);
             settingsPanel.SetActive(false);
             soundPanel.SetActive(false);
-            creditPanel.SetActive(false);
             displayPanel.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(mainMenuFirstObj);
+            controlPanel.SetActive(false);
+            Time.timeScale = 1;
+            EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
         }
+        public void ExitToMainMenu()
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        }
+        #endregion
+
         #region settingFunc
         public void OpenSettingsMenu()
         {
-            mainPanel.SetActive(false);
+            pausePanel.SetActive(false);
             settingsPanel.SetActive(true);
             soundPanel.SetActive(false);
             EventSystem.current.SetSelectedGameObject(settingFirstObj);
+            Time.timeScale = 0;
         }
 
         public void CloseSettingsMenu()
         {
-            mainPanel.SetActive(true);
+            pausePanel.SetActive(true);
             settingsPanel.SetActive(false);
             soundPanel.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(mainMenuFirstObj);
+            EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+            Time.timeScale = 0;
         }
         #endregion
         #region soundFunc
         public void OpenSoundMenu()
         {
-            mainPanel.SetActive(false);
+            pausePanel.SetActive(false);
             settingsPanel.SetActive(false);
             soundPanel.SetActive(true);
             EventSystem.current.SetSelectedGameObject(soundSettingsFirstObj);
+            Time.timeScale = 0;
         }
         public void CloseSoundMenu()
         {
-            mainPanel.SetActive(false);
+            pausePanel.SetActive(false);
             settingsPanel.SetActive(true);
             soundPanel.SetActive(false);
             EventSystem.current.SetSelectedGameObject(settingFirstObj);
-        }
-        #endregion
-        #region creditfunc
-        public void OpenCreditMenu()
-        {
-            mainPanel.SetActive(false);
-            creditPanel.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(creditFirstObj);
-        }
-        public void CloseCreditMenu()
-        {
-            mainPanel.SetActive(true);
-            creditPanel.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(mainMenuFirstObj);
+            Time.timeScale = 0;
         }
         #endregion
         #region displayFunc
@@ -125,12 +154,14 @@ namespace charles
             settingsPanel.SetActive(false);
             controlPanel.SetActive(true);
             EventSystem.current.SetSelectedGameObject(controlFirstObj);
+            Time.timeScale = 0;
         }
         public void CloseControlSetting()
         {
             settingsPanel.SetActive(true);
             controlPanel.SetActive(false);
             EventSystem.current.SetSelectedGameObject(settingFirstObj);
+            Time.timeScale = 0;
         }
         #endregion
         #region displaySetting
@@ -216,30 +247,21 @@ namespace charles
         }
         #endregion
         #region soundVolumeFunc
-        public void SetAmbientVolume()
+        public void SetAmbientVolume(float volume)
         {
-
-            audioMixer.SetFloat("Ambient", Mathf.Log10(ambientSlider.value) * 20);
+            audioMixer.SetFloat("Ambient", Mathf.Log10(volume) * 20);
         }
 
-        public void SetFXVolume()
+        public void SetFXVolume(float volume)
         {
-            audioMixer.SetFloat("FX", Mathf.Log10(fxSlider.value) * 20);
+            audioMixer.SetFloat("FX", Mathf.Log10(volume) * 20);
         }
 
-        public void SetMasterVolume()
+        public void SetMasterVolume(float volume)
         {
-            audioMixer.SetFloat("Master", Mathf.Log10(masterSlider.value) * 20);
+            audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
         }
         #endregion
-
-        public void MakeNewGame()
-        {
-            //a reajuster une fois le systeme de sauvegarde fait
-            //une fois la sauvegarde fais  changer le bouton new game en continue 
-            // et rajouter un bouton new game avec (are you sure) 
-            StartCoroutine(LoadYourAsyncScene("Village"));
-        }
 
         public void ExitGame()
         {
@@ -248,21 +270,6 @@ namespace charles
 #else
         Application.Quit();
 #endif
-        }
-
-        IEnumerator LoadYourAsyncScene(string sceneName)
-        {
-            AsyncOperation aSyncLoad = SceneManager.LoadSceneAsync(sceneName);
-            aSyncLoad.allowSceneActivation = false;
-
-            while (!aSyncLoad.isDone)
-            {
-                if (aSyncLoad.progress >= 0.90f)
-                {
-                    aSyncLoad.allowSceneActivation = true;
-                }
-                yield return null;
-            }
         }
     }
 }
