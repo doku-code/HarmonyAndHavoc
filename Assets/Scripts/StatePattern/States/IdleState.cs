@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace JFM
@@ -13,9 +14,13 @@ namespace JFM
 
     public class IdleState : PlayerState
     {
-        private float oldGravityScale;
+        public float oldGravityScale;
         public int nFrames;
-       
+        private bool resetGravityScale;
+        public bool resetGravityScaleWithOther;
+        public float otherGravityScale;
+        public bool overrideOldGravityScale;
+        
         public IdleState(Animator animator, PlayerController player)
             : base(animator, player)
         {
@@ -26,8 +31,19 @@ namespace JFM
         {           
             animator.SetBool("IsIdle", true);
             player.rb.velocity = Vector2.zero;
-            oldGravityScale = player.rb.gravityScale;
+            if (!overrideOldGravityScale)
+            {
+                oldGravityScale = player.rb.gravityScale;
+            }
+            else
+            {
+                overrideOldGravityScale = false;
+            }
             player.rb.gravityScale = 0.0f;
+
+            player.rb.isKinematic = false;
+
+            resetGravityScale = true;
             base.Enter();
         }
 
@@ -41,18 +57,17 @@ namespace JFM
 
             Vector2 v;
             //Debug.Log($"Before: {player.stairsSide}");
-            if (player.stairsSide != 0)
+           /*if (player.stairsSide != 0)
             {
                 v = player.stairsSide == -1 ? -Vector2.right : Vector2.right;
             }
             else
             {
                 v = Vector2.zero;
-            }
-            int foundStairsBeneath = player.FindStairsBeneath();
-            bool stairsAreRightSide = foundStairsBeneath == 1;
-            player.stairsSide = foundStairsBeneath;
-            if (!player.IsCastGrounded(false) && foundStairsBeneath == 0)
+            }*/            
+            bool foundStairsBeneath = player.FindSlopeBeneath(out float slope);
+            //player.stairsSide = foundStairsBeneath;
+            if (!player.IsCastGrounded(false) && !foundStairsBeneath)
             {
                 player.ChangeState(player.airborneState);
                 return;
@@ -60,6 +75,21 @@ namespace JFM
             
             if (player.inputTriggers["Move"] && player.MoveInput.x != 0.0f && player.MoveInput.y == 0.0f)
             {
+                if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
+                player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down)
+                    )
+                {
+                    resetGravityScale = false;
+                    player.walkingState.newGravityScale = 0.0f;
+                    player.walkingState.resetGravityScaleWithOther = true;
+                    player.walkingState.otherGravityScale = oldGravityScale;
+                    player.rb.gravityScale = 0.0f;
+                    Debug.Log("walking on ladder");
+                }
+                else
+                {
+                    Debug.Log("not walking on ladder");
+                }
                 player.ChangeState(player.walkingState);
                 return;
             }
@@ -119,7 +149,18 @@ namespace JFM
 
         public override void Exit()
         {
-            player.rb.gravityScale = oldGravityScale;
+            if(resetGravityScale)
+            {
+                if (resetGravityScaleWithOther)
+                {
+                    player.rb.gravityScale = otherGravityScale;
+                    resetGravityScaleWithOther = false;
+                }
+                else
+                {
+                    player.rb.gravityScale = oldGravityScale;
+                }
+            }
             animator.SetBool("IsIdle", false);
             base.Exit();
         }

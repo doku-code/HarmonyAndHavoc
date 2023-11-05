@@ -52,11 +52,12 @@ namespace JFM
             }*/
             Vector2 v = player.IsFacingRight ? -Vector2.right : Vector2.right;
 
-            int foundStairsBeneath = player.FindStairsBeneath();
-            player.stairsSide = foundStairsBeneath;
-            if (!player.IsCastGrounded(false) && foundStairsBeneath == 0)
+            bool foundStairsBeneath = player.FindSlopeBeneath(out float slope, Vector2.up * 0.02f + v * player.StairsDownGroundX, -v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight);
+            //player.stairsSide = foundStairsBeneath;
+            if (!player.IsCastGrounded(false) && !foundStairsBeneath)
             {
                 player.ChangeState(player.airborneState);
+                //Debug.Break();
                 return;
             }
 
@@ -108,7 +109,14 @@ namespace JFM
             // Add force but limit speed
             if (player.rb.velocity.magnitude < player.StairsSpeed * player.StairsDownDeceleration)
             {
-                angle = player.StairsDownAngle * Mathf.Deg2Rad;
+                if (Mathf.Abs(slope) < player.StairsUpMinSlope)
+                {
+                    angle = 0.0f;
+                }
+                else
+                { 
+                    angle = player.StairsDownAngle * Mathf.Deg2Rad;
+                }
                 v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), -Mathf.Sin(angle)) * player.StairsSpeed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
 
                 player.rb.AddForce(v, ForceMode2D.Force);

@@ -22,6 +22,10 @@ namespace JFM
         private float stairsEndY;
         private bool stairsEndIsSet;
         private bool reachedTop;
+        private bool finishing;
+        private Vector2 finishPosition;
+        private Vector2 finishTranslate;
+        private int finishNSteps;
 
         public StairsClimbingUpState(Animator animator, PlayerController player)
             : base(animator, player)
@@ -35,6 +39,7 @@ namespace JFM
             animator.SetBool("IsRunning", true);
             stairsEndIsSet = false;
             reachedTop = false;
+            finishing = false;
 
             base.Enter();
         }
@@ -45,7 +50,23 @@ namespace JFM
             float side = player.IsFacingRight ? 1.0f : -1.0f;
             Vector2 vec = new Vector2(side * Mathf.Cos(angle), -Mathf.Sin(angle));
 
+            Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
 
+
+            if(finishing)
+            {
+                if (finishNSteps > 0)
+                {
+                    finishPosition += finishTranslate;
+                    player.rb.MovePosition(finishPosition);
+                    finishNSteps--;                    
+                }
+                else
+                {
+                    player.ChangeState(player.walkingState);                                        
+                }
+                return;
+            }
 
 
             /*if (                
@@ -56,14 +77,37 @@ namespace JFM
             if (reachedTop)
             {
                 Debug.Log($"reachedTop={reachedTop}");
-                player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f);
+                player.rb.velocity = Vector2.zero;// new Vector2(player.rb.velocity.x, 0.0f);
                 //player.transform.position = new Vector3(player.transform.position.x, stairsEndY, player.transform.position.z);
-                player.rb.MovePosition(new Vector2(player.transform.position.x, stairsEndY));
                 player.rb.totalForce = Vector2.zero;
+                player.rb.isKinematic = true;
+                //player.rb.MovePosition(new Vector2(player.transform.position.x + v.x * player.StairsUpFinishTranslate.x, stairsEndY));// + player.StairsUpFinishTranslate.y));
+                Vector2 goalPosition = new Vector2(player.transform.position.x + v.x * player.StairsUpFinishTranslate.x, stairsEndY);
+                
+                finishNSteps = 5;
+                finishTranslate = (goalPosition - player.rb.position) / finishNSteps;
+                finishPosition = player.rb.position;
+
+                finishPosition += finishTranslate;
+                player.rb.MovePosition(finishPosition);
+                finishNSteps--;
+
+                //player.rb.totalForce = Vector2.zero;
                 //player.walkingState.willBreak = true;
+                Debug.Log($"stairsEndY = {stairsEndY}");
                 //Debug.Break();
-                player.ChangeState(player.walkingState);
+                //player.rb.isKinematic = false;
+                //player.inputTriggers["Move"] = false;
+                //player.rb.gravityScale = 0.0f;
+                player.rb.velocity = Vector2.zero;// new Vector2(player.rb.velocity.x, 0.0f);                
+                player.rb.totalForce = Vector2.zero;
+                //player.rb.AddForce(v * player.WalkSpeed * player.WalkAcceleration * Time.fixedDeltaTime, ForceMode2D.Force);
+                //player.ChangeState(player.walkingState);
+                
+                finishing=true;
+                
                 return;
+
             }
 
 
@@ -75,14 +119,15 @@ namespace JFM
                 return;
             }*/
 
-            Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
-
-            int foundStairsBeneath = player.FindStairsBeneath(v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, v * player.StairsUpDistanceHigh2 + Vector2.up * player.StairsUpHeight2);
-            player.stairsSide = foundStairsBeneath;
+            
+            //bool foundStairsBeneath = player.FindSlopeBeneath(out float slope, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, v * player.StairsUpDistanceHigh2 + Vector2.up * player.StairsUpHeight2);
+            bool foundStairsInFront = player.FindSlopeAtPoint(out float slope, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, v);
+            //player.stairsSide = foundStairsBeneath;
             //Debug.Log($"After: {player.stairsSide}");
-            if (!player.IsCastGrounded(false) && foundStairsBeneath == 0)
+            if (!player.IsCastGrounded(false) && !foundStairsInFront && reachedTop)
             {
                 //Debug.Break();
+                
                 player.ChangeState(player.airborneState);
                 return;
             }
@@ -161,10 +206,11 @@ namespace JFM
             }
 
             Vector2 newPosition = new Vector2(player.transform.position.x, player.transform.position.y) + player.rb.velocity * Time.fixedDeltaTime;
+            Debug.Log($"{newPosition.y}  {stairsEndY}");
             if (newPosition.y > stairsEndY && stairsEndIsSet)
             {
                 //player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - (newPosition.y - stairsEndY), player.transform.position.z);
-                player.rb.MovePosition(new Vector2(player.transform.position.x, player.transform.position.y - (newPosition.y - stairsEndY)));
+                //player.rb.MovePosition(new Vector2(player.transform.position.x, player.transform.position.y - (newPosition.y - stairsEndY)));
                 //player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f);
                 reachedTop = true;
                 Debug.Log("Testtttttttt");
@@ -176,6 +222,8 @@ namespace JFM
         public override void Exit()
         {
             animator.SetBool("IsRunning", false);
+            player.rb.isKinematic = false;
+            player.rb.velocity = new Vector2((player.IsFacingRight ? 1.0f : -1.0f) * player.WalkSpeed, 0.0f);
             base.Exit();
         }
     }

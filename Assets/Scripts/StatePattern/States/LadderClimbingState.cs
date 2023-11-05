@@ -7,6 +7,8 @@ namespace JFM
     public class LadderClimbingState : PlayerState
     {
         private float oldGravityScale;
+        private bool resetGravityScale;
+
         private bool isCentering;
         private float targetX;
         private float playerSide; 
@@ -28,7 +30,9 @@ namespace JFM
             isCentering = true;           
             targetX = player.GetBeneathObjectPosition().x - player.ColliderOffset.x + 0.5f;
             playerSide = Mathf.Sign(targetX - player.transform.position.x);
-            
+
+            resetGravityScale = true;
+
             base.Enter();
         }
 
@@ -99,8 +103,16 @@ namespace JFM
                 {
                     player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f);
                     player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
-                    float y = Mathf.Floor(player.HitInfo.probePoint.y);
-                    player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);                    
+                    float y = Mathf.Floor(player.HitInfo.probePoint.y) + 0.007519f;
+                    player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
+
+                    player.idleState.otherGravityScale = player.DefaultGravityScale;
+                    player.idleState.resetGravityScaleWithOther = true;
+                    player.idleState.overrideOldGravityScale = true;
+                    player.idleState.oldGravityScale = player.rb.gravityScale;
+
+                    player.rb.gravityScale = 0.0f;
+                    resetGravityScale = false;
                     player.ChangeState(player.idleState);
 
                     return;
@@ -119,7 +131,10 @@ namespace JFM
         public override void Exit()
         {
             animator.SetInteger("Ladder", 0);
-            player.rb.gravityScale = oldGravityScale;
+            if (resetGravityScale)
+            {
+                player.rb.gravityScale = oldGravityScale;
+            }
             base.Exit();
         }
     }
