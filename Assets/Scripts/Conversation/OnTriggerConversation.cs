@@ -10,11 +10,19 @@ namespace charles
         [SerializeField] ConversationManager questionIdx;
         [SerializeField] bool resetConversation;
 
+        private Coroutine textCoroutine;
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))
             {
-                StartCoroutine(questionIdx.ShowText());
+
+                if (textCoroutine != null)
+                {
+                    StopCoroutine(textCoroutine);
+                }
+
+                textCoroutine = StartCoroutine(questionIdx.ShowText());
                 conversationPanel.SetActive(true);
 
                 if (resetConversation)
@@ -23,16 +31,21 @@ namespace charles
                 }
             }
         }
+
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (conversationPanel != null)
             {
                 conversationPanel.SetActive(false);
 
+                if (textCoroutine != null)
+                {
+                    StopCoroutine(textCoroutine);
+                }
+
                 if (resetConversation)
                 {
-                    questionIdx.questionIndex = 0;
-
+                    questionIdx.LoadConversation(0);
                 }
             }
         }

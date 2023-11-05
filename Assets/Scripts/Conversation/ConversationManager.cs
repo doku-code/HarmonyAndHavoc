@@ -8,11 +8,13 @@ namespace charles
     [System.Serializable]
     public class Answer
     {
+        [TextArea]
         public string answerText;
     }
     [System.Serializable]
     public class Question
     {
+        [TextArea]
         public string questionText;
         public Answer[] answers;
     }
