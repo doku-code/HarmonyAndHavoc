@@ -84,6 +84,7 @@ namespace JFM
         [SerializeField] private Vector2 groundBoxSize = new Vector2(0.95f, 0.01f);
         [SerializeField] private float wallDistance = 0.4f;
         [SerializeField] private float wallJumpDuration = 1.0f;
+        [SerializeField] private float wallJumpForce = 1.0f;
         [SerializeField] private float ledgeAnimationDuration = 1.0f;
         [SerializeField] private float dashForce = 3.0f;
         [SerializeField] private float groundDashForce = 60.0f;
@@ -428,7 +429,7 @@ namespace JFM
             {
                 float angle = wallJumpAngle * Mathf.Deg2Rad;
                 Debug.Log($"JUMP from wall {IsFacingRight}  {(IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle)}  {Mathf.Cos(angle)}");
-                Vector3 v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * jumpForce * 1.0f;
+                Vector3 v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * wallJumpForce * 1.0f;
                 rb.AddForce(v, ForceMode2D.Impulse);
             }
             else
@@ -634,11 +635,7 @@ namespace JFM
         public bool WillClimbUpStairs()
         {
             Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
-            /*bool lowHit = Raycast(false, groundLayer | ladderLayer, Vector2.up * stairsUpHeight + v * stairsUpDistanceLow, stairsUpRayLength, v, false, true);
-            bool highHit = Raycast(false, groundLayer | ladderLayer, Vector2.up * stairsUpMinHeight + v * stairsUpDistanceHigh, stairsUpRayLength, v, false, true);
-            bool highHit2 = Raycast(false, groundLayer | ladderLayer, Vector2.up * stairsUpMinHeight + v * stairsUpDistanceLow, stairsUpRayLength, v, false, true);
-            return lowHit && !highHit && !highHit2 && moveInput.x != 0.0f;*/
-
+            
             if (FindSlopeAtPoint(out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, v))
             {
                 //Debug.Log($"ClimbingUpStairs slope={slope}");
@@ -653,17 +650,11 @@ namespace JFM
         public bool WillClimbDownStairs()
         {
             Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
-            /*bool lowHit = Raycast(false, groundLayer | ladderLayer, Vector2.down * stairsDownMinHeight + v * stairsDownDistanceLow, stairsDownRayLength, v);//, false, true);
-            bool highHit = Raycast(false, groundLayer | ladderLayer, Vector2.down * stairsDownHeight + v * stairsDownDistanceHigh, stairsDownRayLength, v);//, false, true);
-
-            bool groundHit = Raycast(false, groundLayer | ladderLayer, -v * stairsDownGroundX, stairsGroundDistance, Vector2.down);//, false, true);
-            //Debug.Log($"{lowHit} && {!highHit} && {groundHit}");
-            return lowHit && !highHit && groundHit && rb.velocity.y <= 0.0f && moveInput.x != 0.0f;
-            */
+            
             bool stairsDown = FindSlopeBeneath(out float slope);
             
-            bool ret = stairsDown && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) < stairsUpMaxSlope && rb.velocity.y <= 0.01f;// && ((moveInput.x < 0.0f && slope > 0) || (moveInput.x > 0.0f && slope < 0));
-            Debug.Log($"stairsDown={stairsDown} slope={slope} ret={ret} rb.velocity.y={rb.velocity.y} {Mathf.Abs(slope) > stairsUpMinSlope} && {Mathf.Abs(slope) < stairsUpMaxSlope} && {rb.velocity.y <= 0.0f}");
+            bool ret = stairsDown && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) < stairsUpMaxSlope && Mathf.Abs(rb.velocity.y) <= 0.01f && ((moveInput.x > 0.0f && slope < 0) || (moveInput.x > 0.0f && slope < 0));
+            //Debug.Log($"stairsDown={stairsDown} slope={slope} ret={ret} rb.velocity.y={rb.velocity.y} {Mathf.Abs(slope) > stairsUpMinSlope} && {Mathf.Abs(slope) < stairsUpMaxSlope} && {Mathf.Abs(rb.velocity.y) <= 0.01f}");
             return ret;
         }
 

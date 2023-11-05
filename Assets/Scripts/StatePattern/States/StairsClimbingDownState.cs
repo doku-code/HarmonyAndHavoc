@@ -115,7 +115,7 @@ namespace JFM
                 }
                 else
                 { 
-                    angle = player.StairsDownAngle * Mathf.Deg2Rad;
+                    //angle = player.StairsDownAngle * Mathf.Deg2Rad;
                 }
                 v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), -Mathf.Sin(angle)) * player.StairsSpeed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
 

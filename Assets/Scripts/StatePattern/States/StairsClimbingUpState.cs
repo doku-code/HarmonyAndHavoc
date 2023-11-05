@@ -134,6 +134,7 @@ namespace JFM
 
             if (player.MoveInput.x == 0.0f)
             {
+                Debug.Log("Here.");
                 player.ChangeState(player.idleState);
                 return;
             }
