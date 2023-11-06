@@ -42,17 +42,10 @@ namespace JFM
             float distance = player.StairsGroundDistance;
             Vector2 vec;
             vec = new Vector2(-side * Mathf.Cos(angle), -Mathf.Sin(angle));
-            /*if (!player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.zero, Mathf.Sin(angle) * distance, Vector2.down, false, false) &&
-                !player.Raycast(false, player.GroundLayer, Vector2.right * -side * (player.ColliderSize.x / 2), distance, vec, false, false) &&
-                !player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.down * player.StairsDownMinHeight * 2.5f, 0.1f, Vector2.down, false, false)
-            )
-            {
-                player.ChangeState(player.airborneState);
-                return;
-            }*/
+            
             Vector2 v = player.IsFacingRight ? -Vector2.right : Vector2.right;
 
-            bool foundStairsBeneath = player.FindSlopeBeneath(out float slope, Vector2.up * 0.02f + v * player.StairsDownGroundX, -v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight);
+            bool foundStairsBeneath = player.FindSlopeBeneath(out float slope, Vector2.up * 0.02f + v * player.StairsDownGroundX, -v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, true);
             //player.stairsSide = foundStairsBeneath;
             if (!player.IsCastGrounded(false) && !foundStairsBeneath)
             {
@@ -67,11 +60,12 @@ namespace JFM
                 return;
             }
 
-            if (                
+            /*if (                
                 player.Raycast(false, player.GroundLayer, Vector2.right * side * (player.ColliderSize.x / 2), player.StairsGroundDistance, vec) && //, false, true) &&
                 player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.zero, Mathf.Sin(angle) * player.StairsGroundDistance, Vector2.down) && //, false, true) &&
                 nFrames > 1                
-            )
+            )*/
+            if(Mathf.Abs(slope) < player.StairsUpMinSlope && nFrames > 1)
             {
                 player.ChangeState(player.walkingState);
                 return;
@@ -114,8 +108,11 @@ namespace JFM
                     angle = 0.0f;
                 }
                 else
-                { 
+                {
+
                     //angle = player.StairsDownAngle * Mathf.Deg2Rad;
+                    angle = Mathf.Atan(-slope) ;
+                    Debug.Log($"angle={angle * Mathf.Rad2Deg}");
                 }
                 v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), -Mathf.Sin(angle)) * player.StairsSpeed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
 

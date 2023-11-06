@@ -159,12 +159,7 @@ namespace JFM
                 }
 
                 //Debug.Log($"Detected stairs or ground. slope was {slope} player.MoveInput.x={player.MoveInput.x} foundSlopeBeneath={foundSlopeBeneath} && Mathf.Abs(slope) > player.StairsUpMinSlope={Mathf.Abs(slope) > player.StairsUpMinSlope}");                
-            }           
-
-            if(!grounded)
-            {
-                
-            }
+            }                       
 
             if (player.WillGripToWall())
             {

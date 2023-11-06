@@ -470,10 +470,18 @@ namespace JFM
         }
 
         public bool WillDash()
-        {
+        {            
+            Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
+
+            if ((FindSlopeAtPoint(out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, v) && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) < stairsUpMaxSlope) ||
+                Raycast(false, groundLayer, Vector2.up * 0.0f + (isFacingRight ? Vector2.right : -Vector2.right) * 2.5f * colliderSize.x, 0.01f, (isFacingRight ? Vector2.right : -Vector2.right), false, false))
+            {
+                return false;
+            }
+
             int knowledgeIndex = (int)playerData.AvalaibleKnowledgeDictionary[KnowledgeID.DASH];
 
-            return !hasDashed && knowledgeIndex > 0 && inputTriggers[knowledgeInputNames[knowledgeIndex - 1]] && moveInput != Vector2.zero;
+            return !hasDashed && knowledgeIndex > 0 && inputTriggers[knowledgeInputNames[knowledgeIndex - 1]] && moveInput.x != 0.0f;
         }
 
         public void Dash()
@@ -486,52 +494,23 @@ namespace JFM
             }
 
             Vector3 v;
-            if (moveInput.y != 0.0f)
-            {
-                if (moveInput.x != 0.0f)
-                {
-                    float angle = dashDiagAngle * Mathf.Deg2Rad;
-                    v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * dashForce;
-                }
-                else
-                {
-                    v = Vector3.up * moveInput.y * dashForce;
-                }
+            
+            float angle = groundDashAngle * Mathf.Deg2Rad;
+            v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * groundDashForce * groundDashAcceleration * Time.fixedDeltaTime;
+            rb.AddForce(v, ForceMode2D.Force);            
 
-                rb.AddForce(v, ForceMode2D.Impulse);
-            }
-            else
-            {
-                float angle = groundDashAngle * Mathf.Deg2Rad;
-                v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * groundDashForce * groundDashAcceleration * Time.fixedDeltaTime;
-                rb.AddForce(v, ForceMode2D.Force);
-            }
-
-            dashDirection = moveInput;
+            dashDirection = moveInput.x * Vector2.right;
         }
 
         public void ContinueDash()
         {
             Vector3 v;
-            if (dashDirection.y != 0.0f)
-            {
-                /*if (dashDirection.x != 0.0f)
-                {
-                    float angle = dashDiagAngle * Mathf.Deg2Rad;
-                    v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * dashForce;
-                }
-                else
-                {
-                    v = Vector3.up * moveInput.y * dashForce;
-                }*/
-            }
-            else
-            {
-                float angle = groundDashAngle * Mathf.Deg2Rad;
-                v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * groundDashForce;
+            
+            float angle = groundDashAngle * Mathf.Deg2Rad;
+            v = new Vector3((IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * groundDashForce;
 
-                rb.AddForce(v, ForceMode2D.Force);
-            }
+            rb.AddForce(v, ForceMode2D.Force);
+            
         }
 
         private void SetFrontWallInfo()
@@ -591,7 +570,7 @@ namespace JFM
 
         public bool WillClimbDownLadder()
         {
-            bool h2 = Raycast(false, ladderLayer, Vector2.down * 0.2f, groundDistance);
+            bool h2 = Raycast(false, ladderLayer, Vector2.down * groundDistance, 0.01f, Vector2.down);//, false ,true);
 
             //Debug.Log($"h2={h2}");
 
@@ -650,9 +629,9 @@ namespace JFM
         public bool WillClimbDownStairs()
         {
             Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
-            
-            bool stairsDown = FindSlopeBeneath(out float slope);
-            
+
+            bool stairsDown = FindSlopeBeneath(out float slope);//, Vector2.up * 0.02f + v * stairsDownGroundX, -v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, true);
+
             bool ret = stairsDown && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) < stairsUpMaxSlope && Mathf.Abs(rb.velocity.y) <= 0.01f && ((moveInput.x > 0.0f && slope < 0) || (moveInput.x > 0.0f && slope < 0));
             //Debug.Log($"stairsDown={stairsDown} slope={slope} ret={ret} rb.velocity.y={rb.velocity.y} {Mathf.Abs(slope) > stairsUpMinSlope} && {Mathf.Abs(slope) < stairsUpMaxSlope} && {Mathf.Abs(rb.velocity.y) <= 0.01f}");
             return ret;
@@ -673,6 +652,11 @@ namespace JFM
 
         public bool FindSlopeBeneath(out float slope, Vector2 offset1, Vector2 offset2)
         {
+            return FindSlopeBeneath(out slope, offset1, offset2, false);
+        }
+
+        public bool FindSlopeBeneath(out float slope, Vector2 offset1, Vector2 offset2, bool willDraw)
+        {
 
             bool retValue = false;
             slope = 0;
@@ -680,15 +664,12 @@ namespace JFM
             //bool stairsDirectionIsRight = false;
             //Vector2 offset2 = v * colliderSize.x / 2.0f + v * stairsDownGroundX;
 
-            if (!(retValue = FindSlopeAtPoint(out slope, offset1, Vector2.down)))//, true)))
+            retValue = FindSlopeAtPoint(out slope, offset1, Vector2.down, willDraw);
+
+            if (Mathf.Abs(slope) < stairsUpMinSlope)
             {
                 //offset2 = -v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight;
-                if (!(retValue = FindSlopeAtPoint(out slope, offset2, Vector2.down)))//, true)))
-                {
-                    return false;
-                }
-
-                return retValue;
+                retValue = FindSlopeAtPoint(out slope, offset2, Vector2.down, willDraw);
             }
 
             return retValue;
@@ -773,14 +754,19 @@ namespace JFM
 
         public bool IsCastGrounded(bool limitToRay, int layerMask, Vector2 offset)
         {
+            return IsCastGrounded(limitToRay, layerMask, offset, groundDistance);
+        }
+
+        public bool IsCastGrounded(bool limitToRay, int layerMask, Vector2 offset, float distance)
+        {
             RaycastHit2D[] hits;
             if (limitToRay)
             {
-                hits = Physics2D.RaycastAll(new Vector2(transform.position.x, transform.position.y) + offset, Vector2.down, groundDistance, layerMask);
+                hits = Physics2D.RaycastAll(new Vector2(transform.position.x, transform.position.y) + offset, Vector2.down, distance, layerMask);
             }
             else
             {
-                hits = Physics2D.BoxCastAll(new Vector2(transform.position.x, transform.position.y) + offset, groundBoxSize, 0.0f, Vector2.down, groundDistance, layerMask);
+                hits = Physics2D.BoxCastAll(new Vector2(transform.position.x, transform.position.y) + offset, groundBoxSize, 0.0f, Vector2.down, distance, layerMask);
             }
             bool groundFound = false;
             for (int i = 0; i < hits.Length && !groundFound; i++)

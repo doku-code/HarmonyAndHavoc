@@ -33,11 +33,34 @@ namespace JFM
         public override void Update()
         {
 
-            if (player.IsCastGrounded())
+            if (player.IsCastGrounded(false))
             {
+                if (player.inputTriggers["Move"] && player.MoveInput.x != 0.0f && player.MoveInput.y == 0.0f)
+                {
+                    if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
+                    player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down)
+                        )
+                    {
+                        //resetGravityScale = false;
+                        player.walkingState.newGravityScale = 0.0f;
+                        player.walkingState.resetGravityScaleWithOther = true;
+                        player.walkingState.otherGravityScale = player.DefaultGravityScale;
+                        player.rb.gravityScale = 0.0f;
+                        Debug.Log("walking on ladder");
+                    }
+                    else
+                    {
+                        Debug.Log("not walking on ladder");
+                    }
+                    player.ChangeState(player.walkingState);
+                    return;
+                }
+
                 player.ChangeState(player.idleState);
                 return;
             }
+
+            
 
             if (player.WillGripToWall())// && player.inputTriggers["Move"])
             {

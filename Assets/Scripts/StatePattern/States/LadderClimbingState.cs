@@ -33,6 +33,9 @@ namespace JFM
 
             resetGravityScale = true;
 
+            Debug.Log($"targetX={targetX} transform.position={player.transform.position}");
+            //Debug.Break();
+            
             base.Enter();
         }
 
@@ -55,7 +58,8 @@ namespace JFM
                 }
                 else
                 {
-                    player.rb.AddForce(Vector2.right * diff * (player.WalkAcceleration * Mathf.Abs(diff) * 10.0f) * Time.fixedDeltaTime, ForceMode2D.Force);
+                    Debug.Log($"player.rb.position={player.rb.position}");
+                    player.rb.AddForce(Vector2.right * diff * (player.WalkAcceleration * Mathf.Abs(diff) * 100.0f) * Time.fixedDeltaTime, ForceMode2D.Force);
                 }
             }
             else if (player.MoveInput.x != 0.0f)
@@ -83,7 +87,7 @@ namespace JFM
                 return;
             }
 
-            if (player.inputTriggers["Move"] && player.MoveInput.y != 0.0f)
+            if (player.inputTriggers["Move"] && player.MoveInput.y != 0.0f && !isCentering)
             {
                 animator.SetFloat("MotionSpeed", 1);
                 animator.SetInteger("Ladder", Mathf.FloorToInt(player.MoveInput.y));

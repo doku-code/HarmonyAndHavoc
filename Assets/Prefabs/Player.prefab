@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2294263633123340064}
   - component: {fileID: 5880637116911839396}
   - component: {fileID: 8324543635577956107}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
   stairsDownGroundX: 0.02
   stairsDownDeceleration: 0.61
   stairsUpAngle: 45
-  stairsDownAngle: 45
+  stairsDownAngle: 70
   stairsGroundDistance: 0.2
   stairsSpeed: 5.54
   stairsAcceleration: 2000
@@ -89,6 +89,7 @@ MonoBehaviour:
   groundBoxSize: {x: 0.75, y: 0.01}
   wallDistance: 0.5
   wallJumpDuration: 1
+  wallJumpForce: 10
   ledgeAnimationDuration: 1
   dashForce: 15
   groundDashForce: 668.3
@@ -224,8 +225,8 @@ BoxCollider2D:
   m_Offset: {x: -0.09, y: 0.87}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.6551724, y: 0}
-    oldSize: {x: 0.90625, y: 1.625}
+    pivot: {x: 0.6451613, y: 0.018518519}
+    oldSize: {x: 0.96875, y: 1.6875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

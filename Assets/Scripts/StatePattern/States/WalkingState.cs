@@ -83,52 +83,12 @@ namespace JFM
                 return;
             }
 
-
-            // Adjust for walking on ladders
-            /*if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
-                player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down, false, true) &&
-                player.MoveInput.x != 0.0f)
-            {
-                //Debug.Log("Adjusting for ladders");
-
-                Vector2 force = (player.IsFacingRight ? Vector2.right : -Vector2.right) * player.WalkAcceleration * Time.fixedDeltaTime;
-
-                player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f) + force / player.rb.mass;
-                if(Mathf.Abs(player.rb.velocity.x) > player.WalkSpeed)
-                {
-                    player.rb.velocity = new Vector2(player.WalkSpeed * Mathf.Sign(player.rb.velocity.x), 0.0f);
-                }
-                player.rb.totalForce = Vector2.zero;
-                player.rb.gravityScale = 0.0f;
-                //player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
-                float y = Mathf.Floor(player.HitInfo.hit.point.y) + 1 + 0.007519f;//player.rb.gravityScale * -Physics2D.gravity.y * player.LadderPushUpForce * Time.fixedDeltaTime;
-                groundY = y;
-                
-
-                //player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
-                player.rb.isKinematic = true;
-                player.rb.MovePosition(new Vector2(player.transform.position.x + player.rb.velocity.x * Time.fixedDeltaTime, y));
-                
-
-                Debug.Log($"Adjust for walking on ladders! player.transform.position.y={player.transform.position.y} y={y} probe.y={player.HitInfo.probePoint.y}");
-                if(PlayerController.AreNearlyEqual(y, -2.992481f))
-                {
-                    Debug.Break();
-                }
-
-                return;
-            }
-            else
-            {
-                Debug.Log("Resetting gravity scale!");
-                player.rb.gravityScale = oldGravityScale;
-            }     */
-
             bool grounded = player.IsCastGrounded(false);
             //Debug.Log($"grounded={grounded} player.groundedDistance={player.groundedDistance}");
-            player.Raycast(false, player.LadderLayer | player.GroundLayer, Vector2.zero, 0.3f, Vector2.down);//, false, true);
-            if ((!grounded && player.HitInfo.hit.distance > player.GroundDistance) || !player.HitInfo.hasHit )
+            player.Raycast(false, player.LadderLayer | player.GroundLayer, Vector2.zero, 1.0f, Vector2.down);//, false, true);
+            if ((!grounded && player.HitInfo.hit.distance > player.GroundDistance * 25.0f) || !player.HitInfo.hasHit )
             {
+                //Debug.Log($"d={player.HitInfo.hit.distance - player.GroundDistance}");
                 //Debug.Log($"rb.totalForce={player.rb.totalForce} rb.velocity={player.rb.velocity}");
                 //Debug.Break();
                 
@@ -158,17 +118,25 @@ namespace JFM
 
                     //player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
                     player.rb.isKinematic = true;
-                    player.rb.MovePosition(new Vector2(player.transform.position.x + player.rb.velocity.x * Time.fixedDeltaTime, y));
-
-
-                    //Debug.Log($"Adjust for walking on ladders! player.transform.position.y={player.transform.position.y} y={y} probe.y={player.HitInfo.probePoint.y}");
-                    /*if (PlayerController.AreNearlyEqual(y, -2.992481f))
-                    {
-                        Debug.Break();
-                    }*/
+                    player.rb.MovePosition(new Vector2(player.transform.position.x + player.rb.velocity.x * Time.fixedDeltaTime, y));                    
 
                     return;
                 }
+            }
+
+            if (player.WillClimbDownLadder())
+            {
+                float ladderX = Mathf.Floor(player.HitInfo.probePoint.x) + 0.5f - player.ColliderOffset.x;
+                Debug.Log($"Climbing ladder... ladderX={ladderX}");
+                player.transform.position = new Vector3(ladderX, player.transform.position.y, player.transform.position.z);
+                player.ChangeState(player.ladderClimbingState);
+                return;
+            }
+
+            if (player.WillClimbLadder())
+            {
+                player.ChangeState(player.ladderClimbingState);
+                return;
             }
 
             if (player.MoveInput.x == 0.0f)
@@ -191,18 +159,7 @@ namespace JFM
                 player.ChangeState(player.idleState);
                 return;
             }
-
-            
-            if (player.WillClimbLadder())
-            {
-                player.ChangeState(player.ladderClimbingState);
-                return;
-            }
-
-            
-
-            
-            
+                          
             // Add force but limit speed
             if (player.rb.velocity.magnitude < player.WalkSpeed)
             {
