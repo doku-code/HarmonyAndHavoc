@@ -85,11 +85,16 @@ namespace JFM
                 player.ChangeState(player.ladderClimbingState);
                 return;
             }
-
+            
             if (player.WillClimbUpStairs())
             {
                 player.ChangeState(player.stairsClimbingUpState);
                 return;
+            }
+            else
+            {
+                //Debug.Log($"nFrames={nFrames}");
+                //Debug.Break();
             }
 
             //Debug.Log($"Mathf.Abs(player.rb.velocity.x)={Mathf.Abs(player.rb.velocity.x)}");
@@ -100,8 +105,7 @@ namespace JFM
             }
             // Let rigidbody have a little deceleration when dashing on the ground
             else if (nFrames > 1)
-            {
-                Debug.Log($"player.GroundDashDeceleration={player.GroundDashDeceleration}");
+            {                
                 player.rb.AddForce(Vector2.right * -player.rb.velocity.x * player.GroundDashDeceleration * Time.fixedDeltaTime, ForceMode2D.Force);
             }
             else

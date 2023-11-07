@@ -473,15 +473,23 @@ namespace JFM
         {            
             Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
 
-            if ((FindSlopeAtPoint(out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, v) && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) < stairsUpMaxSlope) ||
-                Raycast(false, groundLayer, Vector2.up * 0.0f + (isFacingRight ? Vector2.right : -Vector2.right) * 2.5f * colliderSize.x, 0.01f, (isFacingRight ? Vector2.right : -Vector2.right), false, false))
+            if ((FindSlopeAtPoint(out float slope, v * 0.02f + Vector2.up * 0.02f, v, StairsDownHeight/*, true*/) && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) < stairsUpMaxSlope) ||
+                Raycast(false, groundLayer, Vector2.up * 0.0f + (isFacingRight ? Vector2.right : -Vector2.right) * 2.5f * colliderSize.x, 0.01f, (isFacingRight ? Vector2.right : -Vector2.right)/*, false, true*/))
             {
                 return false;
             }
-
+            
             int knowledgeIndex = (int)playerData.AvalaibleKnowledgeDictionary[KnowledgeID.DASH];
 
-            return !hasDashed && knowledgeIndex > 0 && inputTriggers[knowledgeInputNames[knowledgeIndex - 1]] && moveInput.x != 0.0f;
+            bool ret = !hasDashed && knowledgeIndex > 0 && inputTriggers[knowledgeInputNames[knowledgeIndex - 1]] && moveInput.x != 0.0f;
+
+            if (ret)
+            {
+                //Debug.Log($"slope={slope}");
+                //Debug.Break();
+            }
+
+            return ret;
         }
 
         public void Dash()
@@ -615,7 +623,7 @@ namespace JFM
         {
             Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
             
-            if (FindSlopeAtPoint(out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, v))
+            if (FindSlopeAtPoint(out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, v, StairsDownHeight))//, true))
             {
                 //Debug.Log($"ClimbingUpStairs slope={slope}");
                 return moveInput.x != 0.0f && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) <= stairsUpMaxSlope;
@@ -652,10 +660,15 @@ namespace JFM
 
         public bool FindSlopeBeneath(out float slope, Vector2 offset1, Vector2 offset2)
         {
-            return FindSlopeBeneath(out slope, offset1, offset2, false);
+            return FindSlopeBeneath(out slope, offset1, offset2, StairsDownHeight);
         }
 
-        public bool FindSlopeBeneath(out float slope, Vector2 offset1, Vector2 offset2, bool willDraw)
+        public bool FindSlopeBeneath(out float slope, Vector2 offset1, Vector2 offset2, float distance)
+        {
+            return FindSlopeBeneath(out slope, offset1, offset2, distance, false);
+        }
+
+        public bool FindSlopeBeneath(out float slope, Vector2 offset1, Vector2 offset2, float distance, bool willDraw)
         {
 
             bool retValue = false;
@@ -664,12 +677,12 @@ namespace JFM
             //bool stairsDirectionIsRight = false;
             //Vector2 offset2 = v * colliderSize.x / 2.0f + v * stairsDownGroundX;
 
-            retValue = FindSlopeAtPoint(out slope, offset1, Vector2.down, willDraw);
+            retValue = FindSlopeAtPoint(out slope, offset1, Vector2.down, distance, willDraw);
 
             if (Mathf.Abs(slope) < stairsUpMinSlope)
             {
                 //offset2 = -v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight;
-                retValue = FindSlopeAtPoint(out slope, offset2, Vector2.down, willDraw);
+                retValue = FindSlopeAtPoint(out slope, offset2, Vector2.down, distance, willDraw);
             }
 
             return retValue;
@@ -686,29 +699,34 @@ namespace JFM
 
         public bool FindSlopeAtPoint(out float slope, Vector2 offset, Vector2 direction)
         {
-            return FindSlopeAtPoint(out slope, offset, direction, false);
+            return FindSlopeAtPoint(out slope, offset, direction, StairsDownHeight);
         }
 
-        public bool FindSlopeAtPoint(out float slope, Vector2 offset, Vector2 direction, bool willDraw)
+        public bool FindSlopeAtPoint(out float slope, Vector2 offset, Vector2 direction, float distance)
+        {
+            return FindSlopeAtPoint(out slope, offset, direction, distance, false);
+        }
+
+        public bool FindSlopeAtPoint(out float slope, Vector2 offset, Vector2 direction, float distance, bool willDraw)
         {
             Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
             bool retValue = false;
             slope = 0;
             //bool foundStairsBeneath = false;
             //bool stairsDirectionIsRight = false;
-            RaycastHit2D hit = Physics2D.Raycast(rb.position + offset, direction, StairsDownHeight, GroundLayer);
+            RaycastHit2D hit = Physics2D.Raycast(rb.position + offset, direction, distance, GroundLayer);
             if (willDraw)
             {
-                Debug.DrawRay(transform.position + new Vector3(offset.x, offset.y, transform.position.z), direction * StairsDownHeight, Color.yellow);
+                Debug.DrawRay(transform.position + new Vector3(offset.x, offset.y, transform.position.z), direction * distance, Color.yellow);
             }
             Vector3 vr = transform.position + new Vector3(offset.x, offset.y, transform.position.z);
             if (hit.collider is not null)
             {
                 Vector2 perpendicularDirection = GetPerpendicularVector2(direction);
-                RaycastHit2D hit2 = Physics2D.Raycast(rb.position + perpendicularDirection * 0.02f + offset, direction, StairsDownHeight, GroundLayer);
+                RaycastHit2D hit2 = Physics2D.Raycast(rb.position + perpendicularDirection * 0.02f + offset, direction, distance, GroundLayer);
                 if (willDraw)
                 {
-                    Debug.DrawRay(transform.position + new Vector3(perpendicularDirection.x, perpendicularDirection.y, transform.position.z) * 0.02f + new Vector3(offset.x, offset.y, transform.position.z), direction * StairsDownHeight, Color.yellow);
+                    Debug.DrawRay(transform.position + new Vector3(perpendicularDirection.x, perpendicularDirection.y, transform.position.z) * 0.02f + new Vector3(offset.x, offset.y, transform.position.z), direction * distance, Color.yellow);
                 }
                 Vector3 vr2 = transform.position + new Vector3(perpendicularDirection.x, perpendicularDirection.y, transform.position.z) * 0.02f + new Vector3(offset.x, offset.y, transform.position.z) - vr;
 

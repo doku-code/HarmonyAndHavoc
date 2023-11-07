@@ -105,7 +105,7 @@ namespace JFM
 
             if (player.MoveInput.x == 0.0f)
             {
-                Debug.Log("Here.");
+                //Debug.Log("Here.");
                 player.ChangeState(player.idleState);
                 return;
             }
@@ -149,7 +149,7 @@ namespace JFM
                 {
                     stairsEndIsSet = true;
                     stairsEndY = hit.point.y;
-                    Debug.Log($"stairsEndY={stairsEndY}");
+                    //Debug.Log($"stairsEndY={stairsEndY}");
                 }
             }            
 
