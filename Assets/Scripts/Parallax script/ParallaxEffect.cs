@@ -1,38 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace charles
 {
     public class ParallaxEffect : MonoBehaviour
     {
-        private float startingPos;
+        private float startingPosX;
+        private float startingPosY;
         private float lengthOfSprite;
-        [SerializeField] private float AmountOfParallax;
+        [SerializeField] private float AmountOfParallaxX;
+        [SerializeField] private float AmountOfParallaxY;
+        [SerializeField] private bool FollowY;
+        [SerializeField] private float YOffset;
         [SerializeField] private Camera MainCamera;
 
         private void Start()
         {
-            startingPos = transform.position.x;
+            startingPosX = transform.position.x;
+            startingPosY = transform.position.y;
             lengthOfSprite = GetComponent<SpriteRenderer>().bounds.size.x;
         }
+
         private void Update()
         {
-            Vector3 Position = MainCamera.transform.position;
-            float Temp = Position.x * (1 - AmountOfParallax);
-            float Distance = Position.x * AmountOfParallax;
+            Vector3 position = MainCamera.transform.position;
+            float tempX = position.x * (1 - AmountOfParallaxX);
+            float distanceX = position.x * AmountOfParallaxX;
 
-            Vector3 NewPosition = new Vector3(startingPos + Distance, transform.position.y, transform.position.z);
+            Vector3 newPositionX = new Vector3(startingPosX + distanceX, transform.position.y, transform.position.z);
 
-            transform.position = NewPosition;
+            transform.position = newPositionX;
 
-            if (Temp > startingPos + (lengthOfSprite / 2))
+            if (tempX > startingPosX + (lengthOfSprite / 2))
             {
-                startingPos += lengthOfSprite;
+                startingPosX += lengthOfSprite;
             }
-            else if (Temp < startingPos - (lengthOfSprite / 2))
+            else if (tempX < startingPosX - (lengthOfSprite / 2))
             {
-                startingPos -= lengthOfSprite;
+                startingPosX -= lengthOfSprite;
+            }
+
+            if (FollowY)
+            {
+                float tempY = position.y * (1 - AmountOfParallaxY) + YOffset;
+                float distanceY = position.y * AmountOfParallaxY;
+
+                Vector3 newPositionY = new Vector3(transform.position.x, startingPosY + distanceY, transform.position.z);
+
+                transform.position = newPositionY;
             }
         }
     }

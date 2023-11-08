@@ -38,16 +38,16 @@ namespace charles
             while (true)
             {
                 isLerping = true;
-                float journeyLength = Vector3.Distance(startPosition, targetPosition);
+                float durationLength = Vector3.Distance(startPosition, targetPosition);
                 float startTime = Time.time;
 
                 while (isLerping)
                 {
                     float distanceCovered = (Time.time - startTime) * lerpSpeed;
-                    float fractionOfJourney = distanceCovered / journeyLength;
-                    transform.position = Vector3.Lerp(startPosition, targetPosition, fractionOfJourney);
+                    float fractionOfDuration = distanceCovered / durationLength;
+                    transform.position = Vector3.Lerp(startPosition, targetPosition, fractionOfDuration);
 
-                    if (fractionOfJourney >= 1.0f)
+                    if (fractionOfDuration >= 1.0f)
                     {
                         isLerping = false;
                         yield return new WaitForSeconds(0.1f);

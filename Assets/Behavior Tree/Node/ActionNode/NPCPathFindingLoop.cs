@@ -20,7 +20,6 @@ public class NPCPathFindingLoop : ActionNode
         npcSpriteRenderer = npc.GetComponent<SpriteRenderer>();
         npcAnimator = npc.GetComponent<Animator>();
         npcRigidBody = npc.GetComponent<Rigidbody2D>();
-
         npcAnimator.SetBool(PatrolAnimString, true);
     }
     protected override void OnStop()
@@ -39,7 +38,7 @@ public class NPCPathFindingLoop : ActionNode
         Vector3 moveDirection = (targetPOS - npc.transform.position).normalized;
         npcRigidBody.velocity = moveDirection * moveSpeed * Time.deltaTime;
 
-        if (Vector3.Distance(npc.transform.position, targetPOS) < 1f)// 1f est la tolerance de la distance entre le point et le transform du npc
+        if (Vector3.Distance(npc.transform.position, targetPOS) < 1f)
         {
             currentPOS++;
             if (currentPOS >= POSPatrolRoute.Length)
