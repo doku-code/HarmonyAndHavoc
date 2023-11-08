@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.3
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &6518561
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -357,6 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.3
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &13439312
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1340,6 +1342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.5
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &76162316
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -36551,6 +36554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.5
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &233653616
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -37030,6 +37034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 1
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &239139684
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -37585,8 +37590,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.5733, y: -0.23314995, z: 0}
-    m_Extent: {x: 9.3913, y: 1.5610499, z: 0}
+    m_Center: {x: 2.5754, y: -0.23970002, z: 0}
+    m_Extent: {x: 9.391, y: 1.5604999, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -37873,6 +37878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.8
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &297786857
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -37974,6 +37980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 1
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &307516568
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -38770,6 +38777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.8
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &377120582
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -44941,6 +44949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.3
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &520442673
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -46976,6 +46985,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.3
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &709434880
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -47161,6 +47171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 1
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &713737083
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -47744,6 +47755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 1
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &770438304
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -49421,8 +49433,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 14.38185, y: 2.6938, z: 0}
-    m_Extent: {x: 22.05885, y: 5.1097, z: 0}
+    m_Center: {x: 14.38265, y: 2.68685, z: 0}
+    m_Extent: {x: 22.05765, y: 5.10985, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -49489,6 +49501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.3
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &927914781
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -118375,6 +118388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.8
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1170082546
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -118476,6 +118490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.3
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1171056161
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -118577,6 +118592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 1
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1184025840
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -120542,6 +120558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 1
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1211164358
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -121231,6 +121248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 1
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1257079629
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -121436,6 +121454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 1
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1270509039
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -123691,6 +123710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.8
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1461927840
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -123998,6 +124018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.5
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1483450054
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -125005,6 +125026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.3
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1575713770
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -125420,6 +125442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.5
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1601453309
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -125521,6 +125544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.8
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1604906683
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -126765,6 +126789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.8
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1671317556
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -126866,6 +126891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.5
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1685045355
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -127533,6 +127559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.5
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1725586649
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -127908,6 +127935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.5
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1747273184
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -129032,6 +129060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.5
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1834691515
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -130763,6 +130792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.5
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &1947520120
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -131326,6 +131356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 1
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &2013270497
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -132017,6 +132048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.8
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &2038152119
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -132346,6 +132378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.8
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &2052382884
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -132531,6 +132564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.3
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &2065632496
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -134909,6 +134943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.3
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &2096122941
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -135326,6 +135361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.8
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!212 &2124712160
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -135424,6 +135460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.8
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!1 &2181559168306403878
 GameObject:
   m_ObjectHideFlags: 0
@@ -135611,6 +135648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 1
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!1 &3282599858374337091
 GameObject:
   m_ObjectHideFlags: 0
@@ -136092,6 +136130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.3
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!1 &5712645439422440103
 GameObject:
   m_ObjectHideFlags: 0
@@ -136473,6 +136512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfParallax: 0.5
   MainCamera: {fileID: 944848461}
+  activateYFollow: 0
 --- !u!1 &9122661176773225166
 GameObject:
   m_ObjectHideFlags: 0
