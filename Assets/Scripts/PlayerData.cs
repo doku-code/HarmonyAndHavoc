@@ -127,12 +127,14 @@ namespace AF
 
         void TakeDamage(int dmg)
         {
-            actualOrder = (dmg - ArmorUpgrade);
+            actualOrder -= (dmg - ArmorUpgrade);
 
             if (actualOrder <= 0)
             {
                 OnDeadDelegate();
             }
+            
+            Debug.Log(actualOrder);
         }
 
         int GetPlayerDamage(Knowledge usedKnowledge)
