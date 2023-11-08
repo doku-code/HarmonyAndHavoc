@@ -4,40 +4,43 @@ namespace charles
 {
     public class ParallaxEffect : MonoBehaviour
     {
-        private float startingPos;
+        private float startingPosX;
         private float lengthOfSprite;
         [SerializeField] private float AmountOfParallax;
         [SerializeField] private Camera MainCamera;
         [SerializeField] private bool activateYFollow;
+        [SerializeField] private float yOffsetDelay = 0.5f; // Adjust this value for the desired Y offset delay
 
         private void Start()
         {
-            startingPos = transform.position.x;
+            startingPosX = transform.position.x;
             lengthOfSprite = GetComponent<SpriteRenderer>().bounds.size.x;
         }
 
         private void Update()
         {
-            Vector3 Position = MainCamera.transform.position;
-            float Temp = Position.x * (1 - AmountOfParallax);
-            float Distance = Position.x * AmountOfParallax;
+            Vector3 cameraPosition = MainCamera.transform.position;
+            float tempX = cameraPosition.x * (1 - AmountOfParallax);
+            float distanceX = cameraPosition.x * AmountOfParallax;
 
-            Vector3 NewPosition = new Vector3(startingPos + Distance, transform.position.y, transform.position.z);
+            Vector3 newPosition = new Vector3(startingPosX + distanceX, transform.position.y, transform.position.z);
 
             if (activateYFollow)
             {
-                NewPosition.y = Position.y;
+                float targetY = cameraPosition.y;
+                float currentY = Mathf.Lerp(transform.position.y, targetY, Time.deltaTime / yOffsetDelay);
+                newPosition.y = currentY;
             }
 
-            transform.position = NewPosition;
+            transform.position = newPosition;
 
-            if (Temp > startingPos + (lengthOfSprite / 2))
+            if (tempX > startingPosX + (lengthOfSprite / 2))
             {
-                startingPos += lengthOfSprite;
+                startingPosX += lengthOfSprite;
             }
-            else if (Temp < startingPos - (lengthOfSprite / 2))
+            else if (tempX < startingPosX - (lengthOfSprite / 2))
             {
-                startingPos -= lengthOfSprite;
+                startingPosX -= lengthOfSprite;
             }
         }
     }
