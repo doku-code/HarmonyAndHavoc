@@ -56,7 +56,7 @@ public class NPCPathFinding : ActionNode
         }
         else
         {
-            npcRigidBody.velocity = moveDirection * moveSpeed * Time.deltaTime;
+            npcRigidBody.velocity = moveDirection * moveSpeed * Time.fixedDeltaTime;
 
             if (Vector3.Distance(npc.transform.position, targetPOS) < 1f)
             {

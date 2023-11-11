@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2205317528671191681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc873a854b000144b392c20ae33d57b, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: c41eaf167e9577e43a398fa7c16ba196
+  position: {x: 0, y: 0}
+  Description: 
+  child: {fileID: -2080950711435506995}
+--- !u!114 &-2080950711435506995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e22483f73a7cb48a1a8f0d2f066df6, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 4e8a7341b89b0c846a436b0bd5dd4d83
+  position: {x: 24.75, y: 136.37503}
+  Description: 
+  children:
+  - {fileID: 5424909742054463931}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d52bd284d66f45409895549ec0dc050, type: 3}
+  m_Name: HeavyArmor2
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: -2205317528671191681}
+  treeState: 0
+  nodes:
+  - {fileID: -2205317528671191681}
+  - {fileID: -2080950711435506995}
+  - {fileID: 5424909742054463931}
+  - {fileID: 6117819438726625810}
+  - {fileID: 1825806273407921186}
+--- !u!114 &1825806273407921186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640ac424bf086f846bc71dfb4524525e, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 88bf7ae450f4f8c4a9056296e1f15f41
+  position: {x: 121.99997, y: 467.66498}
+  Description: 
+  duration: 4
+--- !u!114 &5424909742054463931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcddb15bcd2925f4887c696f4baa3c36, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 89ab4027e808b354d9570e1a60adf8ee
+  position: {x: 25.375061, y: 271.25003}
+  Description: 
+  children:
+  - {fileID: 6117819438726625810}
+  - {fileID: 1825806273407921186}
+--- !u!114 &6117819438726625810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8b7c5f167cd2f4094eba272b83a09a, type: 3}
+  m_Name: NPCPathFinding
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: b63742ff3c0d8f04085ddfc89a5b5924
+  position: {x: -51.625, y: 448.87503}
+  Description: 
+  POSPatrolRoute:
+  - {fileID: 8815926703427942773, guid: 5d94e7bc10274a849a1b2821bbcc40e8, type: 3}
+  - {fileID: 7683581577592735548, guid: 3f6f846a652a9c241af0ae15492a67ac, type: 3}
+  - {fileID: 8815926703427942773, guid: 5d94e7bc10274a849a1b2821bbcc40e8, type: 3}
+  PatrolAnimString: Run
+  gameobjNpcName: Heavy_Armor2
+  moveSpeed: 250
+  sphereCastRadius: 2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128

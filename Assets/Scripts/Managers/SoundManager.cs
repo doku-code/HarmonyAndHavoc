@@ -8,7 +8,8 @@ namespace AF
     {
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private AudioSource clipPlayerSource;
-        [SerializeField] private AudioClip[] ClipsToPlay;
+        [SerializeField] private AudioClip[] clipsToPlay;
+        [SerializeField] private AudioClip[] npcSounds;
         
         public static SoundManager Instance { get; private set; }
 
@@ -42,7 +43,12 @@ namespace AF
 
         public void PlayAClip(int index)
         {
-            clipPlayerSource.clip = ClipsToPlay[index];
+            clipPlayerSource.clip = clipsToPlay[index];
+            clipPlayerSource.Play();
+        }
+        public void PlayNpcSounds(int index)
+        {
+            clipPlayerSource.clip = npcSounds[index];
             clipPlayerSource.Play();
         }
     }

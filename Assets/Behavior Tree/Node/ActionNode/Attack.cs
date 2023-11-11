@@ -1,0 +1,80 @@
+using UnityEngine;
+//Charles
+public class Attack : ActionNode
+{
+    public float attackCooldown = 3.0f;
+    public float attackDistance = 1.5f;
+    public string attackAnimString;
+    public LayerMask playerLayer;
+    public string gameobjNpcName;
+
+    private Animator npcAnimator;
+    private bool isCooldown = false;
+    private bool hasAttacked = false;
+    private float lastAttackTime = 0f;
+    private GameObject npc;
+    private GameObject player;
+    private Rigidbody2D npcRigidBody;
+    private SpriteRenderer npcSpriteRenderer;
+
+    protected override void OnStart()
+    {
+        player = GameObject.Find("Player");
+        npc = GameObject.Find(gameobjNpcName);
+        npcAnimator = npc.GetComponent<Animator>();
+        npcRigidBody = npc.GetComponent<Rigidbody2D>();
+        npcSpriteRenderer = npc.GetComponent<SpriteRenderer>();
+    }
+
+    protected override void OnStop()
+    {
+    }
+
+    protected override State OnUpdate()
+    {
+        Debug.Log(hasAttacked);
+        float distanceToPlayer = Vector3.Distance(npc.transform.position, player.transform.position);
+
+        if (player.transform.position.x > npc.transform.position.x)
+        {
+            npcSpriteRenderer.flipX = false;
+        }
+        else
+        {
+            npcSpriteRenderer.flipX = true;
+        }
+        if (distanceToPlayer <= attackDistance && !hasAttacked)
+        {
+            if (!isCooldown)
+            {
+                npcAnimator.SetTrigger(attackAnimString);
+                isCooldown = true;
+                lastAttackTime = Time.time;
+                hasAttacked = true;
+                return State.RUNNING;
+            }
+        }
+        else if(distanceToPlayer > attackDistance)
+        {
+            return State.FAILURE;
+        }
+        else
+        {
+            if (hasAttacked && npcAnimator.GetCurrentAnimatorStateInfo(0).length <= Time.time - lastAttackTime)
+            {              
+                npcAnimator.ResetTrigger(attackAnimString);
+                npcAnimator.SetBool("IsIdle", true);
+                hasAttacked = false;
+                
+                return State.SUCCESS;
+            }
+            return State.RUNNING;
+        }
+        if (isCooldown && Time.time - lastAttackTime >= attackCooldown)
+        {
+            isCooldown = false;
+            npcAnimator.SetBool("IsIdle", false);
+        }
+        return State.RUNNING;
+    }
+}

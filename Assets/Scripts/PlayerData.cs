@@ -125,7 +125,7 @@ namespace AF
             }
         }
 
-        void TakeDamage(int dmg)
+        public void TakeDamage(int dmg)
         {
             actualOrder -= (dmg - ArmorUpgrade);
 
