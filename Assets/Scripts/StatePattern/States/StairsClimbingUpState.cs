@@ -10,10 +10,11 @@ namespace JFM
      * 
      * It seems that, in order to make raycasts work with irregular collider shapes
      * (like stairs for instance), you must set the Geometry Type of the Composite Collider 2D to
-     * "Polygons".
+     * "Outlines".
      * 
      * A bug sometimes prevent Unity from updating the "Custom Physics Shapes" in the scene. To work around this,
-     * select the problematic tilemap and check and uncheck "Used by composite".
+     * select the problematic tilemap and uncheck and re-check "Used by composite" (or uncheck and re-check the 
+     * TilemapCollider2D component).
      * 
      * * * * * * * * * * * * * * * * * * * */ 
     public class StairsClimbingUpState : PlayerState
@@ -21,11 +22,9 @@ namespace JFM
         private int nFrames;
         private float stairsEndY;
         private bool stairsEndIsSet;
-        private bool reachedTop;
-        private bool finishing;
-        private Vector2 finishPosition;
-        private Vector2 finishTranslate;
-        private int finishNSteps;
+        private bool reachedTop;        
+        private bool hasTurned;
+        private float yEndDistance;
 
         public StairsClimbingUpState(Animator animator, PlayerController player)
             : base(animator, player)
@@ -39,8 +38,7 @@ namespace JFM
             animator.SetBool("IsRunning", true);
             stairsEndIsSet = false;
             reachedTop = false;
-            finishing = false;
-
+            hasTurned = false;
             base.Enter();
         }
 
@@ -50,52 +48,50 @@ namespace JFM
             float side = player.IsFacingRight ? 1.0f : -1.0f;
             Vector2 vec = new Vector2(side * Mathf.Cos(angle), -Mathf.Sin(angle));
 
-            Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
+            Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;            
 
-
-            if(finishing)
-            {
-                if (finishNSteps > 0)
-                {
-                    finishPosition += finishTranslate;
-                    player.rb.MovePosition(finishPosition);
-                    finishNSteps--;                    
-                }
-                else
-                {
-                    player.ChangeState(player.walkingState);                                        
-                }
-                return;
-            }
+            float stairsSpeed = player.StairsSpeed;
+            bool foundStairsInFront = player.FindSlopeAtPoint(out float slope, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? 1.0f : -1.0f) * 45.0f), player.StairsDownHeight);//, true);
 
             if (reachedTop)
             {
-                Debug.Log($"reachedTop={reachedTop}");
-                player.rb.velocity = Vector2.zero;// new Vector2(player.rb.velocity.x, 0.0f);
-                player.rb.totalForce = Vector2.zero;
-                player.rb.isKinematic = true;
-                Vector2 goalPosition = new Vector2(player.transform.position.x + v.x * player.StairsUpFinishTranslate.x, stairsEndY);
-                
-                finishNSteps = 5;
-                finishTranslate = (goalPosition - player.rb.position) / finishNSteps;
-                finishPosition = player.rb.position;
+                float yDiff = stairsEndY - player.rb.position.y;                
+                stairsSpeed = Mathf.Lerp(0.0f, player.StairsSpeed, Mathf.Abs(yDiff) / yEndDistance);
 
-                finishPosition += finishTranslate;
-                player.rb.MovePosition(finishPosition);
-                finishNSteps--;
+                if(yDiff < 0.001f)
+                {
+                    player.ChangeState(player.walkingState);
+                    return;
+                }            
+            }            
 
-                //Debug.Log($"stairsEndY = {stairsEndY}");
-                player.rb.velocity = Vector2.zero;// new Vector2(player.rb.velocity.x, 0.0f);                
-                player.rb.totalForce = Vector2.zero;
-                
-                finishing=true;
-                
-                return;
+            if (Mathf.Abs(slope) < player.StairsUpMinSlope)
+            {
+                if (!player.Raycast(false, player.GroundLayer, Vector2.up * player.ColliderSize.y / 2.0f + (player.IsFacingRight ? Vector2.right : -Vector2.right) * 2.5f * player.ColliderSize.x, 0.01f, (player.IsFacingRight ? Vector2.right : -Vector2.right), false, false) && !stairsEndIsSet)
+                {
+                    //Debug.Log("Starting deceleration!");
 
+                    RaycastHit2D hit = Physics2D.Raycast(player.HitInfo.probePoint, Vector2.down, 2.0f, player.GroundLayer);
+
+                    if (hit.collider is not null)
+                    {
+                        stairsEndIsSet = true;
+                        stairsEndY = hit.point.y;
+                        Debug.Log($"stairsEndY={stairsEndY}");
+                    }
+                    else
+                    {
+                        stairsEndIsSet = true;
+                        stairsEndY = player.HitInfo.probePoint.y;
+                    }
+
+                    float yDiff = stairsEndY - player.rb.position.y;
+                    yEndDistance = Mathf.Abs(yDiff);
+                    
+                }                
             }
-
-            bool foundStairsInFront = player.FindSlopeAtPoint(out float slope, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, v);
-            if (!player.IsCastGrounded(false) && !foundStairsInFront && reachedTop)
+            
+            if (!player.IsCastGrounded(false) && !foundStairsInFront && (reachedTop || hasTurned))
             {
                 //Debug.Break();
                 
@@ -120,12 +116,7 @@ namespace JFM
             {
                 player.ChangeState(player.dashingState);
                 return;
-            }
-
-            if (player.CanTurn())
-            {
-                player.Turn();
-            }
+            }            
 
             if (player.WillClimbLadder())
             {
@@ -138,30 +129,18 @@ namespace JFM
                 player.ChangeState(player.jumpingState);
                 return;
             }
+               
+
             
-            if (!player.Raycast(false, player.GroundLayer, Vector2.up * player.ColliderSize.y / 2.0f + (player.IsFacingRight ? Vector2.right : -Vector2.right) * 2.5f * player.ColliderSize.x, 0.01f, (player.IsFacingRight ? Vector2.right : -Vector2.right), false, false) && !stairsEndIsSet)
-            {
-                //Debug.Log("Starting deceleration!");
-
-                RaycastHit2D hit = Physics2D.Raycast(player.HitInfo.probePoint, Vector2.down, 2.0f, player.GroundLayer);
-
-                if (hit.collider is not null)
-                {
-                    stairsEndIsSet = true;
-                    stairsEndY = hit.point.y;
-                    //Debug.Log($"stairsEndY={stairsEndY}");
-                }
-            }            
-
-            float stairsSpeed = player.StairsSpeed;
 
             // Add force but limit speed
             if (player.rb.velocity.magnitude < stairsSpeed)
             {                
                 angle = player.StairsUpAngle * Mathf.Deg2Rad;                
-                v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * stairsSpeed * player.StairsAcceleration * Time.fixedDeltaTime;
+                v = new Vector2((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * stairsSpeed * player.StairsAcceleration * Time.fixedDeltaTime;
 
                 player.rb.AddForce(v, ForceMode2D.Force);
+                //player.rb.velocity += v;
 
                 if (player.rb.velocity.magnitude > stairsSpeed)
                 {
@@ -174,6 +153,12 @@ namespace JFM
             if (newPosition.y > stairsEndY && stairsEndIsSet)
             {
                 reachedTop = true;                
+            }
+
+            if (player.CanTurn())
+            {
+                player.Turn();
+                hasTurned = true;
             }
 
             nFrames++;

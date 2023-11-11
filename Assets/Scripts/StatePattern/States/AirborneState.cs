@@ -55,16 +55,19 @@ namespace JFM
             bool stairsAreRightSide = slope > 0;
             //player.stairsSide = foundSlopeBeneath;
             //Debug.Log($"After: {player.stairsSide}");
-            bool grounded = player.IsCastGrounded(false);            
+            bool grounded = player.IsCastGrounded(false);
+
+            if (grounded && player.WillLand() && (!foundSlopeBeneath || Mathf.Abs(slope) < player.StairsUpMinSlope))
+            {
+                Debug.Log($"foundSlopeBeneath={foundSlopeBeneath} grounded={grounded}");
+                player.ChangeState(player.landingState);
+                return;
+            }
+
             if (grounded || foundSlopeBeneath)
             {
-                if (player.WillLand())
-                {
-                    player.ChangeState(player.landingState);
-                    return;
-                }
-                else
-                {
+                
+                
                     if (player.MoveInput.x != 0.0f)
                     {
                         if (foundSlopeBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope)
@@ -73,11 +76,13 @@ namespace JFM
                             {
                                 if (stairsAreRightSide == player.IsFacingRight)
                                 {
-                                    player.ChangeState(player.stairsClimbingUpState);
+                                    //player.ChangeState(player.stairsClimbingUpState);
+                                    player.ChangeState(player.walkingState);
                                 }
                                 else
                                 {
-                                    player.ChangeState(player.stairsClimbingDownState);
+                                    //player.ChangeState(player.stairsClimbingDownState);
+                                    player.ChangeState(player.walkingState);
                                 }
                             }
                             else
@@ -156,7 +161,7 @@ namespace JFM
                     {
                         //Debug.Log($"Didn't make a case (2)... grounded={grounded} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
                     }
-                }
+                
 
                 //Debug.Log($"Detected stairs or ground. slope was {slope} player.MoveInput.x={player.MoveInput.x} foundSlopeBeneath={foundSlopeBeneath} && Mathf.Abs(slope) > player.StairsUpMinSlope={Mathf.Abs(slope) > player.StairsUpMinSlope}");                
             }                       

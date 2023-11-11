@@ -21,8 +21,8 @@ namespace JFM
         {
             animator.SetBool("IsLanding", true);
             player.rb.velocity = Vector2.zero;
-            startTime = Time.time;            
-            
+            startTime = Time.time;
+            player.rb.gravityScale = 0.0f;
             if(animationClipLength == 0.0f)
             {
                 animationClipLength = animator.GetCurrentAnimatorStateInfo(animatorLayer).length;                       
@@ -33,6 +33,7 @@ namespace JFM
 
         public override void Update()
         {
+            //Debug.Break();
             if (Time.time - startTime >= animationClipLength)
             {
                 player.ChangeState(player.idleState);
@@ -42,6 +43,7 @@ namespace JFM
 
         public override void Exit()
         {
+            player.rb.gravityScale = player.DefaultGravityScale;
             animator.SetBool("IsLanding", false);
             base.Exit();
         }

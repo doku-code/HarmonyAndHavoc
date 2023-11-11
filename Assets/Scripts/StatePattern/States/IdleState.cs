@@ -57,22 +57,19 @@ namespace JFM
 
             Vector2 v;
             //Debug.Log($"Before: {player.stairsSide}");
-           /*if (player.stairsSide != 0)
-            {
-                v = player.stairsSide == -1 ? -Vector2.right : Vector2.right;
-            }
-            else
-            {
-                v = Vector2.zero;
-            }*/            
-            bool foundStairsBeneath = player.FindSlopeBeneath(out float slope);
+            /*if (player.stairsSide != 0)
+             {
+                 v = player.stairsSide == -1 ? -Vector2.right : Vector2.right;
+             }
+             else
+             {
+                 v = Vector2.zero;
+             }*/
+            //bool foundStairsBeneath = player.FindSlopeBeneath(out float slope);
             //player.stairsSide = foundStairsBeneath;
-            if (!player.IsCastGrounded(false) && !foundStairsBeneath)
-            {
-                player.ChangeState(player.airborneState);
-                return;
-            }
-            
+
+            v = player.IsFacingRight ? -Vector2.right : Vector2.right;
+
             if (player.inputTriggers["Move"] && player.MoveInput.x != 0.0f && player.MoveInput.y == 0.0f)
             {
                 if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
@@ -94,6 +91,31 @@ namespace JFM
                 return;
             }
 
+            bool foundStairsBeneath = player.FindSlopeBeneath(out float slope, Vector2.up * 0.02f + v * 0.0f /*player.ColliderSize.x / 2.0f*/ + v * 0.2f, -v * 0.3f + Vector2.up * player.StairsUpHeight, player.StairsDownHeight);//, true);
+
+            if (!player.IsCastGrounded(false) && !foundStairsBeneath)
+            {
+                player.ChangeState(player.airborneState);
+                return;
+            }
+
+            if(player.CanTurn())
+            {
+                player.Turn();
+            }
+
+            if (player.WillClimbUpStairs())
+            {
+                player.ChangeState(player.stairsClimbingUpState);
+                return;
+            }
+
+            if (player.WillClimbDownStairs() || (foundStairsBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope) && Mathf.Abs(player.rb.velocity.y) <= 0.01f && ((player.MoveInput.x > 0.0f && slope < 0) || (player.MoveInput.x > 0.0f && slope < 0)))
+            {
+                player.ChangeState(player.stairsClimbingDownState);
+                return;
+            }            
+
             if (player.WillClimbDownLadder())
             {
                 float ladderX = Mathf.Floor(player.HitInfo.probePoint.x) + 0.5f - player.ColliderOffset.x;
@@ -112,7 +134,7 @@ namespace JFM
 
             if (player.WillClimbLadder())
             {
-                
+
 
                 player.ChangeState(player.ladderClimbingState);
                 return;
@@ -130,17 +152,7 @@ namespace JFM
                 return;
             }
 
-            if (player.WillClimbUpStairs())
-            {
-                player.ChangeState(player.stairsClimbingUpState);
-                return;
-            }
-
-            if (player.WillClimbDownStairs())
-            {
-                player.ChangeState(player.stairsClimbingDownState);
-                return;
-            }
+            
 
             if (player.inputTriggers["BasicAttack"])
             {

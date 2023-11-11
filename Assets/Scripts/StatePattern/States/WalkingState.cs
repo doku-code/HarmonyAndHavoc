@@ -47,12 +47,13 @@ namespace JFM
             {
                 player.rb.isKinematic = false;
             }
-
+            bool hasTurned = false;
             if (player.CanTurn())
             {
                 player.Turn();
+                hasTurned = true;
             }
-
+            
             if (player.WillClimbUpStairs())
             {
                 player.ChangeState(player.stairsClimbingUpState);
@@ -61,6 +62,7 @@ namespace JFM
 
             if (player.WillClimbDownStairs())
             {
+                //Debug.Break();
                 player.ChangeState(player.stairsClimbingDownState);
                 return;
             }
@@ -83,10 +85,10 @@ namespace JFM
                 return;
             }
 
-            bool grounded = player.IsCastGrounded(false);
+            bool grounded = player.IsCastGrounded(false, player.GroundLayer | player.LadderLayer, Vector2.zero, player.GroundDistance, true);
             //Debug.Log($"grounded={grounded} player.groundedDistance={player.groundedDistance}");
             player.Raycast(false, player.LadderLayer | player.GroundLayer, Vector2.zero, 1.0f, Vector2.down);//, false, true);
-            if ((!grounded && player.HitInfo.hit.distance > player.GroundDistance * 25.0f) || !player.HitInfo.hasHit )
+            if ((!grounded ))//&& player.HitInfo.hit.distance > player.GroundDistance * 25.0f) || !player.HitInfo.hasHit )
             {
                 //Debug.Log($"d={player.HitInfo.hit.distance - player.GroundDistance}");
                 //Debug.Log($"rb.totalForce={player.rb.totalForce} rb.velocity={player.rb.velocity}");
@@ -161,16 +163,19 @@ namespace JFM
             }
                           
             // Add force but limit speed
-            if (player.rb.velocity.magnitude < player.WalkSpeed)
+            if (player.rb.velocity.magnitude < player.WalkSpeed || hasTurned)
             {
-                player.rb.AddForce((player.IsFacingRight ? Vector2.right : -Vector2.right) * player.WalkSpeed * player.WalkAcceleration * Time.fixedDeltaTime, ForceMode2D.Force);
-                
+                Vector2 v = (player.IsFacingRight ? Vector2.right : -Vector2.right) * /*player.WalkSpeed **/ player.WalkAcceleration * Time.fixedDeltaTime;
+                player.rb.AddForce(v, ForceMode2D.Force);
+
+                //Debug.Log($"AddForce() player.rb.velocity.magnitude={player.rb.velocity.magnitude} v={v}");
+                //player.rb.velocity += v;
                 if (player.rb.velocity.magnitude > player.WalkSpeed)
                 {
                     player.rb.velocity = player.rb.velocity.normalized * player.WalkSpeed;
                 }
             }
-
+            //Debug.Log($"player.rb.velocity.magnitude={player.rb.velocity.magnitude} player.rb.gravityScale={player.rb.gravityScale}");
             //Debug.Log($"player.rb.gravityScale(3)={player.rb.gravityScale}");
 
         }

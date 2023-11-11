@@ -29,6 +29,7 @@ namespace JFM
 
             // When the Player is in a corner, all normals are the same, so I use in addition a raycast.            
             //if (player.IsGrounded(false) && player.rb.velocity.y >= 0.0f)
+            //Debug.Log($"{player.IsCastGrounded(false)} && {player.rb.velocity.y >= 0.0f} player.rb.velocity.y={player.rb.velocity.y}");
             if (player.IsCastGrounded(false) && player.rb.velocity.y >= 0.0f)
             {
                 player.idleState.nFrames = 3;

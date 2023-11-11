@@ -55,7 +55,7 @@ namespace JFM
             //Debug.Log($"Mathf.Abs(player.rb.velocity.x)={Mathf.Abs(player.rb.velocity.x)}");
 
             bool foundSlopeBeneath = player.FindSlopeBeneath(out float slope);
-            bool grounded = player.IsCastGrounded(true, player.GroundLayer | player.LadderLayer, Vector2.zero, player.GroundDistance * 2.0f) || (foundSlopeBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope && Mathf.Abs(slope) < player.StairsUpMaxSlope);
+            bool grounded = player.IsCastGrounded(true, player.GroundLayer | player.LadderLayer, Vector2.zero, player.GroundDistance * 2.0f, false) || (foundSlopeBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope && Mathf.Abs(slope) < player.StairsUpMaxSlope);
             //becameAirborne |= !grounded;
             
             float elapsedTime = Time.time - startTime;        

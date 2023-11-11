@@ -6,6 +6,8 @@ namespace JFM
 {
     public class JumpingState : PlayerState
     {
+        private int nFrames;
+
         public JumpingState(Animator animator, PlayerController player)
             : base(animator, player)
         {
@@ -17,6 +19,8 @@ namespace JFM
             animator.SetTrigger("Jump");
             player.Jump();
             player.inputTriggers["Jump"] = false;
+            nFrames = 0;
+
             base.Enter();
         }
 
@@ -38,7 +42,7 @@ namespace JFM
                 return;
             }
             
-            if(player.WillGripToWall())
+            if(player.WillGripToWall() && nFrames > 0)
             {
                 player.ChangeState(player.wallGrippingState);
                 return;
@@ -81,7 +85,9 @@ namespace JFM
             if (player.WillJump())
             {
                 player.Jump();
-            }            
+            }  
+            
+            nFrames++;
         }
 
         public override void Exit()
