@@ -45,11 +45,21 @@ namespace charles
         [Header("Keyboard Rebinding text"), Tooltip("Text array for the button mapping")]
         [SerializeField] private TMP_Text[] actionBtnText;
 
-        void Awake()
+        void Start()
         {
+            InitializeMixerAtStart();
             DontDestroyOnLoad(this);
             EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
             Application.targetFrameRate = -1;
+        }
+        void InitializeMixerAtStart()
+        {
+            SoundManager.Instance.LoadSoundSetting(masterSlider, SoundManager.Instance.sMasterVolume);
+            SoundManager.Instance.LoadSoundSetting(fxSlider, SoundManager.Instance.sFXVolume);
+            SoundManager.Instance.LoadSoundSetting(ambientSlider, SoundManager.Instance.sAmbientVolume);
+            SoundManager.Instance.SetMasterVolume(masterSlider.value);
+            SoundManager.Instance.SetFXVolume(fxSlider.value);
+            SoundManager.Instance.SetAmbientVolume(ambientSlider.value);
         }
         #region PauseFunc
         public void PauseMenu(CallbackContext value)
