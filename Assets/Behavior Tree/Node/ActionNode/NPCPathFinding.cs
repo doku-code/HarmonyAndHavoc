@@ -9,6 +9,8 @@ public class NPCPathFinding : ActionNode
     public string PatrolAnimString;
     public string gameobjNpcName;
     public float moveSpeed = 2000.0f;
+    public float sphereCastRadius = 2.0f;
+    public LayerMask playerLayer;
 
     private int currentPOS;
     private SpriteRenderer npcSpriteRenderer;
@@ -18,6 +20,7 @@ public class NPCPathFinding : ActionNode
 
     protected override void OnStart()
     {
+
         npc = GameObject.Find(gameobjNpcName);
         npcSpriteRenderer = npc.GetComponent<SpriteRenderer>();
         npcAnimator = npc.GetComponent<Animator>();
@@ -42,27 +45,39 @@ public class NPCPathFinding : ActionNode
 
         Vector3 targetPOS = POSPatrolRoute[currentPOS].transform.position;
         Vector3 moveDirection = (targetPOS - npc.transform.position).normalized;
-        npcRigidBody.velocity = moveDirection * moveSpeed * Time.deltaTime;
 
-        if (Vector3.Distance(npc.transform.position, targetPOS) < 1f) // 1f est la tolerance de la distance entre le point et le transform du npc
+        RaycastHit2D hit = Physics2D.CircleCast(npc.transform.position, sphereCastRadius, moveDirection, Mathf.Infinity, playerLayer);
+
+        if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            currentPOS++;
-            if (currentPOS >= POSPatrolRoute.Length)
+            
+            npcRigidBody.velocity = Vector3.zero;
+            return State.SUCCESS;
+        }
+        else
+        {
+            npcRigidBody.velocity = moveDirection * moveSpeed * Time.fixedDeltaTime;
+
+            if (Vector3.Distance(npc.transform.position, targetPOS) < 1f)
             {
-                npcRigidBody.velocity = Vector3.zero; // ajout pour briser le continue de mouvement en kinematique
-                return State.SUCCESS;
+                currentPOS++;
+                if (currentPOS >= POSPatrolRoute.Length)
+                {
+                    npcRigidBody.velocity = Vector3.zero;
+                    return State.SUCCESS;
+                }
             }
-        }
 
-        if (moveDirection.x < 0)
-        {
-            npcSpriteRenderer.flipX = true;
-        }
-        else if (moveDirection.x > 0)
-        {
-            npcSpriteRenderer.flipX = false;
-        }
+            if (moveDirection.x < 0)
+            {
+                npcSpriteRenderer.flipX = true;
+            }
+            else if (moveDirection.x > 0)
+            {
+                npcSpriteRenderer.flipX = false;
+            }
 
-        return State.RUNNING;
+            return State.RUNNING;
+        }
     }
 }

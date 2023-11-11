@@ -35,7 +35,15 @@ public abstract class Node : ScriptableObject
     {
         return Instantiate(this);
     }
-
+    public void Abort()
+    {
+        BehaviourTree.Traverse(this, (node) => 
+        {
+            node.started = false;
+            node.state = State.RUNNING;
+            node.OnStop();
+        });
+    }
     protected abstract void OnStart();
     protected abstract void OnStop();
     protected abstract State OnUpdate();
