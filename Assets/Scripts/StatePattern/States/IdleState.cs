@@ -81,11 +81,11 @@ namespace JFM
                     player.walkingState.resetGravityScaleWithOther = true;
                     player.walkingState.otherGravityScale = oldGravityScale;
                     player.rb.gravityScale = 0.0f;
-                    Debug.Log("walking on ladder");
+                    //Debug.Log("walking on ladder");
                 }
                 else
                 {
-                    Debug.Log("not walking on ladder");
+                    //Debug.Log("not walking on ladder");
                 }
                 player.ChangeState(player.walkingState);
                 return;

@@ -55,7 +55,7 @@ namespace JFM
             if (foundStairsBeneath && nFrames == 0)
             {
                 stairsSlope = slope;
-                Debug.Log($"stairsSlope={stairsSlope}");
+                //Debug.Log($"stairsSlope={stairsSlope}");
                 //Debug.Break();
             }
 
@@ -63,7 +63,7 @@ namespace JFM
             if (!player.IsCastGrounded(false) && !foundStairsBeneath)
             {
                 player.ChangeState(player.airborneState);
-                Debug.Log("Going Airborne");
+                //Debug.Log("Going Airborne");
                 //Debug.Break();
                 return;
             }
@@ -81,7 +81,7 @@ namespace JFM
             )*/
             if(Mathf.Abs(slope) < player.StairsUpMinSlope && nFrames > 1)
             {
-                Debug.Log($"slope={slope}");
+                //Debug.Log($"slope={slope}");
                 //Debug.Break();
                 player.ChangeState(player.walkingState);
                 return;
@@ -127,16 +127,16 @@ namespace JFM
                 //angle = player.StairsDownAngle * Mathf.Deg2Rad;
                 usedSlope = stairsSlope;
                 angle = Mathf.Atan(-usedSlope);
-                Debug.Log($"angle={angle * Mathf.Rad2Deg}");
+                //Debug.Log($"angle={angle * Mathf.Rad2Deg}");
             }
             float angleRange = (62.0f * Mathf.Deg2Rad) - Mathf.PI / 4.0f;
             float lerp = Mathf.Lerp(1.0f, 0.4f, (Mathf.Abs(Mathf.Max(angle, Mathf.PI / 4.0f)) - Mathf.PI / 4.0f) / angleRange);
             float speed = player.StairsSpeed * lerp;
-            Debug.Log($"lerp={lerp}");
+            //Debug.Log($"lerp={lerp}");
 
             if(lerp == 1.0f)
             {
-                Debug.Log($"slope={slope}");
+                //Debug.Log($"slope={slope}");
                 //Debug.Break();
             }
 
@@ -150,7 +150,7 @@ namespace JFM
 
 
                 player.rb.AddForce(f, ForceMode2D.Force);
-                Debug.Log($"AddForce() player.rb.velocity.magnitude={player.rb.velocity.magnitude} speed = {speed} f={f}");
+                //Debug.Log($"AddForce() player.rb.velocity.magnitude={player.rb.velocity.magnitude} speed = {speed} f={f}");
 
                 /*if(player.rb.velocity.magnitude == 0.0f || addForceNotWorking)
                 {

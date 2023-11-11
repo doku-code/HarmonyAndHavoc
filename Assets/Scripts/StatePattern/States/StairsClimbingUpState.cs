@@ -77,7 +77,7 @@ namespace JFM
                     {
                         stairsEndIsSet = true;
                         stairsEndY = hit.point.y;
-                        Debug.Log($"stairsEndY={stairsEndY}");
+                        //Debug.Log($"stairsEndY={stairsEndY}");
                     }
                     else
                     {

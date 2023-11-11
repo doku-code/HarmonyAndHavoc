@@ -33,7 +33,7 @@ namespace JFM
 
             resetGravityScale = true;
 
-            Debug.Log($"targetX={targetX} transform.position={player.transform.position}");
+            //Debug.Log($"targetX={targetX} transform.position={player.transform.position}");
             //Debug.Break();
             
             base.Enter();
@@ -58,7 +58,7 @@ namespace JFM
                 }
                 else
                 {
-                    Debug.Log($"player.rb.position={player.rb.position}");
+                    //Debug.Log($"player.rb.position={player.rb.position}");
                     player.rb.AddForce(Vector2.right * diff * (player.WalkAcceleration * Mathf.Abs(diff) * 100.0f) * Time.fixedDeltaTime, ForceMode2D.Force);
                 }
             }

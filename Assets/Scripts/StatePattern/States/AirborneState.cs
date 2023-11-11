@@ -59,7 +59,7 @@ namespace JFM
 
             if (grounded && player.WillLand() && (!foundSlopeBeneath || Mathf.Abs(slope) < player.StairsUpMinSlope))
             {
-                Debug.Log($"foundSlopeBeneath={foundSlopeBeneath} grounded={grounded}");
+                //Debug.Log($"foundSlopeBeneath={foundSlopeBeneath} grounded={grounded}");
                 player.ChangeState(player.landingState);
                 return;
             }
@@ -94,7 +94,7 @@ namespace JFM
                         }
                         else if (grounded || (Mathf.Abs(slope) > player.StairsUpMinSlope && foundSlopeBeneath))
                         {
-                            Debug.Log($"{1 << player.groundedLayer} == {(int)player.LadderLayer}");
+                            //Debug.Log($"{1 << player.groundedLayer} == {(int)player.LadderLayer}");
                             if (1 << player.groundedLayer == (int)player.LadderLayer)
                             {
                                 if (player.Raycast(false, player.LadderLayer, Vector2.zero, player.GroundDistance + 1.0f, Vector2.down))
@@ -109,7 +109,7 @@ namespace JFM
                                     float y = Mathf.Floor(player.HitInfo.hit.point.y) + 1 + 0.007519f;// - player.ColliderSize.y + player.ColliderOffset.y;
                                     player.rb.isKinematic = true;
                                     player.rb.MovePosition(new Vector2(player.transform.position.x, y));
-                                    Debug.Log($"Bon! y={y}");
+                                    //Debug.Log($"Bon! y={y}");
                                 }
                             }
                             //Debug.Log($"Oh HO!!! grounded={grounded} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
