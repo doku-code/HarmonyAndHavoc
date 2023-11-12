@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
@@ -6,9 +7,9 @@ namespace AF
 {
     public class SoundManager : MonoBehaviour
     {
-        public string sMasterVolume   = "Master";
-        public string sFXVolume       = "FX";
-        public string sAmbientVolume  = "Ambient";
+        [NonSerialized] public string sMasterVolume   = "Master";
+        [NonSerialized] public string sFXVolume       = "FX";
+        [NonSerialized] public string sAmbientVolume  = "Ambient";
 
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private AudioSource clipPlayerSource;
