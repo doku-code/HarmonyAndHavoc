@@ -1,11 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
-using UnityEngine.Serialization;
 
 namespace AF
 {
     public class SoundManager : MonoBehaviour
     {
+        public string sMasterVolume   = "Master";
+        public string sFXVolume       = "FX";
+        public string sAmbientVolume  = "Ambient";
+
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private AudioSource clipPlayerSource;
         [SerializeField] private AudioClip[] clipsToPlay;
@@ -28,17 +32,20 @@ namespace AF
         
         public void SetAmbientVolume(float volume)
         {
-            audioMixer.SetFloat("Ambient", volume);
+            audioMixer.SetFloat(sAmbientVolume, volume);
+            SaveSoundSettings(sAmbientVolume, volume);
         }
 
         public void SetFXVolume(float volume)
         {
-            audioMixer.SetFloat("FX", volume);
+            audioMixer.SetFloat(sFXVolume, volume);
+            SaveSoundSettings(sFXVolume, volume);
         }
 
         public void SetMasterVolume(float volume)
         {
-            audioMixer.SetFloat("Master", volume);
+            audioMixer.SetFloat(sMasterVolume, volume);
+            SaveSoundSettings(sMasterVolume,volume);
         }
 
         public void PlayAClip(int index)
@@ -46,10 +53,21 @@ namespace AF
             clipPlayerSource.clip = clipsToPlay[index];
             clipPlayerSource.Play();
         }
+        
         public void PlayNpcSounds(int index)
         {
             clipPlayerSource.clip = npcSounds[index];
             clipPlayerSource.Play();
+        }
+        
+        public void SaveSoundSettings(string settingName, float value)
+        {
+            PlayerPrefs.SetFloat(settingName, value);
+        }
+        
+        public void LoadSoundSetting(Slider sliderToSet, string settingName)
+        {
+            sliderToSet.value = PlayerPrefs.GetFloat(settingName);
         }
     }
 }

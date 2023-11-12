@@ -45,11 +45,23 @@ namespace AF
         [Header("Keyboard Rebinding text"), Tooltip("Text array for the button mapping")]
         [SerializeField] private TMP_Text[] actionBtnText;
 
-        void Awake()
+        void Start()
         {
+            InitializeMixerAtStart();
             OpenMainMenu();
             Application.targetFrameRate = -1;
         }
+        
+        void InitializeMixerAtStart()
+        {
+            SoundManager.Instance.LoadSoundSetting(masterSlider, SoundManager.Instance.sMasterVolume);
+            SoundManager.Instance.LoadSoundSetting(fxSlider, SoundManager.Instance.sFXVolume);
+            SoundManager.Instance.LoadSoundSetting(ambientSlider, SoundManager.Instance.sAmbientVolume);
+            SoundManager.Instance.SetMasterVolume(masterSlider.value);
+            SoundManager.Instance.SetFXVolume(fxSlider.value);
+            SoundManager.Instance.SetAmbientVolume(ambientSlider.value);
+        }
+        
         public void OpenMainMenu()
         {
             mainPanel.SetActive(true);
