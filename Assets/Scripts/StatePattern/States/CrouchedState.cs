@@ -43,7 +43,7 @@ namespace JFM
                 }
                 else
                 {
-                    player.idleState.nFrames = 1;
+                    player.idleState.waitNFrames = 1;
                     player.ChangeState(player.idleState);
                 }
                 return;

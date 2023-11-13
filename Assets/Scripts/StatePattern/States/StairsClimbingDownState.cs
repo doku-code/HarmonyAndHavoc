@@ -21,6 +21,7 @@ namespace JFM
         private int nFrames;
         private float stairsSlope;
         private bool addForceNotWorking;
+        private float lastXPos;
 
         public StairsClimbingDownState(Animator animator, PlayerController player)
             : base(animator, player)
@@ -41,11 +42,11 @@ namespace JFM
 
         public override void Update()
         {
-            float angle = 45 * Mathf.Deg2Rad;
+            float angle;// = 45 * Mathf.Deg2Rad;
             float side = player.IsFacingRight ? 1.0f : -1.0f;
             float distance = player.StairsGroundDistance;
-            Vector2 vec;
-            vec = new Vector2(-side * Mathf.Cos(angle), -Mathf.Sin(angle));
+            //Vector2 vec;
+            //vec = new Vector2(-side * Mathf.Cos(angle), -Mathf.Sin(angle));
             
             Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
 
@@ -138,33 +139,42 @@ namespace JFM
             {
                 //Debug.Log($"slope={slope}");
                 //Debug.Break();
-            }
+            }            
 
             // Add force but limit speed
             if (player.rb.velocity.magnitude < speed /** player.StairsDownDeceleration*/)
             {
-                
-                //f = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), -Mathf.Sin(angle)) * speed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
-
-                Vector3 f = new Vector3(player.IsFacingRight ? 1.0f : -1.0f, 0.0f) * speed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
-
+                Vector3 f;
+                if (addForceNotWorking)
+                {
+                    f = new Vector3(player.IsFacingRight ? 1.0f : -1.0f, 0.0f) * speed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
+                }
+                else
+                {
+                    f = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), -Mathf.Sin(angle)) * speed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
+                }
 
                 player.rb.AddForce(f, ForceMode2D.Force);
                 //Debug.Log($"AddForce() player.rb.velocity.magnitude={player.rb.velocity.magnitude} speed = {speed} f={f}");
 
-                /*if(player.rb.velocity.magnitude == 0.0f || addForceNotWorking)
+                if(Platformer2DUtilities.AreNearlyEqual(player.rb.position.x, lastXPos) && nFrames > 0)// || addForceNotWorking)
                 {
                     addForceNotWorking = true;
-                    player.rb.velocity += (v * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime) / player.rb.mass;
-                    Debug.Log($"Passage a la course.");
+                    //player.rb.velocity += (v * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime) / player.rb.mass;
+                    //Debug.Log($"Passage a la course.");
                     //player.ChangeState(player.walkingState);
                     //return;
-                }*/
+                    Debug.Log($"Passage a un angle de 0 degres.");
+                    f = new Vector3(player.IsFacingRight ? 1.0f : -1.0f, 0.0f) * speed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
+                    player.rb.AddForce(f, ForceMode2D.Force);
+                }
 
                 if (player.rb.velocity.magnitude > speed /** player.StairsDownDeceleration*/)
                 {
                     player.rb.velocity = player.rb.velocity.normalized * speed /** player.StairsDownDeceleration*/;
                 }
+
+                lastXPos = player.rb.position.x;
             }
 
             nFrames++;

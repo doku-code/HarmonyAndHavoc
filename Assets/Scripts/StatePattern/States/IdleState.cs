@@ -15,12 +15,13 @@ namespace JFM
     public class IdleState : PlayerState
     {
         public float oldGravityScale;
-        public int nFrames;
+        public int waitNFrames;
         private bool resetGravityScale;
         public bool resetGravityScaleWithOther;
         public float otherGravityScale;
         public bool overrideOldGravityScale;
-        
+        private bool startingOnLadder;
+
         public IdleState(Animator animator, PlayerController player)
             : base(animator, player)
         {
@@ -39,8 +40,21 @@ namespace JFM
             {
                 overrideOldGravityScale = false;
             }
-            player.rb.gravityScale = 0.0f;
-
+            if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
+                player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down)
+            )
+            {
+                //Debug.Log("Ladders on idle.Enter().");
+                player.rb.velocity = Vector2.zero;
+                player.rb.totalForce = Vector2.zero;
+                player.rb.gravityScale = 0.0f;
+                startingOnLadder = true;
+            }
+            else
+            {
+                startingOnLadder = false;
+            }
+            
             player.rb.isKinematic = false;
 
             resetGravityScale = true;
@@ -49,29 +63,63 @@ namespace JFM
 
         public override void Update()
         {
-            if (nFrames > 0)
+            if (waitNFrames > 0)
             {
-                nFrames--;
+                waitNFrames--;
+                return;
+            }
+            //Debug.Log($"gravityScale = {player.rb.gravityScale}");
+
+            Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
+                        
+            // Could reuse this raycast for player.WillClimbUpStairs() below
+            bool foundSlopeInFront = (player.FindSlopeAtPoint(out float slopeFront, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? 1.0f : -1.0f) * 45.0f), player.StairsDownHeight));//, true))
+
+            bool foundSlopeBehind = (player.FindSlopeAtPoint(out float slopeBack, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? -1.0f : 1.0f) * 45.0f), player.StairsDownHeight));//, true))
+
+            if (!player.IsCastGrounded(false))
+            {
+                if (!foundSlopeInFront && !foundSlopeBehind)
+                {
+                    player.ChangeState(player.airborneState);
+                    return;
+                }
+                //Debug.Log("!player.IsCastGrounded()");
+            }
+            else if((foundSlopeInFront && Mathf.Abs(slopeFront) > 0.001f) || (foundSlopeBehind && Mathf.Abs(slopeBack) > 0.001f)) 
+            {
+                //Debug.Log("OK!!!!!");
+                //player.rb.AddForce(Vector2.up * -Physics2D.gravity.y * player.rb.gravityScale * Time.fixedDeltaTime, ForceMode2D.Force);
+                player.rb.velocity = Vector2.zero;
+                player.rb.totalForce = Vector2.zero;
+                player.rb.gravityScale = 0.0f;
+            }
+            else if(!startingOnLadder)
+            {
+                //Debug.Log("!startingOnLadder");
+                player.rb.gravityScale = player.DefaultGravityScale;
+            }
+
+            if (player.CanTurn())
+            {
+                player.Turn();
+            }
+
+            if (player.WillClimbUpStairs())
+            {                
+                player.ChangeState(player.stairsClimbingUpState);
                 return;
             }
 
-            Vector2 v;
-            //Debug.Log($"Before: {player.stairsSide}");
-            /*if (player.stairsSide != 0)
-             {
-                 v = player.stairsSide == -1 ? -Vector2.right : Vector2.right;
-             }
-             else
-             {
-                 v = Vector2.zero;
-             }*/
-            //bool foundStairsBeneath = player.FindSlopeBeneath(out float slope);
-            //player.stairsSide = foundStairsBeneath;
-
-            v = player.IsFacingRight ? -Vector2.right : Vector2.right;
+            if (player.WillClimbDownStairs())// || (foundSlopeInFront && Mathf.Abs(slopeFront) > player.StairsUpMinSlope) && Mathf.Abs(player.rb.velocity.y) <= 0.01f && ((player.MoveInput.x > 0.0f && slopeFront < 0) || (player.MoveInput.x > 0.0f && slopeFront < 0)))
+            {
+                player.ChangeState(player.stairsClimbingDownState);
+                return;
+            }
 
             if (player.inputTriggers["Move"] && player.MoveInput.x != 0.0f && player.MoveInput.y == 0.0f)
             {
+                // Could I reuse these raycasts for WillClimbDownLadder() below ?
                 if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
                 player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down)
                     )
@@ -81,6 +129,8 @@ namespace JFM
                     player.walkingState.resetGravityScaleWithOther = true;
                     player.walkingState.otherGravityScale = oldGravityScale;
                     player.rb.gravityScale = 0.0f;
+                    player.rb.velocity = Vector2.zero;
+                    player.rb.totalForce = Vector2.zero;
                     //Debug.Log("walking on ladder");
                 }
                 else
@@ -90,36 +140,11 @@ namespace JFM
                 player.ChangeState(player.walkingState);
                 return;
             }
-
-            bool foundStairsBeneath = player.FindSlopeBeneath(out float slope, Vector2.up * 0.02f + v * 0.0f /*player.ColliderSize.x / 2.0f*/ + v * 0.2f, -v * 0.3f + Vector2.up * player.StairsUpHeight, player.StairsDownHeight);//, true);
-
-            if (!player.IsCastGrounded(false) && !foundStairsBeneath)
-            {
-                player.ChangeState(player.airborneState);
-                return;
-            }
-
-            if(player.CanTurn())
-            {
-                player.Turn();
-            }
-
-            if (player.WillClimbUpStairs())
-            {
-                player.ChangeState(player.stairsClimbingUpState);
-                return;
-            }
-
-            if (player.WillClimbDownStairs() || (foundStairsBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope) && Mathf.Abs(player.rb.velocity.y) <= 0.01f && ((player.MoveInput.x > 0.0f && slope < 0) || (player.MoveInput.x > 0.0f && slope < 0)))
-            {
-                player.ChangeState(player.stairsClimbingDownState);
-                return;
-            }            
-
+            
             if (player.WillClimbDownLadder())
             {
                 float ladderX = Mathf.Floor(player.HitInfo.probePoint.x) + 0.5f - player.ColliderOffset.x;
-                Debug.Log($"Climbing ladder... ladderX={ladderX}");
+                //Debug.Log($"Climbing ladder... ladderX={ladderX}");
                 player.transform.position = new Vector3(ladderX, player.transform.position.y, player.transform.position.z);
                 //Debug.Break();
                 player.ChangeState(player.ladderClimbingState);
@@ -160,7 +185,7 @@ namespace JFM
                 return;
             }
 
-            player.rb.velocity = Vector2.zero;
+            //player.rb.velocity = Vector2.zero;
         }
 
         public override void Exit()

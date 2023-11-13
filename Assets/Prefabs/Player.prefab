@@ -52,7 +52,9 @@ MonoBehaviour:
   walkAcceleration: 5000
   ladderSpeed: 3
   ladderAcceleration: 1000
+  ladderGroundDistance: 0.1
   ladderPushUpForce: 0.01
+  ladderCenteringSpeed: 100000
   stairsUpDistanceHigh: 0.32
   stairsUpDistanceHigh2: 0.495
   stairsUpRayLength: 0.05
@@ -78,7 +80,7 @@ MonoBehaviour:
   stairsSpeed: 5.54
   stairsAcceleration: 2000
   jumpForce: 11.3
-  baseNumJumps: 1
+  baseNumJumps: 2
   airAcceleration: 100
   groundLayer:
     serializedVersion: 2
@@ -88,6 +90,7 @@ MonoBehaviour:
     m_Bits: 64
   defaultGravityScale: 2
   groundDistance: 0.01
+  groundedRadius: 0.14
   groundBoxSize: {x: 0.75, y: 0.01}
   wallDistance: 0.5
   wallJumpDuration: 1
@@ -108,10 +111,8 @@ MonoBehaviour:
   spriteBoxProbeSize: {x: 0.9414063, y: 0.3}
   spriteBoxProbeOffset: {x: 0, y: 0}
   playerData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
-  groundedDistance: 0.0062732697
   groundedLayer: 3
   groundedNormal: {x: -0, y: 1}
-  groundedPoint: {x: 30.029726, y: -9.998719}
 --- !u!50 &411990679414685770
 Rigidbody2D:
   serializedVersion: 4

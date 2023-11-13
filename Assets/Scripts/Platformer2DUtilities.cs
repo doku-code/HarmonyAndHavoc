@@ -25,5 +25,20 @@ namespace JFM
             return Mathf.Abs(f2 - f1) <= 0.001f;
         }
 
+        public static void DebugDrawCircle(Vector2 position, float radius, Color color)
+        {
+            int numSegments = 16;
+            float radSubdivisions = Mathf.PI * 2 / numSegments;
+
+            Vector2 lastPoint = new Vector2(radius * Mathf.Cos(0), radius * Mathf.Sin(0));
+            Vector2 point;
+            for (float curAngle = 0; curAngle < Mathf.PI * 2; curAngle += radSubdivisions)
+            {
+                point = new Vector2(radius * Mathf.Cos(curAngle + radSubdivisions), radius * Mathf.Sin(curAngle + radSubdivisions));
+                //Debug.Log("v0 = " + v0);
+                Debug.DrawLine(position + lastPoint, position + point, color);
+                lastPoint = point;
+            }
+        }
     }
 }

@@ -46,8 +46,9 @@ namespace JFM
         //[SerializeField] private float runSpeed = 4.0f;
         [SerializeField] private float ladderSpeed = 3.0f;
         [SerializeField] private float ladderAcceleration = 10.0f;
-        //[SerializeField] private float ladderGettingUpForce = 1.0f;
+        [SerializeField] private float ladderGroundDistance = 0.1f;
         [SerializeField] private float ladderPushUpForce = 2.0f;
+        [SerializeField] private float ladderCenteringSpeed = 10.0f;
 
         //[SerializeField] private float stairsUpDistanceLow = 0.6f;
         [SerializeField] private float stairsUpDistanceHigh = 0.8f;
@@ -85,6 +86,7 @@ namespace JFM
 
         [SerializeField] private float defaultGravityScale;
         [SerializeField] private float groundDistance = 1.0f;
+        [SerializeField] private float groundedRadius = 0.2f;
         [SerializeField] private Vector2 groundBoxSize = new Vector2(0.95f, 0.01f);
         [SerializeField] private float wallDistance = 0.4f;
         [SerializeField] private float wallJumpDuration = 1.0f;
@@ -208,12 +210,12 @@ namespace JFM
         {
             get => ladderAcceleration;
         }
-        /*
-        public float LadderGettingUpForce
+        
+        public float LadderCenteringSpeed
         {
-            get => ladderGettingUpForce;
+            get => ladderCenteringSpeed;
         }
-        */
+        
         public float LadderPushUpForce
         {
             get => ladderPushUpForce;
@@ -388,6 +390,11 @@ namespace JFM
             return beneathObjectPosition;
         }
 
+        public GameObject GetBeneathObject()
+        {
+            return beneathObject;
+        }
+
         public void SetHighestAirborneY()
         {
             SetHighestAirborneY(false);
@@ -421,7 +428,7 @@ namespace JFM
 
         public void SetAirborneInfo()
         {
-            bool grounded = IsCastGrounded(); // && rb.velocity.y < 0.0f;
+            bool grounded = IsCastGrounded() && Platformer2DUtilities.AreNearlyEqual(rb.velocity.y, 0.0f);
             bool grippingToWall = IsGrippingToWall();
             if (grounded || grippingToWall)
             {
@@ -449,6 +456,7 @@ namespace JFM
             }
             else
             {
+                rb.velocity = new Vector2(rb.velocity.x, 0.0f);
                 rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
                 //rb.velocity += Vector2.up * jumpForce;
                 //Debug.Log($"rb.velocity={rb.velocity}");
@@ -463,7 +471,7 @@ namespace JFM
 
             if (highestY - transform.position.y > heightDamage)
             {
-                Debug.Log(" ~ ~ ~ D A M A G E ~ ~ ~");
+                Debug.Log($" ~ ~ ~ D A M A G E ~ ~ ~ highestY={highestY} transform.position.y={transform.position.y}");
 
                 return true;
             }
@@ -543,7 +551,7 @@ namespace JFM
             if (frontWall is null)
             {
                 RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(0, colliderSize.y / 2.0f), isFacingRight ? Vector2.right : -Vector2.right, wallDistance, groundLayer);
-                Debug.DrawRay(new Vector3(transform.position.x, transform.position.y) + new Vector3(0, colliderSize.y / 2.0f), (isFacingRight ? Vector2.right : -Vector2.right) * wallDistance, Color.yellow);
+                //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y) + new Vector3(0, colliderSize.y / 2.0f), (isFacingRight ? Vector2.right : -Vector2.right) * wallDistance, Color.yellow);
 
                 if (hit.collider is null)
                 {
@@ -555,14 +563,16 @@ namespace JFM
         }
 
         private void SetBeneathObjectInfo()
-        {
+        {            
             if (beneathObject is null)
             {
                 RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y) + spriteBoxProbeOffset, spriteBoxProbeSize, 0.0f, isFacingRight ? Vector2.right : -Vector2.right, 0.0f, ladderLayer);
 
                 if (hit.collider is null)
                 {
+                    //Debug.Log("SetBeneathObjectInfo() says hit is null.");
                     beneathObject = null;
+                    beneathObjectPosition = new Vector2(Mathf.Floor(transform.position.x + spriteBoxProbeOffset.x), Mathf.Floor(transform.position.y + spriteBoxProbeOffset.y));
 
                     return;
                 }
@@ -571,7 +581,7 @@ namespace JFM
                 beneathObjectPosition = new Vector2(Mathf.Floor(hit.point.x), Mathf.Floor(hit.point.y));
             }
         }
-
+        
         public bool IsInFrontOfObjectLayer(Vector2 offset, int layerMask)
         {
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + offset, isFacingRight ? Vector2.right : -Vector2.right, 0.0f, layerMask);
@@ -595,7 +605,7 @@ namespace JFM
 
         public bool WillClimbDownLadder()
         {
-            bool h2 = Raycast(false, ladderLayer, Vector2.down * groundDistance, 0.01f, Vector2.down);//, false ,true);
+            bool h2 = Raycast(false, ladderLayer, Vector2.down * ladderGroundDistance, 0.01f, Vector2.down);//, false ,true);
 
             //Debug.Log($"h2={h2}");
 
@@ -642,8 +652,10 @@ namespace JFM
             //if (FindSlopeAtPoint(out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, v, StairsDownHeight))//, true))
             if (FindSlopeAtPoint(out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (isFacingRight ? 1.0f : -1.0f) * 45.0f), stairsDownHeight))//, true))
             {
-                //Debug.Log($"ClimbingUpStairs slope={slope}");
-                return moveInput.x != 0.0f && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) <= stairsUpMaxSlope;
+                
+                bool grounded = IsCastGrounded(false);
+                //Debug.Log($"ClimbingUpStairs slope={slope} grounded={grounded}");
+                return grounded && moveInput.x != 0.0f && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) <= stairsUpMaxSlope && slope != Mathf.Infinity;
             }
             else
             {
@@ -657,11 +669,20 @@ namespace JFM
 
             bool stairsDown = FindSlopeBeneath(out float slope, Vector2.up * 0.02f + v * stairsDownGroundX, -v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, StairsDownHeight, false, (isFacingRight ? -1.0f : 1.0f) * 45.0f);
 
-            bool ret = stairsDown && Mathf.Abs(slope) > stairsDownMinSlope && Mathf.Abs(slope) < stairsDownMaxSlope && rb.velocity.y <= 0.01f && ((moveInput.x > 0.0f && slope < 0) || (moveInput.x > 0.0f && slope < 0));
-            //Debug.Log($"stairsDown={stairsDown} slope={slope} ret={ret} rb.velocity.y={rb.velocity.y} {Mathf.Abs(slope) > stairsDownMinSlope} && {Mathf.Abs(slope) < stairsDownMaxSlope} && {rb.velocity.y <= 0.01f}");
+            // Doing a second slope test to avoid getting the case where the first slope test falls on a corner (two lines intersecting). A corner automatically is interpreted as a slope.
+            bool stairsDown2 = FindSlopeBeneath(out float slope2, Vector2.up * 0.02f + v * (stairsDownGroundX + 0.04f), -v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, StairsDownHeight, false, (isFacingRight ? -1.0f : 1.0f) * 45.0f);
+            
+            // Validating the first slope test
+            if (Platformer2DUtilities.AreNearlyEqual(slope2, 0.0f) || slope2 == Mathf.Infinity)
+            {
+                slope = slope2;
+            }
+
+            bool ret = IsCastGrounded(false) && stairsDown && Mathf.Abs(slope) > stairsDownMinSlope && Mathf.Abs(slope) < stairsDownMaxSlope && rb.velocity.y <= 0.01f && ((moveInput.x > 0.0f && slope < 0) || (moveInput.x > 0.0f && slope < 0)) && slope != Mathf.Infinity;
+            //Debug.Log($"IsCastGrounded(false)={IsCastGrounded(false)} stairsDown={stairsDown} slope={slope} ret={ret} rb.velocity.y={rb.velocity.y} {Mathf.Abs(slope) > stairsDownMinSlope} && {Mathf.Abs(slope) < stairsDownMaxSlope} && {rb.velocity.y <= 0.01f} ({(moveInput.x > 0.0f && slope < 0)} || {(moveInput.x > 0.0f && slope < 0)})");
             return ret;
         }
-        
+
         //public int stairsDown = 0;
 
         public bool FindSlopeBeneath(out float slope)
@@ -817,7 +838,7 @@ namespace JFM
             return groundFound;// && rb.velocity.y < -0.001f;
             */
             //Debug.Log($"rb.velocity.y={rb.velocity.y} {rb.velocity.y <= 0.0f}");
-            bool grounded = checkGrounded(layerMask) && (rb.velocity.y <= 0.0f || overrideVelocity);
+            bool grounded = checkGrounded(groundedRadius, layerMask) && (rb.velocity.y <= 0.0f || overrideVelocity);
 
             if(grounded)
             {
@@ -830,11 +851,9 @@ namespace JFM
             return grounded;
         }
     
-        private bool checkGrounded(LayerMask layerMask)
+        private bool checkGrounded(float radius, LayerMask layerMask)
         {
             Vector2 origin = rb.position;
-
-            float radius = 0.2f;
 
             // detect downwards
             Vector2 direction;
@@ -843,21 +862,38 @@ namespace JFM
 
             float distance = groundDistance;            
 
-            RaycastHit2D hitRec = Physics2D.CircleCast(origin, radius, direction, distance, layerMask);
-            if(hitRec.collider != null)
+            RaycastHit2D[] hitRecs = Physics2D.CircleCastAll(origin, radius, direction, distance, layerMask);
+            if (hitRecs.Length > 0)
             {
-                groundY = hitRec.point.y;
+                int i = 0;
+                bool found = false;
+                for (; i < hitRecs.Length; i++)
+                {
+                    if(1 << hitRecs[i].collider.gameObject.layer == groundLayer)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found)
+                {
+                    i = 0;
+                }
+                groundY = hitRecs[i].point.y;
+                groundedLayer = hitRecs[i].collider.gameObject.layer;
+
+                return true;
             }
 
-            return hitRec.collider != null;
+            return false;
         }
 
         private float groundY;
-        public float groundedDistance;
+        //public float groundedDistance;
         public int groundedLayer;
         public Vector2 groundedNormal;
         //public bool groundedOnLadder;
-        public Vector2 groundedPoint;
+        //public Vector2 groundedPoint;
 
         public bool Raycast(bool doBoxCast, int layerMask, Vector2 offset, float distance)
         {
@@ -1031,6 +1067,8 @@ namespace JFM
             //knowledgeIndices[(int)KnowledgeID.WALL_SLIDE] = 1;        // Wall slide does not have a button, it's the D-pad!
             knowledgeIndices[(int)KnowledgeID.GROUND_SLIDE] = 2;
             //knowledgeIndices[(int)KnowledgeID.DOUBLE_JUMP] = 3;       // Double jump does not have a dedicated button, it's the jump button!
+
+            SetHighestAirborneY(true);
         }
 
         private void Start()

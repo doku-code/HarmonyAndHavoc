@@ -32,7 +32,7 @@ namespace JFM
             //Debug.Log($"{player.IsCastGrounded(false)} && {player.rb.velocity.y >= 0.0f} player.rb.velocity.y={player.rb.velocity.y}");
             if (player.IsCastGrounded(false) && player.rb.velocity.y >= 0.0f)
             {
-                player.idleState.nFrames = 3;
+                player.idleState.waitNFrames = 3;
                 player.ChangeState(player.idleState);
                 return;
             }

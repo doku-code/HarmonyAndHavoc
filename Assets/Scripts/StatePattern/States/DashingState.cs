@@ -59,15 +59,7 @@ namespace JFM
             //becameAirborne |= !grounded;
             
             float elapsedTime = Time.time - startTime;        
-            /*if ((becameAirborne || elapsedTime > animationClipLength * player.GroundDashBailOutNormalizedTime) && grounded )//&& player.rb.velocity.y < 0)// player.MoveInput.y < 0)
-            {
-                Debug.Log($"becameAirborne={becameAirborne}");
-
-                //player.idleState.nFrames = 3;
-                //player.ChangeState(player.idleState);
-                //return;
-            }*/
-
+            
             if (player.WillGripToWall())// && player.inputTriggers["Move"])
             {
                 player.ChangeState(player.wallGrippingState);

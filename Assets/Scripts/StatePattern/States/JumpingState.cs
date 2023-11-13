@@ -29,7 +29,7 @@ namespace JFM
             player.SetHighestAirborneY();
 
             //if (player.IsGrounded())
-            if (player.IsCastGrounded(false) && player.rb.velocity.y < -0.001f)
+            if (player.IsCastGrounded(false, player.GroundLayer) && player.rb.velocity.y < -0.001f)
             {
                 if (player.WillLand())
                 {
