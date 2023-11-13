@@ -5789,7 +5789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b8557818e616448a62f2df9fd3512a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: {fileID: 941742786}
+  debugFunc: {fileID: 941742786}
 --- !u!4 &941742784
 Transform:
   m_ObjectHideFlags: 0
@@ -5910,6 +5910,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0d8ab6af-cac8-4d97-8844-471288f7892f
     m_ActionName: Player/Return[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 941742783}
+        m_TargetAssemblyTypeName: charles.DebugController, Assembly-CSharp
+        m_MethodName: OnArrowUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0d2d6541-a0e0-4f6f-96ef-4be19c25aa70
+    m_ActionName: Player/ArrowUp[/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 941742783}
+        m_TargetAssemblyTypeName: charles.DebugController, Assembly-CSharp
+        m_MethodName: OnArrowDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c6364e17-bc2a-4957-ba67-8b4ad33407c8
+    m_ActionName: Player/ArrowDown[/Keyboard/downArrow]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -5924,7 +5956,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 941742782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed59fb166ecbae0448149ba04df5da49, type: 3}
+  m_Script: {fileID: 11500000, guid: 0814b739f2c9b704d91db5eea5f5c04a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &947009222
@@ -9561,14 +9593,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f503a502c2dcb754aa49fcc901173d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sMasterVolume: Master
-  sFXVolume: FX
-  sAmbientVolume: Ambient
   audioMixer: {fileID: 24100000, guid: 807142ccf2ec42845abc5fa0cbd1b10b, type: 2}
   clipPlayerSource: {fileID: 1501874232}
   clipsToPlay:
-  - {fileID: 8300000, guid: e7f47641b73306246b881375575b1218, type: 3}
-  - {fileID: 8300000, guid: 5a48882f4a5e34d469ef0c8289e7752f, type: 3}
+  - {fileID: 8300000, guid: b095fa4a64ce82b41a2687f232efda2b, type: 3}
+  - {fileID: 8300000, guid: a9762fd70ec49a74daf802d9b4f649ee, type: 3}
   npcSounds: []
 --- !u!82 &1501874232
 AudioSource:

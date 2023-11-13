@@ -130,6 +130,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ArrowUp",
+                    "type": "Button",
+                    "id": "0d2d6541-a0e0-4f6f-96ef-4be19c25aa70",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ArrowDown",
+                    "type": "Button",
+                    "id": "c6364e17-bc2a-4957-ba67-8b4ad33407c8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -555,10 +573,32 @@
                     "name": "",
                     "id": "6e6b40a8-cd60-4f14-a186-6ba95b15ac98",
                     "path": "<Keyboard>/enter",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Return",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b5dd195a-7175-456c-8e82-abf3ee5beb04",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ArrowUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d69b66de-cfad-452f-964e-c94a9a5bbe7c",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ArrowDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
