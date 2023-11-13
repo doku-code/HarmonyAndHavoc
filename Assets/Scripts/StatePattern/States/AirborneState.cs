@@ -1,3 +1,5 @@
+//#define _DEBUG
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,8 +59,9 @@ namespace JFM
                 player.ChangeState(player.landingState);
                 return;
             }
-            //Debug.Log($"1 << player.groundedLayer={1 << player.groundedLayer} wasOnLadder={wasOnLadder} ladder={ladderX}");
-
+#if _DEBUG
+            Debug.Log($"grounded={grounded} 1 << player.groundedLayer={1 << player.groundedLayer} == {(int)player.GroundLayer} wasOnLadder ={wasOnLadder} ladder={ladderX}");
+#endif
             if (grounded || foundSlopeBeneath)
             {                               
                 if (player.MoveInput.x != 0.0f)
@@ -105,8 +108,10 @@ namespace JFM
                                 //Debug.Log($"Bon! y={y}");
                             }
                         }
-                        //Debug.Log($"MoveInput.x != 0.0f!!! grounded={grounded} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
+#if _DEBUG
+                        Debug.Log($"MoveInput.x != 0.0f!!! grounded={grounded} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
                         //Debug.Break();
+#endif
                         player.ChangeState(player.walkingState);
                         return;
                     }
@@ -129,7 +134,9 @@ namespace JFM
                             )
                             )
                     {
-                        //Debug.Log($"Didn't make a case (1)... grounded={grounded} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
+#if _DEBUG
+                        Debug.Log($"Didn't make a case (1)... grounded={grounded} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
+#endif
                         player.ChangeState(player.walkingState);
                         return;
                     }
@@ -158,8 +165,9 @@ namespace JFM
                             
                         //Debug.Log($"Adjust for walking on ladders! y={y}");
                     }
-
-                    //Debug.Log($"MoveInput.x = 0 grounded={grounded} || ({Mathf.Abs(slope) > player.StairsUpMinSlope} && {foundSlopeBeneath})");
+#if _DEBUG
+                    Debug.Log($"MoveInput.x = 0 grounded={grounded} || ({Mathf.Abs(slope) > player.StairsUpMinSlope} && {foundSlopeBeneath})");
+#endif
                     // To rectify
                     // The Player actually "waits" in idle after having fallen
                     player.idleState.waitNFrames = 3;
@@ -185,10 +193,11 @@ namespace JFM
                             )
                         )
                         ) 
-                {                    
-                    //Debug.Log($"Didn't make a case (2)... grounded={grounded} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
-
-                    if(1 << player.groundedLayer == (int)player.LadderLayer)
+                {
+#if _DEBUG
+                    Debug.Log($"Didn't make a case (2)... grounded={grounded} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
+#endif
+                    if (1 << player.groundedLayer == (int)player.LadderLayer)
                     {
                         bool hit = player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down);
                         float y;
