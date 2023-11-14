@@ -44,48 +44,48 @@ namespace charles
 
         private void CallTheCheatHere()
         {
-            HELP = new DebugCommand("Help", "Show the list of available commands", "Help", () =>
+            HELP = new DebugCommand("help", "Show the list of available commands", "help", () =>
             {
                 showHelp = true;
             });
-            GOLD = new DebugCommand<int>("Gold", "Add gold", "Gold", (x) =>
+            GOLD = new DebugCommand<int>("gold", "Add gold", "gold", (x) =>
             {
                 playerData.Gold = x;
             });
-            TIMESCALE = new DebugCommand<float>("Timescale", "Reduce game time to debug", "timescale", (x) =>
+            TIMESCALE = new DebugCommand<float>("timescale", "Reduce game time to debug", "timescale", (x) =>
             {
                 debugFunc.ModifyTimeScale(x);
             });
 
-            KNOWLEDGESLOT = new DebugCommand<int>("KnowledgeSlot", "Add knowledge slot", "KnowledgeSlot", (x) =>
+            KNOWLEDGESLOT = new DebugCommand<int>("knowledgeslot", "Add knowledge slot", "knowledgeslot", (x) =>
             {
                 playerData.KnowledgeSlots = x;
             });
-            ACTUALORDER = new DebugCommand<int>("ActualOrder", "Add your Actual Order", "ActualOrder", (x) =>
+            ACTUALORDER = new DebugCommand<int>("actualorder", "Add your Actual Order", "actualorder", (x) =>
             {
                 playerData.ActualOrder = x;
             });
-            ACTUALCHAOS = new DebugCommand<int>("ActualChaos", "Add your Actual Chaos", "ActualChaos", (x) =>
+            ACTUALCHAOS = new DebugCommand<int>("actualchaos", "Add your Actual Chaos", "actualchaos", (x) =>
             {
                 playerData.ActualChaos = x;
             });
-            MAXORDER = new DebugCommand<int>("MaxOrder", "Add max Order", "MaxOrder", (x) =>
+            MAXORDER = new DebugCommand<int>("maxorder", "Add max Order", "maxorder", (x) =>
             {
                 playerData.MaxOrder = x;
             });
-            MAXCHAOS = new DebugCommand<int>("MaxChaos", "Add max Chaos", "MaxChaos", (x) =>
+            MAXCHAOS = new DebugCommand<int>("maxchaos", "Add max Chaos", "maxchaos", (x) =>
             {
                 playerData.MaxChaos = x;
             });
-            ORDERFRAGMENTS = new DebugCommand<int>("OrderFragments", "Add order Fragments", "OrderFragments", (x) =>
+            ORDERFRAGMENTS = new DebugCommand<int>("orderFragments", "Add order Fragments", "orderFragments", (x) =>
             {
                 playerData.OrderFragments = x;
             });
-            WEAPONUPGRADE = new DebugCommand<int>("WeaponUpgrade", "Upgrade weapon FREE OF CHARGE", "WeaponUpgrade", (x) =>
+            WEAPONUPGRADE = new DebugCommand<int>("weaponupgrade", "Upgrade weapon FREE OF CHARGE", "weaponupgrade", (x) =>
             {
                 playerData.WeaponUpgdrade = x;
             });
-            ARMORUPGRADE = new DebugCommand<int>("ArmorUpgrade", "Upgrade Armor FREE OF CHARGE", "ArmorUpgrade", (x) =>
+            ARMORUPGRADE = new DebugCommand<int>("armorUpgrade", "Upgrade Armor FREE OF CHARGE", "armorUpgrade", (x) =>
             {
                 playerData.WeaponUpgdrade = x;
             });
@@ -102,7 +102,7 @@ namespace charles
                 GOLD,
                 ORDERFRAGMENTS,
                 WEAPONUPGRADE,
-                ARMORUPGRADE
+                ARMORUPGRADE,
             };
 
             commandHistory = new List<string>();
@@ -197,7 +197,7 @@ namespace charles
 
                     string label = $"{command.commandFormat} - {command.commandDescription}";
 
-                    Rect labelRect = new Rect(5f, screenHeight * 0.1f * i, viewport.width - 100f, screenHeight * 0.1f);
+                    Rect labelRect = new Rect(5f, screenHeight * 0.05f * i, viewport.width - 100f, screenHeight * 0.1f);
 
                     GUI.Label(labelRect, label);
                 }
@@ -208,7 +208,7 @@ namespace charles
 
             GUI.Box(new Rect(0, y, screenWidth, screenHeight * 0.05f), "");
             GUI.backgroundColor = new Color(0, 0, 0, 0);
-            input = GUI.TextField(new Rect(10f, y + screenHeight * 0.025f, screenWidth - 20f, screenHeight * 0.04f), input);
+            input = GUI.TextField(new Rect(10f, y + screenHeight * 0.010f, screenWidth - 20f, screenHeight * 0.04f), input);
         }
 
         private void HandleInput()
@@ -242,7 +242,6 @@ namespace charles
                 }
             }
 
-            // Add the command to history
             commandHistory.Add(input);
             historyIndex = commandHistory.Count;
         }
