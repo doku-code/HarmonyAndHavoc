@@ -10,16 +10,12 @@ namespace charles
         [SerializeField] string trapAnimStringName;
         [SerializeField] private PlayerData playerData;
 
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            playerData.TakeDamage(amountofDamage);
-        }
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 SetBoolForAllAnimators(true);
+                playerData.TakeDamage(amountofDamage);
             }
         }
 
