@@ -1,0 +1,556 @@
+fileFormatVersion: 2
+guid: c5c64e026cd1f4303a799df482d0f9cc
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: Smoke_19-1_Frame_0
+    originalName: 
+    pivot: {x: 0.5227273, y: -0.24000001}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 448
+      width: 22
+      height: 25
+    spriteID: 9d76c900c793d2647a9a3e6d2ffde088
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 448}
+  - name: Smoke_19-1_Frame_1
+    originalName: 
+    pivot: {x: 0.47777775, y: -0.51724136}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 411
+      width: 45
+      height: 29
+    spriteID: 1ba5dca5cf66c414cb103a6382a8cd23
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 411}
+  - name: Smoke_19-1_Frame_2
+    originalName: 
+    pivot: {x: 0.5188679, y: -1.0689656}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 374
+      width: 53
+      height: 29
+    spriteID: 059980dddee649c48a1db30c1b556ba1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 374}
+  - name: Smoke_19-1_Frame_3
+    originalName: 
+    pivot: {x: 0.46875, y: -0.3148148}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 312
+      width: 48
+      height: 54
+    spriteID: bf5ee34b5f5b4e94aa0643bb1639327a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 312}
+  - name: Smoke_19-1_Frame_4
+    originalName: 
+    pivot: {x: 0.5163935, y: -0.40677965}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 194
+      width: 61
+      height: 59
+    spriteID: 3df60ea7e7c17bc4e8f95c68c5891bbb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 194}
+  - name: Smoke_19-1_Frame_5
+    originalName: 
+    pivot: {x: 0.5234375, y: -0.47457623}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 80
+      y: 320
+      width: 64
+      height: 59
+    spriteID: b558e3409df6d1242bfefce87a2e6053
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 80, y: 320}
+  - name: Smoke_19-1_Frame_6
+    originalName: 
+    pivot: {x: 0.5227273, y: -0.5438596}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 80
+      y: 387
+      width: 66
+      height: 57
+    spriteID: 89b19223aba613c4f9673e13209ddd1d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 80, y: 387}
+  - name: Smoke_19-1_Frame_7
+    originalName: 
+    pivot: {x: 0.51492536, y: -0.5689655}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 80
+      y: 254
+      width: 67
+      height: 58
+    spriteID: 7e1a0e752396f1e4495b407aa33766b9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 80, y: 254}
+  - name: Smoke_19-1_Frame_8
+    originalName: 
+    pivot: {x: 0.52205884, y: -0.057471264}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 68
+      height: 87
+    spriteID: 7f8f67410f165eb4b9bbf648f82518f1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: Smoke_19-1_Frame_9
+    originalName: 
+    pivot: {x: 0.52205884, y: -0.080459766}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 99
+      width: 68
+      height: 87
+    spriteID: b5147ef55069d3544b8b25da7cf45b11
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 99}
+  - name: Smoke_19-1_Frame_10
+    originalName: 
+    pivot: {x: 0.51449275, y: -0.14457831}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 80
+      y: 4
+      width: 69
+      height: 83
+    spriteID: 04a604ce40be9cb48b651715e1799bee
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 80, y: 4}
+  - name: Smoke_19-1_Frame_11
+    originalName: 
+    pivot: {x: 0.51449275, y: -0.21518986}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 80
+      y: 95
+      width: 69
+      height: 79
+    spriteID: 78500be4347227b4aa0e356df82d2ef6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 80, y: 95}
+  - name: Smoke_19-1_Frame_12
+    originalName: 
+    pivot: {x: 0.51449275, y: -0.49999997}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 80
+      y: 182
+      width: 69
+      height: 64
+    spriteID: 6b8be25c040a2264c882ecc79e241015
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 80, y: 182}
+  - name: Smoke_19-1_Frame_13
+    originalName: 
+    pivot: {x: 0.51449275, y: -0.79629624}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 80
+      y: 452
+      width: 69
+      height: 54
+    spriteID: 501459d1ee0e9ec4b8e469cccababc87
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 80, y: 452}
+  - name: Smoke_19-1_Frame_14
+    originalName: 
+    pivot: {x: 0.5227273, y: -1.1395347}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 261
+      width: 66
+      height: 43
+    spriteID: 8caeba349ca198f439cf20b857783436
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 261}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 192461716
+    name: Smoke_19-1
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Smoke_19-1_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 24
+        y: 6
+        width: 22
+        height: 25
+      spriteId: 9d76c900c793d2647a9a3e6d2ffde088
+    - name: Smoke_19-1_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 14
+        y: 15
+        width: 45
+        height: 29
+      spriteId: 1ba5dca5cf66c414cb103a6382a8cd23
+    - name: Smoke_19-1_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 8
+        y: 31
+        width: 53
+        height: 29
+      spriteId: 059980dddee649c48a1db30c1b556ba1
+    - name: Smoke_19-1_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 13
+        y: 17
+        width: 48
+        height: 54
+      spriteId: bf5ee34b5f5b4e94aa0643bb1639327a
+    - name: Smoke_19-1_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 4
+        y: 24
+        width: 61
+        height: 59
+      spriteId: 3df60ea7e7c17bc4e8f95c68c5891bbb
+    - name: Smoke_19-1_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 2
+        y: 28
+        width: 64
+        height: 59
+      spriteId: b558e3409df6d1242bfefce87a2e6053
+    - name: Smoke_19-1_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 1
+        y: 31
+        width: 66
+        height: 57
+      spriteId: 89b19223aba613c4f9673e13209ddd1d
+    - name: Smoke_19-1_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 1
+        y: 33
+        width: 67
+        height: 58
+      spriteId: 7e1a0e752396f1e4495b407aa33766b9
+    - name: Smoke_19-1_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 0
+        y: 5
+        width: 68
+        height: 87
+      spriteId: 7f8f67410f165eb4b9bbf648f82518f1
+    - name: Smoke_19-1_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 0
+        y: 7
+        width: 68
+        height: 87
+      spriteId: b5147ef55069d3544b8b25da7cf45b11
+    - name: Smoke_19-1_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 0
+        y: 12
+        width: 69
+        height: 83
+      spriteId: 04a604ce40be9cb48b651715e1799bee
+    - name: Smoke_19-1_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 0
+        y: 17
+        width: 69
+        height: 79
+      spriteId: 78500be4347227b4aa0e356df82d2ef6
+    - name: Smoke_19-1_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 0
+        y: 32
+        width: 69
+        height: 64
+      spriteId: 6b8be25c040a2264c882ecc79e241015
+    - name: Smoke_19-1_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 0
+        y: 43
+        width: 69
+        height: 54
+      spriteId: 501459d1ee0e9ec4b8e469cccababc87
+    - name: Smoke_19-1_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 1
+        y: 49
+        width: 66
+        height: 43
+      spriteId: 8caeba349ca198f439cf20b857783436
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 71, y: 97}

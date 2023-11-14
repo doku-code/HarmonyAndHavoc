@@ -1,3 +1,5 @@
+using AF;
+using JFM;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,9 +19,19 @@ namespace charles
         [Header("CommandName")]
         public static DebugCommand HELP;
         public static DebugCommand<float> TIMESCALE;
+        public static DebugCommand<int> KNOWLEDGESLOT;
+        public static DebugCommand<int> ACTUALORDER;
+        public static DebugCommand<int> ACTUALCHAOS;
+        public static DebugCommand<int> MAXORDER;
+        public static DebugCommand<int> MAXCHAOS;
+        public static DebugCommand<int> GOLD;
+        public static DebugCommand<int> ORDERFRAGMENTS;
+        public static DebugCommand<int> WEAPONUPGRADE;
+        public static DebugCommand<int> ARMORUPGRADE;
 
         [Header("Script Reference")]
         public DebugFunction debugFunc;
+        public PlayerData playerData;
 
         [Header("Command List")]
         public List<object> commandList;
@@ -32,20 +44,65 @@ namespace charles
 
         private void CallTheCheatHere()
         {
-            TIMESCALE = new DebugCommand<float>("timescale", "Reduce game time to debug", "timescale", (x) =>
+            HELP = new DebugCommand("Help", "Show the list of available commands", "Help", () =>
+            {
+                showHelp = true;
+            });
+            GOLD = new DebugCommand<int>("Gold", "Add gold", "Gold", (x) =>
+            {
+                playerData.Gold = x;
+            });
+            TIMESCALE = new DebugCommand<float>("Timescale", "Reduce game time to debug", "timescale", (x) =>
             {
                 debugFunc.ModifyTimeScale(x);
             });
 
-            HELP = new DebugCommand("help", "Show the list of available commands", "help", () =>
+            KNOWLEDGESLOT = new DebugCommand<int>("KnowledgeSlot", "Add knowledge slot", "KnowledgeSlot", (x) =>
             {
-                showHelp = true;
+                playerData.KnowledgeSlots = x;
+            });
+            ACTUALORDER = new DebugCommand<int>("ActualOrder", "Add your Actual Order", "ActualOrder", (x) =>
+            {
+                playerData.ActualOrder = x;
+            });
+            ACTUALCHAOS = new DebugCommand<int>("ActualChaos", "Add your Actual Chaos", "ActualChaos", (x) =>
+            {
+                playerData.ActualChaos = x;
+            });
+            MAXORDER = new DebugCommand<int>("MaxOrder", "Add max Order", "MaxOrder", (x) =>
+            {
+                playerData.MaxOrder = x;
+            });
+            MAXCHAOS = new DebugCommand<int>("MaxChaos", "Add max Chaos", "MaxChaos", (x) =>
+            {
+                playerData.MaxChaos = x;
+            });
+            ORDERFRAGMENTS = new DebugCommand<int>("OrderFragments", "Add order Fragments", "OrderFragments", (x) =>
+            {
+                playerData.OrderFragments = x;
+            });
+            WEAPONUPGRADE = new DebugCommand<int>("WeaponUpgrade", "Upgrade weapon FREE OF CHARGE", "WeaponUpgrade", (x) =>
+            {
+                playerData.WeaponUpgdrade = x;
+            });
+            ARMORUPGRADE = new DebugCommand<int>("ArmorUpgrade", "Upgrade Armor FREE OF CHARGE", "ArmorUpgrade", (x) =>
+            {
+                playerData.WeaponUpgdrade = x;
             });
 
             commandList = new List<object>
             {
                 HELP,
-                TIMESCALE
+                TIMESCALE,
+                KNOWLEDGESLOT,
+                ACTUALORDER,
+                ACTUALCHAOS,
+                MAXORDER,
+                MAXCHAOS,
+                GOLD,
+                ORDERFRAGMENTS,
+                WEAPONUPGRADE,
+                ARMORUPGRADE
             };
 
             commandHistory = new List<string>();
@@ -65,7 +122,6 @@ namespace charles
                 input = "";
             }
         }
-
         public void OnTextInput(InputAction.CallbackContext value)
         {
             if (showConsole)
