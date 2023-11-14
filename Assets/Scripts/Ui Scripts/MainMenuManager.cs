@@ -1,10 +1,8 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace AF
@@ -71,7 +69,7 @@ namespace AF
             displayPanel.SetActive(false);
             EventSystem.current.SetSelectedGameObject(mainMenuFirstObj);
         }
-        #region settingFunc
+
         public void OpenSettingsMenu()
         {
             mainPanel.SetActive(false);
@@ -81,16 +79,6 @@ namespace AF
             EventSystem.current.SetSelectedGameObject(settingFirstObj);
         }
 
-        public void CloseSettingsMenu()
-        {
-            mainPanel.SetActive(true);
-            settingsPanel.SetActive(false);
-            soundPanel.SetActive(false);
-            SoundManager.Instance.PlayAClip(0);
-            EventSystem.current.SetSelectedGameObject(mainMenuFirstObj);
-        }
-        #endregion
-        #region soundFunc
         public void OpenSoundMenu()
         {
             mainPanel.SetActive(false);
@@ -99,16 +87,7 @@ namespace AF
             SoundManager.Instance.PlayAClip(1);
             EventSystem.current.SetSelectedGameObject(soundSettingsFirstObj);
         }
-        public void CloseSoundMenu()
-        {
-            mainPanel.SetActive(false);
-            settingsPanel.SetActive(true);
-            soundPanel.SetActive(false);
-            SoundManager.Instance.PlayAClip(0);
-            EventSystem.current.SetSelectedGameObject(settingFirstObj);
-        }
-        #endregion
-        #region creditfunc
+
         public void OpenCreditMenu()
         {
             mainPanel.SetActive(false);
@@ -116,15 +95,7 @@ namespace AF
             SoundManager.Instance.PlayAClip(1);
             EventSystem.current.SetSelectedGameObject(creditFirstObj);
         }
-        public void CloseCreditMenu()
-        {
-            mainPanel.SetActive(true);
-            creditPanel.SetActive(false);
-            SoundManager.Instance.PlayAClip(0);
-            EventSystem.current.SetSelectedGameObject(mainMenuFirstObj);
-        }
-        #endregion
-        #region displayFunc
+
         public void OpenDisplayPanel()
         {
             settingsPanel.SetActive(false);
@@ -132,15 +103,7 @@ namespace AF
             SoundManager.Instance.PlayAClip(1);
             EventSystem.current.SetSelectedGameObject(displayFirstObj);
         }
-        public void CloseDisplayPanel()
-        {
-            settingsPanel.SetActive(true);
-            displayPanel.SetActive(false);
-            SoundManager.Instance.PlayAClip(0);
-            EventSystem.current.SetSelectedGameObject(settingFirstObj);
-        }
-        #endregion
-        #region controlFunc 
+
         public void OpenControlSetting()
         {
             settingsPanel.SetActive(false);
@@ -148,15 +111,7 @@ namespace AF
             SoundManager.Instance.PlayAClip(1);
             EventSystem.current.SetSelectedGameObject(controlFirstObj);
         }
-        public void CloseControlSetting()
-        {
-            settingsPanel.SetActive(true);
-            controlPanel.SetActive(false);
-            SoundManager.Instance.PlayAClip(0);
-            EventSystem.current.SetSelectedGameObject(settingFirstObj);
-        }
-        #endregion
-        #region displaySetting
+        
         public void ChangeWindowMode()
         {
             SoundManager.Instance.PlayAClip(0);
@@ -213,8 +168,7 @@ namespace AF
                     break;
             }
         }
-        #endregion
-        #region soundVolumeFunc
+        
         public void SetAmbientVolume()
         {
             SoundManager.Instance.SetAmbientVolume(ambientSlider.value);
@@ -229,14 +183,13 @@ namespace AF
         {
             SoundManager.Instance.SetMasterVolume(masterSlider.value);
         }
-        #endregion
 
         public void MakeNewGame()
         {
             //a reajuster une fois le systeme de sauvegarde fait
             //une fois la sauvegarde fais  changer le bouton new game en continue 
             // et rajouter un bouton new game avec (are you sure) 
-            StartCoroutine(LoadYourAsyncScene("Village"));
+            GameManager.Instance.LoadNextMap("Village", SpawnerPosition.BEGIN);
         }
 
         public void ExitGame()
@@ -246,21 +199,6 @@ namespace AF
 #else
         Application.Quit();
 #endif
-        }
-
-        IEnumerator LoadYourAsyncScene(string sceneName)
-        {
-            AsyncOperation aSyncLoad = SceneManager.LoadSceneAsync(sceneName);
-            aSyncLoad.allowSceneActivation = false;
-
-            while (!aSyncLoad.isDone)
-            {
-                if (aSyncLoad.progress >= 0.90f)
-                {
-                    aSyncLoad.allowSceneActivation = true;
-                }
-                yield return null;
-            }
         }
     }
 }
