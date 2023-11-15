@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //Charles
@@ -20,7 +18,6 @@ public class NPCPathFinding : ActionNode
 
     protected override void OnStart()
     {
-
         npc = GameObject.Find(gameobjNpcName);
         npcSpriteRenderer = npc.GetComponent<SpriteRenderer>();
         npcAnimator = npc.GetComponent<Animator>();
@@ -37,20 +34,20 @@ public class NPCPathFinding : ActionNode
 
     protected override State OnUpdate()
     {
+
+        Vector3 targetPOS = POSPatrolRoute[currentPOS].transform.position;
+        Vector3 moveDirection = (targetPOS - npc.transform.position).normalized;
+
         if (POSPatrolRoute.Length == 0)
         {
             Debug.LogWarning("You forgot to add the waypoint in the Behavior Tree");
             return State.FAILURE;
         }
 
-        Vector3 targetPOS = POSPatrolRoute[currentPOS].transform.position;
-        Vector3 moveDirection = (targetPOS - npc.transform.position).normalized;
-
         RaycastHit2D hit = Physics2D.CircleCast(npc.transform.position, sphereCastRadius, moveDirection, Mathf.Infinity, playerLayer);
 
         if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            
             npcRigidBody.velocity = Vector3.zero;
             return State.SUCCESS;
         }
@@ -58,7 +55,17 @@ public class NPCPathFinding : ActionNode
         {
             npcRigidBody.velocity = moveDirection * moveSpeed * Time.fixedDeltaTime;
 
-            if (Vector3.Distance(npc.transform.position, targetPOS) < 1f)
+
+            if (moveDirection.x > 0)
+            {
+                npcSpriteRenderer.flipX = false;
+            }
+            else if (moveDirection.x < 0)
+            {
+                npcSpriteRenderer.flipX = true;
+            }
+
+            if (Vector2.Distance(npc.transform.position, targetPOS) < 1f)
             {
                 currentPOS++;
                 if (currentPOS >= POSPatrolRoute.Length)
@@ -67,16 +74,6 @@ public class NPCPathFinding : ActionNode
                     return State.SUCCESS;
                 }
             }
-
-            if (moveDirection.x < 0)
-            {
-                npcSpriteRenderer.flipX = true;
-            }
-            else if (moveDirection.x > 0)
-            {
-                npcSpriteRenderer.flipX = false;
-            }
-
             return State.RUNNING;
         }
     }

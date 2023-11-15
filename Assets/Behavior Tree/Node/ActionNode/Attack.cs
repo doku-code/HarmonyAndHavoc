@@ -25,24 +25,11 @@ public class Attack : ActionNode
         npcRigidBody = npc.GetComponent<Rigidbody2D>();
         npcSpriteRenderer = npc.GetComponent<SpriteRenderer>();
     }
-
-    protected override void OnStop()
-    {
-    }
-
+    protected override void OnStop(){}
     protected override State OnUpdate()
     {
-        Debug.Log(hasAttacked);
         float distanceToPlayer = Vector3.Distance(npc.transform.position, player.transform.position);
 
-        if (player.transform.position.x > npc.transform.position.x)
-        {
-            npcSpriteRenderer.flipX = false;
-        }
-        else
-        {
-            npcSpriteRenderer.flipX = true;
-        }
         if (distanceToPlayer <= attackDistance && !hasAttacked)
         {
             if (!isCooldown)
@@ -61,7 +48,7 @@ public class Attack : ActionNode
         else
         {
             if (hasAttacked && npcAnimator.GetCurrentAnimatorStateInfo(0).length <= Time.time - lastAttackTime)
-            {              
+            {
                 npcAnimator.ResetTrigger(attackAnimString);
                 npcAnimator.SetBool("IsIdle", true);
                 hasAttacked = false;
