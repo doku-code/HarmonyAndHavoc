@@ -9397,7 +9397,8 @@ MonoBehaviour:
   clipsToPlay:
   - {fileID: 8300000, guid: b095fa4a64ce82b41a2687f232efda2b, type: 3}
   - {fileID: 8300000, guid: a9762fd70ec49a74daf802d9b4f649ee, type: 3}
-  npcSounds: []
+  npcSounds:
+  - {fileID: 8300000, guid: 705ca3339003b334f8115863cd198fbe, type: 3}
 --- !u!82 &1501874232
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12398,7 +12399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2353770b80024084e88118509f46e44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1219532753481392680, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
 --- !u!4 &2020336054
 Transform:
   m_ObjectHideFlags: 0

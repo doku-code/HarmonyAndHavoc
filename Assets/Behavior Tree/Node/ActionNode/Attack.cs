@@ -1,3 +1,4 @@
+using AF;
 using UnityEngine;
 //Charles
 public class Attack : ActionNode
@@ -7,6 +8,7 @@ public class Attack : ActionNode
     public string attackAnimString;
     public LayerMask playerLayer;
     public string gameobjNpcName;
+    public int comboSoundIdx;
 
     private Animator npcAnimator;
     private bool isCooldown = false;
@@ -38,6 +40,7 @@ public class Attack : ActionNode
                 isCooldown = true;
                 lastAttackTime = Time.time;
                 hasAttacked = true;
+                SoundManager.Instance.PlayNpcSounds(comboSoundIdx);
                 return State.RUNNING;
             }
         }
@@ -52,7 +55,7 @@ public class Attack : ActionNode
                 npcAnimator.ResetTrigger(attackAnimString);
                 npcAnimator.SetBool("IsIdle", true);
                 hasAttacked = false;
-                
+
                 return State.SUCCESS;
             }
             return State.RUNNING;

@@ -71,11 +71,15 @@ public class FollowPlayer : ActionNode
 
             return State.RUNNING;
         }
-        //if(npcAnimator.GetBool("Combo1") == true || npcAnimator.GetBool("Combo2") == true || npcAnimator.GetBool("Combo3") == true)
-        //{
-        //    npcRigidBody.velocity = Vector2.zero;
-        //    return State.RUNNING;
-        //}
+        if (npcAnimator.GetCurrentAnimatorStateInfo(0).IsName("Combo1")||
+            npcAnimator.GetCurrentAnimatorStateInfo(0).IsName("Combo2")||
+            npcAnimator.GetCurrentAnimatorStateInfo(0).IsName("Combo3"))
+        {
+            npcRigidBody.velocity = Vector2.zero;
+            npcAnimator.SetBool(runAnimString, false);
+
+            return State.RUNNING;
+        }
         if (distanceToTarget > stoppingDistance)
         {
             npcRigidBody.velocity = followDirection * followSpeed * Time.fixedDeltaTime;

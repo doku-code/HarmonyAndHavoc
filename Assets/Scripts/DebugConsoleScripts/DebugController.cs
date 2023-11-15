@@ -28,6 +28,7 @@ namespace charles
         public static DebugCommand<int> ORDERFRAGMENTS;
         public static DebugCommand<int> WEAPONUPGRADE;
         public static DebugCommand<int> ARMORUPGRADE;
+        public static DebugCommand<int> CHANGESCENE;
 
         [Header("Script Reference")]
         public DebugFunction debugFunc;
@@ -77,7 +78,7 @@ namespace charles
             {
                 playerData.MaxChaos = x;
             });
-            ORDERFRAGMENTS = new DebugCommand<int>("orderFragments", "Add order Fragments", "orderFragments", (x) =>
+            ORDERFRAGMENTS = new DebugCommand<int>("orderfragments", "Add order Fragments", "orderfragments", (x) =>
             {
                 playerData.OrderFragments = x;
             });
@@ -85,9 +86,13 @@ namespace charles
             {
                 playerData.WeaponUpgdrade = x;
             });
-            ARMORUPGRADE = new DebugCommand<int>("armorUpgrade", "Upgrade Armor FREE OF CHARGE", "armorUpgrade", (x) =>
+            ARMORUPGRADE = new DebugCommand<int>("armorupgrade", "Upgrade Armor FREE OF CHARGE", "armorupgrade", (x) =>
             {
                 playerData.WeaponUpgdrade = x;
+            });
+            CHANGESCENE = new DebugCommand<int>("changescene", "Change Scene in build", "changescene", (x) =>
+            {
+                debugFunc.ChangeScene(x);
             });
 
             commandList = new List<object>
@@ -103,6 +108,7 @@ namespace charles
                 ORDERFRAGMENTS,
                 WEAPONUPGRADE,
                 ARMORUPGRADE,
+                CHANGESCENE
             };
 
             commandHistory = new List<string>();

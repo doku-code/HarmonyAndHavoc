@@ -23,8 +23,8 @@ namespace charles
             int actualOrder = playerData.ActualOrder;
             int armorUpgrade = playerData.ArmorUpgrade;
 
-            int damageTaken = Mathf.Max(0, damage - (defense + armorUpgrade));
-            currentHealth -= damageTaken;
+           int damageTaken = Mathf.Max(0, damage - (defense + armorUpgrade));
+           currentHealth -= damageTaken;
 
             if (currentHealth <= 0)
             {

@@ -71,6 +71,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Heavy_Armor
+  comboSoundIdx: 0
 --- !u!114 &-7908638253277502157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +126,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1bd64595967f3ad43a7b40b4eb012d1f
-  position: {x: 144.37502, y: 149.90001}
+  position: {x: 144.50006, y: 150.00003}
   Description: 
   children:
   - {fileID: 2938262784184732301}
@@ -217,6 +218,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Heavy_Armor
+  comboSoundIdx: 0
 --- !u!114 &2551691312391995533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +250,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
+  distanceOffset: 1
+  stoppingDistance: 0.1
 --- !u!114 &2938262784184732301
 MonoBehaviour:
   m_ObjectHideFlags: 0
