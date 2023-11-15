@@ -1,19 +1,94 @@
+using System;
 using UnityEngine;
 
 public class FollowPlayer : ActionNode
 {
+    public string runAnimString;
+    public LayerMask playerLayer;
+    public string gameobjNpcName;
+    public float followDistanceX = 0.2f;
+    public float followDistanceY = 0.2f;
+    public float maxDistance = 10f;
+    public float followSpeedX = 250f;
+    public float followSpeedY = 250f;
+    public bool followOnY = false;
+    public LayerMask obstacleLayer;
+    public float distanceOffset = 1f;
+    public float stoppingDistance = 0.1f;
+
+    private Animator npcAnimator;
+    private GameObject npc;
+    private GameObject player;
+    private Rigidbody2D npcRigidBody;
+    private SpriteRenderer npcSpriteRenderer;
+
     protected override void OnStart()
     {
-        throw new System.NotImplementedException();
+        player = GameObject.Find("Player");
+        npc = GameObject.Find(gameobjNpcName);
+        npcAnimator = npc.GetComponent<Animator>();
+        npcRigidBody = npc.GetComponent<Rigidbody2D>();
+        npcSpriteRenderer = npc.GetComponent<SpriteRenderer>();
     }
 
-    protected override void OnStop()
-    {
-        throw new System.NotImplementedException();
-    }
+    protected override void OnStop() { }
 
     protected override State OnUpdate()
     {
-        throw new System.NotImplementedException();
+        float distanceX = player.transform.position.x - npc.transform.position.x;
+        float distanceY = player.transform.position.y - npc.transform.position.y;
+
+        Vector2 vecDirection = Vector2.right;
+
+        if (player.transform.position.x > npc.transform.position.x)
+        {
+            npcSpriteRenderer.flipX = false;
+        }
+        else
+        {
+            npcSpriteRenderer.flipX = true;
+            vecDirection = -vecDirection;
+        }
+
+        if (distanceX > maxDistance || distanceX < -maxDistance)
+        {
+            return State.FAILURE;
+        }
+
+        float followSpeed = followOnY ? followSpeedY : followSpeedX;
+        float followDistance = followOnY ? followDistanceY : followDistanceX;
+        float targetX = player.transform.position.x - (vecDirection.x * (followDistance + distanceOffset));
+        float targetY = followOnY ? player.transform.position.y - (vecDirection.y * (followDistance + distanceOffset)) : npc.transform.position.y;
+        float distanceToTarget = Vector2.Distance(npc.transform.position, new Vector2(targetX, targetY));
+
+        Vector2 followDirection = new Vector2(targetX - npc.transform.position.x, targetY - npc.transform.position.y).normalized;
+        RaycastHit2D hit = Physics2D.Raycast(npcRigidBody.position + vecDirection * 1f, Vector2.down, 1f, obstacleLayer);
+
+        if (hit.collider == null && !followOnY)
+        {
+            npcRigidBody.velocity = Vector2.zero;
+            npcRigidBody.totalForce = Vector2.zero;
+
+            return State.RUNNING;
+        }
+        //if(npcAnimator.GetBool("Combo1") == true || npcAnimator.GetBool("Combo2") == true || npcAnimator.GetBool("Combo3") == true)
+        //{
+        //    npcRigidBody.velocity = Vector2.zero;
+        //    return State.RUNNING;
+        //}
+        if (distanceToTarget > stoppingDistance)
+        {
+            npcRigidBody.velocity = followDirection * followSpeed * Time.fixedDeltaTime;
+            npcAnimator.SetBool(runAnimString, true);
+
+            return State.RUNNING;
+        }
+        else
+        {
+            npcRigidBody.velocity = Vector2.zero;
+            npcAnimator.SetBool(runAnimString, false);
+
+            return State.SUCCESS;
+        }
     }
 }

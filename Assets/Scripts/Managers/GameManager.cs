@@ -12,8 +12,8 @@ namespace AF
     }
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private GameObject player;
-        private MapManager currentMapManager; 
+        private MapManager currentMapManager;
+        private GameObject player;
         [NonSerialized] public string actualMap;
         
         public static GameManager Instance { get; private set; }
@@ -38,6 +38,8 @@ namespace AF
 
         public void PlacePlayer(SpawnerPosition spawnPosition)
         {
+            player = GameObject.FindWithTag("Player");
+            
             switch (spawnPosition)
             {
                 case SpawnerPosition.BEGIN:

@@ -8,7 +8,9 @@ namespace AF
     {
         [SerializeField] public string previousMap;
         [SerializeField] public string nextMap;
-        [SerializeField] public Spawner spawnerBegin;
-        [SerializeField] public Spawner spawnerEnd;
+        [SerializeField] public Spawner despawnerBegin;
+        [SerializeField] public Spawner despawnerEnd;
+        [SerializeField] public GameObject spawnerBegin;
+        [SerializeField] public GameObject spawnerEnd;
     }
 }

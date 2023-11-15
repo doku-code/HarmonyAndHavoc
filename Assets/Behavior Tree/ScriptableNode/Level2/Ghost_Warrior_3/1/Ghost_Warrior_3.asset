@@ -1,0 +1,294 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8838423184905334828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e22483f73a7cb48a1a8f0d2f066df6, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 046fb11eabf682b4caacc2694c8e172c
+  position: {x: 241.55006, y: 111.35003}
+  Description: 
+  children:
+  - {fileID: 756034219687333489}
+--- !u!114 &-5885474663594423440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8b7c5f167cd2f4094eba272b83a09a, type: 3}
+  m_Name: NPCPathFinding
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 8931f5fa8a069704ea5e36d56e6e71c2
+  position: {x: -256, y: 405.00003}
+  Description: 
+  POSPatrolRoute:
+  - {fileID: 8622601081635270880, guid: c6670de20322c3b4ba67dc7ba22a2fbb, type: 3}
+  - {fileID: 8264815446323031844, guid: 4dae0bf80a39ab7478279544932805ed, type: 3}
+  - {fileID: 4600304339012879006, guid: a3045a7d51589c343b88cdfa2e1fc580, type: 3}
+  - {fileID: 8264815446323031844, guid: 4dae0bf80a39ab7478279544932805ed, type: 3}
+  - {fileID: 8622601081635270880, guid: c6670de20322c3b4ba67dc7ba22a2fbb, type: 3}
+  PatrolAnimString: Run
+  gameobjNpcName: Ghost_Warrior_3
+  moveSpeed: 140
+  sphereCastRadius: 2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &-3548162509286098302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640ac424bf086f846bc71dfb4524525e, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: b46bdc3aa3d6bb94099a378eb496ac61
+  position: {x: 304.74997, y: 405.12503}
+  Description: 
+  duration: 2
+--- !u!114 &-1765838445699744006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59494be34770fd4b8486babe3b65c8d, type: 3}
+  m_Name: FollowPlayer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: d43201063be13de4cbfb137cbdf65001
+  position: {x: -121, y: 405.00006}
+  Description: 
+  runAnimString: Run
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Ghost_Warrior_3
+  followDistanceX: 0.2
+  followDistanceY: 0.4
+  maxDistance: 5
+  followSpeedX: 140
+  followSpeedY: 140
+  followOnY: 1
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  distanceOffset: 1
+  stoppingDistance: 0.2
+--- !u!114 &-420378061356527023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc873a854b000144b392c20ae33d57b, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: e677ed38e0ac2964ea067735d1366a82
+  position: {x: 28.875086, y: -170.6035}
+  Description: 
+  child: {fileID: 2905690423338725693}
+--- !u!114 &-291180253881657381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47689c60fb5ba8e44922f0c535e55d02, type: 3}
+  m_Name: Attack
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 49aa645fa9141524a8dc0afdcc2bcb6e
+  position: {x: 445.00006, y: 405.00006}
+  Description: 
+  attackCooldown: 3
+  attackDistance: 2
+  attackAnimString: Combo2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Ghost_Warrior_3
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d52bd284d66f45409895549ec0dc050, type: 3}
+  m_Name: Ghost_Warrior_3
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: -420378061356527023}
+  treeState: 0
+  nodes:
+  - {fileID: -420378061356527023}
+  - {fileID: 7319402141210423286}
+  - {fileID: -5885474663594423440}
+  - {fileID: 6090263970112396695}
+  - {fileID: -1765838445699744006}
+  - {fileID: 2905690423338725693}
+  - {fileID: -8838423184905334828}
+  - {fileID: 756034219687333489}
+  - {fileID: 307739543805387224}
+  - {fileID: -3548162509286098302}
+  - {fileID: 7694874196674162806}
+  - {fileID: -291180253881657381}
+--- !u!114 &307739543805387224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47689c60fb5ba8e44922f0c535e55d02, type: 3}
+  m_Name: Attack
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 762692e0698065545a33d43fd20aad41
+  position: {x: 166.50006, y: 405.00006}
+  Description: 
+  attackCooldown: 3
+  attackDistance: 2
+  attackAnimString: Combo1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Ghost_Warrior_3
+--- !u!114 &756034219687333489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcddb15bcd2925f4887c696f4baa3c36, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: fe1afdc0112ec114c9ca6cbda671b612
+  position: {x: 241.55006, y: 246.10007}
+  Description: 
+  children:
+  - {fileID: 307739543805387224}
+  - {fileID: -3548162509286098302}
+  - {fileID: -291180253881657381}
+  - {fileID: 7694874196674162806}
+--- !u!114 &2905690423338725693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22ff3ddcaa57f64193ad61c8d52fd69, type: 3}
+  m_Name: Parallel
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 550087217993fec4992ce78360bfa612
+  position: {x: 28.875015, y: -24.225008}
+  Description: 
+  children:
+  - {fileID: 6090263970112396695}
+  - {fileID: -8838423184905334828}
+--- !u!114 &6090263970112396695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e22483f73a7cb48a1a8f0d2f066df6, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 585f2ec942fc8ba41919c551afa4342e
+  position: {x: -178.84999, y: 100.00002}
+  Description: 
+  children:
+  - {fileID: 7319402141210423286}
+--- !u!114 &7319402141210423286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcddb15bcd2925f4887c696f4baa3c36, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: c6c938d2ac7ca1642b9b533c5922d1bc
+  position: {x: -178.84999, y: 225.12503}
+  Description: 
+  children:
+  - {fileID: -5885474663594423440}
+  - {fileID: -1765838445699744006}
+--- !u!114 &7694874196674162806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640ac424bf086f846bc71dfb4524525e, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: b28ccceda747cb345b0a9d2bc54c18a3
+  position: {x: 580.0002, y: 405.50006}
+  Description: 
+  duration: 2

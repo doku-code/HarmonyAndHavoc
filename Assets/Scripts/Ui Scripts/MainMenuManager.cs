@@ -130,6 +130,7 @@ namespace AF
                     break;
             }
         }
+        
         public void ChangeWindowSize()
         {
             SoundManager.Instance.PlayAClip(0);
@@ -186,10 +187,7 @@ namespace AF
 
         public void MakeNewGame()
         {
-            //a reajuster une fois le systeme de sauvegarde fait
-            //une fois la sauvegarde fais  changer le bouton new game en continue 
-            // et rajouter un bouton new game avec (are you sure) 
-            GameManager.Instance.LoadNextMap("Village", SpawnerPosition.BEGIN);
+            GameManager.Instance.LoadNextMap("Village", SpawnerPosition.END);
         }
 
         public void ExitGame()
