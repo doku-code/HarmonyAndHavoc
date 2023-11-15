@@ -15,6 +15,7 @@ namespace charles
         {
             DontDestroyOnLoad(this);
         }
+        
         public void InventoryMenu(CallbackContext value)
         {
             if (value.performed)
