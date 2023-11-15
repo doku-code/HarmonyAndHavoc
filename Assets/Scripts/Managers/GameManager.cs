@@ -18,7 +18,6 @@ namespace AF
         
         public static GameManager Instance { get; private set; }
         
-        
         void Awake()
         {
             if (Instance != null)

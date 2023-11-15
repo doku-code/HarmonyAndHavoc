@@ -33,9 +33,7 @@ namespace AF
         [SerializeField] private Knowledge[] knowledgeBank;
         public delegate void ParametersLessDelegate();
         public ParametersLessDelegate OnDeadDelegate;
-
-        //Trouver un moyen d'initialiser les dictionnaire avec le JSON
-        //public Dictionary<KnowledgeID, bool> knownKnowledgeDictionary;
+        
         public Dictionary<KnowledgeID, bool> KnownKnowledgeDictionary { get; set; }
         public Dictionary<KnowledgeID, AvalaibleKnowledgePosition> AvalaibleKnowledgeDictionary;
         public Dictionary<KnowledgeID, Knowledge> EveryKnowledgeDictionary;
