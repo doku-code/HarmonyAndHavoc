@@ -10,7 +10,9 @@ namespace AF
     {
         [Header("PlayerData"), Tooltip("The PlayerData ScriptableObject")] 
         [SerializeField] private PlayerData playerData;
+        
         [Space]
+        
         [Header("Knowledge Buttons"), Tooltip("All the Knowledge Button from the inventory UI")]
         [SerializeField] private Button knowledge1;
         [SerializeField] private Button knowledge2;
@@ -19,6 +21,7 @@ namespace AF
         [SerializeField] private Button knowledge5;
         [SerializeField] private Button knowledge6;
         [SerializeField] private Button knowledge7;
+        
         [Space]
         [SerializeField] private Image disabledKnowledgeImage;
         
@@ -53,13 +56,13 @@ namespace AF
             {
                 if (!isInventoryMenuOpen)
                 {
-                    SoundManager.Instance.PlayAClip(1);
+                    //SoundManager.Instance.PlayAClip(1);
                     InventoryPanel.SetActive(true);
                     isInventoryMenuOpen = true;
                 }
                 else
                 {
-                    SoundManager.Instance.PlayAClip(1);
+                    //SoundManager.Instance.PlayAClip(1);
                     InventoryPanel.SetActive(false);
                     isInventoryMenuOpen = false;
                 }
