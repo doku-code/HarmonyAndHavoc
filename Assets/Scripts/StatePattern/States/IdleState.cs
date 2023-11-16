@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,12 +15,12 @@ namespace JFM
     [CreateAssetMenu(fileName = "IdleState", menuName = "States/Idle")]
     public class IdleState : PlayerState
     {
-        public float oldGravityScale;
-        public int waitNFrames;
+        [NonSerialized] public float oldGravityScale;
+        [NonSerialized] public int waitNFrames;
         private bool resetGravityScale;
-        public bool resetGravityScaleWithOther;
-        public float otherGravityScale;
-        public bool overrideOldGravityScale;
+        [NonSerialized] public bool resetGravityScaleWithOther;
+        [NonSerialized] public float otherGravityScale;
+        [NonSerialized] public bool overrideOldGravityScale;
         private bool startingOnLadder;       
 
         public override void Enter()
@@ -36,7 +37,7 @@ namespace JFM
             }
             if (player.WillClimbLadder() || player.IsAboveLadder())
             {
-                Debug.Log("Ladders on idle.Enter().");
+                //Debug.Log("Ladders on idle.Enter().");
                 player.rb.velocity = Vector2.zero;
                 player.rb.totalForce = Vector2.zero;
                 player.rb.gravityScale = 0.0f;
@@ -140,7 +141,9 @@ namespace JFM
                 //Debug.Log($"Climbing ladder... ladderX={ladderX}");
                 player.transform.position = new Vector3(ladderX, player.transform.position.y, player.transform.position.z);
                 //Debug.Break();
-                player.ChangeState(player.states[STATE.LADDER]);
+                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                state.targetX = ladderX;
+                player.ChangeState(state);
                 return;
             }
 
@@ -152,7 +155,9 @@ namespace JFM
 
             if (player.WillClimbLadder())
             {
-                player.ChangeState(player.states[STATE.LADDER]);
+                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
+                player.ChangeState(state);
                 return;
             }
 

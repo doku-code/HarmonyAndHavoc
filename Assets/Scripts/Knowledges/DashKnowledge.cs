@@ -77,7 +77,9 @@ public class DashKnowledge : Knowledge
 
         if (player.WillClimbLadder())
         {
-            player.ChangeState(player.states[PlayerState.STATE.LADDER]);
+            LadderClimbingState state = (LadderClimbingState)player.states[PlayerState.STATE.LADDER];
+            state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
+            player.ChangeState(state);
             return;
         }
 

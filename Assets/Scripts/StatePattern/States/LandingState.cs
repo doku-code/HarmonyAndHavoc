@@ -10,7 +10,7 @@ namespace JFM
     {
         private float startTime;
         private float animationClipLength;
-        private int animatorLayer = 0;
+        [SerializeField] private int animatorLayer = 0;
 
         public override void Enter()
         {

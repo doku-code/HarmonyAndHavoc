@@ -1,3 +1,6 @@
+//#define _DEBUG
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +15,7 @@ namespace JFM
         private bool resetGravityScale;
 
         private bool isCentering;
-        private float targetX;
+        [NonSerialized] public float targetX;
         private float playerSide; 
         private float lastPositionX;
         
@@ -31,13 +34,13 @@ namespace JFM
 
             isCentering = true;          
             
-            targetX = player.GetBeneathObjectPosition().x - player.ColliderOffset.x + 0.5f;
+            //targetX = player.GetBeneathObjectPosition().x - player.ColliderOffset.x + 0.5f;
             playerSide = Mathf.Sign(targetX - player.transform.position.x);
 
             resetGravityScale = true;
 
             lastPositionX = player.transform.position.x;
-            Debug.Log($"targetX={targetX} transform.position={player.transform.position}");
+            //Debug.Log($"targetX={targetX} transform.position={player.transform.position}");
             //Debug.Break();
 
             base.Enter();
@@ -45,7 +48,7 @@ namespace JFM
 
         public override void Update()
         {
-            if (player.GetBeneathObject() is null)
+            if (player.GetBeneathObject() is null && !player.IsAboveLadder())
             {
                 //Debug.Break();
                 player.ChangeState(player.states[STATE.AIRBORNE]);
@@ -61,8 +64,10 @@ namespace JFM
             {
                 player.rb.isKinematic = false;
                 player.rb.gravityScale = player.DefaultGravityScale;
+#if _DEBUG
                 Debug.Log($"player.rb.position={player.rb.position}");
                 //Debug.Break();
+#endif
             }
 
             if (isCentering && player.MoveInput.y != 0.0f)
@@ -77,7 +82,9 @@ namespace JFM
                     player.rb.velocity = Vector2.zero;
                     player.rb.totalForce = Vector2.zero;
                     player.rb.gravityScale = 0.0f;
+#if _DEBUG
                     Debug.Log($"(1) player.rb.position={player.rb.position}");
+#endif
                 }
                 else
                 {                    
@@ -92,8 +99,9 @@ namespace JFM
                         player.rb.gravityScale = 0.0f;
                     }
                     lastPositionX = player.transform.position.x;
-
+#if _DEBUG
                     Debug.Log($"(2) player.rb.position={player.rb.position} targetX={targetX}");
+#endif
                 }
             }
             else if (player.MoveInput.x != 0.0f)
@@ -111,7 +119,9 @@ namespace JFM
             /*
             if(!player.CanClimbLadder())
             {
+#if _DEBUG
                 Debug.Log($"Cannot climb ladder.");
+#endif
                 player.ChangeState(player.states[STATE.IDLE]);
                 
                 return;
@@ -126,7 +136,9 @@ namespace JFM
                 }
                 else if(player.MoveInput.y == 0.0f)
                 {
+#if _DEBUG
                     Debug.Log($"Won't climb ladder.");
+#endif
                     player.ChangeState(player.states[STATE.IDLE]);
                     return;
                 }                                
@@ -156,13 +168,14 @@ namespace JFM
                     float y;
                     if (player.Raycast(false, player.LadderLayer, Vector2.up * 0.02f, 0.25f, Vector2.up, false, true))
                     {
-                        y = Mathf.Floor(player.HitInfo.hit.point.y) + 0.007519f;
+                        y = Mathf.Round(player.HitInfo.hit.point.y) + 0.007519f;
                     }
                     else
                     {
-                        y = Mathf.Floor(player.HitInfo.probePoint.y) + 0.007519f;
+                        y = Mathf.Round(player.HitInfo.probePoint.y) + 0.007519f;
                     }
                     player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
+                    
                     IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
                     state.otherGravityScale = player.DefaultGravityScale;
                     state.resetGravityScaleWithOther = true;
@@ -174,9 +187,12 @@ namespace JFM
                     player.rb.totalForce = new Vector2(player.rb.totalForce.x, 0.0f); 
                     resetGravityScale = false;
                     //Debug.Log($"No ladder found. hasHit={player.HitInfo.hasHit}");
+#if _DEBUG
                     Debug.Log($"No ladder found. beneathObject={player.GetBeneathObject()}");
+                    //Debug.Break();
+#endif
                     player.ChangeState(state);
-
+                    
                     return;
                 }
 
@@ -186,7 +202,9 @@ namespace JFM
             else
             {
                 player.animator.SetFloat("MotionSpeed", 0);
-                player.rb.velocity = Vector2.zero;                
+                player.rb.velocity = Vector2.zero;  
+                player.rb.totalForce = Vector2.zero;
+                player.rb.gravityScale = 0.0f;
             }            
         }
 

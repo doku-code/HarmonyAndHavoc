@@ -1,5 +1,6 @@
 using AF;
 using UnityEngine;
+using JFM;
 
 namespace charles
 {
@@ -23,17 +24,24 @@ namespace charles
         {
             if(collision.CompareTag("Player"))
             {
-                Attack(playerData);
+                //Attack(playerData);
+                Attack(collision.gameObject.GetComponent<PlayerController>(), Vector2.right * Mathf.Sign(collision.transform.position.x - transform.position.x));
                 Debug.Log("this is a CRITICAL HIT");
             }
         }
         public void TakeDamage(int damage)
         {
-           int actualOrder = playerData.ActualOrder;
-           int armorUpgrade = playerData.ArmorUpgrade;
-           int damageTaken = Mathf.Max(0, damage - (defense + armorUpgrade));
+            
+            /* ? */
+            int actualOrder = playerData.ActualOrder;
 
-           currentHealth -= damageTaken;
+            /* ? */
+            int armorUpgrade = playerData.ArmorUpgrade;
+
+            /* ? */
+            int damageTaken = Mathf.Max(0, damage - (defense + armorUpgrade));
+
+            currentHealth -= damageTaken;
 
             npcAnimator.SetTrigger("GetHit");
 
@@ -44,11 +52,13 @@ namespace charles
             npcAnimator.ResetTrigger("GetHit");
         }
 
-        public void Attack(PlayerData playerData)
+        public void Attack(PlayerController player, Vector2 direction)
         {
-            int armorUpgrade = playerData.ArmorUpgrade;
+            /*int armorUpgrade = playerData.ArmorUpgrade;
             int damageToPlayer = Mathf.Max(0, attackDamage - armorUpgrade);
             playerData.TakeDamage(damageToPlayer);
+            */
+            player.TakeDamage(attackDamage, direction);
         }
 
         private void Die()

@@ -1,5 +1,6 @@
 //#define _DEBUG
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace JFM
         private int ladderX;
         [SerializeField] private float coyoteTime = 0.2f;
         private float coyoteTimeCounter;
-        public bool wasGrounded = true;
+        [NonSerialized] public bool wasGrounded = true;
         private bool hasDepletedJumps;
 
         public override void Enter()
@@ -71,6 +72,7 @@ namespace JFM
 #if _DEBUG
             Debug.Log($"grounded={grounded} 1 << player.groundedLayer={1 << player.groundedLayer} == {(int)player.GroundLayer} wasOnLadder ={wasOnLadder} ladder={ladderX}");
 #endif
+            bool noLadderAbove = false;
             if (grounded || foundSlopeBeneath)
             {                               
                 if (player.MoveInput.x != 0.0f)
@@ -132,20 +134,12 @@ namespace JFM
                             (
                                 (1 << player.groundedLayer == (int)player.GroundLayer)
                                 ||
-                                (
-                                    (1 << player.groundedLayer == (int)player.LadderLayer)
-                                    &&
-                                    (
-                                        !wasOnLadder
-                                        ||
-                                        ladderX != Mathf.FloorToInt(player.rb.position.x + player.ColliderOffset.x)
-                                    )
-                                )
+                                (1 << player.groundedLayer == (int)player.LadderLayer)                                                                    
                             )
                             )
                     {
 #if _DEBUG
-                        Debug.Log($"Didn't make a case (1)... grounded={grounded} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
+                        Debug.Log($"Didn't make a case (1)... grounded={grounded} noLadderAbove={noLadderAbove} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
 #endif
                         player.ChangeState(player.states[STATE.WALK]);
                         return;
@@ -157,33 +151,40 @@ namespace JFM
                     // Adjust for walking on ladders
                     if (player.WillClimbLadder())
                     {
+                        noLadderAbove = Physics2D.CircleCast(player.rb.position + Vector2.up * 0.6f, player.GroundedRadius, Vector2.up, 0.8f, player.LadderLayer).collider is null;
                         //Debug.Log("Adjusting for ladders");
-                        player.rb.velocity = Vector2.zero;
-                        player.rb.totalForce = Vector2.zero;
-                        player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
-                        float y = Mathf.Floor(player.HitInfo.hit.point.y) + 1 + 0.007519f;// + player.rb.gravityScale * -Physics2D.gravity.y * player.LadderPushUpForce * Time.fixedDeltaTime;
-                        //player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
-                        player.rb.isKinematic = true;
-                        player.rb.MovePosition(new Vector2(player.transform.position.x, y));
-                        //player.rb.isKinematic = false;
-                        
-                        state.otherGravityScale = player.rb.gravityScale;
-                        state.resetGravityScaleWithOther = true;
-                        state.overrideOldGravityScale = true;
-                        state.oldGravityScale = player.rb.gravityScale;
-                        player.rb.gravityScale = 0.0f;
-                            
-                        //Debug.Log($"Adjust for walking on ladders! y={y}");
+                        if (noLadderAbove)
+                        {
+                            player.rb.velocity = Vector2.zero;
+                            player.rb.totalForce = Vector2.zero;
+                            player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
+                            float y = Mathf.Floor(player.HitInfo.hit.point.y) + 1 + 0.007519f;// + player.rb.gravityScale * -Physics2D.gravity.y * player.LadderPushUpForce * Time.fixedDeltaTime;
+                                                                                              //player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
+                            player.rb.isKinematic = true;
+                            player.rb.MovePosition(new Vector2(player.transform.position.x, y));
+                            //player.rb.isKinematic = false;
+
+                            state.otherGravityScale = player.rb.gravityScale;
+                            state.resetGravityScaleWithOther = true;
+                            state.overrideOldGravityScale = true;
+                            state.oldGravityScale = player.rb.gravityScale;
+                            player.rb.gravityScale = 0.0f;
+
+                            //Debug.Log($"Adjust for walking on ladders! y={y}");
+                        }
                     }
 #if _DEBUG
                     Debug.Log($"MoveInput.x = 0 grounded={grounded} || ({Mathf.Abs(slope) > player.StairsUpMinSlope} && {foundSlopeBeneath})");
 #endif
-                    // To rectify
-                    // The Player actually "waits" in idle after having fallen
-                    state.waitNFrames = 3;
+                    if ((1 << player.groundedLayer == (int)player.LadderLayer) && noLadderAbove || (1 << player.groundedLayer == (int)player.GroundLayer))
+                    {
+                        // To rectify
+                        // The Player actually "waits" in idle after having fallen
+                        state.waitNFrames = 3;
 
-                    player.ChangeState(state);
-                    return;
+                        player.ChangeState(state);
+                        return;
+                    }
                 }
                 // If grounded to Ground layer, or to Ladder layer IF we didn't start this Airborne state in front 
                 // of a ladder or we started in front of a ladder of another X coordinate.
@@ -192,15 +193,7 @@ namespace JFM
                         (
                             (1 << player.groundedLayer == (int)player.GroundLayer) 
                             || 
-                            (
-                                (1 << player.groundedLayer == (int)player.LadderLayer) 
-                                && 
-                                (
-                                    !wasOnLadder 
-                                    || 
-                                    ladderX != Mathf.FloorToInt(player.rb.position.x + player.ColliderOffset.x)
-                                )
-                            )
+                            (1 << player.groundedLayer == (int)player.LadderLayer)                                                             
                         )
                         ) 
                 {
@@ -219,25 +212,39 @@ namespace JFM
                         {
                             y = Mathf.Floor(player.HitInfo.probePoint.y) + 1 + 0.007519f;
                         }
-                        player.rb.velocity = Vector2.zero;
-                        player.rb.totalForce = Vector2.zero;
-                        player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
-                        
-                        //player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
-                        player.rb.isKinematic = true;
-                        player.rb.MovePosition(new Vector2(player.transform.position.x, y));
-                        //player.rb.isKinematic = false;
-                        IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
-                        state.otherGravityScale = player.rb.gravityScale;
-                        state.resetGravityScaleWithOther = true;
-                        state.overrideOldGravityScale = true;
-                        state.oldGravityScale = player.rb.gravityScale;
-                        player.rb.gravityScale = 0.0f;
 
+                        noLadderAbove = Physics2D.CircleCast(new Vector2(player.rb.position.x, y) + Vector2.up * 0.6f, player.GroundedRadius, Vector2.up, 0.8f, player.LadderLayer).collider is null;
+#if _DEBUG
+                        Debug.Log($"noLadderAbove={noLadderAbove}");
+#endif
+                        if (noLadderAbove)
+                        {
+                            player.rb.velocity = Vector2.zero;
+                            player.rb.totalForce = Vector2.zero;
+                            player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
+
+                            //player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
+                            player.rb.isKinematic = true;
+                            player.rb.MovePosition(new Vector2(player.transform.position.x, y));
+                            //player.rb.isKinematic = false;
+                            IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
+                            state.otherGravityScale = player.rb.gravityScale;
+                            state.resetGravityScaleWithOther = true;
+                            state.overrideOldGravityScale = true;
+                            state.oldGravityScale = player.rb.gravityScale;
+                            player.rb.gravityScale = 0.0f;
+#if _DEBUG
+                            Debug.Log($"y={y}");
+                            //Debug.Break();
+#endif
+                        }
                     }
 
-                    player.ChangeState(player.states[PlayerState.STATE.IDLE]);
-                    return;
+                    if ((1 << player.groundedLayer == (int)player.LadderLayer) && noLadderAbove || (1 << player.groundedLayer == (int)player.GroundLayer))
+                    {
+                        player.ChangeState(player.states[PlayerState.STATE.IDLE]);
+                        return;
+                    }
                 }
                 
                 //Debug.Log($"Detected stairs or ground. slope was {slope} player.MoveInput.x={player.MoveInput.x} foundSlopeBeneath={foundSlopeBeneath} && Mathf.Abs(slope) > player.StairsUpMinSlope={Mathf.Abs(slope) > player.StairsUpMinSlope}");                
@@ -251,7 +258,9 @@ namespace JFM
 
             if (player.WillClimbLadder())
             {
-                player.ChangeState(player.states[STATE.LADDER]);
+                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
+                player.ChangeState(state);
                 return;
             }
 

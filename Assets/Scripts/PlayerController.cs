@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 //using static UnityEngine.InputManagerEntry;
+using charles;
 
 namespace JFM
 {
@@ -415,7 +416,27 @@ namespace JFM
         {
             attackCoolDownStartTime = Time.time;
         }
-        
+
+        public void TakeDamage(int damage, Vector2 pushDirection)
+        {
+            if(currentState != states[PlayerState.STATE.HURT])
+            {
+                playerData.TakeDamage(damage);
+                HurtState state = (HurtState)states[PlayerState.STATE.HURT];
+                state.pushDirection = pushDirection;
+            }
+        }
+
+        public void OnHit()
+        {
+            ChangeState(states[PlayerState.STATE.HURT]);
+        }
+
+        public void OnDead()
+        {
+            ChangeState(states[PlayerState.STATE.DEAD]);
+        }
+
         public bool GetKnowledgeTrigger(AvalaibleKnowledgePosition knowledgePosition)
         {
             if( knowledgePosition == AvalaibleKnowledgePosition.NOT_AVALAIBLE)
@@ -511,7 +532,7 @@ namespace JFM
         {
             bool h2 = Raycast(false, ladderLayer, Vector2.down * ladderGroundDistance, 0.01f, Vector2.down);//, false ,true);
 
-            //Debug.Log($"h2={h2}");
+            //Debug.Log($"{moveInput.x == 0.0f} && {moveInput.y < 0.0f} && h2={h2} moveInput.y = {moveInput.y}");
 
             return moveInput.x == 0.0f && moveInput.y < 0.0f && h2;
         }
@@ -664,30 +685,20 @@ namespace JFM
             hitInfo.hasHit = false;
             return false;
         }
-
-        public void OnHit()
-        {
-            ChangeState(states[PlayerState.STATE.HURT]);
-        }
-
-        public void OnDead()
-        {
-            ChangeState(states[PlayerState.STATE.DEAD]);
-        }
-
+        
         public void OnTriggerEnter2D(Collider2D collision)
         {
             if(collision is not null && collision.gameObject.CompareTag("Enemy"))
             {
                 Debug.Log($"Hit enemy named: {collision.gameObject.name}");
-                /*
+                
                 EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
-                int damage = playerData.GetPlayerDamage(null);
-                enemyController.TakeDamage(damage);
-                */
+                /*int damage = playerData.GetPlayerDamage(null);
+                enemyController.TakeDamage(damage);*/
+                
             }
         }
-
+       
         void Awake()
         {
             animator = GetComponent<Animator>();

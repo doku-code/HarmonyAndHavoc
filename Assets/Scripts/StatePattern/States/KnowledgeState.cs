@@ -1,4 +1,5 @@
 using AF;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace JFM
     [CreateAssetMenu(fileName = "KnowledgeState", menuName = "States/Knowledge")]
     public class KnowledgeState : PlayerState
     {
-        public Knowledge knowledge;
+        [NonSerialized] public Knowledge knowledge;
         
         public override void Enter()
         {

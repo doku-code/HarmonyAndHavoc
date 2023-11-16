@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,7 +15,7 @@ namespace JFM
     [CreateAssetMenu(fileName = "PausedState", menuName = "States/Pause")]
     public class PausedState : PlayerState
     {
-        public int waitNFrames;
+        [NonSerialized] public int waitNFrames;
         //private bool startingOnLadder;       
 
         public override void Enter()

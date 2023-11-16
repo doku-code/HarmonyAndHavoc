@@ -44,7 +44,9 @@ namespace JFM
 
             if (player.WillClimbLadder())
             {
-                player.ChangeState(player.states[STATE.LADDER]);
+                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
+                player.ChangeState(state);
                 return;
             }
 
