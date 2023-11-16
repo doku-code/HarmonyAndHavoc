@@ -10,11 +10,12 @@ namespace charles
         public int defense = 5;
 
         [SerializeField] private PlayerData playerData;
-        [SerializeField] private Animator npcAnimator;
+        private Animator npcAnimator;
         private int currentHealth;
 
         private void Start()
         {
+            npcAnimator = GetComponent<Animator>();
             currentHealth = maxHealth;
         }
 
