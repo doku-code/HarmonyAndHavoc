@@ -143,7 +143,7 @@ namespace AF
             Debug.Log(actualOrder);
         }
 
-        int GetPlayerDamage(Knowledge usedKnowledge)
+        public int GetPlayerDamage(Knowledge usedKnowledge)
         {
             return usedKnowledge != null
                 ? usedKnowledge.damageBoost + playerBaseDamage + weaponUpgrade
