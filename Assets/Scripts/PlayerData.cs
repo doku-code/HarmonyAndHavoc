@@ -135,9 +135,11 @@ namespace AF
             {
                 OnDeadDelegate();
             }
+            else
+            {
+                OnHitDelegate();
+            }
 
-            OnHitDelegate();
-            
             Debug.Log(actualOrder);
         }
 
