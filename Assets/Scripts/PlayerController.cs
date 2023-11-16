@@ -710,7 +710,7 @@ namespace JFM
 
             playerData.InitializeData();
             playerData.OnDeadDelegate += OnDead;
-            playerData.O += OnHit;
+            //playerData.O += OnHit;
             InitializeKnowledges();
 
             SetHighestAirborneY(true);
