@@ -31,8 +31,12 @@ namespace AF
         [SerializeField] private int orderUpgradeValue;
         [SerializeField] private int playerBaseDamage;
         [SerializeField] private Knowledge[] knowledgeBank;
+        
         public delegate void ParametersLessDelegate();
         public ParametersLessDelegate OnDeadDelegate;
+        
+        public ParametersLessDelegate OnHitDelegate;
+        
         
         public Dictionary<KnowledgeID, bool> KnownKnowledgeDictionary { get; set; }
         public Dictionary<KnowledgeID, AvalaibleKnowledgePosition> AvalaibleKnowledgeDictionary;
@@ -131,6 +135,8 @@ namespace AF
             {
                 OnDeadDelegate();
             }
+
+            OnHitDelegate();
             
             Debug.Log(actualOrder);
         }
