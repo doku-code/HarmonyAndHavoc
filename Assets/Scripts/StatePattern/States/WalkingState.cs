@@ -183,11 +183,11 @@ namespace JFM
                     player.rb.gravityScale = 0.0f;
                     player.rb.totalForce = Vector2.zero;
                     player.rb.velocity = Vector2.zero;
-                    Debug.Log("idling on ladder");
+                    //Debug.Log("idling on ladder");
                 }
                 else
                 {
-                    Debug.Log("not idling on ladder");
+                    //Debug.Log("not idling on ladder");
                 }
 
                 player.ChangeState(player.states[STATE.IDLE]);

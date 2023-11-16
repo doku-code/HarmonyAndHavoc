@@ -531,7 +531,7 @@ namespace JFM
                 groundedY = hit.point.y;
             }
             //bool r2 = Physics2D.BoxCast(player.rb.position, player.ColliderSize, 0.0f, Vector2.down, 0.7f, player.LadderLayer).collider is not null;
-            Debug.Log($"r1={r1} r2={r2}");
+            //Debug.Log($"r1={r1} r2={r2}");
             return (!r1 && r2);
         }
 
