@@ -32,7 +32,9 @@ namespace JFM
             LADDER,
             STAIRS_UP,
             STAIRS_DOWN,            
-            BASIC_ATTACK
+            BASIC_ATTACK,
+            HURT,
+            DEAD
         };
 
         public enum EVENT

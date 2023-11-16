@@ -667,12 +667,12 @@ namespace JFM
 
         public void OnHit()
         {
-
+            ChangeState(states[PlayerState.STATE.HURT]);
         }
 
         public void OnDead()
         {
-
+            ChangeState(states[PlayerState.STATE.DEAD]);
         }
 
         public void OnTriggerEnter2D(Collider2D collision)
@@ -710,7 +710,7 @@ namespace JFM
 
             playerData.InitializeData();
             playerData.OnDeadDelegate += OnDead;
-            //playerData.O += OnHit;
+            playerData.OnHitDelegate += OnHit;
             InitializeKnowledges();
 
             SetHighestAirborneY(true);
