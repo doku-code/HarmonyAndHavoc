@@ -29,6 +29,7 @@ namespace charles
         public static DebugCommand<int> WEAPONUPGRADE;
         public static DebugCommand<int> ARMORUPGRADE;
         public static DebugCommand<int> CHANGESCENE;
+        public static DebugCommand<int> HITPLAYER;
 
         [Header("Script Reference")]
         public DebugFunction debugFunc;
@@ -94,6 +95,10 @@ namespace charles
             {
                 debugFunc.ChangeScene(x);
             });
+            HITPLAYER = new DebugCommand<int>("hitplayer", "Give damage to player", "hitplayer", (x) =>
+            {
+                debugFunc.HitPlayer(x);
+            });
 
             commandList = new List<object>
             {
@@ -108,7 +113,8 @@ namespace charles
                 ORDERFRAGMENTS,
                 WEAPONUPGRADE,
                 ARMORUPGRADE,
-                CHANGESCENE
+                CHANGESCENE,
+                HITPLAYER
             };
 
             commandHistory = new List<string>();

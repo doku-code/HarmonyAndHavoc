@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using JFM;
+using AF;
 
 public class DebugFunction : MonoBehaviour
 {
@@ -20,5 +22,11 @@ public class DebugFunction : MonoBehaviour
         {
             Debug.LogError("Invalid scene index" + index);
         }
+    }
+
+    public void HitPlayer(int damage)
+    {
+        PlayerController pc = FindAnyObjectByType<PlayerController>();
+        pc.Data.TakeDamage(damage);
     }
 }
