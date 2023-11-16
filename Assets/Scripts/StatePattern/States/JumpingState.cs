@@ -4,19 +4,14 @@ using UnityEngine;
 
 namespace JFM
 {
+    [CreateAssetMenu(fileName = "JumpingState", menuName = "States/Jumping")]
     public class JumpingState : PlayerState
     {
-        private int nFrames;
-
-        public JumpingState(Animator animator, PlayerController player)
-            : base(animator, player)
-        {
-            name = STATE.JUMP;
-        }
+        private int nFrames;       
 
         public override void Enter()
         {
-            animator.SetTrigger("Jump");
+            player.animator.SetTrigger("Jump");
             player.Jump();
             player.inputTriggers["Jump"] = false;
             nFrames = 0;
@@ -28,41 +23,42 @@ namespace JFM
         {
             player.SetHighestAirborneY();
 
-            //if (player.IsGrounded())
-            if (player.IsCastGrounded(false, player.GroundLayer) && player.rb.velocity.y < -0.001f)
+            if (player.IsGrounded(player.GroundLayer) && player.rb.velocity.y < -0.001f)
             {
                 if (player.WillLand())
                 {
-                    player.ChangeState(player.landingState);
+                    player.ChangeState(player.states[STATE.LAND]);
                 }
                 else
                 {                    
-                    player.ChangeState(player.idleState);
+                    player.ChangeState(player.states[STATE.IDLE]);
                 }
                 return;
             }
-            
-            if(player.WillGripToWall() && nFrames > 0)
+
+            if (player.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUseKnowledge()) // && nFrames > 0)
             {
-                player.ChangeState(player.wallGrippingState);
+                player.UseKnowledge(AF.KnowledgeID.WALL_SLIDE);                
                 return;
             }
 
             if (player.WillClimbLadder())
             {
-                player.ChangeState(player.ladderClimbingState);
+                player.ChangeState(player.states[STATE.LADDER]);
                 return;
             }
 
-            if (player.WillDash())
+            if (player.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUseKnowledge())
             {
-                player.ChangeState(player.dashingState);
+                player.UseKnowledge(AF.KnowledgeID.DASH);
                 return;
             }
 
-            if(player.rb.velocity.y < 0.0f)
+            if (player.rb.velocity.y < 0.0f)
             {
-                player.ChangeState(player.airborneState);
+                AirborneState state = (AirborneState)player.states[STATE.AIRBORNE];
+                state.wasGrounded = false;
+                player.ChangeState(state);
                 return;
             }
 
@@ -92,7 +88,7 @@ namespace JFM
 
         public override void Exit()
         {
-            animator.ResetTrigger("Jump");
+            player.animator.ResetTrigger("Jump");
             base.Exit();
         }
     }

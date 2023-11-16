@@ -11,7 +11,7 @@ namespace JFM
      * because when having a multiple-layered animator, it can sometimes display this default sprite between two animations.
      *       
      * * * * * * * * * * * * * * * * * * * */
-
+    [CreateAssetMenu(fileName = "IdleState", menuName = "States/Idle")]
     public class IdleState : PlayerState
     {
         public float oldGravityScale;
@@ -20,17 +20,11 @@ namespace JFM
         public bool resetGravityScaleWithOther;
         public float otherGravityScale;
         public bool overrideOldGravityScale;
-        private bool startingOnLadder;
-
-        public IdleState(Animator animator, PlayerController player)
-            : base(animator, player)
-        {
-            name = STATE.IDLE;
-        }
+        private bool startingOnLadder;       
 
         public override void Enter()
         {           
-            animator.SetBool("IsIdle", true);
+            player.animator.SetBool("IsIdle", true);
             player.rb.velocity = Vector2.zero;
             if (!overrideOldGravityScale)
             {
@@ -40,11 +34,9 @@ namespace JFM
             {
                 overrideOldGravityScale = false;
             }
-            if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
-                player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down)
-            )
+            if (player.WillClimbLadder() || player.IsAboveLadder())
             {
-                //Debug.Log("Ladders on idle.Enter().");
+                Debug.Log("Ladders on idle.Enter().");
                 player.rb.velocity = Vector2.zero;
                 player.rb.totalForce = Vector2.zero;
                 player.rb.gravityScale = 0.0f;
@@ -73,18 +65,18 @@ namespace JFM
             Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
                         
             // Could reuse this raycast for player.WillClimbUpStairs() below
-            bool foundSlopeInFront = (player.FindSlopeAtPoint(out float slopeFront, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? 1.0f : -1.0f) * 45.0f), player.StairsDownHeight));//, true))
+            bool foundSlopeInFront = (Raycast2DHelper.FindSlopeAtPoint(player.rb.position, out float slopeFront, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? 1.0f : -1.0f) * 45.0f), player.StairsDownHeight, player.GroundLayer));//, true))
 
-            bool foundSlopeBehind = (player.FindSlopeAtPoint(out float slopeBack, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? -1.0f : 1.0f) * 45.0f), player.StairsDownHeight));//, true))
+            bool foundSlopeBehind = (Raycast2DHelper.FindSlopeAtPoint(player.rb.position, out float slopeBack, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? -1.0f : 1.0f) * 45.0f), player.StairsDownHeight, player.GroundLayer));//, true))
 
-            if (!player.IsCastGrounded(false))
+            if (!player.IsGrounded())
             {
                 if (!foundSlopeInFront && !foundSlopeBehind)
                 {
-                    player.ChangeState(player.airborneState);
+                    player.ChangeState(player.states[STATE.AIRBORNE]);
                     return;
                 }
-                //Debug.Log("!player.IsCastGrounded()");
+                //Debug.Log("!player.IsGrounded()");
             }
             else if((foundSlopeInFront && Mathf.Abs(slopeFront) > 0.001f) || (foundSlopeBehind && Mathf.Abs(slopeBack) > 0.001f)) 
             {
@@ -107,13 +99,13 @@ namespace JFM
 
             if (player.WillClimbUpStairs())
             {                
-                player.ChangeState(player.stairsClimbingUpState);
+                player.ChangeState(player.states[STATE.STAIRS_UP]);
                 return;
             }
 
             if (player.WillClimbDownStairs())// || (foundSlopeInFront && Mathf.Abs(slopeFront) > player.StairsUpMinSlope) && Mathf.Abs(player.rb.velocity.y) <= 0.01f && ((player.MoveInput.x > 0.0f && slopeFront < 0) || (player.MoveInput.x > 0.0f && slopeFront < 0)))
             {
-                player.ChangeState(player.stairsClimbingDownState);
+                player.ChangeState(player.states[STATE.STAIRS_DOWN]);
                 return;
             }
 
@@ -125,9 +117,10 @@ namespace JFM
                     )
                 {
                     resetGravityScale = false;
-                    player.walkingState.newGravityScale = 0.0f;
-                    player.walkingState.resetGravityScaleWithOther = true;
-                    player.walkingState.otherGravityScale = oldGravityScale;
+                    WalkingState state = (WalkingState)player.states[STATE.WALK];
+                    state.newGravityScale = 0.0f;
+                    state.resetGravityScaleWithOther = true;
+                    state.otherGravityScale = oldGravityScale;
                     player.rb.gravityScale = 0.0f;
                     player.rb.velocity = Vector2.zero;
                     player.rb.totalForce = Vector2.zero;
@@ -137,7 +130,7 @@ namespace JFM
                 {
                     //Debug.Log("not walking on ladder");
                 }
-                player.ChangeState(player.walkingState);
+                player.ChangeState(player.states[STATE.WALK]);
                 return;
             }
             
@@ -147,41 +140,43 @@ namespace JFM
                 //Debug.Log($"Climbing ladder... ladderX={ladderX}");
                 player.transform.position = new Vector3(ladderX, player.transform.position.y, player.transform.position.z);
                 //Debug.Break();
-                player.ChangeState(player.ladderClimbingState);
+                player.ChangeState(player.states[STATE.LADDER]);
                 return;
             }
 
             if (player.inputTriggers["Move"] && player.MoveInput.y < 0.0f)
             {
-                player.ChangeState(player.crouchedState);
+                player.ChangeState(player.states[STATE.CROUCH]);
                 return;
             }
 
             if (player.WillClimbLadder())
             {
-
-
-                player.ChangeState(player.ladderClimbingState);
+                player.ChangeState(player.states[STATE.LADDER]);
                 return;
             }
 
-            if (player.WillDash())
+            if (player.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUseKnowledge())
             {
-                player.ChangeState(player.dashingState);
+                player.UseKnowledge(AF.KnowledgeID.DASH);                
                 return;
             }
 
             if (player.WillJump())
             {
-                player.ChangeState(player.jumpingState);
+                player.ChangeState(player.states[STATE.JUMP]);
                 return;
             }
 
-            
-
-            if (player.inputTriggers["BasicAttack"])
+            if (player.inputTriggers["Inventory"])
             {
-                player.ChangeState(player.basicAttackState);
+                player.ChangeState(player.states[STATE.PAUSE]);
+                return;
+            }
+
+            if (player.WillAttack())
+            {
+                player.ChangeState(player.states[STATE.BASIC_ATTACK]);
                 return;
             }
 
@@ -202,7 +197,7 @@ namespace JFM
                     player.rb.gravityScale = oldGravityScale;
                 }
             }
-            animator.SetBool("IsIdle", false);
+            player.animator.SetBool("IsIdle", false);
             base.Exit();
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace JFM
-{ 
+{
     /* * * * * * * * * * * * * * * * * * * * 
      * 
      * It seems that, in order to make raycasts work with irregular collider shapes
@@ -14,9 +14,10 @@ namespace JFM
      * 
      * A bug sometimes prevent Unity from updating the "Custom Physics Shapes" in the scene. To work around this,
      * select the problematic tilemap and uncheck and re-check "Used by composite" (or uncheck and re-check the 
-     * TilemapCollider2D component).
+     * TilemapCollider2D component or, as a last resort, remove and re-create that component).
      * 
-     * * * * * * * * * * * * * * * * * * * */ 
+     * * * * * * * * * * * * * * * * * * * */
+    [CreateAssetMenu(fileName = "StairsClimbingUpState", menuName = "States/StairsClimbingUp")]
     public class StairsClimbingUpState : PlayerState
     {
         private int nFrames;
@@ -24,18 +25,12 @@ namespace JFM
         private bool stairsEndIsSet;
         private bool reachedTop;        
         private bool hasTurned;
-        private float yEndDistance;
-
-        public StairsClimbingUpState(Animator animator, PlayerController player)
-            : base(animator, player)
-        {
-            name = STATE.STAIRS_UP;
-        }
+        private float yEndDistance;  
 
         public override void Enter()
         {
             nFrames = 0;
-            animator.SetBool("IsRunning", true);
+            player.animator.SetBool("IsRunning", true);
             stairsEndIsSet = false;
             reachedTop = false;
             hasTurned = false;
@@ -51,7 +46,7 @@ namespace JFM
             Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;            
 
             float stairsSpeed = player.StairsSpeed;
-            bool foundStairsInFront = player.FindSlopeAtPoint(out float slope, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? 1.0f : -1.0f) * 45.0f), player.StairsDownHeight);//, true);
+            bool foundStairsInFront = Raycast2DHelper.FindSlopeAtPoint(player.rb.position, out float slope, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? 1.0f : -1.0f) * 45.0f), player.StairsDownHeight, player.GroundLayer);//, true);
 
             if (reachedTop)
             {
@@ -60,7 +55,7 @@ namespace JFM
 
                 if(yDiff < 0.001f)
                 {
-                    player.ChangeState(player.walkingState);
+                    player.ChangeState(player.states[STATE.WALK]);
                     return;
                 }            
             }            
@@ -86,52 +81,48 @@ namespace JFM
                     }
 
                     float yDiff = stairsEndY - player.rb.position.y;
-                    yEndDistance = Mathf.Abs(yDiff);
-                    
+                    yEndDistance = Mathf.Abs(yDiff);                    
                 }                
             }
             
-            if (!player.IsCastGrounded(false) && !foundStairsInFront && (reachedTop || hasTurned))
+            if (!player.IsGrounded() && !foundStairsInFront && (reachedTop || hasTurned))
             {
                 //Debug.Break();
                 
-                player.ChangeState(player.airborneState);
+                player.ChangeState(player.states[STATE.AIRBORNE]);
                 return;
             }
 
             if (player.MoveInput.x == 0.0f)
             {
                 //Debug.Log("Here.");
-                player.ChangeState(player.idleState);
+                player.ChangeState(player.states[STATE.IDLE]);
                 return;
             }
 
             if (player.MoveInput.y < 0.0f)
             {
-                player.ChangeState(player.crouchedState);
+                player.ChangeState(player.states[STATE.CROUCH]);
                 return;
             }
 
-            if (player.WillDash())
+            if (player.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUseKnowledge())
             {
-                player.ChangeState(player.dashingState);
+                player.UseKnowledge(AF.KnowledgeID.DASH);
                 return;
-            }            
+            }
 
             if (player.WillClimbLadder())
             {
-                player.ChangeState(player.ladderClimbingState);
+                player.ChangeState(player.states[STATE.LADDER]);
                 return;
             }
            
             if (player.WillJump())
             {
-                player.ChangeState(player.jumpingState);
+                player.ChangeState(player.states[STATE.JUMP]);
                 return;
-            }
-               
-
-            
+            }     
 
             // Add force but limit speed
             if (player.rb.velocity.magnitude < stairsSpeed)
@@ -166,7 +157,7 @@ namespace JFM
 
         public override void Exit()
         {
-            animator.SetBool("IsRunning", false);
+            player.animator.SetBool("IsRunning", false);
             player.rb.isKinematic = false;
             player.rb.velocity = new Vector2((player.IsFacingRight ? 1.0f : -1.0f) * player.WalkSpeed, 0.0f);
             base.Exit();

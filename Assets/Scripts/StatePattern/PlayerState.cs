@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.LowLevel;
 
 namespace JFM
 {
@@ -13,25 +14,24 @@ namespace JFM
      *   Change the "Body Type" of the Rigidbody2D to Kinematic unless you want physical interaction with the tilemap.
      * 
      * * * * * * * * * * * * * * */
-    public class PlayerState
+    public class PlayerState : ScriptableObject
     {
         public enum STATE
         {
             IDLE,
             WALK,
-            RUN,
+            //RUN,
             JUMP,
+            PAUSE,
             CROUCH,
             CROUCH_ATTACK,
-            WALLGRIP,
             WALLJUMP,
             AIRBORNE,
             LAND,
-            DASH,
+            KNOWLEDGE,
             LADDER,
             STAIRS_UP,
-            STAIRS_DOWN,
-            LEDGE,
+            STAIRS_DOWN,            
             BASIC_ATTACK
         };
 
@@ -42,15 +42,13 @@ namespace JFM
             EXIT
         };
 
-        public STATE name;
-        protected EVENT stage;
-        protected Animator animator;
+        public new STATE name;
+        protected EVENT stage;        
         protected PlayerController player;
         protected PlayerState nextState;
 
-        public PlayerState(Animator animator, PlayerController player)
+        public void Initialize(PlayerController player)
         {
-            this.animator = animator;
             this.player = player;
             stage = EVENT.ENTER;
         }

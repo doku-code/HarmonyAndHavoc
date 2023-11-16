@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace JFM
 {
+    [CreateAssetMenu(fileName = "WalkingState", menuName = "States/Walking")]
     public class WalkingState : PlayerState
     {
         private float oldGravityScale;
@@ -15,15 +16,9 @@ namespace JFM
         public float otherGravityScale;
         private Vector2 lastposition;
 
-        public WalkingState(Animator animator, PlayerController player)
-            : base(animator, player)
-        {
-            name = STATE.WALK;
-        }
-
         public override void Enter()
         {
-            animator.SetBool("IsRunning", true);
+            player.animator.SetBool("IsRunning", true);
             oldGravityScale = player.rb.gravityScale;
             //Debug.Log($"player.rb.gravityScale(1)={player.rb.gravityScale}");
             player.rb.gravityScale = newGravityScale;
@@ -34,8 +29,7 @@ namespace JFM
             resetGravityScaleWithOther = true;
             otherGravityScale = player.DefaultGravityScale;
 
-            if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
-                player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down) && //, false, true) &&
+            if ((player.WillClimbLadder() || player.IsAboveLadder()) &&
                 player.MoveInput.x != 0.0f)
             {
                 //Debug.Log("Adjusting for ladders");
@@ -51,6 +45,7 @@ namespace JFM
                 player.rb.gravityScale = 0.0f;
             }
 
+            // Adding Vector2.right just so it's different than player.rb.position
             lastposition = player.rb.position + Vector2.right;
 
             base.Enter();
@@ -80,58 +75,48 @@ namespace JFM
             
             if (player.WillClimbUpStairs())
             {
-                player.ChangeState(player.stairsClimbingUpState);
+                player.ChangeState(player.states[STATE.STAIRS_UP]);
                 return;
             }
 
             if (player.WillClimbDownStairs())
             {
                 //Debug.Break();
-                player.ChangeState(player.stairsClimbingDownState);
+                player.ChangeState(player.states[STATE.STAIRS_DOWN]);
                 return;
             }
 
             if (player.MoveInput.y < 0.0f)
             {
-                player.ChangeState(player.crouchedState);
+                player.ChangeState(player.states[STATE.CROUCH]);
                 return;
             }
 
-            if (player.WillDash())
+            if (player.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUseKnowledge())
             {
-                player.ChangeState(player.dashingState);
+                player.UseKnowledge(AF.KnowledgeID.DASH);
                 return;
             }
 
             if (player.WillJump())
             {
-                player.ChangeState(player.jumpingState);
+                player.ChangeState(player.states[STATE.JUMP]);
                 return;
             }
 
             bool foundSlopeBeneath = player.FindSlopeBeneath(out float slope);
-            bool grounded = player.IsCastGrounded(false, player.GroundLayer | player.LadderLayer, Vector2.zero, player.GroundDistance, true);
-            //Debug.Log($"grounded={grounded} player.groundedDistance={player.groundedDistance}");
-            //player.Raycast(false, player.LadderLayer | player.GroundLayer, Vector2.zero, 1.0f, Vector2.down);//, false, true);
-            //if ((!grounded ))//&& player.HitInfo.hit.distance > player.GroundDistance * 25.0f) || !player.HitInfo.hasHit )
+            bool grounded = player.IsGrounded(player.GroundLayer | player.LadderLayer, Vector2.zero, player.GroundDistance, true);
             if(!grounded && !foundSlopeBeneath)
             {
-                //Debug.Log($"d={player.HitInfo.hit.distance - player.GroundDistance}");
-                //Debug.Log($"rb.totalForce={player.rb.totalForce} rb.velocity={player.rb.velocity}");
-                //Debug.Break();
-                
-                player.ChangeState(player.airborneState);
+                player.ChangeState(player.states[STATE.AIRBORNE]);
                 return;
             }
             else
             {
-                
-                if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
-                player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down) && //, false, true) &&
+                bool playerIsAboveLadder = player.IsAboveLadder();
+                if ((player.WillClimbLadder() || playerIsAboveLadder) && 
                 player.MoveInput.x != 0.0f && player.rb.gravityScale != 0.0f)
                 {
-                    
-
                     Vector2 force = (player.IsFacingRight ? Vector2.right : -Vector2.right) * player.WalkAcceleration * Time.fixedDeltaTime;
 
                     player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f) + force / player.rb.mass;
@@ -142,23 +127,28 @@ namespace JFM
                     player.rb.totalForce = Vector2.zero;
                     //player.rb.gravityScale = 0.0f;
                     //player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
-                    float adjust = 1.0f;
-                    if(Platformer2DUtilities.AreNearlyEqual(player.HitInfo.hit.point.y - Mathf.Floor(player.HitInfo.hit.point.y), 0.0f))
-                    { 
-                        adjust = 0.0f;
+                    float y;
+                    if (playerIsAboveLadder)
+                    {
+                        y = Mathf.Round(player.groundedY);                        
+                        //Debug.Log($"y={y}");
                     }
-                    float y = Mathf.Floor(player.HitInfo.hit.point.y) + adjust + 0.007519f;//player.rb.gravityScale * -Physics2D.gravity.y * player.LadderPushUpForce * Time.fixedDeltaTime;                    
-
+                    else
+                    {
+                        float adjust = 1.0f;
+                        if (Platformer2DUtilities.AreNearlyEqual(player.GetBeneathObjectPosition().y - Mathf.Floor(player.GetBeneathObjectPosition().y), 0.0f))
+                        {
+                            adjust = 0.0f;
+                        }
+                        y = Mathf.Floor(player.GetBeneathObjectPosition().y) + adjust + 0.007519f;//player.rb.gravityScale * -Physics2D.gravity.y * player.LadderPushUpForce * Time.fixedDeltaTime;                    
+                    }
                     //player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
                     player.rb.isKinematic = true;
                     player.rb.MovePosition(new Vector2(player.transform.position.x + player.rb.velocity.x * Time.fixedDeltaTime, y));
 
-                    //Debug.Log($"Adjusting for ladders y={y} player.HitInfo.hit.point.y={player.HitInfo.hit.point.y}");
+                    //Debug.Log($"Adjusting for walking on ladders y={y} player.HitInfo.hit.point.y={player.HitInfo.hit.point.y}");
                     player.rb.gravityScale = 0.0f;
-
-                    //Debug.Log($"Adjusting for walking on ladder.");
-
-                    //Debug.Break();
+                   
                     return;
                 }
                 else
@@ -172,36 +162,35 @@ namespace JFM
                 float ladderX = Mathf.Floor(player.HitInfo.probePoint.x) + 0.5f - player.ColliderOffset.x;
                 //Debug.Log($"Climbing ladder... ladderX={ladderX}");
                 player.transform.position = new Vector3(ladderX, player.transform.position.y, player.transform.position.z);
-                player.ChangeState(player.ladderClimbingState);
+                player.ChangeState(player.states[STATE.LADDER]);
                 return;
             }
 
             if (player.WillClimbLadder())
             {
-                player.ChangeState(player.ladderClimbingState);
+                player.ChangeState(player.states[STATE.LADDER]);
                 return;
             }
 
             if (player.MoveInput.x == 0.0f)
             {
-                if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
-                player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down)
-                    )
+                if(player.IsAboveLadder())
                 {
                     resetGravityScale = false;
-                    player.idleState.resetGravityScaleWithOther = true;
-                    player.idleState.otherGravityScale = player.DefaultGravityScale;
+                    IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
+                    state.resetGravityScaleWithOther = true;
+                    state.otherGravityScale = player.DefaultGravityScale;
                     player.rb.gravityScale = 0.0f;
                     player.rb.totalForce = Vector2.zero;
                     player.rb.velocity = Vector2.zero;
-                    //Debug.Log("idling on ladder");
+                    Debug.Log("idling on ladder");
                 }
                 else
                 {
-                    //Debug.Log("not idling on ladder");
+                    Debug.Log("not idling on ladder");
                 }
 
-                player.ChangeState(player.idleState);
+                player.ChangeState(player.states[STATE.IDLE]);
                 return;
             }
                           
@@ -221,9 +210,7 @@ namespace JFM
                 lastposition = player.rb.position;
             }
             //Debug.Log($"player.rb.velocity.magnitude={player.rb.velocity.magnitude} player.rb.gravityScale={player.rb.gravityScale}");
-            //Debug.Log($"player.rb.gravityScale(3)={player.rb.gravityScale}");
-
-            
+            //Debug.Log($"player.rb.gravityScale(3)={player.rb.gravityScale}");   
         }
 
         public override void Exit()
@@ -243,7 +230,7 @@ namespace JFM
                 }
             }
             newGravityScale = oldGravityScale;
-            animator.SetBool("IsRunning", false);
+            player.animator.SetBool("IsRunning", false);
             willBreak = false;
             base.Exit();
         }

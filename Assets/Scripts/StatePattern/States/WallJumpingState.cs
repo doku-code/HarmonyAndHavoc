@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 namespace JFM
 {
@@ -10,20 +11,19 @@ namespace JFM
      * as his input will be in direction of the wall that initiated the walljump.
      * 
      * * * * * * * * * * * * * * */
+    [CreateAssetMenu(fileName = "WallJumpingState", menuName = "States/WallJumping")]
     public class WallJumpingState : PlayerState
     {
         private float startTime;
+        // In degrees
+        [SerializeField] private float wallJumpAngle = 45.0f;
+        [SerializeField] private float wallJumpDuration = 1.0f;
+        [SerializeField] private float wallJumpForce = 1.0f;
         
-        public WallJumpingState(Animator animator, PlayerController player)
-            : base(animator, player)
-        {
-            name = STATE.WALLJUMP;
-        }
-
         public override void Enter()
         {
-            animator.SetTrigger("Dash");
-            player.Jump();
+            player.animator.SetTrigger("Dash");
+            Jump();
             player.inputTriggers["Jump"] = false;
             startTime = Time.time;
 
@@ -33,58 +33,69 @@ namespace JFM
         public override void Update()
         {
 
-            if (player.IsCastGrounded(false))
+            if (player.IsGrounded())
             {
                 if (player.inputTriggers["Move"] && player.MoveInput.x != 0.0f && player.MoveInput.y == 0.0f)
                 {
+                    WalkingState state = (WalkingState)player.states[STATE.WALK];
                     if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
                     player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down)
                         )
                     {
-                        //resetGravityScale = false;
-                        player.walkingState.newGravityScale = 0.0f;
-                        player.walkingState.resetGravityScaleWithOther = true;
-                        player.walkingState.otherGravityScale = player.DefaultGravityScale;
+                        //resetGravityScale = false;                        
+                        state.newGravityScale = 0.0f;
+                        state.resetGravityScaleWithOther = true;
+                        state.otherGravityScale = player.DefaultGravityScale;
                         player.rb.gravityScale = 0.0f;
-                        Debug.Log("walking on ladder");
+                        //Debug.Log("walking on ladder");
                     }
                     else
                     {
-                        Debug.Log("not walking on ladder");
+                        //Debug.Log("not walking on ladder");
                     }
-                    player.ChangeState(player.walkingState);
+                    player.ChangeState(state);
                     return;
                 }
 
-                player.ChangeState(player.idleState);
+                player.ChangeState(player.states[STATE.IDLE]);
                 return;
             }
 
-            
-
-            if (player.WillGripToWall())// && player.inputTriggers["Move"])
+            if (player.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUseKnowledge())
             {
-                player.ChangeState(player.wallGrippingState);
+                player.UseKnowledge(AF.KnowledgeID.WALL_SLIDE);
                 return;
-            }                  
+            }
 
             if (player.WillJump())
             {
-                player.ChangeState(player.jumpingState);
+                player.ChangeState(player.states[STATE.JUMP]);
                 return;
             }
 
-            if(Time.time - startTime > player.WallJumpDuration)
+            if(Time.time - startTime > wallJumpDuration)
             {
-                player.ChangeState(player.airborneState);
+                AirborneState state = (AirborneState)player.states[STATE.AIRBORNE];
+                state.wasGrounded = false;
+                player.ChangeState(state);
                 return;
             }
         }
 
         public override void Exit()
         {
-            animator.ResetTrigger("Dash");
+            player.animator.ResetTrigger("Dash");
             base.Exit();
         }
+
+        private void Jump()
+        {
+            player.DepleteJumps();
+
+            float angle = wallJumpAngle * Mathf.Deg2Rad;            
+            Vector3 v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * wallJumpForce * 1.0f;
+            //Debug.Log($"JUMP from wall {player.IsFacingRight}  v={v}  cos(angle)={Mathf.Cos(angle)}");
+            player.rb.AddForce(v, ForceMode2D.Impulse);
+        }    
     }
 }

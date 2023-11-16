@@ -4,64 +4,72 @@ using UnityEngine;
 
 namespace JFM
 {
+    [CreateAssetMenu(fileName = "CrouchedAttackState", menuName = "States/CrouchedAttack")]
     public class CrouchedAttackState : PlayerState
     {
         private float startTime;
         private float animationClipLength;
-        private int animatorLayer = 2;
-        private string motionName = "Player_Crouch_Attack";
+        [SerializeField] private int animatorLayer = 2;
+        [SerializeField] private string motionName = "Player_Crouch_Attack";
 
-        public CrouchedAttackState(Animator animator, PlayerController player)
-            : base(animator, player)
-        {
-            name = STATE.CROUCH_ATTACK;
-        }
+        private bool resetAnimatorParams;
+        [SerializeField] private float clipLengthAdjustment = -0.02f;
 
         public override void Enter()
         {
-            animator.SetBool("IsCrouched", true);
-            animator.SetBool("IsAttacking", true);
+            player.animator.SetBool("IsCrouched", true);
+            player.animator.SetBool("IsAttacking", true);
 
             player.inputTriggers["BasicAttack"] = false;
             player.rb.velocity = Vector2.zero;
             startTime = Time.time;
+
+            resetAnimatorParams = true;
+
+            player.Attack();
 
             base.Enter();
         }
 
         public override void Update()
         {
-            if (!player.IsCastGrounded())
+            if (!player.IsGrounded())
             {
-                player.ChangeState(player.airborneState);
+                player.ChangeState(player.states[STATE.AIRBORNE]);
                 return;
             }
 
             if (!player.inputTriggers["Move"] || player.MoveInput.y >= 0.0f)
             {
-                player.ChangeState(player.idleState);
+                player.ChangeState(player.states[STATE.IDLE]);
                 return;
             }
 
             if (animationClipLength == 0.0f)
             {
-                if (animator.GetCurrentAnimatorStateInfo(animatorLayer).IsName(motionName))
+                if (player.animator.GetCurrentAnimatorStateInfo(animatorLayer).IsName(motionName))
                 {
-                    animationClipLength = animator.GetCurrentAnimatorStateInfo(animatorLayer).length;
+                    animationClipLength = player.animator.GetCurrentAnimatorStateInfo(animatorLayer).length;
                     Debug.Log($"Testing crouchedattack animationClipLength = {animationClipLength}");
                 }
+                Debug.Log($"animationClipLength={animationClipLength}");
             }
-            else if (Time.time - startTime >= animationClipLength)
+            else if (Time.time - startTime >= animationClipLength + clipLengthAdjustment)
             {
-                player.ChangeState(player.crouchedState);
+                Debug.Log($"{Time.time - startTime} >= {animationClipLength + clipLengthAdjustment}");
+                resetAnimatorParams = false;
+                player.ChangeState(player.states[STATE.CROUCH]);
                 return;
             }                        
         }
 
         public override void Exit()
         {
-            animator.SetBool("IsAttacking", false);
-            animator.SetBool("IsCrouched", false);
+            player.animator.SetBool("IsAttacking", false);
+            if (resetAnimatorParams)
+            {                
+                player.animator.SetBool("IsCrouched", false);
+            }
             base.Exit();
         }
     }

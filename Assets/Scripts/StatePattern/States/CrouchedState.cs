@@ -4,29 +4,28 @@ using UnityEngine;
 
 namespace JFM
 {
+    [CreateAssetMenu(fileName = "CrouchedState", menuName = "States/Crouched")]
     public class CrouchedState : PlayerState
     {
-        public CrouchedState(Animator animator, PlayerController player)
-            : base(animator, player)
-        {
-            name = STATE.CROUCH;
-        }
+        private bool resetAnimatorParams;
 
         public override void Enter()
         {
-            animator.SetBool("IsCrouched", true);
-            animator.SetBool("IsIdle", true);
+            player.animator.SetBool("IsCrouched", true);
+            //player.animator.SetBool("IsIdle", true);
 
             player.rb.velocity = Vector2.zero;
+
+            resetAnimatorParams = true;
 
             base.Enter();
         }
 
         public override void Update()
         {
-            if (!player.IsCastGrounded())
+            if (!player.IsGrounded())
             {
-                player.ChangeState(player.airborneState);
+                player.ChangeState(player.states[STATE.AIRBORNE]);
                 return;
             }
 
@@ -39,33 +38,38 @@ namespace JFM
             {
                 if (player.MoveInput.x != 0.0f)
                 {
-                    player.ChangeState(player.walkingState);
+                    player.ChangeState(player.states[STATE.WALK]);
                 }
                 else
                 {
-                    player.idleState.waitNFrames = 1;
-                    player.ChangeState(player.idleState);
+                    IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
+                    state.waitNFrames = 1;
+                    player.ChangeState(state);
                 }
                 return;
             }            
 
-            if (player.inputTriggers["BasicAttack"] && player.MoveInput.y < 0.0f)
+            if (player.WillAttack() && player.MoveInput.y < 0.0f)
             {
-                player.ChangeState(player.crouchedAttackState);
+                resetAnimatorParams = false;
+                player.ChangeState(player.states[STATE.CROUCH_ATTACK]);
                 return;
             }
 
             if (player.WillClimbDownLadder())
             {
-                player.ChangeState(player.ladderClimbingState);
+                player.ChangeState(player.states[STATE.LADDER]);
                 return;
             }
         }
 
         public override void Exit()
-        {            
-            animator.SetBool("IsCrouched", false);
-            animator.SetBool("IsIdle", false);
+        {
+            //player.animator.SetBool("IsIdle", false);
+            if (resetAnimatorParams)
+            {
+                player.animator.SetBool("IsCrouched", false);                
+            }
             base.Exit();
         }
     }

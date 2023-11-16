@@ -13,26 +13,21 @@ namespace JFM
      * 
      * A bug sometimes prevent Unity from updating the "Custom Physics Shapes" in the scene. To work around this,
      * select the problematic tilemap and uncheck and re-check "Used by composite" (or uncheck and re-check the 
-     * TilemapCollider2D component).
+     * TilemapCollider2D component or, as a last resort, remove and re-create that component).
      * 
      * * * * * * * * * * * * * * * * * * * */
+    [CreateAssetMenu(fileName = "StairsClimbingDownState", menuName = "States/StairsClimbingDown")]
     public class StairsClimbingDownState : PlayerState
     {        
         private int nFrames;
         private float stairsSlope;
         private bool addForceNotWorking;
         private float lastXPos;
-
-        public StairsClimbingDownState(Animator animator, PlayerController player)
-            : base(animator, player)
-        {
-            name = STATE.STAIRS_DOWN;
-        }
-
+        
         public override void Enter()
         {
             nFrames = 0;
-            animator.SetBool("IsRunning", true);           
+            player.animator.SetBool("IsRunning", true);           
             player.rb.velocity = Vector2.zero;
             player.rb.totalForce = Vector2.zero;
             addForceNotWorking = false;
@@ -51,7 +46,7 @@ namespace JFM
             Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
 
             bool foundStairsBeneath;
-            foundStairsBeneath =  player.FindSlopeBeneath(out float slope, Vector2.up * 0.02f + v * player.StairsDownGroundX, -v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, player.StairsDownHeight, false, (player.IsFacingRight ? -1.0f : 1.0f) * 45.0f);            
+            foundStairsBeneath =  Raycast2DHelper.FindSlopeBeneath(player.rb.position, out float slope, Vector2.up * 0.02f + v * player.StairsDownGroundX, -v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, player.StairsDownHeight, player.GroundLayer, (player.IsFacingRight ? -1.0f : 1.0f) * 45.0f, false);            
 
             if (foundStairsBeneath && nFrames == 0)
             {
@@ -61,9 +56,9 @@ namespace JFM
             }
 
             //player.stairsSide = foundStairsBeneath;
-            if (!player.IsCastGrounded(false) && !foundStairsBeneath)
+            if (!player.IsGrounded() && !foundStairsBeneath)
             {
-                player.ChangeState(player.airborneState);
+                player.ChangeState(player.states[STATE.AIRBORNE]);
                 //Debug.Log("Going Airborne");
                 //Debug.Break();
                 return;
@@ -71,7 +66,7 @@ namespace JFM
 
             if (player.MoveInput.x == 0.0f)
             {
-                player.ChangeState(player.idleState);
+                player.ChangeState(player.states[STATE.IDLE]);
                 return;
             }
 
@@ -84,19 +79,19 @@ namespace JFM
             {
                 //Debug.Log($"slope={slope}");
                 //Debug.Break();
-                player.ChangeState(player.walkingState);
+                player.ChangeState(player.states[STATE.WALK]);
                 return;
             }
 
             if (player.MoveInput.y < 0.0f)
             {
-                player.ChangeState(player.crouchedState);
+                player.ChangeState(player.states[STATE.CROUCH]);
                 return;
             }
 
-            if (player.WillDash())
+            if (player.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUseKnowledge())
             {
-                player.ChangeState(player.dashingState);
+                player.UseKnowledge(AF.KnowledgeID.DASH);
                 return;
             }
 
@@ -107,13 +102,13 @@ namespace JFM
 
             if (player.WillClimbLadder())
             {
-                player.ChangeState(player.ladderClimbingState);
+                player.ChangeState(player.states[STATE.LADDER]);
                 return;
             }            
 
             if (player.WillJump())
             {
-                player.ChangeState(player.jumpingState);
+                player.ChangeState(player.states[STATE.JUMP]);
                 return;
             }
 
@@ -162,7 +157,7 @@ namespace JFM
                     addForceNotWorking = true;
                     //player.rb.velocity += (v * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime) / player.rb.mass;
                     //Debug.Log($"Passage a la course.");
-                    //player.ChangeState(player.walkingState);
+                    //player.ChangeState(player.states[STATE.WALK]);
                     //return;
                     Debug.Log($"Passage a un angle de 0 degres.");
                     f = new Vector3(player.IsFacingRight ? 1.0f : -1.0f, 0.0f) * speed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
@@ -182,7 +177,7 @@ namespace JFM
 
         public override void Exit()
         {
-            animator.SetBool("IsRunning", false);
+            player.animator.SetBool("IsRunning", false);
             base.Exit();
         }
     }
