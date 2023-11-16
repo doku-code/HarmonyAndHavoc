@@ -76,7 +76,10 @@ namespace charles
                     displayPanel.SetActive(false);
                     controlPanel.SetActive(false);
                     Time.timeScale = 0;
-                   EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+                    if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
+                    {
+                        EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+                    }
                 }
                 else
                 {
@@ -88,7 +91,10 @@ namespace charles
                     displayPanel.SetActive(false);
                     controlPanel.SetActive(false);
                     Time.timeScale = 1;
-                   EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+                    if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
+                    {
+                        EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+                    }
                 }
             }
         }
@@ -101,7 +107,10 @@ namespace charles
             displayPanel.SetActive(false);
             controlPanel.SetActive(false);
             Time.timeScale = 1;
-            EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
+            {
+                EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+            }
         }
         public void ExitToMainMenu()
         {
@@ -116,7 +125,10 @@ namespace charles
             pausePanel.SetActive(false);
             settingsPanel.SetActive(true);
             soundPanel.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(settingFirstObj);
+            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
+            {
+                EventSystem.current.SetSelectedGameObject(settingFirstObj);
+            }
             Time.timeScale = 0;
         }
 
@@ -126,7 +138,10 @@ namespace charles
             pausePanel.SetActive(true);
             settingsPanel.SetActive(false);
             soundPanel.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
+            {
+                EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+            }
             Time.timeScale = 0;
         }
         #endregion
@@ -137,7 +152,10 @@ namespace charles
             pausePanel.SetActive(false);
             settingsPanel.SetActive(false);
             soundPanel.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(soundSettingsFirstObj);
+            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
+            {
+                EventSystem.current.SetSelectedGameObject(soundSettingsFirstObj);
+            }
             Time.timeScale = 0;
         }
         public void CloseSoundMenu()
@@ -146,7 +164,10 @@ namespace charles
             pausePanel.SetActive(false);
             settingsPanel.SetActive(true);
             soundPanel.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(settingFirstObj);
+            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
+            {
+                EventSystem.current.SetSelectedGameObject(settingFirstObj);
+            }
             Time.timeScale = 0;
         }
         #endregion
@@ -156,14 +177,20 @@ namespace charles
             SoundManager.Instance.PlayAClip(1);
             settingsPanel.SetActive(false);
             displayPanel.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(displayFirstObj);
+            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
+            {
+                EventSystem.current.SetSelectedGameObject(displayFirstObj);
+            }
         }
         public void CloseDisplayPanel()
         {
             SoundManager.Instance.PlayAClip(0);
             settingsPanel.SetActive(true);
             displayPanel.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(settingFirstObj);
+            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
+            {
+                EventSystem.current.SetSelectedGameObject(settingFirstObj);
+            }
         }
         #endregion
         #region controlFunc 

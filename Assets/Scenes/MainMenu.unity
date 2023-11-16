@@ -7400,7 +7400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1178184746
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8181,8 +8181,6 @@ MonoBehaviour:
   creditFirstObj: {fileID: 1715702789}
   displayFirstObj: {fileID: 0}
   controlFirstObj: {fileID: 230224725}
-  toggleBtnVSYNC: {fileID: 0}
-  qualityPreset: {fileID: 0}
   windowModePreset: {fileID: 1642229432}
   windowSizePreset: {fileID: 1457650468}
   ambientSlider: {fileID: 544533564}
@@ -11033,8 +11031,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1308255446}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: CloseCreditMenu
+        m_TargetAssemblyTypeName: AF.MainMenuManager, Assembly-CSharp
+        m_MethodName: OpenSettingsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
