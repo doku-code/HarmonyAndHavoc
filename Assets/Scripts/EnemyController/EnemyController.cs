@@ -10,26 +10,37 @@ namespace charles
         public int defense = 5;
 
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private Animator npcAnimator;
         private int currentHealth;
 
         private void Start()
         {
             currentHealth = maxHealth;
-            playerData = FindObjectOfType<PlayerData>();
         }
 
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.CompareTag("Player"))
+            {
+                Attack(playerData);
+                Debug.Log("this is a CRITICAL HIT");
+            }
+        }
         public void TakeDamage(int damage)
         {
-            int actualOrder = playerData.ActualOrder;
-            int armorUpgrade = playerData.ArmorUpgrade;
-
+           int actualOrder = playerData.ActualOrder;
+           int armorUpgrade = playerData.ArmorUpgrade;
            int damageTaken = Mathf.Max(0, damage - (defense + armorUpgrade));
+
            currentHealth -= damageTaken;
+
+            npcAnimator.SetTrigger("GetHit");
 
             if (currentHealth <= 0)
             {
                 Die();
             }
+            npcAnimator.ResetTrigger("GetHit");
         }
 
         public void Attack(PlayerData playerData)
