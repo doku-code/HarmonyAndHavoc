@@ -10,7 +10,7 @@ namespace JFM
     [CreateAssetMenu(fileName = "AirborneState", menuName = "States/Airborne")]
     public class AirborneState : PlayerState
     {
-        private bool wasOnLadder;
+        //private bool wasOnLadder;
         private int ladderX;
         [SerializeField] private float coyoteTime = 0.2f;
         private float coyoteTimeCounter;
@@ -24,12 +24,12 @@ namespace JFM
             if (player.CanClimbLadder())
             {
                 //Debug.Log("Ladders on airborne.Enter().");
-                wasOnLadder = true;
+                //wasOnLadder = true;
                 ladderX = Mathf.FloorToInt(player.GetBeneathObjectPosition().x);
             }
             else
             {
-                wasOnLadder = false;
+                //wasOnLadder = false;
             }
 
             if (wasGrounded)
@@ -289,12 +289,12 @@ namespace JFM
             if (player.CanClimbLadder())
             {
                 //Debug.Log("Ladders on airborne");
-                wasOnLadder = true;
+                //wasOnLadder = true;
                 ladderX = Mathf.FloorToInt(player.GetBeneathObjectPosition().x);
             }
             else
             {
-                wasOnLadder = false;
+                //wasOnLadder = false;
             }
 
             coyoteTimeCounter -= Time.fixedDeltaTime;

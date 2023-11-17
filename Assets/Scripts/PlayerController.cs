@@ -428,7 +428,7 @@ namespace JFM
         }
 
         public void OnHit()
-        {
+        {            
             ChangeState(states[PlayerState.STATE.HURT]);
         }
 
@@ -693,9 +693,8 @@ namespace JFM
                 Debug.Log($"Hit enemy named: {collision.gameObject.name}");
                 
                 EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
-                /*int damage = playerData.GetPlayerDamage(null);
-                enemyController.TakeDamage(damage);*/
-                
+                int damage = playerData.GetPlayerDamage(null);
+                enemyController.TakeDamage(damage);                
             }
         }
        
