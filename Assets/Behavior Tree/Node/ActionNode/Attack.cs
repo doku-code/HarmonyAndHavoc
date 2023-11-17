@@ -46,6 +46,8 @@ public class Attack : ActionNode
         }
         else if(distanceToPlayer > attackDistance)
         {
+            npcAnimator.SetBool("IsIdle", true);
+            npcAnimator.ResetTrigger(attackAnimString);
             return State.FAILURE;
         }
         else

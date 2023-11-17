@@ -64,8 +64,8 @@ MonoBehaviour:
   guid: c36d5546ed392904bb2d4710cd29d0e1
   position: {x: 208.70018, y: 622.80005}
   Description: 
-  attackCooldown: 3
-  attackDistance: 1.5
+  attackCooldown: 10
+  attackDistance: 5
   attackAnimString: Combo1
   playerLayer:
     serializedVersion: 2
@@ -211,8 +211,8 @@ MonoBehaviour:
   guid: 5863b2a2c288be34792b7943246fd25a
   position: {x: 509.20016, y: 623.30005}
   Description: 
-  attackCooldown: 3
-  attackDistance: 1.5
+  attackCooldown: 10
+  attackDistance: 5
   attackAnimString: Combo2
   playerLayer:
     serializedVersion: 2
@@ -234,7 +234,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f28ac2983ef447b4a8f806ff97500a35
-  position: {x: -60.99495, y: 623.50006}
+  position: {x: -63, y: 623.87506}
   Description: 
   runAnimString: Run
   playerLayer:

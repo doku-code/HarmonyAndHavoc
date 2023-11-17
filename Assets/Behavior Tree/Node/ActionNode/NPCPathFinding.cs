@@ -44,7 +44,7 @@ public class NPCPathFinding : ActionNode
             return State.FAILURE;
         }
 
-        RaycastHit2D hit = Physics2D.CircleCast(npc.transform.position, sphereCastRadius, moveDirection, Mathf.Infinity, playerLayer);
+        RaycastHit2D hit = Physics2D.CircleCast(npc.transform.position, sphereCastRadius, moveDirection, 1f, playerLayer);
 
         if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
@@ -71,7 +71,7 @@ public class NPCPathFinding : ActionNode
                 if (currentPOS >= POSPatrolRoute.Length)
                 {
                     npcRigidBody.velocity = Vector3.zero;
-                    return State.SUCCESS;
+                    return State.FAILURE;
                 }
             }
             return State.RUNNING;
