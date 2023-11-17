@@ -38257,8 +38257,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.5777, y: -0.2338, z: 0}
-    m_Extent: {x: 9.387, y: 1.5610001, z: 0}
+    m_Center: {x: 2.57495, y: -0.23775, z: 0}
+    m_Extent: {x: 9.38155, y: 1.56685, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -45440,7 +45440,7 @@ CapsuleCollider2D:
     m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -45634,8 +45634,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   attackDamage: 10
-  defense: 5
-  playerData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
 --- !u!1 &508404086
 GameObject:
   m_ObjectHideFlags: 0
@@ -47062,7 +47060,7 @@ CapsuleCollider2D:
     m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -47184,8 +47182,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 20
   attackDamage: 10
-  defense: 5
-  playerData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
 --- !u!61 &642116677
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -48723,7 +48719,7 @@ CapsuleCollider2D:
     m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -48917,8 +48913,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   attackDamage: 10
-  defense: 5
-  playerData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
 --- !u!1 &770438301
 GameObject:
   m_ObjectHideFlags: 0
@@ -50647,8 +50641,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 14.382101, y: 2.68435, z: 0}
-    m_Extent: {x: 22.0603, y: 5.11525, z: 0}
+    m_Center: {x: 14.3742485, y: 2.678, z: 0}
+    m_Extent: {x: 22.05415, y: 5.1093, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -123879,7 +123873,7 @@ CapsuleCollider2D:
     m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -124001,8 +123995,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   attackDamage: 10
-  defense: 5
-  playerData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
 --- !u!1 &1403753061
 GameObject:
   m_ObjectHideFlags: 0
@@ -126151,7 +126143,7 @@ CapsuleCollider2D:
     m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -126345,8 +126337,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   attackDamage: 10
-  defense: 5
-  playerData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
 --- !u!1 &1591980596
 GameObject:
   m_ObjectHideFlags: 0
