@@ -64,7 +64,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: b46bdc3aa3d6bb94099a378eb496ac61
-  position: {x: 304.74997, y: 405.12503}
+  position: {x: 564.00006, y: 405.00003}
   Description: 
   duration: 2
 --- !u!114 &-1765838445699744006
@@ -133,7 +133,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 49aa645fa9141524a8dc0afdcc2bcb6e
-  position: {x: 445.00006, y: 405.00006}
+  position: {x: 704.00006, y: 405.00003}
   Description: 
   attackCooldown: 3
   attackDistance: 2
@@ -142,6 +142,29 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Ghost_Warrior_3
+  comboSoundIdx: 0
+--- !u!114 &-121887772863220366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc0431ed6f4987408354e632155e0e4, type: 3}
+  m_Name: CheckForTarget
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 364fd3af24b87f34cae56941ba3ed6b1
+  position: {x: 238, y: 405.50003}
+  Description: 
+  attackDistance: 1.5
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Heavy_Armor
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +192,7 @@ MonoBehaviour:
   - {fileID: -3548162509286098302}
   - {fileID: 7694874196674162806}
   - {fileID: -291180253881657381}
+  - {fileID: -121887772863220366}
 --- !u!114 &307739543805387224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +208,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 762692e0698065545a33d43fd20aad41
-  position: {x: 166.50006, y: 405.00006}
+  position: {x: 425.50006, y: 405.00003}
   Description: 
   attackCooldown: 3
   attackDistance: 2
@@ -193,6 +217,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Ghost_Warrior_3
+  comboSoundIdx: 0
 --- !u!114 &756034219687333489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +240,7 @@ MonoBehaviour:
   - {fileID: -3548162509286098302}
   - {fileID: -291180253881657381}
   - {fileID: 7694874196674162806}
+  - {fileID: -121887772863220366}
 --- !u!114 &2905690423338725693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +315,6 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: b28ccceda747cb345b0a9d2bc54c18a3
-  position: {x: 580.0002, y: 405.50006}
+  position: {x: 838.99994, y: 405.50003}
   Description: 
   duration: 2
