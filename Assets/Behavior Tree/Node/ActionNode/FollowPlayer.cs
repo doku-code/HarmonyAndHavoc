@@ -21,7 +21,6 @@ public class FollowPlayer : ActionNode
     private GameObject npc;
     private GameObject player;
     private Rigidbody2D npcRigidBody;
-    private SpriteRenderer npcSpriteRenderer;
 
     protected override void OnStart()
     {
@@ -29,7 +28,6 @@ public class FollowPlayer : ActionNode
         npc = GameObject.Find(gameobjNpcName);
         npcAnimator = npc.GetComponent<Animator>();
         npcRigidBody = npc.GetComponent<Rigidbody2D>();
-        npcSpriteRenderer = npc.GetComponent<SpriteRenderer>();
     }
 
     protected override void OnStop() { }
@@ -69,7 +67,6 @@ public class FollowPlayer : ActionNode
         if (hit.collider == null && !followOnY)
         {
             npcRigidBody.velocity = Vector2.zero;
-            npcRigidBody.totalForce = Vector2.zero;
 
             return State.RUNNING;
         }
