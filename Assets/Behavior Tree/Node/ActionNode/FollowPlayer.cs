@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FollowPlayer : ActionNode
@@ -42,12 +43,13 @@ public class FollowPlayer : ActionNode
 
         if (player.transform.position.x > npc.transform.position.x)
         {
-            npcSpriteRenderer.flipX = false;
+            npc.transform.localScale = new Vector3(1,1,1);
         }
         else
         {
-            npcSpriteRenderer.flipX = true;
+            npc.transform.localScale = new Vector3(-1, 1, 1);
             vecDirection = -vecDirection;
+
         }
 
         if (distanceX > maxDistance || distanceX < -maxDistance)

@@ -57,14 +57,13 @@ public class NPCPathFinding : ActionNode
 
 
             if (moveDirection.x > 0)
-            {
-                npcSpriteRenderer.flipX = false;
+            { 
+                npc.transform.localScale = new Vector3(1,1,1);
             }
             else if (moveDirection.x < 0)
             {
-                npcSpriteRenderer.flipX = true;
+                npc.transform.localScale = new Vector3(-1, 1, 1);
             }
-
             if (Vector2.Distance(npc.transform.position, targetPOS) < 1f)
             {
                 currentPOS++;
