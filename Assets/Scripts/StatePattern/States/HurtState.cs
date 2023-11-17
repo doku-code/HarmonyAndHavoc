@@ -30,7 +30,7 @@ namespace JFM
             Vector2 normal = Platformer2DUtilities.GetPerpendicularVector2(pushDirection).normalized;
             normal = new Vector2 (MathF.Abs(normal.x), MathF.Abs(normal.y));
             player.rb.velocity = new Vector2(player.rb.velocity.x * normal.x, player.rb.velocity.y * normal.y);
-            Debug.Log($"player.rb.velocity={player.rb.velocity}");
+            //Debug.Log($"player.rb.velocity={player.rb.velocity}");
             player.rb.AddForce(pushDirection * throwBackImpulse, ForceMode2D.Impulse);
 
             base.Enter();

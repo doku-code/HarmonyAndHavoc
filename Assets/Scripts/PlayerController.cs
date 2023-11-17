@@ -320,7 +320,7 @@ namespace JFM
         public void Turn()
         {
             isFacingRight = !isFacingRight;
-            GetComponent<SpriteRenderer>().flipX = !isFacingRight;
+            transform.localScale = new Vector3(isFacingRight ? 1 : -1, 1.0f, 1.0f);
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
 
@@ -423,7 +423,7 @@ namespace JFM
             {
                 playerData.TakeDamage(damage);
                 HurtState state = (HurtState)states[PlayerState.STATE.HURT];
-                state.pushDirection = pushDirection;
+                state.pushDirection = pushDirection.normalized;
             }
         }
 
@@ -688,16 +688,29 @@ namespace JFM
         
         public void OnTriggerEnter2D(Collider2D collision)
         {
+            Debug.Log($"OnTriggerEnter2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
+
             if(collision is not null && collision.gameObject.CompareTag("Enemy"))
             {
                 Debug.Log($"Hit enemy named: {collision.gameObject.name}");
                 
                 EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
                 int damage = playerData.GetPlayerDamage(null);
-                enemyController.TakeDamage(damage);                
+                Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
+                enemyController.TakeDamage(damage, pushDirection);
             }
         }
-       
+
+        public void OnTriggerStay2D(Collider2D collision)
+        {
+            Debug.Log("OnTriggerStay2D");
+        }
+
+        public void OnTriggerExit2D(Collider2D collision)
+        {
+            Debug.Log("OnTriggerExit2D");
+        }
+
         void Awake()
         {
             animator = GetComponent<Animator>();

@@ -2,6 +2,7 @@ using AF;
 using UnityEngine;
 using JFM;
 using System.Collections;
+using System;
 
 namespace charles
 {
@@ -13,6 +14,9 @@ namespace charles
         private Animator npcAnimator;
         private int currentHealth;
 
+        [Range(0.0f, 10.0f)]
+        [SerializeField] private float pushBackImpulse;
+
         private void Start()
         {
             npcAnimator = GetComponent<Animator>();
@@ -21,13 +25,15 @@ namespace charles
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.CompareTag("Player"))
+            if(collision.CompareTag("Player") && collision is CapsuleCollider2D)
             {
-                Attack(collision.gameObject.GetComponent<PlayerController>(), Vector2.right * Mathf.Sign(collision.transform.position.x - transform.position.x));
+                Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
+                Attack(collision.gameObject.GetComponent<PlayerController>(), pushDirection);
                 Debug.Log("this is a CRITICAL HIT");
             }
         }
-        public void TakeDamage(int damage)
+
+        public void TakeDamage(int damage, Vector2 pushDirection)
         {
             currentHealth -= Mathf.Max(0, damage);
             npcAnimator.SetTrigger("GetHit");
@@ -36,7 +42,11 @@ namespace charles
             {
                 Die();
             }
-            npcAnimator.ResetTrigger("GetHit");
+            else
+            {
+                PushBack(pushDirection);
+            }
+            Debug.Log($"currentHealth={currentHealth}");
         }
 
         public void Attack(PlayerController player, Vector2 direction)
@@ -51,11 +61,19 @@ namespace charles
         }
 
         private IEnumerator DestroyAfterAnim(float waitTime)
-        {
-            
+        {            
             yield return new WaitForSeconds(waitTime);
             Destroy(gameObject);
+        }
 
+        private void PushBack(Vector2 pushDirection)
+        {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            Vector2 normal = Platformer2DUtilities.GetPerpendicularVector2(pushDirection).normalized;
+            normal = new Vector2(MathF.Abs(normal.x), MathF.Abs(normal.y));
+            rb.velocity = new Vector2(rb.velocity.x * normal.x, rb.velocity.y * normal.y);
+            //Debug.Log($"rb.velocity={rb.velocity}");
+            rb.AddForce(pushDirection * pushBackImpulse, ForceMode2D.Impulse);
         }
     }
 }
