@@ -40,7 +40,10 @@ public class Attack : ActionNode
                 isCooldown = true;
                 lastAttackTime = Time.time;
                 hasAttacked = true;
-                SoundManager.Instance.PlayNpcSounds(comboSoundIdx);
+                if (SoundManager.Instance is not null)
+                {
+                    SoundManager.Instance.PlayNpcSounds(comboSoundIdx);
+                }
                 return State.RUNNING;
             }
         }
