@@ -36,6 +36,22 @@ namespace AF
             StartCoroutine(LoadYourAsyncScene(mapToLoad, spawnPosition));
         }
 
+        public void LoadGame()
+        {
+            LoadNextMap("Village", SpawnerPosition.END);
+            LoadSceneMenu();
+        }
+
+        public void LoadSceneMenu()
+        {
+            SceneManager.LoadScene("InGameUI", LoadSceneMode.Additive);
+        }
+
+        public void UnloadSceneMenu()
+        {
+            SceneManager.UnloadSceneAsync("InGameUI");
+        }
+
         public void PlacePlayer(SpawnerPosition spawnPosition)
         {
             player = GameObject.FindWithTag("Player");
@@ -75,6 +91,18 @@ namespace AF
             GetCurrentMapManager();
             PlacePlayer(spawnPosition);
             actualMap = sceneName;
+            
+            if(sceneName == "InGameUI")
+                UnloadSceneMenu();
+        }
+        
+        public void ExitGame()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
         }
     }
 }

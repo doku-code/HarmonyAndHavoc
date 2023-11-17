@@ -214,7 +214,7 @@ namespace AF
 
         public void MakeNewGame()
         {
-            GameManager.Instance.LoadNextMap("Village", SpawnerPosition.END);
+            GameManager.Instance.LoadGame();
         }
 
         public void ExitGame()

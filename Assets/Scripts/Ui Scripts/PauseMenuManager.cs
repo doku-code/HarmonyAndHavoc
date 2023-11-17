@@ -16,22 +16,27 @@ namespace charles
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private InputActionReference[] actionsToRebind;
 
-        [Header("Panel"), Tooltip("This is where all the panel goes")]
-        [SerializeField] private GameObject pausePanel;
+        [Header("Panel"), Tooltip("This is where all the panel goes")] [SerializeField]
+        private GameObject pausePanel;
+
         [SerializeField] private GameObject settingsPanel;
         [SerializeField] private GameObject soundPanel;
         [SerializeField] private GameObject displayPanel;
         [SerializeField] private GameObject controlPanel;
 
-        [Header("Event System Object"), Tooltip("It is use to change the main selected object in eventSystem GameObject")]
-        [SerializeField] private GameObject pauseMenuFirstObj;
+        [Header("Event System Object"),
+         Tooltip("It is use to change the main selected object in eventSystem GameObject")]
+        [SerializeField]
+        private GameObject pauseMenuFirstObj;
+
         [SerializeField] private GameObject settingFirstObj;
         [SerializeField] private GameObject soundSettingsFirstObj;
         [SerializeField] private GameObject displayFirstObj;
         [SerializeField] private GameObject controlFirstObj;
 
-        [Header("Display Settings UI"), Tooltip("Different UI element to change display/Sound")]
-        [SerializeField] private Toggle toggleBtnVSYNC;
+        [Header("Display Settings UI"), Tooltip("Different UI element to change display/Sound")] [SerializeField]
+        private Toggle toggleBtnVSYNC;
+
         [SerializeField] private TMP_Dropdown qualityPreset;
         [SerializeField] private TMP_Dropdown windowModePreset;
         [SerializeField] private TMP_Dropdown windowSizePreset;
@@ -39,42 +44,54 @@ namespace charles
         [SerializeField] private Slider fxSlider;
         [SerializeField] private Slider masterSlider;
 
-        [Header("Keyboard Rebinding button"), Tooltip("A array of button that action will go in")]
-        [SerializeField] private Button[] actionBtn;
+        [Header("Keyboard Rebinding button"), Tooltip("A array of button that action will go in")] [SerializeField]
+        private Button[] actionBtn;
 
-        [Header("Keyboard Rebinding text"), Tooltip("Text array for the button mapping")]
-        [SerializeField] private TMP_Text[] actionBtnText;
+        [Header("Keyboard Rebinding text"), Tooltip("Text array for the button mapping")] [SerializeField]
+        private TMP_Text[] actionBtnText;
+
+        [Space] [SerializeField] private GameObject InventoryPanel; 
 
         void Start()
         {
             InitializeMixerAtStart();
-            DontDestroyOnLoad(this);
             EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
             Application.targetFrameRate = -1;
         }
+
         void InitializeMixerAtStart()
         {
-            SoundManager.Instance.LoadSoundSetting(masterSlider, SoundManager.Instance.sMasterVolume);
-            SoundManager.Instance.LoadSoundSetting(fxSlider, SoundManager.Instance.sFXVolume);
-            SoundManager.Instance.LoadSoundSetting(ambientSlider, SoundManager.Instance.sAmbientVolume);
-            SoundManager.Instance.SetMasterVolume(masterSlider.value);
-            SoundManager.Instance.SetFXVolume(fxSlider.value);
-            SoundManager.Instance.SetAmbientVolume(ambientSlider.value);
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.LoadSoundSetting(masterSlider, SoundManager.Instance.sMasterVolume);
+                SoundManager.Instance.LoadSoundSetting(fxSlider, SoundManager.Instance.sFXVolume);
+                SoundManager.Instance.LoadSoundSetting(ambientSlider, SoundManager.Instance.sAmbientVolume);
+                SoundManager.Instance.SetMasterVolume(masterSlider.value);
+                SoundManager.Instance.SetFXVolume(fxSlider.value);
+                SoundManager.Instance.SetAmbientVolume(ambientSlider.value);
+            }
         }
+
         #region PauseFunc
+
         public void PauseMenu(CallbackContext value)
         {
             if (value.performed)
             {
                 if (!isPauseMenuOpen)
                 {
-                    SoundManager.Instance.PlayAClip(1);
+                    if (SoundManager.Instance != null)
+                        SoundManager.Instance.PlayAClip(1);
                     isPauseMenuOpen = true;
                     pausePanel.SetActive(true);
                     settingsPanel.SetActive(false);
                     soundPanel.SetActive(false);
                     displayPanel.SetActive(false);
                     controlPanel.SetActive(false);
+                    InventoryPanel.SetActive(false);
+                    Debug.Log("Opening the pause menu");
+
+                    //Pause the Game
                     Time.timeScale = 0;
                     if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
                     {
@@ -83,13 +100,16 @@ namespace charles
                 }
                 else
                 {
-                    SoundManager.Instance.PlayAClip(1);
+                    if (SoundManager.Instance != null)
+                        SoundManager.Instance.PlayAClip(1);
                     isPauseMenuOpen = false;
                     pausePanel.SetActive(false);
                     settingsPanel.SetActive(false);
                     soundPanel.SetActive(false);
                     displayPanel.SetActive(false);
                     controlPanel.SetActive(false);
+
+                    //Unpause the Game
                     Time.timeScale = 1;
                     if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
                     {
@@ -98,6 +118,7 @@ namespace charles
                 }
             }
         }
+
         public void ContinueGame()
         {
             isPauseMenuOpen = false;
@@ -112,13 +133,17 @@ namespace charles
                 EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
             }
         }
+
         public void ExitToMainMenu()
         {
             Time.timeScale = 1;
-            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+            GameManager.Instance.LoadNextMap("MainMenu", SpawnerPosition.END);
         }
+
         #endregion
+
         #region settingFunc
+
         public void OpenSettingsMenu()
         {
             SoundManager.Instance.PlayAClip(1);
@@ -129,6 +154,7 @@ namespace charles
             {
                 EventSystem.current.SetSelectedGameObject(settingFirstObj);
             }
+
             Time.timeScale = 0;
         }
 
@@ -142,10 +168,14 @@ namespace charles
             {
                 EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
             }
+
             Time.timeScale = 0;
         }
+
         #endregion
+
         #region soundFunc
+
         public void OpenSoundMenu()
         {
             SoundManager.Instance.PlayAClip(1);
@@ -156,8 +186,10 @@ namespace charles
             {
                 EventSystem.current.SetSelectedGameObject(soundSettingsFirstObj);
             }
+
             Time.timeScale = 0;
         }
+
         public void CloseSoundMenu()
         {
             SoundManager.Instance.PlayAClip(0);
@@ -168,10 +200,14 @@ namespace charles
             {
                 EventSystem.current.SetSelectedGameObject(settingFirstObj);
             }
+
             Time.timeScale = 0;
         }
+
         #endregion
+
         #region displayFunc
+
         public void OpenDisplayPanel()
         {
             SoundManager.Instance.PlayAClip(1);
@@ -182,6 +218,7 @@ namespace charles
                 EventSystem.current.SetSelectedGameObject(displayFirstObj);
             }
         }
+
         public void CloseDisplayPanel()
         {
             SoundManager.Instance.PlayAClip(0);
@@ -192,29 +229,39 @@ namespace charles
                 EventSystem.current.SetSelectedGameObject(settingFirstObj);
             }
         }
+
         #endregion
-        #region controlFunc 
+
+        #region controlFunc
+
         public void OpenControlSetting()
         {
-            SoundManager.Instance.PlayAClip(1);
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlayAClip(1);
             settingsPanel.SetActive(false);
             controlPanel.SetActive(true);
             EventSystem.current.SetSelectedGameObject(controlFirstObj);
             Time.timeScale = 0;
         }
+
         public void CloseControlSetting()
         {
-            SoundManager.Instance.PlayAClip(0);
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlayAClip(0);
             settingsPanel.SetActive(true);
             controlPanel.SetActive(false);
             EventSystem.current.SetSelectedGameObject(settingFirstObj);
             Time.timeScale = 0;
         }
+
         #endregion
+
         #region displaySetting
+
         public void ChangeWindowMode()
         {
-            SoundManager.Instance.PlayAClip(0);
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlayAClip(0);
             switch (windowModePreset.value)
             {
                 case 0:
@@ -229,9 +276,11 @@ namespace charles
                     break;
             }
         }
+
         public void ChangeWindowSize()
         {
-            SoundManager.Instance.PlayAClip(0);
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlayAClip(0);
             switch (windowSizePreset.value)
             {
                 case 0:
@@ -266,22 +315,29 @@ namespace charles
                     break;
             }
         }
+
         #endregion
+
         #region soundVolumeFunc
+
         public void SetAmbientVolume()
         {
-            SoundManager.Instance.SetAmbientVolume(ambientSlider.value);
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.SetAmbientVolume(ambientSlider.value);
         }
 
         public void SetFXVolume()
         {
-            SoundManager.Instance.SetFXVolume(fxSlider.value);
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.SetFXVolume(fxSlider.value);
         }
 
         public void SetMasterVolume()
         {
-            SoundManager.Instance.SetMasterVolume(masterSlider.value);
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.SetMasterVolume(masterSlider.value);
         }
+
         #endregion
 
         public void ExitGame()
