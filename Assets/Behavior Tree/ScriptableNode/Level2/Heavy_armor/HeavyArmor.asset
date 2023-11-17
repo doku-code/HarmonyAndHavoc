@@ -64,7 +64,7 @@ MonoBehaviour:
   guid: c36d5546ed392904bb2d4710cd29d0e1
   position: {x: 528.9001, y: 620.5501}
   Description: 
-  attackCooldown: 10
+  attackCooldown: 5
   attackDistance: 5
   attackAnimString: Combo1
   playerLayer:
@@ -105,10 +105,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 77ea8e3b0e7f23644bba0198703fc3da
-  position: {x: 332.15506, y: 381.78}
+  position: {x: 333.52087, y: 383.12088}
   Description: 
   children:
   - {fileID: -5352508940015951760}
+  - {fileID: 4602896285783009515}
   - {fileID: -8131785073684598081}
   - {fileID: -7908638253277502157}
   - {fileID: 1726868002727036595}
@@ -236,7 +237,7 @@ MonoBehaviour:
   guid: 5863b2a2c288be34792b7943246fd25a
   position: {x: 828.9, y: 620.5501}
   Description: 
-  attackCooldown: 10
+  attackCooldown: 5
   attackDistance: 5
   attackAnimString: Combo2
   playerLayer:
@@ -311,6 +312,6 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 838e5eb590fe00341b4aab5673f30480
-  position: {x: 0, y: 0}
+  position: {x: 375.40332, y: 626.855}
   Description: 
   duration: 1
