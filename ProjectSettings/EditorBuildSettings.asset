@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/BuildScenes/MainMenu.unity
     guid: 410c9fa19b66f3843be483b381ffb6f2
   - enabled: 1
-    path: Assets/Scenes/Village.unity
+    path: Assets/Scenes/BuildScenes/Village.unity
     guid: 52dc0f38397ae1140b71549e2e9ee660
   - enabled: 1
-    path: Assets/Scenes/Lvl1.unity
+    path: Assets/Scenes/BuildScenes/Lvl1.unity
     guid: 322d74028f1a8f64384aecc1997f81cf
   - enabled: 1
     path: Assets/Scenes/Level2.unity
@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Level2-JF.unity
     guid: 0e1105d0605ecc94b83216fb2629378b
   - enabled: 1
-    path: Assets/Scenes/InGameUI.unity
+    path: Assets/Scenes/BuildScenes/InGameUI.unity
     guid: ac7747d6fdebef74fa0505c22d796050
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f031fcdeeadc3804aaed37002907b158, type: 2}

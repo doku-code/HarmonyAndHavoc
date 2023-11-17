@@ -14,7 +14,7 @@ namespace AF
     {
         private MapManager currentMapManager;
         private GameObject player;
-        [NonSerialized] public string actualMap;
+        [NonSerialized] public string actualMap = "MainMenu";
         
         public static GameManager Instance { get; private set; }
         
@@ -87,13 +87,16 @@ namespace AF
                 }
                 yield return null;
             }
-            
+
             GetCurrentMapManager();
             PlacePlayer(spawnPosition);
             actualMap = sceneName;
+            LoadSceneMenu();
             
             if(sceneName == "InGameUI")
+            {
                 UnloadSceneMenu();
+            }
         }
         
         public void ExitGame()
