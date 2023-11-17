@@ -62,7 +62,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: c36d5546ed392904bb2d4710cd29d0e1
-  position: {x: 208.70018, y: 622.80005}
+  position: {x: 528.9001, y: 620.5501}
   Description: 
   attackCooldown: 10
   attackDistance: 5
@@ -87,7 +87,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f23e3df69822c914f9bcd02df8b1b30a
-  position: {x: 358.70023, y: 623.30005}
+  position: {x: 678.9001, y: 620.5501}
   Description: 
   duration: 3
 --- !u!114 &-7141807025453075890
@@ -105,12 +105,35 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 77ea8e3b0e7f23644bba0198703fc3da
-  position: {x: 333.00003, y: 372.00003}
+  position: {x: 332.15506, y: 381.78}
   Description: 
   children:
+  - {fileID: -5352508940015951760}
   - {fileID: -8131785073684598081}
   - {fileID: -7908638253277502157}
   - {fileID: 1726868002727036595}
+--- !u!114 &-5352508940015951760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8da4b99ece21cc4cb11bae562ac00dd, type: 3}
+  m_Name: CheckForTarget
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 168a8ad01b24c7b4db603c8431bf1e88
+  position: {x: 222.645, y: 624.5801}
+  Description: 
+  attackDistance: 5
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Heavy_Armor
 --- !u!114 &-3433201973347223546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +217,8 @@ MonoBehaviour:
   - {fileID: -3433201973347223546}
   - {fileID: 2938262784184732301}
   - {fileID: -2890361811100226328}
+  - {fileID: -5352508940015951760}
+  - {fileID: 4602896285783009515}
 --- !u!114 &1726868002727036595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +234,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 5863b2a2c288be34792b7943246fd25a
-  position: {x: 509.20016, y: 623.30005}
+  position: {x: 828.9, y: 620.5501}
   Description: 
   attackCooldown: 10
   attackDistance: 5
@@ -271,3 +296,21 @@ MonoBehaviour:
   Description: 
   children:
   - {fileID: -9075726142348930968}
+--- !u!114 &4602896285783009515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640ac424bf086f846bc71dfb4524525e, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 838e5eb590fe00341b4aab5673f30480
+  position: {x: 0, y: 0}
+  Description: 
+  duration: 1

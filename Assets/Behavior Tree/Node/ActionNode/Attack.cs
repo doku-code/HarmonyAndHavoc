@@ -11,7 +11,7 @@ public class Attack : ActionNode
     public int comboSoundIdx;
 
     private Animator npcAnimator;
-    private bool isCooldown = false;
+    private bool isCooldown = true;
     private bool hasAttacked = false;
     private float lastAttackTime = 0f;
     private GameObject npc;
@@ -26,8 +26,10 @@ public class Attack : ActionNode
         npcAnimator = npc.GetComponent<Animator>();
         npcRigidBody = npc.GetComponent<Rigidbody2D>();
         npcSpriteRenderer = npc.GetComponent<SpriteRenderer>();
+        
     }
-    protected override void OnStop(){}
+    protected override void OnStop() {}
+
     protected override State OnUpdate()
     {
         float distanceToPlayer = Vector3.Distance(npc.transform.position, player.transform.position);
@@ -36,6 +38,7 @@ public class Attack : ActionNode
         {
             if (!isCooldown)
             {
+                npcAnimator.ResetTrigger(attackAnimString);
                 npcAnimator.SetTrigger(attackAnimString);
                 isCooldown = true;
                 lastAttackTime = Time.time;
@@ -50,14 +53,12 @@ public class Attack : ActionNode
         else if(distanceToPlayer > attackDistance)
         {
             npcAnimator.SetBool("IsIdle", true);
-            npcAnimator.ResetTrigger(attackAnimString);
             return State.FAILURE;
         }
         else
         {
             if (hasAttacked && npcAnimator.GetCurrentAnimatorStateInfo(0).length <= Time.time - lastAttackTime)
             {
-                npcAnimator.ResetTrigger(attackAnimString);
                 npcAnimator.SetBool("IsIdle", true);
                 hasAttacked = false;
 
