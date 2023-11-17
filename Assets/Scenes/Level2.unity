@@ -38257,8 +38257,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.5791001, y: -0.23614997, z: 0}
-    m_Extent: {x: 9.390301, y: 1.56025, z: 0}
+    m_Center: {x: 2.5787, y: -0.23825002, z: 0}
+    m_Extent: {x: 9.3927, y: 1.55335, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -38817,34 +38817,6 @@ PrefabInstance:
     - target: {fileID: 1219532753481392680, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1595143377643639229, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: dashForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1595143377643639229, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: baseNumJumps
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1595143377643639229, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: groundDashForce
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1595143377643639229, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: groundDashAcceleration
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 1595143377643639229, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: groundDashDeceleration
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 1595143377643639229, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: groundDashBailOutNormalizedTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5880637116911839396, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -50675,8 +50647,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 14.379351, y: 2.68035, z: 0}
-    m_Extent: {x: 22.048151, y: 5.10975, z: 0}
+    m_Center: {x: 14.38295, y: 2.6815, z: 0}
+    m_Extent: {x: 22.04945, y: 5.1057, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
