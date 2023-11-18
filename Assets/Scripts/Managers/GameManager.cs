@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 namespace AF
 {
+    public delegate void ParametersLessDelegate();
+
     public enum SpawnerPosition
     {
         BEGIN,
@@ -13,7 +16,7 @@ namespace AF
     public class GameManager : MonoBehaviour
     {
         private MapManager currentMapManager;
-        private GameObject player;
+        [SerializeField] private GameObject player;
         [NonSerialized] public string actualMap = "MainMenu";
         
         public static GameManager Instance { get; private set; }
@@ -33,13 +36,24 @@ namespace AF
 
         public void LoadNextMap(string mapToLoad, SpawnerPosition spawnPosition)
         {
-            StartCoroutine(LoadYourAsyncScene(mapToLoad, spawnPosition));
+            StartCoroutine(LoadYourAsyncScene(mapToLoad, () =>
+                {
+                    GetCurrentMapManager();
+                    PlacePlayer(spawnPosition);
+                    actualMap = mapToLoad;
+                    LoadSceneMenu();
+
+                    if (mapToLoad == "InGameUI")
+                    {
+                        UnloadSceneMenu();
+                    }
+                }
+            ));
         }
 
         public void LoadGame()
         {
-            LoadNextMap("Village", SpawnerPosition.END);
-            LoadSceneMenu();
+            LoadNextMap("Village", SpawnerPosition.END);            
         }
 
         public void LoadSceneMenu()
@@ -54,16 +68,18 @@ namespace AF
 
         public void PlacePlayer(SpawnerPosition spawnPosition)
         {
-            player = GameObject.FindWithTag("Player");
-            
+            //player = GameObject.FindWithTag("Player");
+            GameObject playerGO = Instantiate(player);
+            FindAnyObjectByType<CinemachineVirtualCamera>().Follow = playerGO.transform;
+
             switch (spawnPosition)
             {
                 case SpawnerPosition.BEGIN:
-                    player.transform.position = 
+                    playerGO.transform.position = 
                         currentMapManager.spawnerBegin.transform.position;
                     break;
                 case SpawnerPosition.END:
-                    player.transform.position = 
+                    playerGO.transform.position = 
                         currentMapManager.spawnerEnd.transform.position;
                     break;
             }
@@ -74,7 +90,7 @@ namespace AF
             currentMapManager = FindObjectOfType<MapManager>();
         }
 
-        public IEnumerator LoadYourAsyncScene(string sceneName, SpawnerPosition spawnPosition)
+        public IEnumerator LoadYourAsyncScene(string sceneName, ParametersLessDelegate callback)
         {
             AsyncOperation aSyncLoad = SceneManager.LoadSceneAsync(sceneName);
             aSyncLoad.allowSceneActivation = false;
@@ -88,17 +104,12 @@ namespace AF
                 yield return null;
             }
 
-            GetCurrentMapManager();
-            PlacePlayer(spawnPosition);
-            actualMap = sceneName;
-            LoadSceneMenu();
-            
-            if(sceneName == "InGameUI")
+            if(callback is not null)
             {
-                UnloadSceneMenu();
+                callback();
             }
-        }
-        
+        }        
+
         public void ExitGame()
         {
 #if UNITY_EDITOR

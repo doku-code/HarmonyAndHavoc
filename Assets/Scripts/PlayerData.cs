@@ -31,8 +31,7 @@ namespace AF
         [SerializeField] private int orderUpgradeValue;
         [SerializeField] private int playerBaseDamage;
         [SerializeField] private Knowledge[] knowledgeBank;
-        
-        public delegate void ParametersLessDelegate();
+                
         public ParametersLessDelegate OnDeadDelegate;
         
         public ParametersLessDelegate OnHitDelegate;

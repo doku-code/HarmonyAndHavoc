@@ -55,7 +55,7 @@ namespace charles
         void Start()
         {
             InitializeMixerAtStart();
-            EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+            //EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
             Application.targetFrameRate = -1;
         }
 
