@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 namespace AF
@@ -16,9 +17,9 @@ namespace AF
         DEFAULT
     }
 
-    public enum AvalaibleKnowledgePosition
+    public enum AvailableKnowledgePosition
     {
-        NOT_AVALAIBLE,
+        NOT_AVAILABLE,
         POSITION1,
         POSITION2,
         POSITION3,
@@ -29,16 +30,26 @@ namespace AF
     public class PlayerData : ScriptableObject
     {
         [SerializeField] private int orderUpgradeValue;
+        public int OrderUpgradeValue
+        { 
+          get { return orderUpgradeValue; } 
+          set { orderUpgradeValue = value; } 
+        }
+
         [SerializeField] private int playerBaseDamage;
+        public int PlayerBaseDamage
+        {
+            get { return playerBaseDamage; }
+            set { playerBaseDamage = value; }
+        }
+
         [SerializeField] private Knowledge[] knowledgeBank;
-                
+
         public ParametersLessDelegate OnDeadDelegate;
-        
         public ParametersLessDelegate OnHitDelegate;
-        
-        
+
         public Dictionary<KnowledgeID, bool> KnownKnowledgeDictionary { get; set; }
-        public Dictionary<KnowledgeID, AvalaibleKnowledgePosition> AvalaibleKnowledgeDictionary;
+        public Dictionary<KnowledgeID, AvailableKnowledgePosition> AvailableKnowledgeDictionary;
         public Dictionary<KnowledgeID, Knowledge> EveryKnowledgeDictionary;
         
         private int knowledgeSlots;
@@ -92,7 +103,7 @@ namespace AF
         }
 
         private int weaponUpgrade;
-        public int WeaponUpgdrade         {
+        public int WeaponUpgrade         {
             get { return weaponUpgrade;}
             set { weaponUpgrade = value; }
         }
@@ -106,7 +117,7 @@ namespace AF
         public void InitializeData()
         {
             KnownKnowledgeDictionary = new Dictionary<KnowledgeID, bool>();
-            AvalaibleKnowledgeDictionary = new Dictionary<KnowledgeID, AvalaibleKnowledgePosition>();
+            AvailableKnowledgeDictionary = new Dictionary<KnowledgeID, AvailableKnowledgePosition>();
             EveryKnowledgeDictionary = new Dictionary<KnowledgeID, Knowledge>();
 
             for (int i = 0; i < Enum.GetNames(typeof(KnowledgeID)).Length; i++)
@@ -114,7 +125,7 @@ namespace AF
                 KnowledgeID currentID = (KnowledgeID)i;
                 
                 KnownKnowledgeDictionary.Add(currentID , false);
-                AvalaibleKnowledgeDictionary.Add(currentID, AvalaibleKnowledgePosition.NOT_AVALAIBLE);
+                AvailableKnowledgeDictionary.Add(currentID, AvailableKnowledgePosition.NOT_AVAILABLE);
                 
                 for (int j = 0; j < knowledgeBank.Length; j++)
                 {
