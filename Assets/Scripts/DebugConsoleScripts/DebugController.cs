@@ -85,11 +85,11 @@ namespace charles
             });
             WEAPONUPGRADE = new DebugCommand<int>("weaponupgrade", "Upgrade weapon FREE OF CHARGE", "weaponupgrade", (x) =>
             {
-                playerData.WeaponUpgdrade = x;
+                playerData.WeaponUpgrade = x;
             });
             ARMORUPGRADE = new DebugCommand<int>("armorupgrade", "Upgrade Armor FREE OF CHARGE", "armorupgrade", (x) =>
             {
-                playerData.WeaponUpgdrade = x;
+                playerData.WeaponUpgrade = x;
             });
             CHANGESCENE = new DebugCommand<int>("changescene", "Change Scene in build", "changescene", (x) =>
             {
