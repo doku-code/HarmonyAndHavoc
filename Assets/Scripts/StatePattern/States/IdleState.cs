@@ -78,6 +78,9 @@ namespace JFM
                     return;
                 }
                 //Debug.Log("!player.IsGrounded()");
+                player.rb.velocity = Vector2.zero;
+                player.rb.totalForce = Vector2.zero;
+                player.rb.gravityScale = 0.0f;
             }
             else if((foundSlopeInFront && Mathf.Abs(slopeFront) > 0.001f) || (foundSlopeBehind && Mathf.Abs(slopeBack) > 0.001f)) 
             {

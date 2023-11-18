@@ -409,7 +409,7 @@ namespace JFM
 
         public bool WillAttack(KnowledgeID knowledge)
         {
-            return GetKnowledgeTrigger(playerData.AvalaibleKnowledgeDictionary[knowledge]) && IsAttackCooledDown();
+            return GetKnowledgeTrigger(playerData.AvailableKnowledgeDictionary[knowledge]) && IsAttackCooledDown();
         }
 
         public void Attack()
@@ -437,9 +437,9 @@ namespace JFM
             ChangeState(states[PlayerState.STATE.DEAD]);
         }
 
-        public bool GetKnowledgeTrigger(AvalaibleKnowledgePosition knowledgePosition)
+        public bool GetKnowledgeTrigger(AvailableKnowledgePosition knowledgePosition)
         {
-            if( knowledgePosition == AvalaibleKnowledgePosition.NOT_AVALAIBLE)
+            if( knowledgePosition == AvailableKnowledgePosition.NOT_AVAILABLE)
             {
                 return false;
             }
@@ -447,9 +447,9 @@ namespace JFM
             return inputTriggers[knowledgeInputNames[(int)knowledgePosition - 1]];
         }
 
-        public void SetKnowledgeTrigger(AvalaibleKnowledgePosition knowledgePosition, bool value)
+        public void SetKnowledgeTrigger(AvailableKnowledgePosition knowledgePosition, bool value)
         {
-            if (knowledgePosition == AvalaibleKnowledgePosition.NOT_AVALAIBLE)
+            if (knowledgePosition == AvailableKnowledgePosition.NOT_AVAILABLE)
             {
                 return;
             }
@@ -688,27 +688,31 @@ namespace JFM
         
         public void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log($"OnTriggerEnter2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
+            //Debug.Log($"OnTriggerEnter2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
 
             if(collision is not null && collision.gameObject.CompareTag("Enemy"))
             {
-                Debug.Log($"Hit enemy named: {collision.gameObject.name}");
+                //Debug.Log($"Hit enemy named: {collision.gameObject.name}");
                 
                 EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
                 int damage = playerData.GetPlayerDamage(null);
-                Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
-                enemyController.TakeDamage(damage, pushDirection);
+                CapsuleCollider2D capsule = collision.gameObject.GetComponent<CapsuleCollider2D>();
+                Vector3 collisionOffset = new Vector3(capsule.offset.x, capsule.offset.y, 0.0f);
+
+                Vector2 pushDirection = ((collision.transform.position + collisionOffset) - (transform.position + collisionOffset));
+                Debug.Log($"pushDirection={pushDirection}");
+                enemyController.TakeDamage(damage, pushDirection.normalized);
             }
         }
 
         public void OnTriggerStay2D(Collider2D collision)
         {
-            Debug.Log("OnTriggerStay2D");
+            //Debug.Log("OnTriggerStay2D");
         }
 
         public void OnTriggerExit2D(Collider2D collision)
         {
-            Debug.Log("OnTriggerExit2D");
+            //Debug.Log("OnTriggerExit2D");
         }
 
         void Awake()
@@ -768,9 +772,9 @@ namespace JFM
             playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = true;
-            playerData.AvalaibleKnowledgeDictionary[KnowledgeID.DASH] = AvalaibleKnowledgePosition.POSITION1;
-            playerData.AvalaibleKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = AvalaibleKnowledgePosition.POSITION2;
-            playerData.AvalaibleKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = AvalaibleKnowledgePosition.POSITION3;
+            playerData.AvailableKnowledgeDictionary[KnowledgeID.DASH] = AvailableKnowledgePosition.POSITION1;
+            playerData.AvailableKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = AvailableKnowledgePosition.POSITION2;
+            playerData.AvailableKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = AvailableKnowledgePosition.POSITION3;
             GetKnowledgeByID(KnowledgeID.DASH).Activate();
             GetKnowledgeByID(KnowledgeID.WALL_SLIDE).Activate();
             GetKnowledgeByID(KnowledgeID.DOUBLE_JUMP).Activate();

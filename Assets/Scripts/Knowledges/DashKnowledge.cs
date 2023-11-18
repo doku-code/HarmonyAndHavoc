@@ -42,7 +42,7 @@ public class DashKnowledge : Knowledge
     public override void Enter() {
         player.animator.SetTrigger("Dash");
         Dash();
-        AvalaibleKnowledgePosition knowledgePosition = player.Data.AvalaibleKnowledgeDictionary[KnowledgeID.DASH];
+        AvailableKnowledgePosition knowledgePosition = player.Data.AvailableKnowledgeDictionary[KnowledgeID.DASH];
         player.SetKnowledgeTrigger(knowledgePosition, false);
         startTime = Time.time;
 
@@ -151,7 +151,7 @@ public class DashKnowledge : Knowledge
         }
 
         bool availableKnowledge = player.Data.KnownKnowledgeDictionary[KnowledgeID.DASH];
-        AvalaibleKnowledgePosition knowledgePosition = player.Data.AvalaibleKnowledgeDictionary[KnowledgeID.DASH];
+        AvailableKnowledgePosition knowledgePosition = player.Data.AvailableKnowledgeDictionary[KnowledgeID.DASH];
 
         bool ret = availableKnowledge && !hasDashed && player.GetKnowledgeTrigger(knowledgePosition) && player.MoveInput.x != 0.0f;
         //Debug.Log($"ret={ret}");

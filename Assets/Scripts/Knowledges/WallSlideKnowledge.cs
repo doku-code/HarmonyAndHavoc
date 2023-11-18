@@ -83,7 +83,7 @@ public class WallSlideKnowledge : Knowledge
             back = backWallHit && ((player.IsFacingRight && player.MoveInput.x < 0) || (!player.IsFacingRight && player.MoveInput.x > 0));
         }
 
-        bool availableKnowledge = player.Data.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] && player.Data.AvalaibleKnowledgeDictionary[KnowledgeID.WALL_SLIDE] != AvalaibleKnowledgePosition.NOT_AVALAIBLE;        
+        bool availableKnowledge = player.Data.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] && player.Data.AvailableKnowledgeDictionary[KnowledgeID.WALL_SLIDE] != AvailableKnowledgePosition.NOT_AVAILABLE;        
 
         //Debug.Log($"player.IsFacingRight={player.IsFacingRight} availableKnowledge ={availableKnowledge} ({front} || {back}) && {Mathf.Abs(player.rb.velocity.x) <= wallGripVelocityTolerance} rb.velocity.x={player.rb.velocity.x} moveInput.x={player.MoveInput.x}");
         return availableKnowledge && (front || back) && Mathf.Abs(player.rb.velocity.x) <= wallGripVelocityTolerance;
