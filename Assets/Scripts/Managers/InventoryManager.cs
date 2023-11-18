@@ -13,13 +13,7 @@ namespace AF
 
         [Space]
         [Header("Knowledge Buttons"), Tooltip("All the Knowledge Button from the inventory UI")]
-        [SerializeField] private Button knowledge1;
-        [SerializeField] private Button knowledge2;
-        [SerializeField] private Button knowledge3;
-        [SerializeField] private Button knowledge4;
-        [SerializeField] private Button knowledge5;
-        [SerializeField] private Button knowledge6;
-        [SerializeField] private Button knowledge7;
+        [SerializeField] private Button[] knowledges;
         [Space] 
         [SerializeField] private Image disabledKnowledgeImage;
         [Space]
@@ -27,7 +21,7 @@ namespace AF
         [SerializeField] private GameObject PauseMenuPanel;
         private bool isInventoryMenuOpen = false;
         
-        public void InventoryMenu(CallbackContext value)
+        public void OpenInventoryMenu(CallbackContext value)
         {
             if (value.performed)
             {
@@ -48,6 +42,11 @@ namespace AF
                     isInventoryMenuOpen = false;
                 }
             }
+        }
+
+        private void InitializeKnowledgeTextures()
+        {
+            
         }
     }
 }
