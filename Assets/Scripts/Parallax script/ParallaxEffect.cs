@@ -29,7 +29,6 @@ namespace charles
             if (activateYFollow)
             {
                 float targetY = cameraPosition.y;
-                Debug.Log($"yOffsetDelay={yOffsetDelay}");
                 float currentY = Mathf.Lerp(transform.position.y, targetY, Time.deltaTime / yOffsetDelay);
                 newPosition.y = currentY;
             }
