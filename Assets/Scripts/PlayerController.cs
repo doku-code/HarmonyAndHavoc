@@ -685,7 +685,7 @@ namespace JFM
         {
             //Debug.Log($"OnTriggerEnter2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
 
-            if(collision is not null && collision.gameObject.CompareTag("Enemy"))
+            if(collision is not null && collision.gameObject.CompareTag("Enemy") && collision is CapsuleCollider2D)
             {
                 //Debug.Log($"Hit enemy named: {collision.gameObject.name}");
                 
