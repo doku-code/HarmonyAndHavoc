@@ -21,7 +21,7 @@ public class Attack : ActionNode
 
     protected override void OnStart()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         npc = GameObject.Find(gameobjNpcName);
         npcAnimator = npc.GetComponent<Animator>();
         npcRigidBody = npc.GetComponent<Rigidbody2D>();
