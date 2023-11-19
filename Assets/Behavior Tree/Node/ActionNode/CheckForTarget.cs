@@ -13,7 +13,7 @@ public class CheckForTarget : ActionNode
     
     protected override void OnStart()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         npc = GameObject.Find(gameobjNpcName);        
         npcRigidBody = npc.GetComponent<Rigidbody2D>();
         

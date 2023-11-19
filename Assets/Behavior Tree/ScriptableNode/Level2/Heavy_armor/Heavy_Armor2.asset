@@ -15,7 +15,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 7c8a6d694ca66814fa92c5a571c83c2b
-  position: {x: 257.0001, y: 676.00006}
+  position: {x: 455.37506, y: 674.5001}
   Description: 
   duration: 2
 --- !u!114 &-6294545977720278214
@@ -52,7 +52,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: daef53ca5a0bf1c4fa3a52b4dd0c959a
-  position: {x: 707.00006, y: 674.50006}
+  position: {x: 905.3752, y: 673.0001}
   Description: 
   attackCooldown: 3
   attackDistance: 1.5
@@ -61,6 +61,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Heavy_Armor2
+  comboSoundIdx: 0
 --- !u!114 &-3737605389389446156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 7a2ebe10586140842ab02418481507c9
-  position: {x: 857.18604, y: 676.02094}
+  position: {x: 1055.3751, y: 674.5001}
   Description: 
   duration: 2
 --- !u!114 &-2848759643030046218
@@ -167,7 +168,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: d51bf150f2156ac4d981f9d0831229cc
-  position: {x: 557.186, y: 676.02094}
+  position: {x: 755.375, y: 674.5001}
   Description: 
   duration: 2
 --- !u!114 &-2264728346511218252
@@ -185,7 +186,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: edab784141d4b2a4598818480b614566
-  position: {x: 107.185905, y: 676.02094}
+  position: {x: 305.37503, y: 674.5001}
   Description: 
   attackCooldown: 3
   attackDistance: 1.5
@@ -194,6 +195,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Heavy_Armor2
+  comboSoundIdx: 0
 --- !u!114 &-1730332069504383062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,11 +211,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 69bb2bf7f6885fe4f97b9f4e0d7109a2
-  position: {x: 482, y: 486.5001}
+  position: {x: 482, y: 469.50006}
   Description: 
   children:
+  - {fileID: 6794866703496602212}
   - {fileID: -2264728346511218252}
-  - {fileID: -7655367794432368655}
   - {fileID: 8814226341502408426}
   - {fileID: -2848759643030046218}
   - {fileID: -3906522226004270293}
@@ -265,6 +267,7 @@ MonoBehaviour:
   - {fileID: 8814226341502408426}
   - {fileID: -2997002021372472209}
   - {fileID: -3906522226004270293}
+  - {fileID: 6794866703496602212}
 --- !u!114 &1799612508269930846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,10 +311,32 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 51304d2c5d8d11b4cb5204a0a7d3ddc4
-  position: {x: 482, y: 330.1879}
+  position: {x: 482.00003, y: 330.00003}
   Description: 
   children:
   - {fileID: -1730332069504383062}
+--- !u!114 &6794866703496602212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8da4b99ece21cc4cb11bae562ac00dd, type: 3}
+  m_Name: CheckForTarget
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: f3d98120861e8b0469937d49d6bd93ef
+  position: {x: 153.00005, y: 673.00006}
+  Description: 
+  attackDistance: 1.5
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Heavy_Armor2
 --- !u!114 &8814226341502408426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +352,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 3dfe6b217bfb6f44e92742bfa8c5fb99
-  position: {x: 407.18594, y: 676.02094}
+  position: {x: 605.37506, y: 674.5001}
   Description: 
   attackCooldown: 3
   attackDistance: 1.5
@@ -336,3 +361,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Heavy_Armor2
+  comboSoundIdx: 0

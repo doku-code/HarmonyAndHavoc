@@ -12,23 +12,27 @@ namespace charles
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+            if (collision.gameObject.CompareTag("Player"))
             {
                 SetBoolForAllAnimators(true);
                 playerData.TakeDamage(amountofDamage);
             }
         }
-
         private void OnTriggerExit2D(Collider2D collision)
         {
-            SetBoolForAllAnimators(false);
+            if (trapAnim != null)
+            {
+                SetBoolForAllAnimators(false);
+            }
         }
-
         private void SetBoolForAllAnimators(bool value)
         {
-            foreach (Animator animator in trapAnim)
+            if (trapAnim != null)
             {
-                animator.SetBool(trapAnimStringName, value);
+                foreach (Animator animator in trapAnim)
+                {
+                    animator.SetBool(trapAnimStringName, value);
+                }
             }
         }
     }

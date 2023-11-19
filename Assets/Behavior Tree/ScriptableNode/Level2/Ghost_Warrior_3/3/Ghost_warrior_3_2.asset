@@ -34,7 +34,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: d44a0a40a8da7144689f6baa8509b4b1
-  position: {x: 315.50003, y: 631.50006}
+  position: {x: 315.50006, y: 631.50006}
   Description: 
   attackCooldown: 3
   attackDistance: 1.5
@@ -43,6 +43,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Ghost_Warrior_3_3
+  comboSoundIdx: 0
 --- !u!114 &-6789370035471638845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +125,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Ghost_Warrior_3_3
+  comboSoundIdx: 0
 --- !u!114 &-554248014283468030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,6 +324,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Ghost_Warrior_3_3
+  comboSoundIdx: 0
 --- !u!114 &8979231901712097668
 MonoBehaviour:
   m_ObjectHideFlags: 0
