@@ -61,7 +61,7 @@ namespace JFM
                 return;
             }
 
-            if (player.Data.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUseKnowledge())
+            if (player.Data.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUse())
             {
                 player.UseKnowledge(AF.KnowledgeID.WALL_SLIDE);
                 return;

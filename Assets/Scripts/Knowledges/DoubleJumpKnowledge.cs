@@ -29,7 +29,7 @@ public class DoubleJumpKnowledge : Knowledge
     { 
     }
    
-    public override bool WillUseKnowledge()
+    public override bool WillUse()
     {
         return true;
     }

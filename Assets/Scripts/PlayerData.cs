@@ -27,7 +27,7 @@ namespace AF
     
     [CreateAssetMenu(fileName = "PlayerData", menuName = "PlayerData")]
     public class PlayerData : ScriptableObject
-    {
+    {        
         [SerializeField] private int orderUpgradeValue;
         public int OrderUpgradeValue
         { 
@@ -46,7 +46,8 @@ namespace AF
 
         public ParametersLessDelegate OnDeadDelegate;
         public ParametersLessDelegate OnHitDelegate;
-        
+        public ParametersLessDelegate OnChaosDelegate;
+
         public Dictionary<KnowledgeID, bool> KnownKnowledgeDictionary { get; set; }
         // Put a protection (range, 4 maximum possible knowledges at the same time).
         public Dictionary<KnowledgeID, AvailableKnowledgePosition> AvailableKnowledgeDictionary;
@@ -63,6 +64,8 @@ namespace AF
         public int ActualOrder         
         {
             get { return actualOrder;}
+            
+            // Todo: Limit actual order value
             set { actualOrder = value; }
         }
 
@@ -140,11 +143,14 @@ namespace AF
                     }
                 }
             }
+
+            actualOrder = maxOrder;
+            actualChaos = maxChaos;
         }
 
         public void TakeDamage(int dmg)
         {
-            actualOrder -= (dmg - ArmorUpgrade);
+            actualOrder -= Mathf.Max(dmg - ArmorUpgrade, 0);
 
             if (actualOrder <= 0)
             {
@@ -164,5 +170,26 @@ namespace AF
                 ? usedKnowledge.damageBoost + playerBaseDamage + weaponUpgrade
                 : playerBaseDamage + weaponUpgrade;
         }
+
+        public void HealPlayer(int value)
+        {
+            // To do: delegate to inform HUDManager
+
+            actualOrder = Mathf.Min(value + actualOrder, maxOrder);
+        }
+
+        public bool UseChaos(int value)
+        {
+            if(actualChaos >= value)
+            {
+                actualChaos -= value;
+                
+                OnChaosDelegate();
+
+                return true;
+            }
+
+            return false;
+        }        
     }
 }

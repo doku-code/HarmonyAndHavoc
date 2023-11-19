@@ -65,7 +65,7 @@ public class WallSlideKnowledge : Knowledge
         player.animator.SetBool("IsWallSliding", false);        
     }
 
-    public override bool WillUseKnowledge()
+    public override bool WillUse()
     {
         bool front = player.FrontWall is not null && (1 << player.FrontWall.layer) == (int)player.GroundLayer && ((player.IsFacingRight && player.MoveInput.x > 0) || (!player.IsFacingRight && player.MoveInput.x < 0));
         bool text = false;

@@ -4,21 +4,36 @@ using UnityEngine;
 
 namespace AF
 {
-    [Serializable]
+    //[Serializable]
     //[CreateAssetMenu(fileName = "Knowledge", menuName = "PlayerData")] // To put in my children
     public abstract class Knowledge : ScriptableObject
     {
         public int damageBoost;
         public KnowledgeID ID;
+        public int chaosCost;
+        public int slotCost;
+        public float cooldown;
+        protected float activationTime;
 
         protected PlayerController player;
         
         public void Initialize(PlayerController player)
-        {
+        {            
+            activationTime = Time.time - cooldown;
             this.player = player;
         }
 
-        public abstract bool WillUseKnowledge();
+        public bool CanUse()
+        {
+            return Time.time - activationTime >= cooldown;
+        }
+
+        public void Use()
+        {
+            activationTime = Time.time;
+        }
+
+        public abstract bool WillUse();
 
         public abstract void Activate();
         public abstract void Deactivate();

@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 1544314465}
   - component: {fileID: 1544314464}
   m_Layer: 5
-  m_Name: Mana_fill
+  m_Name: Chaos_fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11251,6 +11251,7 @@ GameObject:
   - component: {fileID: 140593465078967055}
   - component: {fileID: 4448810177042979327}
   - component: {fileID: 8639567040193520744}
+  - component: {fileID: 8639567040193520745}
   m_Layer: 5
   m_Name: HUDPanel
   m_TagString: Untagged
@@ -11823,7 +11824,7 @@ GameObject:
   - component: {fileID: 6712778091767808933}
   - component: {fileID: 4257574064150136027}
   m_Layer: 5
-  m_Name: Health_fill
+  m_Name: Order_fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15159,7 +15160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5208539410600699918}
   m_Layer: 5
-  m_Name: HealthBar_ManaBar
+  m_Name: OrderBar_ChaosBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15736,6 +15737,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8639567040193520745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6263919141150625343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb85c3dabc32aa418993a6a3b5688dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
+  order: {fileID: 4257574064150136027}
+  chaos: {fileID: 1544314464}
 --- !u!114 &8645577930126212254
 MonoBehaviour:
   m_ObjectHideFlags: 0

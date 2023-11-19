@@ -63,7 +63,7 @@ public class DashKnowledge : Knowledge
 
         float elapsedTime = Time.time - startTime;
 
-        if (player.Data.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUseKnowledge())
+        if (player.Data.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUse())
         {
             player.UseKnowledge(AF.KnowledgeID.WALL_SLIDE);
             return;
@@ -140,7 +140,7 @@ public class DashKnowledge : Knowledge
         player.rb.AddForce(v, ForceMode2D.Force);
     }
 
-    public override bool WillUseKnowledge()
+    public override bool WillUse()
     {
         Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
 
@@ -153,9 +153,21 @@ public class DashKnowledge : Knowledge
         bool availableKnowledge = player.Data.KnownKnowledgeDictionary[KnowledgeID.DASH];
         AvailableKnowledgePosition knowledgePosition = player.Data.AvailableKnowledgeDictionary[KnowledgeID.DASH];
 
-        bool ret = availableKnowledge && !hasDashed && player.GetKnowledgeTrigger(knowledgePosition) && player.MoveInput.x != 0.0f;
-        //Debug.Log($"ret={ret}");
-        return ret;
+        //Debug.Log($"cooldown = {Time.time - activationTime} >= {cooldown}");
+
+        bool willUse = CanUse()
+            && availableKnowledge && !hasDashed 
+            && player.GetKnowledgeTrigger(knowledgePosition) 
+            && player.MoveInput.x != 0.0f;
+        if (willUse)
+        {
+            if (willUse = player.Data.UseChaos(chaosCost))
+            {
+                Use();
+            }
+        }
+        //Debug.Log($"willUse={willUse}");
+        return willUse;
     }
 
     private void OnGrounded()

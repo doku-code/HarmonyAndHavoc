@@ -89,7 +89,7 @@ namespace JFM
                 return;
             }
 
-            if (player.Data.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUseKnowledge())
+            if (player.Data.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUse())
             {
                 player.UseKnowledge(AF.KnowledgeID.DASH);
                 return;
