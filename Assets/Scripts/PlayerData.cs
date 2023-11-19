@@ -8,13 +8,12 @@ namespace AF
     public enum KnowledgeID
     {
         DASH,
-        WALL_SLIDE,
-        GROUND_SLIDE,
         DOUBLE_JUMP,
-        AOE_ATTACK,
+        WALL_SLIDE,
+        GROUND_SLIDE,                
         AIR_ATTACK,
         COMBO_ATTACK,
-        DEFAULT
+        AOE_ATTACK        
     }
 
     public enum AvailableKnowledgePosition
@@ -47,8 +46,9 @@ namespace AF
 
         public ParametersLessDelegate OnDeadDelegate;
         public ParametersLessDelegate OnHitDelegate;
-
+        
         public Dictionary<KnowledgeID, bool> KnownKnowledgeDictionary { get; set; }
+        // Put a protection (range, 4 maximum possible knowledges at the same time).
         public Dictionary<KnowledgeID, AvailableKnowledgePosition> AvailableKnowledgeDictionary;
         public Dictionary<KnowledgeID, Knowledge> EveryKnowledgeDictionary;
         
@@ -112,6 +112,11 @@ namespace AF
         public int ArmorUpgrade         {
             get { return armorUpgrade;}
             set { armorUpgrade = value; }
+        }
+
+        public Knowledge GetKnowledgeByID(KnowledgeID id)
+        {
+            return EveryKnowledgeDictionary[id];
         }
 
         public void InitializeData()

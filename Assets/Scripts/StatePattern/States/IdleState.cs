@@ -164,7 +164,7 @@ namespace JFM
                 return;
             }
 
-            if (player.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUseKnowledge())
+            if (player.Data.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUseKnowledge())
             {
                 player.UseKnowledge(AF.KnowledgeID.DASH);                
                 return;

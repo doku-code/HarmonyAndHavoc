@@ -72,8 +72,25 @@ namespace charles
             Vector2 normal = Platformer2DUtilities.GetPerpendicularVector2(pushDirection).normalized;
             normal = new Vector2(MathF.Abs(normal.x), MathF.Abs(normal.y));
             rb.velocity = new Vector2(rb.velocity.x * normal.x, rb.velocity.y * normal.y);
-            //Debug.Log($"rb.velocity={rb.velocity}");
-            rb.AddForce(pushDirection * pushBackImpulse, ForceMode2D.Impulse);
+            Debug.Log($"pushDirection={pushDirection}");
+            //rb.AddForce(pushDirection * pushBackImpulse, ForceMode2D.Impulse);
+            //StartCoroutine(PushBackOverTime(rb, pushDirection, pushBackImpulse, 0.1f));
+        }
+
+        private IEnumerator PushBackOverTime(Rigidbody2D rb, Vector2 pushDirection, float pushBackImpulse, float delayTime)
+        {
+            rb.isKinematic = true;
+            float remainingDistance = pushBackImpulse;
+            float force = pushBackImpulse / 5.0f;
+            while (remainingDistance > 0.0f)
+            {
+                rb.MovePosition(rb.position + pushDirection * force);
+                remainingDistance -= force;
+                force *= 0.8f;
+                yield return new WaitForSeconds(delayTime);                
+            }
+
+            rb.isKinematic = false;
         }
     }
 }

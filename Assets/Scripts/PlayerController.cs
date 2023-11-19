@@ -455,19 +455,14 @@ namespace JFM
             }
 
             inputTriggers[knowledgeInputNames[(int)knowledgePosition - 1]] = value;
-        }
-
-        public Knowledge GetKnowledgeByID(KnowledgeID id)
-        {
-            return playerData.EveryKnowledgeDictionary[id];
-        }
+        }        
 
         public void UseKnowledge(KnowledgeID knowledge)
         {
             lastKnowledge = playerData.EveryKnowledgeDictionary[knowledge];
 
             KnowledgeState state = (KnowledgeState)states[PlayerState.STATE.KNOWLEDGE];            
-            state.knowledge = GetKnowledgeByID(knowledge);
+            state.knowledge = playerData.GetKnowledgeByID(knowledge);
             ChangeState(state);
         }
 
@@ -685,7 +680,7 @@ namespace JFM
             hitInfo.hasHit = false;
             return false;
         }
-        
+        [SerializeField] private float thres = 0.05f;
         public void OnTriggerEnter2D(Collider2D collision)
         {
             //Debug.Log($"OnTriggerEnter2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
@@ -698,9 +693,13 @@ namespace JFM
                 int damage = playerData.GetPlayerDamage(null);
                 CapsuleCollider2D capsule = collision.gameObject.GetComponent<CapsuleCollider2D>();
                 Vector3 collisionOffset = new Vector3(capsule.offset.x, capsule.offset.y, 0.0f);
-
-                Vector2 pushDirection = ((collision.transform.position + collisionOffset) - (transform.position + collisionOffset));
-                Debug.Log($"pushDirection={pushDirection}");
+                Vector3 playerColliderOffset = new Vector3(colliderOffset.x, colliderOffset.y, 0.0f); 
+                Vector2 pushDirection = collision.transform.position + collisionOffset - (transform.position + playerColliderOffset);
+                float angle = Mathf.Atan2(pushDirection.y, pushDirection.x);
+                const float fortyFive = Mathf.PI / 4.0f;
+                float quarter = angle / fortyFive;
+                float remainder = angle % fortyFive;
+                Debug.Log($"pushDirection={pushDirection} angle={angle * Mathf.Rad2Deg}");
                 enemyController.TakeDamage(damage, pushDirection.normalized);
             }
         }
@@ -735,7 +734,7 @@ namespace JFM
                 states.Add(state.name, state);
             }
 
-            playerData.InitializeData();
+            playerData.InitializeData();        // To remove in the future
             playerData.OnDeadDelegate += OnDead;
             playerData.OnHitDelegate += OnHit;
             InitializeKnowledges();
@@ -771,13 +770,13 @@ namespace JFM
 
             playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = true;
-            playerData.KnownKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = true;
+            playerData.KnownKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = true;            
             playerData.AvailableKnowledgeDictionary[KnowledgeID.DASH] = AvailableKnowledgePosition.POSITION1;
             playerData.AvailableKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = AvailableKnowledgePosition.POSITION2;
-            playerData.AvailableKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = AvailableKnowledgePosition.POSITION3;
-            GetKnowledgeByID(KnowledgeID.DASH).Activate();
-            GetKnowledgeByID(KnowledgeID.WALL_SLIDE).Activate();
-            GetKnowledgeByID(KnowledgeID.DOUBLE_JUMP).Activate();
+            playerData.AvailableKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = AvailableKnowledgePosition.POSITION4;
+            playerData.GetKnowledgeByID(KnowledgeID.DASH).Activate();
+            playerData.GetKnowledgeByID(KnowledgeID.WALL_SLIDE).Activate();
+            playerData.GetKnowledgeByID(KnowledgeID.DOUBLE_JUMP).Activate();
         }
 
         private void InputSetup()

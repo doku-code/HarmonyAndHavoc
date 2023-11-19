@@ -16,26 +16,24 @@ namespace charles
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private InputActionReference[] actionsToRebind;
 
-        [Header("Panel"), Tooltip("This is where all the panel goes")] [SerializeField]
-        private GameObject pausePanel;
+        [Header("Panel"), Tooltip("This is where all the panel goes")]
+        [SerializeField] private GameObject pausePanel;
 
         [SerializeField] private GameObject settingsPanel;
         [SerializeField] private GameObject soundPanel;
         [SerializeField] private GameObject displayPanel;
         [SerializeField] private GameObject controlPanel;
 
-        [Header("Event System Object"),
-         Tooltip("It is use to change the main selected object in eventSystem GameObject")]
-        [SerializeField]
-        private GameObject pauseMenuFirstObj;
+        [Header("Event System Object"), Tooltip("It is use to change the main selected object in eventSystem GameObject")]
+        [SerializeField] private GameObject pauseMenuFirstObj;
 
         [SerializeField] private GameObject settingFirstObj;
         [SerializeField] private GameObject soundSettingsFirstObj;
         [SerializeField] private GameObject displayFirstObj;
         [SerializeField] private GameObject controlFirstObj;
 
-        [Header("Display Settings UI"), Tooltip("Different UI element to change display/Sound")] [SerializeField]
-        private Toggle toggleBtnVSYNC;
+        [Header("Display Settings UI"), Tooltip("Different UI element to change display/Sound")]
+        [SerializeField] private Toggle toggleBtnVSYNC;
 
         [SerializeField] private TMP_Dropdown qualityPreset;
         [SerializeField] private TMP_Dropdown windowModePreset;
@@ -44,18 +42,21 @@ namespace charles
         [SerializeField] private Slider fxSlider;
         [SerializeField] private Slider masterSlider;
 
-        [Header("Keyboard Rebinding button"), Tooltip("A array of button that action will go in")] [SerializeField]
-        private Button[] actionBtn;
+        [Header("Keyboard Rebinding button"), Tooltip("A array of button that action will go in")]
+        [SerializeField] private Button[] actionBtn;
 
-        [Header("Keyboard Rebinding text"), Tooltip("Text array for the button mapping")] [SerializeField]
-        private TMP_Text[] actionBtnText;
+        [Header("Keyboard Rebinding text"), Tooltip("Text array for the button mapping")]
+        [SerializeField] private TMP_Text[] actionBtnText;
 
-        [Space] [SerializeField] private GameObject InventoryPanel; 
+        [Space]
+        [Header("Other UI menus")]
+        [SerializeField] private GameObject inventoryPanel;
+        [SerializeField] private GameObject HUDPanel;
 
         void Start()
         {
             InitializeMixerAtStart();
-            //EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
+            EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
             Application.targetFrameRate = -1;
         }
 
@@ -72,27 +73,19 @@ namespace charles
             }
         }
 
-        #region PauseFunc
-
         public void PauseMenu(CallbackContext value)
         {
             if (value.performed)
             {
+
                 if (!isPauseMenuOpen)
                 {
                     if (SoundManager.Instance != null)
                         SoundManager.Instance.PlayAClip(1);
-                    isPauseMenuOpen = true;
-                    pausePanel.SetActive(true);
-                    settingsPanel.SetActive(false);
-                    soundPanel.SetActive(false);
-                    displayPanel.SetActive(false);
-                    controlPanel.SetActive(false);
-                    InventoryPanel.SetActive(false);
-                    Debug.Log("Opening the pause menu");
 
-                    //Pause the Game
-                    Time.timeScale = 0;
+                    OpenPauseMenu();
+
+                    
                     if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
                     {
                         EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
@@ -102,32 +95,55 @@ namespace charles
                 {
                     if (SoundManager.Instance != null)
                         SoundManager.Instance.PlayAClip(1);
-                    isPauseMenuOpen = false;
-                    pausePanel.SetActive(false);
-                    settingsPanel.SetActive(false);
-                    soundPanel.SetActive(false);
-                    displayPanel.SetActive(false);
-                    controlPanel.SetActive(false);
 
-                    //Unpause the Game
-                    Time.timeScale = 1;
+                    ClosePauseMenu();
+
+                    
                     if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
                     {
                         EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
                     }
                 }
+                isPauseMenuOpen = !isPauseMenuOpen;
             }
+        }
+
+        // A very good idea would be to create a method that takes a GameObject (panel) in parameter and opens (sets active) it and
+        // closes all other panel GOs (would have to have a list)
+        public void OpenPauseMenu()
+        {
+            pausePanel.SetActive(true);
+            inventoryPanel.SetActive(false);
+            HUDPanel.SetActive(false);
+            CloseOtherPanels();
+
+            //Pause the Game
+            Time.timeScale = 0;
+        }
+
+        public void ClosePauseMenu()
+        {
+            pausePanel.SetActive(false);
+            HUDPanel.SetActive(true);
+            CloseOtherPanels();
+
+            //Unpause the Game
+            Time.timeScale = 1;
+        }
+
+        private void CloseOtherPanels()
+        {
+            settingsPanel.SetActive(false);
+            soundPanel.SetActive(false);
+            displayPanel.SetActive(false);
+            controlPanel.SetActive(false);
         }
 
         public void ContinueGame()
         {
             isPauseMenuOpen = false;
-            pausePanel.SetActive(false);
-            settingsPanel.SetActive(false);
-            soundPanel.SetActive(false);
-            displayPanel.SetActive(false);
-            controlPanel.SetActive(false);
-            Time.timeScale = 1;
+            ClosePauseMenu();
+
             if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
             {
                 EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
@@ -139,42 +155,20 @@ namespace charles
             Time.timeScale = 1;
             GameManager.Instance.LoadNextMap("MainMenu", SpawnerPosition.END);
         }
-
-        #endregion
-
-        #region settingFunc
-
+        
         public void OpenSettingsMenu()
         {
             SoundManager.Instance.PlayAClip(1);
             pausePanel.SetActive(false);
             settingsPanel.SetActive(true);
             soundPanel.SetActive(false);
+            displayPanel.SetActive(false);
+            controlPanel.SetActive(false);
             if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
             {
                 EventSystem.current.SetSelectedGameObject(settingFirstObj);
             }
-
-            Time.timeScale = 0;
-        }
-
-        public void CloseSettingsMenu()
-        {
-            SoundManager.Instance.PlayAClip(0);
-            pausePanel.SetActive(true);
-            settingsPanel.SetActive(false);
-            soundPanel.SetActive(false);
-            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
-            {
-                EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
-            }
-
-            Time.timeScale = 0;
-        }
-
-        #endregion
-
-        #region soundFunc
+        }        
 
         public void OpenSoundMenu()
         {
@@ -186,28 +180,8 @@ namespace charles
             {
                 EventSystem.current.SetSelectedGameObject(soundSettingsFirstObj);
             }
-
-            Time.timeScale = 0;
-        }
-
-        public void CloseSoundMenu()
-        {
-            SoundManager.Instance.PlayAClip(0);
-            pausePanel.SetActive(false);
-            settingsPanel.SetActive(true);
-            soundPanel.SetActive(false);
-            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
-            {
-                EventSystem.current.SetSelectedGameObject(settingFirstObj);
-            }
-
-            Time.timeScale = 0;
-        }
-
-        #endregion
-
-        #region displayFunc
-
+        }        
+       
         public void OpenDisplayPanel()
         {
             SoundManager.Instance.PlayAClip(1);
@@ -217,22 +191,7 @@ namespace charles
             {
                 EventSystem.current.SetSelectedGameObject(displayFirstObj);
             }
-        }
-
-        public void CloseDisplayPanel()
-        {
-            SoundManager.Instance.PlayAClip(0);
-            settingsPanel.SetActive(true);
-            displayPanel.SetActive(false);
-            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
-            {
-                EventSystem.current.SetSelectedGameObject(settingFirstObj);
-            }
-        }
-
-        #endregion
-
-        #region controlFunc
+        }        
 
         public void OpenControlSetting()
         {
@@ -241,22 +200,7 @@ namespace charles
             settingsPanel.SetActive(false);
             controlPanel.SetActive(true);
             EventSystem.current.SetSelectedGameObject(controlFirstObj);
-            Time.timeScale = 0;
         }
-
-        public void CloseControlSetting()
-        {
-            if (SoundManager.Instance != null)
-                SoundManager.Instance.PlayAClip(0);
-            settingsPanel.SetActive(true);
-            controlPanel.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(settingFirstObj);
-            Time.timeScale = 0;
-        }
-
-        #endregion
-
-        #region displaySetting
 
         public void ChangeWindowMode()
         {
@@ -316,10 +260,6 @@ namespace charles
             }
         }
 
-        #endregion
-
-        #region soundVolumeFunc
-
         public void SetAmbientVolume()
         {
             if (SoundManager.Instance != null)
@@ -336,9 +276,7 @@ namespace charles
         {
             if (SoundManager.Instance != null)
                 SoundManager.Instance.SetMasterVolume(masterSlider.value);
-        }
-
-        #endregion
+        }  
 
         public void ExitGame()
         {

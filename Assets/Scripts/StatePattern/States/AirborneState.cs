@@ -250,7 +250,7 @@ namespace JFM
                 //Debug.Log($"Detected stairs or ground. slope was {slope} player.MoveInput.x={player.MoveInput.x} foundSlopeBeneath={foundSlopeBeneath} && Mathf.Abs(slope) > player.StairsUpMinSlope={Mathf.Abs(slope) > player.StairsUpMinSlope}");                
             }
 
-            if (player.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUseKnowledge())
+            if (player.Data.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUseKnowledge())
             {
                 player.UseKnowledge(AF.KnowledgeID.WALL_SLIDE);
                 return;
@@ -264,7 +264,7 @@ namespace JFM
                 return;
             }
 
-            if (player.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUseKnowledge())
+            if (player.Data.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUseKnowledge())
             {
                 player.UseKnowledge(AF.KnowledgeID.DASH);
                 return;

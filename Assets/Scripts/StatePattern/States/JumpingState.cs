@@ -36,7 +36,7 @@ namespace JFM
                 return;
             }
 
-            if (player.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUseKnowledge()) // && nFrames > 0)
+            if (player.Data.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUseKnowledge()) // && nFrames > 0)
             {
                 player.UseKnowledge(AF.KnowledgeID.WALL_SLIDE);                
                 return;
@@ -50,7 +50,7 @@ namespace JFM
                 return;
             }
 
-            if (player.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUseKnowledge())
+            if (player.Data.GetKnowledgeByID(AF.KnowledgeID.DASH).WillUseKnowledge())
             {
                 player.UseKnowledge(AF.KnowledgeID.DASH);
                 return;

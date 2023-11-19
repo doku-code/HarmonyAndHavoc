@@ -63,7 +63,7 @@ public class DashKnowledge : Knowledge
 
         float elapsedTime = Time.time - startTime;
 
-        if (player.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUseKnowledge())
+        if (player.Data.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUseKnowledge())
         {
             player.UseKnowledge(AF.KnowledgeID.WALL_SLIDE);
             return;
