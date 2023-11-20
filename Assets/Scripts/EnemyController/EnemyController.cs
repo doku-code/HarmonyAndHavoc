@@ -1,4 +1,4 @@
-using AF;
+
 using UnityEngine;
 using JFM;
 using System.Collections;
@@ -53,7 +53,7 @@ namespace charles
             {
                 PushBack(pushDirection);
             }
-            //Debug.Log($"currentHealth={currentHealth}");
+            
         }
 
         public void Attack(PlayerController player, Vector2 direction)
@@ -103,13 +103,8 @@ namespace charles
                 {
                     rb.velocity -= pushDirection * friction;
                 }
-                //Debug.Log($"rb.velocity={rb.velocity} rb.position = {rb.position}");
-                //friction *= 1.2f;
-                //Debug.Log($"friction={friction}");
-
                 yield return new WaitForSeconds(delayTime);                
             }
-
             isPushedBack = false;         
         }
     }

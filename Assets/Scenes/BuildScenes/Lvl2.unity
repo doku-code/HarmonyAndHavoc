@@ -955,6 +955,8 @@ MonoBehaviour:
   maxHealth: 100
   attackDamage: 10
   pushBackImpulse: 0.35
+  pushBackInterval: 0.001
+  pushBackFriction: 5
 --- !u!61 &43004787
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38504,8 +38506,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.5742002, y: -0.23205, z: 0}
-    m_Extent: {x: 9.393, y: 1.56355, z: 0}
+    m_Center: {x: 2.5786998, y: -0.23674995, z: 0}
+    m_Extent: {x: 9.3853, y: 1.5632501, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -45825,6 +45827,8 @@ MonoBehaviour:
   maxHealth: 100
   attackDamage: 10
   pushBackImpulse: 0.35
+  pushBackInterval: 0.001
+  pushBackFriction: 5
 --- !u!1 &508404086
 GameObject:
   m_ObjectHideFlags: 0
@@ -47374,6 +47378,8 @@ MonoBehaviour:
   maxHealth: 20
   attackDamage: 10
   pushBackImpulse: 0.35
+  pushBackInterval: 0.001
+  pushBackFriction: 5
 --- !u!61 &642116677
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -50640,8 +50646,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 14.375599, y: 2.6884, z: 0}
-    m_Extent: {x: 22.0583, y: 5.1036997, z: 0}
+    m_Center: {x: 14.381851, y: 2.68925, z: 0}
+    m_Extent: {x: 22.06055, y: 5.11275, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -124143,6 +124149,8 @@ MonoBehaviour:
   maxHealth: 100
   attackDamage: 10
   pushBackImpulse: 0.35
+  pushBackInterval: 0.001
+  pushBackFriction: 5
 --- !u!61 &1398941876
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -126543,6 +126551,8 @@ MonoBehaviour:
   maxHealth: 100
   attackDamage: 10
   pushBackImpulse: 0.35
+  pushBackInterval: 0.001
+  pushBackFriction: 5
 --- !u!1 &1591980596
 GameObject:
   m_ObjectHideFlags: 0
