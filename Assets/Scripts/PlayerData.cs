@@ -160,8 +160,6 @@ namespace AF
             {
                 OnHitDelegate();
             }
-
-            Debug.Log(actualOrder);
         }
 
         public int GetPlayerDamage(Knowledge usedKnowledge)
