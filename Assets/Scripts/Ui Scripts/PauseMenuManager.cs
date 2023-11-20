@@ -209,7 +209,6 @@ namespace charles
             switch (windowModePreset.value)
             {
                 case 0:
-                    ;
                     Screen.fullScreenMode = FullScreenMode.Windowed;
                     break;
                 case 1:
