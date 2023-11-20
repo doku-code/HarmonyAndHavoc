@@ -16,10 +16,10 @@ public class HUDManager : MonoBehaviour
     void Awake()
     {
         playerData.OnDeadDelegate += OnDeadSlider;
-        playerData.OnHitDelegate += UpdateOrderSlider;
+        playerData.OnOrderDelegate += UpdateOrderSlider;
         playerData.OnChaosDelegate += UpdateChaosSlider;
 
-        UpdateOrderSlider();
+        UpdateOrderSlider(0);
         UpdateChaosSlider();
     }
 
@@ -28,7 +28,7 @@ public class HUDManager : MonoBehaviour
         order.value = 0;
     }
 
-    private void UpdateOrderSlider()
+    private void UpdateOrderSlider(int value)
     {
         order.value = playerData.ActualOrder / (float)playerData.MaxOrder;
     }

@@ -440,14 +440,27 @@ namespace JFM
             }
         }
 
-        public void OnHit()
-        {            
-            ChangeState(states[PlayerState.STATE.HURT]);
+        public void OnOrderChange(int value)
+        {
+            if (value < 0)
+            {
+                if (currentState != states[PlayerState.STATE.DEAD])
+                {
+                    ChangeState(states[PlayerState.STATE.HURT]);
+                }
+            }
+            else
+            {
+                ChangeState(states[PlayerState.STATE.IDLE]);
+            }
         }
 
         public void OnDead()
         {
-            ChangeState(states[PlayerState.STATE.DEAD]);
+            if (currentState != states[PlayerState.STATE.DEAD])
+            {
+                ChangeState(states[PlayerState.STATE.DEAD]);
+            }
         }
 
         private void HitEnemy(Collider2D collision)
@@ -798,7 +811,7 @@ namespace JFM
 
             playerData.InitializeData();        // To remove in the future
             playerData.OnDeadDelegate += OnDead;
-            playerData.OnHitDelegate += OnHit;
+            playerData.OnOrderDelegate += OnOrderChange;
             InitializeKnowledges();
 
             SetHighestAirborneY(true);

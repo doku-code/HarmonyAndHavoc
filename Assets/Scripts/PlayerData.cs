@@ -45,7 +45,7 @@ namespace AF
         [SerializeField] private Knowledge[] knowledgeBank;
 
         public ParametersLessDelegate OnDeadDelegate;
-        public ParametersLessDelegate OnHitDelegate;
+        public SingleParameterDelegate OnOrderDelegate;
         public ParametersLessDelegate OnChaosDelegate;
 
         public Dictionary<KnowledgeID, bool> KnownKnowledgeDictionary { get; set; }
@@ -150,7 +150,8 @@ namespace AF
 
         public void TakeDamage(int dmg)
         {
-            actualOrder -= Mathf.Max(dmg - ArmorUpgrade, 0);
+            int actualDmg = Mathf.Max(dmg - ArmorUpgrade, 0);
+            actualOrder -= actualDmg;
 
             if (actualOrder <= 0)
             {
@@ -158,7 +159,7 @@ namespace AF
             }
             else
             {
-                OnHitDelegate();
+                OnOrderDelegate(-actualDmg);
             }
         }
 
@@ -171,7 +172,7 @@ namespace AF
 
         public void HealPlayer(int value)
         {
-            // To do: delegate to inform HUDManager
+            OnOrderDelegate(value);
 
             actualOrder = Mathf.Min(value + actualOrder, maxOrder);
         }

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 namespace AF
 {
     public delegate void ParametersLessDelegate();
+    public delegate void SingleParameterDelegate(int value);
 
     public enum SpawnerPosition
     {
@@ -38,14 +39,17 @@ namespace AF
         {
             StartCoroutine(LoadYourAsyncScene(mapToLoad, () =>
                 {
-                    GetCurrentMapManager();
-                    PlacePlayer(spawnPosition);
+                    GetCurrentMapManager();                    
                     actualMap = mapToLoad;
                     LoadSceneMenu();
 
-                    if (mapToLoad == "InGameUI")
+                    if (mapToLoad == "MainMenu")
                     {
                         UnloadSceneMenu();
+                    }
+                    else
+                    {
+                        PlacePlayer(spawnPosition);
                     }
                 }
             ));
