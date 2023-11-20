@@ -9,7 +9,7 @@ public class Parallel : CompositeNode
 {
     List<State> childrenLeftToExecute = new List<State>();
 
-    public override void OnInitialize()
+    public override void OnInitialize(GameObject go)
     {
 
     }

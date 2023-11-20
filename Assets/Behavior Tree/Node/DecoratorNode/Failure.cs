@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class Failure : DecoratorNode
 {
-    public override void OnInitialize()
+    public override void OnInitialize(GameObject go)
     {
     }
     protected override void OnStart()

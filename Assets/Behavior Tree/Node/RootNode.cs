@@ -7,7 +7,7 @@ public class RootNode : Node
 {
     public Node child;
 
-    public override void OnInitialize()
+    public override void OnInitialize(GameObject go)
     {
 
     }

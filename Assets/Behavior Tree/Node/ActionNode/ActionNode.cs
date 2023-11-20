@@ -13,23 +13,30 @@ public abstract class ActionNode : Node
     protected Rigidbody2D npcRigidBody;
     protected EnemyController npcController;
 
-    public override void OnInitialize()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        npc = GameObject.Find(gameobjNpcName);
+    public override void OnInitialize(GameObject go)
+    {        
+        //npc = GameObject.Find(gameobjNpcName);
+        npc = go;
         if (npc is not null)
         {
             npcAnimator = npc.GetComponent<Animator>();
             npcRigidBody = npc.GetComponent<Rigidbody2D>();
             npcController = npc.GetComponent<EnemyController>();
         }
+        else
+        {
+            Debug.Log($"NPC not found : '{gameobjNpcName}' desc={Description}");
+        }
     }
 
     protected void ChangeNpcVelocity(Vector2 newVelocity)
     {
-        if (!npcController.IsPushedBack)
+        if (npcController is null || !npcController.IsPushedBack)
         {
-            npcRigidBody.velocity = newVelocity;
+            if (npcRigidBody is not null)
+            {
+                npcRigidBody.velocity = newVelocity;
+            }
         }
     }
 }

@@ -12,7 +12,10 @@ public class Attack : ActionNode
     private bool hasAttacked = false;
     private float lastAttackTime = 0f;
 
-    protected override void OnStart() {}
+    protected override void OnStart() 
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     protected override void OnStop() {}
 
     protected override State OnUpdate()

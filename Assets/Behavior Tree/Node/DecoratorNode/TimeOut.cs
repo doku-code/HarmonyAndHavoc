@@ -9,7 +9,7 @@ public class TimeOut : DecoratorNode
     public float duration = 1.0f;
     float startTime;
 
-    public override void OnInitialize()
+    public override void OnInitialize(GameObject go)
     {
 
     }

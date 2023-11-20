@@ -17,7 +17,10 @@ public class FollowPlayer : ActionNode
     public float distanceOffset = 1f;
     public float stoppingDistance = 0.1f;
    
-    protected override void OnStart() {}
+    protected override void OnStart() 
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     protected override void OnStop() {}
 

@@ -45,7 +45,7 @@ public abstract class Node : ScriptableObject
         });
     }
 
-    public abstract void OnInitialize();
+    public abstract void OnInitialize(GameObject go);
     protected abstract void OnStart();
     protected abstract void OnStop();
     protected abstract State OnUpdate();

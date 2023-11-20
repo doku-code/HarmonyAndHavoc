@@ -8,7 +8,7 @@ public class Selector : CompositeNode
 {
     protected int current;
 
-    public override void OnInitialize()
+    public override void OnInitialize(GameObject go)
     {
 
     }

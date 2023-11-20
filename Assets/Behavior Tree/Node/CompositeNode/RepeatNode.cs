@@ -1,7 +1,9 @@
 //Charles
+using UnityEngine;
+
 public class RepeatNode : CompositeNode
 {
-    public override void OnInitialize()
+    public override void OnInitialize(GameObject go)
     {
         
     }

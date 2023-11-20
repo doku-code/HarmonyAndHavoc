@@ -13,7 +13,7 @@ public class BehaviorTreeRunner : MonoBehaviour
 
         foreach(Node node in tree.nodes)
         {
-            node.OnInitialize();
+            node.OnInitialize(gameObject);
         }
 
         tickCoroutine = Tick();

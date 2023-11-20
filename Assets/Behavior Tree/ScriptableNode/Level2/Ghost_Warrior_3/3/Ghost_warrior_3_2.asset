@@ -36,13 +36,13 @@ MonoBehaviour:
   guid: d44a0a40a8da7144689f6baa8509b4b1
   position: {x: 315.50006, y: 631.50006}
   Description: 
-  attackCooldown: 3
-  attackDistance: 1.5
-  attackAnimString: Combo2
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: Ghost_Warrior_3_3
+  gameobjNpcName: Ghost_Warrior_3_2
+  attackCooldown: 3
+  attackDistance: 1.5
+  attackAnimString: Combo2
   comboSoundIdx: 0
 --- !u!114 &-6789370035471638845
 MonoBehaviour:
@@ -118,13 +118,13 @@ MonoBehaviour:
   guid: cddab0ddebdf6564da04e8d864d6fcf5
   position: {x: 51.5, y: 632.00006}
   Description: 
-  attackCooldown: 3
-  attackDistance: 1.5
-  attackAnimString: Combo1
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: Ghost_Warrior_3_3
+  gameobjNpcName: Ghost_Warrior_3_2
+  attackCooldown: 3
+  attackDistance: 1.5
+  attackAnimString: Combo1
   comboSoundIdx: 0
 --- !u!114 &-554248014283468030
 MonoBehaviour:
@@ -142,7 +142,11 @@ MonoBehaviour:
   started: 0
   guid: 23516edd0f76dff459413a7dbed2ac26
   position: {x: 449.49994, y: 632.00006}
-  Description: 
+  Description: Wait node
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  gameobjNpcName: 
   duration: 1
 --- !u!114 &-123627844221281179
 MonoBehaviour:
@@ -234,11 +238,11 @@ MonoBehaviour:
   guid: 845d49f873901244d9b358201ca1777a
   position: {x: -206.83897, y: 631.50006}
   Description: 
-  runAnimString: Run
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: Ghost_Warrior_3_3
+  gameobjNpcName: Ghost_Warrior_3_2
+  runAnimString: Run
   followDistanceX: 0.2
   followDistanceY: 0.2
   maxDistance: 10
@@ -267,6 +271,10 @@ MonoBehaviour:
   guid: 6bae5872e53721e49980be446732de93
   position: {x: -373.5, y: 631.50006}
   Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Ghost_Warrior_3_2
   POSPatrolRoute:
   - {fileID: 2066428140465870038, guid: d850272274990304f9d60e3a380e6af0, type: 3}
   - {fileID: 5974466042104709885, guid: d804fa2834da09546ba174f8bbca78dc, type: 3}
@@ -276,12 +284,8 @@ MonoBehaviour:
   - {fileID: 5974466042104709885, guid: d804fa2834da09546ba174f8bbca78dc, type: 3}
   - {fileID: 2066428140465870038, guid: d850272274990304f9d60e3a380e6af0, type: 3}
   PatrolAnimString: Run
-  gameobjNpcName: Ghost_Warrior_3_3
   moveSpeed: 140
   sphereCastRadius: 2
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &3575711347820622385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,7 +302,11 @@ MonoBehaviour:
   started: 0
   guid: 566493d75b5c412428ac2cc0e77ffd7e
   position: {x: 719.0001, y: 632.00006}
-  Description: 
+  Description: Wait node
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  gameobjNpcName: 
   duration: 1
 --- !u!114 &5307711838194429031
 MonoBehaviour:
@@ -317,13 +325,13 @@ MonoBehaviour:
   guid: a6c5b388a14ce8047b49e9129aadffd2
   position: {x: 582.5001, y: 631.50006}
   Description: 
-  attackCooldown: 3
-  attackDistance: 1.5
-  attackAnimString: Combo3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: Ghost_Warrior_3_3
+  gameobjNpcName: Ghost_Warrior_3_2
+  attackCooldown: 3
+  attackDistance: 1.5
+  attackAnimString: Combo3
   comboSoundIdx: 0
 --- !u!114 &8979231901712097668
 MonoBehaviour:
@@ -341,5 +349,9 @@ MonoBehaviour:
   started: 0
   guid: 61f22ddbe12db6c458b2ffa8f5b4a2c2
   position: {x: 185.49997, y: 632.00006}
-  Description: 
+  Description: Wait node
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  gameobjNpcName: 
   duration: 1

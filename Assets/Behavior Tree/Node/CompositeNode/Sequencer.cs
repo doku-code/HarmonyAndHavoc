@@ -6,7 +6,7 @@ public class Sequencer : CompositeNode
 {
     int current;
 
-    public override void OnInitialize()
+    public override void OnInitialize(GameObject go)
     {
 
     }

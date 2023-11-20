@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class Inverter : DecoratorNode
 {
-    public override void OnInitialize()
+    public override void OnInitialize(GameObject go)
     {
     }
 

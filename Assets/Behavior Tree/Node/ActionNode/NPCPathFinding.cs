@@ -13,6 +13,7 @@ public class NPCPathFinding : ActionNode
     
     protected override void OnStart()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         npcAnimator.SetBool(PatrolAnimString, true);
     }
 
