@@ -4,7 +4,7 @@ using UnityEngine;
 public class Attack : ActionNode
 {
     public float attackCooldown = 3.0f;
-    public float attackDistance = 1.5f;
+    public float attackDistance = 3.0f;
     public string attackAnimString;
     public int comboSoundIdx;
 

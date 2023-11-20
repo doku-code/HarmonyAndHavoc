@@ -19,7 +19,8 @@ namespace AF
         private MapManager currentMapManager;
         [SerializeField] private GameObject player;
         [NonSerialized] public string actualMap = "MainMenu";
-        
+        [NonSerialized] public ParametersLessDelegate OnLoadMapDelegate;
+
         public static GameManager Instance { get; private set; }
         
         void Awake()
@@ -50,6 +51,15 @@ namespace AF
                     else
                     {
                         PlacePlayer(spawnPosition);
+                    }
+
+                    if (OnLoadMapDelegate is not null)
+                    {
+                        OnLoadMapDelegate();
+                    }
+                    else
+                    {
+                        Debug.Log("test");
                     }
                 }
             ));

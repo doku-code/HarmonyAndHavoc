@@ -103,6 +103,7 @@ namespace charles
                 {
                     rb.velocity -= pushDirection * friction;
                 }
+                //Debug.Log($"rb.velocity={rb.velocity}");
                 yield return new WaitForSeconds(delayTime);                
             }
             isPushedBack = false;         

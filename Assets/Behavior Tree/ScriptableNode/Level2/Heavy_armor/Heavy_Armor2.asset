@@ -17,6 +17,10 @@ MonoBehaviour:
   guid: 7c8a6d694ca66814fa92c5a571c83c2b
   position: {x: 455.37506, y: 674.5001}
   Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  gameobjNpcName: 
   duration: 2
 --- !u!114 &-6294545977720278214
 MonoBehaviour:
@@ -54,13 +58,13 @@ MonoBehaviour:
   guid: daef53ca5a0bf1c4fa3a52b4dd0c959a
   position: {x: 905.3752, y: 673.0001}
   Description: 
-  attackCooldown: 3
-  attackDistance: 1.5
-  attackAnimString: Combo3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Heavy_Armor2
+  attackCooldown: 3
+  attackDistance: 1.5
+  attackAnimString: Combo3
   comboSoundIdx: 0
 --- !u!114 &-3737605389389446156
 MonoBehaviour:
@@ -99,11 +103,11 @@ MonoBehaviour:
   guid: fa73ec64b2d6e0142b27f7304e5425bb
   position: {x: -104.24994, y: 674.5001}
   Description: 
-  runAnimString: Run
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Heavy_Armor2
+  runAnimString: Run
   followDistanceX: 0.2
   followDistanceY: 0.2
   maxDistance: 10
@@ -152,6 +156,10 @@ MonoBehaviour:
   guid: 7a2ebe10586140842ab02418481507c9
   position: {x: 1055.3751, y: 674.5001}
   Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  gameobjNpcName: 
   duration: 2
 --- !u!114 &-2848759643030046218
 MonoBehaviour:
@@ -170,6 +178,10 @@ MonoBehaviour:
   guid: d51bf150f2156ac4d981f9d0831229cc
   position: {x: 755.375, y: 674.5001}
   Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  gameobjNpcName: 
   duration: 2
 --- !u!114 &-2264728346511218252
 MonoBehaviour:
@@ -188,13 +200,13 @@ MonoBehaviour:
   guid: edab784141d4b2a4598818480b614566
   position: {x: 305.37503, y: 674.5001}
   Description: 
-  attackCooldown: 3
-  attackDistance: 1.5
-  attackAnimString: Combo1
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Heavy_Armor2
+  attackCooldown: 3
+  attackDistance: 1.5
+  attackAnimString: Combo1
   comboSoundIdx: 0
 --- !u!114 &-1730332069504383062
 MonoBehaviour:
@@ -285,17 +297,17 @@ MonoBehaviour:
   guid: f5bc4fd53aebd394caa041c7e021a3bb
   position: {x: -269.50015, y: 674.50006}
   Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Heavy_Armor2
   POSPatrolRoute:
   - {fileID: 8815926703427942773, guid: 5d94e7bc10274a849a1b2821bbcc40e8, type: 3}
   - {fileID: 7683581577592735548, guid: 3f6f846a652a9c241af0ae15492a67ac, type: 3}
   - {fileID: 8815926703427942773, guid: 5d94e7bc10274a849a1b2821bbcc40e8, type: 3}
   PatrolAnimString: Run
-  gameobjNpcName: Heavy_Armor2
   moveSpeed: 250
   sphereCastRadius: 2
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &2695247785635160617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,11 +344,11 @@ MonoBehaviour:
   guid: f3d98120861e8b0469937d49d6bd93ef
   position: {x: 153.00005, y: 673.00006}
   Description: 
-  attackDistance: 1.5
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Heavy_Armor2
+  attackDistance: 1.5
 --- !u!114 &8814226341502408426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,11 +366,11 @@ MonoBehaviour:
   guid: 3dfe6b217bfb6f44e92742bfa8c5fb99
   position: {x: 605.37506, y: 674.5001}
   Description: 
-  attackCooldown: 3
-  attackDistance: 1.5
-  attackAnimString: Combo2
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Heavy_Armor2
+  attackCooldown: 3
+  attackDistance: 1.5
+  attackAnimString: Combo2
   comboSoundIdx: 0

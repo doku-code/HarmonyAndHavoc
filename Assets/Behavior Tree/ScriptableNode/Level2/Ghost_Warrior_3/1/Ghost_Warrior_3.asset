@@ -40,7 +40,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Ghost_Warrior_3
-  attackDistance: 1.5
+  attackDistance: 3
 --- !u!114 &-2075671940059750544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
     m_Bits: 128
   gameobjNpcName: Ghost_Warrior_3
   attackCooldown: 3
-  attackDistance: 1.5
+  attackDistance: 3
   attackAnimString: Combo2
   comboSoundIdx: 0
 --- !u!114 &-1364269203394993303
@@ -193,7 +193,7 @@ MonoBehaviour:
     m_Bits: 128
   gameobjNpcName: Ghost_Warrior_3
   attackCooldown: 3
-  attackDistance: 1.5
+  attackDistance: 3
   attackAnimString: Combo1
   comboSoundIdx: 0
 --- !u!114 &2787499802598783854
@@ -228,7 +228,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   distanceOffset: 1
-  stoppingDistance: 0.1
+  stoppingDistance: 0.5
 --- !u!114 &2838549528837533932
 MonoBehaviour:
   m_ObjectHideFlags: 0

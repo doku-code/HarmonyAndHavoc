@@ -42,8 +42,9 @@ namespace JFM
 
         public void OnRetryClick()
         {
-            PlayAnimation(false);
-            playerData.HealPlayer(playerData.MaxOrder);
+            //PlayAnimation(false);
+            //playerData.HealPlayer(playerData.MaxOrder);
+            GameManager.Instance.LoadNextMap("Village", SpawnerPosition.BEGIN);
         }
 
         public void OnExitClick()

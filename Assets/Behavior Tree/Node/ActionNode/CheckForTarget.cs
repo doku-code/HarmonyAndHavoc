@@ -11,12 +11,7 @@ public class CheckForTarget : ActionNode
     }
     protected override void OnStop() {}
     protected override State OnUpdate()
-    {
-        if(player is null)
-        {
-            Debug.Log("Player is null");
-        }
-
+    {        
         float distanceToPlayer = Vector3.Distance(npc.transform.position, 
             player.transform.position);
 

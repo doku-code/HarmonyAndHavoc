@@ -52,7 +52,7 @@ public class FollowPlayer : ActionNode
         float followSpeed = followOnY ? followSpeedY : followSpeedX;
         float followDistance = followOnY ? followDistanceY : followDistanceX;
         float targetX = player.transform.position.x - (vecDirection.x * (followDistance + distanceOffset));
-        float targetY = followOnY ? player.transform.position.y - (vecDirection.y * (followDistance + distanceOffset)) : npc.transform.position.y;
+        float targetY = followOnY ? player.transform.position.y + (followDistance + distanceOffset) : npc.transform.position.y;
         float distanceToTarget = Vector2.Distance(npc.transform.position, new Vector2(targetX, targetY));
 
         Vector2 followDirection = new Vector2(targetX - npc.transform.position.x, targetY - npc.transform.position.y).normalized;

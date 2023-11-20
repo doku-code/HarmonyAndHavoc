@@ -442,7 +442,7 @@ namespace JFM
 
         public void OnOrderChange(int value)
         {
-            if (value < 0)
+            if (value <= 0)
             {
                 if (currentState != states[PlayerState.STATE.DEAD])
                 {
@@ -474,7 +474,7 @@ namespace JFM
             Vector3 playerColliderOffset = new Vector3(colliderOffset.x, colliderOffset.y, 0.0f);
             Vector2 pushDirection = collision.transform.position + collisionOffset - (transform.position + playerColliderOffset);
             Vector2 newPushDirection = Platformer2DUtilities.RoundVector2Angle(pushDirection, Mathf.PI / 4.0f);
-            //Debug.Log($"pushDirection={pushDirection} newPushDirection={newPushDirection}");
+            Debug.Log($"pushDirection={pushDirection} newPushDirection={newPushDirection}");
 
             enemyController.TakeDamage(damage, newPushDirection.normalized);
         }
@@ -782,13 +782,17 @@ namespace JFM
         public void OnTriggerStay2D(Collider2D collision)
         {
             //Debug.Log("OnTriggerStay2D");
+            //Debug.Log($"OnTriggerStay2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
+
         }
 
         public void OnTriggerExit2D(Collider2D collision)
         {
             //Debug.Log("OnTriggerExit2D");
+            //Debug.Log($"OnTriggerExit2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
+
         }
-        
+
         void Awake()
         {
             animator = GetComponent<Animator>();
