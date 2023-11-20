@@ -52,15 +52,15 @@ namespace AF
         // Put a protection (range, 4 maximum possible knowledges at the same time).
         public Dictionary<KnowledgeID, AvailableKnowledgePosition> AvailableKnowledgeDictionary;
         public Dictionary<KnowledgeID, Knowledge> EveryKnowledgeDictionary;
-        
-        private int knowledgeSlots;
+
+        [SerializeField] private int knowledgeSlots;
         public int KnowledgeSlots
         {
             get { return knowledgeSlots;}
             set { knowledgeSlots = value; }
         }
 
-        private int actualOrder;
+        [SerializeField] private int actualOrder;
         public int ActualOrder         
         {
             get { return actualOrder;}
@@ -69,31 +69,31 @@ namespace AF
             set { actualOrder = value; }
         }
 
-        private int maxOrder;
+        [SerializeField] private int maxOrder;
         public int MaxOrder         {
             get { return maxOrder;}
             set { maxOrder = value; }
         }
 
-        private int actualChaos;
+        [SerializeField] private int actualChaos;
         public int ActualChaos         {
             get { return actualChaos;}
             set { actualChaos = value; }
         }
 
-        private int maxChaos;
+        [SerializeField] private int maxChaos;
         public int MaxChaos         {
             get { return maxChaos;}
             set { maxChaos = value; }
         }
 
-        private int gold;
+        [SerializeField] private int gold;
         public int Gold         {
             get { return gold;}
             set { gold = value; }
         }
 
-        private int orderFragments;
+        [SerializeField] private int orderFragments;
         public int OrderFragments
         {
             get { return orderFragments; }
@@ -105,13 +105,13 @@ namespace AF
             }
         }
 
-        private int weaponUpgrade;
+        [SerializeField] private int weaponUpgrade;
         public int WeaponUpgrade         {
             get { return weaponUpgrade;}
             set { weaponUpgrade = value; }
         }
 
-        private int armorUpgrade;
+        [SerializeField] private int armorUpgrade;
         public int ArmorUpgrade         {
             get { return armorUpgrade;}
             set { armorUpgrade = value; }
@@ -144,6 +144,7 @@ namespace AF
                 }
             }
 
+            Debug.Log($"actualOrder {actualOrder} = maxOrder {maxOrder}");
             actualOrder = maxOrder;
             actualChaos = maxChaos;
         }
