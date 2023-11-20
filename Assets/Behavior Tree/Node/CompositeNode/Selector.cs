@@ -8,6 +8,11 @@ public class Selector : CompositeNode
 {
     protected int current;
 
+    public override void OnInitialize()
+    {
+
+    }
+
     protected override void OnStart()
     {
         current = 0;

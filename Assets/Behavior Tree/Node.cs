@@ -44,6 +44,8 @@ public abstract class Node : ScriptableObject
             node.OnStop();
         });
     }
+
+    public abstract void OnInitialize();
     protected abstract void OnStart();
     protected abstract void OnStop();
     protected abstract State OnUpdate();

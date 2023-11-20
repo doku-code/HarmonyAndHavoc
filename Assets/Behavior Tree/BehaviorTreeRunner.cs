@@ -10,6 +10,12 @@ public class BehaviorTreeRunner : MonoBehaviour
     void Start()
     {
         tree = tree.Clone();
+
+        foreach(Node node in tree.nodes)
+        {
+            node.OnInitialize();
+        }
+
         tickCoroutine = Tick();
         StartCoroutine(tickCoroutine);
     }

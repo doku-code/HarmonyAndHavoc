@@ -7,6 +7,11 @@ public class RepeatUntilSuccess : CompositeNode
 {
     private int currentChildIndex = 0;
 
+    public override void OnInitialize()
+    {
+
+    }
+
     protected override void OnStart()
     {
 

@@ -1,6 +1,11 @@
 //Charles
 public class RepeatNode : CompositeNode
 {
+    public override void OnInitialize()
+    {
+        
+    }
+
     protected override void OnStart()
     {
 

@@ -1,3 +1,4 @@
+using charles;
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -5,8 +6,7 @@ using UnityEngine;
 public class FollowPlayer : ActionNode
 {
     public string runAnimString;
-    public LayerMask playerLayer;
-    public string gameobjNpcName;
+
     public float followDistanceX = 0.2f;
     public float followDistanceY = 0.2f;
     public float maxDistance = 10f;
@@ -16,24 +16,15 @@ public class FollowPlayer : ActionNode
     public LayerMask obstacleLayer;
     public float distanceOffset = 1f;
     public float stoppingDistance = 0.1f;
+   
+    protected override void OnStart() {}
 
-    private Animator npcAnimator;
-    private GameObject npc;
-    private GameObject player;
-    private Rigidbody2D npcRigidBody;
-
-    protected override void OnStart()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        npc = GameObject.Find(gameobjNpcName);
-        npcAnimator = npc.GetComponent<Animator>();
-        npcRigidBody = npc.GetComponent<Rigidbody2D>();
-    }
-
-    protected override void OnStop() { }
+    protected override void OnStop() {}
 
     protected override State OnUpdate()
     {
+        EnemyController enemyController = npc.GetComponent<EnemyController>();
+
         float distanceX = player.transform.position.x - npc.transform.position.x;
         float distanceY = player.transform.position.y - npc.transform.position.y;
 
@@ -66,29 +57,31 @@ public class FollowPlayer : ActionNode
 
         if (hit.collider == null && !followOnY)
         {
-            npcRigidBody.velocity = Vector2.zero;
+            ChangeNpcVelocity(Vector2.zero);
 
             return State.RUNNING;
         }
         if (npcAnimator.GetCurrentAnimatorStateInfo(0).IsName("Combo1")||
             npcAnimator.GetCurrentAnimatorStateInfo(0).IsName("Combo2")||
-            npcAnimator.GetCurrentAnimatorStateInfo(0).IsName("Combo3"))
+            npcAnimator.GetCurrentAnimatorStateInfo(0).IsName("Combo3"))             
         {
-            npcRigidBody.velocity = Vector2.zero;
+            ChangeNpcVelocity(Vector2.zero);
+            
             npcAnimator.SetBool(runAnimString, false);
 
             return State.RUNNING;
         }
         if (distanceToTarget > stoppingDistance)
         {
-            npcRigidBody.velocity = followDirection * followSpeed * Time.fixedDeltaTime;
+            ChangeNpcVelocity( followDirection * followSpeed * Time.fixedDeltaTime);
             npcAnimator.SetBool(runAnimString, true);
-
+            
             return State.RUNNING;
         }
         else
         {
-            npcRigidBody.velocity = Vector2.zero;
+            ChangeNpcVelocity(Vector2.zero);
+            
             npcAnimator.SetBool(runAnimString, false);
 
             return State.SUCCESS;

@@ -46,6 +46,9 @@ namespace JFM
         public int weaponUpgrade;
         public int armorUpgrade;
 
+        public string currentMapName;
+        //public Vector2 currentPosition;
+
         public SaveGame()
         {
         }

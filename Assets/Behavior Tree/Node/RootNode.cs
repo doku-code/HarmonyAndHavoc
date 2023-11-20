@@ -6,6 +6,12 @@ using UnityEngine;
 public class RootNode : Node
 {
     public Node child;
+
+    public override void OnInitialize()
+    {
+
+    }
+
     protected override void OnStart()
     {
 

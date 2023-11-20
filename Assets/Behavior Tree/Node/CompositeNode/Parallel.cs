@@ -9,6 +9,11 @@ public class Parallel : CompositeNode
 {
     List<State> childrenLeftToExecute = new List<State>();
 
+    public override void OnInitialize()
+    {
+
+    }
+
     protected override void OnStart()
     {
         childrenLeftToExecute.Clear();

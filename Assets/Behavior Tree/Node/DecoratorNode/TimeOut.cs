@@ -9,6 +9,11 @@ public class TimeOut : DecoratorNode
     public float duration = 1.0f;
     float startTime;
 
+    public override void OnInitialize()
+    {
+
+    }
+
     protected override void OnStart()
     {
         startTime = Time.time;
@@ -16,6 +21,7 @@ public class TimeOut : DecoratorNode
 
     protected override void OnStop()
     {
+
     }
 
     protected override State OnUpdate()

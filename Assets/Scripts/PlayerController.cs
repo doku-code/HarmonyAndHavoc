@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 //using static UnityEngine.InputManagerEntry;
 using charles;
+using UnityEngine.UIElements;
 
 namespace JFM
 {
@@ -66,6 +67,8 @@ namespace JFM
         private GameObject frontWall;
         private GameObject beneathObject;
         private Vector2 beneathObjectPosition;
+        private bool isWallColliding;        
+        private bool wallIsToRight;        
 
         [Header("Ladders")]
         [SerializeField] private float ladderSpeed = 3.0f;
@@ -302,7 +305,17 @@ namespace JFM
         public GameObject GetBeneathObject()
         {
             return beneathObject;
-        }        
+        }
+
+        public bool IsWallColliding
+        {
+            get => isWallColliding;
+        }
+
+        public bool WallIsToRight
+        {
+            get => wallIsToRight;
+        }
 
         public void SetHighestAirborneY()
         {
@@ -437,6 +450,22 @@ namespace JFM
             ChangeState(states[PlayerState.STATE.DEAD]);
         }
 
+        private void HitEnemy(Collider2D collision)
+        {
+            EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
+            int damage = playerData.GetPlayerDamage(null);
+
+            // Calculates pushback direction
+            CapsuleCollider2D capsule = collision.gameObject.GetComponent<CapsuleCollider2D>();
+            Vector3 collisionOffset = new Vector3(capsule.offset.x, capsule.offset.y, 0.0f);
+            Vector3 playerColliderOffset = new Vector3(colliderOffset.x, colliderOffset.y, 0.0f);
+            Vector2 pushDirection = collision.transform.position + collisionOffset - (transform.position + playerColliderOffset);
+            Vector2 newPushDirection = Platformer2DUtilities.RoundVector2Angle(pushDirection, Mathf.PI / 4.0f);
+            //Debug.Log($"pushDirection={pushDirection} newPushDirection={newPushDirection}");
+
+            enemyController.TakeDamage(damage, newPushDirection.normalized);
+        }
+
         public bool GetKnowledgeTrigger(AvailableKnowledgePosition knowledgePosition)
         {
             if( knowledgePosition == AvailableKnowledgePosition.NOT_AVAILABLE)
@@ -465,7 +494,7 @@ namespace JFM
             state.knowledge = playerData.GetKnowledgeByID(knowledge);
             ChangeState(state);
         }
-
+        /*
         private void SetFrontWallInfo()
         {
             if (frontWall is null)
@@ -475,7 +504,7 @@ namespace JFM
                 
                 if (hit1.collider is null)
                 {
-                    RaycastHit2D hit2 = Physics2D.BoxCast(rb.position + colliderSize / 2.0f + v * wallDistance, colliderSize, 0.0f, v, 0.0f, groundLayer);
+                    RaycastHit2D hit2 = Physics2D.BoxCast(rb.position + Vector2.up * colliderSize.y / 2.0f + v * wallDistance, colliderSize, 0.0f, v, 0.0f, groundLayer);
                     if (hit2.collider is null)
                     {                     
                         return;
@@ -488,7 +517,7 @@ namespace JFM
                 frontWall = hit1.transform.gameObject;
             }
         }
-
+        */
         private void SetBeneathObjectInfo()
         {            
             if (beneathObject is null)
@@ -680,7 +709,51 @@ namespace JFM
             hitInfo.hasHit = false;
             return false;
         }
-        [SerializeField] private float thres = 0.05f;
+        
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            //Debug.Log($"collision.gameObject.layer={collision.gameObject.layer} == {collision.gameObject.layer == GroundLayer} GroundLayer={(int)GroundLayer}");
+            if (1 << collision.gameObject.layer == GroundLayer)
+            {
+                if (!IsGrounded())
+                {
+                    isWallColliding = true;
+                    //Debug.Log($"YEAH!! collision.normal={collision.GetContact(0).normal}");
+                    wallIsToRight = collision.GetContact(0).normal.x < 0;
+                }
+                else
+                {
+                    isWallColliding = false;                    
+                }
+            }
+        }
+
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            //Debug.Log($"collision.gameObject.layer={collision.gameObject.layer} == {collision.gameObject.layer == GroundLayer} GroundLayer={(int)GroundLayer}");
+            if (1 << collision.gameObject.layer == GroundLayer)
+            {
+                if (!IsGrounded())
+                {
+                    isWallColliding = true;
+                    //Debug.Log($"YEAH!! collision.normal={collision.GetContact(0).normal}");
+                    wallIsToRight = collision.GetContact(0).normal.x < 0;
+                }
+                else
+                {
+                    isWallColliding = false;
+                }
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if (1 << collision.gameObject.layer == GroundLayer)
+            {                
+                isWallColliding = false;
+            }
+        }
+
         public void OnTriggerEnter2D(Collider2D collision)
         {
             //Debug.Log($"OnTriggerEnter2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
@@ -688,19 +761,8 @@ namespace JFM
             if(collision is not null && collision.gameObject.CompareTag("Enemy") && collision is CapsuleCollider2D)
             {
                 //Debug.Log($"Hit enemy named: {collision.gameObject.name}");
-                
-                EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
-                int damage = playerData.GetPlayerDamage(null);
-                CapsuleCollider2D capsule = collision.gameObject.GetComponent<CapsuleCollider2D>();
-                Vector3 collisionOffset = new Vector3(capsule.offset.x, capsule.offset.y, 0.0f);
-                Vector3 playerColliderOffset = new Vector3(colliderOffset.x, colliderOffset.y, 0.0f); 
-                Vector2 pushDirection = collision.transform.position + collisionOffset - (transform.position + playerColliderOffset);
-                float angle = Mathf.Atan2(pushDirection.y, pushDirection.x);
-                const float fortyFive = Mathf.PI / 4.0f;
-                float quarter = angle / fortyFive;
-                float remainder = angle % fortyFive;
-                Debug.Log($"pushDirection={pushDirection} angle={angle * Mathf.Rad2Deg}");
-                enemyController.TakeDamage(damage, pushDirection.normalized);
+
+                HitEnemy(collision);
             }
         }
 
@@ -713,7 +775,7 @@ namespace JFM
         {
             //Debug.Log("OnTriggerExit2D");
         }
-
+        
         void Awake()
         {
             animator = GetComponent<Animator>();
@@ -754,7 +816,8 @@ namespace JFM
             SetAirborneInfo();
 
             frontWall = null;
-            SetFrontWallInfo();
+            //SetFrontWallInfo();
+
             beneathObject = null;
             SetBeneathObjectInfo();
 

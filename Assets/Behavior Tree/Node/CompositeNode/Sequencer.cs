@@ -5,6 +5,11 @@ using UnityEngine;
 public class Sequencer : CompositeNode
 {
     int current;
+
+    public override void OnInitialize()
+    {
+
+    }
     protected override void OnStart()
     {
         current = 0;

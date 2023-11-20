@@ -6,28 +6,13 @@ public class Attack : ActionNode
     public float attackCooldown = 3.0f;
     public float attackDistance = 1.5f;
     public string attackAnimString;
-    public LayerMask playerLayer;
-    public string gameobjNpcName;
     public int comboSoundIdx;
 
-    private Animator npcAnimator;
     private bool isCooldown = true;
     private bool hasAttacked = false;
     private float lastAttackTime = 0f;
-    private GameObject npc;
-    private GameObject player;
-    private Rigidbody2D npcRigidBody;
-    private SpriteRenderer npcSpriteRenderer;
 
-    protected override void OnStart()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        npc = GameObject.Find(gameobjNpcName);
-        npcAnimator = npc.GetComponent<Animator>();
-        npcRigidBody = npc.GetComponent<Rigidbody2D>();
-        npcSpriteRenderer = npc.GetComponent<SpriteRenderer>();
-        
-    }
+    protected override void OnStart() {}
     protected override void OnStop() {}
 
     protected override State OnUpdate()

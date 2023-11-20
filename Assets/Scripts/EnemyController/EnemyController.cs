@@ -14,8 +14,15 @@ namespace charles
         private Animator npcAnimator;
         private int currentHealth;
 
-        [Range(0.0f, 10.0f)]
+        [Range(0.0f, 50.0f)]
         [SerializeField] private float pushBackImpulse;
+        [SerializeField] private float pushBackInterval = 0.001f;
+        [SerializeField] private float pushBackFriction = 5.0f;
+        private bool isPushedBack;
+        public bool IsPushedBack
+        {
+            get => isPushedBack;
+        }
 
         private void Start()
         {
@@ -46,7 +53,7 @@ namespace charles
             {
                 PushBack(pushDirection);
             }
-            Debug.Log($"currentHealth={currentHealth}");
+            //Debug.Log($"currentHealth={currentHealth}");
         }
 
         public void Attack(PlayerController player, Vector2 direction)
@@ -65,32 +72,45 @@ namespace charles
             yield return new WaitForSeconds(waitTime);
             Destroy(gameObject);
         }
-
+        
         private void PushBack(Vector2 pushDirection)
         {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            Vector2 normal = Platformer2DUtilities.GetPerpendicularVector2(pushDirection).normalized;
-            normal = new Vector2(MathF.Abs(normal.x), MathF.Abs(normal.y));
-            rb.velocity = new Vector2(rb.velocity.x * normal.x, rb.velocity.y * normal.y);
-            Debug.Log($"pushDirection={pushDirection}");
-            //rb.AddForce(pushDirection * pushBackImpulse, ForceMode2D.Impulse);
-            //StartCoroutine(PushBackOverTime(rb, pushDirection, pushBackImpulse, 0.1f));
+            if (!isPushedBack)
+            {
+                isPushedBack = true;
+
+                Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                Vector2 normal = Platformer2DUtilities.GetPerpendicularVector2(pushDirection).normalized;
+                normal = new Vector2(MathF.Abs(normal.x), MathF.Abs(normal.y));
+                rb.velocity = new Vector2(rb.velocity.x * normal.x, rb.velocity.y * normal.y);
+                Debug.Log($"pushDirection={pushDirection}");
+                //rb.AddForce(pushDirection * pushBackImpulse, ForceMode2D.Impulse);
+                StartCoroutine(PushBackOverTime(rb, pushDirection, pushBackImpulse, pushBackInterval));
+            }
         }
 
         private IEnumerator PushBackOverTime(Rigidbody2D rb, Vector2 pushDirection, float pushBackImpulse, float delayTime)
-        {
-            rb.isKinematic = true;
-            float remainingDistance = pushBackImpulse;
-            float force = pushBackImpulse / 5.0f;
-            while (remainingDistance > 0.0f)
+        {            
+            rb.velocity = pushDirection * pushBackImpulse;
+            float friction = pushBackFriction;
+            while(rb.velocity != Vector2.zero)
             {
-                rb.MovePosition(rb.position + pushDirection * force);
-                remainingDistance -= force;
-                force *= 0.8f;
+                if(rb.velocity.magnitude < friction)
+                {
+                    rb.velocity = Vector2.zero;
+                }
+                else
+                {
+                    rb.velocity -= pushDirection * friction;
+                }
+                //Debug.Log($"rb.velocity={rb.velocity} rb.position = {rb.position}");
+                //friction *= 1.2f;
+                //Debug.Log($"friction={friction}");
+
                 yield return new WaitForSeconds(delayTime);                
             }
 
-            rb.isKinematic = false;
+            isPushedBack = false;         
         }
     }
 }

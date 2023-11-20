@@ -40,5 +40,14 @@ namespace JFM
                 lastPoint = point;
             }
         }
+
+        public static Vector2 RoundVector2Angle(Vector2 vector, float roundingAngle)
+        {
+            float angle = Mathf.Atan2(vector.y, vector.x);            
+            float quarter = angle / roundingAngle;
+            quarter = Mathf.Round(quarter);
+            float newAngle = quarter * roundingAngle;            
+            return new Vector2(Mathf.Cos(newAngle), Mathf.Sin(newAngle));
+        }
     }
 }
