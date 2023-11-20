@@ -56,11 +56,7 @@ namespace AF
                     if (OnLoadMapDelegate is not null)
                     {
                         OnLoadMapDelegate();
-                    }
-                    else
-                    {
-                        Debug.Log("test");
-                    }
+                    }                    
                 }
             ));
         }
