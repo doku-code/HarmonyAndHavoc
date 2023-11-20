@@ -10,7 +10,9 @@ namespace charles
     {
         [TextArea]
         public string answerText;
+        public int price;
     }
+
     [System.Serializable]
     public class Question
     {
@@ -18,20 +20,20 @@ namespace charles
         public string questionText;
         public Answer[] answers;
     }
+
     public class ConversationManager : MonoBehaviour
     {
         [SerializeField] public Question[] Conversations;
-
         [Header("UI")]
-
         [SerializeField] private TMP_Text questionText;
         [SerializeField] private Button firstAnswerButton;
         [SerializeField] private Button secondAnswerButton;
-        [SerializeField] private Button thirdAnswerButton;
 
         private bool buttonPressed = false;
         [SerializeField] private float typingSpeed = 0.2f;
-        public int questionIndex = 0;
+        private int questionIndex = 0;
+        private int currentUpgradePrice = 10;
+        private bool repeatQuestion = true;
         private void Start()
         {
             LoadConversation(questionIndex);
@@ -53,7 +55,16 @@ namespace charles
                 buttonPressed = false;
                 yield return new WaitUntil(() => buttonPressed);
 
-                questionIndex++;
+                currentUpgradePrice += 10;
+
+                if (repeatQuestion)
+                {
+                    LoadConversation(questionIndex);
+                }
+                else
+                {
+                    questionIndex++;
+                }
             }
         }
         public void LoadConversation(int index)
@@ -64,39 +75,31 @@ namespace charles
                 questionText.text = Conversations[index].questionText;
                 Answer[] answers = Conversations[index].answers;
 
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 2; i++)
                 {
-                    Button answerButton = null;
-                    switch (i)
-                    {
-                        case 0:
-                            answerButton = firstAnswerButton;
-                            break;
-                        case 1:
-                            answerButton = secondAnswerButton;
-                            break;
-                        case 2:
-                            answerButton = thirdAnswerButton;
-                            break;
-                    }
+                    Button answerButton = i == 0 ? firstAnswerButton : secondAnswerButton;
 
                     if (i < answers.Length)
                     {
                         answerButton.interactable = true;
-                        answerButton.GetComponentInChildren<TMP_Text>().text = answers[i].answerText;
-                    }
-                    else
-                    {
-                        answerButton.interactable = false;
+                        string answerText = string.IsNullOrEmpty(answers[i].answerText) ? "No Answer" : answers[i].answerText;
+                        answerText += " - Price: $" + currentUpgradePrice;
+                        answerButton.GetComponentInChildren<TMP_Text>().text = answerText;
                     }
                 }
             }
         }
         public void OnAnswerSubmitted(int answerIndex)
         {
-            questionIndex++;
             buttonPressed = true;
+            currentUpgradePrice += 10;
+
+            if (!repeatQuestion)
+            {
+                questionIndex++;
+            }
             LoadConversation(questionIndex);
         }
     }
+
 }
