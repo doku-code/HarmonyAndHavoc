@@ -1,40 +1,42 @@
-using AF;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HUDManager : MonoBehaviour
+namespace AF
 {
-    [Header("PlayerData"), Tooltip("The PlayerData ScriptableObject")]
-    [SerializeField] private PlayerData playerData;
-
-    [Header("Sliders"), Tooltip("")]
-    [SerializeField] private Slider order;
-    [SerializeField] private Slider chaos;
-
-    void Awake()
+    public class HUDManager : MonoBehaviour
     {
-        playerData.OnDeadDelegate += OnDeadSlider;
-        playerData.OnOrderDelegate += UpdateOrderSlider;
-        playerData.OnChaosDelegate += UpdateChaosSlider;
+        [Header("PlayerData"), Tooltip("The PlayerData ScriptableObject")]
+        [SerializeField] private PlayerData playerData;
 
-        UpdateOrderSlider(0);
-        UpdateChaosSlider();
-    }
+        [Header("Sliders"), Tooltip("Order and Chaos sliders")]
+        [SerializeField] private Slider order;
+        [SerializeField] private Slider chaos;
 
-    private void OnDeadSlider()
-    {
-        order.value = 0;
-    }
+        void Awake()
+        {
+            playerData.OnDeadDelegate += OnDeadSlider;
+            playerData.OnOrderDelegate += UpdateOrderSlider;
+            playerData.OnChaosDelegate += UpdateChaosSlider;
 
-    private void UpdateOrderSlider(int value)
-    {
-        order.value = playerData.ActualOrder / (float)playerData.MaxOrder;
-    }
+            UpdateOrderSlider(0);
+            UpdateChaosSlider();
+        }
 
-    private void UpdateChaosSlider()
-    {
-        chaos.value = playerData.ActualChaos / (float)playerData.MaxChaos;
+        private void OnDeadSlider()
+        {
+            order.value = 0;
+        }
+
+        private void UpdateOrderSlider(int value)
+        {
+            order.value = playerData.ActualOrder / (float)playerData.MaxOrder;
+        }
+
+        private void UpdateChaosSlider()
+        {
+            chaos.value = playerData.ActualChaos / (float)playerData.MaxChaos;
+        }
     }
 }
