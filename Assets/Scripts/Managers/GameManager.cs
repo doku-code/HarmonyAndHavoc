@@ -40,29 +40,15 @@ namespace AF
         {
             StartCoroutine(LoadYourAsyncScene(mapToLoad, () =>
                 {
-                    GetCurrentMapManager();
+                    GetCurrentMapManager();                                    
 
-                    string previousMap = actualMap;
-                    if (previousMap == "MainMenu")
-                    {
-                        //LoadSceneMenu();
-                    }
-
-                    Debug.Log($"actualMap (before) ={actualMap}");
                     actualMap = mapToLoad;
-                    Debug.Log($"actualMap (after) ={actualMap}");
                     
                     if (mapToLoad != "MainMenu")
                     {
-                        PlacePlayer(spawnPosition);
-                        //UnloadSceneMenu();
-                        LoadSceneMenu();
-                        //Debug.Log("Unload");
-                    }
-                    else
-                    {                        
-                        
-                    }
+                        PlacePlayer(spawnPosition);                        
+                        LoadSceneMenu();                        
+                    }                    
 
                     if (OnLoadMapDelegate is not null)
                     {
