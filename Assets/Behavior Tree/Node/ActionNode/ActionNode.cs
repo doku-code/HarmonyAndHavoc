@@ -31,7 +31,7 @@ public abstract class ActionNode : Node
 
     protected void ChangeNpcVelocity(Vector2 newVelocity)
     {
-        if (npcController is null || !npcController.IsPushedBack)
+        if (npcController is null || !npcController.IsKnockedBack)
         {
             if (npcRigidBody is not null)
             {

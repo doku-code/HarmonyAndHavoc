@@ -47,18 +47,14 @@ namespace JFM
 
         public void OnRetryClick()
         {
-            PlayAnimation(false);
-            //playerData.HealPlayer(playerData.MaxOrder);
+            PlayAnimation(false);            
             GameManager.Instance.LoadNextMap("Village", SpawnerPosition.BEGIN);
         }
 
         public void OnExitClick()
         {
-            PlayAnimation(false);
-
-           
-            GameManager.Instance.LoadNextMap("MainMenu", SpawnerPosition.END);
-       
+            PlayAnimation(false);           
+            GameManager.Instance.LoadNextMap("MainMenu", SpawnerPosition.END);       
         }
 
         private void PlayAnimation(bool isOn)
