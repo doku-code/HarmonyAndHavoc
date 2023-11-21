@@ -16,6 +16,7 @@ namespace AF
 
         void Awake()
         {
+            Debug.Log("*******************Load******************");
             playerData.OnDeadDelegate += OnDeadSlider;
             playerData.OnOrderDelegate += UpdateOrderSlider;
             playerData.OnChaosDelegate += UpdateChaosSlider;

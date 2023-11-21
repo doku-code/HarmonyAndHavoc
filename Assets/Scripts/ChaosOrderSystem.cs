@@ -49,7 +49,6 @@ public class ChaosOrderSystem : MonoBehaviour
     {        
         playerData.OnDeadDelegate += OnPlayerDead;
         GameManager.Instance.OnLoadMapDelegate += OnLoadMap;
-        Debug.Log("ok");
     }
 
     private void OnLoadMap()

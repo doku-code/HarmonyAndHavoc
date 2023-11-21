@@ -2,6 +2,7 @@ using AF;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace JFM
 {
@@ -15,6 +16,7 @@ namespace JFM
         [SerializeField] private Animator btnExitAnimator;
 
         [SerializeField] private float waitForDeadAnimation = 2.0f;
+        [SerializeField] private float waitForSceneMenuUnload = 1.0f;
 
         private void Start()
         {
@@ -30,30 +32,38 @@ namespace JFM
 
         private void OnDead()
         {
-            StartCoroutine(WaitForDeadAnimation());
+            StartCoroutine(WaitAndExecute(waitForDeadAnimation, () => { PlayAnimation(true); }));
         }
 
-        private IEnumerator WaitForDeadAnimation()
+        private IEnumerator WaitAndExecute(float waitDelay, ParametersLessDelegate callback)
         {
-            yield return new WaitForSeconds(waitForDeadAnimation);
+            yield return new WaitForSeconds(waitDelay);
 
-            PlayAnimation(true);
+            if(callback is not null)
+            {
+                callback.Invoke();
+            }
         }
 
         public void OnRetryClick()
         {
-            //PlayAnimation(false);
+            PlayAnimation(false);
             //playerData.HealPlayer(playerData.MaxOrder);
             GameManager.Instance.LoadNextMap("Village", SpawnerPosition.BEGIN);
         }
 
         public void OnExitClick()
         {
+            PlayAnimation(false);
+
+           
             GameManager.Instance.LoadNextMap("MainMenu", SpawnerPosition.END);
+       
         }
 
         private void PlayAnimation(bool isOn)
         {
+            fxAnimator.gameObject.SetActive(isOn);
             fxAnimator.SetBool("On", isOn);
             textAnimator.SetBool("On", isOn);
             btnRetryAnimator.SetBool("On", isOn);

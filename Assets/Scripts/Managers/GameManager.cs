@@ -22,7 +22,7 @@ namespace AF
         [NonSerialized] public ParametersLessDelegate OnLoadMapDelegate;
 
         public static GameManager Instance { get; private set; }
-        
+
         void Awake()
         {
             if (Instance != null)
@@ -40,30 +40,40 @@ namespace AF
         {
             StartCoroutine(LoadYourAsyncScene(mapToLoad, () =>
                 {
-                    GetCurrentMapManager();                    
+                    GetCurrentMapManager();
+
+                    if(actualMap == "MainMenu")
+                    {
+                        LoadSceneMenu();
+                    }
+
                     actualMap = mapToLoad;
-                    LoadSceneMenu();
+                   
 
                     if (mapToLoad == "MainMenu")
                     {
                         UnloadSceneMenu();
+                        Debug.Log("Unload");
                     }
                     else
                     {
+                        
                         PlacePlayer(spawnPosition);
                     }
 
                     if (OnLoadMapDelegate is not null)
                     {
                         OnLoadMapDelegate();
-                    }                    
+                    }
                 }
             ));
         }
 
         public void LoadGame()
         {
-            LoadNextMap("Village", SpawnerPosition.END);            
+            Debug.Log("loadgame **************************************");
+            
+            LoadNextMap("Village", SpawnerPosition.END);
         }
 
         public void LoadSceneMenu()
@@ -85,11 +95,11 @@ namespace AF
             switch (spawnPosition)
             {
                 case SpawnerPosition.BEGIN:
-                    playerGO.transform.position = 
+                    playerGO.transform.position =
                         currentMapManager.spawnerBegin.transform.position;
                     break;
                 case SpawnerPosition.END:
-                    playerGO.transform.position = 
+                    playerGO.transform.position =
                         currentMapManager.spawnerEnd.transform.position;
                     break;
             }
@@ -114,11 +124,11 @@ namespace AF
                 yield return null;
             }
 
-            if(callback is not null)
+            if (callback is not null)
             {
                 callback();
             }
-        }        
+        }
 
         public void ExitGame()
         {
