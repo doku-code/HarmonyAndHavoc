@@ -4625,7 +4625,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FullScreenWindow
+  m_text: fullScreenMode
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3ea3d0d084b8bc4cb3043da4a88f629, type: 2}
   m_sharedMaterial: {fileID: -6453497614183099643, guid: a3ea3d0d084b8bc4cb3043da4a88f629, type: 2}
@@ -10475,12 +10475,12 @@ MonoBehaviour:
   m_Placeholder: {fileID: 0}
   m_ItemText: {fileID: 1836546906}
   m_ItemImage: {fileID: 0}
-  m_Value: 1
+  m_Value: 2
   m_Options:
     m_Options:
     - m_Text: Windowed
       m_Image: {fileID: 0}
-    - m_Text: FullScreenWindow
+    - m_Text: FullScreenWindowed
       m_Image: {fileID: 0}
     - m_Text: fullScreenMode
       m_Image: {fileID: 0}
