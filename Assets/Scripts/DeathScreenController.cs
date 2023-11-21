@@ -63,11 +63,28 @@ namespace JFM
 
         private void PlayAnimation(bool isOn)
         {
-            fxAnimator.gameObject.SetActive(isOn);
+            if (isOn)
+            {
+                SetGOActive(isOn);
+            }
+            
             fxAnimator.SetBool("On", isOn);
             textAnimator.SetBool("On", isOn);
             btnRetryAnimator.SetBool("On", isOn);
             btnExitAnimator.SetBool("On", isOn);
+
+            if (!isOn)
+            {
+                SetGOActive(isOn);
+            }
+        }
+
+        private void SetGOActive(bool isActive)
+        {
+            fxAnimator.gameObject.SetActive(isActive);
+            textAnimator.gameObject.SetActive(isActive);
+            btnRetryAnimator.gameObject.SetActive(isActive);
+            btnExitAnimator.gameObject.SetActive(isActive);
         }
     }
 }
