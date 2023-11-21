@@ -28,8 +28,8 @@ namespace charles
         public static DebugCommand<int> ORDERFRAGMENTS;
         public static DebugCommand<int> WEAPONUPGRADE;
         public static DebugCommand<int> ARMORUPGRADE;
-        public static DebugCommand<int> CHANGESCENE;
         public static DebugCommand<int> HITPLAYER;
+        public static DebugCommand<string> CHANGESCENE;
 
         [Header("Script Reference")]
         public DebugFunction debugFunc;
@@ -91,7 +91,7 @@ namespace charles
             {
                 playerData.WeaponUpgrade = x;
             });
-            CHANGESCENE = new DebugCommand<int>("changescene", "Change Scene in build", "changescene", (x) =>
+            CHANGESCENE = new DebugCommand<string>("changescene", "Change Scene in build", "changescene", (x) =>
             {
                 debugFunc.ChangeScene(x);
             });
@@ -251,9 +251,15 @@ namespace charles
                             (commandList[i] as DebugCommand<float>).Invoke(floatValue);
                         }
                     }
+                    else if (commandList[i] is DebugCommand<string>)
+                    {
+                        if (properties.Length > 1)
+                        {
+                            (commandList[i] as DebugCommand<string>).Invoke(properties[1]);
+                        }
+                    }
                 }
             }
-
             commandHistory.Add(input);
             historyIndex = commandHistory.Count;
         }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using JFM;
-
+using AF;
 
 public class DebugFunction : MonoBehaviour
 {
@@ -13,16 +13,9 @@ public class DebugFunction : MonoBehaviour
         Debug.Log("This is called");
     }
 
-    public void ChangeScene(int index)
+    public void ChangeScene(string index)
     {
-        if (index >= 0 && index < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneManager.LoadScene(index);
-        }
-        else
-        {
-            Debug.LogError("Invalid scene index" + index);
-        }
+        GameManager.Instance.LoadNextMap(index, SpawnerPosition.BEGIN);
     }
 
     public void HitPlayer(int damage)
