@@ -16,8 +16,7 @@ namespace JFM
         [SerializeField] private Animator btnExitAnimator;
 
         [SerializeField] private float waitForDeadAnimation = 2.0f;
-        [SerializeField] private float waitForSceneMenuUnload = 1.0f;
-
+        
         private void Start()
         {
             playerData.OnDeadDelegate += OnDead;

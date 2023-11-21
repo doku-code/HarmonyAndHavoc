@@ -42,23 +42,26 @@ namespace AF
                 {
                     GetCurrentMapManager();
 
-                    if(actualMap == "MainMenu")
+                    string previousMap = actualMap;
+                    if (previousMap == "MainMenu")
                     {
-                        LoadSceneMenu();
+                        //LoadSceneMenu();
                     }
 
+                    Debug.Log($"actualMap (before) ={actualMap}");
                     actualMap = mapToLoad;
-                   
-
-                    if (mapToLoad == "MainMenu")
+                    Debug.Log($"actualMap (after) ={actualMap}");
+                    
+                    if (mapToLoad != "MainMenu")
                     {
-                        UnloadSceneMenu();
-                        Debug.Log("Unload");
+                        PlacePlayer(spawnPosition);
+                        //UnloadSceneMenu();
+                        LoadSceneMenu();
+                        //Debug.Log("Unload");
                     }
                     else
-                    {
+                    {                        
                         
-                        PlacePlayer(spawnPosition);
                     }
 
                     if (OnLoadMapDelegate is not null)
@@ -72,7 +75,9 @@ namespace AF
         public void LoadGame()
         {
             Debug.Log("loadgame **************************************");
-            
+
+            //LoadSceneMenu();
+
             LoadNextMap("Village", SpawnerPosition.END);
         }
 

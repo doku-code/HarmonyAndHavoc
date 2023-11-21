@@ -29,8 +29,9 @@ namespace AF
         [SerializeField] private GameObject PauseMenuPanel;
         private bool isInventoryMenuOpen = false;
 
-        private void Awake()
+        private void Start()
         {
+            Debug.Log("InventoryManager.Start() called.");
             OpenInventoryMenu();
             OpenInventoryMenu();
         }
