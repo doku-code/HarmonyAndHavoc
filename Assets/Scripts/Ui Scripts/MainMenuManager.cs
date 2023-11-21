@@ -138,7 +138,7 @@ namespace AF
                 EventSystem.current.SetSelectedGameObject(controlFirstObj);
             }
         }
-        
+
         public void ChangeWindowMode()
         {
             SoundManager.Instance.PlayAClip(0);
@@ -146,18 +146,22 @@ namespace AF
             switch (windowModePreset.value)
             {
                 case 0:
-                    ;
                     Screen.fullScreenMode = FullScreenMode.Windowed;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
                     break;
                 case 1:
-                    Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
+                    Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                    Cursor.visible = true;
                     break;
                 case 2:
-                    Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                    Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                    Cursor.lockState = CursorLockMode.Confined;
                     break;
             }
         }
-        
+
+
         public void ChangeWindowSize()
         {
             SoundManager.Instance.PlayAClip(0);
