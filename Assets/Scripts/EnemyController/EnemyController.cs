@@ -15,13 +15,13 @@ namespace charles
         private int currentHealth;
 
         [Range(0.0f, 50.0f)]
-        [SerializeField] private float pushBackImpulse;
-        [SerializeField] private float pushBackInterval = 0.001f;
-        [SerializeField] private float pushBackFriction = 5.0f;
-        private bool isPushedBack;
-        public bool IsPushedBack
+        [SerializeField] private float knockBackImpulse;
+        [SerializeField] private float knockBackInterval = 0.001f;
+        [SerializeField] private float knockBackFriction = 5.0f;
+        private bool isKnockedBack;
+        public bool IsKnockedBack
         {
-            get => isPushedBack;
+            get => isKnockedBack;
         }
 
         private void Start()
@@ -51,9 +51,8 @@ namespace charles
             }
             else
             {
-                PushBack(pushDirection);
-            }
-            
+                KnockBack(pushDirection);
+            }            
         }
 
         public void Attack(PlayerController player, Vector2 direction)
@@ -73,40 +72,33 @@ namespace charles
             Destroy(gameObject);
         }
         
-        private void PushBack(Vector2 pushDirection)
+        private void KnockBack(Vector2 pushDirection)
         {
-            if (!isPushedBack)
+            if (!isKnockedBack)
             {
-                isPushedBack = true;
+                isKnockedBack = true;
 
                 Rigidbody2D rb = GetComponent<Rigidbody2D>();
                 Vector2 normal = Platformer2DUtilities.GetPerpendicularVector2(pushDirection).normalized;
                 normal = new Vector2(MathF.Abs(normal.x), MathF.Abs(normal.y));
                 rb.velocity = new Vector2(rb.velocity.x * normal.x, rb.velocity.y * normal.y);
                 Debug.Log($"pushDirection={pushDirection}");
-                //rb.AddForce(pushDirection * pushBackImpulse, ForceMode2D.Impulse);
-                StartCoroutine(PushBackOverTime(rb, pushDirection, pushBackImpulse, pushBackInterval));
+                //rb.AddForce(pushDirection * knockBackImpulse, ForceMode2D.Impulse);
+                //StartCoroutine(KnockBackOverTime(rb, pushDirection, knockBackImpulse, knockBackInterval));
             }
         }
 
-        private IEnumerator PushBackOverTime(Rigidbody2D rb, Vector2 pushDirection, float pushBackImpulse, float delayTime)
+        private IEnumerator KnockBackOverTime(Rigidbody2D rb, Vector2 pushDirection, float knockBackImpulse, float delayTime)
         {            
-            rb.velocity = pushDirection * pushBackImpulse;
-            float friction = pushBackFriction;
+            rb.AddForce(pushDirection * knockBackImpulse, ForceMode2D.Impulse);
+            float friction = knockBackFriction;
             while(rb.velocity != Vector2.zero)
             {
-                if(rb.velocity.magnitude < friction)
-                {
-                    rb.velocity = Vector2.zero;
-                }
-                else
-                {
-                    rb.velocity -= pushDirection * friction;
-                }
+                
                 //Debug.Log($"rb.velocity={rb.velocity}");
                 yield return new WaitForSeconds(delayTime);                
             }
-            isPushedBack = false;         
+            isKnockedBack = false;         
         }
     }
 }
