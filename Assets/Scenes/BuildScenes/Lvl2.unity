@@ -1570,7 +1570,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 52325c7cbddf8f2448cc9061a668290a, type: 2}
+  - {fileID: 2100000, guid: 9194caafdad76f44fbefc106a12fdbe9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -38257,8 +38257,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.5812001, y: -0.23295003, z: 0}
-    m_Extent: {x: 9.3880005, y: 1.55745, z: 0}
+    m_Center: {x: 2.5726, y: -0.23095, z: 0}
+    m_Extent: {x: 9.3808, y: 1.56375, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -45347,6 +45347,7 @@ GameObject:
   - component: {fileID: 498163628}
   - component: {fileID: 498163634}
   - component: {fileID: 498163635}
+  - component: {fileID: 498163636}
   m_Layer: 8
   m_Name: Ghost_Warrior_3_2
   m_TagString: Enemy
@@ -45580,6 +45581,22 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &498163636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498163627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa71ca3f6c09c445b66d945594c1f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
+  numberOfCoins: 20
+  minForce: 300
+  maxForce: 600
 --- !u!1 &508404086
 GameObject:
   m_ObjectHideFlags: 0
@@ -50148,8 +50165,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 14.383951, y: 2.67945, z: 0}
-    m_Extent: {x: 22.05105, y: 5.11275, z: 0}
+    m_Center: {x: 14.380949, y: 2.6918998, z: 0}
+    m_Extent: {x: 22.05715, y: 5.1089, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -123461,6 +123478,7 @@ GameObject:
   - component: {fileID: 1398941869}
   - component: {fileID: 1398941875}
   - component: {fileID: 1398941876}
+  - component: {fileID: 1398941877}
   m_Layer: 8
   m_Name: Heavy_Armor_2
   m_TagString: Enemy
@@ -123694,6 +123712,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.25, y: 6.25}
   m_EdgeRadius: 0
+--- !u!114 &1398941877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398941868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa71ca3f6c09c445b66d945594c1f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
+  numberOfCoins: 20
+  minForce: 300
+  maxForce: 600
 --- !u!1 &1403753061
 GameObject:
   m_ObjectHideFlags: 0
@@ -123778,6 +123812,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1408429749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9125858477312548240, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+  m_PrefabInstance: {fileID: 2446853775206420874}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1408429758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408429749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa71ca3f6c09c445b66d945594c1f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
+  numberOfCoins: 5
+  minForce: 300
+  maxForce: 600
 --- !u!1 &1425568354
 GameObject:
   m_ObjectHideFlags: 0
@@ -125633,6 +125688,7 @@ GameObject:
   - component: {fileID: 1588325937}
   - component: {fileID: 1588325943}
   - component: {fileID: 1588325944}
+  - component: {fileID: 1588325945}
   m_Layer: 8
   m_Name: Ghost_Warrior_3_1
   m_TagString: Enemy
@@ -125866,6 +125922,22 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1588325945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588325936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa71ca3f6c09c445b66d945594c1f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
+  numberOfCoins: 20
+  minForce: 300
+  maxForce: 600
 --- !u!1 &1591980596
 GameObject:
   m_ObjectHideFlags: 0
@@ -136086,21 +136158,45 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5867942646594363380, guid: 5286af92ef80838458203443a74ac32e, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
-      value: 0.41573033
+      value: 0.4615385
       objectReference: {fileID: 0}
     - target: {fileID: 5867942646594363380, guid: 5286af92ef80838458203443a74ac32e, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 2.78125
+      value: 0.8125
       objectReference: {fileID: 0}
     - target: {fileID: 5867942646594363380, guid: 5286af92ef80838458203443a74ac32e, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.375
+      value: 1.59375
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1916055096298109937, guid: 5286af92ef80838458203443a74ac32e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 268893464139130737}
   m_SourcePrefab: {fileID: 100100000, guid: 5286af92ef80838458203443a74ac32e, type: 3}
+--- !u!1 &268893464139130736 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1916055096298109937, guid: 5286af92ef80838458203443a74ac32e, type: 3}
+  m_PrefabInstance: {fileID: 268893464139130735}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &268893464139130737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268893464139130736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa71ca3f6c09c445b66d945594c1f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
+  numberOfCoins: 20
+  minForce: 300
+  maxForce: 600
 --- !u!4 &353716591063399753
 Transform:
   m_ObjectHideFlags: 0
@@ -136252,7 +136348,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9125858477312548240, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1408429758}
   m_SourcePrefab: {fileID: 100100000, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
 --- !u!212 &2618951601284857769
 SpriteRenderer:
@@ -137548,8 +137647,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8838496778720078665, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7509732422598660227}
   m_SourcePrefab: {fileID: 100100000, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
+--- !u!1 &7509732422598660226 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8838496778720078665, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
+  m_PrefabInstance: {fileID: 7509732422598660225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7509732422598660227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509732422598660226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa71ca3f6c09c445b66d945594c1f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
+  numberOfCoins: 20
+  minForce: 300
+  maxForce: 600
 --- !u!1 &7926377196802219015
 GameObject:
   m_ObjectHideFlags: 0

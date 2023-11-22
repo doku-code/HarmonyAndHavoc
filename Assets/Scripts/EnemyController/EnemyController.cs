@@ -48,6 +48,8 @@ namespace charles
             if (currentHealth <= 0)
             {
                 Die();
+                CoinSpawner coinSpawner = GetComponent<CoinSpawner>();
+                coinSpawner.SpawnCoins();
             }
             else
             {

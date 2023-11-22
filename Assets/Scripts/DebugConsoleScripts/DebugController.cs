@@ -29,7 +29,7 @@ namespace charles
         public static DebugCommand<int> WEAPONUPGRADE;
         public static DebugCommand<int> ARMORUPGRADE;
         public static DebugCommand<int> HITPLAYER;
-        public static DebugCommand<string> CHANGESCENE;
+        public static DebugCommand<string> SCENE;
 
         [Header("Script Reference")]
         public DebugFunction debugFunc;
@@ -91,7 +91,7 @@ namespace charles
             {
                 playerData.WeaponUpgrade = x;
             });
-            CHANGESCENE = new DebugCommand<string>("changescene", "Change Scene in build", "changescene", (x) =>
+            SCENE = new DebugCommand<string>("scene", "Change Scene in build", "scene", (x) =>
             {
                 debugFunc.ChangeScene(x);
             });
@@ -113,7 +113,7 @@ namespace charles
                 ORDERFRAGMENTS,
                 WEAPONUPGRADE,
                 ARMORUPGRADE,
-                CHANGESCENE,
+                SCENE,
                 HITPLAYER
             };
 
