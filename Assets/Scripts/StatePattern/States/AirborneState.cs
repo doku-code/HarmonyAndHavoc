@@ -1,4 +1,4 @@
-//#define _DEBUG
+#define _DEBUG
 
 using System;
 using System.Collections;
@@ -56,7 +56,8 @@ namespace JFM
             {
                 player.Turn();
             }
-            
+
+            bool willCrouch = (player.inputTriggers["Move"] && player.MoveInput.y < 0.0f);
             bool foundSlopeBeneath = player.FindSlopeBeneath(out float slope);
             bool stairsAreRightSide = slope > 0;
             //player.stairsSide = foundSlopeBeneath;
@@ -70,7 +71,7 @@ namespace JFM
                 return;
             }
 #if _DEBUG
-            Debug.Log($"grounded={grounded} 1 << player.groundedLayer={1 << player.groundedLayer} == {(int)player.GroundLayer} wasOnLadder ={wasOnLadder} ladder={ladderX}");
+            Debug.Log($"grounded={grounded} 1 << player.groundedLayer={1 << player.groundedLayer} == {(int)player.GroundLayer} ladder={ladderX}");
 #endif
             bool noLadderAbove = false;
             if (grounded || foundSlopeBeneath)
@@ -114,7 +115,7 @@ namespace JFM
                                 player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f);
                                 player.rb.totalForce = Vector2.zero;
 
-                                float y = Mathf.Floor(player.HitInfo.hit.point.y) + 1 + 0.007519f;// - player.ColliderSize.y + player.ColliderOffset.y;
+                                float y = Mathf.Round(player.HitInfo.hit.point.y) + 0.007519f;// - player.ColliderSize.y + player.ColliderOffset.y;
                                 player.rb.isKinematic = true;
                                 player.rb.MovePosition(new Vector2(player.transform.position.x, y));
                                 //Debug.Log($"Bon! y={y}");
@@ -147,7 +148,8 @@ namespace JFM
                 }
                 else if (grounded && (Mathf.Abs(slope) > player.StairsUpMinSlope && foundSlopeBeneath))
                 {
-                    IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
+                    IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];                    
+
                     // Adjust for walking on ladders
                     if (player.WillClimbLadder())
                     {
@@ -158,7 +160,7 @@ namespace JFM
                             player.rb.velocity = Vector2.zero;
                             player.rb.totalForce = Vector2.zero;
                             player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
-                            float y = Mathf.Floor(player.HitInfo.hit.point.y) + 1 + 0.007519f;// + player.rb.gravityScale * -Physics2D.gravity.y * player.LadderPushUpForce * Time.fixedDeltaTime;
+                            float y = Mathf.Round(player.HitInfo.hit.point.y) + 0.007519f;// + player.rb.gravityScale * -Physics2D.gravity.y * player.LadderPushUpForce * Time.fixedDeltaTime;
                                                                                               //player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
                             player.rb.isKinematic = true;
                             player.rb.MovePosition(new Vector2(player.transform.position.x, y));
@@ -206,11 +208,11 @@ namespace JFM
                         float y;
                         if ( hit )
                         {
-                            y = Mathf.Floor(player.HitInfo.hit.point.y) + 1 + 0.007519f;// + player.rb.gravityScale * -Physics2D.gravity.y * player.LadderPushUpForce * Time.fixedDeltaTime;
+                            y = Mathf.Round(player.HitInfo.hit.point.y) + 0.007519f;// + player.rb.gravityScale * -Physics2D.gravity.y * player.LadderPushUpForce * Time.fixedDeltaTime;
                         }
                         else
                         {
-                            y = Mathf.Floor(player.HitInfo.probePoint.y) + 1 + 0.007519f;
+                            y = player.transform.position.y;
                         }
 
                         noLadderAbove = Physics2D.CircleCast(new Vector2(player.rb.position.x, y) + Vector2.up * 0.6f, player.GroundedRadius, Vector2.up, 0.8f, player.LadderLayer).collider is null;
@@ -242,12 +244,24 @@ namespace JFM
 
                     if ((1 << player.groundedLayer == (int)player.LadderLayer) && noLadderAbove || (1 << player.groundedLayer == (int)player.GroundLayer))
                     {
+                        if (willCrouch)
+                        {
+                            player.ChangeState(player.states[STATE.CROUCH]);
+                            return;
+                        }
                         player.ChangeState(player.states[PlayerState.STATE.IDLE]);
                         return;
                     }
                 }
-                
-                //Debug.Log($"Detected stairs or ground. slope was {slope} player.MoveInput.x={player.MoveInput.x} foundSlopeBeneath={foundSlopeBeneath} && Mathf.Abs(slope) > player.StairsUpMinSlope={Mathf.Abs(slope) > player.StairsUpMinSlope}");                
+#if _DEBUG
+                Debug.Log($"Detected stairs or ground. slope was {slope} player.MoveInput.x={player.MoveInput.x} foundSlopeBeneath={foundSlopeBeneath} && Mathf.Abs(slope) > player.StairsUpMinSlope={Mathf.Abs(slope) > player.StairsUpMinSlope}");
+#endif
+
+                if (player.rb.velocity.y > -0.001f)
+                {
+                    player.ChangeState(player.states[PlayerState.STATE.IDLE]);
+                    return;
+                }
             }
 
             if (player.Data.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUse())
@@ -279,6 +293,12 @@ namespace JFM
                 {
                     player.rb.velocity = player.rb.velocity.normalized * player.WalkSpeed;
                 }
+            }
+
+            if (player.WillAttack())
+            {
+                player.ChangeState(player.states[STATE.BASIC_ATTACK]);
+                return;
             }
 
             if (player.WillJump())

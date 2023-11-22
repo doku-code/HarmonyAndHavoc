@@ -198,7 +198,13 @@ namespace JFM
                 player.ChangeState(player.states[STATE.IDLE]);
                 return;
             }
-                          
+
+            if (player.WillAttack())
+            {
+                player.ChangeState(player.states[STATE.BASIC_ATTACK]);
+                return;
+            }
+
             // Add force but limit speed
             if ((player.rb.velocity.magnitude < player.WalkSpeed && !Platformer2DUtilities.AreNearlyEqual(lastposition.x, player.rb.position.x)) || hasTurned)
             {
