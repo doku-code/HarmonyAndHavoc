@@ -80,6 +80,12 @@ namespace JFM
                 }
             }
 
+            if (player.WillAttack())
+            {
+                player.ChangeState(player.states[STATE.BASIC_ATTACK]);
+                return;
+            }
+
             if (player.WillJump())
             {
                 player.Jump();

@@ -44,7 +44,7 @@ public class WallSlideKnowledge : Knowledge
             return;
         }
 
-        if (player.WillJump())
+        if (player.inputTriggers["Jump"])
         {
             player.ChangeState(player.states[PlayerState.STATE.WALLJUMP]);
             return;

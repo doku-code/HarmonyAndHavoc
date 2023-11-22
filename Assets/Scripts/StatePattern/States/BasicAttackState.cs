@@ -9,15 +9,22 @@ namespace JFM
     {
         private float startTime;
         private float animationClipLength;
+        private bool usingCrouchedAnimation;
         [SerializeField] private int animatorLayer = 2;
         [SerializeField] private string motionName = "Player_Attack_1";
 
         public override void Enter()
         {
-            player.animator.SetBool("IsAttacking", true);
+            // If airborne, use crouched attack animation
+            if (usingCrouchedAnimation = !player.IsGrounded())
+            {
+                player.animator.SetBool("IsCrouched", true);
+            }
+            
+            player.animator.SetBool("IsAttacking", true);            
 
             player.inputTriggers["BasicAttack"] = false;
-            player.rb.velocity = Vector2.zero;
+            //player.rb.velocity = Vector2.zero;
             startTime = Time.time;
             player.Attack();
 
@@ -26,15 +33,10 @@ namespace JFM
 
         public override void Update()
         {
-            if (!player.IsGrounded())
-            {
-                player.ChangeState(player.states[STATE.AIRBORNE]);
-                return;
-            }
-
-            if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
+            if (
+                !player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
                 player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down)
-                    )
+            )
             {                
                 player.rb.gravityScale = 0.0f;
                 player.rb.velocity = Vector2.zero;
@@ -52,7 +54,14 @@ namespace JFM
             }
             else if (Time.time - startTime >= animationClipLength)
             {
-                player.ChangeState(player.states[STATE.IDLE]);
+                if (!player.IsGrounded())
+                {
+                    player.ChangeState(player.states[STATE.AIRBORNE]);                 
+                }
+                else
+                {
+                    player.ChangeState(player.states[STATE.IDLE]);
+                }
                 return;
             }
         }
@@ -61,6 +70,10 @@ namespace JFM
         {
             player.rb.gravityScale = player.DefaultGravityScale;
             player.animator.SetBool("IsAttacking", false);
+            if(usingCrouchedAnimation)
+            {
+                player.animator.SetBool("IsCrouched", false);
+            }
             base.Exit();
         }
     }

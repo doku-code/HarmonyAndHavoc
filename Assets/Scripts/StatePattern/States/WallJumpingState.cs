@@ -89,9 +89,7 @@ namespace JFM
         }
 
         private void Jump()
-        {
-            player.DepleteJumps();
-
+        {            
             float angle = wallJumpAngle * Mathf.Deg2Rad;            
             Vector3 v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * wallJumpForce * 1.0f;
             //Debug.Log($"JUMP from wall {player.IsFacingRight}  v={v}  cos(angle)={Mathf.Cos(angle)}");
