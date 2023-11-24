@@ -1,46 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-namespace JFM
+namespace Fineallday.StatePattern
 {
-    [CreateAssetMenu(fileName = "LandingState", menuName = "States/Landing")]
     public class LandingState : PlayerState
     {
-        private float startTime;
-        private float animationClipLength;
-        [SerializeField] private int animatorLayer = 0;
-
-        public override void Enter()
+        public LandingState(PlayerController player) : base(player)
         {
-            player.animator.SetBool("IsLanding", true);
-            player.rb.velocity = Vector2.zero;
-            startTime = Time.time;
-            player.rb.gravityScale = 0.0f;
-            if(animationClipLength == 0.0f)
+        }
+
+        public override void OnEnterState()
+        {
+         //   playerC._animator.SetBool("Fall", true);
+        }
+
+        public override void OnUpdateState()
+        {
+
+            if (playerC.isGrounded)
             {
-                animationClipLength = player.animator.GetCurrentAnimatorStateInfo(animatorLayer).length;                       
+                playerC.ChangeState(playerC._idleState);
             }
-
-            base.Enter();
         }
 
-        public override void Update()
+        public override void OnExitState()
         {
-            //Debug.Break();
-            if (Time.time - startTime >= animationClipLength)
-            {
-                player.ChangeState(player.states[STATE.IDLE]);
-                return;
-            }            
-        }
-
-        public override void Exit()
-        {
-            player.rb.gravityScale = player.DefaultGravityScale;
-            player.animator.SetBool("IsLanding", false);
-            base.Exit();
+            //playerC._animator.SetBool("Fall", false);
         }
     }
 }
