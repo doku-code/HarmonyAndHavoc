@@ -16,20 +16,31 @@ namespace charles
         {
             StartCoroutine(SpawnCoinsWithDelay());
         }
-        //La couroutine a lair d'aider a en spawner plus mais y'a quand meme un bug ou parfois 
+
         private IEnumerator SpawnCoinsWithDelay()
         {
             for (int i = 0; i < numberOfCoins; i++)
             {
-                GameObject coin = Instantiate(coinPrefab, transform.position, Quaternion.identity);
-                Vector2 trajectory = Random.insideUnitCircle * 200f;
+                GameObject coin = CoinPool.SharedInstance.GetPooledObject();
 
+                if (coin != null)
+                {
+                    coin.SetActive(true);
+                }
+
+                coin.transform.position = transform.position;
+
+                Vector2 trajectory = Random.insideUnitCircle * 200f;
                 float forceX = Random.Range(-minForce, maxForce) + trajectory.x;
                 float forceY = maxForce + trajectory.y;
 
-                coin.GetComponent<Rigidbody2D>().AddForce(new Vector2(forceX, forceY));
+                Rigidbody2D coinRigidbody = coin.GetComponent<Rigidbody2D>();
+                coinRigidbody.velocity = Vector2.zero;
+                coinRigidbody.AddForce(new Vector2(forceX, forceY));
+
                 coin.AddComponent<CoinPickup>();
                 SoundManager.Instance.PlayAClip(2);
+
                 yield return new WaitForSeconds(spawnDelay);
             }
         }
