@@ -15,11 +15,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6fa37ccd292d0c843bd2ca2faf3211a4
-  position: {x: 302.99982, y: 676}
+  position: {x: 305, y: 676.00006}
   Description: 
   playerLayer:
     serializedVersion: 2
-    m_Bits: 7
+    m_Bits: 0
   gameobjNpcName: 
   duration: 1
 --- !u!114 &-8421530712381887247
@@ -37,12 +37,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: dd50da2f1e63360498e6c6917834faff
-  position: {x: 530.78534, y: 676}
+  position: {x: 453.00006, y: 676}
   Description: 
   playerLayer:
     serializedVersion: 2
-    m_Bits: 7
-  gameobjNpcName: 
+    m_Bits: 128
+  gameobjNpcName: Goblin
   attackCooldown: 3
   attackDistance: 3
   attackAnimString: Combo1
@@ -62,18 +62,19 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: e20ff99690b28c04cbb254f4f9821e02
-  position: {x: -396, y: 676}
+  position: {x: -397, y: 676.00006}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: 
+  gameobjNpcName: Goblin
   POSPatrolRoute:
-  - {fileID: 6523700425995177072, guid: 002e8ab119fa5dc45aa7c7225e9721c1, type: 3}
-  - {fileID: 460703195443874644, guid: b9361833467b89446bb83fa5f2c266c3, type: 3}
+  - {fileID: 2008969997219987048, guid: 8cc2eec0c11a24b4b8177313de9de85b, type: 3}
+  - {fileID: 4099377676801820007, guid: 9ddf7e0c0490f6f488c6c5ac51b3cec6, type: 3}
+  - {fileID: 2008969997219987048, guid: 8cc2eec0c11a24b4b8177313de9de85b, type: 3}
   PatrolAnimString: Run
-  moveSpeed: 150
-  sphereCastRadius: 2
+  moveSpeed: 100
+  sphereCastRadius: 3
 --- !u!114 &-3821781152797416976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,12 +128,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6d5cdd8b41fb2d04497bb96acd420514
-  position: {x: 104.99999, y: 675.99994}
+  position: {x: 151.24997, y: 676.00006}
   Description: 
   playerLayer:
     serializedVersion: 2
-    m_Bits: 7
-  gameobjNpcName: 
+    m_Bits: 128
+  gameobjNpcName: Goblin
   attackDistance: 1.5
 --- !u!114 &-2475738774914419675
 MonoBehaviour:
@@ -188,11 +189,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: cef6e93d74df6af43b0177c058093358
-  position: {x: 764.6461, y: 675.99994}
+  position: {x: 603.00006, y: 676.00006}
   Description: 
   playerLayer:
     serializedVersion: 2
-    m_Bits: 7
+    m_Bits: 0
   gameobjNpcName: 
   duration: 1
 --- !u!114 &11400000
@@ -248,8 +249,8 @@ MonoBehaviour:
   followDistanceX: 0.2
   followDistanceY: 0.2
   maxDistance: 10
-  followSpeedX: 250
-  followSpeedY: 250
+  followSpeedX: 60
+  followSpeedY: 60
   followOnY: 0
   obstacleLayer:
     serializedVersion: 2
@@ -313,13 +314,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 185a710cc31d113488123a82d5c5835c
-  position: {x: 1000.7358, y: 675.99994}
+  position: {x: 753.0001, y: 676.00006}
   Description: 
   playerLayer:
     serializedVersion: 2
-    m_Bits: 7
-  gameobjNpcName: 
+    m_Bits: 128
+  gameobjNpcName: Goblin
   attackCooldown: 3
   attackDistance: 3
-  attackAnimString: 
+  attackAnimString: Combo2
   comboSoundIdx: 0
