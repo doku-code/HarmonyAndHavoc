@@ -56,9 +56,9 @@ namespace JFM
                 return;
             }
 
-            if (player.WillClimbDownLadder())
+            if (player.WillClimbDownLadder(out Vector2 ladderPoint))
             {
-                float ladderX = Mathf.Floor(player.HitInfo.probePoint.x) + 0.5f - player.ColliderOffset.x;
+                float ladderX = Mathf.Floor(ladderPoint.x) + 0.5f - player.ColliderOffset.x;
                 Debug.Log($"Climbing ladder... ladderX={ladderX}");
                 player.transform.position = new Vector3(ladderX, player.transform.position.y, player.transform.position.z);
 

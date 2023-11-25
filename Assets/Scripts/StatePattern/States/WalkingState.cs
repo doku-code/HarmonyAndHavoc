@@ -107,17 +107,20 @@ namespace JFM
 
             bool foundSlopeBeneath = player.FindSlopeBeneath(out float slope);
             bool grounded = player.IsGrounded(player.GroundLayer | player.LadderLayer, Vector2.zero, player.GroundDistance, true);
-            if(!grounded && !foundSlopeBeneath)
+            //Debug.Log($"grounded={grounded} slope ={slope} foundSlopeBeneath={foundSlopeBeneath}");
+            if (!grounded && (!foundSlopeBeneath || slope == 0.0f))
             {
                 player.ChangeState(player.states[STATE.AIRBORNE]);
                 return;
             }
             else
             {
+               
                 bool playerIsAboveLadder = player.IsAboveLadder();
                 if ((player.WillClimbLadder() || playerIsAboveLadder) && 
                 player.MoveInput.x != 0.0f && player.rb.gravityScale != 0.0f)
                 {
+                    //Debug.Log($"OK!!!!");
                     Vector2 force = (player.IsFacingRight ? Vector2.right : -Vector2.right) * player.WalkAcceleration * Time.fixedDeltaTime;
 
                     player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f) + force / player.rb.mass;
@@ -158,9 +161,9 @@ namespace JFM
                 }
             }
 
-            if (player.WillClimbDownLadder())
+            if (player.WillClimbDownLadder(out Vector2 ladderPoint))
             {
-                float ladderX = Mathf.Floor(player.HitInfo.probePoint.x) + 0.5f - player.ColliderOffset.x;
+                float ladderX = Mathf.Floor(ladderPoint.x) + 0.5f - player.ColliderOffset.x;
                 //Debug.Log($"Climbing ladder... ladderX={ladderX}");
                 player.transform.position = new Vector3(ladderX, player.transform.position.y, player.transform.position.z);
                 LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];

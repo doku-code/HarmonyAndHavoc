@@ -168,11 +168,11 @@ namespace JFM
                     float y;
                     if (player.Raycast(false, player.LadderLayer, Vector2.up * 0.02f, 0.25f, Vector2.up, false, true))
                     {
-                        y = Mathf.Round(player.HitInfo.hit.point.y) + 0.007519f;
+                        y = Mathf.Round(player.HitInfo.hit.point.y);// + 0.007519f;
                     }
                     else
                     {
-                        y = Mathf.Round(player.HitInfo.probePoint.y) + 0.007519f;
+                        y = Mathf.Round(player.HitInfo.probePoint.y);// + 0.007519f;
                     }
                     player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
                     

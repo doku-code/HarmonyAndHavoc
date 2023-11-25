@@ -507,30 +507,7 @@ namespace JFM
             state.knowledge = playerData.GetKnowledgeByID(knowledge);
             ChangeState(state);
         }
-        /*
-        private void SetFrontWallInfo()
-        {
-            if (frontWall is null)
-            {
-                Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
-                RaycastHit2D hit1 = Physics2D.Raycast(rb.position + new Vector2(0, colliderSize.y / 2.0f), v, wallDistance, groundLayer);
-                
-                if (hit1.collider is null)
-                {
-                    RaycastHit2D hit2 = Physics2D.BoxCast(rb.position + Vector2.up * colliderSize.y / 2.0f + v * wallDistance, colliderSize, 0.0f, v, 0.0f, groundLayer);
-                    if (hit2.collider is null)
-                    {                     
-                        return;
-                    }
-
-                    frontWall = hit2.transform.gameObject;
-                    return;
-                }
-
-                frontWall = hit1.transform.gameObject;
-            }
-        }
-        */
+       
         private void SetBeneathObjectInfo()
         {            
             if (beneathObject is null)
@@ -565,15 +542,17 @@ namespace JFM
             return (moveInput.x == 0.0f && moveInput.y != 0.0f && beneathObject is not null && (1 << beneathObject.layer) == (int)ladderLayer);
         }
 
-        public bool WillClimbDownLadder()
+        public bool WillClimbDownLadder(out Vector2 point)
         {
-            bool h2 = Raycast(false, ladderLayer, Vector2.down * ladderGroundDistance, 0.01f, Vector2.down);//, false ,true);
-
+            RaycastHit2D hit;
+            //bool h2 = Raycast(false, ladderLayer, Vector2.down * ladderGroundDistance, 0.01f, Vector2.down);//, false ,true);
+            bool h2 = (hit = Physics2D.CircleCast(rb.position, groundedRadius, Vector2.down, ladderGroundDistance, ladderLayer)).collider is not null;
             //Debug.Log($"{moveInput.x == 0.0f} && {moveInput.y < 0.0f} && h2={h2} moveInput.y = {moveInput.y}");
 
+            point = hit.point;
             return moveInput.x == 0.0f && moveInput.y < 0.0f && h2;
         }
-        
+
         public bool IsAboveLadder()
         {
             //if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
@@ -596,13 +575,13 @@ namespace JFM
         public bool WillClimbUpStairs()
         {
             Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
+            float facing = isFacingRight ? 1.0f : -1.0f;
             //if (FindSlopeAtPoint(out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, v, StairsDownHeight))//, true))
-            if (Raycast2DHelper.FindSlopeAtPoint(rb.position, out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (isFacingRight ? 1.0f : -1.0f) * 45.0f), stairsDownHeight, GroundLayer))//, true))
-            {
-                
+            if (Raycast2DHelper.FindSlopeAtPoint(rb.position, out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down,facing * 45.0f), stairsDownHeight, GroundLayer))//, true))
+            {                
                 bool grounded = IsGrounded();
                 //Debug.Log($"ClimbingUpStairs slope={slope} grounded={grounded}");
-                return grounded && moveInput.x != 0.0f && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) <= stairsUpMaxSlope && slope != Mathf.Infinity;
+                return grounded && moveInput.x != 0.0f && facing * Mathf.Sign(slope) > 0 && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) <= stairsUpMaxSlope && slope != Mathf.Infinity;
             }
             else
             {
@@ -794,7 +773,7 @@ namespace JFM
         }
 
         void Awake()
-        {
+        {            
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
             defaultGravityScale = rb.gravityScale;

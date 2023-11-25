@@ -2,6 +2,7 @@ using AF;
 using JFM;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -67,24 +68,25 @@ public class WallSlideKnowledge : Knowledge
 
     public override bool WillUse()
     {
-        //bool front = player.FrontWall is not null && (1 << player.FrontWall.layer) == (int)player.GroundLayer && ((player.IsFacingRight && player.MoveInput.x > 0) || (!player.IsFacingRight && player.MoveInput.x < 0));
-        bool front = player.IsWallColliding && player.WallIsToRight == player.IsFacingRight && ((player.IsFacingRight && player.MoveInput.x > 0) || (!player.IsFacingRight && player.MoveInput.x < 0));
+        GameObject frontWall = IsInFrontOfWall();
+        bool front = frontWall is not null && (1 << frontWall.layer) == (int)player.GroundLayer;// && ((player.IsFacingRight && player.MoveInput.x > 0) || (!player.IsFacingRight && player.MoveInput.x < 0));
+        front = /*front || */(player.IsWallColliding && player.WallIsToRight == player.IsFacingRight) && ((player.IsFacingRight && player.MoveInput.x > 0) || (!player.IsFacingRight && player.MoveInput.x < 0));
 
         bool text = false;
-        if (player.FrontWall is not null)
+        if (frontWall is not null)
         {
-            text = (1 << player.FrontWall.layer) == (int)player.GroundLayer;
+            text = (1 << frontWall.layer) == (int)player.GroundLayer;
         }
-        //Debug.Log($"front = {player.FrontWall is not null} && ({text} && (({player.IsFacingRight && player.MoveInput.x > 0}) || ({!player.IsFacingRight && player.MoveInput.x < 0}))");
+        //Debug.Log($"front = {frontWall is not null} && ({text} && (({player.IsFacingRight && player.MoveInput.x > 0}) || ({!player.IsFacingRight && player.MoveInput.x < 0}))");
         //Debug.Log($"front = {player.IsWallColliding} && (({player.IsFacingRight && player.MoveInput.x > 0}) || ({!player.IsFacingRight && player.MoveInput.x < 0}))");
         bool back = false;
 
         if (!front)
         {
             // Check also back wall 
-            //bool backWallHit = player.Raycast(false, player.GroundLayer, Vector2.zero, player.WallDistance, player.IsFacingRight ? -Vector2.right : Vector2.right);
+            bool backWallHit = player.Raycast(false, player.GroundLayer, Vector2.zero, player.WallDistance, player.IsFacingRight ? -Vector2.right : Vector2.right);
             //back = backWallHit && ((player.IsFacingRight && player.MoveInput.x < 0) || (!player.IsFacingRight && player.MoveInput.x > 0));
-            back = player.IsWallColliding && player.WallIsToRight != player.IsFacingRight && ((player.IsFacingRight && player.MoveInput.x < 0) || (!player.IsFacingRight && player.MoveInput.x > 0));
+            back = /*backWallHit || */(player.IsWallColliding && player.WallIsToRight != player.IsFacingRight) && ((player.IsFacingRight && player.MoveInput.x < 0) || (!player.IsFacingRight && player.MoveInput.x > 0));
         }
 
         bool availableKnowledge = player.Data.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] && player.Data.AvailableKnowledgeDictionary[KnowledgeID.WALL_SLIDE] != AvailableKnowledgePosition.NOT_AVAILABLE;        
@@ -92,6 +94,26 @@ public class WallSlideKnowledge : Knowledge
         //Debug.Log($"player.IsFacingRight={player.IsFacingRight} availableKnowledge ={availableKnowledge} ({front} || {back}) && {Mathf.Abs(player.rb.velocity.x) <= wallGripVelocityTolerance} rb.velocity.x={player.rb.velocity.x} moveInput.x={player.MoveInput.x}");
         return availableKnowledge && (front || back) && Mathf.Abs(player.rb.velocity.x) <= wallGripVelocityTolerance;        
     }
+    
+    private GameObject IsInFrontOfWall()
+    {
+        Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
+        RaycastHit2D hit1 = Physics2D.Raycast(player.rb.position + new Vector2(0, player.ColliderSize.y / 2.0f), v, player.WallDistance, player.GroundLayer);
+
+        if (hit1.collider is null)
+        {
+            RaycastHit2D hit2 = Physics2D.BoxCast(player.rb.position + Vector2.up * player.ColliderSize.y / 2.0f + v * player.WallDistance, player.ColliderSize, 0.0f, v, 0.0f, player.GroundLayer);
+            if (hit2.collider is null)
+            {
+                return null;
+            }
+            
+            return hit2.transform.gameObject;
+        }
+
+        return hit1.transform.gameObject;
+    }
+
 
     // Checks back wall
     private bool IsSlidingOnBackWall()
@@ -106,6 +128,6 @@ public class WallSlideKnowledge : Knowledge
             hit = hit2;
         }
         //return hit.collider is not null && ((!player.IsFacingRight && player.MoveInput.x > 0) || (player.IsFacingRight && player.MoveInput.x < 0)) && Mathf.Abs(player.rb.velocity.x) <= 0.5f;
-        return player.IsWallColliding && player.WallIsToRight != player.IsFacingRight && ((!player.IsFacingRight && player.MoveInput.x > 0) || (player.IsFacingRight && player.MoveInput.x < 0)) && Mathf.Abs(player.rb.velocity.x) <= 0.5f;
+        return hit.collider is not null || (player.IsWallColliding && player.WallIsToRight != player.IsFacingRight) && ((!player.IsFacingRight && player.MoveInput.x > 0) || (player.IsFacingRight && player.MoveInput.x < 0)) && Mathf.Abs(player.rb.velocity.x) <= 0.5f;
     }
 }
