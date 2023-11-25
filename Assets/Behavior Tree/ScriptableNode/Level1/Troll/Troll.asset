@@ -15,7 +15,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 7b959e344eb5eb9448408c14e0414760
-  position: {x: 461.00006, y: 726.50006}
+  position: {x: 430, y: 735.50006}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -78,7 +78,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 0fd943f43a4c2554c9112b90753a6240
-  position: {x: 611.00006, y: 726.50006}
+  position: {x: 580, y: 735.50006}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -123,7 +123,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: ec22fae4020a65f42a15772483f476ce
-  position: {x: 199.99994, y: 364}
+  position: {x: 167, y: 373.00003}
   Description: 
   children:
   - {fileID: 8136881546061674528}
@@ -142,7 +142,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: d30813dd523313a49a1e3afb52b69264
-  position: {x: 311.00006, y: 726.50006}
+  position: {x: 280, y: 735.50006}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -209,7 +209,7 @@ MonoBehaviour:
   followOnY: 0
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8
   distanceOffset: 1
   stoppingDistance: 0.1
 --- !u!114 &4751016770263260837
@@ -250,7 +250,7 @@ MonoBehaviour:
   Description: 
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   gameobjNpcName: 
   POSPatrolRoute:
   - {fileID: 8981031655952692514, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
@@ -274,7 +274,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 62e4132898946cc4d8796ac3cc28216c
-  position: {x: 236.00006, y: 588.00006}
+  position: {x: 169, y: 588.00006}
   Description: 
   children:
   - {fileID: 8710811692187415094}
@@ -296,7 +296,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: b6fdb6660dd839e4ea252a9fef71219c
-  position: {x: 157.5, y: 726.4999}
+  position: {x: 126.5, y: 735.50006}
   Description: 
   playerLayer:
     serializedVersion: 2
