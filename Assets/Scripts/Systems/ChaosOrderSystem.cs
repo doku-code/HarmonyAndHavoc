@@ -184,6 +184,11 @@ namespace JFM
 
         private void ActivateCurrentChaosLevel()
         {
+            if(activationObjectStates[chaosAmount] is null)
+            {
+                return;
+            }
+
             foreach (GameObject go in activationObjectStates[chaosAmount].objects)
             {
                 if (go is not null)
