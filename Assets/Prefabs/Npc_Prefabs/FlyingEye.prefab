@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 173520606651937498}
   - component: {fileID: -9204760421774538763}
   - component: {fileID: -5113294156208424820}
+  - component: {fileID: 3272987733189534183}
   m_Layer: 0
   m_Name: FlyingEye
   m_TagString: Untagged
@@ -268,6 +269,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &3272987733189534183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2538372085507538761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 5925790882502761358}
 --- !u!1001 &2484780349563593443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -373,6 +387,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+--- !u!114 &5925790882502761358 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 2484780349563593443}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6223829298438296609 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}

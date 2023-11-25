@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FullScreenPassChaos
+  m_Name: Chaos Level 1
   m_Shader: {fileID: -6465566751694194690, guid: bdf11075f57687f48863a0069d6cbf1e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -37,11 +37,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _VignetteIntensity: 2
-    - _VignettePower: 6
-    - _VoronoiIntensity: 0.76
-    - _VoronoiPower: 3.01
-    - _VoronoiSpeed: 2.08
+    - _VignetteIntensity: 0.75
+    - _VignettePower: 3.33
+    - _VoronoiIntensity: 1.16
+    - _VoronoiPower: 0.76
+    - _VoronoiSpeed: 2.59
     m_Colors:
-    - _VignetteColor: {r: 1.1865976, g: 0.38620394, b: 1.0005995, a: 1}
+    - _VignetteColor: {r: 0.30102983, g: 0, b: 0.5660378, a: 1}
   m_BuildTextureStacks: []

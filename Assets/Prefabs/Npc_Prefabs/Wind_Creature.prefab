@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6843124495827089229}
   - component: {fileID: -7278747016550905350}
   - component: {fileID: 9173074001220633786}
+  - component: {fileID: 7850313770420207740}
   m_Layer: 0
   m_Name: Wind_Creature
   m_TagString: Untagged
@@ -268,6 +269,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &7850313770420207740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846432293866392312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
 --- !u!1001 &4300423533183516068
 PrefabInstance:
   m_ObjectHideFlags: 0

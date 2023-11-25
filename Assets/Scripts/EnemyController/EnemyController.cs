@@ -2,6 +2,7 @@ using UnityEngine;
 using JFM;
 using System.Collections;
 using System;
+using AF;
 
 namespace charles
 {
@@ -18,8 +19,10 @@ namespace charles
         [SerializeField] private float knockBackInterval = 0.001f;
         [SerializeField] private float knockBackFriction = 5.0f;
         private bool isKnockedBack;
-        public bool IsKnockedBack {get => isKnockedBack;}
-        public bool IsDead{ get => currentHealth <= 0; }
+        public bool IsKnockedBack { get => isKnockedBack; }
+        public bool IsDead { get => currentHealth <= 0; }
+
+        public event SingleParameterDelegate OnHealthDecrease;
 
         private void Start()
         {
@@ -29,7 +32,7 @@ namespace charles
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.CompareTag("Player") && collision is CapsuleCollider2D)
+            if (collision.CompareTag("Player") && collision is CapsuleCollider2D)
             {
                 Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
                 Attack(collision.gameObject.GetComponent<PlayerController>(), pushDirection);
@@ -39,13 +42,14 @@ namespace charles
 
         public void TakeDamage(int damage, Vector2 pushDirection)
         {
-            if(currentHealth == 0)
+            if (currentHealth == 0)
             {
                 return;
             }
             currentHealth -= Mathf.Max(0, damage);
             npcAnimator.SetTrigger("GetHit");
-
+            
+            OnHealthDecrease(currentHealth);
             if (currentHealth <= 0)
             {
                 Die();
@@ -54,8 +58,9 @@ namespace charles
             else
             {
                 KnockBack(pushDirection);
-            }            
+            }
         }
+            
 
         public void Attack(PlayerController player, Vector2 direction)
         {

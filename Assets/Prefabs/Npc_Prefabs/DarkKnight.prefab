@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 385583696819779983}
   - component: {fileID: 6468222234881983603}
   - component: {fileID: 6992088970029207480}
+  - component: {fileID: -3373571228203418711}
   m_Layer: 0
   m_Name: DarkKnight
   m_TagString: Untagged
@@ -268,6 +269,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &-3373571228203418711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916055096298109937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 8036830219417508601}
 --- !u!1001 &2292221681911587732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -279,6 +293,10 @@ PrefabInstance:
     - target: {fileID: 4229758479447274299, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Name
       value: Ennemy Health bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
@@ -378,3 +396,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 2292221681911587732}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8036830219417508601 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 2292221681911587732}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

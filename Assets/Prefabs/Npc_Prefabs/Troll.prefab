@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6234994597373119208}
   - component: {fileID: -5853658623702271934}
   - component: {fileID: -5436947849686195483}
+  - component: {fileID: 1768326600914027493}
   m_Layer: 0
   m_Name: Troll
   m_TagString: Untagged
@@ -268,6 +269,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1768326600914027493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3243686433130409897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
 --- !u!1001 &8129664726042809354
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,0 +1,27 @@
+using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
+
+namespace charles
+{
+    public class EnemyHealthBar : MonoBehaviour
+    {
+        [SerializeField] private Slider healthSlider;
+        private EnemyController enemyController;
+        private void Start()
+        {
+            enemyController = GetComponent<EnemyController>();
+            enemyController.OnHealthDecrease += UpdateHealthBar;
+        }
+
+        private void UpdateHealthBar(int currentHealth)
+        {
+            Debug.Log("is This Called " + "UpdateHealthBar");
+            healthSlider.value = currentHealth;
+        }
+        private void OnDestroy()
+        {
+            enemyController.OnHealthDecrease -= UpdateHealthBar;
+        }
+    }
+}

@@ -11,6 +11,7 @@ namespace charles
         [TextArea]
         public string answerText;
         public int price;
+        public bool includePrice;
     }
 
     [System.Serializable]
@@ -34,10 +35,12 @@ namespace charles
         private int questionIndex = 0;
         private int currentUpgradePrice = 10;
         private bool repeatQuestion = true;
+
         private void Start()
         {
             LoadConversation(questionIndex);
         }
+
         public IEnumerator ShowText()
         {
             while (questionIndex < Conversations.Length)
@@ -67,6 +70,7 @@ namespace charles
                 }
             }
         }
+
         public void LoadConversation(int index)
         {
             buttonPressed = false;
@@ -83,12 +87,18 @@ namespace charles
                     {
                         answerButton.interactable = true;
                         string answerText = string.IsNullOrEmpty(answers[i].answerText) ? "No Answer" : answers[i].answerText;
-                        answerText += " - Price: $" + currentUpgradePrice;
+
+                        if (answers[i].includePrice)
+                        {
+                            answerText += " - Price: $" + currentUpgradePrice;
+                        }
+
                         answerButton.GetComponentInChildren<TMP_Text>().text = answerText;
                     }
                 }
             }
         }
+
         public void OnAnswerSubmitted(int answerIndex)
         {
             buttonPressed = true;
@@ -101,5 +111,4 @@ namespace charles
             LoadConversation(questionIndex);
         }
     }
-
 }
