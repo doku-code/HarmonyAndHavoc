@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5761180071126291733}
   - component: {fileID: 2744116323288069843}
   - component: {fileID: -3612252716294822507}
+  - component: {fileID: 2329015283717452022}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -249,3 +250,20 @@ MonoBehaviour:
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &2329015283717452022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7863827562862499243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5

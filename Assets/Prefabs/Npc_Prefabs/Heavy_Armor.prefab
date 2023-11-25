@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 482451724513659173}
   - component: {fileID: 3637562509203071390}
   - component: {fileID: 5723241378898235679}
-  - component: {fileID: 7108231063012163750}
   - component: {fileID: 8000035976008550848}
+  - component: {fileID: 2281428959766015154}
   m_Layer: 8
   m_Name: Heavy_Armor
   m_TagString: Enemy
@@ -233,23 +233,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tickInterval: 0
   tree: {fileID: 11400000, guid: 8d49269ea05186147b47270c2891dd02, type: 2}
---- !u!114 &7108231063012163750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9125858477312548240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 20
-  attackDamage: 0
-  knockBackImpulse: 0
-  knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &8000035976008550848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,3 +250,20 @@ MonoBehaviour:
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &2281428959766015154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9125858477312548240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5

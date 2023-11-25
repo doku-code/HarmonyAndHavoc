@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 598608526300918775}
   - component: {fileID: 6254713708683063202}
   - component: {fileID: 3990826440339552541}
+  - component: {fileID: 465776952547087491}
   m_Layer: 0
   m_Name: Heavy_Armor2
   m_TagString: Untagged
@@ -249,3 +250,20 @@ MonoBehaviour:
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &465776952547087491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4001193077463154613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5

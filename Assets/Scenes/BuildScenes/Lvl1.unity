@@ -549,6 +549,7 @@ GameObject:
   - component: {fileID: 63284512}
   - component: {fileID: 63284511}
   - component: {fileID: 63284517}
+  - component: {fileID: 63284518}
   m_Layer: 0
   m_Name: Skeleton (4)
   m_TagString: Untagged
@@ -782,6 +783,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &63284518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63284509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &66375060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,6 +1472,7 @@ GameObject:
   - component: {fileID: 188854466}
   - component: {fileID: 188854465}
   - component: {fileID: 188854471}
+  - component: {fileID: 188854472}
   m_Layer: 0
   m_Name: Goblin (5)
   m_TagString: Untagged
@@ -1687,6 +1706,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &188854472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188854463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &202083578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2359,6 +2395,7 @@ GameObject:
   - component: {fileID: 282405269}
   - component: {fileID: 282405268}
   - component: {fileID: 282405274}
+  - component: {fileID: 282405275}
   m_Layer: 0
   m_Name: Skeleton (5)
   m_TagString: Untagged
@@ -2592,6 +2629,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &282405275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282405266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &290969924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,6 +2744,7 @@ GameObject:
   - component: {fileID: 292607786}
   - component: {fileID: 292607785}
   - component: {fileID: 292607791}
+  - component: {fileID: 292607792}
   m_Layer: 0
   m_Name: Skeleton (11)
   m_TagString: Untagged
@@ -2923,6 +2978,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &292607792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292607783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &307064182
 GameObject:
   m_ObjectHideFlags: 0
@@ -10484,6 +10556,7 @@ GameObject:
   - component: {fileID: 656493463}
   - component: {fileID: 656493462}
   - component: {fileID: 656493468}
+  - component: {fileID: 656493469}
   m_Layer: 0
   m_Name: Skeleton (9)
   m_TagString: Untagged
@@ -10717,6 +10790,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &656493469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656493460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &731258358
 GameObject:
   m_ObjectHideFlags: 0
@@ -10815,6 +10905,7 @@ GameObject:
   - component: {fileID: 732978193}
   - component: {fileID: 732978192}
   - component: {fileID: 732978198}
+  - component: {fileID: 732978199}
   m_Layer: 0
   m_Name: Goblin (3)
   m_TagString: Untagged
@@ -11048,6 +11139,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &732978199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732978190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &737120228
 GameObject:
   m_ObjectHideFlags: 0
@@ -12049,6 +12157,7 @@ GameObject:
   - component: {fileID: 868142656}
   - component: {fileID: 868142655}
   - component: {fileID: 868142661}
+  - component: {fileID: 868142662}
   m_Layer: 0
   m_Name: Goblin (7)
   m_TagString: Untagged
@@ -12282,6 +12391,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &868142662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868142653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &878758471
 GameObject:
   m_ObjectHideFlags: 0
@@ -14842,6 +14968,7 @@ GameObject:
   - component: {fileID: 1032169568}
   - component: {fileID: 1032169567}
   - component: {fileID: 1032169573}
+  - component: {fileID: 1032169574}
   m_Layer: 0
   m_Name: Skeleton (6)
   m_TagString: Untagged
@@ -15075,6 +15202,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1032169574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032169565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &1038553380
 GameObject:
   m_ObjectHideFlags: 0
@@ -15880,6 +16024,7 @@ GameObject:
   - component: {fileID: 1206130275}
   - component: {fileID: 1206130274}
   - component: {fileID: 1206130280}
+  - component: {fileID: 1206130281}
   m_Layer: 0
   m_Name: Skeleton (10)
   m_TagString: Untagged
@@ -16113,6 +16258,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1206130281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206130272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &1212490141
 GameObject:
   m_ObjectHideFlags: 0
@@ -16211,6 +16373,7 @@ GameObject:
   - component: {fileID: 1232793243}
   - component: {fileID: 1232793242}
   - component: {fileID: 1232793248}
+  - component: {fileID: 1232793249}
   m_Layer: 0
   m_Name: Goblin (2)
   m_TagString: Untagged
@@ -16444,6 +16607,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1232793249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232793240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &1235156225
 GameObject:
   m_ObjectHideFlags: 0
@@ -39939,6 +40119,7 @@ GameObject:
   - component: {fileID: 1307303179}
   - component: {fileID: 1307303178}
   - component: {fileID: 1307303184}
+  - component: {fileID: 1307303185}
   m_Layer: 0
   m_Name: Skeleton (8)
   m_TagString: Untagged
@@ -40172,6 +40353,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1307303185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307303176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &1320370228
 GameObject:
   m_ObjectHideFlags: 0
@@ -40270,6 +40468,7 @@ GameObject:
   - component: {fileID: 1329097539}
   - component: {fileID: 1329097538}
   - component: {fileID: 1329097544}
+  - component: {fileID: 1329097545}
   m_Layer: 0
   m_Name: Goblin (1)
   m_TagString: Untagged
@@ -40503,6 +40702,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1329097545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329097536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &1330439794
 GameObject:
   m_ObjectHideFlags: 0
@@ -404839,6 +405055,7 @@ GameObject:
   - component: {fileID: 1521873536}
   - component: {fileID: 1521873535}
   - component: {fileID: 1521873541}
+  - component: {fileID: 1521873542}
   m_Layer: 0
   m_Name: Skeleton (7)
   m_TagString: Untagged
@@ -405072,6 +405289,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1521873542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521873533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &1526924439
 GameObject:
   m_ObjectHideFlags: 0
@@ -405416,6 +405650,7 @@ GameObject:
   - component: {fileID: 1570236418}
   - component: {fileID: 1570236417}
   - component: {fileID: 1570236423}
+  - component: {fileID: 1570236424}
   m_Layer: 0
   m_Name: Goblin (6)
   m_TagString: Untagged
@@ -405649,6 +405884,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1570236424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570236415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &1578012564
 GameObject:
   m_ObjectHideFlags: 0
@@ -405993,6 +406245,7 @@ GameObject:
   - component: {fileID: 1600207937}
   - component: {fileID: 1600207936}
   - component: {fileID: 1600207942}
+  - component: {fileID: 1600207943}
   m_Layer: 0
   m_Name: Skeleton (1)
   m_TagString: Untagged
@@ -406226,6 +406479,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1600207943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600207934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &1613608061
 GameObject:
   m_ObjectHideFlags: 0
@@ -406906,6 +407176,7 @@ GameObject:
   - component: {fileID: 1723928784}
   - component: {fileID: 1723928783}
   - component: {fileID: 1723928789}
+  - component: {fileID: 1723928790}
   m_Layer: 0
   m_Name: Skeleton (2)
   m_TagString: Untagged
@@ -407139,6 +407410,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1723928790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723928781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &1766677531
 GameObject:
   m_ObjectHideFlags: 0
@@ -408095,6 +408383,7 @@ GameObject:
   - component: {fileID: 1849342165}
   - component: {fileID: 1849342164}
   - component: {fileID: 1849342170}
+  - component: {fileID: 1849342171}
   m_Layer: 0
   m_Name: Goblin (4)
   m_TagString: Untagged
@@ -408328,6 +408617,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1849342171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849342162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &1857806617
 GameObject:
   m_ObjectHideFlags: 0
@@ -408754,6 +409060,7 @@ GameObject:
   - component: {fileID: 1898092421}
   - component: {fileID: 1898092420}
   - component: {fileID: 1898092426}
+  - component: {fileID: 1898092427}
   m_Layer: 0
   m_Name: Goblin (8)
   m_TagString: Untagged
@@ -408987,6 +409294,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1898092427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898092418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &1906606411
 GameObject:
   m_ObjectHideFlags: 0
@@ -411174,6 +411498,7 @@ GameObject:
   - component: {fileID: 1989576965}
   - component: {fileID: 1989576964}
   - component: {fileID: 1989576970}
+  - component: {fileID: 1989576971}
   m_Layer: 0
   m_Name: Skeleton (3)
   m_TagString: Untagged
@@ -411407,6 +411732,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1989576971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989576962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1 &2002139339
 GameObject:
   m_ObjectHideFlags: 0
@@ -414954,6 +415296,7 @@ GameObject:
   - component: {fileID: 4238977736468225868}
   - component: {fileID: 7996308814575183912}
   - component: {fileID: 8828252214850132336}
+  - component: {fileID: 8828252214850132337}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -415561,6 +415904,7 @@ GameObject:
   - component: {fileID: 8024168652293089364}
   - component: {fileID: 485631617094929298}
   - component: {fileID: 8024168652293089365}
+  - component: {fileID: 8024168652293089366}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -416121,6 +416465,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &8024168652293089366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587187720671963370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!114 &8342023812671161836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416208,6 +416569,23 @@ MonoBehaviour:
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &8828252214850132337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931527273088561141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

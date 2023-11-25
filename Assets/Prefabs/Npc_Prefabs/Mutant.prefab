@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1510485723727714906}
   - component: {fileID: 6300921325846031613}
   - component: {fileID: 6674043525612952028}
+  - component: {fileID: 170242915327532786}
   m_Layer: 0
   m_Name: Mutant
   m_TagString: Untagged
@@ -249,3 +250,20 @@ MonoBehaviour:
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &170242915327532786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4478949822896280565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5

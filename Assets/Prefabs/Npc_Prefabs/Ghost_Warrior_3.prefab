@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 4497443909256801772}
   - component: {fileID: 5483487203527408102}
   - component: {fileID: 9198808928710699119}
-  - component: {fileID: 4536541911031869284}
   - component: {fileID: -1769397409177067100}
+  - component: {fileID: -8342164101516688105}
   m_Layer: 8
   m_Name: Ghost_Warrior_3
   m_TagString: Enemy
@@ -233,23 +233,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
---- !u!114 &4536541911031869284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8838496778720078665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
-  knockBackImpulse: 0
-  knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &-1769397409177067100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,3 +250,20 @@ MonoBehaviour:
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &-8342164101516688105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8838496778720078665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5

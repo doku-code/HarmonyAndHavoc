@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7625923108501952319}
   - component: {fileID: 973852863847423959}
   - component: {fileID: 7102874649931178669}
+  - component: {fileID: -3487515393241271531}
   m_Layer: 0
   m_Name: Rock_Creature
   m_TagString: Untagged
@@ -249,3 +250,20 @@ MonoBehaviour:
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &-3487515393241271531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8068643329353702137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  attackDamage: 10
+  knockBackImpulse: 0
+  knockBackInterval: 0.001
+  knockBackFriction: 5
