@@ -6,6 +6,9 @@ namespace JFM
 {
     public class Platformer2DUtilities
     {
+
+
+
         public static Vector2 GetPerpendicularVector2(Vector2 source)
         {
             return RotateVector2(source, 90.0f);
