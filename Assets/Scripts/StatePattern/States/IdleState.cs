@@ -113,7 +113,7 @@ namespace JFM
                 return;
             }
 
-            if (player.inputTriggers["Move"] && player.MoveInput.x != 0.0f && player.MoveInput.y == 0.0f)
+            if (player.inputTriggers["Move"] && player.MoveInput.x != 0.0f && player.MoveInput.y >= 0.0f)
             {
                 // Could I reuse these raycasts for WillClimbDownLadder() below ?
                 if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
