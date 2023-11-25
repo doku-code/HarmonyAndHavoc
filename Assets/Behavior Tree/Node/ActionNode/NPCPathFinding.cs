@@ -29,7 +29,13 @@ public class NPCPathFinding : ActionNode
     }
 
     protected override State OnUpdate()
-    {        
+    {
+
+        if (npcController.IsDead)
+        {
+            return State.FAILURE;
+        }
+
         Vector3 targetPOS = POSPatrolRoute[currentPOS].transform.position;
         Vector3 moveDirection = (targetPOS - npc.transform.position).normalized;
 

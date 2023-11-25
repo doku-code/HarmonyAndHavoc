@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using JFM;
 using System.Collections;
@@ -19,10 +18,8 @@ namespace charles
         [SerializeField] private float knockBackInterval = 0.001f;
         [SerializeField] private float knockBackFriction = 5.0f;
         private bool isKnockedBack;
-        public bool IsKnockedBack
-        {
-            get => isKnockedBack;
-        }
+        public bool IsKnockedBack {get => isKnockedBack;}
+        public bool IsDead{ get => currentHealth <= 0; }
 
         private void Start()
         {
@@ -42,14 +39,17 @@ namespace charles
 
         public void TakeDamage(int damage, Vector2 pushDirection)
         {
+            if(currentHealth == 0)
+            {
+                return;
+            }
             currentHealth -= Mathf.Max(0, damage);
             npcAnimator.SetTrigger("GetHit");
 
             if (currentHealth <= 0)
             {
                 Die();
-                CoinSpawner coinSpawner = GetComponent<CoinSpawner>();
-                coinSpawner.SpawnCoins();
+
             }
             else
             {
@@ -64,14 +64,14 @@ namespace charles
 
         private void Die()
         {
+            CoinSpawner coinSpawner = GetComponent<CoinSpawner>();
+            coinSpawner.SpawnCoins(DestroyAfterAnim);
             npcAnimator.SetTrigger("Death");
-            StartCoroutine(DestroyAfterAnim(npcAnimator.GetCurrentAnimatorStateInfo(0).length));
         }
 
-        private IEnumerator DestroyAfterAnim(float waitTime)
+        private void DestroyAfterAnim()
         {            
-            yield return new WaitForSeconds(waitTime);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         
         private void KnockBack(Vector2 pushDirection)

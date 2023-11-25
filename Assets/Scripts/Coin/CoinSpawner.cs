@@ -11,10 +11,12 @@ namespace charles
         [SerializeField] private float minForce = 300f;
         [SerializeField] private float maxForce = 600f;
         [SerializeField] private float spawnDelay = 0.1f;
-
-        public void SpawnCoins()
+        private ParametersLessDelegate callback;
+        public void SpawnCoins(ParametersLessDelegate callback)
         {
+            this.callback = callback;
             StartCoroutine(SpawnCoinsWithDelay());
+
         }
 
         private IEnumerator SpawnCoinsWithDelay()
@@ -43,6 +45,7 @@ namespace charles
 
                 yield return new WaitForSeconds(spawnDelay);
             }
+            callback.Invoke();
         }
     }
 }
