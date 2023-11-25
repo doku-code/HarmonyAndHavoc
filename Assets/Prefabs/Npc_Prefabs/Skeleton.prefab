@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3625217840915600244}
   - component: {fileID: 4019347367613984118}
   - component: {fileID: 7200359050903951890}
+  - component: {fileID: -198181064112137199}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -231,3 +232,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tickInterval: 0
   tree: {fileID: 0}
+--- !u!114 &-198181064112137199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2718670513770733007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa71ca3f6c09c445b66d945594c1f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
+  numberOfCoins: 20
+  minForce: 100
+  maxForce: 150
+  spawnDelay: 0.1

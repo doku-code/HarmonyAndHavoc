@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2479375677933858925}
   - component: {fileID: 1832950487059632982}
   - component: {fileID: 6234994597373119208}
+  - component: {fileID: -5853658623702271934}
   m_Layer: 0
   m_Name: Troll
   m_TagString: Untagged
@@ -231,3 +232,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tickInterval: 0
   tree: {fileID: 0}
+--- !u!114 &-5853658623702271934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3243686433130409897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa71ca3f6c09c445b66d945594c1f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
+  numberOfCoins: 20
+  minForce: 100
+  maxForce: 150
+  spawnDelay: 0.1

@@ -38257,8 +38257,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.57165, y: -0.24045002, z: 0}
-    m_Extent: {x: 9.38835, y: 1.56555, z: 0}
+    m_Center: {x: 2.5730498, y: -0.23809999, z: 0}
+    m_Extent: {x: 9.38315, y: 1.5532999, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -45595,9 +45595,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 20
-  minForce: 300
-  maxForce: 600
-  spawnDelay: 0.2
+  minForce: 100
+  maxForce: 150
+  spawnDelay: 0.1
 --- !u!1 &508404086
 GameObject:
   m_ObjectHideFlags: 0
@@ -50213,8 +50213,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 14.37775, y: 2.6848998, z: 0}
-    m_Extent: {x: 22.05735, y: 5.1166, z: 0}
+    m_Center: {x: 14.378901, y: 2.68335, z: 0}
+    m_Extent: {x: 22.050001, y: 5.11245, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -123774,9 +123774,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 20
-  minForce: 300
-  maxForce: 600
-  spawnDelay: 0.2
+  minForce: 100
+  maxForce: 150
+  spawnDelay: 0.1
 --- !u!1 &1403753061
 GameObject:
   m_ObjectHideFlags: 0
@@ -125986,9 +125986,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 20
-  minForce: 300
-  maxForce: 600
-  spawnDelay: 0.2
+  minForce: 100
+  maxForce: 150
+  spawnDelay: 0.1
 --- !u!1 &1591980596
 GameObject:
   m_ObjectHideFlags: 0
@@ -136219,6 +136219,18 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1.59375
       objectReference: {fileID: 0}
+    - target: {fileID: 6468222234881983603, guid: 5286af92ef80838458203443a74ac32e, type: 3}
+      propertyPath: maxForce
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468222234881983603, guid: 5286af92ef80838458203443a74ac32e, type: 3}
+      propertyPath: minForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468222234881983603, guid: 5286af92ef80838458203443a74ac32e, type: 3}
+      propertyPath: spawnDelay
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -136392,6 +136404,18 @@ PrefabInstance:
     - target: {fileID: 3706950329441137414, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
       propertyPath: m_Offset.y
       value: 0.85555553
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000035976008550848, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: maxForce
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000035976008550848, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: minForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000035976008550848, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: spawnDelay
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 9125858477312548240, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
       propertyPath: m_Name
@@ -137652,6 +137676,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1769397409177067100, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
+      propertyPath: maxForce
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: -1769397409177067100, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
+      propertyPath: minForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -1769397409177067100, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
+      propertyPath: spawnDelay
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4288845440548645853, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.6

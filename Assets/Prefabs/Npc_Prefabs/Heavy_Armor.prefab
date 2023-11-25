@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3637562509203071390}
   - component: {fileID: 5723241378898235679}
   - component: {fileID: 7108231063012163750}
+  - component: {fileID: 8000035976008550848}
   m_Layer: 8
   m_Name: Heavy_Armor
   m_TagString: Enemy
@@ -249,3 +250,20 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &8000035976008550848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9125858477312548240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa71ca3f6c09c445b66d945594c1f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
+  numberOfCoins: 20
+  minForce: 100
+  maxForce: 150
+  spawnDelay: 0.1
