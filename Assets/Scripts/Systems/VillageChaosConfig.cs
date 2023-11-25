@@ -9,15 +9,16 @@ namespace JFM
     {
 
         //Faire une autre liste de gameobject a desactiver dependant du niveau de chaos
-        public ObjectList[] activeObjects = new ObjectList[ChaosOrderSystem.maxChaosAmount];
+        public List<GameObject> activatingObjects = new List<GameObject>();
+        public ObjectList[] activationObjectStates = new ObjectList[ChaosOrderSystem.maxChaosAmount];
 
         //Faire une liste de gameobject pour les gameobject dans le village qui pourrais dependant du niveau du chaos changer de couleur
         public List<GameObject> colorChangingObjects = new List<GameObject>();
-        public Color[] colors = new Color[ChaosOrderSystem.maxChaosAmount];
+        public string[] colors = new string[ChaosOrderSystem.maxChaosAmount];
 
         //Faire en sorte que si on gameover tout ce reactive et revienne comme couleur normal
         //Faire en sorte de changer le fullscreenpass material dependant du shader \
 
 
-      }
+    }
 }

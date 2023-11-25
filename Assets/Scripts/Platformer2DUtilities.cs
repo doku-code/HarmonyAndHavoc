@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace JFM
@@ -48,6 +50,28 @@ namespace JFM
             quarter = Mathf.Round(quarter);
             float newAngle = quarter * roundingAngle;            
             return new Vector2(Mathf.Cos(newAngle), Mathf.Sin(newAngle));
+        }
+
+        public static Color HexStringToColor(string hexString)
+        {
+            float r, g, b;
+
+            try
+            {
+                int hex = int.Parse(hexString, System.Globalization.NumberStyles.HexNumber);
+
+                b = 0xff & hex;
+                hex >>= 8;
+                g = 0xff & hex;
+                hex >>= 8;
+                r = 0xff & hex;
+            }
+            catch(Exception e) 
+            {
+                return Color.white;
+            }
+            
+            return new Color(r, g, b);
         }
     }
 }

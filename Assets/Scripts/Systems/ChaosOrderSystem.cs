@@ -4,7 +4,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
+using Unity.VisualScripting;
 
 namespace JFM
 { 
@@ -39,21 +42,31 @@ namespace JFM
 
         [SerializeField] private int chaosAmount;
         public static int maxChaosAmount = 4;
+        private int previousChaosAmount;
 
         //Faire une autre liste de gameobject a desactiver dependant du niveau de chaos
-        [SerializeField] private ObjectList[] activeObjects = new ObjectList[maxChaosAmount];
+        private List<GameObject> activatingObjects = new List<GameObject>();
+        private ObjectList[] activationObjectStates = new ObjectList[maxChaosAmount];
 
         //Faire une liste de gameobject pour les gameobject dans le village qui pourrais dependant du niveau du chaos changer de couleur
-        [SerializeField] private List<GameObject> colorChangingObjects = new List<GameObject>();
-        [SerializeField] private Color[] colors = new Color[maxChaosAmount];
+        private List<GameObject> colorChangingObjects = new List<GameObject>();
+        private string[] colors = new string[maxChaosAmount];
 
         //Faire en sorte que si on gameover tout ce reactive et revienne comme couleur normal
         //Faire en sorte de changer le fullscreenpass material dependant du shader \
 
         public int ChaosAmount
         {
-            get { return chaosAmount; }
-            set { chaosAmount = value; }
+            get 
+            { 
+                return chaosAmount;
+            }
+
+            set 
+            {
+                previousChaosAmount = chaosAmount;
+                chaosAmount = value % maxChaosAmount;                
+            }
         }
 
         void Awake()
@@ -71,7 +84,8 @@ namespace JFM
 
         // Start is called before the first frame update
         void Start()
-        {        
+        {
+            previousChaosAmount = -1;
             playerData.OnDeadDelegate += OnPlayerDead;
             GameManager.Instance.OnLoadMapDelegate += OnLoadMap;
         }
@@ -87,13 +101,50 @@ namespace JFM
             }
 
             // Call VillageChaosConfig script
-            VillageChaosConfig villageConfig = FindObjectOfType<VillageChaosConfig>();
-            activeObjects = villageConfig.activeObjects;
+            InitializeVariables();
 
+            ActivateGrids();
+
+            ActivateObjects();
+
+            ChangeColoredObjects();
+                                    
+            Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(chaosAmount);
+        }
+
+        private void OnPlayerDead()
+        {
+            IncrementChaos();
+        }
+
+        private void InitializeVariables()
+        {
+            VillageChaosConfig villageConfig = FindObjectOfType<VillageChaosConfig>();
+            if (villageConfig is null)
+            {
+                Debug.LogError("You forgot to attach a VillageChaosConfig component on a GameObject in your Village scene!");
+            }
+            else if(activatingObjects is null)
+            {
+                activatingObjects = villageConfig.activatingObjects;
+                activationObjectStates = villageConfig.activationObjectStates;
+                colorChangingObjects = villageConfig.colorChangingObjects;
+                colors = villageConfig.colors;
+            }
+        }
+
+        private void IncrementChaos()
+        {
+            // Using the property here
+            ChaosAmount++;
+        }              
+
+        private void ActivateGrids()
+        {
             Grid[] grids = FindObjectsOfType<Grid>();
             //Debug.Log("grids.Length=" +grids.Length);
 
-            if(grids is null)
+            if (grids is null)
             {
                 return;
             }
@@ -118,58 +169,54 @@ namespace JFM
             Debug.Log($"chaosAmount={chaosAmount}");
 
 
-            if (chaosAmount > 0)
+            if (previousChaosAmount >= 0)
             {
-                sortedGrids[chaosAmount - 1].grid.enabled = false;
-            }
-            else // if chaosAmount == 0
-            {
-            
+                sortedGrids[previousChaosAmount].grid.enabled = false;
             }
             sortedGrids[chaosAmount].grid.enabled = true;
-
-            ActivateObjects();
-        }
-
-        private void OnPlayerDead()
-        {
-            chaosAmount++;
         }
 
         private void ActivateObjects()
-        {
-            if (chaosAmount == 0)
-            {
-                ActivateCurrentChaosLevel();
-            }
-            else
-            {
-                foreach (GameObject go in activeObjects[chaosAmount - 1].objects)
-                {
-                    if (go is not null)
-                    {
-                        if (activeObjects[chaosAmount].objects.Find(
-                            (x) => { return x == go; }
-
-                        ) is null )
-                        {
-                            go.SetActive(false);
-                        }
-                    }
-                }
-
-                ActivateCurrentChaosLevel();
-            }
+        {            
+            DeactivatePreviousChaosLevel();
+            ActivateCurrentChaosLevel();
         }
 
         private void ActivateCurrentChaosLevel()
         {
-            foreach (GameObject go in activeObjects[chaosAmount].objects)
+            foreach (GameObject go in activationObjectStates[chaosAmount].objects)
             {
                 if (go is not null)
                 {
                     go.SetActive(true);
                 }
+            }
+        }
+
+        private void DeactivatePreviousChaosLevel()
+        {
+            foreach (GameObject go in activatingObjects)
+            {
+                if (go is not null)
+                {
+                    if (activationObjectStates[chaosAmount].objects.Find(
+                        (x) => { return x == go; }
+
+                    ) is null)
+                    {
+                        go.SetActive(false);
+                    }
+                }
+            }
+        }
+
+        private void ChangeColoredObjects()
+        {
+            foreach(GameObject go in colorChangingObjects)
+            {
+                Color color = Platformer2DUtilities.HexStringToColor(colors[chaosAmount]);
+                //Debug.Log($"hexString={colors[chaosAmount]} color={color}");
+                go.GetComponentInChildren<SpriteRenderer>().color = color;
             }
         }
     }
