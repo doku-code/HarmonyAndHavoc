@@ -194,7 +194,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -78.7, y: 0.79999924}
+  m_AnchoredPosition: {x: -69.5, y: 0}
   m_SizeDelta: {x: 44.5798, y: 43.4254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9018705
@@ -1040,9 +1040,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AF.MainMenuManager, Assembly-CSharp
-        m_MethodName: OpenMainMenu
+      - m_Target: {fileID: 880611779}
+        m_TargetAssemblyTypeName: charles.PauseMenuManager, Assembly-CSharp
+        m_MethodName: OpenPauseMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1792,8 +1792,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 307, y: 58}
+  m_AnchoredPosition: {x: -6.3347, y: 0}
+  m_SizeDelta: {x: 294.3305, y: 58}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &253605115
 MonoBehaviour:
@@ -2073,7 +2073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &308081178
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3078,7 +3078,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -3091,7 +3091,7 @@ PrefabInstance:
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 880611779}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -3119,6 +3119,10 @@ PrefabInstance:
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
@@ -3280,7 +3284,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -33.708996, y: 0.9}
+  m_AnchoredPosition: {x: -22.29, y: 0.49999046}
   m_SizeDelta: {x: 44.5798, y: 43.4254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &538454198
@@ -4328,6 +4332,7 @@ GameObject:
   - component: {fileID: 880611775}
   - component: {fileID: 880611778}
   - component: {fileID: 880611779}
+  - component: {fileID: 880611780}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -4427,7 +4432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 807142ccf2ec42845abc5fa0cbd1b10b, type: 2}
   actionsToRebind: []
-  pausePanel: {fileID: 880611774}
+  pausePanel: {fileID: 308081177}
   settingsPanel: {fileID: 2100377908}
   pauseMenuFirstObj: {fileID: 2005708477}
   settingFirstObj: {fileID: 137703088}
@@ -4438,6 +4443,124 @@ MonoBehaviour:
   masterSlider: {fileID: 2120823133}
   inventoryPanel: {fileID: 5338992470082227146}
   HUDPanel: {fileID: 6263919141150625343}
+--- !u!114 &880611780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880611774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 18fe487ebbeb42a41a71899f8528c329, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f33f252-067f-4785-83f4-8ba41f9447c0
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f14ea5d-4854-4802-8a98-28db54cfa668
+    m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 880611779}
+        m_TargetAssemblyTypeName: charles.PauseMenuManager, Assembly-CSharp
+        m_MethodName: PauseMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 87c1551b-9792-43f0-9690-6dd086331f2c
+    m_ActionName: Player/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0ac979ae-1ff2-4d5a-95c4-4d526766ed49
+    m_ActionName: Player/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 26212655-a04c-4824-956f-43dd8c51fa64
+    m_ActionName: Player/BasicAttack[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b9796594-904f-4632-a980-21a03394d74e
+    m_ActionName: Player/Knowledge1[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9ca74c14-c4a6-4e59-81cb-aae00018338b
+    m_ActionName: Player/Knowledge2[/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1350a012-6c9f-414c-a10b-a0a520528efd
+    m_ActionName: Player/Knowledge3[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c76af7ee-c931-41df-a38e-bda8a97daa89
+    m_ActionName: Player/Knowledge4[/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c9941bf0-351a-4dc7-8ca5-1d00ba77002f
+    m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b421025b-dc8d-4db9-b5ef-3d64ee703f8e
+    m_ActionName: Player/SlideDown[/Keyboard/ctrl]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4991702538334020897}
+        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
+        m_MethodName: InventoryButtonCallback
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7e59b108-850f-4bd3-bcd7-cdbc73f58155
+    m_ActionName: Player/Inventory[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8eebc05e-4665-435b-bfaf-427ad683b2fa
+    m_ActionName: Player/ConsoleDebug[/Keyboard/backquote,/Keyboard/f1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0d8ab6af-cac8-4d97-8844-471288f7892f
+    m_ActionName: Player/Return[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0d2d6541-a0e0-4f6f-96ef-4be19c25aa70
+    m_ActionName: Player/ArrowUp[/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c6364e17-bc2a-4957-ba67-8b4ad33407c8
+    m_ActionName: Player/ArrowDown[/Keyboard/downArrow]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &891255407
 GameObject:
   m_ObjectHideFlags: 0
@@ -6214,8 +6337,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.21300001, y: 0.145}
   m_AnchorMax: {x: 0.24225275, y: 0.5475}
-  m_AnchoredPosition: {x: -33.780495, y: 11.664}
-  m_SizeDelta: {x: 48.593, y: 71.533}
+  m_AnchoredPosition: {x: -29.396, y: 11.0277}
+  m_SizeDelta: {x: 51.5232, y: 68.4786}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1219062633
 GameObject:
@@ -8285,7 +8408,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 56.8, y: 1.4}
+  m_AnchoredPosition: {x: 71.7, y: 0.49999046}
   m_SizeDelta: {x: 44.5798, y: 43.4254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1510004638
@@ -9303,14 +9426,14 @@ PrefabInstance:
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 880611779}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ExitToMainMenu
+      value: ExitGame
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -9641,8 +9764,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7005495, y: 0.155}
   m_AnchorMax: {x: 0.7294506, y: 0.5475}
-  m_AnchoredPosition: {x: 26.5475, y: 11.464}
-  m_SizeDelta: {x: 48.7152, y: 71.681}
+  m_AnchoredPosition: {x: 46.3, y: 10.5455}
+  m_SizeDelta: {x: 51.6266, y: 68.7407}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1751977738
 GameObject:
@@ -10654,7 +10777,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.6, y: 1.4}
+  m_AnchoredPosition: {x: 24.600002, y: 0.49998665}
   m_SizeDelta: {x: 44.5798, y: 43.4254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1934349799
@@ -11123,7 +11246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -11132,7 +11255,7 @@ PrefabInstance:
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 880611774}
+      objectReference: {fileID: 880611779}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -11147,7 +11270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: ContinueGame
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -11155,7 +11278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: charles.PauseMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -15834,7 +15957,6 @@ GameObject:
   - component: {fileID: 4448810177042979327}
   - component: {fileID: 8639567040193520744}
   - component: {fileID: 8639567040193520745}
-  - component: {fileID: 8639567040193520747}
   m_Layer: 5
   m_Name: HUDPanel
   m_TagString: Untagged
@@ -17123,124 +17245,6 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
   order: {fileID: 1202516062}
   chaos: {fileID: 1726219399}
---- !u!114 &8639567040193520747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6263919141150625343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 18fe487ebbeb42a41a71899f8528c329, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4f33f252-067f-4785-83f4-8ba41f9447c0
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4f14ea5d-4854-4802-8a98-28db54cfa668
-    m_ActionName: Player/Jump[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 880611779}
-        m_TargetAssemblyTypeName: charles.PauseMenuManager, Assembly-CSharp
-        m_MethodName: PauseMenu
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 87c1551b-9792-43f0-9690-6dd086331f2c
-    m_ActionName: Player/Pause[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0ac979ae-1ff2-4d5a-95c4-4d526766ed49
-    m_ActionName: Player/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 26212655-a04c-4824-956f-43dd8c51fa64
-    m_ActionName: Player/BasicAttack[/Keyboard/i]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b9796594-904f-4632-a980-21a03394d74e
-    m_ActionName: Player/Knowledge1[/Keyboard/shift]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9ca74c14-c4a6-4e59-81cb-aae00018338b
-    m_ActionName: Player/Knowledge2[/Keyboard/j]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1350a012-6c9f-414c-a10b-a0a520528efd
-    m_ActionName: Player/Knowledge3[/Keyboard/k]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c76af7ee-c931-41df-a38e-bda8a97daa89
-    m_ActionName: Player/Knowledge4[/Keyboard/l]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c9941bf0-351a-4dc7-8ca5-1d00ba77002f
-    m_ActionName: Player/Interact[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b421025b-dc8d-4db9-b5ef-3d64ee703f8e
-    m_ActionName: Player/SlideDown[/Keyboard/ctrl]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4991702538334020897}
-        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
-        m_MethodName: InventoryButtonCallback
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 7e59b108-850f-4bd3-bcd7-cdbc73f58155
-    m_ActionName: Player/Inventory[/Keyboard/tab]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8eebc05e-4665-435b-bfaf-427ad683b2fa
-    m_ActionName: Player/ConsoleDebug[/Keyboard/backquote,/Keyboard/f1]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0d8ab6af-cac8-4d97-8844-471288f7892f
-    m_ActionName: Player/Return[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0d2d6541-a0e0-4f6f-96ef-4be19c25aa70
-    m_ActionName: Player/ArrowUp[/Keyboard/upArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c6364e17-bc2a-4957-ba67-8b4ad33407c8
-    m_ActionName: Player/ArrowDown[/Keyboard/downArrow]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &8645577930126212254
 MonoBehaviour:
   m_ObjectHideFlags: 0
