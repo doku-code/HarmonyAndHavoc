@@ -1,4 +1,5 @@
 using AF;
+using charles;
 using UnityEngine;
 //Charles
 public class Attack : ActionNode
@@ -20,6 +21,11 @@ public class Attack : ActionNode
 
     protected override State OnUpdate()
     {
+        if(npcController.IsDead)
+        {
+            return State.FAILURE;
+        }
+          
         float distanceToPlayer = Vector3.Distance(npc.transform.position, player.transform.position);
 
         if (distanceToPlayer <= attackDistance && !hasAttacked)

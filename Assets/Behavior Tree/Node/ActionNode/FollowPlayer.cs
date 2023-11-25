@@ -32,6 +32,11 @@ public class FollowPlayer : ActionNode
 
     protected override State OnUpdate()
     {
+
+        if (npcController.IsDead)
+        {
+            return State.FAILURE;
+        }
         EnemyController enemyController = npc.GetComponent<EnemyController>();
 
         float distanceX = player.transform.position.x - npc.transform.position.x;
