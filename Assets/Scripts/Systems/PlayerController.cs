@@ -23,20 +23,20 @@ namespace JFM
     public class PlayerController : MonoBehaviour
     {
         public delegate void ParameterLessDelegate();
-        
+
         private PlayerInput playerInputManager;
         public Dictionary<string, bool> inputTriggers = new Dictionary<string, bool>();
 
         [NonSerialized] public Animator animator;
         [NonSerialized] public Rigidbody2D rb;
-        
+
         [Header("Movement")]
         [SerializeField] private float walkSpeed = 1.0f;
         [SerializeField] private float walkAcceleration = 10.0f;
         //[SerializeField] private float runSpeed = 4.0f;
         private bool isFacingRight = true;
         private Vector2 moveInput;
-        
+
         [Header("Jumping")]
         [SerializeField] private float jumpForce = 3.0f;
         [SerializeField] private int baseNumJumps = 1;
@@ -53,7 +53,7 @@ namespace JFM
         private int numJumps;
         public ParameterLessDelegate GroundedEvent { get; set; }
 
-        [Header ("Attacking")]
+        [Header("Attacking")]
         [SerializeField] private float attackCoolDownTime = 0.3f;
         private float attackCoolDownStartTime;
 
@@ -67,8 +67,8 @@ namespace JFM
         private GameObject frontWall;
         private GameObject beneathObject;
         private Vector2 beneathObjectPosition;
-        private bool isWallColliding;        
-        private bool wallIsToRight;        
+        private bool isWallColliding;
+        private bool wallIsToRight;
 
         [Header("Ladders")]
         [SerializeField] private float ladderSpeed = 3.0f;
@@ -98,7 +98,7 @@ namespace JFM
         [Header("Layers")]
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private LayerMask ladderLayer;
-                
+
         [Header("Data")]
         [SerializeField] private PlayerData playerData;
         private Knowledge lastKnowledge;
@@ -116,7 +116,7 @@ namespace JFM
         private PlayerState currentState;
         [SerializeField] private PlayerState[] statesArray;
         public Dictionary<PlayerState.STATE, PlayerState> states = new Dictionary<PlayerState.STATE, PlayerState>();
-        
+
         public int BaseNumJumps
         {
             get => baseNumJumps;
@@ -246,7 +246,7 @@ namespace JFM
         public float StairsDownGroundX
         {
             get => stairsDownGroundX;
-        }        
+        }
 
         public float WallDistance
         {
@@ -285,7 +285,7 @@ namespace JFM
         public Vector2 ColliderSize
         {
             get => colliderSize;
-        }       
+        }
 
         public GameObject FrontWall
         {
@@ -360,9 +360,9 @@ namespace JFM
                 //hasDashed = false;
                 //Debug.Log("Jump reset");
                 GroundedEvent();
-            }            
+            }
         }
-        
+
         public void ResetJump()
         {
             numJumps = baseNumJumps;
@@ -378,11 +378,11 @@ namespace JFM
         {
             numJumps--;
         }
-        
+
         public void Jump()
         {
             DepleteJumps();
-            
+
             rb.velocity = new Vector2(rb.velocity.x, 0.0f);
             rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
             //rb.velocity += Vector2.up * jumpForce;
@@ -432,12 +432,12 @@ namespace JFM
 
         public void TakeDamage(int damage, Vector2 pushDirection)
         {
-            if(currentState != states[PlayerState.STATE.HURT] && 
+            if (currentState != states[PlayerState.STATE.HURT] &&
+                currentState != states[PlayerState.STATE.DEAD] &&
                 (currentState != states[PlayerState.STATE.KNOWLEDGE] ||
-                ((KnowledgeState)states[PlayerState.STATE.KNOWLEDGE]).knowledge != 
+                ((KnowledgeState)states[PlayerState.STATE.KNOWLEDGE]).knowledge !=
                 playerData.EveryKnowledgeDictionary[KnowledgeID.DASH]))
             {
-                Debug.Log($"Player is taking {damage} damage!");
                 playerData.TakeDamage(damage);
                 HurtState state = (HurtState)states[PlayerState.STATE.HURT];
                 state.pushDirection = pushDirection.normalized;
@@ -485,7 +485,7 @@ namespace JFM
 
         public bool GetKnowledgeTrigger(AvailableKnowledgePosition knowledgePosition)
         {
-            if( knowledgePosition == AvailableKnowledgePosition.NOT_AVAILABLE)
+            if (knowledgePosition == AvailableKnowledgePosition.NOT_AVAILABLE)
             {
                 return false;
             }
@@ -501,37 +501,37 @@ namespace JFM
             }
 
             inputTriggers[knowledgeInputNames[(int)knowledgePosition - 1]] = value;
-        }        
+        }
 
         public void UseKnowledge(KnowledgeID knowledge)
         {
             lastKnowledge = playerData.EveryKnowledgeDictionary[knowledge];
 
-            KnowledgeState state = (KnowledgeState)states[PlayerState.STATE.KNOWLEDGE];            
+            KnowledgeState state = (KnowledgeState)states[PlayerState.STATE.KNOWLEDGE];
             state.knowledge = playerData.GetKnowledgeByID(knowledge);
             ChangeState(state);
         }
-       
+
         private void SetBeneathObjectInfo()
-        {            
+        {
             if (beneathObject is null)
             {
                 Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
-                RaycastHit2D rayHit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + spriteBoxProbeOffset.x * v + spriteBoxProbeSize.x/2.0f * v + spriteBoxProbeSize.y / 2.0f * Vector2.up, v, spriteBoxProbeSize.x, ladderLayer);
+                RaycastHit2D rayHit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + spriteBoxProbeOffset.x * v + spriteBoxProbeSize.x / 2.0f * v + spriteBoxProbeSize.y / 2.0f * Vector2.up, v, spriteBoxProbeSize.x, ladderLayer);
                 //Debug.DrawRay(new Vector2(transform.position.x, transform.position.y) + spriteBoxProbeOffset.x * v + spriteBoxProbeSize.x / 2.0f * v + spriteBoxProbeSize.y / 2.0f * Vector2.up, v * spriteBoxProbeSize.x, Color.yellow);
-                if(rayHit.collider is not null)
+                if (rayHit.collider is not null)
                 {
                     //Debug.Log($"rayHit.point={rayHit.point}");
                     beneathObjectPosition = new Vector2(Mathf.Floor(rayHit.point.x), Mathf.Floor(rayHit.point.y));
                     beneathObject = rayHit.transform.gameObject;
-                }          
+                }
                 else
                 {
                     beneathObject = null;
                 }
             }
         }
-        
+
         public bool CanClimbLadder()
         {
             SetBeneathObjectInfo();
@@ -566,7 +566,7 @@ namespace JFM
                                                                                          //bool r2 = player.Raycast(false, player.LadderLayer, Vector2.down * 0.5f, 0.3f, Vector2.down);
             RaycastHit2D hit = Physics2D.CircleCast(rb.position, groundedRadius, Vector2.down, 0.7f, ladderLayer);
             bool r2 = hit.collider is not null;
-            if(r2)
+            if (r2)
             {
                 groundedLayer = hit.collider.gameObject.layer;
                 groundedY = hit.point.y;
@@ -581,8 +581,8 @@ namespace JFM
             Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
             float facing = isFacingRight ? 1.0f : -1.0f;
             //if (FindSlopeAtPoint(out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, v, StairsDownHeight))//, true))
-            if (Raycast2DHelper.FindSlopeAtPoint(rb.position, out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down,facing * 45.0f), stairsDownHeight, GroundLayer))//, true))
-            {                
+            if (Raycast2DHelper.FindSlopeAtPoint(rb.position, out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, facing * 45.0f), stairsDownHeight, GroundLayer))//, true))
+            {
                 bool grounded = IsGrounded();
                 //Debug.Log($"ClimbingUpStairs slope={slope} grounded={grounded}");
                 return grounded && moveInput.x != 0.0f && facing * Mathf.Sign(slope) > 0 && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) <= stairsUpMaxSlope && slope != Mathf.Infinity;
@@ -601,7 +601,7 @@ namespace JFM
 
             // Doing a second slope test to avoid getting the case where the first slope test falls on a corner (two lines intersecting). A corner automatically is interpreted as a slope.
             bool stairsDown2 = Raycast2DHelper.FindSlopeBeneath(rb.position, out float slope2, Vector2.up * 0.02f + v * (stairsDownGroundX + 0.04f), -v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, StairsDownHeight, GroundLayer, (isFacingRight ? -1.0f : 1.0f) * 45.0f, false);
-            
+
             // Validating the first slope test
             if (Platformer2DUtilities.AreNearlyEqual(slope2, 0.0f) || slope2 == Mathf.Infinity)
             {
@@ -616,7 +616,7 @@ namespace JFM
         public bool FindSlopeBeneath(out float slope)
         {
             Vector2 v = isFacingRight ? Vector2.right : -Vector2.right;
-            return FindSlopeBeneath(out slope, Vector2.up * 0.02f + v * colliderSize.x / 2.0f + v * stairsDownGroundX, - v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight);
+            return FindSlopeBeneath(out slope, Vector2.up * 0.02f + v * colliderSize.x / 2.0f + v * stairsDownGroundX, -v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight);
         }
 
         public bool FindSlopeBeneath(out float slope, Vector2 offset1, Vector2 offset2)
@@ -645,7 +645,7 @@ namespace JFM
         }
 
         public bool IsGrounded(int layerMask, Vector2 offset, float distance, bool overrideVelocity)
-        {            
+        {
             bool groundRaycast = Raycast2DHelper.CheckGrounded(rb.position + offset, groundedRadius, distance, layerMask, groundLayer, out groundedLayer);
             bool grounded = groundRaycast && (rb.velocity.y <= 0.001f || overrideVelocity);
 
@@ -658,7 +658,7 @@ namespace JFM
 
             return grounded;
         }
-            
+
         public bool Raycast(bool doBoxCast, int layerMask, Vector2 offset, float distance)
         {
             return Raycast(doBoxCast, layerMask, offset, distance, Vector2.down);
@@ -680,7 +680,7 @@ namespace JFM
             if (!doBoxCast)
             {
                 hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + offset, direction, distance, layerMask);
-                
+
                 if (willDraw)
                     Debug.DrawRay(new Vector2(transform.position.x, transform.position.y) + offset, direction * distance, Color.yellow);
 
@@ -693,7 +693,7 @@ namespace JFM
             }
 
             hitInfo.hit = hit;
-            if(hit.collider is not null)
+            if (hit.collider is not null)
             {
                 hitInfo.probePoint = hit.point;
                 hitInfo.hasHit = true;
@@ -705,7 +705,7 @@ namespace JFM
             hitInfo.hasHit = false;
             return false;
         }
-        
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             //Debug.Log($"collision.gameObject.layer={collision.gameObject.layer} == {collision.gameObject.layer == GroundLayer} GroundLayer={(int)GroundLayer}");
@@ -719,7 +719,7 @@ namespace JFM
                 }
                 else
                 {
-                    isWallColliding = false;                    
+                    isWallColliding = false;
                 }
             }
         }
@@ -745,7 +745,7 @@ namespace JFM
         private void OnCollisionExit2D(Collision2D collision)
         {
             if (1 << collision.gameObject.layer == GroundLayer)
-            {                
+            {
                 isWallColliding = false;
             }
         }
@@ -755,7 +755,7 @@ namespace JFM
             //Debug.Log($"OnTriggerEnter2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
             IInteractible interactibleObject = null;
 
-            if(collision is not null)
+            if (collision is not null)
             {
                 if (collision.gameObject.CompareTag("Enemy") && collision is CapsuleCollider2D)
                 {
@@ -763,9 +763,10 @@ namespace JFM
 
                     HitEnemy(collision);
                 }
-                else if((interactibleObject = collision.gameObject.GetComponent<IInteractible>()) is not null)
-                {
 
+                if (collision.gameObject.TryGetComponent<IInteractible>(out interactibleObject))
+                {
+                    interactibleObject.Interact(gameObject);
                 }
             }
         }
@@ -781,7 +782,7 @@ namespace JFM
         }
 
         void Awake()
-        {            
+        {
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
             defaultGravityScale = rb.gravityScale;
@@ -792,7 +793,7 @@ namespace JFM
             colliderSize = cc.size;
 
             InputSetup();
-            
+
             for (int i = 0; i < statesArray.Length; i++)
             {
                 PlayerState state = statesArray[i];
@@ -837,7 +838,7 @@ namespace JFM
 
             playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = true;
-            playerData.KnownKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = true;            
+            playerData.KnownKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = true;
             playerData.AvailableKnowledgeDictionary[KnowledgeID.DASH] = AvailableKnowledgePosition.POSITION1;
             playerData.AvailableKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = AvailableKnowledgePosition.POSITION2;
             playerData.AvailableKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = AvailableKnowledgePosition.POSITION4;
@@ -869,7 +870,7 @@ namespace JFM
             playerInputManager.Player.Inventory.performed += OnInputTrigger;
 
             playerInputManager.Player.Move.canceled += OnInputMove;
-            playerInputManager.Player.Jump.canceled += OnInputTrigger;                        
+            playerInputManager.Player.Jump.canceled += OnInputTrigger;
             playerInputManager.Player.Knowledge1.canceled += OnInputTrigger;
             playerInputManager.Player.Knowledge2.canceled += OnInputTrigger;
             playerInputManager.Player.Knowledge3.canceled += OnInputTrigger;
@@ -896,12 +897,12 @@ namespace JFM
             Debug.Log($"{context.action.name} has been {context.action.phase}");
 #endif
             if (context.action.phase == InputActionPhase.Performed)
-            {                
+            {
                 inputTriggers[context.action.name] = true;
             }
             else if (context.action.phase == InputActionPhase.Canceled)
             {
-                inputTriggers[context.action.name] = false;                
+                inputTriggers[context.action.name] = false;
             }
         }
 
@@ -926,7 +927,7 @@ namespace JFM
 
         public void ChangeState(PlayerState nextState)
         {
-            currentState.SetNextState(nextState);            
-        }        
+            currentState.SetNextState(nextState);
+        }
     }
 }

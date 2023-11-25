@@ -107,7 +107,6 @@ namespace charles
 
         public void ClosePauseMenu()
         {
-            Debug.Log("tEST");
             pausePanel.SetActive(false);
             HUDPanel.SetActive(true);
             CloseOtherPanels();

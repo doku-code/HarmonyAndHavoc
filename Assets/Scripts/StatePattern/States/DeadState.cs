@@ -36,6 +36,7 @@ namespace JFM
 
         public override void Exit()
         {
+            Debug.Log("Exiting Dead state.");
             player.animator.ResetTrigger("IsDead");
             base.Exit();
         }
