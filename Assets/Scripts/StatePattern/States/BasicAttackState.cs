@@ -9,19 +9,25 @@ namespace JFM
     {
         private float startTime;
         private float animationClipLength;
-        private bool usingAirAnimation;
+        private bool isAirborned;
         [SerializeField] private int animatorLayer = 2;
-        [SerializeField] private string motionName = "Player_Attack_1";
+        [SerializeField] private string groundMotionName = "Player_Attack_1";
         [SerializeField] private string airMotionName = "Player_Air_Attack_1";
+        private string motionName;
 
         public override void Enter()
         {
             // If airborne, use air attack animation
-            if (usingAirAnimation = !player.IsGrounded())
+            if (isAirborned = !player.IsGrounded())
             {
                 player.animator.SetBool("IsAirborne", true);
+                motionName = airMotionName;
             }
-            
+            else
+            {
+                motionName = groundMotionName;
+            }
+
             player.animator.SetBool("IsAttacking", true);            
 
             player.inputTriggers["BasicAttack"] = false;
@@ -71,7 +77,7 @@ namespace JFM
         {
             player.rb.gravityScale = player.DefaultGravityScale;
             player.animator.SetBool("IsAttacking", false);
-            if(usingAirAnimation)
+            if(isAirborned)
             {
                 player.animator.SetBool("IsAirborne", false);
             }

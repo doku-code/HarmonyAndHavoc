@@ -57,7 +57,7 @@ namespace JFM
                 return;
             }
 
-            if (player.rb.velocity.y < 0.0f)
+            if (player.rb.velocity.y < -0.001f)
             {
                 AirborneState state = (AirborneState)player.states[STATE.AIRBORNE];
                 state.wasGrounded = false;
