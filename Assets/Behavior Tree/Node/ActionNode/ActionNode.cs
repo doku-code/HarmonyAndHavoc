@@ -1,4 +1,6 @@
 //Charles
+
+using System;
 using charles;
 using UnityEngine;
 
@@ -12,6 +14,8 @@ public abstract class ActionNode : Node
     protected Animator npcAnimator;
     protected Rigidbody2D npcRigidBody;
     protected EnemyController npcController;
+
+
 
     public override void OnInitialize(GameObject go)
     {        

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2514630424835615299}
   - component: {fileID: 1654591295985145363}
   - component: {fileID: 7049405586279435779}
+  - component: {fileID: 8520360346191928994}
   m_Layer: 0
   m_Name: PlagueWarrior
   m_TagString: Untagged
@@ -231,3 +232,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tickInterval: 0
   tree: {fileID: 0}
+--- !u!114 &8520360346191928994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6655494735255177492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa71ca3f6c09c445b66d945594c1f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
+  numberOfCoins: 20
+  minForce: 100
+  maxForce: 150
+  spawnDelay: 0.1

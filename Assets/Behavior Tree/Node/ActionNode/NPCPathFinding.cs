@@ -10,6 +10,11 @@ public class NPCPathFinding : ActionNode
     public float sphereCastRadius = 2.0f;
 
     private int currentPOS;
+
+    void OnEnable()
+    {
+        PatrolAnimString = "Run";
+    }
     
     protected override void OnStart()
     {

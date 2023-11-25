@@ -15,18 +15,12 @@ namespace AF
         [Header("Panel"), Tooltip("This is where all the panel goes")]
         [SerializeField] private GameObject mainPanel;
         [SerializeField] private GameObject settingsPanel;
-        [SerializeField] private GameObject soundPanel;
         [SerializeField] private GameObject creditPanel;
-        [SerializeField] private GameObject displayPanel;
-        [SerializeField] private GameObject controlPanel;
 
         [Header("Event System Object"), Tooltip("It is use to change the main selected object in eventSystem GameObject")]
         [SerializeField] private GameObject mainMenuFirstObj;
         [SerializeField] private GameObject settingFirstObj;
-        [SerializeField] private GameObject soundSettingsFirstObj;
         [SerializeField] private GameObject creditFirstObj;
-        [SerializeField] private GameObject displayFirstObj;
-        [SerializeField] private GameObject controlFirstObj;
 
         [Header("Display Settings UI"), Tooltip("Different UI element to change display/Sound")]
         [SerializeField] private TMP_Dropdown windowModePreset;
@@ -62,9 +56,7 @@ namespace AF
         {
             mainPanel.SetActive(true);
             settingsPanel.SetActive(false);
-            soundPanel.SetActive(false);
             creditPanel.SetActive(false);
-            displayPanel.SetActive(false);
 
             if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
             {
@@ -76,8 +68,6 @@ namespace AF
         {
             mainPanel.SetActive(false);
             settingsPanel.SetActive(true);
-            soundPanel.SetActive(false);
-            displayPanel.SetActive(false);
             creditPanel.SetActive(false);
             SoundManager.Instance.PlayAClip(1);
 
@@ -86,56 +76,17 @@ namespace AF
                 EventSystem.current.SetSelectedGameObject(settingFirstObj);
             }
         }
-
-        public void OpenSoundMenu()
-        {
-            mainPanel.SetActive(false);
-            settingsPanel.SetActive(false);
-            soundPanel.SetActive(true);
-            displayPanel.SetActive(false);
-            SoundManager.Instance.PlayAClip(1);
-
-            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
-            {
-                EventSystem.current.SetSelectedGameObject(soundSettingsFirstObj);
-            }
-        }
-
+        
         public void OpenCreditMenu()
         {
             mainPanel.SetActive(false);
             creditPanel.SetActive(true);
-            displayPanel.SetActive(false);
             settingsPanel.SetActive(false);
-            soundPanel.SetActive(false);
             SoundManager.Instance.PlayAClip(1);
 
             if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
             {
                 EventSystem.current.SetSelectedGameObject(creditFirstObj);
-            }
-        }
-
-        public void OpenDisplayPanel()
-        {
-            settingsPanel.SetActive(false);
-            displayPanel.SetActive(true);
-            SoundManager.Instance.PlayAClip(1);
-
-            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
-            {
-                EventSystem.current.SetSelectedGameObject(displayFirstObj);
-            }
-        }
-
-        public void OpenControlSetting()
-        {
-            settingsPanel.SetActive(false);
-            controlPanel.SetActive(true);
-            SoundManager.Instance.PlayAClip(1);
-            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
-            {
-                EventSystem.current.SetSelectedGameObject(controlFirstObj);
             }
         }
 
@@ -160,8 +111,7 @@ namespace AF
                     break;
             }
         }
-
-
+        
         public void ChangeWindowSize()
         {
             SoundManager.Instance.PlayAClip(0);

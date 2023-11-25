@@ -16,7 +16,13 @@ public class FollowPlayer : ActionNode
     public LayerMask obstacleLayer;
     public float distanceOffset = 1f;
     public float stoppingDistance = 0.1f;
-   
+    
+    void OnEnable()
+    {
+        runAnimString = "Run";
+    }
+
+    
     protected override void OnStart() 
     {
         player = GameObject.FindGameObjectWithTag("Player");

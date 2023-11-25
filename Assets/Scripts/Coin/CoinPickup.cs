@@ -10,7 +10,7 @@ namespace charles
             if (other.CompareTag("Player") && other is CapsuleCollider2D)
             {
                 SoundManager.Instance.PlayAClip(3);
-                Destroy(gameObject);
+               gameObject.SetActive(false);
             }
         }
     }
