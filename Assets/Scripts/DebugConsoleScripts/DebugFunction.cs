@@ -23,4 +23,9 @@ public class DebugFunction : MonoBehaviour
         PlayerController pc = FindAnyObjectByType<PlayerController>();
         pc.Data.TakeDamage(damage);
     }
+
+    public void ChangeChaos(int chaosNumber)
+    {
+        ChaosOrderSystem.Instance.ChaosAmount = chaosNumber;
+    }
 }

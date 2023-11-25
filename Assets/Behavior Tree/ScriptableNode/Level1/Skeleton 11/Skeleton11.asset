@@ -1,27 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7408479087970414096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 640ac424bf086f846bc71dfb4524525e, type: 3}
-  m_Name: WaitNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 51dd0fb9f78dabd47b4ffecff0a29fd2
-  position: {x: 257.9999, y: 656.50006}
-  Description: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  gameobjNpcName: 
-  duration: 1
 --- !u!114 &-7281780248815949370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37,14 +15,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 0fa36f36392255946ae5ec0a02f796b4
-  position: {x: 708.00006, y: 656.50006}
+  position: {x: 406.00006, y: 656.50006}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackCooldown: 3
-  attackDistance: 3
+  attackCooldown: 2
+  attackDistance: 2
   attackAnimString: Combo2
   comboSoundIdx: 0
 --- !u!114 &-7258625121589260600
@@ -81,38 +59,16 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 57840fb83457dcc4f899f8405c8c338a
-  position: {x: 408.00006, y: 656.50006}
+  position: {x: 256.0001, y: 656.50006}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackCooldown: 3
-  attackDistance: 3
+  attackCooldown: 2
+  attackDistance: 2
   attackAnimString: Combo1
   comboSoundIdx: 0
---- !u!114 &-6048021643029021468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 640ac424bf086f846bc71dfb4524525e, type: 3}
-  m_Name: WaitNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 9f39e6b606cbe4b4a8bfb76664a63e76
-  position: {x: 558, y: 656.50006}
-  Description: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  gameobjNpcName: 
-  duration: 1
 --- !u!114 &-5961631296424399733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,33 +133,8 @@ MonoBehaviour:
   - {fileID: 6633485318811556596}
   - {fileID: 8844749275255958085}
   - {fileID: 3860617489491873450}
-  - {fileID: -7408479087970414096}
   - {fileID: -7281780248815949370}
   - {fileID: -6460290084807186524}
-  - {fileID: -6048021643029021468}
-  - {fileID: 3552937770048740613}
---- !u!114 &3552937770048740613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 640ac424bf086f846bc71dfb4524525e, type: 3}
-  m_Name: WaitNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 2e385dd8521b4034985cf49af2dc97cb
-  position: {x: 858.0001, y: 656.50006}
-  Description: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  gameobjNpcName: 
-  duration: 1
 --- !u!114 &3860617489491873450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +156,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackDistance: 1.5
+  attackDistance: 3
 --- !u!114 &4689465991318579201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,11 +195,8 @@ MonoBehaviour:
   Description: 
   children:
   - {fileID: 3860617489491873450}
-  - {fileID: -7408479087970414096}
   - {fileID: -6460290084807186524}
-  - {fileID: -6048021643029021468}
   - {fileID: -7281780248815949370}
-  - {fileID: 3552937770048740613}
 --- !u!114 &6633485318811556596
 MonoBehaviour:
   m_ObjectHideFlags: 0

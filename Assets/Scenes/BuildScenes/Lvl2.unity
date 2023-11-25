@@ -38257,8 +38257,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.57, y: -0.23595, z: 0}
-    m_Extent: {x: 9.3827, y: 1.55695, z: 0}
+    m_Center: {x: 2.56965, y: -0.23585004, z: 0}
+    m_Extent: {x: 9.39365, y: 1.5610499, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -39234,6 +39234,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 363679214}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &363679216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 363679214}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &370865737
 GameObject:
   m_ObjectHideFlags: 0
@@ -45458,6 +45469,7 @@ GameObject:
   - component: {fileID: 498163634}
   - component: {fileID: 498163635}
   - component: {fileID: 498163636}
+  - component: {fileID: 498163637}
   m_Layer: 8
   m_Name: Ghost_Warrior_3_2
   m_TagString: Enemy
@@ -45709,6 +45721,19 @@ MonoBehaviour:
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &498163637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498163627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 884622782}
 --- !u!1 &508404086
 GameObject:
   m_ObjectHideFlags: 0
@@ -49968,6 +49993,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 884622780}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &884622782 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 884622780}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &887496767
 GameObject:
   m_ObjectHideFlags: 0
@@ -50434,8 +50470,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 14.371901, y: 2.68465, z: 0}
-    m_Extent: {x: 22.0524, y: 5.11645, z: 0}
+    m_Center: {x: 14.376401, y: 2.6835501, z: 0}
+    m_Extent: {x: 22.049702, y: 5.1101503, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -59268,6 +59304,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 1105343672}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1105343674 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 1105343672}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1126971541
 GameObject:
   m_ObjectHideFlags: 0
@@ -123858,6 +123905,7 @@ GameObject:
   - component: {fileID: 1398941875}
   - component: {fileID: 1398941876}
   - component: {fileID: 1398941877}
+  - component: {fileID: 1398941878}
   m_Layer: 8
   m_Name: Heavy_Armor_2
   m_TagString: Enemy
@@ -124109,6 +124157,19 @@ MonoBehaviour:
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1398941878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398941868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 1105343674}
 --- !u!1 &1403753061
 GameObject:
   m_ObjectHideFlags: 0
@@ -126071,6 +126132,7 @@ GameObject:
   - component: {fileID: 1588325943}
   - component: {fileID: 1588325944}
   - component: {fileID: 1588325945}
+  - component: {fileID: 1588325946}
   m_Layer: 8
   m_Name: Ghost_Warrior_3_1
   m_TagString: Enemy
@@ -126322,6 +126384,19 @@ MonoBehaviour:
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
+--- !u!114 &1588325946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588325936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 363679216}
 --- !u!1 &1591980596
 GameObject:
   m_ObjectHideFlags: 0
@@ -136600,6 +136675,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8043583929058929610, guid: 5286af92ef80838458203443a74ac32e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043583929058929610, guid: 5286af92ef80838458203443a74ac32e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -136607,6 +136690,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1916055096298109937, guid: 5286af92ef80838458203443a74ac32e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 268893464139130737}
+    - targetCorrespondingSourceObject: {fileID: 1916055096298109937, guid: 5286af92ef80838458203443a74ac32e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 268893464139130739}
   m_SourcePrefab: {fileID: 100100000, guid: 5286af92ef80838458203443a74ac32e, type: 3}
 --- !u!1 &268893464139130736 stripped
 GameObject:
@@ -136630,6 +136716,30 @@ MonoBehaviour:
   minForce: 300
   maxForce: 600
   spawnDelay: 0.2
+--- !u!114 &268893464139130738 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8036830219417508601, guid: 5286af92ef80838458203443a74ac32e, type: 3}
+  m_PrefabInstance: {fileID: 268893464139130735}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &268893464139130739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268893464139130736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 268893464139130738}
 --- !u!4 &353716591063399753
 Transform:
   m_ObjectHideFlags: 0
@@ -136718,6 +136828,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4158284810766522340, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 2446853775206420875}
     - target: {fileID: 3171951329780551718, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.91
@@ -136798,6 +136912,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1408429758}
   m_SourcePrefab: {fileID: 100100000, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+--- !u!114 &2446853775206420875 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4197352416516893533, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+  m_PrefabInstance: {fileID: 2446853775206420874}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &2618951601284857769
 SpriteRenderer:
   m_ObjectHideFlags: 0
