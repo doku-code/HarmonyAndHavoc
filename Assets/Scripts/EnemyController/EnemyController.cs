@@ -17,7 +17,6 @@ namespace charles
         [Range(0.0f, 50.0f)]
         [SerializeField] private float knockBackImpulse;
         [SerializeField] private float knockBackInterval = 0.001f;
-        [SerializeField] private float knockBackFriction = 5.0f;
         private bool isKnockedBack;
         public bool IsKnockedBack { get => isKnockedBack; }
         public bool IsDead { get => currentHealth <= 0; }
@@ -92,14 +91,13 @@ namespace charles
                 rb.velocity = new Vector2(rb.velocity.x * normal.x, rb.velocity.y * normal.y);
                 Debug.Log($"pushDirection={pushDirection}");
                 //rb.AddForce(pushDirection * knockBackImpulse, ForceMode2D.Impulse);
-                //StartCoroutine(KnockBackOverTime(rb, pushDirection, knockBackImpulse, knockBackInterval));
+                StartCoroutine(KnockBackOverTime(rb, pushDirection, knockBackImpulse, knockBackInterval));
             }
         }
 
         private IEnumerator KnockBackOverTime(Rigidbody2D rb, Vector2 pushDirection, float knockBackImpulse, float delayTime)
         {            
             rb.AddForce(pushDirection * knockBackImpulse, ForceMode2D.Impulse);
-            float friction = knockBackFriction;
             while(rb.velocity != Vector2.zero)
             {
                 

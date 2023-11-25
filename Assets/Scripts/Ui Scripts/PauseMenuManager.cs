@@ -1,5 +1,6 @@
 using AF;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
@@ -18,35 +19,18 @@ namespace charles
 
         [Header("Panel"), Tooltip("This is where all the panel goes")]
         [SerializeField] private GameObject pausePanel;
-
         [SerializeField] private GameObject settingsPanel;
-        [SerializeField] private GameObject soundPanel;
-        [SerializeField] private GameObject displayPanel;
-        [SerializeField] private GameObject controlPanel;
 
         [Header("Event System Object"), Tooltip("It is use to change the main selected object in eventSystem GameObject")]
         [SerializeField] private GameObject pauseMenuFirstObj;
-
         [SerializeField] private GameObject settingFirstObj;
-        [SerializeField] private GameObject soundSettingsFirstObj;
-        [SerializeField] private GameObject displayFirstObj;
-        [SerializeField] private GameObject controlFirstObj;
 
         [Header("Display Settings UI"), Tooltip("Different UI element to change display/Sound")]
-        [SerializeField] private Toggle toggleBtnVSYNC;
-
-        [SerializeField] private TMP_Dropdown qualityPreset;
         [SerializeField] private TMP_Dropdown windowModePreset;
         [SerializeField] private TMP_Dropdown windowSizePreset;
         [SerializeField] private Slider ambientSlider;
         [SerializeField] private Slider fxSlider;
         [SerializeField] private Slider masterSlider;
-
-        [Header("Keyboard Rebinding button"), Tooltip("A array of button that action will go in")]
-        [SerializeField] private Button[] actionBtn;
-
-        [Header("Keyboard Rebinding text"), Tooltip("Text array for the button mapping")]
-        [SerializeField] private TMP_Text[] actionBtnText;
 
         [Space]
         [Header("Other UI menus")]
@@ -134,16 +118,13 @@ namespace charles
         private void CloseOtherPanels()
         {
             settingsPanel.SetActive(false);
-            soundPanel.SetActive(false);
-            displayPanel.SetActive(false);
-            controlPanel.SetActive(false);
         }
 
         public void ContinueGame()
         {
             isPauseMenuOpen = false;
             ClosePauseMenu();
-
+            Time.timeScale = 1;
             if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
             {
                 EventSystem.current.SetSelectedGameObject(pauseMenuFirstObj);
@@ -161,47 +142,11 @@ namespace charles
             SoundManager.Instance.PlayAClip(1);
             pausePanel.SetActive(false);
             settingsPanel.SetActive(true);
-            soundPanel.SetActive(false);
-            displayPanel.SetActive(false);
-            controlPanel.SetActive(false);
             if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
             {
                 EventSystem.current.SetSelectedGameObject(settingFirstObj);
             }
         }        
-
-        public void OpenSoundMenu()
-        {
-            SoundManager.Instance.PlayAClip(1);
-            pausePanel.SetActive(false);
-            settingsPanel.SetActive(false);
-            soundPanel.SetActive(true);
-            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
-            {
-                EventSystem.current.SetSelectedGameObject(soundSettingsFirstObj);
-            }
-        }        
-       
-        public void OpenDisplayPanel()
-        {
-            SoundManager.Instance.PlayAClip(1);
-            settingsPanel.SetActive(false);
-            displayPanel.SetActive(true);
-            if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
-            {
-                EventSystem.current.SetSelectedGameObject(displayFirstObj);
-            }
-        }        
-
-        public void OpenControlSetting()
-        {
-            if (SoundManager.Instance != null)
-                SoundManager.Instance.PlayAClip(1);
-            settingsPanel.SetActive(false);
-            controlPanel.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(controlFirstObj);
-        }
-
         public void ChangeWindowMode()
         {
             SoundManager.Instance.PlayAClip(0);
