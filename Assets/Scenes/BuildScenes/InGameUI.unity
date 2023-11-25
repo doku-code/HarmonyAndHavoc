@@ -3481,7 +3481,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 569627376}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4991702538334020897}
+        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
+        m_MethodName: InteractEquipped
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 569627374}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &569627376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9922,7 +9934,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1771138081}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4991702538334020897}
+        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
+        m_MethodName: InteractEquipped
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1771138079}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1771138081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12668,7 +12692,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5777903800051888227}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4991702538334020897}
+        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
+        m_MethodName: InteractKnowledgeKnown
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 3046936060799905572}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &941262699821278686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13088,7 +13124,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9207475061011703243}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4991702538334020897}
+        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
+        m_MethodName: InteractKnowledgeKnown
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5600602705826257608}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &1543735795312467884
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13260,7 +13308,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4991702538334020897}
         m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
-        m_MethodName: Test
+        m_MethodName: InteractEquipped
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1920308354443373174}
@@ -14737,7 +14785,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4120830132392651283}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4991702538334020897}
+        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
+        m_MethodName: InteractEquipped
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2697795065607337718}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4448810177042979327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15068,29 +15128,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
-  knowledges:
-  - {fileID: 884365788950251797}
-  - {fileID: 8645577930126212254}
-  - {fileID: 6826406997192841056}
-  - {fileID: 7563153007112134614}
-  - {fileID: 1492621330698615352}
-  - {fileID: 7159089604892129318}
-  - {fileID: 8553781500127623190}
-  knowledgeSprites:
+  knowledgesKnown:
+  - {fileID: 2239049257670659300}
+  - {fileID: 551833563446672572}
+  - {fileID: 1464790000958119089}
+  - {fileID: 6954089402343663445}
+  - {fileID: 3566972524141033937}
+  - {fileID: 7695100041375862720}
+  - {fileID: 7624899197184071346}
+  knowledgeKnownSprites:
   - {fileID: 21300000, guid: 6e7a503b69e456647980d8369e786894, type: 3}
   - {fileID: 21300000, guid: c3f85852f6d72b444976df19e4599a15, type: 3}
   - {fileID: 21300000, guid: bb656f9720ed1844dace55e4fad5f2ed, type: 3}
   - {fileID: 21300000, guid: 9e0afdbfaa7d3a540aff6b76879351ed, type: 3}
   - {fileID: 21300000, guid: c462315e4f888584bb4dd908677d3f09, type: 3}
-  - {fileID: 21300000, guid: ca3b05f2f7b2a6349afe364635142a8f, type: 3}
+  - {fileID: 21300000, guid: 9d03ca63aae3d9c45885e3c12605938b, type: 3}
   - {fileID: 21300000, guid: f3a9e76730864e9439e9d8c0d7f25ff3, type: 3}
   disabledKnowledgeSprite: {fileID: 21300000, guid: f652f0d16b19d0f4e80cc05cadeaba9a, type: 3}
-  knowledgesAvailableInMenu:
+  knowledgesEquippedInventory:
   - {fileID: 1920308354443373175}
   - {fileID: 4291574835966975758}
   - {fileID: 569627375}
   - {fileID: 1771138080}
-  knowledgesAvailableInGame:
+  knowledgesAvailableInHUD:
   - {fileID: 9018705}
   - {fileID: 538454198}
   - {fileID: 1934349799}
@@ -16255,7 +16315,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5717719525397097516}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4991702538334020897}
+        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
+        m_MethodName: InteractKnowledgeKnown
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6282090578192614726}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6857284613331837045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16427,7 +16499,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9093249753193564686}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4991702538334020897}
+        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
+        m_MethodName: InteractKnowledgeKnown
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8702398790807444900}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7197017419418358376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16621,7 +16705,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5515661502179792983}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4991702538334020897}
+        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
+        m_MethodName: InteractKnowledgeKnown
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7521816099453124593}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &7583411906586338036
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16926,7 +17022,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 977989837078961819}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4991702538334020897}
+        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
+        m_MethodName: InteractKnowledgeKnown
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1543735795312467884}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8573920170124399294
 GameObject:
   m_ObjectHideFlags: 0
@@ -17176,7 +17284,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2420932574016875791}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4991702538334020897}
+        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
+        m_MethodName: InteractKnowledgeKnown
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2372361602128589390}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &8685309211207159621
 CanvasRenderer:
   m_ObjectHideFlags: 0
