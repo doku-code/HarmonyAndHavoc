@@ -3,17 +3,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System;
+using System.Linq;
+using UnityEngine.Serialization;
 
 namespace AF
 {
     public class InventoryManager : MonoBehaviour
     {
-
         // Faire un custom editor pour mettre les knowledges et les textures de ces derniers en deux colonnes.
-
         [Header("PlayerData"), Tooltip("The PlayerData ScriptableObject")]
         [SerializeField] private PlayerData playerData;
-
         [Space]
         [Header("Knowledge Buttons"), Tooltip("All the Knowledge Button from the inventory UI")]
         [SerializeField] private Button[] knowledges;
@@ -21,9 +20,9 @@ namespace AF
         [Space]
         [SerializeField] private Sprite disabledKnowledgeSprite;
         [Space]
-        [Header("Knowledges available")]
-        [SerializeField] private Button[] knowledgesAvailableInMenu;
-        [SerializeField] private Image[] knowledgesAvailableInGame;
+        [Header("Knowledges Equipped")]
+        [SerializeField] private Button[] knowledgesEquippedInventory;
+        [SerializeField] private Image[] knowledgesAvailableInHUD;
         [Space]
         [SerializeField] private GameObject InventoryPanel;
         [SerializeField] private GameObject PauseMenuPanel;
@@ -31,9 +30,7 @@ namespace AF
 
         private void Start()
         {
-            Debug.Log("InventoryManager.Start() called.");
-            OpenInventoryMenu();
-            OpenInventoryMenu();
+            InitializeKnowledgeSprites();
         }
 
         public void InventoryButtonCallback(CallbackContext value)
@@ -67,10 +64,10 @@ namespace AF
 
         private void InitializeKnowledgeSprites()
         {
-            for(int i = 0; i < knowledgesAvailableInMenu.Length; i++)
+            for(int i = 0; i < knowledgesEquippedInventory.Length; i++)
             {                
-                knowledgesAvailableInMenu[i].GetComponent<Image>().sprite = disabledKnowledgeSprite;
-                knowledgesAvailableInGame[i].sprite = disabledKnowledgeSprite;
+                knowledgesEquippedInventory[i].GetComponent<Image>().sprite = disabledKnowledgeSprite;
+                knowledgesAvailableInHUD[i].sprite = disabledKnowledgeSprite;
 
             }
 
@@ -88,12 +85,28 @@ namespace AF
                 }
 
                 AvailableKnowledgePosition position = playerData.AvailableKnowledgeDictionary[currentID];
-                if(position != AvailableKnowledgePosition.NOT_AVAILABLE) 
+                if(position != AvailableKnowledgePosition.NOT_AVAILABLE)
                 {
-                    knowledgesAvailableInMenu[(int)position - 1].GetComponent<Image>().sprite = knowledgeSprites[i];
-                    knowledgesAvailableInGame[(int)position - 1].sprite = knowledgeSprites[i];
+                    knowledgesEquippedInventory[(int)position - 1].GetComponent<Image>().sprite = knowledgeSprites[i];
+                    knowledgesAvailableInHUD[(int)position - 1].sprite = knowledgeSprites[i];
                 }                                
             }
+        }
+
+        public void InteractEquipped(Transform tr)
+        {
+            for (int i = 0; i < knowledgesEquippedInventory.Length; i++)
+            {
+                if (knowledgesEquippedInventory[i] == tr)
+                {
+                   // playerData.AvailableKnowledgeDictionary.FirstOrDefault((x) => x.Value == ((AvailableKnowledgePosition)(i + 1))).Key;
+                }
+            }
+        }
+
+        public void InteractKnowledgeKnown(Transform tr)
+        {
+            
         }
     }
 }
