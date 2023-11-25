@@ -315,6 +315,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 23559274}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &23559276 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 23559274}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &54883056
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,6 +671,7 @@ GameObject:
   - component: {fileID: 63284511}
   - component: {fileID: 63284517}
   - component: {fileID: 63284518}
+  - component: {fileID: 63284519}
   m_Layer: 8
   m_Name: Skeleton (4)
   m_TagString: Enemy
@@ -911,6 +923,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &63284519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63284509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 639897126}
 --- !u!1 &66375060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,6 +1210,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 102828622}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &102828624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 102828622}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &104494718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,6 +1730,7 @@ GameObject:
   - component: {fileID: 188854465}
   - component: {fileID: 188854471}
   - component: {fileID: 188854472}
+  - component: {fileID: 188854473}
   m_Layer: 8
   m_Name: Goblin (5)
   m_TagString: Enemy
@@ -1945,6 +1982,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &188854473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188854463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 478562569}
 --- !u!1 &202083578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2465,6 +2515,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 239205022}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &239205024 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 239205022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &244349515
 GameObject:
   m_ObjectHideFlags: 0
@@ -2821,6 +2882,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 287217465}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &287217467 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 287217465}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &290969924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2920,6 +2992,7 @@ GameObject:
   - component: {fileID: 292607785}
   - component: {fileID: 292607791}
   - component: {fileID: 292607792}
+  - component: {fileID: 292607793}
   m_Layer: 8
   m_Name: Skeleton (11)
   m_TagString: Enemy
@@ -3171,6 +3244,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &292607793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292607783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 848244919}
 --- !u!1 &307064182
 GameObject:
   m_ObjectHideFlags: 0
@@ -9203,6 +9289,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 352038359}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &352038361 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 352038359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &376580779
 GameObject:
   m_ObjectHideFlags: 0
@@ -9788,6 +9885,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 478562567}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &478562569 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 478562567}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &478661776
 GameObject:
   m_ObjectHideFlags: 0
@@ -11003,6 +11111,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 598387203}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &598387205 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 598387203}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &611881095
 GameObject:
   m_ObjectHideFlags: 0
@@ -11277,6 +11396,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 638244685}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &638244687 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 638244685}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &639897124
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11387,6 +11517,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 639897124}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &639897126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 639897124}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &656493460
 GameObject:
   m_ObjectHideFlags: 0
@@ -11404,6 +11545,7 @@ GameObject:
   - component: {fileID: 656493462}
   - component: {fileID: 656493468}
   - component: {fileID: 656493469}
+  - component: {fileID: 656493470}
   m_Layer: 8
   m_Name: Skeleton (9)
   m_TagString: Enemy
@@ -11655,6 +11797,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &656493470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656493460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 1102703776}
 --- !u!1001 &668517265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11765,6 +11920,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 668517265}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &668517267 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 668517265}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &687327928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11875,6 +12041,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 687327928}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &687327930 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 687327928}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &731258358
 GameObject:
   m_ObjectHideFlags: 0
@@ -11974,6 +12151,7 @@ GameObject:
   - component: {fileID: 732978192}
   - component: {fileID: 732978198}
   - component: {fileID: 732978199}
+  - component: {fileID: 732978200}
   m_Layer: 8
   m_Name: Goblin (3)
   m_TagString: Enemy
@@ -12225,6 +12403,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &732978200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732978190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 1877239994}
 --- !u!1 &737120228
 GameObject:
   m_ObjectHideFlags: 0
@@ -13156,6 +13347,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 848244917}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &848244919 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 848244917}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &852206619
 GameObject:
   m_ObjectHideFlags: 0
@@ -13337,6 +13539,7 @@ GameObject:
   - component: {fileID: 868142655}
   - component: {fileID: 868142661}
   - component: {fileID: 868142662}
+  - component: {fileID: 868142663}
   m_Layer: 8
   m_Name: Goblin (7)
   m_TagString: Enemy
@@ -13588,6 +13791,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &868142663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868142653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 23559276}
 --- !u!1 &878758471
 GameObject:
   m_ObjectHideFlags: 0
@@ -16149,6 +16365,7 @@ GameObject:
   - component: {fileID: 1032169567}
   - component: {fileID: 1032169573}
   - component: {fileID: 1032169574}
+  - component: {fileID: 1032169575}
   m_Layer: 8
   m_Name: Skeleton (6)
   m_TagString: Enemy
@@ -16400,6 +16617,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1032169575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032169565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 687327930}
 --- !u!1 &1038553380
 GameObject:
   m_ObjectHideFlags: 0
@@ -16889,6 +17119,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 1102703774}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1102703776 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 1102703774}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1120624905
 GameObject:
   m_ObjectHideFlags: 0
@@ -17316,6 +17557,7 @@ GameObject:
   - component: {fileID: 1206130274}
   - component: {fileID: 1206130280}
   - component: {fileID: 1206130281}
+  - component: {fileID: 1206130282}
   m_Layer: 8
   m_Name: Skeleton (10)
   m_TagString: Enemy
@@ -17567,6 +17809,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1206130282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206130272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 102828624}
 --- !u!1 &1212490141
 GameObject:
   m_ObjectHideFlags: 0
@@ -17666,6 +17921,7 @@ GameObject:
   - component: {fileID: 1232793242}
   - component: {fileID: 1232793248}
   - component: {fileID: 1232793249}
+  - component: {fileID: 1232793250}
   m_Layer: 8
   m_Name: Goblin (2)
   m_TagString: Enemy
@@ -17917,6 +18173,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1232793250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232793240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 239205024}
 --- !u!1 &1235156225
 GameObject:
   m_ObjectHideFlags: 0
@@ -41413,6 +41682,7 @@ GameObject:
   - component: {fileID: 1307303178}
   - component: {fileID: 1307303184}
   - component: {fileID: 1307303185}
+  - component: {fileID: 1307303186}
   m_Layer: 8
   m_Name: Skeleton (8)
   m_TagString: Enemy
@@ -41664,6 +41934,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1307303186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307303176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 1833654475}
 --- !u!1 &1320370228
 GameObject:
   m_ObjectHideFlags: 0
@@ -42384,6 +42667,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 1432017493}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1432017495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 1432017493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1456212362
 GameObject:
   m_ObjectHideFlags: 0
@@ -406475,6 +406769,7 @@ GameObject:
   - component: {fileID: 1521873535}
   - component: {fileID: 1521873541}
   - component: {fileID: 1521873542}
+  - component: {fileID: 1521873543}
   m_Layer: 8
   m_Name: Skeleton (7)
   m_TagString: Enemy
@@ -406726,6 +407021,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1521873543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521873533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 638244687}
 --- !u!1 &1526924439
 GameObject:
   m_ObjectHideFlags: 0
@@ -407071,6 +407379,7 @@ GameObject:
   - component: {fileID: 1570236417}
   - component: {fileID: 1570236423}
   - component: {fileID: 1570236424}
+  - component: {fileID: 1570236425}
   m_Layer: 8
   m_Name: Goblin (6)
   m_TagString: Enemy
@@ -407322,6 +407631,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1570236425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570236415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 668517267}
 --- !u!1 &1578012564
 GameObject:
   m_ObjectHideFlags: 0
@@ -407667,6 +407989,7 @@ GameObject:
   - component: {fileID: 1600207936}
   - component: {fileID: 1600207942}
   - component: {fileID: 1600207943}
+  - component: {fileID: 1600207944}
   m_Layer: 8
   m_Name: Skeleton (1)
   m_TagString: Enemy
@@ -407918,6 +408241,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1600207944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600207934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 2003447411}
 --- !u!1 &1613608061
 GameObject:
   m_ObjectHideFlags: 0
@@ -408364,6 +408700,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 1633585896}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1633585898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 1633585896}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1668286202
 GameObject:
   m_ObjectHideFlags: 0
@@ -408709,6 +409056,7 @@ GameObject:
   - component: {fileID: 1723928783}
   - component: {fileID: 1723928789}
   - component: {fileID: 1723928790}
+  - component: {fileID: 1723928791}
   m_Layer: 8
   m_Name: Skeleton (2)
   m_TagString: Enemy
@@ -408960,6 +409308,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1723928791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723928781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 1633585898}
 --- !u!1 &1766677531
 GameObject:
   m_ObjectHideFlags: 0
@@ -409928,6 +410289,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 1833654473}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1833654475 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 1833654473}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1837973184
 GameObject:
   m_ObjectHideFlags: 0
@@ -410027,6 +410399,7 @@ GameObject:
   - component: {fileID: 1849342164}
   - component: {fileID: 1849342170}
   - component: {fileID: 1849342171}
+  - component: {fileID: 1849342172}
   m_Layer: 8
   m_Name: Goblin (4)
   m_TagString: Enemy
@@ -410278,6 +410651,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1849342172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849342162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 1432017495}
 --- !u!1 &1857806617
 GameObject:
   m_ObjectHideFlags: 0
@@ -410634,6 +411020,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 1877239992}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1877239994 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 1877239992}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1879087980
 GameObject:
   m_ObjectHideFlags: 0
@@ -410815,6 +411212,7 @@ GameObject:
   - component: {fileID: 1898092420}
   - component: {fileID: 1898092426}
   - component: {fileID: 1898092427}
+  - component: {fileID: 1898092428}
   m_Layer: 8
   m_Name: Goblin (8)
   m_TagString: Enemy
@@ -411066,6 +411464,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1898092428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898092418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 352038361}
 --- !u!1001 &1899580310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -411176,6 +411587,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 1899580310}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1899580312 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 1899580310}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1906606411
 GameObject:
   m_ObjectHideFlags: 0
@@ -413364,6 +413786,7 @@ GameObject:
   - component: {fileID: 1989576964}
   - component: {fileID: 1989576970}
   - component: {fileID: 1989576971}
+  - component: {fileID: 1989576972}
   m_Layer: 8
   m_Name: Skeleton (3)
   m_TagString: Enemy
@@ -413615,6 +414038,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &1989576972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989576962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 287217467}
 --- !u!1 &2002139339
 GameObject:
   m_ObjectHideFlags: 0
@@ -413807,6 +414243,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 2003447409}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2003447411 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 2003447409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2032343618
 GameObject:
   m_ObjectHideFlags: 0
@@ -417274,6 +417721,7 @@ GameObject:
   - component: {fileID: 7996308814575183912}
   - component: {fileID: 8828252214850132336}
   - component: {fileID: 8828252214850132337}
+  - component: {fileID: 8828252214850132338}
   m_Layer: 8
   m_Name: Skeleton
   m_TagString: Enemy
@@ -417882,6 +418330,7 @@ GameObject:
   - component: {fileID: 485631617094929298}
   - component: {fileID: 8024168652293089365}
   - component: {fileID: 8024168652293089366}
+  - component: {fileID: 8024168652293089367}
   m_Layer: 8
   m_Name: Goblin
   m_TagString: Enemy
@@ -418459,6 +418908,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &8024168652293089367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587187720671963370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 598387205}
 --- !u!114 &8342023812671161836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418563,6 +419025,19 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackInterval: 0.001
   knockBackFriction: 5
+--- !u!114 &8828252214850132338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931527273088561141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 1899580312}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

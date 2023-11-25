@@ -16,6 +16,7 @@ public class Attack : ActionNode
     protected override void OnStart() 
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        attackCooldown = 3.0f;
     }
     protected override void OnStop() {}
 

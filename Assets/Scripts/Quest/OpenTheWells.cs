@@ -1,3 +1,4 @@
+using AF;
 using UnityEngine;
 namespace charles
 {
@@ -7,6 +8,7 @@ namespace charles
 
         public void onAcceptQuest()
         {
+            SoundManager.Instance.PlayAClip(4);
             wellsCollider.SetActive(false);
         }
     }

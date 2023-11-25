@@ -8,8 +8,8 @@ namespace charles
 {
     public class EnemyController : MonoBehaviour
     {
-        public int maxHealth = 100;
-        public int attackDamage = 10;
+        [SerializeField] private int maxHealth = 100;
+        [SerializeField] private int attackDamage = 10;
 
         private Animator npcAnimator;
         private int currentHealth;
@@ -21,6 +21,7 @@ namespace charles
         private bool isKnockedBack;
         public bool IsKnockedBack { get => isKnockedBack; }
         public bool IsDead { get => currentHealth <= 0; }
+        public int MaxHealth { get => maxHealth; }
 
         public event SingleParameterDelegate OnHealthDecrease;
 
