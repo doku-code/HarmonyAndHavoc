@@ -6,89 +6,171 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public struct GridInfo : IComparable
-{
-    public Grid grid;
-    public string name;
-
-    public GridInfo(Grid grid)
+namespace JFM
+{ 
+    [Serializable]
+    public class ObjectList
     {
-        this.grid = grid;
-        name = grid.gameObject.name;
+        public List<GameObject> objects;
     }
 
-    public int CompareTo(object other)
+    public struct GridInfo : IComparable
     {
-        return String.Compare(name, ((GridInfo)other).name, true) ;
-    }
-}
+        public Grid grid;
+        public string name;
 
-public class ChaosOrderSystem : MonoBehaviour
-{
-    public static ChaosOrderSystem Instance { get; private set; }    
-
-    [SerializeField] private PlayerData playerData;
-
-    [SerializeField] private int chaosAmount;
-
-    void Awake()
-    {
-        if (Instance != null)
+        public GridInfo(Grid grid)
         {
-            Destroy(gameObject);
+            this.grid = grid;
+            name = grid.gameObject.name;
         }
-        else
+
+        public int CompareTo(object other)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            return String.Compare(name, ((GridInfo)other).name, true) ;
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {        
-        playerData.OnDeadDelegate += OnPlayerDead;
-        GameManager.Instance.OnLoadMapDelegate += OnLoadMap;
-    }
-
-    private void OnLoadMap()
+    public class ChaosOrderSystem : MonoBehaviour
     {
-        Debug.Log("OnLoadMap()");
-        if (GameManager.Instance.actualMap != "Village")
+        public static ChaosOrderSystem Instance { get; private set; }    
+
+        [SerializeField] private PlayerData playerData;
+
+        [SerializeField] private int chaosAmount;
+        public static int maxChaosAmount = 4;
+
+        //Faire une autre liste de gameobject a desactiver dependant du niveau de chaos
+        [SerializeField] private ObjectList[] activeObjects = new ObjectList[maxChaosAmount];
+
+        //Faire une liste de gameobject pour les gameobject dans le village qui pourrais dependant du niveau du chaos changer de couleur
+        [SerializeField] private List<GameObject> colorChangingObjects = new List<GameObject>();
+        [SerializeField] private Color[] colors = new Color[maxChaosAmount];
+
+        //Faire en sorte que si on gameover tout ce reactive et revienne comme couleur normal
+        //Faire en sorte de changer le fullscreenpass material dependant du shader \
+
+        public int ChaosAmount
         {
-            return;
+            get { return chaosAmount; }
+            set { chaosAmount = value; }
         }
-        Grid[] grids = FindObjectsOfType<Grid>();
-        //Debug.Log("grids.Length=" +grids.Length);
-        if(grids is null)
+
+        void Awake()
         {
-            return;
-        }
-        List<GridInfo> list = new List<GridInfo>();
-        foreach (Grid grid in grids)
-        {
-            if (grid.gameObject.layer == LayerMask.NameToLayer("ChaosGrids"))
+            if (Instance != null)
             {
-                Debug.Log($"id={grid.gameObject.name}");
-                list.Add(new GridInfo(grid));
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
             }
         }
 
-        list.Sort();
-        foreach (GridInfo grid in list)
-        {
-            Debug.Log($"list= {grid.name}");
+        // Start is called before the first frame update
+        void Start()
+        {        
+            playerData.OnDeadDelegate += OnPlayerDead;
+            GameManager.Instance.OnLoadMapDelegate += OnLoadMap;
         }
-        Debug.Log($"chaosAmount={chaosAmount}");
-        if (chaosAmount > 0)
-        {
-            list[chaosAmount - 1].grid.enabled = false;
-        }
-        list[chaosAmount].grid.enabled = true;
-    }
 
-    private void OnPlayerDead()
-    {
-        chaosAmount++;
+        private void OnLoadMap()
+        {
+            //Debug.Log("OnLoadMap()");
+
+            // Bail out if map is not the Village
+            if (GameManager.Instance.actualMap != "Village")
+            {
+                return;
+            }
+
+            // Call VillageChaosConfig script
+            VillageChaosConfig villageConfig = FindObjectOfType<VillageChaosConfig>();
+            activeObjects = villageConfig.activeObjects;
+
+            Grid[] grids = FindObjectsOfType<Grid>();
+            //Debug.Log("grids.Length=" +grids.Length);
+
+            if(grids is null)
+            {
+                return;
+            }
+
+            // Create a list of Grid objects that are on layer "ChaosGrids"
+            List<GridInfo> sortedGrids = new List<GridInfo>();
+            foreach (Grid grid in grids)
+            {
+                if (grid.gameObject.layer == LayerMask.NameToLayer("ChaosGrids"))
+                {
+                    Debug.Log($"id={grid.gameObject.name}");
+                    sortedGrids.Add(new GridInfo(grid));
+                }
+            }
+
+            sortedGrids.Sort();
+            /*foreach (GridInfo grid in sortedGrids)
+            {
+                Debug.Log($"sortedGrids= {grid.name}");
+            }*/
+
+            Debug.Log($"chaosAmount={chaosAmount}");
+
+
+            if (chaosAmount > 0)
+            {
+                sortedGrids[chaosAmount - 1].grid.enabled = false;
+            }
+            else // if chaosAmount == 0
+            {
+            
+            }
+            sortedGrids[chaosAmount].grid.enabled = true;
+
+            ActivateObjects();
+        }
+
+        private void OnPlayerDead()
+        {
+            chaosAmount++;
+        }
+
+        private void ActivateObjects()
+        {
+            if (chaosAmount == 0)
+            {
+                ActivateCurrentChaosLevel();
+            }
+            else
+            {
+                foreach (GameObject go in activeObjects[chaosAmount - 1].objects)
+                {
+                    if (go is not null)
+                    {
+                        if (activeObjects[chaosAmount].objects.Find(
+                            (x) => { return x == go; }
+
+                        ) is null )
+                        {
+                            go.SetActive(false);
+                        }
+                    }
+                }
+
+                ActivateCurrentChaosLevel();
+            }
+        }
+
+        private void ActivateCurrentChaosLevel()
+        {
+            foreach (GameObject go in activeObjects[chaosAmount].objects)
+            {
+                if (go is not null)
+                {
+                    go.SetActive(true);
+                }
+            }
+        }
     }
 }
