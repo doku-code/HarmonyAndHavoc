@@ -9,8 +9,9 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 [CreateAssetMenu(fileName = "WallSlideKnowledge", menuName = "Knowledges/WallSlide")]
 public class WallSlideKnowledge : Knowledge
 {
-    [SerializeField] private float wallGripVelocityTolerance = 0.5f;
-    [SerializeField] private float wallGripForce = 1000.0f;
+    [SerializeField] private float wallSlideVelocityTolerance = 0.02f;
+    [SerializeField] private float wallSlideForce = 1000.0f;
+    [SerializeField] private float wallSlideMinHeight = 0.5f;
 
     public override void Activate() { }
     public override void Deactivate() { }
@@ -57,7 +58,7 @@ public class WallSlideKnowledge : Knowledge
             return;
         }
 
-        player.rb.AddForce(Vector2.up * -player.rb.velocity.y * wallGripForce * Time.fixedDeltaTime, ForceMode2D.Force);
+        player.rb.AddForce(Vector2.up * -player.rb.velocity.y * wallSlideForce * Time.fixedDeltaTime, ForceMode2D.Force);
         //player.ResetJump();
     }
 
@@ -68,31 +69,34 @@ public class WallSlideKnowledge : Knowledge
 
     public override bool WillUse()
     {
-        GameObject frontWall = IsInFrontOfWall();
-        bool front = frontWall is not null && (1 << frontWall.layer) == (int)player.GroundLayer;// && ((player.IsFacingRight && player.MoveInput.x > 0) || (!player.IsFacingRight && player.MoveInput.x < 0));
-        front = /*front || */(player.IsWallColliding && player.WallIsToRight == player.IsFacingRight) && ((player.IsFacingRight && player.MoveInput.x > 0) || (!player.IsFacingRight && player.MoveInput.x < 0));
+        //GameObject frontWall = IsInFrontOfWall();
+        //bool front = frontWall is not null && (1 << frontWall.layer) == (int)player.GroundLayer;// && ((player.IsFacingRight && player.MoveInput.x > 0) || (!player.IsFacingRight && player.MoveInput.x < 0));
+        bool front = /*front || */(player.IsWallColliding && player.WallIsToRight == player.IsFacingRight) && ((player.IsFacingRight && player.MoveInput.x > 0) || (!player.IsFacingRight && player.MoveInput.x < 0));
 
         bool text = false;
-        if (frontWall is not null)
+        /*if (frontWall is not null)
         {
             text = (1 << frontWall.layer) == (int)player.GroundLayer;
-        }
+        }*/
         //Debug.Log($"front = {frontWall is not null} && ({text} && (({player.IsFacingRight && player.MoveInput.x > 0}) || ({!player.IsFacingRight && player.MoveInput.x < 0}))");
         //Debug.Log($"front = {player.IsWallColliding} && (({player.IsFacingRight && player.MoveInput.x > 0}) || ({!player.IsFacingRight && player.MoveInput.x < 0}))");
+
+        // To avoid wallSliding when too close to the ground.
+        bool groundHit = player.Raycast(false, player.GroundLayer | player.LadderLayer, Vector2.zero, wallSlideMinHeight, Vector2.down);
+
         bool back = false;
 
         if (!front)
         {
             // Check also back wall 
-            bool backWallHit = player.Raycast(false, player.GroundLayer, Vector2.zero, player.WallDistance, player.IsFacingRight ? -Vector2.right : Vector2.right);
-            //back = backWallHit && ((player.IsFacingRight && player.MoveInput.x < 0) || (!player.IsFacingRight && player.MoveInput.x > 0));
+            //bool backWallHit = player.Raycast(false, player.GroundLayer, Vector2.zero, player.WallDistance, player.IsFacingRight ? -Vector2.right : Vector2.right);
             back = /*backWallHit || */(player.IsWallColliding && player.WallIsToRight != player.IsFacingRight) && ((player.IsFacingRight && player.MoveInput.x < 0) || (!player.IsFacingRight && player.MoveInput.x > 0));
         }
 
         bool availableKnowledge = player.Data.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] && player.Data.AvailableKnowledgeDictionary[KnowledgeID.WALL_SLIDE] != AvailableKnowledgePosition.NOT_AVAILABLE;        
 
         //Debug.Log($"player.IsFacingRight={player.IsFacingRight} availableKnowledge ={availableKnowledge} ({front} || {back}) && {Mathf.Abs(player.rb.velocity.x) <= wallGripVelocityTolerance} rb.velocity.x={player.rb.velocity.x} moveInput.x={player.MoveInput.x}");
-        return availableKnowledge && (front || back) && Mathf.Abs(player.rb.velocity.x) <= wallGripVelocityTolerance;        
+        return !groundHit && availableKnowledge && (front || back) && Mathf.Abs(player.rb.velocity.x) <= wallSlideVelocityTolerance;        
     }
     
     private GameObject IsInFrontOfWall()
