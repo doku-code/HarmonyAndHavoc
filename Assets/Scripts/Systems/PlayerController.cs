@@ -432,8 +432,12 @@ namespace JFM
 
         public void TakeDamage(int damage, Vector2 pushDirection)
         {
-            if(currentState != states[PlayerState.STATE.HURT])
+            if(currentState != states[PlayerState.STATE.HURT] && 
+                (currentState != states[PlayerState.STATE.KNOWLEDGE] ||
+                ((KnowledgeState)states[PlayerState.STATE.KNOWLEDGE]).knowledge != 
+                playerData.EveryKnowledgeDictionary[KnowledgeID.DASH]))
             {
+                Debug.Log($"Player is taking {damage} damage!");
                 playerData.TakeDamage(damage);
                 HurtState state = (HurtState)states[PlayerState.STATE.HURT];
                 state.pushDirection = pushDirection.normalized;
