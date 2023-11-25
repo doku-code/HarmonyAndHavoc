@@ -29,6 +29,7 @@ namespace charles
         public static DebugCommand<int> WEAPONUPGRADE;
         public static DebugCommand<int> ARMORUPGRADE;
         public static DebugCommand<int> HITPLAYER;
+        public static DebugCommand<int> CHANGECHAOSAMOUNT;
         public static DebugCommand<string> SCENE;
 
         [Header("Script Reference")]
@@ -99,6 +100,10 @@ namespace charles
             {
                 debugFunc.HitPlayer(x);
             });
+            CHANGECHAOSAMOUNT = new DebugCommand<int>("villagechaos", "Change the world state of chaos", "villagechaos", (x) =>
+            {
+                debugFunc.ChangeChaos(x);
+            });
 
             commandList = new List<object>
             {
@@ -114,7 +119,8 @@ namespace charles
                 WEAPONUPGRADE,
                 ARMORUPGRADE,
                 SCENE,
-                HITPLAYER
+                HITPLAYER,
+                CHANGECHAOSAMOUNT
             };
 
             commandHistory = new List<string>();
