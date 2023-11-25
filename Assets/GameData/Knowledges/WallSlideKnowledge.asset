@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageBoost: 0
   ID: 2
-  wallGripVelocityTolerance: 0.02
-  wallGripForce: 1000
+  chaosCost: 0
+  slotCost: 0
+  cooldown: 0
+  wallSlideVelocityTolerance: 0.02
+  wallSlideForce: 1000
+  wallSlideMinHeight: 2

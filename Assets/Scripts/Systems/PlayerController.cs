@@ -753,24 +753,30 @@ namespace JFM
         public void OnTriggerEnter2D(Collider2D collision)
         {
             //Debug.Log($"OnTriggerEnter2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
+            IInteractible interactibleObject = null;
 
-            if(collision is not null && collision.gameObject.CompareTag("Enemy") && collision is CapsuleCollider2D)
+            if(collision is not null)
             {
-                //Debug.Log($"Hit enemy named: {collision.gameObject.name}");
+                if (collision.gameObject.CompareTag("Enemy") && collision is CapsuleCollider2D)
+                {
+                    //Debug.Log($"Hit enemy named: {collision.gameObject.name}");
 
-                HitEnemy(collision);
+                    HitEnemy(collision);
+                }
+                else if((interactibleObject = collision.gameObject.GetComponent<IInteractible>()) is not null)
+                {
+
+                }
             }
         }
 
         public void OnTriggerStay2D(Collider2D collision)
         {
-            //Debug.Log("OnTriggerStay2D");
             //Debug.Log($"OnTriggerStay2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
         }
 
         public void OnTriggerExit2D(Collider2D collision)
         {
-            //Debug.Log("OnTriggerExit2D");
             //Debug.Log($"OnTriggerExit2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
         }
 
