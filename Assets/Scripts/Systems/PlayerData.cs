@@ -183,8 +183,11 @@ namespace AF
             if(actualChaos >= value)
             {
                 actualChaos -= value;
-                
-                OnChaosDelegate();
+
+                if (OnChaosDelegate is not null)
+                {
+                    OnChaosDelegate();
+                }
 
                 return true;
             }
