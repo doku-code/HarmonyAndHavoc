@@ -1,7 +1,9 @@
+using UnityEngine;
+
 namespace AF
 {
     public interface IInteractible
     {
-        public void Interact() { }
+        public void Interact(GameObject gameObject) { }
     }
 }
