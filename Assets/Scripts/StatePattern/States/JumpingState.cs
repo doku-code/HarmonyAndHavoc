@@ -12,6 +12,7 @@ namespace JFM
         public override void Enter()
         {
             player.animator.SetTrigger("Jump");
+            player.animator.SetBool("IsAirborne", true);
             player.Jump();
             player.inputTriggers["Jump"] = false;
             nFrames = 0;
@@ -97,6 +98,7 @@ namespace JFM
         public override void Exit()
         {
             player.animator.ResetTrigger("Jump");
+            player.animator.SetBool("IsAirborne", false);
             base.Exit();
         }
     }

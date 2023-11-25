@@ -9,16 +9,17 @@ namespace JFM
     {
         private float startTime;
         private float animationClipLength;
-        private bool usingCrouchedAnimation;
+        private bool usingAirAnimation;
         [SerializeField] private int animatorLayer = 2;
         [SerializeField] private string motionName = "Player_Attack_1";
+        [SerializeField] private string airMotionName = "Player_Air_Attack_1";
 
         public override void Enter()
         {
-            // If airborne, use crouched attack animation
-            if (usingCrouchedAnimation = !player.IsGrounded())
+            // If airborne, use air attack animation
+            if (usingAirAnimation = !player.IsGrounded())
             {
-                player.animator.SetBool("IsCrouched", true);
+                player.animator.SetBool("IsAirborne", true);
             }
             
             player.animator.SetBool("IsAttacking", true);            
@@ -70,9 +71,9 @@ namespace JFM
         {
             player.rb.gravityScale = player.DefaultGravityScale;
             player.animator.SetBool("IsAttacking", false);
-            if(usingCrouchedAnimation)
+            if(usingAirAnimation)
             {
-                player.animator.SetBool("IsCrouched", false);
+                player.animator.SetBool("IsAirborne", false);
             }
             base.Exit();
         }

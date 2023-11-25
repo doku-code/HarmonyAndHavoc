@@ -762,14 +762,12 @@ namespace JFM
         {
             //Debug.Log("OnTriggerStay2D");
             //Debug.Log($"OnTriggerStay2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
-
         }
 
         public void OnTriggerExit2D(Collider2D collision)
         {
             //Debug.Log("OnTriggerExit2D");
             //Debug.Log($"OnTriggerExit2D collision is null = {collision is null} collision.gameObject.CompareTag(\"Enemy\")={collision.gameObject.CompareTag("Enemy")} collision.gameObject.name={collision.gameObject.name}");
-
         }
 
         void Awake()

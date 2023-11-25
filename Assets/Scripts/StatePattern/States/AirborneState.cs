@@ -20,6 +20,7 @@ namespace JFM
         public override void Enter()
         {            
             player.animator.SetBool("IsFalling", true);
+            player.animator.SetBool("IsAirborne", true);
 
             if (player.CanClimbLadder())
             {
@@ -57,6 +58,8 @@ namespace JFM
                 player.Turn();
             }
 
+            float playerSide = player.IsFacingRight ? 1.0f : -1.0f;
+
             bool willCrouch = (player.inputTriggers["Move"] && player.MoveInput.y < 0.0f);
             bool foundSlopeBeneath = player.FindSlopeBeneath(out float slope);
             bool stairsAreRightSide = slope > 0;
@@ -71,17 +74,20 @@ namespace JFM
                 return;
             }
 #if _DEBUG
-            Debug.Log($"grounded={grounded} 1 << player.groundedLayer={1 << player.groundedLayer} == {(int)player.GroundLayer} ladder={ladderX}");
+            Debug.Log($"grounded={grounded} 1 << player.groundedLayer={1 << player.groundedLayer} == {(int)player.GroundLayer} ladder={ladderX} foundSlopeBeneath={foundSlopeBeneath} slope={slope}");
 #endif
             bool noLadderAbove = false;
             if (grounded || foundSlopeBeneath)
             {                               
                 if (player.MoveInput.x != 0.0f)
                 {
-                    if (foundSlopeBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope)
+                    if (foundSlopeBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope && Mathf.Sign(slope) * playerSide > 0)
                     {
                         if (Mathf.Abs(slope) < player.StairsUpMaxSlope)
                         {
+#if _DEBUG
+                            Debug.Log("Going to walk.");
+#endif
                             if (stairsAreRightSide == player.IsFacingRight)
                             {
                                 //player.ChangeState(player.states[STATE.STAIRS_UP]);
@@ -332,6 +338,7 @@ namespace JFM
             wasGrounded = true;
             //player.rb.gravityScale = player.DefaultGravityScale;
             player.animator.SetBool("IsFalling", false);
+            player.animator.SetBool("IsAirborne", false);
             base.Exit();
         }
     }

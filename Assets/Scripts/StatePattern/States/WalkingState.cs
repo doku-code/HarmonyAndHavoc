@@ -1,3 +1,5 @@
+//#define _DEBUG
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,15 +35,6 @@ namespace JFM
             if ((player.WillClimbLadder() || player.IsAboveLadder()) &&
                 player.MoveInput.x != 0.0f)
             {
-                //Debug.Log("Adjusting for ladders");
-/*
-                Vector2 force = (player.IsFacingRight ? Vector2.right : -Vector2.right) * player.WalkAcceleration * Time.fixedDeltaTime;
-
-                player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f) + force / player.rb.mass;
-                if (Mathf.Abs(player.rb.velocity.x) > player.WalkSpeed)
-                {
-                    player.rb.velocity = new Vector2(player.WalkSpeed * Mathf.Sign(player.rb.velocity.x), 0.0f);
-                }*/
                 player.rb.totalForce = Vector2.zero;
                 player.rb.gravityScale = 0.0f;
             }
@@ -110,6 +103,9 @@ namespace JFM
             //Debug.Log($"grounded={grounded} slope ={slope} foundSlopeBeneath={foundSlopeBeneath}");
             if (!grounded && (!foundSlopeBeneath || slope == 0.0f))
             {
+#if _DEBUG
+                Debug.Log($"Walking not grounded!");
+#endif
                 player.ChangeState(player.states[STATE.AIRBORNE]);
                 return;
             }
@@ -120,7 +116,9 @@ namespace JFM
                 if ((player.WillClimbLadder() || playerIsAboveLadder) && 
                 player.MoveInput.x != 0.0f && player.rb.gravityScale != 0.0f)
                 {
-                    //Debug.Log($"OK!!!!");
+#if _DEBUG
+                    Debug.Log($"Walking on ladder");
+#endif
                     Vector2 force = (player.IsFacingRight ? Vector2.right : -Vector2.right) * player.WalkAcceleration * Time.fixedDeltaTime;
 
                     player.rb.velocity = new Vector2(player.rb.velocity.x, 0.0f) + force / player.rb.mass;
@@ -191,11 +189,15 @@ namespace JFM
                     player.rb.gravityScale = 0.0f;
                     player.rb.totalForce = Vector2.zero;
                     player.rb.velocity = Vector2.zero;
-                    //Debug.Log("idling on ladder");
+#if _DEBUG
+                    Debug.Log("Walking on ladder while MoveInput.x = 0");
+#endif
                 }
                 else
                 {
-                    //Debug.Log("not idling on ladder");
+#if _DEBUG
+                    Debug.Log("Not walking on ladder while MoveInput.x = 0");
+#endif
                 }
 
                 player.ChangeState(player.states[STATE.IDLE]);
