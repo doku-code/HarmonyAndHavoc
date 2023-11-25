@@ -922,7 +922,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &63284519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1981,7 +1980,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &188854473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3243,7 +3241,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &292607793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11796,7 +11793,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &656493470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12402,7 +12398,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &732978200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13790,7 +13785,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &868142663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16616,7 +16610,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &1032169575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17808,7 +17801,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &1206130282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18172,7 +18164,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &1232793250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41933,7 +41924,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &1307303186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42293,11 +42283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
-  knockBackImpulse: 0
+  maxHealth: 40
+  attackDamage: 2
+  knockBackImpulse: 2
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &1329097546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407020,7 +407009,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &1521873543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407630,7 +407618,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &1570236425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408240,7 +408227,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &1600207944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409307,7 +409293,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &1723928791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410650,7 +410635,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &1849342172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411463,7 +411447,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &1898092428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414037,7 +414020,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &1989576972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418907,7 +418889,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &8024168652293089367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419024,7 +419005,6 @@ MonoBehaviour:
   attackDamage: 10
   knockBackImpulse: 0
   knockBackInterval: 0.001
-  knockBackFriction: 5
 --- !u!114 &8828252214850132338
 MonoBehaviour:
   m_ObjectHideFlags: 0

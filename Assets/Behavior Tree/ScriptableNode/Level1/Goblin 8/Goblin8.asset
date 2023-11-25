@@ -22,7 +22,7 @@ MonoBehaviour:
     m_Bits: 128
   gameobjNpcName: Goblin
   attackCooldown: 2
-  attackDistance: 2
+  attackDistance: 8
   attackAnimString: Combo1
   comboSoundIdx: 0
 --- !u!114 &-7819835407118219623
@@ -106,13 +106,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6d5cdd8b41fb2d04497bb96acd420514
-  position: {x: 151.24997, y: 676.00006}
+  position: {x: 150.75006, y: 676.00006}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Goblin
-  attackDistance: 1.5
+  attackDistance: 8
 --- !u!114 &-2475738774914419675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,6 +273,6 @@ MonoBehaviour:
     m_Bits: 128
   gameobjNpcName: Goblin
   attackCooldown: 2
-  attackDistance: 2
+  attackDistance: 8
   attackAnimString: Combo2
   comboSoundIdx: 0

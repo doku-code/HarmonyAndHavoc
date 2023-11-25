@@ -15,14 +15,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 0fa36f36392255946ae5ec0a02f796b4
-  position: {x: 396.5202, y: 656.50006}
+  position: {x: 392.50003, y: 656.50006}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
   attackCooldown: 2
-  attackDistance: 2
+  attackDistance: 8
   attackAnimString: Combo2
   comboSoundIdx: 0
 --- !u!114 &-7258625121589260600
@@ -66,7 +66,7 @@ MonoBehaviour:
     m_Bits: 128
   gameobjNpcName: 
   attackCooldown: 2
-  attackDistance: 2
+  attackDistance: 8
   attackAnimString: Combo1
   comboSoundIdx: 0
 --- !u!114 &-5961631296424399733
@@ -156,7 +156,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackDistance: 3
+  attackDistance: 8
 --- !u!114 &4689465991318579201
 MonoBehaviour:
   m_ObjectHideFlags: 0
