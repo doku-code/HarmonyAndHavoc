@@ -8,6 +8,7 @@ public class NPCPathFinding : ActionNode
     public string PatrolAnimString;
     public float moveSpeed = 2000.0f;
     public float sphereCastRadius = 2.0f;
+    public float distBeforeChanging = 1.0f;
 
     private int currentPOS;
 
@@ -66,7 +67,7 @@ public class NPCPathFinding : ActionNode
             {
                 npc.transform.localScale = new Vector3(-1, 1, 1);
             }
-            if (Vector2.Distance(npc.transform.position, targetPOS) < 1f)
+            if (Vector2.Distance(npc.transform.position, targetPOS) < distBeforeChanging)
             {
                 currentPOS++;
                 if (currentPOS >= POSPatrolRoute.Length)

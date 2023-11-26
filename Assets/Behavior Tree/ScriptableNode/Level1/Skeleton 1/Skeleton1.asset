@@ -21,8 +21,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackCooldown: 2.5
-  attackDistance: 2.5
+  attackCooldown: 2
+  attackDistance: 3
   attackAnimString: Combo2
   comboSoundIdx: 0
 --- !u!114 &-7258625121589260600
@@ -65,8 +65,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackCooldown: 2
-  attackDistance: 8
+  attackCooldown: 3
+  attackDistance: 3
   attackAnimString: Combo1
   comboSoundIdx: 0
 --- !u!114 &-5961631296424399733
@@ -156,7 +156,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackDistance: 8
+  attackDistance: 5
 --- !u!114 &4689465991318579201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 707b5c568a340ec49bc6812a243eb5bd
-  position: {x: -292.5, y: 656.50006}
+  position: {x: -295.125, y: 656.25006}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -220,7 +220,7 @@ MonoBehaviour:
   gameobjNpcName: 
   POSPatrolRoute:
   - {fileID: 1157354183395995956, guid: f55002d0bdbef7f45bf592c3b419ea61, type: 3}
-  - {fileID: 1157354183395995956, guid: f55002d0bdbef7f45bf592c3b419ea61, type: 3}
+  - {fileID: 9131394250539630818, guid: 19aaa2f584ed023489e524f609cb12e0, type: 3}
   - {fileID: 1157354183395995956, guid: f55002d0bdbef7f45bf592c3b419ea61, type: 3}
   PatrolAnimString: Run
   moveSpeed: 100
@@ -265,14 +265,14 @@ MonoBehaviour:
     m_Bits: 128
   gameobjNpcName: 
   runAnimString: Run
-  followDistanceX: 0.2
+  followDistanceX: 0.5
   followDistanceY: 0.2
   maxDistance: 10
-  followSpeedX: 100
+  followSpeedX: 80
   followSpeedY: 100
   followOnY: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
-  distanceOffset: 1
-  stoppingDistance: 0.1
+  distanceOffset: 0.8
+  stoppingDistance: 0.5

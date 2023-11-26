@@ -15,14 +15,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: dd50da2f1e63360498e6c6917834faff
-  position: {x: 305.00006, y: 676.00006}
+  position: {x: 305.00003, y: 676.00006}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Goblin
-  attackCooldown: 2
-  attackDistance: 8
+  attackCooldown: 1.5
+  attackDistance: 3
   attackAnimString: Combo1
   comboSoundIdx: 0
 --- !u!114 &-7819835407118219623
@@ -40,7 +40,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: e20ff99690b28c04cbb254f4f9821e02
-  position: {x: -366.00012, y: 676.00006}
+  position: {x: -366, y: 676.00006}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -51,8 +51,8 @@ MonoBehaviour:
   - {fileID: 5883379018016440759, guid: 3ca00384449fe16449ae2f9055efc85e, type: 3}
   - {fileID: 6428893711209667640, guid: 67b9c57a3fb6bc34fabade74facbec70, type: 3}
   PatrolAnimString: Run
-  moveSpeed: 100
-  sphereCastRadius: 3
+  moveSpeed: 200
+  sphereCastRadius: 2
 --- !u!114 &-3821781152797416976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,13 +106,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6d5cdd8b41fb2d04497bb96acd420514
-  position: {x: 151.50003, y: 676.00006}
+  position: {x: 150.74997, y: 676.0001}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Goblin
-  attackDistance: 7
+  attackDistance: 5
 --- !u!114 &-2475738774914419675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,24 +193,24 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 947c35a899ee1814d96844ba4e39afdc
-  position: {x: -211.99994, y: 675.99994}
+  position: {x: -169.5, y: 676.00006}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
   runAnimString: Run
-  followDistanceX: 0.2
+  followDistanceX: 0.5
   followDistanceY: 0.2
-  maxDistance: 10
-  followSpeedX: 60
+  maxDistance: 5
+  followSpeedX: 180
   followSpeedY: 60
   followOnY: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
-  distanceOffset: 1
-  stoppingDistance: 0.1
+  distanceOffset: 0.8
+  stoppingDistance: 0.5
 --- !u!114 &3374381720642658304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Goblin
-  attackCooldown: 2
-  attackDistance: 8
+  attackCooldown: 1.5
+  attackDistance: 3
   attackAnimString: Combo2
   comboSoundIdx: 0

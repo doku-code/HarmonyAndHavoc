@@ -708,7 +708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: 0141efcae08282647aec0a5abf459dca, type: 2}
+  tree: {fileID: 11400000, guid: 201bce417fabea846a1b1a26e5f0992f, type: 2}
 --- !u!61 &63284512
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -902,7 +902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 6
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -918,8 +918,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 60
+  attackDamage: 5
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &63284519
@@ -1099,6 +1099,63 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1001 &100861693
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1219532753481392680, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 302.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
 --- !u!1001 &102828622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1766,7 +1823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: 9d9cb017cccf89947adda71828bf1bf5, type: 2}
+  tree: {fileID: 11400000, guid: 10b8d8f4ee1927c49a97561a0ea68d43, type: 2}
 --- !u!61 &188854466
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1960,7 +2017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 3
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -1976,8 +2033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 40
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &188854473
@@ -3027,7 +3084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: 0b6a4c1c7f9621542b9ea1623c02ef3d, type: 2}
+  tree: {fileID: 11400000, guid: 288b2986fd35eac4aa0fe4a136320434, type: 2}
 --- !u!61 &292607786
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3221,7 +3278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 6
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -3237,8 +3294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 60
+  attackDamage: 5
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &292607793
@@ -9390,7 +9447,7 @@ PrefabInstance:
     - target: {fileID: 580033360862106619, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1297663109}
     - target: {fileID: 580033360862106619, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_LookAt
       value: 
@@ -9401,11 +9458,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5249900324331317818, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.5
+      value: 302.09
       objectReference: {fileID: 0}
     - target: {fileID: 5249900324331317818, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.1
+      value: -1.1000001
       objectReference: {fileID: 0}
     - target: {fileID: 5249900324331317818, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10303,6 +10360,63 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1001 &517354255
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2449430017141810295, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 298.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449430017141810295, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449430017141810295, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -46.282898
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449430017141810295, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449430017141810295, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449430017141810295, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449430017141810295, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449430017141810295, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449430017141810295, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449430017141810295, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8981031655952692514, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
+      propertyPath: m_Name
+      value: GameObject
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
 --- !u!1 &533438544
 GameObject:
   m_ObjectHideFlags: 0
@@ -11579,7 +11693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: b69bdaafe00fdc1498abcd2cc9e3a71c, type: 2}
+  tree: {fileID: 11400000, guid: fd0662f111725a841913a62bffcfc785, type: 2}
 --- !u!61 &656493463
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11773,7 +11887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 6
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -11789,8 +11903,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 60
+  attackDamage: 5
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &656493470
@@ -11806,6 +11920,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 1102703776}
+--- !u!1001 &662261171
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2657968460763939276, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
+      propertyPath: m_Name
+      value: GameObject (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935400739949240683, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 321.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935400739949240683, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935400739949240683, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -46.282898
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935400739949240683, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935400739949240683, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935400739949240683, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935400739949240683, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935400739949240683, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935400739949240683, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935400739949240683, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
 --- !u!1001 &668517265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12184,7 +12355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: 2e39d6a29340ea64d97e497091eb1e1d, type: 2}
+  tree: {fileID: 11400000, guid: 2a8eeb9ec81132c448b2a411a02830cf, type: 2}
 --- !u!61 &732978193
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12378,7 +12549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 3
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -12394,8 +12565,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 40
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &732978200
@@ -13571,7 +13742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: be1474f879dc05644925b4700f8af45d, type: 2}
+  tree: {fileID: 11400000, guid: 290086b71dc64344185ce73267406a49, type: 2}
 --- !u!61 &868142656
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13765,7 +13936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 3
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -13781,8 +13952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 40
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &868142663
@@ -16396,7 +16567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: d164c04d4a82a1d4aa3430a38ed38a06, type: 2}
+  tree: {fileID: 11400000, guid: 1b7793007a3cd5341a8e7be8aa1b8f40, type: 2}
 --- !u!61 &1032169568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16590,7 +16761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 6
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -16606,8 +16777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 60
+  attackDamage: 5
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1032169575
@@ -17567,7 +17738,7 @@ Transform:
   m_GameObject: {fileID: 1206130272}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 65.14, y: -24.66, z: -8.275355}
+  m_LocalPosition: {x: 65.14, y: -24.48, z: -8.275355}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17587,7 +17758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: 62d75d40f570fff4c8297c8158818178, type: 2}
+  tree: {fileID: 11400000, guid: 39dc6200189681949b4fd250ffab56ea, type: 2}
 --- !u!61 &1206130275
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17781,7 +17952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 6
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -17797,8 +17968,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 60
+  attackDamage: 5
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1206130282
@@ -18144,7 +18315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 3
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -18160,8 +18331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 40
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1232793250
@@ -41558,7 +41729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObjects: []
   objectToPool: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  amountToPool: 100
+  amountToPool: 200
 --- !u!4 &1293816139
 Transform:
   m_ObjectHideFlags: 0
@@ -41574,6 +41745,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1297663109 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+  m_PrefabInstance: {fileID: 100861693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1305423746
 GameObject:
   m_ObjectHideFlags: 0
@@ -41710,7 +41886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: 7c8f9ba9cd5d2de46aa6de3a326d476a, type: 2}
+  tree: {fileID: 11400000, guid: eccc56ed340bcb147b591088a637c297, type: 2}
 --- !u!61 &1307303179
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -41904,7 +42080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 6
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -41920,8 +42096,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 60
+  attackDamage: 5
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1307303186
@@ -42267,7 +42443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 3
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -42285,7 +42461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 40
   attackDamage: 2
-  knockBackImpulse: 2
+  knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1329097546
 MonoBehaviour:
@@ -406795,7 +406971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: 28887ee89b57c4345add0200bfe0c41d, type: 2}
+  tree: {fileID: 11400000, guid: 01a13a2bc7b4c314e936e8b3c119d343, type: 2}
 --- !u!61 &1521873536
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -406989,7 +407165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 6
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -407005,8 +407181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 60
+  attackDamage: 5
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1521873543
@@ -407404,7 +407580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: 89152e1c60577a84bb032806c607d339, type: 2}
+  tree: {fileID: 11400000, guid: 92e25a4ac7b4d0344807f3093348d046, type: 2}
 --- !u!61 &1570236418
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -407598,7 +407774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 3
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -407614,8 +407790,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 40
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1570236425
@@ -408013,7 +408189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: 5750fef2a92995040845db0b60eaa56f, type: 2}
+  tree: {fileID: 11400000, guid: 47dab816a4888e245a84bd2b2f922810, type: 2}
 --- !u!61 &1600207937
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -408207,7 +408383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 6
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -408223,8 +408399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 60
+  attackDamage: 5
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1600207944
@@ -408410,7 +408586,7 @@ Transform:
   m_GameObject: {fileID: 1625123830}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.5, y: 11.1, z: -10}
+  m_LocalPosition: {x: 302.09, y: -1.1000001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -409079,7 +409255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: 6ebda27fa5d035c429a0dd5252f34c5b, type: 2}
+  tree: {fileID: 11400000, guid: 9252acacb2097694f9f7eac75e6f89ad, type: 2}
 --- !u!61 &1723928784
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -409273,7 +409449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 6
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -409289,8 +409465,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 60
+  attackDamage: 5
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1723928791
@@ -410421,7 +410597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: 3d18a4f13867a094ebb2edc343f0dd01, type: 2}
+  tree: {fileID: 11400000, guid: bbf87bd6cc69ac14592037916bab20f6, type: 2}
 --- !u!61 &1849342165
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -410615,7 +410791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 3
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -410631,8 +410807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 40
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1849342172
@@ -411233,7 +411409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: acc99cf26488ce143b70f5ad6aeda600, type: 2}
+  tree: {fileID: 11400000, guid: 67d77091a4f5ee74eacebed2046d6b88, type: 2}
 --- !u!61 &1898092421
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -411427,7 +411603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 3
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -411443,8 +411619,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 40
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1898092428
@@ -413806,7 +413982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickInterval: 0
-  tree: {fileID: 11400000, guid: c9ee822f91ef4a64998255019446052c, type: 2}
+  tree: {fileID: 11400000, guid: 31cc1a6b8fc9ef742b05f91f1a463d7a, type: 2}
 --- !u!61 &1989576965
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -414000,7 +414176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 6
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -414016,8 +414192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 60
+  attackDamage: 5
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1989576972
@@ -417131,7 +417307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 150
   attackDamage: 54
   knockBackImpulse: 0
   knockBackInterval: 0.001
@@ -417557,8 +417733,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.034742355, y: -0.22334218}
-  m_Size: {x: 1.356327, y: 1.6541162}
+  m_Offset: {x: 0.086387634, y: -0.113049984}
+  m_Size: {x: 0.91737366, y: 1.4335318}
   m_Direction: 0
 --- !u!95 &2305495656788272560
 Animator:
@@ -417902,7 +418078,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -418142,8 +418318,8 @@ Transform:
   m_GameObject: {fileID: 1373996881212869375}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 303.3, y: -15.34, z: -8.275355}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 303.3, y: -16.67, z: -8.275355}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5674772736841609566}
@@ -419395,7 +419571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 6
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -419411,8 +419587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 60
+  attackDamage: 5
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &8828252214850132338
@@ -419462,3 +419638,6 @@ SceneRoots:
   - {fileID: 1545401400058854368}
   - {fileID: 2041733707}
   - {fileID: 1293816139}
+  - {fileID: 100861693}
+  - {fileID: 662261171}
+  - {fileID: 517354255}

@@ -21,8 +21,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Goblin
-  attackCooldown: 2
-  attackDistance: 7
+  attackCooldown: 1.5
+  attackDistance: 3
   attackAnimString: Combo1
   comboSoundIdx: 0
 --- !u!114 &-7819835407118219623
@@ -40,7 +40,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: e20ff99690b28c04cbb254f4f9821e02
-  position: {x: -366.00003, y: 676.00006}
+  position: {x: -365.75, y: 677.25006}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -51,8 +51,8 @@ MonoBehaviour:
   - {fileID: 4099377676801820007, guid: 9ddf7e0c0490f6f488c6c5ac51b3cec6, type: 3}
   - {fileID: 2008969997219987048, guid: 8cc2eec0c11a24b4b8177313de9de85b, type: 3}
   PatrolAnimString: Run
-  moveSpeed: 100
-  sphereCastRadius: 3
+  moveSpeed: 200
+  sphereCastRadius: 2
 --- !u!114 &-3821781152797416976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Goblin
-  attackDistance: 7
+  attackDistance: 5
 --- !u!114 &-2475738774914419675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,24 +193,24 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 947c35a899ee1814d96844ba4e39afdc
-  position: {x: -211.99994, y: 675.99994}
+  position: {x: -213.50006, y: 676.37506}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
   runAnimString: Run
-  followDistanceX: 0.2
+  followDistanceX: 0.5
   followDistanceY: 0.2
-  maxDistance: 10
-  followSpeedX: 60
+  maxDistance: 5
+  followSpeedX: 180
   followSpeedY: 60
   followOnY: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
-  distanceOffset: 1
-  stoppingDistance: 0.1
+  distanceOffset: 0.8
+  stoppingDistance: 0.5
 --- !u!114 &3374381720642658304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Goblin
-  attackCooldown: 2
-  attackDistance: 7
+  attackCooldown: 1.5
+  attackDistance: 3
   attackAnimString: Combo2
   comboSoundIdx: 0

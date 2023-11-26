@@ -15,14 +15,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 0fa36f36392255946ae5ec0a02f796b4
-  position: {x: 406.00003, y: 656.50006}
+  position: {x: 408.00003, y: 656.50006}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
   attackCooldown: 2
-  attackDistance: 8
+  attackDistance: 3
   attackAnimString: Combo2
   comboSoundIdx: 0
 --- !u!114 &-7258625121589260600
@@ -59,14 +59,14 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 57840fb83457dcc4f899f8405c8c338a
-  position: {x: 256.00003, y: 656.50006}
+  position: {x: 258.0001, y: 656.50006}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackCooldown: 2
-  attackDistance: 8
+  attackCooldown: 3
+  attackDistance: 3
   attackAnimString: Combo1
   comboSoundIdx: 0
 --- !u!114 &-5961631296424399733
@@ -150,13 +150,13 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f82b6c9b74c683a4b914d8a92a0ef00b
-  position: {x: 104.50006, y: 656.50006}
+  position: {x: 104.25003, y: 656.50006}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackDistance: 8
+  attackDistance: 5
 --- !u!114 &4689465991318579201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +191,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 4a52583026acd894587dfe427f4074c4
-  position: {x: 230.00003, y: 474.50006}
+  position: {x: 183.00003, y: 463.50006}
   Description: 
   children:
   - {fileID: 3860617489491873450}
@@ -212,7 +212,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 707b5c568a340ec49bc6812a243eb5bd
-  position: {x: -291.5, y: 656.50006}
+  position: {x: -295.125, y: 656.25006}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -265,14 +265,14 @@ MonoBehaviour:
     m_Bits: 128
   gameobjNpcName: 
   runAnimString: Run
-  followDistanceX: 0.2
+  followDistanceX: 0.5
   followDistanceY: 0.2
   maxDistance: 10
-  followSpeedX: 100
+  followSpeedX: 80
   followSpeedY: 100
   followOnY: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
-  distanceOffset: 1
-  stoppingDistance: 0.1
+  distanceOffset: 0.8
+  stoppingDistance: 0.5

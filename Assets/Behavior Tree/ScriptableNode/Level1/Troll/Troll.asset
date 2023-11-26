@@ -19,10 +19,10 @@ MonoBehaviour:
   Description: 
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   gameobjNpcName: 
-  attackCooldown: 3
-  attackDistance: 6
+  attackCooldown: 2
+  attackDistance: 3
   attackAnimString: Combo2
   comboSoundIdx: 0
 --- !u!114 &-6614378293689732671
@@ -82,10 +82,10 @@ MonoBehaviour:
   Description: 
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   gameobjNpcName: 
-  attackCooldown: 3
-  attackDistance: 6
+  attackCooldown: 2
+  attackDistance: 3
   attackAnimString: Combo3
   comboSoundIdx: 0
 --- !u!114 &-3544352756054679891
@@ -148,8 +148,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackCooldown: 3
-  attackDistance: 6
+  attackCooldown: 2
+  attackDistance: 3
   attackAnimString: Combo1
   comboSoundIdx: 0
 --- !u!114 &11400000
@@ -194,24 +194,24 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 136d1aa5cd98ec743a72f5b7fc970d84
-  position: {x: -127, y: 751.50006}
+  position: {x: -126.4375, y: 751.62506}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
   runAnimString: Run
-  followDistanceX: 0.2
+  followDistanceX: 0
   followDistanceY: 0.2
-  maxDistance: 10
-  followSpeedX: 1000
+  maxDistance: 14
+  followSpeedX: 200
   followSpeedY: 250
   followOnY: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
   distanceOffset: 1
-  stoppingDistance: 0.1
+  stoppingDistance: 1
 --- !u!114 &4751016770263260837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,8 +257,9 @@ MonoBehaviour:
   - {fileID: 2657968460763939276, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
   - {fileID: 8981031655952692514, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
   PatrolAnimString: Run
-  moveSpeed: 1000
+  moveSpeed: 250
   sphereCastRadius: 2
+  distBeforeChanging: 1
 --- !u!114 &8136881546061674528
 MonoBehaviour:
   m_ObjectHideFlags: 0

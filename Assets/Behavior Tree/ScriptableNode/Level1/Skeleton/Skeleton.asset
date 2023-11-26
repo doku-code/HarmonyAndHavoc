@@ -21,8 +21,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackCooldown: 2.5
-  attackDistance: 8
+  attackCooldown: 2
+  attackDistance: 3
   attackAnimString: Combo2
   comboSoundIdx: 0
 --- !u!114 &-7258625121589260600
@@ -65,8 +65,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackCooldown: 2.5
-  attackDistance: 8
+  attackCooldown: 2
+  attackDistance: 3
   attackAnimString: Combo1
   comboSoundIdx: 0
 --- !u!114 &-5961631296424399733
@@ -156,7 +156,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackDistance: 8
+  attackDistance: 5
 --- !u!114 &4689465991318579201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,16 +212,16 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 707b5c568a340ec49bc6812a243eb5bd
-  position: {x: -305.82, y: 672.50006}
+  position: {x: -300.375, y: 633.00006}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
   POSPatrolRoute:
-  - {fileID: 1935423857724535878, guid: b2e8b732bec62004d86ae690dcc49878, type: 3}
-  - {fileID: 5638340887957387906, guid: eeaf80229659b4a47b95a6979e42186e, type: 3}
-  - {fileID: 1935423857724535878, guid: b2e8b732bec62004d86ae690dcc49878, type: 3}
+  - {fileID: 2022405094061098983, guid: 2d1ff8195c9b41344a2c1f7aade496c0, type: 3}
+  - {fileID: 1967153528361073811, guid: ef08de609f7b22b429075dd542b4f057, type: 3}
+  - {fileID: 2022405094061098983, guid: 2d1ff8195c9b41344a2c1f7aade496c0, type: 3}
   PatrolAnimString: Run
   moveSpeed: 100
   sphereCastRadius: 2
@@ -258,21 +258,21 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 829d12b78b581c349a81a9aba2743e97
-  position: {x: -114.99999, y: 656.43744}
+  position: {x: -147.875, y: 632.62506}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
   runAnimString: Run
-  followDistanceX: 0.2
+  followDistanceX: 0.1
   followDistanceY: 0.2
-  maxDistance: 10
-  followSpeedX: 100
+  maxDistance: 0.1
+  followSpeedX: 80
   followSpeedY: 100
   followOnY: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
-  distanceOffset: 1
+  distanceOffset: 0.1
   stoppingDistance: 0.1
