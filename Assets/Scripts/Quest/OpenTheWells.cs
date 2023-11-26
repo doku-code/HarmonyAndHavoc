@@ -1,23 +1,40 @@
 using AF;
 using UnityEngine;
-namespace charles
+
+public class OpenTheWells : MonoBehaviour
 {
-    public class OpenTheWells : MonoBehaviour
+    private static OpenTheWells instance;
+
+    private bool wellsIsOpen = false;
+    private GameObject wellsCollider;
+    public static OpenTheWells Instance { get; private set; }
+    void Awake()
     {
-        [SerializeField] private GameObject wellsCollider;
-        private bool wellsIsOpen = false;
-        public void onAcceptQuest()
+        if (Instance != null)
         {
-            if (!wellsIsOpen)
-            {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+    private void Start()
+    {
+        wellsCollider = GameObject.Find("QuestOpenWells");
+    }
+    public void OnAcceptQuest()
+    {
+        if (!wellsIsOpen)
+        {
             SoundManager.Instance.PlayAClip(4);
             wellsCollider.SetActive(false);
-                wellsIsOpen = true;
-            }
-            else
-            {
-                wellsCollider.SetActive(false);
-            }
+            wellsIsOpen = true;
+        }
+        else
+        {
+            return;
         }
     }
 }
