@@ -29,8 +29,10 @@ namespace charles
         public static DebugCommand<int> WEAPONUPGRADE;
         public static DebugCommand<int> ARMORUPGRADE;
         public static DebugCommand<int> HITPLAYER;
-        public static DebugCommand<int> CHANGECHAOSAMOUNT;
+        public static DebugCommand<int> CHANGECHAOSAMOUNT;        
         public static DebugCommand<string> SCENE;
+        public static DebugCommand<int> SETKNOWLEDGE;
+        public static DebugCommand<int> UNSETKNOWLEDGE;
 
         [Header("Script Reference")]
         public DebugFunction debugFunc;
@@ -104,6 +106,14 @@ namespace charles
             {
                 debugFunc.ChangeChaos(x);
             });
+            SETKNOWLEDGE = new DebugCommand<int>("setknowledge", "Learn a knowledge", "setknowledge", (x) =>
+            {
+                debugFunc.SetKnowldege((KnowledgeID)x);
+            });
+            UNSETKNOWLEDGE = new DebugCommand<int>("unsetknowledge", "Unlearn a knowledge", "unsetknowledge", (x) =>
+            {
+                debugFunc.UnsetKnowldege((KnowledgeID)x);
+            });
 
             commandList = new List<object>
             {
@@ -120,7 +130,9 @@ namespace charles
                 ARMORUPGRADE,
                 SCENE,
                 HITPLAYER,
-                CHANGECHAOSAMOUNT
+                CHANGECHAOSAMOUNT,
+                SETKNOWLEDGE,
+                UNSETKNOWLEDGE
             };
 
             commandHistory = new List<string>();

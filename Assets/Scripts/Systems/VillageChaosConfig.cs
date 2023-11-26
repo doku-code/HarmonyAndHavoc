@@ -9,7 +9,7 @@ namespace JFM
     {
 
         //Faire une autre liste de gameobject a desactiver dependant du niveau de chaos
-        public List<GameObject> activatingObjects = new List<GameObject>();
+        //public List<GameObject> activatingObjects = new List<GameObject>();
         public ObjectList[] activationObjectStates = new ObjectList[ChaosOrderSystem.maxChaosAmount];
 
         //Faire une liste de gameobject pour les gameobject dans le village qui pourrais dependant du niveau du chaos changer de couleur

@@ -28,4 +28,21 @@ public class DebugFunction : MonoBehaviour
     {
         ChaosOrderSystem.Instance.ChaosAmount = chaosNumber;
     }
+
+    public void SetKnowldege(KnowledgeID knowldegeID)
+    {
+        Debug.Log("Test SetKnowldege");
+
+        PlayerController pc = FindAnyObjectByType<PlayerController>();
+
+        pc.Data.KnownKnowledgeDictionary[knowldegeID] = true;
+        pc.Data.AvailableKnowledgeDictionary[knowldegeID] = AvailableKnowledgePosition.NOT_AVAILABLE;
+    }
+
+    public void UnsetKnowldege(KnowledgeID knowldegeID)
+    {
+        PlayerController pc = FindAnyObjectByType<PlayerController>();
+
+        pc.Data.KnownKnowledgeDictionary[knowldegeID] = false;
+    }
 }

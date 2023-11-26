@@ -359,7 +359,10 @@ namespace JFM
                 ResetJump();
                 //hasDashed = false;
                 //Debug.Log("Jump reset");
-                GroundedEvent();
+                if (GroundedEvent is not null)
+                {
+                    GroundedEvent();
+                }
             }
         }
 
@@ -828,7 +831,7 @@ namespace JFM
 
             currentState = currentState.Process();
         }
-
+      
         private void InitializeKnowledges()
         {
             foreach (var knowledge in playerData.EveryKnowledgeDictionary)
@@ -836,7 +839,7 @@ namespace JFM
                 knowledge.Value.Initialize(this);
             }
 
-            playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
+           /* playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = true;
             playerData.AvailableKnowledgeDictionary[KnowledgeID.DASH] = AvailableKnowledgePosition.POSITION1;
@@ -844,7 +847,7 @@ namespace JFM
             playerData.AvailableKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = AvailableKnowledgePosition.POSITION4;
             playerData.GetKnowledgeByID(KnowledgeID.DASH).Activate();
             playerData.GetKnowledgeByID(KnowledgeID.WALL_SLIDE).Activate();
-            playerData.GetKnowledgeByID(KnowledgeID.DOUBLE_JUMP).Activate();
+            playerData.GetKnowledgeByID(KnowledgeID.DOUBLE_JUMP).Activate();*/
         }
 
         private void InputSetup()

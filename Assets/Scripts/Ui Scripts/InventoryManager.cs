@@ -109,7 +109,8 @@ namespace AF
                     KnowledgeID knowledge = playerData.AvailableKnowledgeDictionary.FirstOrDefault(x => x.Value == position).Key;
 
                     playerData.AvailableKnowledgeDictionary[knowledge] = AvailableKnowledgePosition.NOT_AVAILABLE;
-                    
+                    playerData.EveryKnowledgeDictionary[knowledge].Deactivate();
+
                     knowledgesKnown[(int)knowledge].GetComponent<Button>().enabled = true;
                     
                     InitializeKnowledgeSprites();
@@ -130,6 +131,7 @@ namespace AF
                     {
                         KnowledgeID knowledge = (KnowledgeID)i;
                         playerData.AvailableKnowledgeDictionary[knowledge] = position;
+                        playerData.EveryKnowledgeDictionary[knowledge].Activate();
 
                         knowledgesKnown[i].GetComponent<Button>().enabled = false;
                         

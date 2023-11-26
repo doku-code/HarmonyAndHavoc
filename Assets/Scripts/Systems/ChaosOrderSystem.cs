@@ -45,7 +45,7 @@ namespace JFM
         private int previousChaosAmount;
 
         //Faire une autre liste de gameobject a desactiver dependant du niveau de chaos
-        private List<GameObject> activatingObjects = new List<GameObject>();
+        private List<GameObject> activatingObjects = null;
         private ObjectList[] activationObjectStates = new ObjectList[maxChaosAmount];
 
         //Faire une liste de gameobject pour les gameobject dans le village qui pourrais dependant du niveau du chaos changer de couleur
@@ -126,8 +126,26 @@ namespace JFM
             }
             else if(activatingObjects is null)
             {
-                activatingObjects = villageConfig.activatingObjects;
+                //activatingObjects = villageConfig.activatingObjects;
                 activationObjectStates = villageConfig.activationObjectStates;
+
+                activatingObjects = new List<GameObject>();
+                foreach(ObjectList list in activationObjectStates)
+                {
+                    foreach(GameObject obj in list.objects) 
+                    {
+                        if (activatingObjects.Find(
+                        (x) => { return x == obj; }
+
+                        ) is null)
+                        {
+                            activatingObjects.Add(obj);
+                            Debug.Log("test...");
+                        }
+                    }
+                    
+                }
+                 
                 colorChangingObjects = villageConfig.colorChangingObjects;
                 colors = villageConfig.colors;
             }
@@ -168,12 +186,17 @@ namespace JFM
 
             Debug.Log($"chaosAmount={chaosAmount}");
 
-
-            if (previousChaosAmount >= 0)
+            for (int i = 0; i < chaosAmount; i++)
             {
-                sortedGrids[previousChaosAmount].grid.enabled = false;
+                sortedGrids[i].grid.enabled = false;
             }
+
             sortedGrids[chaosAmount].grid.enabled = true;
+
+            for (int i = chaosAmount + 1; i < maxChaosAmount; i++)
+            {
+                sortedGrids[i].grid.enabled = false;
+            }
         }
 
         private void ActivateObjects()

@@ -16,7 +16,7 @@ namespace JFM
     public class PausedState : PlayerState
     {
         [NonSerialized] public int waitNFrames;
-        //private bool startingOnLadder;       
+        //private bool startingOnLadder;               
 
         public override void Enter()
         {           
