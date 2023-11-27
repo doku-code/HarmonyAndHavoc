@@ -101,7 +101,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: fa73ec64b2d6e0142b27f7304e5425bb
-  position: {x: -104.24994, y: 674.5001}
+  position: {x: -106.125, y: 674.62506}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -308,6 +308,7 @@ MonoBehaviour:
   PatrolAnimString: Run
   moveSpeed: 250
   sphereCastRadius: 2
+  distBeforeChanging: 2
 --- !u!114 &2695247785635160617
 MonoBehaviour:
   m_ObjectHideFlags: 0

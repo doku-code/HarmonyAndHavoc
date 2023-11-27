@@ -1,0 +1,327 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9075726142348930968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcddb15bcd2925f4887c696f4baa3c36, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 59ba2f2603e7b7143a0ae59762b69e81
+  position: {x: -39.500023, y: 372.05008}
+  Description: 
+  children:
+  - {fileID: -8474071016947369759}
+  - {fileID: 2551691312391995533}
+--- !u!114 &-8474071016947369759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8b7c5f167cd2f4094eba272b83a09a, type: 3}
+  m_Name: NPCPathFinding
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 896ac9bd2cd35334b8c1df4acf6f27d0
+  position: {x: -215.25, y: 623.87506}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Heavy_Armor
+  POSPatrolRoute:
+  - {fileID: 4652269464013877742, guid: 2ae67e4c0549bdc408ddfe7b6c7bf3c5, type: 3}
+  - {fileID: 6148884900167577130, guid: 27a6a9c615b5fff43949b280baa4b276, type: 3}
+  - {fileID: 4652269464013877742, guid: 2ae67e4c0549bdc408ddfe7b6c7bf3c5, type: 3}
+  PatrolAnimString: Run
+  moveSpeed: 250
+  sphereCastRadius: 2
+  distBeforeChanging: 2
+--- !u!114 &-8131785073684598081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47689c60fb5ba8e44922f0c535e55d02, type: 3}
+  m_Name: Attack
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: c36d5546ed392904bb2d4710cd29d0e1
+  position: {x: 528.9001, y: 620.5501}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Heavy_Armor
+  attackCooldown: 5
+  attackDistance: 5
+  attackAnimString: Combo1
+  comboSoundIdx: 0
+--- !u!114 &-7908638253277502157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640ac424bf086f846bc71dfb4524525e, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: f23e3df69822c914f9bcd02df8b1b30a
+  position: {x: 678.9001, y: 620.5501}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  gameobjNpcName: 
+  duration: 3
+--- !u!114 &-7141807025453075890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcddb15bcd2925f4887c696f4baa3c36, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 77ea8e3b0e7f23644bba0198703fc3da
+  position: {x: 333.52087, y: 383.12088}
+  Description: 
+  children:
+  - {fileID: -5352508940015951760}
+  - {fileID: 4602896285783009515}
+  - {fileID: -8131785073684598081}
+  - {fileID: -7908638253277502157}
+  - {fileID: 1726868002727036595}
+--- !u!114 &-5352508940015951760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8da4b99ece21cc4cb11bae562ac00dd, type: 3}
+  m_Name: CheckForTarget
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 168a8ad01b24c7b4db603c8431bf1e88
+  position: {x: 222.645, y: 624.5801}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Heavy_Armor
+  attackDistance: 5
+--- !u!114 &-3433201973347223546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22ff3ddcaa57f64193ad61c8d52fd69, type: 3}
+  m_Name: Parallel
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 1bd64595967f3ad43a7b40b4eb012d1f
+  position: {x: 144.50006, y: 150.00003}
+  Description: 
+  children:
+  - {fileID: 2938262784184732301}
+  - {fileID: -2890361811100226328}
+--- !u!114 &-2890361811100226328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e22483f73a7cb48a1a8f0d2f066df6, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: b43c2d23ca3afd44bb5f554249b83ac9
+  position: {x: 333.00006, y: 245.00003}
+  Description: 
+  children:
+  - {fileID: -7141807025453075890}
+--- !u!114 &-2205317528671191681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc873a854b000144b392c20ae33d57b, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: c41eaf167e9577e43a398fa7c16ba196
+  position: {x: 144.50006, y: -12.760025}
+  Description: 
+  child: {fileID: -3433201973347223546}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d52bd284d66f45409895549ec0dc050, type: 3}
+  m_Name: Rock_Creature1
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: -2205317528671191681}
+  treeState: 0
+  nodes:
+  - {fileID: -2205317528671191681}
+  - {fileID: -9075726142348930968}
+  - {fileID: -8474071016947369759}
+  - {fileID: 2551691312391995533}
+  - {fileID: -7141807025453075890}
+  - {fileID: -8131785073684598081}
+  - {fileID: -7908638253277502157}
+  - {fileID: 1726868002727036595}
+  - {fileID: -3433201973347223546}
+  - {fileID: 2938262784184732301}
+  - {fileID: -2890361811100226328}
+  - {fileID: -5352508940015951760}
+  - {fileID: 4602896285783009515}
+--- !u!114 &1726868002727036595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47689c60fb5ba8e44922f0c535e55d02, type: 3}
+  m_Name: Attack
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 5863b2a2c288be34792b7943246fd25a
+  position: {x: 828.9, y: 620.5501}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Heavy_Armor
+  attackCooldown: 5
+  attackDistance: 5
+  attackAnimString: Combo2
+  comboSoundIdx: 0
+--- !u!114 &2551691312391995533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59494be34770fd4b8486babe3b65c8d, type: 3}
+  m_Name: FollowPlayer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: f28ac2983ef447b4a8f806ff97500a35
+  position: {x: -63, y: 623.87506}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  gameobjNpcName: Heavy_Armor
+  runAnimString: Run
+  followDistanceX: 0.2
+  followDistanceY: 0.2
+  maxDistance: 10
+  followSpeedX: 150
+  followSpeedY: 250
+  followOnY: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  distanceOffset: 1
+  stoppingDistance: 0.1
+--- !u!114 &2938262784184732301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e22483f73a7cb48a1a8f0d2f066df6, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: e40307ac895c50841b6f5cec4dee46b2
+  position: {x: -39.500023, y: 255.10008}
+  Description: 
+  children:
+  - {fileID: -9075726142348930968}
+--- !u!114 &4602896285783009515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640ac424bf086f846bc71dfb4524525e, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 838e5eb590fe00341b4aab5673f30480
+  position: {x: 375.40332, y: 626.855}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  gameobjNpcName: 
+  duration: 1
