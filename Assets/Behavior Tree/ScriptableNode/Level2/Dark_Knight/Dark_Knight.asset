@@ -24,7 +24,7 @@ MonoBehaviour:
   attackCooldown: 2
   attackDistance: 4
   attackAnimString: Combo3
-  comboSoundIdx: 0
+  comboSoundIdx: 3
 --- !u!114 &-8278304243439181460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   PatrolAnimString: Run
   moveSpeed: 300
   sphereCastRadius: 2
-  distBeforeChanging: 1
+  distBeforeChanging: 2
 --- !u!114 &-7954742234325381289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: a093de4a7710094499fd35bc90fa6c37
-  position: {x: 34.25006, y: 602.00006}
+  position: {x: 34.125, y: 601.12506}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -140,7 +140,7 @@ MonoBehaviour:
   attackCooldown: 2
   attackDistance: 4
   attackAnimString: Combo2
-  comboSoundIdx: 0
+  comboSoundIdx: 3
 --- !u!114 &-3626967703852835284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   attackCooldown: 2
   attackDistance: 4
   attackAnimString: Combo1
-  comboSoundIdx: 0
+  comboSoundIdx: 3
 --- !u!114 &-2875313798119270079
 MonoBehaviour:
   m_ObjectHideFlags: 0

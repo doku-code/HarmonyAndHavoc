@@ -43,7 +43,7 @@ MonoBehaviour:
   attackCooldown: 3
   attackDistance: 3
   attackAnimString: Combo2
-  comboSoundIdx: 0
+  comboSoundIdx: 3
 --- !u!114 &-6789370035471638845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   attackCooldown: 3
   attackDistance: 3
   attackAnimString: Combo1
-  comboSoundIdx: 0
+  comboSoundIdx: 3
 --- !u!114 &-554248014283468030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,6 +288,7 @@ MonoBehaviour:
   PatrolAnimString: Run
   moveSpeed: 140
   sphereCastRadius: 2
+  distBeforeChanging: 1
 --- !u!114 &3575711347820622385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,7 +335,7 @@ MonoBehaviour:
   attackCooldown: 3
   attackDistance: 3
   attackAnimString: Combo3
-  comboSoundIdx: 0
+  comboSoundIdx: 3
 --- !u!114 &8390105399605595731
 MonoBehaviour:
   m_ObjectHideFlags: 0
