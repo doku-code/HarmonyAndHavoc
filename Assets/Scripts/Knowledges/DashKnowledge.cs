@@ -16,9 +16,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DashKnowledge", menuName = "Knowledges/Dash")]
 public class DashKnowledge : Knowledge
 {
-    private float startTime;
     private float animationClipLength;
-    private int animatorLayer = 0;
+    [SerializeField] private int animatorLayer = 0;
     private int nFrames;
 
     private bool hasDashed;
@@ -44,8 +43,7 @@ public class DashKnowledge : Knowledge
         Dash();
         AvailableKnowledgePosition knowledgePosition = player.Data.AvailableKnowledgeDictionary[KnowledgeID.DASH];
         player.SetKnowledgeTrigger(knowledgePosition, false);
-        startTime = Time.time;
-
+        
         nFrames = 0;
 
         //         lastKnowledge = player.Data.Knowledges.find_if()
@@ -61,7 +59,7 @@ public class DashKnowledge : Knowledge
         bool foundSlopeBeneath = player.FindSlopeBeneath(out float slope);
         bool grounded = player.IsGrounded(player.GroundLayer | player.LadderLayer, Vector2.zero, player.GroundDistance * 2.0f, false) || (foundSlopeBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope && Mathf.Abs(slope) < player.StairsUpMaxSlope);
 
-        float elapsedTime = Time.time - startTime;
+        float elapsedTime = Time.time - activationTime;
 
         if (player.Data.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUse())
         {

@@ -50,7 +50,6 @@ namespace JFM
 
         public override void Update()
         {
-
             player.SetHighestAirborneY();
 
             if (player.CanTurn())

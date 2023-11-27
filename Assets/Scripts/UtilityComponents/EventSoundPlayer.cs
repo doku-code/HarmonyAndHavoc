@@ -28,11 +28,21 @@ namespace JFM
 
         public void PlaySound(int soundID)
         {
+            if(SoundManager.Instance is null)
+            {
+                return;
+            }
+
             SoundManager.Instance.PlayAClip(soundID);
         }
 
         public void PlayRandomSound(SoundGroupID soundGroupID)
         {
+            if (SoundManager.Instance is null)
+            {
+                return;
+            }
+
             SoundGroup group = soundGroups.First(x => x.id == soundGroupID);
             int soundID = Random.Range(group.fromSoundID, group.toSoundID);
             SoundManager.Instance.PlayAClip(soundID);
