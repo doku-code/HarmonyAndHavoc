@@ -124,7 +124,7 @@ namespace JFM
             {
                 Debug.LogError("You forgot to attach a VillageChaosConfig component on a GameObject in your Village scene!");
             }
-            else if(activatingObjects is null)
+            else 
             {
                 //activatingObjects = villageConfig.activatingObjects;
                 activationObjectStates = villageConfig.activationObjectStates;
@@ -139,11 +139,9 @@ namespace JFM
 
                         ) is null)
                         {
-                            activatingObjects.Add(obj);
-                            Debug.Log("test...");
+                            activatingObjects.Add(obj);                            
                         }
-                    }
-                    
+                    }                    
                 }
                  
                 colorChangingObjects = villageConfig.colorChangingObjects;
@@ -227,12 +225,19 @@ namespace JFM
             {
                 if (go is not null)
                 {
-                    if (activationObjectStates[chaosAmount].objects.Find(
+                    //Debug.Log($"go={go.name}");
+
+                    GameObject foundGO = null;
+                    if ((foundGO = activationObjectStates[chaosAmount].objects.Find(
                         (x) => { return x == go; }
 
-                    ) is null)
+                    )) is null)
                     {
                         go.SetActive(false);
+                    }
+                    else
+                    {
+                        //Debug.Log($"foundGO={foundGO.name}");
                     }
                 }
             }

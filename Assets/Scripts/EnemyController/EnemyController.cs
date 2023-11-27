@@ -14,7 +14,7 @@ namespace charles
         private Animator npcAnimator;
         private int currentHealth;
 
-        [Range(0.0f, 50.0f)]
+        [Range(0.0f, 5000.0f)]
         [SerializeField] private float knockBackImpulse;
         [SerializeField] private float knockBackInterval = 0.001f;
         private bool isKnockedBack;
@@ -90,21 +90,8 @@ namespace charles
                 normal = new Vector2(MathF.Abs(normal.x), MathF.Abs(normal.y));
                 rb.velocity = new Vector2(rb.velocity.x * normal.x, rb.velocity.y * normal.y);
                 Debug.Log($"pushDirection={pushDirection}");
-                //rb.AddForce(pushDirection * knockBackImpulse, ForceMode2D.Impulse);
-                StartCoroutine(KnockBackOverTime(rb, pushDirection, knockBackImpulse, knockBackInterval));
+                rb.AddForce(pushDirection * knockBackImpulse, ForceMode2D.Impulse);                
             }
-        }
-
-        private IEnumerator KnockBackOverTime(Rigidbody2D rb, Vector2 pushDirection, float knockBackImpulse, float delayTime)
-        {            
-            rb.AddForce(pushDirection * knockBackImpulse, ForceMode2D.Impulse);
-            while(rb.velocity != Vector2.zero)
-            {
-                
-                //Debug.Log($"rb.velocity={rb.velocity}");
-                yield return new WaitForSeconds(delayTime);                
-            }
-            isKnockedBack = false;         
-        }
+        }        
     }
 }
