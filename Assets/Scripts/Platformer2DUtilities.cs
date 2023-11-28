@@ -57,7 +57,7 @@ namespace JFM
 
         public static Color HexStringToColor(string hexString)
         {
-            float r, g, b;
+            int r, g, b;
 
             try
             {
@@ -74,7 +74,7 @@ namespace JFM
                 return Color.white;
             }
             
-            return new Color(r, g, b);
+            return new Color(r / 255.0f, g / 255.0f, b / 255.0f);
         }
     }
 }

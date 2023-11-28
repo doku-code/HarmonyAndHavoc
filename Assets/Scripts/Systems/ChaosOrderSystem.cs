@@ -248,8 +248,13 @@ namespace JFM
             foreach(GameObject go in colorChangingObjects)
             {
                 Color color = Platformer2DUtilities.HexStringToColor(colors[chaosAmount]);
-                //Debug.Log($"hexString={colors[chaosAmount]} color={color}");
-                go.GetComponentInChildren<SpriteRenderer>().color = color;
+                SpriteRenderer[] sr = go.GetComponentsInChildren<SpriteRenderer>();
+                //Debug.Log($"hexString={colors[chaosAmount]} color={color} for go={go.name} sr.Length={sr.Length}");
+
+                foreach (SpriteRenderer spriteRenderer in sr)
+                { 
+                    spriteRenderer.color = color;
+                }
             }
         }
     }
