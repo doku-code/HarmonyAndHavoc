@@ -557,7 +557,7 @@ namespace JFM
         {
             RaycastHit2D hit;
             //bool h2 = Raycast(false, ladderLayer, Vector2.down * ladderGroundDistance, 0.01f, Vector2.down);//, false ,true);
-            bool h2 = (hit = Physics2D.CircleCast(rb.position, groundedRadius, Vector2.down, ladderGroundDistance, ladderLayer)).collider is not null;
+            bool h2 = (hit = Physics2D.CircleCast(rb.position + Vector2.down * ladderGroundDistance, groundedRadius, Vector2.down, 0.0f, ladderLayer)).collider is not null;
             //Debug.Log($"{moveInput.x == 0.0f} && {moveInput.y < 0.0f} && h2={h2} moveInput.y = {moveInput.y}");
 
             point = hit.point;
@@ -591,7 +591,7 @@ namespace JFM
             if (Raycast2DHelper.FindSlopeAtPoint(rb.position, out float slope, v * stairsUpDistanceHigh + Vector2.up * stairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, facing * 45.0f), stairsDownHeight, GroundLayer))//, true))
             {
                 bool grounded = IsGrounded();
-                //Debug.Log($"ClimbingUpStairs slope={slope} grounded={grounded}");
+                //Debug.Log($"ClimbingUpStairs slope={slope} grounded={grounded} facing={facing}");
                 return grounded && moveInput.x != 0.0f && facing * Mathf.Sign(slope) > 0 && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) <= stairsUpMaxSlope && slope != Mathf.Infinity;
             }
             else
@@ -844,7 +844,7 @@ namespace JFM
         private bool CheckForCollisionsAndReplace()
         {
             repositionning = false;
-            if (repositionning = CheckForCollisions())
+            /*if (repositionning = CheckForCollisions())
             {
                 Debug.Log($"Repositionning Player");
                 //Debug.Break();
@@ -853,7 +853,7 @@ namespace JFM
 
                 StartCoroutine(Reposition());
                 
-            }
+            }*/
          
             return repositionning;
         }
@@ -906,8 +906,8 @@ namespace JFM
             Vector2 colliderOffset = cc.offset;
             //Vector2 colliderSize = cc.size;
             
-            Vector2 position = rb.position + colliderOffset;
-            Debug.Log($"position={position} colliderOffset ={colliderOffset}");
+            Vector2 position = rb.position + Vector2.up * colliderOffset.y;
+            Debug.Log($"position={position} colliderOffset ={colliderOffset} colliderSize.y={colliderSize.y}");
 
             RaycastHit2D collisionHit = Physics2D.CircleCast(
                 position,
@@ -959,7 +959,7 @@ namespace JFM
                 knowledge.Value.Initialize(this);
             }
             
-            /*playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
+            playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.GROUND_SLIDE] = true;
@@ -970,7 +970,7 @@ namespace JFM
             playerData.GetKnowledgeByID(KnowledgeID.DASH).Activate();
             playerData.GetKnowledgeByID(KnowledgeID.WALL_SLIDE).Activate();
             playerData.GetKnowledgeByID(KnowledgeID.DOUBLE_JUMP).Activate();
-            playerData.GetKnowledgeByID(KnowledgeID.GROUND_SLIDE).Activate();*/
+            playerData.GetKnowledgeByID(KnowledgeID.GROUND_SLIDE).Activate();
         }
 
         private void InputSetup()

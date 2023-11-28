@@ -120,7 +120,8 @@ namespace JFM
                
                 bool playerIsAboveLadder = player.IsAboveLadder();
                 if ((player.WillClimbLadder() || playerIsAboveLadder) && 
-                player.MoveInput.x != 0.0f && player.rb.gravityScale != 0.0f)
+                player.MoveInput.x != 0.0f && player.rb.gravityScale != 0.0f &&
+                player.GetBeneathObject() is null)
                 {
 #if _DEBUG
                     Debug.Log($"Walking on ladder");
@@ -138,7 +139,7 @@ namespace JFM
                     float y;
                     if (playerIsAboveLadder)
                     {
-                        y = Mathf.Round(player.groundedY);                        
+                        y = Mathf.Round(player.groundedY) + player.GroundDistance;//0.1f;// 0.007519f;                        
                         //Debug.Log($"y={y}");
                     }
                     else

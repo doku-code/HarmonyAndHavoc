@@ -147,8 +147,11 @@ namespace JFM
 #if _DEBUG
                         Debug.Log($"Didn't make a case (1)... grounded={grounded} noLadderAbove={noLadderAbove} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
 #endif
-                        player.ChangeState(player.states[STATE.WALK]);
-                        return;
+                        if (player.GetBeneathObject() is null)
+                        {
+                            player.ChangeState(player.states[STATE.WALK]);
+                            return;
+                        }
                     }
                 }
                 else if (grounded && (Mathf.Abs(slope) > player.StairsUpMinSlope && foundSlopeBeneath))

@@ -61,7 +61,7 @@ MonoBehaviour:
   groundDistance: 0.1
   groundedRadius: 0.14
   groundBoxSize: {x: 0.75, y: 0.01}
-  groundedY: 0
+  groundedY: -25.893784
   groundedLayer: 3
   attackCoolDownTime: 0.4
   spriteBoxProbeSize: {x: 0.9414063, y: 0.3}
@@ -72,7 +72,7 @@ MonoBehaviour:
   heightAdjustmentFactor: 0.2
   ladderSpeed: 3
   ladderAcceleration: 1000
-  ladderGroundDistance: 0.1
+  ladderGroundDistance: 1.5
   ladderPushUpForce: 0.01
   ladderCenteringSpeed: 100000
   stairsUpDistanceHigh: 0.32
