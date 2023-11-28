@@ -57,7 +57,15 @@ namespace JFM
 
         public virtual void Enter()
         {
-            Debug.Log(name);
+            if (name == STATE.KNOWLEDGE)
+            {
+                KnowledgeState state = (KnowledgeState)this;
+                Debug.Log($"{name} : {state.knowledge.ID}");
+            }
+            else
+            {
+                Debug.Log(name);
+            }
             stage = EVENT.UPDATE;
         }
 

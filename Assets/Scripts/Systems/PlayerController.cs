@@ -10,6 +10,7 @@ using UnityEngine.InputSystem;
 //using static UnityEngine.InputManagerEntry;
 using charles;
 using UnityEngine.UIElements;
+using System.Collections;
 
 namespace JFM
 {
@@ -69,6 +70,9 @@ namespace JFM
         private Vector2 beneathObjectPosition;
         private bool isWallColliding;
         private bool wallIsToRight;
+        [SerializeField] private float collisionCheckRadius = 0.2f;
+        [SerializeField] private float collisionCheckYOffset = 0.3f;
+        [SerializeField] private float heightAdjustmentFactor = 0.2f;
 
         [Header("Ladders")]
         [SerializeField] private float ladderSpeed = 3.0f;
@@ -819,17 +823,133 @@ namespace JFM
             currentState = states[PlayerState.STATE.IDLE];
         }
 
+        private bool repositionning;
+
         private void FixedUpdate()
         {
-            SetAirborneInfo();
+            if (!repositionning && !CheckForCollisionsAndReplace())
+            {
+                SetAirborneInfo();
 
-            frontWall = null;
-            //SetFrontWallInfo();
+                frontWall = null;
+                //SetFrontWallInfo();
 
-            beneathObject = null;
-            SetBeneathObjectInfo();
+                beneathObject = null;
+                SetBeneathObjectInfo();
 
-            currentState = currentState.Process();
+                currentState = currentState.Process();
+            }
+        }
+
+        private bool CheckForCollisionsAndReplace()
+        {
+            repositionning = false;
+            if (repositionning = CheckForCollisions())
+            {
+                Debug.Log($"Repositionning Player");
+                //Debug.Break();
+
+                rb.isKinematic = true;
+
+                StartCoroutine(Reposition());
+                
+            }
+         
+            return repositionning;
+        }
+
+        public bool CheckForCollisions()
+        {
+            CapsuleCollider2D cc = GetComponent<CapsuleCollider2D>();
+            Vector2 colliderOffset = cc.offset;
+            Vector2 colliderSize = cc.size;
+
+            Vector2 position = rb.position + colliderOffset;
+            RaycastHit2D collisionHit = Physics2D.CircleCast(
+                position,
+                collisionCheckRadius,
+                Vector2.up,
+                colliderSize.y * heightAdjustmentFactor,
+                groundLayer
+            );
+            Platformer2DUtilities.DebugDrawCircle(
+                position,
+                collisionCheckRadius,
+                Color.green
+            );
+
+            /*Vector2 position = rb.position + colliderOffset;
+            RaycastHit2D collisionHit = Physics2D.CircleCast(
+                position,
+                collisionCheckRadius,
+                Vector2.zero,
+                0.0f,
+                groundLayer
+            );*/
+            Platformer2DUtilities.DebugDrawCircle(
+                position + Vector2.up * colliderSize.y * heightAdjustmentFactor,
+                collisionCheckRadius,
+                Color.green
+            );
+
+            if (collisionHit.collider is not null)
+            {
+                Debug.Log($"collider.gameObject.layer={collisionHit.collider.gameObject.layer}");
+            }
+
+            return collisionHit.collider is not null;
+        }
+
+        public bool CheckForCollisions2()
+        {
+            CapsuleCollider2D cc = GetComponent<CapsuleCollider2D>();
+            Vector2 colliderOffset = cc.offset;
+            //Vector2 colliderSize = cc.size;
+            
+            Vector2 position = rb.position + colliderOffset;
+            Debug.Log($"position={position} colliderOffset ={colliderOffset}");
+
+            RaycastHit2D collisionHit = Physics2D.CircleCast(
+                position,
+                collisionCheckRadius,
+                Vector2.up,
+                colliderSize.y,
+                groundLayer
+            );
+            Platformer2DUtilities.DebugDrawCircle(
+                position,
+                collisionCheckRadius,
+                Color.green
+            );
+           
+            Platformer2DUtilities.DebugDrawCircle(
+                position + Vector2.up * colliderSize.y,
+                collisionCheckRadius,
+                Color.green
+            );
+            //Debug.Break();
+            if (collisionHit.collider is not null)
+            {
+                Debug.Log($"collider.gameObject.layer={collisionHit.collider.gameObject.layer}");
+            }
+
+            return collisionHit.collider is not null;
+        }
+
+
+        private IEnumerator Reposition()
+        {
+            Vector2 v = isFacingRight ? Vector2.right : Vector2.left;
+            rb.MovePosition(rb.position + v);
+
+            while(CheckForCollisions())
+            {
+                rb.MovePosition(rb.position + v);
+                yield return null;
+            }
+
+            repositionning = false;
+            rb.isKinematic = false;            
         }
       
         private void InitializeKnowledges()
@@ -838,16 +958,19 @@ namespace JFM
             {
                 knowledge.Value.Initialize(this);
             }
-
-           /* playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
+            
+            /*playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = true;
+            playerData.KnownKnowledgeDictionary[KnowledgeID.GROUND_SLIDE] = true;
             playerData.AvailableKnowledgeDictionary[KnowledgeID.DASH] = AvailableKnowledgePosition.POSITION1;
             playerData.AvailableKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = AvailableKnowledgePosition.POSITION2;
             playerData.AvailableKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = AvailableKnowledgePosition.POSITION4;
+            playerData.AvailableKnowledgeDictionary[KnowledgeID.GROUND_SLIDE] = AvailableKnowledgePosition.POSITION3;
             playerData.GetKnowledgeByID(KnowledgeID.DASH).Activate();
             playerData.GetKnowledgeByID(KnowledgeID.WALL_SLIDE).Activate();
-            playerData.GetKnowledgeByID(KnowledgeID.DOUBLE_JUMP).Activate();*/
+            playerData.GetKnowledgeByID(KnowledgeID.DOUBLE_JUMP).Activate();
+            playerData.GetKnowledgeByID(KnowledgeID.GROUND_SLIDE).Activate();*/
         }
 
         private void InputSetup()

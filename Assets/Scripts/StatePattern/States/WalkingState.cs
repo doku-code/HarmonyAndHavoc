@@ -92,6 +92,12 @@ namespace JFM
                 return;
             }
 
+            if (player.Data.GetKnowledgeByID(AF.KnowledgeID.GROUND_SLIDE).WillUse())
+            {
+                player.UseKnowledge(AF.KnowledgeID.GROUND_SLIDE);
+                return;
+            }
+
             if (player.WillJump())
             {
                 player.ChangeState(player.states[STATE.JUMP]);
