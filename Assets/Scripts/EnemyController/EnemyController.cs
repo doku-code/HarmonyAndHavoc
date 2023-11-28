@@ -18,6 +18,9 @@ namespace charles
         [SerializeField] private float knockBackImpulse;
         [SerializeField] private float knockBackInterval = 0.001f;
         private bool isKnockedBack;
+        private bool canTakeDamage = true;
+        private float damageCooldown = 1.3f;
+
         public bool IsKnockedBack { get => isKnockedBack; }
         public bool IsDead { get => currentHealth <= 0; }
         public int MaxHealth { get => maxHealth; }
@@ -35,32 +38,40 @@ namespace charles
             if (collision.CompareTag("Player") && collision is CapsuleCollider2D)
             {
                 Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
+
                 Attack(collision.gameObject.GetComponent<PlayerController>(), pushDirection);
                 Debug.Log("this is a CRITICAL HIT");
+
             }
+        }
+
+        IEnumerator DamageCooldown()
+        {
+            canTakeDamage = false;
+            yield return new WaitForSeconds(damageCooldown);
+            canTakeDamage = true;
         }
 
         public void TakeDamage(int damage, Vector2 pushDirection)
         {
-            if (currentHealth <= 0)
+            if (currentHealth <= 0 || !canTakeDamage)
             {
                 return;
             }
+            StartCoroutine(DamageCooldown());
             currentHealth -= Mathf.Max(0, damage);
             npcAnimator.SetTrigger("GetHit");
-            
+
             OnHealthDecrease(currentHealth);
             if (currentHealth <= 0)
             {
                 Die();
-
             }
             else
             {
                 KnockBack(pushDirection);
             }
         }
-            
 
         public void Attack(PlayerController player, Vector2 direction)
         {
@@ -75,10 +86,10 @@ namespace charles
         }
 
         private void DestroyAfterAnim()
-        {            
+        {
             gameObject.SetActive(false);
         }
-        
+
         private void KnockBack(Vector2 pushDirection)
         {
             if (!isKnockedBack)
@@ -87,11 +98,11 @@ namespace charles
 
                 Rigidbody2D rb = GetComponent<Rigidbody2D>();
                 Vector2 normal = Platformer2DUtilities.GetPerpendicularVector2(pushDirection).normalized;
-                normal = new Vector2(MathF.Abs(normal.x), MathF.Abs(normal.y));
+                normal = new Vector2(Mathf.Abs(normal.x), Mathf.Abs(normal.y));
                 rb.velocity = new Vector2(rb.velocity.x * normal.x, rb.velocity.y * normal.y);
                 Debug.Log($"pushDirection={pushDirection}");
-                rb.AddForce(pushDirection * knockBackImpulse, ForceMode2D.Impulse);                
+                rb.AddForce(pushDirection * knockBackImpulse, ForceMode2D.Impulse);
             }
-        }        
+        }
     }
 }

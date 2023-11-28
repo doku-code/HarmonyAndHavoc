@@ -16,7 +16,6 @@ namespace charles
         {
             this.callback = callback;
             StartCoroutine(SpawnCoinsWithDelay());
-
         }
 
         private IEnumerator SpawnCoinsWithDelay()
