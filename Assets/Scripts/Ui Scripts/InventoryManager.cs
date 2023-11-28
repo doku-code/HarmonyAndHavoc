@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using UnityEngine.Serialization;
 using System.Collections.Generic;
+using TMPro;
 
 namespace AF
 {
@@ -24,6 +25,13 @@ namespace AF
         [Header("Knowledges Equipped")]
         [SerializeField] private Button[] knowledgesEquippedInventory;
         [SerializeField] private Image[] knowledgesAvailableInHUD;
+
+        [Space] [Header("Misc")] 
+        [SerializeField] private TMP_Text armorUpgradeText;
+        [SerializeField] private TMP_Text swordUpgradeText;
+        [SerializeField] private TMP_Text quarterOrderCountText;
+        [SerializeField] private TMP_Text goldCountText;
+        [SerializeField] private GameObject[] quarterOrderPieces;
         [Space]
         [SerializeField] private GameObject InventoryPanel;
         [SerializeField] private GameObject PauseMenuPanel;
@@ -53,6 +61,7 @@ namespace AF
                 Debug.Log("Opening the inventory menu");
                 isInventoryMenuOpen = true;
                 InitializeKnowledgeSprites();
+                InitializeMisc();
             }
             else
             {
@@ -60,6 +69,23 @@ namespace AF
                     SoundManager.Instance.PlayAClip(1);
                 InventoryPanel.SetActive(false);
                 isInventoryMenuOpen = false;
+            }
+        }
+
+        private void InitializeMisc()
+        {
+            //Armor Upgrade
+            armorUpgradeText.text = playerData.ArmorUpgrade.ToString();
+            //Sword Upgrade
+            swordUpgradeText.text = playerData.WeaponUpgrade.ToString();
+            //Heart Upgrade
+            quarterOrderCountText.text = playerData.OrderFragments.ToString();
+            //Gold Amount
+            goldCountText.text = playerData.Gold.ToString();
+            //Gold Pieces Actualization
+            for (int i = 0; i < playerData.OrderFragments; i++)
+            {
+                quarterOrderPieces[i].SetActive(true);
             }
         }
 
