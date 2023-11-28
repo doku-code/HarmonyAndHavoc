@@ -45,6 +45,7 @@ namespace charles
 
                 yield return new WaitForSeconds(spawnDelay);
             }
+                            SoundManager.Instance.PlayAClip(2);
             callback.Invoke();
         }
     }
