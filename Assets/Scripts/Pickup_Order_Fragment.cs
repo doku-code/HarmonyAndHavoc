@@ -1,17 +1,21 @@
 using AF;
 using UnityEngine;
 
-public class Pickup_Order_Fragment : MonoBehaviour
+namespace charles
 {
-    public PlayerData playerData;
-
-    private void OnTriggerEnter2D(Collider2D other)
+    public class Pickup_Order_Fragment : MonoBehaviour
     {
-     
-        if (other.CompareTag("Player"))
-        {             
+        public PlayerData playerData;
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+
+            if (other.CompareTag("Player"))
+            {
                 playerData.OrderFragments += 1;
                 gameObject.SetActive(false);
+            }
         }
     }
 }
+

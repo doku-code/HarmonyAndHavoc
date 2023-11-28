@@ -41,7 +41,10 @@ namespace charles
                 coinRigidbody.AddForce(new Vector2(forceX, forceY));
 
                 coin.AddComponent<CoinPickup>();
-                SoundManager.Instance.PlayAClip(2);
+                if(SoundManager.Instance != null)
+                {
+                    SoundManager.Instance.PlayAClip(2);
+                }
 
                 yield return new WaitForSeconds(spawnDelay);
             }

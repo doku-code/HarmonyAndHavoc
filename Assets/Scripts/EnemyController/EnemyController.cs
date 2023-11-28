@@ -42,7 +42,7 @@ namespace charles
 
         public void TakeDamage(int damage, Vector2 pushDirection)
         {
-            if (currentHealth == 0)
+            if (currentHealth <= 0)
             {
                 return;
             }
