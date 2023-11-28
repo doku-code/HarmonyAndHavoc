@@ -1,12 +1,10 @@
 using UnityEngine;
-using UnityEngine.UIElements;
+using JFM;
 
 //CHARLES
 public class Jump : ActionNode
 {
-    public float jumpForceY = 10f;
-    public float horizontalSpeed = 5f;
-        public string obstacleLayer;
+    public float jumpForceY = 1f;
     protected override void OnStart()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -20,20 +18,14 @@ public class Jump : ActionNode
     protected override State OnUpdate()
     {
        
-        if (player.transform.position.y > npc.transform.position.y + 2f)
+        if (player.transform.position.y > npc.transform.position.y + 2f && Raycast2DHelper.CheckGrounded(npcRigidBody.position, 0.14f, 0.1f,
+                LayerMask.GetMask("Ground"), LayerMask.GetMask("Ground"), out int Layer))
         {
             npcAnimator.SetTrigger("Jump");
 
 
             Vector2 jumpForce = new Vector2(0f, jumpForceY);
             npcRigidBody.AddForce(jumpForce, ForceMode2D.Impulse);
-
-            //Vector2 direction = player.transform.position - npc.transform.position;
-            //direction.Normalize();
-
-            //Vector2 horizontalMovement = direction * horizontalSpeed;
-            //npcRigidBody.velocity = new Vector2(horizontalMovement.x, npcRigidBody.velocity.y);
-            //Debug.Log("Je suis dans le state Jump et J'arrive  pas sortir ");
             return State.SUCCESS;
         }
         npcAnimator.ResetTrigger("Fall");

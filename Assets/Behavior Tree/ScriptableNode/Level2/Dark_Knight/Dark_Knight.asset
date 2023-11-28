@@ -156,7 +156,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: d01ced3305f503542b327ea9e10a37bd
-  position: {x: 186.49994, y: 600.25006}
+  position: {x: 186.37506, y: 600.25006}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -166,49 +166,6 @@ MonoBehaviour:
   attackDistance: 4
   attackAnimString: Combo1
   comboSoundIdx: 3
---- !u!114 &-2875313798119270079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcddb15bcd2925f4887c696f4baa3c36, type: 3}
-  m_Name: Sequencer
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 8eab1fb6f7e45c8419864c0fd47523af
-  position: {x: 680.7501, y: 472.50006}
-  Description: 
-  children:
-  - {fileID: 7405821160657972970}
-  - {fileID: -2415101612272533891}
---- !u!114 &-2415101612272533891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b22b00c69e3bd6f40a3e86a629d98dac, type: 3}
-  m_Name: Fall
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: ce974f6f3869cb248a83b79501a5be9d
-  position: {x: 788.3751, y: 602.87506}
-  Description: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  gameobjNpcName: 
-  fallForceY: -10
-  horizontalSpeed: 5
 --- !u!114 &-2313499752102526974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,25 +185,6 @@ MonoBehaviour:
   Description: 
   children:
   - {fileID: 4391227014461508362}
---- !u!114 &-2098871737953681578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10e22483f73a7cb48a1a8f0d2f066df6, type: 3}
-  m_Name: RepeatNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 226b42b6733027947a521a2790b1e72c
-  position: {x: 680.75006, y: 318}
-  Description: 
-  children:
-  - {fileID: -2875313798119270079}
 --- !u!114 &-2098770303747569382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +205,6 @@ MonoBehaviour:
   children:
   - {fileID: -2313499752102526974}
   - {fileID: -2091253009877213525}
-  - {fileID: -2098871737953681578}
 --- !u!114 &-2091253009877213525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,48 +264,11 @@ MonoBehaviour:
   - {fileID: 4391227014461508362}
   - {fileID: -6224832869298612166}
   - {fileID: -8278304243439181460}
-  - {fileID: 4349567034639096959}
   - {fileID: -5340044118666301520}
   - {fileID: -3626967703852835284}
   - {fileID: -3775647038207944147}
   - {fileID: -9108082039838411041}
-  - {fileID: -2098871737953681578}
-  - {fileID: -2875313798119270079}
-  - {fileID: -2415101612272533891}
-  - {fileID: 7405821160657972970}
---- !u!114 &4349567034639096959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f59494be34770fd4b8486babe3b65c8d, type: 3}
-  m_Name: FollowPlayer
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 8d3f1f5fb5c2d2d4f88f9cea48482bad
-  position: {x: -150.5, y: 600.25006}
-  Description: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  gameobjNpcName: 
-  runAnimString: Run
-  followDistanceX: 0.5
-  followDistanceY: 0.2
-  maxDistance: 5
-  followSpeedX: 300
-  followSpeedY: 100
-  followOnY: 1
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  distanceOffset: 0.5
-  stoppingDistance: 0.5
+  - {fileID: 6714695864591444940}
 --- !u!114 &4391227014461508362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,12 +284,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 49df84265d5694949914d23afd0de1f8
-  position: {x: -169.75, y: 472.25006}
+  position: {x: -169.75, y: 472.50006}
   Description: 
   children:
   - {fileID: -8278304243439181460}
-  - {fileID: 4349567034639096959}
---- !u!114 &7405821160657972970
+  - {fileID: 6714695864591444940}
+--- !u!114 &6714695864591444940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -398,18 +298,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6828f535c3f989c4f83a91ace7a11ebe, type: 3}
-  m_Name: Jump
+  m_Script: {fileID: 11500000, guid: f59494be34770fd4b8486babe3b65c8d, type: 3}
+  m_Name: FollowPlayer
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 01485882e04bae64ab9acce3f257d25c
-  position: {x: 637.8751, y: 600.25006}
+  guid: dc78ee634deba0c40a7486b1bc7d9474
+  position: {x: -136.5, y: 600.25006}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  jumpForceY: 0.1
-  horizontalSpeed: 5
-  obstacleLayer: Ground
+  runAnimString: Run
+  followDistanceX: 0.2
+  followDistanceY: 0.2
+  maxDistance: 15
+  followSpeedX: 250
+  followSpeedY: 250
+  followOnY: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  distanceOffset: 0.5
+  stoppingDistance: 0.5

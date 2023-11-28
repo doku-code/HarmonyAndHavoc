@@ -15,27 +15,11 @@ public class Fall : ActionNode
     {
         npcAnimator.ResetTrigger("Fall");
     }
-      
+
 
     protected override State OnUpdate()
     {
-
-        if (player.transform.position.y -2f < npc.transform.position.y)
-        {
-            npcAnimator.SetTrigger("Fall");
-
-            
-            //npcRigidBody.AddForce(Vector2.down * fallForceY, ForceMode2D.Impulse);
-
-            //Vector2 direction = player.transform.position - npc.transform.position;
-            //direction.Normalize();
-
-            //Vector2 horizontalMovement = direction * horizontalSpeed;
-            //npcRigidBody.velocity = new Vector2(horizontalMovement.x, npcRigidBody.velocity.y);
-
-            return State.SUCCESS;
-        }
-        npcAnimator.ResetTrigger("Fall");
-        return State.FAILURE;
+        npcAnimator.SetTrigger("Fall");
+        return State.SUCCESS;
     }
 }
