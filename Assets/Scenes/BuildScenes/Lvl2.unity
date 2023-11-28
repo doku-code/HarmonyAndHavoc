@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: tree
       value: 
       objectReference: {fileID: 11400000, guid: 0d7f9957aa0692b4986c5d9e0f00f907, type: 2}
+    - target: {fileID: 3577497778200294446, guid: 19347866cc996034b9d37b7d1c16b8a0, type: 3}
+      propertyPath: numberOfCoins
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4247515025585475503, guid: 19347866cc996034b9d37b7d1c16b8a0, type: 3}
       propertyPath: m_Name
       value: Mushroom
@@ -36544,6 +36548,10 @@ PrefabInstance:
       propertyPath: spawnDelay
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8000035976008550848, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: numberOfCoins
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9125858477312548240, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
       propertyPath: m_Name
       value: Heavy_Armor (1)
@@ -38520,8 +38528,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.5758998, y: -0.23364997, z: 0}
-    m_Extent: {x: 9.3917, y: 1.55995, z: 0}
+    m_Center: {x: 2.5771499, y: -0.23190004, z: 0}
+    m_Extent: {x: 9.3939495, y: 1.5637, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -45984,7 +45992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 20
+  numberOfCoins: 6
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
@@ -46295,6 +46303,10 @@ PrefabInstance:
     - target: {fileID: 8000035976008550848, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
       propertyPath: spawnDelay
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000035976008550848, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: numberOfCoins
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9125858477312548240, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
       propertyPath: m_Name
@@ -50922,8 +50934,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 14.3764, y: 2.68685, z: 0}
-    m_Extent: {x: 22.0612, y: 5.10855, z: 0}
+    m_Center: {x: 14.37945, y: 2.68175, z: 0}
+    m_Extent: {x: 22.056349, y: 5.11495, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -59625,6 +59637,10 @@ PrefabInstance:
     - target: {fileID: 465776952547087491, guid: 3e96c96ccf0ad4347a20b1cf19c8fd23, type: 3}
       propertyPath: attackDamage
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990826440339552541, guid: 3e96c96ccf0ad4347a20b1cf19c8fd23, type: 3}
+      propertyPath: numberOfCoins
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4001193077463154613, guid: 3e96c96ccf0ad4347a20b1cf19c8fd23, type: 3}
       propertyPath: m_Name
@@ -122054,6 +122070,10 @@ PrefabInstance:
       propertyPath: spawnDelay
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8000035976008550848, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: numberOfCoins
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9125858477312548240, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
       propertyPath: m_Name
       value: Heavy_Armor (3)
@@ -127325,7 +127345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 20
+  numberOfCoins: 6
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
@@ -128016,6 +128036,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1001576176}
     m_Modifications:
+    - target: {fileID: -8487509642643682964, guid: 7f77d479d14e8264c8ca853871cd9e8d, type: 3}
+      propertyPath: numberOfCoins
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -7677641607766068002, guid: 7f77d479d14e8264c8ca853871cd9e8d, type: 3}
       propertyPath: maxHealth
       value: 8
@@ -128277,6 +128301,10 @@ PrefabInstance:
     - target: {fileID: 6698976015133818495, guid: 7e17f722f4a9836459e2588d8e30e6cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102874649931178669, guid: 7e17f722f4a9836459e2588d8e30e6cd, type: 3}
+      propertyPath: numberOfCoins
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8068643329353702137, guid: 7e17f722f4a9836459e2588d8e30e6cd, type: 3}
       propertyPath: m_Name
@@ -129939,6 +129967,10 @@ PrefabInstance:
     - target: {fileID: 6698976015133818495, guid: 7e17f722f4a9836459e2588d8e30e6cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102874649931178669, guid: 7e17f722f4a9836459e2588d8e30e6cd, type: 3}
+      propertyPath: numberOfCoins
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8068643329353702137, guid: 7e17f722f4a9836459e2588d8e30e6cd, type: 3}
       propertyPath: m_Name
@@ -133302,6 +133334,10 @@ PrefabInstance:
     - target: {fileID: 8000035976008550848, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
       propertyPath: spawnDelay
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000035976008550848, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: numberOfCoins
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9125858477312548240, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
       propertyPath: m_Name
@@ -138430,6 +138466,10 @@ PrefabInstance:
       propertyPath: spawnDelay
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8000035976008550848, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: numberOfCoins
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9125858477312548240, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
       propertyPath: m_Name
       value: Heavy_Armor
@@ -139723,6 +139763,10 @@ PrefabInstance:
     - target: {fileID: -1769397409177067100, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
       propertyPath: spawnDelay
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1769397409177067100, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
+      propertyPath: numberOfCoins
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4288845440548645853, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
       propertyPath: m_LocalPosition.x
