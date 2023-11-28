@@ -902,7 +902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 6
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -918,8 +918,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
-  attackDamage: 5
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &63284519
@@ -1960,7 +1960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 3
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -1976,8 +1976,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  attackDamage: 2
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &188854473
@@ -2606,6 +2606,134 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &247528950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 247528952}
+  - component: {fileID: 247528951}
+  m_Layer: 0
+  m_Name: LevelSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &247528951
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247528950}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 249824721126818650, guid: 807142ccf2ec42845abc5fa0cbd1b10b, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 3935dc3ab09104b4a8ffce8f942327fc, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &247528952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247528950}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1158.7188, y: 725.01135, z: 6.313036}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &253583192
 GameObject:
   m_ObjectHideFlags: 0
@@ -3221,7 +3349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 6
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -3237,8 +3365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
-  attackDamage: 5
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &292607793
@@ -11773,7 +11901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 6
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -11789,8 +11917,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
-  attackDamage: 5
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &656493470
@@ -12378,7 +12506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 3
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -12394,8 +12522,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  attackDamage: 2
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &732978200
@@ -13765,7 +13893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 3
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -13781,8 +13909,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  attackDamage: 2
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &868142663
@@ -16590,7 +16718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 6
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -16606,8 +16734,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
-  attackDamage: 5
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1032169575
@@ -17781,7 +17909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 6
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -17797,8 +17925,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
-  attackDamage: 5
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1206130282
@@ -18144,7 +18272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 3
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -18160,8 +18288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  attackDamage: 2
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1232793250
@@ -41904,7 +42032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 6
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -41920,8 +42048,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
-  attackDamage: 5
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1307303186
@@ -42267,7 +42395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 3
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -42283,8 +42411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  attackDamage: 2
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1329097546
@@ -406989,7 +407117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 6
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -407005,8 +407133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
-  attackDamage: 5
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1521873543
@@ -407598,7 +407726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 3
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -407614,8 +407742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  attackDamage: 2
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1570236425
@@ -408207,7 +408335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 6
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -408223,8 +408351,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
-  attackDamage: 5
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1600207944
@@ -409273,7 +409401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 6
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -409289,8 +409417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
-  attackDamage: 5
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1723928791
@@ -410615,7 +410743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 3
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -410631,8 +410759,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  attackDamage: 2
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1849342172
@@ -411427,7 +411555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 3
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -411443,8 +411571,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  attackDamage: 2
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1898092428
@@ -414000,7 +414128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 6
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -414016,8 +414144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
-  attackDamage: 5
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &1989576972
@@ -417131,8 +417259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
-  attackDamage: 54
+  maxHealth: 10
+  attackDamage: 4
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!1 &805803094812297287
@@ -417196,7 +417324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 105
+  numberOfCoins: 15
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
@@ -419295,8 +419423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &8024168652293089367
@@ -419395,7 +419523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 6
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -419411,8 +419539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
-  attackDamage: 5
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackInterval: 0.001
 --- !u!114 &8828252214850132338
@@ -419462,3 +419590,4 @@ SceneRoots:
   - {fileID: 1545401400058854368}
   - {fileID: 2041733707}
   - {fileID: 1293816139}
+  - {fileID: 247528952}
