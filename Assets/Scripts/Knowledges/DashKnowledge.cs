@@ -16,8 +16,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DashKnowledge", menuName = "Knowledges/Dash")]
 public class DashKnowledge : Knowledge
 {
-    private float animationClipLength;
-    [SerializeField] private int animatorLayer = 0;
     private int nFrames;
 
     private bool hasDashed;
@@ -48,10 +46,7 @@ public class DashKnowledge : Knowledge
 
         //         lastKnowledge = player.Data.Knowledges.find_if()
 
-        if (animationClipLength == 0.0f)
-        {
-            animationClipLength = player.animator.GetCurrentAnimatorStateInfo(animatorLayer).length;
-        }
+        player.currentState.SubscribeToAnimatorObserver("Movement");
     }
 
     public override void Update()
@@ -87,9 +82,9 @@ public class DashKnowledge : Knowledge
             return;
         }
        
-        if ((elapsedTime > animationClipLength || (Mathf.Abs(player.rb.velocity.x) < 0.0005f && grounded)) && nFrames > 1)
+        if (Mathf.Abs(player.rb.velocity.x) < 0.0005f && grounded && nFrames > 1)
         {
-            player.ChangeState(player.states[PlayerState.STATE.IDLE]);
+            OnLeave();
             return;
         }
         // Let rigidbody have a little deceleration when dashing on the ground
@@ -106,8 +101,9 @@ public class DashKnowledge : Knowledge
     }
 
     public override void Exit() {
+        player.currentState.UnsubscribeToAnimatorObserver();
         player.animator.ResetTrigger("Dash");
-        player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
+        player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);        
     }
 
     private void Dash()
@@ -171,5 +167,10 @@ public class DashKnowledge : Knowledge
     private void OnGrounded()
     {
         hasDashed = false;
+    }
+
+    public override void OnLeave()
+    {
+        player.ChangeState(player.states[PlayerState.STATE.IDLE]);
     }
 }

@@ -18,10 +18,10 @@ public class Sequencer : CompositeNode
     {
 
     }
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
         var child = children[current];
-        switch (child.Update())
+        switch (child.DoUpdate(dt))
         {
             case State.RUNNING:
                 return State.RUNNING;

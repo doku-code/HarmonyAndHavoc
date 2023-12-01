@@ -217,5 +217,7 @@ namespace JFM
             }
             base.Exit();
         }
+
+        public override void OnLeaveState() { }
     }
 }

@@ -90,6 +90,7 @@ namespace JFM
             if (player.WillJump())
             {
                 player.Jump();
+                player.inputTriggers["Jump"] = false;
             }  
             
             nFrames++;
@@ -101,5 +102,7 @@ namespace JFM
             player.animator.SetBool("IsAirborne", false);
             base.Exit();
         }
+
+        public override void OnLeaveState() { }
     }
 }

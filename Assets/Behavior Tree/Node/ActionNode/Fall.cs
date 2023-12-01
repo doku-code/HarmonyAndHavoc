@@ -17,7 +17,7 @@ public class Fall : ActionNode
     }
 
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
         npcAnimator.SetTrigger("Fall");
         return State.SUCCESS;

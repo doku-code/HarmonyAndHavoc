@@ -13,11 +13,11 @@ public class BehaviourTree : ScriptableObject
     public Node rootNode;
     public Node.State treeState = Node.State.RUNNING;
     public List<Node> nodes = new List<Node>();
-    public Node.State Update()
+    public Node.State DoUpdate(float dt)
     {
         if (rootNode.state == Node.State.RUNNING)
         {
-            treeState = rootNode.Update();
+            treeState = rootNode.DoUpdate(dt);
         }
         return treeState;
     }

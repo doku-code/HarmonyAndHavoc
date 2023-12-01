@@ -14,23 +14,50 @@ namespace charles
         private Animator npcAnimator;
         private int currentHealth;
 
-        [Range(0.0f, 5000.0f)]
+        [Range(0.0f, 50.0f)]
         [SerializeField] private float knockBackImpulse;
-        [SerializeField] private float knockBackInterval = 0.001f;
+        [SerializeField] private float knockBackDuration = 0.5f;
         private bool isKnockedBack;
         private bool canTakeDamage = true;
-        private float damageCooldown = 1.3f;
+        [SerializeField] private float damageCooldown = 1.3f;
 
         public bool IsKnockedBack { get => isKnockedBack; }
+        public bool CanTakeDamage { get => canTakeDamage; }
         public bool IsDead { get => currentHealth <= 0; }
         public int MaxHealth { get => maxHealth; }
 
         public event SingleParameterDelegate OnHealthDecrease;
 
+        [Space]
+        [Header("Behavior Tree")]
+        [SerializeField] float tickInterval;
+        public BehaviourTree tree;
+        private IEnumerator tickCoroutine;
+        [SerializeField] private EnemyBlackboard blackboard;
+
+        public EnemyBlackboard Blackboard
+        {
+            get => blackboard;
+        }
+
+        void StartBehaviorTree()
+        {
+            tree = tree.Clone();
+
+            foreach (Node node in tree.nodes)
+            {
+                node.OnInitialize(gameObject);
+            }
+
+            tickCoroutine = BehaviorTreeTick();
+            StartCoroutine(tickCoroutine);
+        }
+
         private void Start()
         {
             npcAnimator = GetComponent<Animator>();
             currentHealth = maxHealth;
+            StartBehaviorTree();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -40,8 +67,8 @@ namespace charles
                 Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
 
                 Attack(collision.gameObject.GetComponent<PlayerController>(), pushDirection);
-                Debug.Log("this is a CRITICAL HIT");
-
+                //Debug.Log("Enemy hit");
+                blackboard.lastHitTime = Time.time;
             }
         }
 
@@ -49,6 +76,7 @@ namespace charles
         {
             canTakeDamage = false;
             yield return new WaitForSeconds(damageCooldown);
+            npcAnimator.ResetTrigger("GetHit");
             canTakeDamage = true;
         }
 
@@ -58,17 +86,22 @@ namespace charles
             {
                 return;
             }
-            StartCoroutine(DamageCooldown());
             currentHealth -= Mathf.Max(0, damage);
-            npcAnimator.SetTrigger("GetHit");
-
+            
             OnHealthDecrease(currentHealth);
+
             if (currentHealth <= 0)
             {
                 Die();
             }
             else
             {
+                StartCoroutine(DamageCooldown());
+
+                npcAnimator.SetBool("IsIdle", false);
+                npcAnimator.SetBool("Run", false);
+                npcAnimator.SetTrigger("GetHit");
+
                 KnockBack(pushDirection);
             }
         }
@@ -102,6 +135,22 @@ namespace charles
                 rb.velocity = new Vector2(rb.velocity.x * normal.x, rb.velocity.y * normal.y);
                 Debug.Log($"pushDirection={pushDirection}");
                 rb.AddForce(pushDirection * knockBackImpulse, ForceMode2D.Impulse);
+                StartCoroutine(KnockBackDelay(knockBackDuration));
+            }
+        }
+
+        private IEnumerator KnockBackDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            isKnockedBack = false;
+        }
+
+        private IEnumerator BehaviorTreeTick()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(tickInterval);
+                tree.DoUpdate(tickInterval);
             }
         }
     }

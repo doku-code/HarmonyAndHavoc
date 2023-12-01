@@ -94,6 +94,8 @@ namespace JFM
             Vector3 v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * wallJumpForce * 1.0f;
             //Debug.Log($"JUMP from wall {player.IsFacingRight}  v={v}  cos(angle)={Mathf.Cos(angle)}");
             player.rb.AddForce(v, ForceMode2D.Impulse);
-        }    
+        }
+
+        public override void OnLeaveState() { }
     }
 }

@@ -70,5 +70,7 @@ namespace JFM
             player.animator.SetBool("IsIdle", false);
             base.Exit();
         }
+
+        public override void OnLeaveState() { }
     }
 }

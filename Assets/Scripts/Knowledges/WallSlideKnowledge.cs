@@ -134,4 +134,8 @@ public class WallSlideKnowledge : Knowledge
         //return hit.collider is not null && ((!player.IsFacingRight && player.MoveInput.x > 0) || (player.IsFacingRight && player.MoveInput.x < 0)) && Mathf.Abs(player.rb.velocity.x) <= 0.5f;
         return hit.collider is not null || (player.IsWallColliding && player.WallIsToRight != player.IsFacingRight) && ((!player.IsFacingRight && player.MoveInput.x > 0) || (player.IsFacingRight && player.MoveInput.x < 0)) && Mathf.Abs(player.rb.velocity.x) <= 0.5f;
     }
+
+    public override void OnLeave()
+    {
+    }
 }

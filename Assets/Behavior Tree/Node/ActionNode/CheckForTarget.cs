@@ -10,17 +10,18 @@ public class CheckForTarget : ActionNode
         player = GameObject.FindGameObjectWithTag("Player");
     }
     protected override void OnStop() {}
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {        
-        float distanceToPlayer = Vector3.Distance(npc.transform.position, 
-            player.transform.position);
+        float facing = npcRigidBody.velocity.x > 0 ? 1.0f : -1.0f;
 
-        if (distanceToPlayer <= attackDistance)
+        RaycastHit2D hit = Physics2D.Raycast(npcRigidBody.position, Vector2.right * facing, attackDistance, playerLayer);
+        Debug.DrawLine(npc.transform.position, npc.transform.position + Vector3.right * facing * attackDistance, Color.yellow);
+        
+        if (hit.collider is not null)
         {            
-            //Debug.Log("Player in sight...");
+            Debug.Log("Player in sight...");
                 
-            return State.SUCCESS;
-            
+            return State.SUCCESS;            
         }
         else 
         {

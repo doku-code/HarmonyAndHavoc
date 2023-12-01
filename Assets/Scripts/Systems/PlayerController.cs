@@ -117,7 +117,7 @@ namespace JFM
 
         [Space]
         [Header("States")]
-        private PlayerState currentState;
+        public PlayerState currentState;
         [SerializeField] private PlayerState[] statesArray;
         public Dictionary<PlayerState.STATE, PlayerState> states = new Dictionary<PlayerState.STATE, PlayerState>();
 
@@ -419,11 +419,13 @@ namespace JFM
 
         public bool IsAttackCooledDown()
         {
+            //Debug.Log($"Time.time - attackCoolDownStartTime {Time.time - attackCoolDownStartTime} >= {attackCoolDownTime}");
             return Time.time - attackCoolDownStartTime >= attackCoolDownTime;
         }
 
         public bool WillAttack()
         {
+            //Debug.Log($"inputTriggers[\"BasicAttack\"] && IsAttackCooledDown() {inputTriggers["BasicAttack"]} && {IsAttackCooledDown()}");
             return inputTriggers["BasicAttack"] && IsAttackCooledDown();
         }
 
@@ -561,7 +563,13 @@ namespace JFM
             //Debug.Log($"{moveInput.x == 0.0f} && {moveInput.y < 0.0f} && h2={h2} moveInput.y = {moveInput.y}");
 
             point = hit.point;
-            return moveInput.x == 0.0f && moveInput.y < 0.0f && h2;
+            bool h3 = IsAboveLadder();
+            if (h3)
+            {
+                point.x = rb.position.x;
+                point.y = groundedY;                
+            }
+            return moveInput.x == 0.0f && moveInput.y < 0.0f && h3;// h2;
         }
 
         public bool IsAboveLadder()
@@ -958,7 +966,7 @@ namespace JFM
             {
                 knowledge.Value.Initialize(this);
             }
-            
+            /*
             playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = true;
             playerData.KnownKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = true;
@@ -970,7 +978,7 @@ namespace JFM
             playerData.GetKnowledgeByID(KnowledgeID.DASH).Activate();
             playerData.GetKnowledgeByID(KnowledgeID.WALL_SLIDE).Activate();
             playerData.GetKnowledgeByID(KnowledgeID.DOUBLE_JUMP).Activate();
-            playerData.GetKnowledgeByID(KnowledgeID.GROUND_SLIDE).Activate();
+            playerData.GetKnowledgeByID(KnowledgeID.GROUND_SLIDE).Activate();*/
         }
 
         private void InputSetup()

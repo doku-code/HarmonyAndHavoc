@@ -30,7 +30,7 @@ public class FollowPlayer : ActionNode
 
     protected override void OnStop() {}
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
 
         if (npcController.IsDead)

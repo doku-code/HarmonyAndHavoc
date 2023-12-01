@@ -22,9 +22,9 @@ public class RootNode : Node
 
     }
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
-        return child.Update();
+        return child.DoUpdate(dt);
     }
 
     public override Node Clone()

@@ -164,5 +164,7 @@ namespace JFM
             player.rb.velocity = new Vector2((player.IsFacingRight ? 1.0f : -1.0f) * player.WalkSpeed, 0.0f);
             base.Exit();
         }
+
+        public override void OnLeaveState() { }
     }
 }

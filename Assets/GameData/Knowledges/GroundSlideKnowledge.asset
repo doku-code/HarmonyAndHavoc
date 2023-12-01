@@ -18,7 +18,7 @@ MonoBehaviour:
   slotCost: 0
   cooldown: 0
   animatorLayer: 0
-  groundSlideForce: 60
-  groundSlideDeceleration: 250
-  groundSlideAcceleration: 500
-  groundSlideBailOutVelocity: 2
+  force: 60
+  deceleration: 1000
+  acceleration: 500
+  minVelocity: 3

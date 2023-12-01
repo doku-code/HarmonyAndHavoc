@@ -27,14 +27,14 @@ public class Parallel : CompositeNode
     {
     }
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
         bool stillRunning = false;
         for (int i = 0; i < childrenLeftToExecute.Count(); ++i)
         {
             if (childrenLeftToExecute[i] == State.RUNNING)
             {
-                var status = children[i].Update();
+                var status = children[i].DoUpdate(dt);
                 if (status == State.FAILURE)
                 {
                     AbortRunningChildren();

@@ -18,7 +18,7 @@ namespace JFM
         private bool hasDepletedJumps;
 
         public override void Enter()
-        {            
+        {
             player.animator.SetBool("IsFalling", true);
             player.animator.SetBool("IsAirborne", true);
 
@@ -64,7 +64,7 @@ namespace JFM
             bool stairsAreRightSide = slope > 0;
             //player.stairsSide = foundSlopeBeneath;
             //Debug.Log($"After: {player.stairsSide}");
-            bool grounded = player.IsGrounded();            
+            bool grounded = player.IsGrounded();
 
             if (grounded && player.WillLand() && (!foundSlopeBeneath || Mathf.Abs(slope) < player.StairsUpMaxSlope))
             {
@@ -72,12 +72,13 @@ namespace JFM
                 player.ChangeState(player.states[STATE.LAND]);
                 return;
             }
+                        
 #if _DEBUG
             Debug.Log($"grounded={grounded} 1 << player.groundedLayer={1 << player.groundedLayer} == {(int)player.GroundLayer} ladder={ladderX} foundSlopeBeneath={foundSlopeBeneath} slope={slope}");
 #endif
             bool noLadderAbove = false;
             if (grounded || foundSlopeBeneath)
-            {                               
+            {
                 if (player.MoveInput.x != 0.0f)
                 {
                     if (foundSlopeBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope && Mathf.Sign(slope) * playerSide > 0)
@@ -140,7 +141,7 @@ namespace JFM
                             (
                                 (1 << player.groundedLayer == (int)player.GroundLayer)
                                 ||
-                                (1 << player.groundedLayer == (int)player.LadderLayer)                                                                    
+                                (1 << player.groundedLayer == (int)player.LadderLayer)
                             )
                             )
                     {
@@ -156,7 +157,7 @@ namespace JFM
                 }
                 else if (grounded && (Mathf.Abs(slope) > player.StairsUpMinSlope && foundSlopeBeneath))
                 {
-                    IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];                    
+                    IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
 
                     // Adjust for walking on ladders
                     if (player.WillClimbLadder())
@@ -169,7 +170,7 @@ namespace JFM
                             player.rb.totalForce = Vector2.zero;
                             player.MoveInput = new Vector2(player.MoveInput.x, 0.0f);
                             float y = Mathf.Round(player.HitInfo.hit.point.y) + 0.007519f;// + player.rb.gravityScale * -Physics2D.gravity.y * player.LadderPushUpForce * Time.fixedDeltaTime;
-                                                                                              //player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
+                                                                                          //player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
                             player.rb.isKinematic = true;
                             player.rb.MovePosition(new Vector2(player.transform.position.x, y));
                             //player.rb.isKinematic = false;
@@ -198,14 +199,14 @@ namespace JFM
                 }
                 // If grounded to Ground layer, or to Ladder layer IF we didn't start this Airborne state in front 
                 // of a ladder or we started in front of a ladder of another X coordinate.
-                else if (grounded 
-                        && 
+                else if (grounded
+                        &&
                         (
-                            (1 << player.groundedLayer == (int)player.GroundLayer) 
-                            || 
-                            (1 << player.groundedLayer == (int)player.LadderLayer)                                                             
+                            (1 << player.groundedLayer == (int)player.GroundLayer)
+                            ||
+                            (1 << player.groundedLayer == (int)player.LadderLayer)
                         )
-                        ) 
+                        )
                 {
 #if _DEBUG
                     Debug.Log($"Didn't make a case (2)... grounded={grounded} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
@@ -214,20 +215,27 @@ namespace JFM
                     {
                         bool hit = player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down);
                         float y;
-                        if ( hit )
+                        if (hit)
                         {
                             y = Mathf.Round(player.HitInfo.hit.point.y) + 0.007519f;// + player.rb.gravityScale * -Physics2D.gravity.y * player.LadderPushUpForce * Time.fixedDeltaTime;
+                            Debug.Log($"hit!");
                         }
                         else
                         {
                             y = player.transform.position.y;
+                            Debug.Log($"no hit!");
+
                         }
 
                         noLadderAbove = Physics2D.CircleCast(new Vector2(player.rb.position.x, y) + Vector2.up * 0.6f, player.GroundedRadius, Vector2.up, 0.8f, player.LadderLayer).collider is null;
+                        
 #if _DEBUG
                         Debug.Log($"noLadderAbove={noLadderAbove}");
 #endif
-                        if (noLadderAbove)
+                        if (player.GetBeneathObject() is not null)
+                            Debug.Log($"player.GetBeneathObject().layer={player.GetBeneathObject().layer}");
+
+                        if (noLadderAbove && (player.GetBeneathObject() is null || 1 << player.GetBeneathObject().layer != (int)player.LadderLayer))
                         {
                             player.rb.velocity = Vector2.zero;
                             player.rb.totalForce = Vector2.zero;
@@ -249,8 +257,8 @@ namespace JFM
 #endif
                         }
                     }
-
-                    if ((1 << player.groundedLayer == (int)player.LadderLayer) && noLadderAbove || (1 << player.groundedLayer == (int)player.GroundLayer))
+                    
+                    if ((1 << player.groundedLayer == (int)player.LadderLayer && (player.GetBeneathObject() is null || 1 << player.GetBeneathObject().layer != (int)player.LadderLayer)) && noLadderAbove || (1 << player.groundedLayer == (int)player.GroundLayer))
                     {
                         if (willCrouch)
                         {
@@ -265,7 +273,7 @@ namespace JFM
                 Debug.Log($"Detected stairs or ground. slope was {slope} player.MoveInput.x={player.MoveInput.x} foundSlopeBeneath={foundSlopeBeneath} && Mathf.Abs(slope) > player.StairsUpMinSlope={Mathf.Abs(slope) > player.StairsUpMinSlope}");
 #endif
 
-                if (player.rb.velocity.y > -0.001f)
+                if (Mathf.Abs(player.rb.velocity.y) < 0.001f)
                 {
                     player.ChangeState(player.states[PlayerState.STATE.IDLE]);
                     return;
@@ -290,8 +298,8 @@ namespace JFM
             {
                 player.UseKnowledge(AF.KnowledgeID.DASH);
                 return;
-            }            
-            
+            }
+
             // Add force but limit speed
             if (player.MoveInput.x != 0.0f && player.rb.velocity.magnitude < player.WalkSpeed)
             {
@@ -310,8 +318,10 @@ namespace JFM
             }
 
             if (player.WillJump())
-            {                
+            {
                 player.Jump();
+                player.inputTriggers["Jump"] = false;
+                return;
             }
 
             if (player.CanClimbLadder())
@@ -327,7 +337,7 @@ namespace JFM
 
             coyoteTimeCounter -= Time.fixedDeltaTime;
 
-            if(coyoteTimeCounter <= 0.0f && !hasDepletedJumps && wasGrounded) 
+            if (coyoteTimeCounter <= 0.0f && !hasDepletedJumps && wasGrounded)
             {
                 //player.rb.gravityScale = player.DefaultGravityScale;
                 player.DepleteJumps();
@@ -343,5 +353,7 @@ namespace JFM
             player.animator.SetBool("IsAirborne", false);
             base.Exit();
         }
+
+        public override void OnLeaveState() {}
     }
 }

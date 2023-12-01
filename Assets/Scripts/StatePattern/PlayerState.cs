@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem.LowLevel;
+using AF;
 
 namespace JFM
 {
@@ -14,7 +15,7 @@ namespace JFM
      *   Change the "Body Type" of the Rigidbody2D to Kinematic unless you want physical interaction with the tilemap.
      * 
      * * * * * * * * * * * * * * */
-    public class PlayerState : ScriptableObject
+    public abstract class PlayerState : ScriptableObject
     {
         public enum STATE
         {
@@ -48,6 +49,7 @@ namespace JFM
         protected EVENT stage;        
         protected PlayerController player;
         protected PlayerState nextState;
+        protected string animatorObserverName;
 
         public void Initialize(PlayerController player)
         {
@@ -56,7 +58,7 @@ namespace JFM
         }
 
         public virtual void Enter()
-        {
+        {            
             if (name == STATE.KNOWLEDGE)
             {
                 KnowledgeState state = (KnowledgeState)this;
@@ -70,7 +72,10 @@ namespace JFM
         }
 
         public virtual void Update() { stage = EVENT.UPDATE; }
-        public virtual void Exit() { stage = EVENT.EXIT; }
+        public virtual void Exit() 
+        {            
+            stage = EVENT.EXIT; 
+        }
 
         public PlayerState Process()
         {
@@ -89,6 +94,40 @@ namespace JFM
             this.nextState = nextState;
             stage = EVENT.EXIT;
             nextState.stage = EVENT.ENTER;
+        }
+
+        public abstract void OnLeaveState();
+
+        public void SubscribeToAnimatorObserver(string observerName)
+        {
+            animatorObserverName = observerName;
+
+            AnimatorObserver[] behaviors = player.animator.GetBehaviours<AnimatorObserver>();
+            
+            foreach (AnimatorObserver behavior in behaviors)
+            {
+                if (behavior is not null && behavior.name == observerName)
+                {
+                    //Debug.Log($"Behavior found.");
+                    behavior.onLeaveState += OnLeaveState;
+                }
+                else
+                {
+                    //Debug.Log($"Behavior NOT found.");
+                }
+            }
+        }
+
+        public void UnsubscribeToAnimatorObserver()
+        {
+            AnimatorObserver[] behaviors = player.animator.GetBehaviours<AnimatorObserver>();
+            foreach (AnimatorObserver behavior in behaviors)
+            {
+                if (behavior is not null && behavior.name == animatorObserverName)
+                {
+                    behavior.onLeaveState -= OnLeaveState;
+                }
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ public class Jump : ActionNode
         npcAnimator.ResetTrigger("Fall");
     }
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
        
         if (player.transform.position.y > npc.transform.position.y + 2f && Raycast2DHelper.CheckGrounded(npcRigidBody.position, 0.14f, 0.1f,

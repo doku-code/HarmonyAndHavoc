@@ -182,5 +182,7 @@ namespace JFM
             player.animator.SetBool("IsRunning", false);
             base.Exit();
         }
+
+        public override void OnLeaveState() { }
     }
 }

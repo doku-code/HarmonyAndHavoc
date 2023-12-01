@@ -219,11 +219,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -678,7 +678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &63284510
 Transform:
   m_ObjectHideFlags: 0
@@ -688,7 +688,7 @@ Transform:
   m_GameObject: {fileID: 63284509}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 122.950005, y: -43.64, z: -8.275355}
+  m_LocalPosition: {x: 130.36278, y: -35.150745, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -707,8 +707,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 0141efcae08282647aec0a5abf459dca, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 201bce417fabea846a1b1a26e5f0992f, type: 2}
 --- !u!61 &63284512
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -902,7 +902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -918,10 +918,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &63284519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1113,11 +1117,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -1736,7 +1740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &188854464
 Transform:
   m_ObjectHideFlags: 0
@@ -1746,7 +1750,7 @@ Transform:
   m_GameObject: {fileID: 188854463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 187.21, y: -6.33, z: -8.275355}
+  m_LocalPosition: {x: 194.62279, y: 2.159255, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1765,8 +1769,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 9d9cb017cccf89947adda71828bf1bf5, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 10b8d8f4ee1927c49a97561a0ea68d43, type: 2}
 --- !u!61 &188854466
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1960,7 +1964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -1976,10 +1980,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &188854473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2417,11 +2425,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -2606,6 +2614,134 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &247528950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 247528952}
+  - component: {fileID: 247528951}
+  m_Layer: 0
+  m_Name: LevelSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &247528951
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247528950}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 249824721126818650, guid: 807142ccf2ec42845abc5fa0cbd1b10b, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 3935dc3ab09104b4a8ffce8f942327fc, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &247528952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247528950}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1158.7188, y: 725.01135, z: 6.313036}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &253583192
 GameObject:
   m_ObjectHideFlags: 0
@@ -2784,11 +2920,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -2997,7 +3133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &292607784
 Transform:
   m_ObjectHideFlags: 0
@@ -3007,7 +3143,7 @@ Transform:
   m_GameObject: {fileID: 292607783}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 76.8, y: -24.66, z: -8.275355}
+  m_LocalPosition: {x: 84.212776, y: -16.170746, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3026,8 +3162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 0b6a4c1c7f9621542b9ea1623c02ef3d, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 288b2986fd35eac4aa0fe4a136320434, type: 2}
 --- !u!61 &292607786
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3221,7 +3357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -3237,10 +3373,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &292607793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9190,11 +9330,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -9390,7 +9530,7 @@ PrefabInstance:
     - target: {fileID: 580033360862106619, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 1198071499}
+      objectReference: {fileID: 710177884}
     - target: {fileID: 580033360862106619, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_LookAt
       value: 
@@ -9401,11 +9541,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5249900324331317818, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.96
+      value: 67.32
       objectReference: {fileID: 0}
     - target: {fileID: 5249900324331317818, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.1400003
+      value: 11.38
       objectReference: {fileID: 0}
     - target: {fileID: 5249900324331317818, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9442,8 +9582,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4161893206928066694, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 377749686}
   m_SourcePrefab: {fileID: 100100000, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
+--- !u!1 &377749685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4161893206928066694, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
+  m_PrefabInstance: {fileID: 377749684}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &377749686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377749685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &429501462
 GameObject:
   m_ObjectHideFlags: 0
@@ -9786,11 +9946,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -10399,11 +10559,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -11012,11 +11172,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -11297,11 +11457,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -11418,11 +11578,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -11549,7 +11709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &656493461
 Transform:
   m_ObjectHideFlags: 0
@@ -11559,7 +11719,7 @@ Transform:
   m_GameObject: {fileID: 656493460}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 262.35, y: -6.26, z: -8.275355}
+  m_LocalPosition: {x: 269.7628, y: 2.2292547, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11578,8 +11738,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: b69bdaafe00fdc1498abcd2cc9e3a71c, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: fd0662f111725a841913a62bffcfc785, type: 2}
 --- !u!61 &656493463
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11773,7 +11933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -11789,10 +11949,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &656493470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11820,11 +11984,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -11941,11 +12105,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -12048,6 +12212,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &710177884 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+  m_PrefabInstance: {fileID: 1048421421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &731258358
 GameObject:
   m_ObjectHideFlags: 0
@@ -12154,7 +12323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &732978191
 Transform:
   m_ObjectHideFlags: 0
@@ -12164,7 +12333,7 @@ Transform:
   m_GameObject: {fileID: 732978190}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 86.73, y: -8.44, z: -8.275355}
+  m_LocalPosition: {x: 94.14278, y: 0.04925537, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12183,8 +12352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 2e39d6a29340ea64d97e497091eb1e1d, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: cf82db3fda8ff354dbeb8e923fd3617b, type: 2}
 --- !u!61 &732978193
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12378,7 +12547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -12394,10 +12563,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &732978200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13246,11 +13419,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -13541,7 +13714,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &868142654
 Transform:
   m_ObjectHideFlags: 0
@@ -13551,7 +13724,7 @@ Transform:
   m_GameObject: {fileID: 868142653}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 251.19998, y: -0.4499998, z: -8.275355}
+  m_LocalPosition: {x: 258.61276, y: 8.039255, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13570,8 +13743,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: be1474f879dc05644925b4700f8af45d, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 290086b71dc64344185ce73267406a49, type: 2}
 --- !u!61 &868142656
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13765,7 +13938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -13781,10 +13954,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &868142663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16366,7 +16543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1032169566
 Transform:
   m_ObjectHideFlags: 0
@@ -16376,7 +16553,7 @@ Transform:
   m_GameObject: {fileID: 1032169565}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 170.08, y: -10.28, z: -8.275355}
+  m_LocalPosition: {x: 177.49278, y: -1.7907448, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16395,8 +16572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: d164c04d4a82a1d4aa3430a38ed38a06, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 1b7793007a3cd5341a8e7be8aa1b8f40, type: 2}
 --- !u!61 &1032169568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16590,7 +16767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -16606,10 +16783,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1032169575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16674,6 +16855,63 @@ Transform:
   - {fileID: 1973423179}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1048421421
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1219532753481392680, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 67.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
 --- !u!1 &1057564510
 GameObject:
   m_ObjectHideFlags: 0
@@ -17016,11 +17254,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -17533,11 +17771,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!4 &1198071499 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-  m_PrefabInstance: {fileID: 2112578522}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1206130272
 GameObject:
   m_ObjectHideFlags: 0
@@ -17562,7 +17795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1206130273
 Transform:
   m_ObjectHideFlags: 0
@@ -17572,7 +17805,7 @@ Transform:
   m_GameObject: {fileID: 1206130272}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 65.14, y: -24.66, z: -8.275355}
+  m_LocalPosition: {x: 72.55277, y: -15.990745, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17591,8 +17824,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 62d75d40f570fff4c8297c8158818178, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 39dc6200189681949b4fd250ffab56ea, type: 2}
 --- !u!61 &1206130275
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17786,7 +18019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -17802,10 +18035,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1206130282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17925,7 +18162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1232793241
 Transform:
   m_ObjectHideFlags: 0
@@ -17935,7 +18172,7 @@ Transform:
   m_GameObject: {fileID: 1232793240}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.17, y: -0.47999954, z: -8.275355}
+  m_LocalPosition: {x: 32.582775, y: 8.009255, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17954,8 +18191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 208c31204bd83b147b0385085fe7e6fe, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 1241453996e39c2449fa0ac2809c259c, type: 2}
 --- !u!61 &1232793243
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18149,7 +18386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -18165,10 +18402,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1232793250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41563,7 +41804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObjects: []
   objectToPool: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  amountToPool: 100
+  amountToPool: 200
 --- !u!4 &1293816139
 Transform:
   m_ObjectHideFlags: 0
@@ -41685,7 +41926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1307303177
 Transform:
   m_ObjectHideFlags: 0
@@ -41695,7 +41936,7 @@ Transform:
   m_GameObject: {fileID: 1307303176}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 211.99, y: -27.61, z: -8.275355}
+  m_LocalPosition: {x: 219.40279, y: -19.120747, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -41714,8 +41955,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 7c8f9ba9cd5d2de46aa6de3a326d476a, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: eccc56ed340bcb147b591088a637c297, type: 2}
 --- !u!61 &1307303179
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -41909,7 +42150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -41925,10 +42166,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1307303186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42038,7 +42283,6 @@ GameObject:
   - component: {fileID: 1329097541}
   - component: {fileID: 1329097540}
   - component: {fileID: 1329097539}
-  - component: {fileID: 1329097538}
   - component: {fileID: 1329097544}
   - component: {fileID: 1329097545}
   - component: {fileID: 1329097546}
@@ -42048,7 +42292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1329097537
 Transform:
   m_ObjectHideFlags: 0
@@ -42058,27 +42302,13 @@ Transform:
   m_GameObject: {fileID: 1329097536}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.73, y: -2.4099998, z: -8.275355}
+  m_LocalPosition: {x: 19.44, y: 8.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 539055137}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1329097538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1329097536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: c52d5584a8e3d9146871be30907c826e, type: 2}
 --- !u!61 &1329097539
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -42272,7 +42502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -42288,10 +42518,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  attackDamage: 100
-  knockBackImpulse: 2
-  knockBackInterval: 0.001
+  maxHealth: 3
+  attackDamage: 1
+  knockBackImpulse: 3
+  knockBackDuration: 0.5
+  damageCooldown: 0.5
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: a3489f9cadc6ce145bdc5c3ccb365aac, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1329097546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42565,11 +42799,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -406770,7 +407004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1521873534
 Transform:
   m_ObjectHideFlags: 0
@@ -406780,7 +407014,7 @@ Transform:
   m_GameObject: {fileID: 1521873533}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 199.82, y: -27.61, z: -8.275355}
+  m_LocalPosition: {x: 207.23279, y: -19.120747, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -406799,8 +407033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 28887ee89b57c4345add0200bfe0c41d, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 01a13a2bc7b4c314e936e8b3c119d343, type: 2}
 --- !u!61 &1521873536
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -406994,7 +407228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -407010,10 +407244,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1521873543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407379,7 +407617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1570236416
 Transform:
   m_ObjectHideFlags: 0
@@ -407389,7 +407627,7 @@ Transform:
   m_GameObject: {fileID: 1570236415}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 224.06, y: -6.33, z: -8.275355}
+  m_LocalPosition: {x: 231.47278, y: 2.159255, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -407408,8 +407646,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 89152e1c60577a84bb032806c607d339, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 92e25a4ac7b4d0344807f3093348d046, type: 2}
 --- !u!61 &1570236418
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -407603,7 +407841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -407619,10 +407857,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1570236425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407988,7 +408230,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1600207935
 Transform:
   m_ObjectHideFlags: 0
@@ -407998,7 +408240,7 @@ Transform:
   m_GameObject: {fileID: 1600207934}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 101.78, y: -8.5, z: -8.275355}
+  m_LocalPosition: {x: 109.19277, y: -0.0107450485, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -408017,8 +408259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 5750fef2a92995040845db0b60eaa56f, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 47dab816a4888e245a84bd2b2f922810, type: 2}
 --- !u!61 &1600207937
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -408212,7 +408454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -408228,10 +408470,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1600207944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408415,7 +408661,7 @@ Transform:
   m_GameObject: {fileID: 1625123830}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.96, y: 7.1400003, z: -10}
+  m_LocalPosition: {x: 67.32, y: 11.38, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -408595,11 +408841,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -409054,7 +409300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1723928782
 Transform:
   m_ObjectHideFlags: 0
@@ -409064,7 +409310,7 @@ Transform:
   m_GameObject: {fileID: 1723928781}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 91.11, y: -5.44, z: -8.275355}
+  m_LocalPosition: {x: 98.52277, y: 3.049255, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -409083,8 +409329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 6ebda27fa5d035c429a0dd5252f34c5b, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 9252acacb2097694f9f7eac75e6f89ad, type: 2}
 --- !u!61 &1723928784
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -409278,7 +409524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -409294,10 +409540,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1723928791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410183,11 +410433,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -410396,7 +410646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1849342163
 Transform:
   m_ObjectHideFlags: 0
@@ -410406,7 +410656,7 @@ Transform:
   m_GameObject: {fileID: 1849342162}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 155.71, y: -10.26, z: -8.275355}
+  m_LocalPosition: {x: 163.12279, y: -1.7707453, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -410425,8 +410675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 3d18a4f13867a094ebb2edc343f0dd01, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 97b10bda210ad074bb2bd9204e3b69e4, type: 2}
 --- !u!61 &1849342165
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -410620,7 +410870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -410636,10 +410886,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1849342172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410913,11 +411167,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -411208,7 +411462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1898092419
 Transform:
   m_ObjectHideFlags: 0
@@ -411218,7 +411472,7 @@ Transform:
   m_GameObject: {fileID: 1898092418}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 279.44, y: -1.4700003, z: -8.275355}
+  m_LocalPosition: {x: 286.85278, y: 7.0192547, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -411237,8 +411491,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: acc99cf26488ce143b70f5ad6aeda600, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 67d77091a4f5ee74eacebed2046d6b88, type: 2}
 --- !u!61 &1898092421
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -411432,7 +411686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 1
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -411448,10 +411702,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1898092428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411479,11 +411737,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -412254,8 +412512,8 @@ GameObject:
   - component: {fileID: 1973423181}
   - component: {fileID: 1973423180}
   - component: {fileID: 1973423183}
-  - component: {fileID: 1973423185}
   - component: {fileID: 1973423184}
+  - component: {fileID: 1973423185}
   m_Layer: 6
   m_Name: Ladder
   m_TagString: Untagged
@@ -413781,7 +414039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1989576963
 Transform:
   m_ObjectHideFlags: 0
@@ -413791,7 +414049,7 @@ Transform:
   m_GameObject: {fileID: 1989576962}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 112.57, y: -43.64, z: -8.275355}
+  m_LocalPosition: {x: 119.98277, y: -35.150745, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -413810,8 +414068,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: c9ee822f91ef4a64998255019446052c, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 31cc1a6b8fc9ef742b05f91f1a463d7a, type: 2}
 --- !u!61 &1989576965
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -414005,7 +414263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -414021,10 +414279,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1989576972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414134,11 +414396,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -414348,7 +414610,7 @@ Transform:
   m_GameObject: {fileID: 2041733706}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.412775, y: 8.489255, z: 8.275355}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -416897,63 +417159,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1001 &2112578522
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1219532753481392680, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 25.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.34
-      objectReference: {fileID: 0}
-    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
 --- !u!1 &2130891435
 GameObject:
   m_ObjectHideFlags: 0
@@ -417162,8 +417367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 70a70122cf92b91418e3f63f4d5bcde4, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: c52d5584a8e3d9146871be30907c826e, type: 2}
 --- !u!4 &737480819805687483
 Transform:
   m_ObjectHideFlags: 0
@@ -417193,10 +417398,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 54
+  maxHealth: 10
+  attackDamage: 4
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!1 &805803094812297287
 GameObject:
   m_ObjectHideFlags: 0
@@ -417258,7 +417467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 105
+  numberOfCoins: 15
   minForce: 100
   maxForce: 150
   spawnDelay: 0.1
@@ -417370,7 +417579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1444697693181896750
 GameObject:
   m_ObjectHideFlags: 0
@@ -417548,7 +417757,7 @@ Transform:
   m_GameObject: {fileID: 2931527273088561141}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35.85, y: 1.6499996, z: -8.275355}
+  m_LocalPosition: {x: 43.26277, y: 10.139255, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -417619,8 +417828,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.034742355, y: -0.22334218}
-  m_Size: {x: 1.356327, y: 1.6541162}
+  m_Offset: {x: 0.086387634, y: -0.113049984}
+  m_Size: {x: 0.91737366, y: 1.4335318}
   m_Direction: 0
 --- !u!95 &2305495656788272560
 Animator:
@@ -417818,7 +418027,7 @@ Transform:
   m_GameObject: {fileID: 5587187720671963370}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 39.660004, y: -0.63600016, z: -8.275355}
+  m_LocalPosition: {x: 47.072777, y: 7.853255, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -417964,7 +418173,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -418003,7 +418212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &2952911732383082299
 GameObject:
   m_ObjectHideFlags: 0
@@ -418204,8 +418413,8 @@ Transform:
   m_GameObject: {fileID: 1373996881212869375}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 303.3, y: -15.34, z: -8.275355}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 310.71277, y: -8.180745, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5674772736841609566}
@@ -418628,7 +418837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1001 &5674772736841609564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -418667,11 +418876,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8354556803198035938, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Layer
@@ -419235,7 +419444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
+  tickInterval: 0.01
   tree: {fileID: 11400000, guid: 65c304a75a81b914b902b769d069f55c, type: 2}
 --- !u!1 &7611776407940225465
 GameObject:
@@ -419281,8 +419490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: be1d75fb866324e49865aa4900ba1b9a, type: 2}
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 23dd3da9f67943a4e8f01db7fbe15009, type: 2}
 --- !u!61 &8024168652293089364
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -419357,10 +419566,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 3
+  attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 11400000, guid: c52d5584a8e3d9146871be30907c826e, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &8024168652293089367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419457,7 +419670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 10
+  numberOfCoins: 2
   minForce: 10
   maxForce: 150
   spawnDelay: 0.1
@@ -419473,10 +419686,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 4
+  attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &8828252214850132338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419524,4 +419741,5 @@ SceneRoots:
   - {fileID: 1545401400058854368}
   - {fileID: 2041733707}
   - {fileID: 1293816139}
-  - {fileID: 2112578522}
+  - {fileID: 247528952}
+  - {fileID: 1048421421}

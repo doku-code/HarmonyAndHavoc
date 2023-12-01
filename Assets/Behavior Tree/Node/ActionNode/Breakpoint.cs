@@ -15,7 +15,7 @@ public class Breakpoint : ActionNode
     {
     }
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
         return State.SUCCESS;
     }

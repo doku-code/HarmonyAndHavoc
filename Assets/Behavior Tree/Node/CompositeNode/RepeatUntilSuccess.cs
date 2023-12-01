@@ -22,7 +22,7 @@ public class RepeatUntilSuccess : CompositeNode
 
     }
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
         if (children.Count == 0)
         {
@@ -30,7 +30,7 @@ public class RepeatUntilSuccess : CompositeNode
         }
 
         Node currentChild = children[currentChildIndex];
-        State childState = currentChild.Update();
+        State childState = currentChild.DoUpdate(dt);
 
         if (childState == State.FAILURE)
         {

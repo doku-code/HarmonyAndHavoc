@@ -76,5 +76,18 @@ namespace JFM
             
             return new Color(r / 255.0f, g / 255.0f, b / 255.0f);
         }
+
+        public static float GetClipLength(Animator animator, string name)
+        {
+            foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+            {
+                if (clip.name == name)
+                {
+                    return clip.length;
+                }
+            }
+
+            return 0.0f;
+        }
     }
 }

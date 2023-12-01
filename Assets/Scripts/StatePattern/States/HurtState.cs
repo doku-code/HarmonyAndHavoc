@@ -9,22 +9,14 @@ namespace JFM
     [CreateAssetMenu(fileName = "HurtState", menuName = "States/Hurt")]
     public class HurtState : PlayerState
     {
-        private float startTime;
-        private float animationClipLength;
-        [SerializeField] private int animatorLayer = 0;
-        [SerializeField] private string motionName = "Player_Get_Hit";
-        [SerializeField] private float clipLengthAdjustment = -0.02f;
+        //private float startTime;
         [SerializeField] private float throwBackImpulse = 0.5f;
         [NonSerialized] public Vector2 pushDirection;
 
         public override void Enter()
         {
             player.animator.SetTrigger("IsHit");
-            startTime = Time.time;
-            /*if(animationClipLength == 0.0f)
-            {
-                animationClipLength = player.animator.GetCurrentAnimatorStateInfo(animatorLayer).length;                       
-            }*/
+            //startTime = Time.time;            
 
             //player.rb.velocity = new Vector2(0.0f, player.rb.velocity.y);
             Vector2 normal = Platformer2DUtilities.GetPerpendicularVector2(pushDirection).normalized;
@@ -33,30 +25,25 @@ namespace JFM
             //Debug.Log($"player.rb.velocity={player.rb.velocity}");
             player.rb.AddForce(pushDirection * throwBackImpulse, ForceMode2D.Impulse);
 
+            SubscribeToAnimatorObserver("Movement");
+
             base.Enter();
         }
 
         public override void Update()
-        {
-            if (animationClipLength == 0.0f)
-            {
-                if (player.animator.GetCurrentAnimatorStateInfo(animatorLayer).IsName(motionName))
-                {
-                    animationClipLength = player.animator.GetCurrentAnimatorStateInfo(animatorLayer).length;
-                    //Debug.Log($"Testing IsHit animationClipLength = {animationClipLength}");
-                }
-            }
-            else if(Time.time - startTime >= animationClipLength + clipLengthAdjustment)
-            {
-                player.ChangeState(player.states[STATE.IDLE]);
-                return;
-            }            
+        {                 
         }
 
         public override void Exit()
         {
+            UnsubscribeToAnimatorObserver();
             player.animator.ResetTrigger("IsHit");
             base.Exit();
+        }
+
+        public override void OnLeaveState() 
+        {
+            player.ChangeState(player.states[STATE.IDLE]);
         }
     }
 }

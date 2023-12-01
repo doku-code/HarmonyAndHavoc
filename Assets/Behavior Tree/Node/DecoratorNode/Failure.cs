@@ -17,14 +17,14 @@ public class Failure : DecoratorNode
     {
     }
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
         if (child == null)
         {
             return State.FAILURE;
         }
 
-        var state = child.Update();
+        var state = child.DoUpdate(dt);
         if (state == State.SUCCESS)
         {
             return State.FAILURE;

@@ -33,4 +33,8 @@ public class DoubleJumpKnowledge : Knowledge
     {
         return true;
     }
+
+    public override void OnLeave()
+    {
+    }
 }

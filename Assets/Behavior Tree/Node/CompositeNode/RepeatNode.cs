@@ -18,11 +18,11 @@ public class RepeatNode : CompositeNode
 
     }
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
         foreach (var child in children)
         {
-            child.Update();
+            child.DoUpdate(dt);
         }
         return State.RUNNING;
     }

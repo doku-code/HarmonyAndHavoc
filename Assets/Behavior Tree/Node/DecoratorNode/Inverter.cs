@@ -19,14 +19,14 @@ public class Inverter : DecoratorNode
     {
     }
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
         if (child == null)
         {
             return State.FAILURE;
         }
 
-        switch (child.Update())
+        switch (child.DoUpdate(dt))
         {
             case State.RUNNING:
                 return State.RUNNING;

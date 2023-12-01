@@ -24,7 +24,7 @@ public class TimeOut : DecoratorNode
 
     }
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
         if (child == null)
         {
@@ -36,6 +36,6 @@ public class TimeOut : DecoratorNode
             return State.FAILURE;
         }
 
-        return child.Update();
+        return child.DoUpdate(dt);
     }
 }

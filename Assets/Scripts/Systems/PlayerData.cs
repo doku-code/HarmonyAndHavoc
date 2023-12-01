@@ -11,7 +11,6 @@ namespace AF
         DOUBLE_JUMP,
         WALL_SLIDE,
         GROUND_SLIDE,                
-        AIR_ATTACK,
         COMBO_ATTACK,
         AOE_ATTACK        
     }

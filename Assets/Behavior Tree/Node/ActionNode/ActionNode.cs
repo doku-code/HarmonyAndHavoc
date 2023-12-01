@@ -15,8 +15,6 @@ public abstract class ActionNode : Node
     protected Rigidbody2D npcRigidBody;
     protected EnemyController npcController;
 
-
-
     public override void OnInitialize(GameObject go)
     {        
         //npc = GameObject.Find(gameobjNpcName);

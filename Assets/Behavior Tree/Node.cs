@@ -13,7 +13,7 @@ public abstract class Node : ScriptableObject
     [HideInInspector] public string guid;
     [HideInInspector] public Vector2 position;
     [TextArea] public string Description;
-    public State Update()
+    public State DoUpdate(float dt)
     {
         if (!started)
         {
@@ -21,7 +21,7 @@ public abstract class Node : ScriptableObject
             started = true;
         }
 
-        state = OnUpdate();
+        state = OnUpdate(dt);
 
         if (state == State.FAILURE || state == State.SUCCESS)
         {
@@ -48,5 +48,5 @@ public abstract class Node : ScriptableObject
     public abstract void OnInitialize(GameObject go);
     protected abstract void OnStart();
     protected abstract void OnStop();
-    protected abstract State OnUpdate();
+    protected abstract State OnUpdate(float dt);
 }

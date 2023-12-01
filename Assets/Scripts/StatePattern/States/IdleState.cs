@@ -26,6 +26,7 @@ namespace JFM
         public override void Enter()
         {           
             player.animator.SetBool("IsIdle", true);
+
             player.rb.velocity = Vector2.zero;
             if (!overrideOldGravityScale)
             {
@@ -61,6 +62,8 @@ namespace JFM
                 waitNFrames--;
                 return;
             }
+                       
+
             //Debug.Log($"gravityScale = {player.rb.gravityScale}");
 
             Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
@@ -149,18 +152,18 @@ namespace JFM
                 player.ChangeState(state);
                 return;
             }
-
-            if (player.inputTriggers["Move"] && player.MoveInput.y < 0.0f)
-            {
-                player.ChangeState(player.states[STATE.CROUCH]);
-                return;
-            }
-
+                        
             if (player.WillClimbLadder())
             {
                 LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
                 state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
                 player.ChangeState(state);
+                return;
+            }
+
+            if (player.inputTriggers["Move"] && player.MoveInput.y < 0.0f)
+            {
+                player.ChangeState(player.states[STATE.CROUCH]);
                 return;
             }
 
@@ -214,5 +217,7 @@ namespace JFM
             player.animator.SetBool("IsIdle", false);
             base.Exit();
         }
+
+        public override void OnLeaveState() { }
     }
 }

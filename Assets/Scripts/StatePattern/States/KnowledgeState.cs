@@ -27,5 +27,10 @@ namespace JFM
             knowledge.Exit();
             base.Exit();
         }
+
+        public override void OnLeaveState() 
+        {
+            knowledge.OnLeave();
+        }
     }
 }

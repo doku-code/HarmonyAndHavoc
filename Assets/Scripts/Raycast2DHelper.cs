@@ -18,6 +18,8 @@ namespace JFM
             hitLayer = 0;
 
             RaycastHit2D[] hitRecs = Physics2D.CircleCastAll(position, radius, direction, distance, layerMask);
+            //Debug.Log($"hitRecs.Length={hitRecs.Length}");
+            Platformer2DUtilities.DebugDrawCircle(position, radius, Color.yellow);
             if (hitRecs.Length > 0)
             {
                 int i = 0;
@@ -26,6 +28,7 @@ namespace JFM
                 {
                     if (1 << hitRecs[i].collider.gameObject.layer == groundLayer)
                     {
+                        //Debug.Log($"groundLayer={groundLayer}");
                         found = true;
                         break;
                     }
@@ -36,16 +39,28 @@ namespace JFM
                 }
                 //groundY = hitRecs[i].point.y;
                 hitLayer = hitRecs[i].collider.gameObject.layer;
+                //Debug.Log($"(2)hitLayer={hitLayer}");
 
                 return true;
             }
 
-            RaycastHit2D rayHitRec = Physics2D.Raycast(position, direction, distance + radius, layerMask);
-            if(rayHitRec.collider is not null)
+            RaycastHit2D[] rayHitRecs = Physics2D.RaycastAll(position, direction, distance + radius, layerMask);
+            //Debug.Log($"rayHitRecs.Length={rayHitRecs.Length}");
+
+            if (rayHitRecs.Length > 0)
             {
-                if(hitLayer == 0)
+                int i = 0;
+                while (i < rayHitRecs.Length)
                 {
-                    hitLayer = rayHitRec.collider.gameObject.layer; 
+                    if (hitLayer == 0)
+                    {
+                        if (rayHitRecs[i].collider.gameObject.layer == groundLayer)
+                        {
+                            hitLayer = rayHitRecs[i].collider.gameObject.layer;
+                            break;
+                        }
+                        //Debug.Log($"hitLayer={hitLayer}");
+                    }
                 }
 
                 return true;

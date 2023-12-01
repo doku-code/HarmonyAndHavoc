@@ -11,7 +11,7 @@ public class BehaviorTreeRunner : MonoBehaviour
     {
         tree = tree.Clone();
 
-        foreach(Node node in tree.nodes)
+        foreach (Node node in tree.nodes)
         {
             node.OnInitialize(gameObject);
         }
@@ -24,7 +24,7 @@ public class BehaviorTreeRunner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(tickInterval);
-            tree.Update();
+            tree.DoUpdate(tickInterval);
         }
     }
 }

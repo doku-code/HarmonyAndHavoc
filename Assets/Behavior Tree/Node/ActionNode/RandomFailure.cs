@@ -16,7 +16,7 @@ public class RandomFailure : ActionNode
     {
     }
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
         float value = Random.value;
         if (value > chanceOfFailure)

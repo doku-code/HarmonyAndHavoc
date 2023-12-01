@@ -8,33 +8,29 @@ namespace JFM
     public class BasicAttackState : PlayerState
     {
         private float startTime;
-        private float animationClipLength;
         private bool isAirborned;
-        [SerializeField] private int animatorLayer = 2;
-        [SerializeField] private string groundMotionName = "Player_Attack_1";
-        [SerializeField] private string airMotionName = "Player_Air_Attack_1";
-        private string motionName;
-
+       
         public override void Enter()
         {
             // If airborne, use air attack animation
             if (isAirborned = !player.IsGrounded())
             {
                 player.animator.SetBool("IsAirborne", true);
-                motionName = airMotionName;
+                SubscribeToAnimatorObserver("AirAttacks");
             }
             else
             {
-                motionName = groundMotionName;
+                SubscribeToAnimatorObserver("GroundAttacks");
             }
 
-            player.animator.SetBool("IsAttacking", true);            
-
+            player.animator.SetInteger("AttackIndex", Random.Range(1, 4));
+            player.animator.SetTrigger("IsAttacking");
+            
             player.inputTriggers["BasicAttack"] = false;
             //player.rb.velocity = Vector2.zero;
             startTime = Time.time;
             player.Attack();
-
+            
             base.Enter();
         }
 
@@ -49,39 +45,35 @@ namespace JFM
                 player.rb.velocity = Vector2.zero;
                 player.rb.totalForce = Vector2.zero;
                 //Debug.Log("walking on ladder");
-            }
-
-            if (animationClipLength == 0.0f)
-            {
-                if (player.animator.GetCurrentAnimatorStateInfo(animatorLayer).IsName(motionName))
-                {
-                    animationClipLength = player.animator.GetCurrentAnimatorStateInfo(animatorLayer).length;
-                    //Debug.Log($"Testing crouchedattack animationClipLength = {animationClipLength}");
-                }
-            }
-            else if (Time.time - startTime >= animationClipLength)
-            {
-                if (!player.IsGrounded())
-                {
-                    player.ChangeState(player.states[STATE.AIRBORNE]);                 
-                }
-                else
-                {
-                    player.ChangeState(player.states[STATE.IDLE]);
-                }
-                return;
-            }
+            }            
         }
 
         public override void Exit()
         {
             player.rb.gravityScale = player.DefaultGravityScale;
-            player.animator.SetBool("IsAttacking", false);
-            if(isAirborned)
+            player.animator.ResetTrigger("IsAttacking");
+            if (isAirborned)
+            {
+                //player.animator.SetBool("IsAirborne", false);                
+            }
+            
+            UnsubscribeToAnimatorObserver();
+            base.Exit();
+        }
+
+        public override void OnLeaveState()
+        {
+            Debug.Log("OnLeaveState()");
+
+            if (!player.IsGrounded())
+            {
+                player.ChangeState(player.states[STATE.AIRBORNE]);                
+            }
+            else
             {
                 player.animator.SetBool("IsAirborne", false);
+                player.ChangeState(player.states[STATE.IDLE]);
             }
-            base.Exit();
         }
     }
 }

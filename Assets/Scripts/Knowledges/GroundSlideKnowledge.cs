@@ -17,15 +17,19 @@ public class GroundSlideKnowledge : Knowledge
     [SerializeField] private float acceleration = 500.0f;
     [SerializeField] private float minVelocity = 0.0005f;    
 
+    private int idleFrames;
+    private bool moving;
+    private bool collisionOverHead;
+
     // In degrees
     private float angle = 0.0f;
 
-    public override void Activate() 
+    public override void Activate()
     {
         //player.GroundedEvent += OnGrounded;
     }
 
-    public override void Deactivate() 
+    public override void Deactivate()
     {
         //player.GroundedEvent -= OnGrounded;
     }
@@ -37,6 +41,8 @@ public class GroundSlideKnowledge : Knowledge
         player.SetKnowledgeTrigger(knowledgePosition, false);
 
         nFrames = 0;
+        moving = true;
+        idleFrames = 0;
 
         //         lastKnowledge = player.Data.Knowledges.find_if()
 
@@ -44,6 +50,8 @@ public class GroundSlideKnowledge : Knowledge
         {
             animationClipLength = player.animator.GetCurrentAnimatorStateInfo(animatorLayer).length;
         }
+
+        collisionOverHead = player.CheckForCollisions2();
     }
 
     public override void Update()
@@ -52,17 +60,18 @@ public class GroundSlideKnowledge : Knowledge
         bool grounded = player.IsGrounded(player.GroundLayer | player.LadderLayer, Vector2.zero, player.GroundDistance * 2.0f, false) || (foundSlopeBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope && Mathf.Abs(slope) < player.StairsUpMaxSlope);
 
         float elapsedTime = Time.time - activationTime;
-
-        if (player.CheckForCollisions2())
+        bool currentCollisionOverHead = player.CheckForCollisions2();
+        if (collisionOverHead |= currentCollisionOverHead)
         {
-            Debug.Log("Found a collision!");
-            nFrames = -5;
-        }
+            //Debug.Log("Found a collision!");
+            //nFrames = 2;
+        }        
 
-        if (nFrames > 1)
+        //Debug.Log($"nFrames={nFrames} collisionOverHead={collisionOverHead} currentCollisionOverHead={currentCollisionOverHead}");
+        if (nFrames > 1 && (collisionOverHead || !moving) && !currentCollisionOverHead)
         {
-            
 
+            //Debug.Log($"GroundSlide end....idleFrames={idleFrames}");
             if (slideDirection.y != 0.0f && player.rb.velocity.y < -0.01f && !grounded)
             {
                 player.ChangeState(player.states[PlayerState.STATE.AIRBORNE]);
@@ -83,10 +92,7 @@ public class GroundSlideKnowledge : Knowledge
                 return;
             }
 
-            //Debug.Log($"Mathf.Abs(player.rb.velocity.x)={Mathf.Abs(player.rb.velocity.x)}");
-
-        
-
+            //Debug.Log($"Mathf.Abs(player.rb.velocity.x)={Mathf.Abs(player.rb.velocity.x)}");        
         
             if( elapsedTime > animationClipLength || (Mathf.Abs(player.rb.velocity.x) < minVelocity && grounded))
             {
@@ -111,10 +117,27 @@ public class GroundSlideKnowledge : Knowledge
             ContinueSlide();
         }
 
+        if(!moving)
+        {
+            idleFrames++;
+        }
+
+        float s = Mathf.Abs(player.rb.velocity.x);
+        if (s < minVelocity)
+        {
+            moving = false;
+        }
+
         nFrames++;
     }
 
     public override void Exit() {
+
+        //if (player.CheckForCollisions2())
+        
+            //Debug.Break();
+        
+        Debug.Log($"GroundSlideKnowledge.Exit() player.rb.velocity={player.rb.velocity}");
         player.animator.ResetTrigger("IsGroundSliding");
         player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
     }
@@ -140,7 +163,7 @@ public class GroundSlideKnowledge : Knowledge
         Vector3 v;
 
         float angle = this.angle * Mathf.Deg2Rad;
-        v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * force;
+        v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * force * Time.fixedDeltaTime;
 
         player.rb.AddForce(v, ForceMode2D.Force);
     }
@@ -148,12 +171,6 @@ public class GroundSlideKnowledge : Knowledge
     public override bool WillUse()
     {
         Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
-        /*
-                if ((Raycast2DHelper.FindSlopeAtPoint(player.rb.position, out float slope, v * 0.02f + Vector2.up * 0.02f, v, player.StairsDownHeight, player.GroundLayer) && Mathf.Abs(slope) > player.StairsUpMinSlope && Mathf.Abs(slope) < player.StairsUpMaxSlope) ||
-                    player.Raycast(false, player.GroundLayer, Vector2.up * 0.0f + (player.IsFacingRight ? Vector2.right : -Vector2.right) * 2.5f * player.ColliderSize.x, 0.01f, (player.IsFacingRight ? Vector2.right : -Vector2.right)))
-                {            
-                    return false;
-                }*/
 
         bool grounded = player.IsGrounded();
 
@@ -177,8 +194,7 @@ public class GroundSlideKnowledge : Knowledge
         return willUse;
     }
 
-    private void OnGrounded()
+    public override void OnLeave()
     {
-        
     }
 }

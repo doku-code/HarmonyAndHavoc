@@ -40,5 +40,7 @@ namespace JFM
             player.animator.ResetTrigger("IsDead");
             base.Exit();
         }
+
+        public override void OnLeaveState() { }
     }
 }

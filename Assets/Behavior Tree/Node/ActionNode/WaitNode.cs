@@ -16,7 +16,7 @@ public class WaitNode : ActionNode
 
     }
 
-    protected override State OnUpdate()
+    protected override State OnUpdate(float dt)
     {
         if (Time.time - startTime > duration)
         {

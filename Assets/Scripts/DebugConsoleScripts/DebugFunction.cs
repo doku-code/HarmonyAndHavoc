@@ -31,8 +31,6 @@ public class DebugFunction : MonoBehaviour
 
     public void SetKnowldege(KnowledgeID knowldegeID)
     {
-        Debug.Log("Test SetKnowldege");
-
         PlayerController pc = FindAnyObjectByType<PlayerController>();
 
         pc.Data.KnownKnowledgeDictionary[knowldegeID] = true;
