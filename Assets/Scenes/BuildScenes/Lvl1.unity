@@ -921,7 +921,11 @@ MonoBehaviour:
   maxHealth: 4
   attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &63284519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1979,7 +1983,11 @@ MonoBehaviour:
   maxHealth: 3
   attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &188854473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3368,7 +3376,11 @@ MonoBehaviour:
   maxHealth: 4
   attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &292607793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11920,7 +11932,11 @@ MonoBehaviour:
   maxHealth: 4
   attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &656493470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12525,7 +12541,11 @@ MonoBehaviour:
   maxHealth: 3
   attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &732978200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13912,7 +13932,11 @@ MonoBehaviour:
   maxHealth: 3
   attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &868142663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16737,7 +16761,11 @@ MonoBehaviour:
   maxHealth: 4
   attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1032169575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17928,7 +17956,11 @@ MonoBehaviour:
   maxHealth: 4
   attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1206130282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18291,7 +18323,11 @@ MonoBehaviour:
   maxHealth: 3
   attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1232793250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42051,7 +42087,11 @@ MonoBehaviour:
   maxHealth: 4
   attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1307303186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42414,7 +42454,11 @@ MonoBehaviour:
   maxHealth: 3
   attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1329097546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407136,7 +407180,11 @@ MonoBehaviour:
   maxHealth: 4
   attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1521873543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407745,7 +407793,11 @@ MonoBehaviour:
   maxHealth: 3
   attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1570236425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408354,7 +408406,11 @@ MonoBehaviour:
   maxHealth: 4
   attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1600207944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409420,7 +409476,11 @@ MonoBehaviour:
   maxHealth: 4
   attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1723928791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410762,7 +410822,11 @@ MonoBehaviour:
   maxHealth: 3
   attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1849342172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411574,7 +411638,11 @@ MonoBehaviour:
   maxHealth: 3
   attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1898092428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414147,7 +414215,11 @@ MonoBehaviour:
   maxHealth: 4
   attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1989576972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417262,7 +417334,11 @@ MonoBehaviour:
   maxHealth: 10
   attackDamage: 4
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!1 &805803094812297287
 GameObject:
   m_ObjectHideFlags: 0
@@ -419426,7 +419502,11 @@ MonoBehaviour:
   maxHealth: 3
   attackDamage: 1
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &8024168652293089367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419542,7 +419622,11 @@ MonoBehaviour:
   maxHealth: 4
   attackDamage: 2
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  tickInterval: 0
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &8828252214850132338
 MonoBehaviour:
   m_ObjectHideFlags: 0

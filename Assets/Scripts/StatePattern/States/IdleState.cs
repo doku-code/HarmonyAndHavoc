@@ -179,6 +179,12 @@ namespace JFM
                 return;
             }
 
+            if (player.Data.GetKnowledgeByID(AF.KnowledgeID.COMBO_ATTACK).WillUse())
+            {
+                player.UseKnowledge(AF.KnowledgeID.COMBO_ATTACK);
+                return;
+            }
+            
             if (player.WillJump())
             {
                 player.ChangeState(player.states[STATE.JUMP]);

@@ -49,10 +49,10 @@ namespace JFM
 
             if (rayHitRecs.Length > 0)
             {
-                int i = 0;
-                while (i < rayHitRecs.Length)
+                if (hitLayer == 0)
                 {
-                    if (hitLayer == 0)
+                    int i = 0;
+                    while (i < rayHitRecs.Length)
                     {
                         if (rayHitRecs[i].collider.gameObject.layer == groundLayer)
                         {
@@ -60,6 +60,8 @@ namespace JFM
                             break;
                         }
                         //Debug.Log($"hitLayer={hitLayer}");
+                        
+                        i++;
                     }
                 }
 

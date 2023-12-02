@@ -34,8 +34,10 @@ public class ComboAttackKnowledge : Knowledge
             motionName = groundMotionName;
         }
 
+        player.currentState.SubscribeToAnimatorObserver("Attacks");
+        
         player.animator.SetBool("IsAttacking", true);
-
+        player.animator.SetInteger("KnowledgeAttackIndex", 1);
         AvailableKnowledgePosition knowledgePosition = player.Data.AvailableKnowledgeDictionary[KnowledgeID.COMBO_ATTACK];
         player.SetKnowledgeTrigger(knowledgePosition, false);
         //player.rb.velocity = Vector2.zero;
@@ -50,27 +52,22 @@ public class ComboAttackKnowledge : Knowledge
 
     public override void Exit()
     {
+        player.animator.SetInteger("KnowledgeAttackIndex", 0);
+        player.currentState.UnsubscribeToAnimatorObserver();
     }
 
     public override bool WillUse()
     {
-        Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
+        
 
-        if ((Raycast2DHelper.FindSlopeAtPoint(player.rb.position, out float slope, v * 0.02f + Vector2.up * 0.02f, v, player.StairsDownHeight, player.GroundLayer) && Mathf.Abs(slope) > player.StairsUpMinSlope && Mathf.Abs(slope) < player.StairsUpMaxSlope) ||
-            player.Raycast(false, player.GroundLayer, Vector2.up * 0.0f + (player.IsFacingRight ? Vector2.right : -Vector2.right) * 2.5f * player.ColliderSize.x, 0.01f, (player.IsFacingRight ? Vector2.right : -Vector2.right)))
-        {
-            return false;
-        }
-
-        bool availableKnowledge = player.Data.KnownKnowledgeDictionary[KnowledgeID.DASH];
-        AvailableKnowledgePosition knowledgePosition = player.Data.AvailableKnowledgeDictionary[KnowledgeID.DASH];
+        bool availableKnowledge = player.Data.KnownKnowledgeDictionary[KnowledgeID.COMBO_ATTACK];
+        AvailableKnowledgePosition knowledgePosition = player.Data.AvailableKnowledgeDictionary[KnowledgeID.COMBO_ATTACK];
 
         //Debug.Log($"cooldown = {Time.time - activationTime} >= {cooldown}");
 
         bool willUse = CanUse()
-            && availableKnowledge
-            && player.GetKnowledgeTrigger(knowledgePosition)
-            && player.MoveInput.x != 0.0f;
+                       && availableKnowledge
+                       && player.GetKnowledgeTrigger(knowledgePosition);
         if (willUse)
         {
             if (willUse = player.Data.UseChaos(chaosCost))
@@ -83,5 +80,6 @@ public class ComboAttackKnowledge : Knowledge
     }
     public override void OnLeave()
     {
+        player.ChangeState(player.states[PlayerState.STATE.IDLE]);
     }
 }
