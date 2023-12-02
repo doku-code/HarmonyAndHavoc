@@ -10,8 +10,7 @@ namespace AF
         DASH,
         DOUBLE_JUMP,
         WALL_SLIDE,
-        GROUND_SLIDE,                
-        AIR_ATTACK,
+        GROUND_SLIDE,
         COMBO_ATTACK,
         AOE_ATTACK        
     }
