@@ -69,20 +69,20 @@ namespace JFM
             
             if (player.WillClimbUpStairs())
             {
-                player.ChangeState(player.states[STATE.STAIRS_UP]);
+                player.StateMachine.ChangeState(player.States[STATE.STAIRS_UP]);
                 return;
             }
 
             if (player.WillClimbDownStairs())
             {
                 //Debug.Break();
-                player.ChangeState(player.states[STATE.STAIRS_DOWN]);
+                player.StateMachine.ChangeState(player.States[STATE.STAIRS_DOWN]);
                 return;
             }
 
             if (player.MoveInput.y < 0.0f)
             {
-                player.ChangeState(player.states[STATE.CROUCH]);
+                player.StateMachine.ChangeState(player.States[STATE.CROUCH]);
                 return;
             }
 
@@ -100,7 +100,7 @@ namespace JFM
 
             if (player.WillJump())
             {
-                player.ChangeState(player.states[STATE.JUMP]);
+                player.StateMachine.ChangeState(player.States[STATE.JUMP]);
                 return;
             }
 
@@ -112,7 +112,7 @@ namespace JFM
 #if _DEBUG
                 Debug.Log($"Walking not grounded!");
 #endif
-                player.ChangeState(player.states[STATE.AIRBORNE]);
+                player.StateMachine.ChangeState(player.States[STATE.AIRBORNE]);
                 return;
             }
             else
@@ -171,17 +171,17 @@ namespace JFM
                 float ladderX = Mathf.Floor(ladderPoint.x) + 0.5f - player.ColliderOffset.x;
                 //Debug.Log($"Climbing ladder... ladderX={ladderX}");
                 player.transform.position = new Vector3(ladderX, player.transform.position.y, player.transform.position.z);
-                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                LadderClimbingState state = (LadderClimbingState)player.States[STATE.LADDER];
                 state.targetX = ladderX;
-                player.ChangeState(state);
+                player.StateMachine.ChangeState(state);
                 return;
             }
 
             if (player.WillClimbLadder())
             {
-                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                LadderClimbingState state = (LadderClimbingState)player.States[STATE.LADDER];
                 state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
-                player.ChangeState(state);
+                player.StateMachine.ChangeState(state);
                 return;
             }
 
@@ -190,7 +190,7 @@ namespace JFM
                 if(player.IsAboveLadder())
                 {
                     resetGravityScale = false;
-                    IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
+                    IdleState state = (IdleState)player.States[PlayerState.STATE.IDLE];
                     state.resetGravityScaleWithOther = true;
                     state.otherGravityScale = player.DefaultGravityScale;
                     player.rb.gravityScale = 0.0f;
@@ -207,13 +207,13 @@ namespace JFM
 #endif
                 }
 
-                player.ChangeState(player.states[STATE.IDLE]);
+                player.StateMachine.ChangeState(player.States[STATE.IDLE]);
                 return;
             }
 
             if (player.WillAttack())
             {
-                player.ChangeState(player.states[STATE.BASIC_ATTACK]);
+                player.StateMachine.ChangeState(player.States[STATE.BASIC_ATTACK]);
                 return;
             }
 

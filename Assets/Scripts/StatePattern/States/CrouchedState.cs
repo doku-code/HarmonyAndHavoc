@@ -25,7 +25,7 @@ namespace JFM
         {
             if (!player.IsGrounded())
             {
-                player.ChangeState(player.states[STATE.AIRBORNE]);
+                player.StateMachine.ChangeState(player.States[STATE.AIRBORNE]);
                 return;
             }
 
@@ -38,13 +38,13 @@ namespace JFM
             {
                 if (player.MoveInput.x != 0.0f)
                 {
-                    player.ChangeState(player.states[STATE.WALK]);
+                    player.StateMachine.ChangeState(player.States[STATE.WALK]);
                 }
                 else
                 {
-                    IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
+                    IdleState state = (IdleState)player.States[PlayerState.STATE.IDLE];
                     state.waitNFrames = 1;
-                    player.ChangeState(state);
+                    player.StateMachine.ChangeState(state);
                 }
                 return;
             }            
@@ -52,7 +52,7 @@ namespace JFM
             if (player.WillAttack() && player.MoveInput.y < 0.0f)
             {
                 resetAnimatorParams = false;
-                player.ChangeState(player.states[STATE.CROUCH_ATTACK]);
+                player.StateMachine.ChangeState(player.States[STATE.CROUCH_ATTACK]);
                 return;
             }
 
@@ -62,10 +62,10 @@ namespace JFM
                 Debug.Log($"Climbing ladder... ladderX={ladderX}");
                 player.transform.position = new Vector3(ladderX, player.transform.position.y, player.transform.position.z);
 
-                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                LadderClimbingState state = (LadderClimbingState)player.States[STATE.LADDER];
                 state.targetX = ladderX;
-                player.ChangeState(state);
-                player.ChangeState(player.states[STATE.LADDER]);
+                player.StateMachine.ChangeState(state);
+                player.StateMachine.ChangeState(player.States[STATE.LADDER]);
                 return;
             }
         }

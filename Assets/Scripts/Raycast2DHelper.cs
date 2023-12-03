@@ -146,5 +146,47 @@ namespace JFM
             return retValue;
         }
 
+        public static bool CheckForCollisions(Vector2 position,
+                                        float radius,
+                                        float upDistance,
+                                        float colliderYOffset,
+                                        int layerMask,
+                                        bool debug
+                                      )
+        {
+            position += Vector2.up * colliderYOffset;
+            
+            if (debug) { 
+                Debug.Log($"position={position} colliderYOffset ={colliderYOffset} upDistance={upDistance}");
+            }
+
+            RaycastHit2D collisionHit = Physics2D.CircleCast(
+                position,
+                radius,
+                Vector2.up,
+                upDistance,
+                layerMask
+            );
+            if (debug)
+            {
+                Platformer2DUtilities.DebugDrawCircle(
+                    position,
+                    radius,
+                    Color.green
+                );
+
+                Platformer2DUtilities.DebugDrawCircle(
+                    position + Vector2.up * upDistance,
+                    radius,
+                    Color.green
+                );
+                //Debug.Break();
+                if (collisionHit.collider is not null)
+                {
+                    Debug.Log($"collider.gameObject.layer={collisionHit.collider.gameObject.layer}");
+                }
+            }
+            return collisionHit.collider is not null;
+        }
     }
 }

@@ -55,7 +55,7 @@ namespace JFM
 
                 if(yDiff < 0.001f)
                 {
-                    player.ChangeState(player.states[STATE.WALK]);
+                    player.StateMachine.ChangeState(player.States[STATE.WALK]);
                     return;
                 }            
             }            
@@ -89,20 +89,20 @@ namespace JFM
             {
                 //Debug.Break();
                 
-                player.ChangeState(player.states[STATE.AIRBORNE]);
+                player.StateMachine.ChangeState(player.States[STATE.AIRBORNE]);
                 return;
             }
 
             if (player.MoveInput.x == 0.0f)
             {
                 //Debug.Log("Here.");
-                player.ChangeState(player.states[STATE.IDLE]);
+                player.StateMachine.ChangeState(player.States[STATE.IDLE]);
                 return;
             }
 
             if (player.MoveInput.y < 0.0f)
             {
-                player.ChangeState(player.states[STATE.CROUCH]);
+                player.StateMachine.ChangeState(player.States[STATE.CROUCH]);
                 return;
             }
 
@@ -114,15 +114,15 @@ namespace JFM
 
             if (player.WillClimbLadder())
             {
-                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                LadderClimbingState state = (LadderClimbingState)player.States[STATE.LADDER];
                 state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
-                player.ChangeState(state);
+                player.StateMachine.ChangeState(state);
                 return;
             }
            
             if (player.WillJump())
             {
-                player.ChangeState(player.states[STATE.JUMP]);
+                player.StateMachine.ChangeState(player.States[STATE.JUMP]);
                 return;
             }     
 

@@ -58,7 +58,7 @@ namespace JFM
             //player.stairsSide = foundStairsBeneath;
             if (!player.IsGrounded() && !foundStairsBeneath)
             {
-                player.ChangeState(player.states[STATE.AIRBORNE]);
+                player.StateMachine.ChangeState(player.States[STATE.AIRBORNE]);
                 //Debug.Log("Going Airborne");
                 //Debug.Break();
                 return;
@@ -66,7 +66,7 @@ namespace JFM
 
             if (player.MoveInput.x == 0.0f)
             {
-                player.ChangeState(player.states[STATE.IDLE]);
+                player.StateMachine.ChangeState(player.States[STATE.IDLE]);
                 return;
             }
 
@@ -79,13 +79,13 @@ namespace JFM
             {
                 //Debug.Log($"slope={slope}");
                 //Debug.Break();
-                player.ChangeState(player.states[STATE.WALK]);
+                player.StateMachine.ChangeState(player.States[STATE.WALK]);
                 return;
             }
 
             if (player.MoveInput.y < 0.0f)
             {
-                player.ChangeState(player.states[STATE.CROUCH]);
+                player.StateMachine.ChangeState(player.States[STATE.CROUCH]);
                 return;
             }
 
@@ -102,15 +102,15 @@ namespace JFM
 
             if (player.WillClimbLadder())
             {
-                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                LadderClimbingState state = (LadderClimbingState)player.States[STATE.LADDER];
                 state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
-                player.ChangeState(state);
+                player.StateMachine.ChangeState(state);
                 return;
             }            
 
             if (player.WillJump())
             {
-                player.ChangeState(player.states[STATE.JUMP]);
+                player.StateMachine.ChangeState(player.States[STATE.JUMP]);
                 return;
             }
 
@@ -139,16 +139,16 @@ namespace JFM
             }            
 
             // Add force but limit speed
-            if (player.rb.velocity.magnitude < speed /** player.StairsDownDeceleration*/)
+            if (player.rb.velocity.magnitude < speed * player.StairsDownDecelerationFactor)
             {
                 Vector3 f;
                 if (addForceNotWorking)
                 {
-                    f = new Vector3(player.IsFacingRight ? 1.0f : -1.0f, 0.0f) * speed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
+                    f = new Vector3(player.IsFacingRight ? 1.0f : -1.0f, 0.0f) * speed * player.StairsAcceleration * player.StairsDownDecelerationFactor * Time.fixedDeltaTime;
                 }
                 else
                 {
-                    f = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), -Mathf.Sin(angle)) * speed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
+                    f = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), -Mathf.Sin(angle)) * speed * player.StairsAcceleration * player.StairsDownDecelerationFactor * Time.fixedDeltaTime;
                 }
 
                 player.rb.AddForce(f, ForceMode2D.Force);
@@ -157,18 +157,18 @@ namespace JFM
                 if(Platformer2DUtilities.AreNearlyEqual(player.rb.position.x, lastXPos) && nFrames > 0)// || addForceNotWorking)
                 {
                     addForceNotWorking = true;
-                    //player.rb.velocity += (v * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime) / player.rb.mass;
+                    //player.rb.velocity += (v * player.StairsAcceleration * player.StairsDownDecelerationFactor * Time.fixedDeltaTime) / player.rb.mass;
                     //Debug.Log($"Passage a la course.");
-                    //player.ChangeState(player.states[STATE.WALK]);
+                    //player.StateMachine.ChangeState(player.States[STATE.WALK]);
                     //return;
                     Debug.Log($"Passage a un angle de 0 degres.");
-                    f = new Vector3(player.IsFacingRight ? 1.0f : -1.0f, 0.0f) * speed * player.StairsAcceleration * player.StairsDownDeceleration * Time.fixedDeltaTime;
+                    f = new Vector3(player.IsFacingRight ? 1.0f : -1.0f, 0.0f) * speed * player.StairsAcceleration * player.StairsDownDecelerationFactor * Time.fixedDeltaTime;
                     player.rb.AddForce(f, ForceMode2D.Force);
                 }
 
-                if (player.rb.velocity.magnitude > speed /** player.StairsDownDeceleration*/)
+                if (player.rb.velocity.magnitude > speed /** player.StairsDownDecelerationFactor*/)
                 {
-                    player.rb.velocity = player.rb.velocity.normalized * speed /** player.StairsDownDeceleration*/;
+                    player.rb.velocity = player.rb.velocity.normalized * speed /** player.StairsDownDecelerationFactor*/;
                 }
 
                 lastXPos = player.rb.position.x;

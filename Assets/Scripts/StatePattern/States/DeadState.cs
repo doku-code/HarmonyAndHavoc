@@ -29,7 +29,7 @@ namespace JFM
             //Debug.Break();
             if (Time.time - startTime >= animationClipLength)
             {
-                //player.ChangeState(player.states[STATE.IDLE]);
+                //player.StateMachine.ChangeState(player.States[STATE.IDLE]);
                 return;
             }            
         }

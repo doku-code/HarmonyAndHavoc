@@ -7,15 +7,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GroundSlideKnowledge", menuName = "Knowledges/Ground Slide")]
 public class GroundSlideKnowledge : Knowledge
 {
-    private float animationClipLength;
-    [SerializeField] private int animatorLayer = 0;
     private int nFrames;
 
     private Vector2 slideDirection;
     [SerializeField] private float force = 60.0f;
     [SerializeField] private float deceleration = 1000.0f;
     [SerializeField] private float acceleration = 500.0f;
-    [SerializeField] private float minVelocity = 0.0005f;    
+    [SerializeField] private float minVelocity = 0.0005f;
+    [SerializeField] private float maxVelocity = 5.0f;
+    [SerializeField] private int minFrames = 5;
 
     private int idleFrames;
     private bool moving;
@@ -44,14 +44,9 @@ public class GroundSlideKnowledge : Knowledge
         moving = true;
         idleFrames = 0;
 
-        //         lastKnowledge = player.Data.Knowledges.find_if()
+        //         lastKnowledge = player.Data.Knowledges.find_if()        
 
-        if (animationClipLength == 0.0f)
-        {
-            animationClipLength = player.animator.GetCurrentAnimatorStateInfo(animatorLayer).length;
-        }
-
-        collisionOverHead = player.CheckForCollisions2();
+        collisionOverHead = player.CheckForCollisions();
     }
 
     public override void Update()
@@ -59,8 +54,8 @@ public class GroundSlideKnowledge : Knowledge
         bool foundSlopeBeneath = player.FindSlopeBeneath(out float slope);
         bool grounded = player.IsGrounded(player.GroundLayer | player.LadderLayer, Vector2.zero, player.GroundDistance * 2.0f, false) || (foundSlopeBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope && Mathf.Abs(slope) < player.StairsUpMaxSlope);
 
-        float elapsedTime = Time.time - activationTime;
-        bool currentCollisionOverHead = player.CheckForCollisions2();
+        //float elapsedTime = Time.time - activationTime;
+        bool currentCollisionOverHead = player.CheckForCollisions();
         if (collisionOverHead |= currentCollisionOverHead)
         {
             //Debug.Log("Found a collision!");
@@ -68,33 +63,33 @@ public class GroundSlideKnowledge : Knowledge
         }        
 
         //Debug.Log($"nFrames={nFrames} collisionOverHead={collisionOverHead} currentCollisionOverHead={currentCollisionOverHead}");
-        if (nFrames > 1 && (collisionOverHead || !moving) && !currentCollisionOverHead)
+        if (nFrames >= minFrames && (collisionOverHead || !moving) && !currentCollisionOverHead)
         {
 
             //Debug.Log($"GroundSlide end....idleFrames={idleFrames}");
             if (slideDirection.y != 0.0f && player.rb.velocity.y < -0.01f && !grounded)
             {
-                player.ChangeState(player.states[PlayerState.STATE.AIRBORNE]);
+                player.StateMachine.ChangeState(player.States[PlayerState.STATE.AIRBORNE]);
                 return;
             }
 
             if (player.WillClimbLadder())
             {
-                LadderClimbingState state = (LadderClimbingState)player.states[PlayerState.STATE.LADDER];
+                LadderClimbingState state = (LadderClimbingState)player.States[PlayerState.STATE.LADDER];
                 state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
-                player.ChangeState(state);
+                player.StateMachine.ChangeState(state);
                 return;
             }
 
             if (player.WillClimbUpStairs())
             {
-                player.ChangeState(player.states[PlayerState.STATE.STAIRS_UP]);
+                player.StateMachine.ChangeState(player.States[PlayerState.STATE.STAIRS_UP]);
                 return;
             }
 
             //Debug.Log($"Mathf.Abs(player.rb.velocity.x)={Mathf.Abs(player.rb.velocity.x)}");        
         
-            if( elapsedTime > animationClipLength || (Mathf.Abs(player.rb.velocity.x) < minVelocity && grounded))
+            if(Mathf.Abs(player.rb.velocity.x) < minVelocity && grounded)
             {
 
                 if (player.Data.GetKnowledgeByID(AF.KnowledgeID.WALL_SLIDE).WillUse())
@@ -103,13 +98,14 @@ public class GroundSlideKnowledge : Knowledge
                     return;
                 }
 
-                player.ChangeState(player.states[PlayerState.STATE.IDLE]);
+                player.StateMachine.ChangeState(player.States[PlayerState.STATE.IDLE]);
                 return;
             }
             // Let rigidbody have a little deceleration when sliding on the ground
             else
             {
                 player.rb.AddForce(Vector2.right * -player.rb.velocity.x * deceleration * Time.fixedDeltaTime, ForceMode2D.Force);
+                Debug.Log($"Decelerating: player.rb.velocity.magnitude={player.rb.velocity.magnitude}");
             }
         }
         else
@@ -128,12 +124,18 @@ public class GroundSlideKnowledge : Knowledge
             moving = false;
         }
 
+        Debug.Log($"player.rb.velocity.magnitude={player.rb.velocity.magnitude}");
+
+        // Limit speed (looks like we have to do this here, since there's sometimes a mysterious force
+        // applied in addition to the slide.
+        Platformer2DUtilities.LimitVelocity(player.rb, maxVelocity);
+
         nFrames++;
     }
 
     public override void Exit() {
 
-        //if (player.CheckForCollisions2())
+        //if (player.CheckForCollisions())
         
             //Debug.Break();
         
@@ -153,7 +155,15 @@ public class GroundSlideKnowledge : Knowledge
 
         float angle = this.angle * Mathf.Deg2Rad;
         v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * force * acceleration * Time.fixedDeltaTime;
-        player.rb.AddForce(v, ForceMode2D.Force);
+
+        // It seems that limiting the speed preemptively (before applpying the force), we may 
+        // limit too much the speed that we gain from running beforehand.
+        //if (player.rb.velocity.magnitude < maxVelocity)
+        {
+            player.rb.AddForce(v, ForceMode2D.Force);
+
+            Debug.Log($"Slide() says: player.rb.velocity.magnitude={player.rb.velocity.magnitude}");
+        }
 
         slideDirection = player.MoveInput.x * Vector2.right;
     }
@@ -165,7 +175,12 @@ public class GroundSlideKnowledge : Knowledge
         float angle = this.angle * Mathf.Deg2Rad;
         v = new Vector3((player.IsFacingRight ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle)) * force * Time.fixedDeltaTime;
 
-        player.rb.AddForce(v, ForceMode2D.Force);
+        if (player.rb.velocity.magnitude < maxVelocity)
+        {
+            player.rb.AddForce(v, ForceMode2D.Force);
+
+            Debug.Log($"ContinueSlide() says: player.rb.velocity.magnitude={player.rb.velocity.magnitude}");
+        }
     }
 
     public override bool WillUse()

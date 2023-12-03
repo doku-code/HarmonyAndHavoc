@@ -89,5 +89,17 @@ namespace JFM
 
             return 0.0f;
         }
+
+        public static void LimitVelocity(Rigidbody2D rb, float maxVelocity)
+        {
+            if (rb.velocity.magnitude > maxVelocity)
+            {
+                /*if (rb.velocity.magnitude > 15.0f)
+                {
+                    Debug.Break();
+                }*/
+                rb.velocity = rb.velocity.normalized * maxVelocity;
+            }
+        }
     }
 }

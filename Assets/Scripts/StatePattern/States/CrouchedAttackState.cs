@@ -37,13 +37,13 @@ namespace JFM
         {
             if (!player.IsGrounded())
             {
-                player.ChangeState(player.states[STATE.AIRBORNE]);
+                player.StateMachine.ChangeState(player.States[STATE.AIRBORNE]);
                 return;
             }
 
             if (!player.inputTriggers["Move"] || player.MoveInput.y >= 0.0f)
             {
-                player.ChangeState(player.states[STATE.IDLE]);
+                player.StateMachine.ChangeState(player.States[STATE.IDLE]);
                 return;
             }                                           
         }
@@ -62,7 +62,7 @@ namespace JFM
         public override void OnLeaveState() 
         {
             resetAnimatorParams = false;
-            player.ChangeState(player.states[STATE.CROUCH]);            
+            player.StateMachine.ChangeState(player.States[STATE.CROUCH]);            
         }
     }
 }

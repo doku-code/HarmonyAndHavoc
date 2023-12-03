@@ -37,7 +37,7 @@ namespace JFM
             {
                 if (player.inputTriggers["Move"] && player.MoveInput.x != 0.0f && player.MoveInput.y == 0.0f)
                 {
-                    WalkingState state = (WalkingState)player.states[STATE.WALK];
+                    WalkingState state = (WalkingState)player.States[STATE.WALK];
                     if (!player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
                     player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down)
                         )
@@ -53,11 +53,11 @@ namespace JFM
                     {
                         //Debug.Log("not walking on ladder");
                     }
-                    player.ChangeState(state);
+                    player.StateMachine.ChangeState(state);
                     return;
                 }
 
-                player.ChangeState(player.states[STATE.IDLE]);
+                player.StateMachine.ChangeState(player.States[STATE.IDLE]);
                 return;
             }
 
@@ -69,15 +69,15 @@ namespace JFM
 
             if (player.WillJump())
             {
-                player.ChangeState(player.states[STATE.JUMP]);
+                player.StateMachine.ChangeState(player.States[STATE.JUMP]);
                 return;
             }
 
             if(Time.time - startTime > wallJumpDuration)
             {
-                AirborneState state = (AirborneState)player.states[STATE.AIRBORNE];
+                AirborneState state = (AirborneState)player.States[STATE.AIRBORNE];
                 state.wasGrounded = false;
-                player.ChangeState(state);
+                player.StateMachine.ChangeState(state);
                 return;
             }
         }

@@ -34,7 +34,7 @@ public class ComboAttackKnowledge : Knowledge
             motionName = groundMotionName;
         }
 
-        player.currentState.SubscribeToAnimatorObserver("Attacks");
+        player.CurrentState.SubscribeToAnimatorObserver("Attacks");
         
         player.animator.SetBool("IsAttacking", true);
         player.animator.SetInteger("KnowledgeAttackIndex", 1);
@@ -53,7 +53,7 @@ public class ComboAttackKnowledge : Knowledge
     public override void Exit()
     {
         player.animator.SetInteger("KnowledgeAttackIndex", 0);
-        player.currentState.UnsubscribeToAnimatorObserver();
+        player.CurrentState.UnsubscribeToAnimatorObserver();
     }
 
     public override bool WillUse()
@@ -80,6 +80,6 @@ public class ComboAttackKnowledge : Knowledge
     }
     public override void OnLeave()
     {
-        player.ChangeState(player.states[PlayerState.STATE.IDLE]);
+        player.StateMachine.ChangeState(player.States[PlayerState.STATE.IDLE]);
     }
 }

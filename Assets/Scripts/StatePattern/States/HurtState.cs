@@ -43,7 +43,7 @@ namespace JFM
 
         public override void OnLeaveState() 
         {
-            player.ChangeState(player.states[STATE.IDLE]);
+            player.StateMachine.ChangeState(player.States[STATE.IDLE]);
         }
     }
 }

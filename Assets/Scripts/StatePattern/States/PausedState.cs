@@ -56,7 +56,7 @@ namespace JFM
             if (player.inputTriggers["Inventory"])
             {
                 player.inputTriggers["Inventory"] = false;
-                player.ChangeState(player.states[STATE.IDLE]);
+                player.StateMachine.ChangeState(player.States[STATE.IDLE]);
                 return;
             }
 

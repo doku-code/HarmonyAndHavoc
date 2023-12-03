@@ -46,7 +46,7 @@ public class DashKnowledge : Knowledge
 
         //         lastKnowledge = player.Data.Knowledges.find_if()
 
-        player.currentState.SubscribeToAnimatorObserver("Movement");
+        player.CurrentState.SubscribeToAnimatorObserver("Movement");
     }
 
     public override void Update()
@@ -64,21 +64,21 @@ public class DashKnowledge : Knowledge
 
         if (dashDirection.y != 0.0f && player.rb.velocity.y < -0.01f && !grounded)
         {
-            player.ChangeState(player.states[PlayerState.STATE.AIRBORNE]);
+            player.StateMachine.ChangeState(player.States[PlayerState.STATE.AIRBORNE]);
             return;
         }
 
         if (player.WillClimbLadder())
         {
-            LadderClimbingState state = (LadderClimbingState)player.states[PlayerState.STATE.LADDER];
+            LadderClimbingState state = (LadderClimbingState)player.States[PlayerState.STATE.LADDER];
             state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
-            player.ChangeState(state);
+            player.StateMachine.ChangeState(state);
             return;
         }
 
         if (player.WillClimbUpStairs())
         {
-            player.ChangeState(player.states[PlayerState.STATE.STAIRS_UP]);
+            player.StateMachine.ChangeState(player.States[PlayerState.STATE.STAIRS_UP]);
             return;
         }
        
@@ -101,7 +101,7 @@ public class DashKnowledge : Knowledge
     }
 
     public override void Exit() {
-        player.currentState.UnsubscribeToAnimatorObserver();
+        player.CurrentState.UnsubscribeToAnimatorObserver();
         player.animator.ResetTrigger("Dash");
         player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);        
     }
@@ -171,6 +171,6 @@ public class DashKnowledge : Knowledge
 
     public override void OnLeave()
     {
-        player.ChangeState(player.states[PlayerState.STATE.IDLE]);
+        player.StateMachine.ChangeState(player.States[PlayerState.STATE.IDLE]);
     }
 }

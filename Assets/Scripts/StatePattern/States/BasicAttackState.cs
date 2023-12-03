@@ -67,12 +67,12 @@ namespace JFM
 
             if (!player.IsGrounded())
             {
-                player.ChangeState(player.states[STATE.AIRBORNE]);                
+                player.StateMachine.ChangeState(player.States[STATE.AIRBORNE]);                
             }
             else
             {
                 player.animator.SetBool("IsAirborne", false);
-                player.ChangeState(player.states[STATE.IDLE]);
+                player.StateMachine.ChangeState(player.States[STATE.IDLE]);
             }
         }
     }

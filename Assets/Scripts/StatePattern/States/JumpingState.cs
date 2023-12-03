@@ -28,11 +28,11 @@ namespace JFM
             {
                 if (player.WillLand())
                 {
-                    player.ChangeState(player.states[STATE.LAND]);
+                    player.StateMachine.ChangeState(player.States[STATE.LAND]);
                 }
                 else
                 {                    
-                    player.ChangeState(player.states[STATE.IDLE]);
+                    player.StateMachine.ChangeState(player.States[STATE.IDLE]);
                 }
                 return;
             }
@@ -45,9 +45,9 @@ namespace JFM
 
             if (player.WillClimbLadder())
             {
-                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                LadderClimbingState state = (LadderClimbingState)player.States[STATE.LADDER];
                 state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
-                player.ChangeState(state);
+                player.StateMachine.ChangeState(state);
                 return;
             }
 
@@ -59,9 +59,9 @@ namespace JFM
 
             if (player.rb.velocity.y < -0.001f)
             {
-                AirborneState state = (AirborneState)player.states[STATE.AIRBORNE];
+                AirborneState state = (AirborneState)player.States[STATE.AIRBORNE];
                 state.wasGrounded = false;
-                player.ChangeState(state);
+                player.StateMachine.ChangeState(state);
                 return;
             }
 
@@ -83,7 +83,7 @@ namespace JFM
 
             if (player.WillAttack())
             {
-                player.ChangeState(player.states[STATE.BASIC_ATTACK]);
+                player.StateMachine.ChangeState(player.States[STATE.BASIC_ATTACK]);
                 return;
             }
 

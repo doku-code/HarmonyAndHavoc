@@ -34,27 +34,27 @@ public class WallSlideKnowledge : Knowledge
         //Debug.Log($"{player.IsGrounded()} && {player.rb.velocity.y >= 0.0f} player.rb.velocity.y={player.rb.velocity.y}");
         if (player.IsGrounded() && player.rb.velocity.y >= 0.0f)
         {
-            IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
+            IdleState state = (IdleState)player.States[PlayerState.STATE.IDLE];
             state.waitNFrames = 3;
-            player.ChangeState(state);
+            player.StateMachine.ChangeState(state);
             return;
         }
 
         if (!IsSlidingOnBackWall())
         {
-            player.ChangeState(player.states[PlayerState.STATE.AIRBORNE]);
+            player.StateMachine.ChangeState(player.States[PlayerState.STATE.AIRBORNE]);
             return;
         }
 
         if (player.inputTriggers["Jump"])
         {
-            player.ChangeState(player.states[PlayerState.STATE.WALLJUMP]);
+            player.StateMachine.ChangeState(player.States[PlayerState.STATE.WALLJUMP]);
             return;
         }
 
         if (!player.inputTriggers["Move"] || !((player.MoveInput.x > 0 && !player.IsFacingRight) || (player.MoveInput.x < 0 && player.IsFacingRight)))
         {
-            player.ChangeState(player.states[PlayerState.STATE.AIRBORNE]);
+            player.StateMachine.ChangeState(player.States[PlayerState.STATE.AIRBORNE]);
             return;
         }
 

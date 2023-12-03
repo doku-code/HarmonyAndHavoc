@@ -69,7 +69,7 @@ namespace JFM
             if (grounded && player.WillLand() && (!foundSlopeBeneath || Mathf.Abs(slope) < player.StairsUpMaxSlope))
             {
                 //Debug.Log($"foundSlopeBeneath={foundSlopeBeneath} grounded={grounded}");
-                player.ChangeState(player.states[STATE.LAND]);
+                player.StateMachine.ChangeState(player.States[STATE.LAND]);
                 return;
             }
                         
@@ -90,13 +90,13 @@ namespace JFM
 #endif
                             if (stairsAreRightSide == player.IsFacingRight)
                             {
-                                //player.ChangeState(player.states[STATE.STAIRS_UP]);
-                                player.ChangeState(player.states[STATE.WALK]);
+                                //player.StateMachine.ChangeState(player.States[STATE.STAIRS_UP]);
+                                player.StateMachine.ChangeState(player.States[STATE.WALK]);
                             }
                             else
                             {
-                                //player.ChangeState(player.states[STATE.STAIRS_DOWN]);
-                                player.ChangeState(player.states[STATE.WALK]);
+                                //player.StateMachine.ChangeState(player.States[STATE.STAIRS_DOWN]);
+                                player.StateMachine.ChangeState(player.States[STATE.WALK]);
                             }
                         }
                         else
@@ -113,7 +113,7 @@ namespace JFM
                         {
                             if (player.Raycast(false, player.LadderLayer, Vector2.zero, player.GroundDistance + 1.0f, Vector2.down))
                             {
-                                WalkingState state = (WalkingState)player.states[STATE.WALK];
+                                WalkingState state = (WalkingState)player.States[STATE.WALK];
                                 state.resetGravityScaleWithOther = true;
                                 state.otherGravityScale = player.rb.gravityScale;
                                 state.newGravityScale = 0.0f;
@@ -131,7 +131,7 @@ namespace JFM
                         Debug.Log($"MoveInput.x != 0.0f!!! grounded={grounded} slope={slope} foundSlopeBeneath={foundSlopeBeneath} player.groundedLayer={player.groundedLayer}");
                         //Debug.Break();
 #endif
-                        player.ChangeState(player.states[STATE.WALK]);
+                        player.StateMachine.ChangeState(player.States[STATE.WALK]);
                         return;
                     }
                     // If grounded to Ground layer, or to Ladder layer IF we didn't start this Airborne state in front 
@@ -150,14 +150,14 @@ namespace JFM
 #endif
                         if (player.GetBeneathObject() is null)
                         {
-                            player.ChangeState(player.states[STATE.WALK]);
+                            player.StateMachine.ChangeState(player.States[STATE.WALK]);
                             return;
                         }
                     }
                 }
                 else if (grounded && (Mathf.Abs(slope) > player.StairsUpMinSlope && foundSlopeBeneath))
                 {
-                    IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
+                    IdleState state = (IdleState)player.States[PlayerState.STATE.IDLE];
 
                     // Adjust for walking on ladders
                     if (player.WillClimbLadder())
@@ -193,7 +193,7 @@ namespace JFM
                         // The Player actually "waits" in idle after having fallen
                         state.waitNFrames = 3;
 
-                        player.ChangeState(state);
+                        player.StateMachine.ChangeState(state);
                         return;
                     }
                 }
@@ -245,7 +245,7 @@ namespace JFM
                             player.rb.isKinematic = true;
                             player.rb.MovePosition(new Vector2(player.transform.position.x, y));
                             //player.rb.isKinematic = false;
-                            IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
+                            IdleState state = (IdleState)player.States[PlayerState.STATE.IDLE];
                             state.otherGravityScale = player.rb.gravityScale;
                             state.resetGravityScaleWithOther = true;
                             state.overrideOldGravityScale = true;
@@ -262,10 +262,10 @@ namespace JFM
                     {
                         if (willCrouch)
                         {
-                            player.ChangeState(player.states[STATE.CROUCH]);
+                            player.StateMachine.ChangeState(player.States[STATE.CROUCH]);
                             return;
                         }
-                        player.ChangeState(player.states[PlayerState.STATE.IDLE]);
+                        player.StateMachine.ChangeState(player.States[PlayerState.STATE.IDLE]);
                         return;
                     }
                 }
@@ -275,7 +275,7 @@ namespace JFM
 
                 if (Mathf.Abs(player.rb.velocity.y) < 0.001f)
                 {
-                    player.ChangeState(player.states[PlayerState.STATE.IDLE]);
+                    player.StateMachine.ChangeState(player.States[PlayerState.STATE.IDLE]);
                     return;
                 }
             }
@@ -288,9 +288,9 @@ namespace JFM
 
             if (player.WillClimbLadder())
             {
-                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                LadderClimbingState state = (LadderClimbingState)player.States[STATE.LADDER];
                 state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
-                player.ChangeState(state);
+                player.StateMachine.ChangeState(state);
                 return;
             }
 
@@ -313,7 +313,7 @@ namespace JFM
 
             if (player.WillAttack())
             {
-                player.ChangeState(player.states[STATE.BASIC_ATTACK]);
+                player.StateMachine.ChangeState(player.States[STATE.BASIC_ATTACK]);
                 return;
             }
 

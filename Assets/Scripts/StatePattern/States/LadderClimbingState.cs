@@ -51,7 +51,7 @@ namespace JFM
             if (player.GetBeneathObject() is null && !player.IsAboveLadder())
             {
                 //Debug.Break();
-                player.ChangeState(player.states[STATE.AIRBORNE]);
+                player.StateMachine.ChangeState(player.States[STATE.AIRBORNE]);
                 return;
             }
 
@@ -106,14 +106,14 @@ namespace JFM
             }
             else if (player.MoveInput.x != 0.0f)
             {                
-                player.ChangeState(player.states[STATE.AIRBORNE]);
+                player.StateMachine.ChangeState(player.States[STATE.AIRBORNE]);
                 return;
             }
 
             if (player.inputTriggers["Jump"])
             {
                 player.inputTriggers["Jump"] = false;
-                player.ChangeState(player.states[STATE.AIRBORNE]);
+                player.StateMachine.ChangeState(player.States[STATE.AIRBORNE]);
                 return;
             }
             /*
@@ -122,7 +122,7 @@ namespace JFM
 #if _DEBUG
                 Debug.Log($"Cannot climb ladder.");
 #endif
-                player.ChangeState(player.states[STATE.IDLE]);
+                player.StateMachine.ChangeState(player.States[STATE.IDLE]);
                 
                 return;
             }*/
@@ -131,7 +131,7 @@ namespace JFM
             {                
                 if(player.MoveInput.y < 0.0f)
                 {
-                    player.ChangeState(player.states[STATE.CROUCH]);
+                    player.StateMachine.ChangeState(player.States[STATE.CROUCH]);
                     return;
                 }
                 else if(player.MoveInput.y == 0.0f)
@@ -139,7 +139,7 @@ namespace JFM
 #if _DEBUG
                     Debug.Log($"Won't climb ladder.");
 #endif
-                    player.ChangeState(player.states[STATE.IDLE]);
+                    player.StateMachine.ChangeState(player.States[STATE.IDLE]);
                     return;
                 }                                
             }
@@ -176,7 +176,7 @@ namespace JFM
                     }
                     player.transform.position = new Vector3(player.transform.position.x, y, player.transform.position.z);
                     
-                    IdleState state = (IdleState)player.states[PlayerState.STATE.IDLE];
+                    IdleState state = (IdleState)player.States[PlayerState.STATE.IDLE];
                     state.otherGravityScale = player.DefaultGravityScale;
                     state.resetGravityScaleWithOther = true;
                     state.overrideOldGravityScale = true;
@@ -191,7 +191,7 @@ namespace JFM
                     Debug.Log($"No ladder found. beneathObject={player.GetBeneathObject()}");
                     //Debug.Break();
 #endif
-                    player.ChangeState(state);
+                    player.StateMachine.ChangeState(state);
                     
                     return;
                 }

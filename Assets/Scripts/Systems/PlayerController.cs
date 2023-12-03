@@ -42,8 +42,8 @@ namespace JFM
         [SerializeField] private float jumpForce = 3.0f;
         [SerializeField] private int baseNumJumps = 1;
         [SerializeField] private float airAcceleration = 100.0f;
-        [SerializeField] private float heightDamage = 3.0f;
-        [SerializeField] private float landingHeight = 2.0f;
+        [SerializeField] private float maxFallDamageHeight = 3.0f;
+        [SerializeField] private float landingHeight = 2.0f;        
         [SerializeField] private float defaultGravityScale;
         [SerializeField] private float groundDistance = 1.0f;
         [SerializeField] private float groundedRadius = 0.2f;
@@ -89,7 +89,7 @@ namespace JFM
 
         [SerializeField] private float stairsDownHeight = 0.2f;
         [SerializeField] private float stairsDownGroundX = 0.3f;
-        [SerializeField] private float stairsDownDeceleration = 0.3f;
+        [SerializeField] private float stairsDownDecelerationFactor = 0.3f;
         [SerializeField] private float stairsDownMinSlope = 0.4f;
         [SerializeField] private float stairsDownMaxSlope = 2.0f;
         // In degrees
@@ -117,9 +117,23 @@ namespace JFM
 
         [Space]
         [Header("States")]
-        public PlayerState currentState;
         [SerializeField] private PlayerState[] statesArray;
-        public Dictionary<PlayerState.STATE, PlayerState> states = new Dictionary<PlayerState.STATE, PlayerState>();
+        private PlayerStateMachine stateMachine;
+
+        public PlayerStateMachine StateMachine
+        {
+            get => stateMachine;
+        }
+
+        public PlayerState CurrentState
+        {
+            get => stateMachine.currentState;
+        }
+
+        public Dictionary<PlayerState.STATE, PlayerState> States
+        {
+            get => stateMachine.states;
+        }
 
         public int BaseNumJumps
         {
@@ -232,20 +246,15 @@ namespace JFM
             get => stairsAcceleration;
         }
 
-        public float StairsDownDeceleration
+        public float StairsDownDecelerationFactor
         {
-            get => stairsDownDeceleration;
+            get => stairsDownDecelerationFactor;
         }
 
         public float StairsUpAngle
         {
             get => stairsUpAngle;
         }
-
-        /*public float StairsDownAngle
-        {
-            get => stairsDownAngle;
-        }*/
 
         public float StairsDownGroundX
         {
@@ -266,11 +275,6 @@ namespace JFM
         {
             get => defaultGravityScale;
         }
-
-        /*public float NumJumps
-        {
-            get => numJumps;
-        }*/
 
         public LayerMask GroundLayer
         {
@@ -402,7 +406,7 @@ namespace JFM
             float highestY = highestAirborneY;
             highestAirborneY = transform.position.y;
 
-            if (highestY - transform.position.y > heightDamage)
+            if (highestY - transform.position.y > maxFallDamageHeight)
             {
                 Debug.Log($" ~ ~ ~ D A M A G E ~ ~ ~ highestY={highestY} transform.position.y={transform.position.y}");
 
@@ -441,14 +445,14 @@ namespace JFM
 
         public void TakeDamage(int damage, Vector2 pushDirection)
         {
-            if (currentState != states[PlayerState.STATE.HURT] &&
-                currentState != states[PlayerState.STATE.DEAD] &&
-                (currentState != states[PlayerState.STATE.KNOWLEDGE] ||
-                ((KnowledgeState)states[PlayerState.STATE.KNOWLEDGE]).knowledge !=
+            if (stateMachine.currentState != stateMachine.states[PlayerState.STATE.HURT] &&
+                stateMachine.currentState != stateMachine.states[PlayerState.STATE.DEAD] &&
+                (stateMachine.currentState != stateMachine.states[PlayerState.STATE.KNOWLEDGE] ||
+                ((KnowledgeState)stateMachine.states[PlayerState.STATE.KNOWLEDGE]).knowledge !=
                 playerData.EveryKnowledgeDictionary[KnowledgeID.DASH]))
             {
                 playerData.TakeDamage(damage);
-                HurtState state = (HurtState)states[PlayerState.STATE.HURT];
+                HurtState state = (HurtState)stateMachine.states[PlayerState.STATE.HURT];
                 state.pushDirection = pushDirection.normalized;
             }
         }
@@ -457,22 +461,22 @@ namespace JFM
         {
             if (value <= 0)
             {
-                if (currentState != states[PlayerState.STATE.DEAD])
+                if (stateMachine.currentState != stateMachine.states[PlayerState.STATE.DEAD])
                 {
-                    ChangeState(states[PlayerState.STATE.HURT]);
+                    stateMachine.ChangeState(stateMachine.states[PlayerState.STATE.HURT]);
                 }
             }
             else
             {
-                ChangeState(states[PlayerState.STATE.IDLE]);
+                stateMachine.ChangeState(stateMachine.states[PlayerState.STATE.IDLE]);
             }
         }
 
         public void OnDead()
         {
-            if (currentState != states[PlayerState.STATE.DEAD])
+            if (stateMachine.currentState != stateMachine.states[PlayerState.STATE.DEAD])
             {
-                ChangeState(states[PlayerState.STATE.DEAD]);
+                stateMachine.ChangeState(stateMachine.states[PlayerState.STATE.DEAD]);
             }
         }
 
@@ -516,9 +520,9 @@ namespace JFM
         {
             lastKnowledge = playerData.EveryKnowledgeDictionary[knowledge];
 
-            KnowledgeState state = (KnowledgeState)states[PlayerState.STATE.KNOWLEDGE];
+            KnowledgeState state = (KnowledgeState)stateMachine.states[PlayerState.STATE.KNOWLEDGE];
             state.knowledge = playerData.GetKnowledgeByID(knowledge);
-            ChangeState(state);
+            stateMachine.ChangeState(state);
         }
 
         private void SetBeneathObjectInfo()
@@ -642,6 +646,15 @@ namespace JFM
         public bool FindSlopeAtPoint(out float slope, Vector2 offset, Vector2 direction)
         {
             return Raycast2DHelper.FindSlopeAtPoint(rb.position, out slope, offset, direction, StairsDownHeight, GroundLayer);
+        }
+
+        public bool CheckForCollisions()
+        {
+            CapsuleCollider2D cc = GetComponent<CapsuleCollider2D>();
+            Vector2 colliderOffset = cc.offset;
+            //Vector2 colliderSize = cc.size;
+
+            return Raycast2DHelper.CheckForCollisions(rb.position, collisionCheckRadius, colliderSize.y, colliderOffset.y, groundLayer, false);
         }
 
         public bool IsGrounded()
@@ -809,12 +822,7 @@ namespace JFM
 
             InputSetup();
 
-            for (int i = 0; i < statesArray.Length; i++)
-            {
-                PlayerState state = statesArray[i];
-                state.Initialize(this);
-                states.Add(state.name, state);
-            }
+            stateMachine = new PlayerStateMachine(statesArray, this);
 
             playerData.InitializeData();        // To remove in the future
             playerData.OnDeadDelegate += OnDead;
@@ -826,140 +834,19 @@ namespace JFM
             attackCoolDownStartTime = Time.time;
         }
 
-        private void Start()
-        {
-            currentState = states[PlayerState.STATE.IDLE];
-        }
-
-        private bool repositionning;
-
         private void FixedUpdate()
         {
-            if (!repositionning && !CheckForCollisionsAndReplace())
-            {
-                SetAirborneInfo();
+            SetAirborneInfo();
 
-                frontWall = null;
-                //SetFrontWallInfo();
+            frontWall = null;
+            //SetFrontWallInfo();
 
-                beneathObject = null;
-                SetBeneathObjectInfo();
+            beneathObject = null;
+            SetBeneathObjectInfo();
 
-                currentState = currentState.Process();
-            }
-        }
-
-        private bool CheckForCollisionsAndReplace()
-        {
-            repositionning = false;
-            /*if (repositionning = CheckForCollisions())
-            {
-                Debug.Log($"Repositionning Player");
-                //Debug.Break();
-
-                rb.isKinematic = true;
-
-                StartCoroutine(Reposition());
-                
-            }*/
-         
-            return repositionning;
-        }
-
-        public bool CheckForCollisions()
-        {
-            CapsuleCollider2D cc = GetComponent<CapsuleCollider2D>();
-            Vector2 colliderOffset = cc.offset;
-            Vector2 colliderSize = cc.size;
-
-            Vector2 position = rb.position + colliderOffset;
-            RaycastHit2D collisionHit = Physics2D.CircleCast(
-                position,
-                collisionCheckRadius,
-                Vector2.up,
-                colliderSize.y * heightAdjustmentFactor,
-                groundLayer
-            );
-            Platformer2DUtilities.DebugDrawCircle(
-                position,
-                collisionCheckRadius,
-                Color.green
-            );
-
-            /*Vector2 position = rb.position + colliderOffset;
-            RaycastHit2D collisionHit = Physics2D.CircleCast(
-                position,
-                collisionCheckRadius,
-                Vector2.zero,
-                0.0f,
-                groundLayer
-            );*/
-            Platformer2DUtilities.DebugDrawCircle(
-                position + Vector2.up * colliderSize.y * heightAdjustmentFactor,
-                collisionCheckRadius,
-                Color.green
-            );
-
-            if (collisionHit.collider is not null)
-            {
-                Debug.Log($"collider.gameObject.layer={collisionHit.collider.gameObject.layer}");
-            }
-
-            return collisionHit.collider is not null;
-        }
-
-        public bool CheckForCollisions2()
-        {
-            CapsuleCollider2D cc = GetComponent<CapsuleCollider2D>();
-            Vector2 colliderOffset = cc.offset;
-            //Vector2 colliderSize = cc.size;
-            
-            Vector2 position = rb.position + Vector2.up * colliderOffset.y;
-            Debug.Log($"position={position} colliderOffset ={colliderOffset} colliderSize.y={colliderSize.y}");
-
-            RaycastHit2D collisionHit = Physics2D.CircleCast(
-                position,
-                collisionCheckRadius,
-                Vector2.up,
-                colliderSize.y,
-                groundLayer
-            );
-            Platformer2DUtilities.DebugDrawCircle(
-                position,
-                collisionCheckRadius,
-                Color.green
-            );
-           
-            Platformer2DUtilities.DebugDrawCircle(
-                position + Vector2.up * colliderSize.y,
-                collisionCheckRadius,
-                Color.green
-            );
-            //Debug.Break();
-            if (collisionHit.collider is not null)
-            {
-                Debug.Log($"collider.gameObject.layer={collisionHit.collider.gameObject.layer}");
-            }
-
-            return collisionHit.collider is not null;
-        }
-
-
-        private IEnumerator Reposition()
-        {
-            Vector2 v = isFacingRight ? Vector2.right : Vector2.left;
-            rb.MovePosition(rb.position + v);
-
-            while(CheckForCollisions())
-            {
-                rb.MovePosition(rb.position + v);
-                yield return null;
-            }
-
-            repositionning = false;
-            rb.isKinematic = false;            
-        }
-      
+            stateMachine.Update();           
+        }       
+        
         private void InitializeKnowledges()
         {
             foreach (var knowledge in playerData.EveryKnowledgeDictionary)
@@ -986,9 +873,7 @@ namespace JFM
             playerData.GetKnowledgeByID(KnowledgeID.GROUND_SLIDE).Activate();
             
             playerData.GetKnowledgeByID(KnowledgeID.COMBO_ATTACK).Activate();
-            //playerData.GetKnowledgeByID(KnowledgeID.AOE_ATTACK).Activate();
-
-            
+            //playerData.GetKnowledgeByID(KnowledgeID.AOE_ATTACK).Activate();            
         }
 
         private void InputSetup()
@@ -1067,11 +952,6 @@ namespace JFM
         private void OnDisable()
         {
             playerInputManager.Player.Disable();
-        }
-
-        public void ChangeState(PlayerState nextState)
-        {
-            currentState.SetNextState(nextState);
-        }
+        }        
     }
 }

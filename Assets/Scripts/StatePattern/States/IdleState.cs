@@ -77,7 +77,7 @@ namespace JFM
             {
                 if (!foundSlopeInFront && !foundSlopeBehind)
                 {
-                    player.ChangeState(player.states[STATE.AIRBORNE]);
+                    player.StateMachine.ChangeState(player.States[STATE.AIRBORNE]);
                     return;
                 }
                 //Debug.Log("!player.IsGrounded()");
@@ -106,13 +106,13 @@ namespace JFM
 
             if (player.WillClimbUpStairs())
             {                
-                player.ChangeState(player.states[STATE.STAIRS_UP]);
+                player.StateMachine.ChangeState(player.States[STATE.STAIRS_UP]);
                 return;
             }
 
             if (player.WillClimbDownStairs())// || (foundSlopeInFront && Mathf.Abs(slopeFront) > player.StairsUpMinSlope) && Mathf.Abs(player.rb.velocity.y) <= 0.01f && ((player.MoveInput.x > 0.0f && slopeFront < 0) || (player.MoveInput.x > 0.0f && slopeFront < 0)))
             {
-                player.ChangeState(player.states[STATE.STAIRS_DOWN]);
+                player.StateMachine.ChangeState(player.States[STATE.STAIRS_DOWN]);
                 return;
             }
 
@@ -124,7 +124,7 @@ namespace JFM
                     )
                 {
                     resetGravityScale = false;
-                    WalkingState state = (WalkingState)player.states[STATE.WALK];
+                    WalkingState state = (WalkingState)player.States[STATE.WALK];
                     state.newGravityScale = 0.0f;
                     state.resetGravityScaleWithOther = true;
                     state.otherGravityScale = oldGravityScale;
@@ -137,7 +137,7 @@ namespace JFM
                 {
                     //Debug.Log("not walking on ladder");
                 }
-                player.ChangeState(player.states[STATE.WALK]);
+                player.StateMachine.ChangeState(player.States[STATE.WALK]);
                 return;
             }
             
@@ -147,23 +147,23 @@ namespace JFM
                 //Debug.Log($"Climbing ladder... ladderX={ladderX}");
                 player.transform.position = new Vector3(ladderX, player.transform.position.y, player.transform.position.z);
                 //Debug.Break();
-                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                LadderClimbingState state = (LadderClimbingState)player.States[STATE.LADDER];
                 state.targetX = ladderX;
-                player.ChangeState(state);
+                player.StateMachine.ChangeState(state);
                 return;
             }
                         
             if (player.WillClimbLadder())
             {
-                LadderClimbingState state = (LadderClimbingState)player.states[STATE.LADDER];
+                LadderClimbingState state = (LadderClimbingState)player.States[STATE.LADDER];
                 state.targetX = player.GetBeneathObjectPosition().x + 0.5f - player.ColliderOffset.x;
-                player.ChangeState(state);
+                player.StateMachine.ChangeState(state);
                 return;
             }
 
             if (player.inputTriggers["Move"] && player.MoveInput.y < 0.0f)
             {
-                player.ChangeState(player.states[STATE.CROUCH]);
+                player.StateMachine.ChangeState(player.States[STATE.CROUCH]);
                 return;
             }
 
@@ -187,19 +187,19 @@ namespace JFM
             
             if (player.WillJump())
             {
-                player.ChangeState(player.states[STATE.JUMP]);
+                player.StateMachine.ChangeState(player.States[STATE.JUMP]);
                 return;
             }
 
             if (player.inputTriggers["Inventory"])
             {
-                player.ChangeState(player.states[STATE.PAUSE]);
+                player.StateMachine.ChangeState(player.States[STATE.PAUSE]);
                 return;
             }
 
             if (player.WillAttack())
             {
-                player.ChangeState(player.states[STATE.BASIC_ATTACK]);
+                player.StateMachine.ChangeState(player.States[STATE.BASIC_ATTACK]);
                 return;
             }
 

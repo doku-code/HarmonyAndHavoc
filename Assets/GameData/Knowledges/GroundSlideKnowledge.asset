@@ -17,8 +17,9 @@ MonoBehaviour:
   chaosCost: 0
   slotCost: 0
   cooldown: 0
-  animatorLayer: 0
   force: 60
   deceleration: 1000
-  acceleration: 500
-  minVelocity: 3
+  acceleration: 1500
+  minVelocity: 3.5
+  maxVelocity: 5
+  minFrames: 15
