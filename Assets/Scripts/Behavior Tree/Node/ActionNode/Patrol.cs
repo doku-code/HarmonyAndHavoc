@@ -31,7 +31,7 @@ public class Patrol : ActionNode
         if (initialPosition == Vector2.zero)
         {
             initialPosition = npcRigidBody.position;
-        }        
+        }
     }
 
     protected override void OnStop()
@@ -45,7 +45,7 @@ public class Patrol : ActionNode
             return State.FAILURE;
         }
 
-        if (npcController.CanTakeDamage)
+        if (npcAnimator.GetBool("IsIdle") && npcController.CanTakeDamage)
         {
             npcAnimator.SetBool(PatrolAnimString, true);
             npcAnimator.SetBool("IsIdle", false);

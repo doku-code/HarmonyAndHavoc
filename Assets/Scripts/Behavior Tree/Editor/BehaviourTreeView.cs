@@ -21,7 +21,7 @@ public class BehaviourTreeView : GraphView
         this.AddManipulator(new RectangleSelector());
 
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>
-            ("Assets/Behavior Tree/Editor/BehaviorTreeEditor.uss");
+            ("Assets/Scripts/Behavior Tree/Editor/BehaviorTreeEditor.uss");
 
         styleSheets.Add(styleSheet);
 

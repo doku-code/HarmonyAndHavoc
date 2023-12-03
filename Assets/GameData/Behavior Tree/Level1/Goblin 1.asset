@@ -15,16 +15,17 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: dd50da2f1e63360498e6c6917834faff
-  position: {x: 126, y: 672}
+  position: {x: 33, y: 672}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Goblin
-  attackCooldown: 1.5
+  attackCooldown: 3
   attackDistance: 1.5
   leaveDistance: 5
   attackAnimString: Combo1
+  attackClipName: Attack1
   comboSoundIdx: 0
   animatorLayer: 0
   moveSpeed: 1000
@@ -62,7 +63,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 3d679d781546b31468fcf5b7ed1b193d
-  position: {x: -97, y: 672}
+  position: {x: -170, y: 670}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -137,6 +138,7 @@ MonoBehaviour:
   children:
   - {fileID: -298296971772436585}
   - {fileID: -8421530712381887247}
+  - {fileID: 7672916494558790739}
 --- !u!114 &7672916494558790739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,17 +154,18 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 185a710cc31d113488123a82d5c5835c
-  position: {x: 524.8401, y: 677}
+  position: {x: 215, y: 670}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: Goblin
-  attackCooldown: 1.5
-  attackDistance: 3
+  attackCooldown: 3
+  attackDistance: 1.5
   leaveDistance: 5
   attackAnimString: Combo2
+  attackClipName: Attack2
   comboSoundIdx: 0
   animatorLayer: 0
-  moveSpeed: 2000
-  maxSpeed: 50
+  moveSpeed: 1000
+  maxSpeed: 2

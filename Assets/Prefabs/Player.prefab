@@ -53,9 +53,9 @@ MonoBehaviour:
   walkSpeed: 5
   walkAcceleration: 5000
   jumpForce: 11.3
-  baseNumJumps: 2
+  baseNumJumps: 1
   airAcceleration: 100
-  heightDamage: 20
+  maxFallDamageHeight: 3
   landingHeight: 15
   defaultGravityScale: 2
   groundDistance: 0.1
@@ -81,7 +81,7 @@ MonoBehaviour:
   stairsUpMaxSlope: 2
   stairsDownHeight: 1.33
   stairsDownGroundX: 0.67
-  stairsDownDeceleration: 0.61
+  stairsDownDecelerationFactor: 0.3
   stairsDownMinSlope: 0.4
   stairsDownMaxSlope: 2
   stairsUpAngle: 45
