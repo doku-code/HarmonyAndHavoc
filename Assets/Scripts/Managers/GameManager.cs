@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 namespace AF
 {
     public delegate void ParametersLessDelegate();
-    public delegate void SingleParameterDelegate(int value);
+    public delegate void IntegerParameterDelegate(int value);
 
     public enum SpawnerPosition
     {

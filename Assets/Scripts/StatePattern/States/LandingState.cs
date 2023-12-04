@@ -9,26 +9,40 @@ namespace JFM
     public class LandingState : PlayerState
     {
         private float startTime;
-        
+        public int animatorLayerIndex = 0;
+        public string motionName = "Player_landing";
+        private bool hasSubscribedToAnimatorObserver;
+
         public override void Enter()
         {
             player.animator.SetBool("IsLanding", true);
-            player.rb.velocity = Vector2.zero;
+            
+            player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
+            
             startTime = Time.time;
             player.rb.gravityScale = 0.0f;
 
             player.Land();
-            SubscribeToAnimatorObserver("Movement");
+            hasSubscribedToAnimatorObserver = false;
 
             base.Enter();
         }
 
         public override void Update()
-        {            
+        {
+            // It seems while in landing Enter() method execution the animator might still be in 
+            // 'Player_Fall' motion, so subscribing at that time is wrong and we have to wait
+            // to do so.
+            if (!hasSubscribedToAnimatorObserver 
+                && player.animator.GetCurrentAnimatorStateInfo(animatorLayerIndex).IsName(motionName))
+            {
+                SubscribeToAnimatorObserver("Movement");
+                hasSubscribedToAnimatorObserver = true;                
+            }
         }
 
         public override void Exit()
-        {
+        {            
             UnsubscribeToAnimatorObserver();
             player.rb.gravityScale = player.DefaultGravityScale;
             player.animator.SetBool("IsLanding", false);

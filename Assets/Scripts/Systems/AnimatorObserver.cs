@@ -24,6 +24,7 @@ namespace AF
         {
             if (onLeaveState is not null)
             {
+                //Debug.Log($"stateInfo={stateInfo.normalizedTime} {stateInfo.IsName("Player_Fall")}");
                 onLeaveState();
             }
         }

@@ -26,7 +26,7 @@ namespace charles
         public bool IsDead { get => currentHealth <= 0; }
         public int MaxHealth { get => maxHealth; }
 
-        public event SingleParameterDelegate OnHealthDecrease;
+        public event IntegerParameterDelegate OnHealthDecrease;
 
         [Space]
         [Header("Behavior Tree")]

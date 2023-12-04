@@ -44,7 +44,7 @@ namespace AF
         [SerializeField] private Knowledge[] knowledgeBank;
 
         public ParametersLessDelegate OnDeadDelegate;
-        public SingleParameterDelegate OnOrderDelegate;
+        public IntegerParameterDelegate OnOrderDelegate;
         public ParametersLessDelegate OnChaosDelegate;
 
         public Dictionary<KnowledgeID, bool> KnownKnowledgeDictionary { get; set; }

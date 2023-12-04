@@ -13,7 +13,8 @@ namespace JFM
         FOOTSTEPS,
         ATTACKS,
         LANDING,
-        JUMPING
+        JUMPING,
+        HURTING
     }
 
     [Serializable]
@@ -21,23 +22,25 @@ namespace JFM
     {
         public SoundGroupID id;        
         public AudioClip[] sounds;
+        public int sourceIndex;
     }
 
     public class EventSoundPlayer : MonoBehaviour
     {
         [SerializeField] private SoundGroup[] soundGroups;        
 
-        private AudioSource soundSource;
+        private AudioSource[] soundSources;
 
         private void Start()
         {
-            soundSource = GetComponent<AudioSource>();
+            soundSources = GetComponents<AudioSource>();
 
             PlayerController player = GetComponent<PlayerController>();
             if(player is not null )
             {
                 player.LandedEvent += OnLand;
                 player.JumpedEvent += OnJump;
+                player.IsHurtEvent += OnIsHurt;
             }
         }
 
@@ -45,7 +48,7 @@ namespace JFM
         {
             if (value == 0)
             {
-                PlaySound(SoundGroupID.LANDING, 0);
+                PlaySound(SoundGroupID.LANDING);
             }
             else
             {
@@ -55,39 +58,47 @@ namespace JFM
 
         private void OnJump()
         {
-            PlaySound(SoundGroupID.JUMPING, 0);
+            PlaySound(SoundGroupID.JUMPING);
         }
-        
+
+        private void OnIsHurt(int value)
+        {
+            PlaySound(SoundGroupID.HURTING);
+        }
+
+        // Plays the first sound in that sound group
+        public void PlaySound(SoundGroupID soundGroupID)
+        {
+            PlaySound(soundGroupID, 0);
+        }
+
         public void PlaySound(SoundGroupID soundGroupID, int soundID)
         {
             SoundGroup group = soundGroups.First(x => x.id == soundGroupID);
             try
             {
-                soundSource.clip = group.sounds[soundID];
-                soundSource.Play();
+                soundSources[group.sourceIndex].clip = group.sounds[soundID];
+                soundSources[group.sourceIndex].Play();
             }
             catch(Exception e)
             {
-
+                Debug.Log($"PlaySound(SoundGroupID, int) throwed an exception: {e.Message}");
             }
         }
 
         public void PlayRandomSound(SoundGroupID soundGroupID)
         {
-            if (soundGroupID == SoundGroupID.ATTACKS)
-                return;
-
             SoundGroup group = soundGroups.First(x => x.id == soundGroupID);
             int soundID = Random.Range(0, group.sounds.Length);
-            //try
-            //{
-                soundSource.clip = group.sounds[soundID];
-                soundSource.Play();
-            /*}
+            try
+            {
+                soundSources[group.sourceIndex].clip = group.sounds[soundID];
+                soundSources[group.sourceIndex].Play();
+            }
             catch (Exception e)
             {
-
-            }*/
+                Debug.Log($"PlayRandomSound(SoundGroupID) throwed an exception: {e.Message}");
+            }
         }
 
         public void PlayRandomSound(SoundGroupID soundGroupID, int fromID, int toID)
@@ -96,12 +107,12 @@ namespace JFM
             int soundID = Random.Range(fromID, toID + 1);
             try
             {
-                soundSource.clip = group.sounds[soundID];
-                soundSource.Play();
+                soundSources[group.sourceIndex].clip = group.sounds[soundID];
+                soundSources[group.sourceIndex].Play();
             }
             catch( Exception e)
             {
-
+                Debug.Log($"PlayRandomSound(SoundGroupID, int, int) throwed an exception: {e.Message}");
             }
         }
     }

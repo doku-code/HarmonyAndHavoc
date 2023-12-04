@@ -41,7 +41,9 @@ namespace JFM
         [SerializeField] private int baseNumJumps = 1;
         [SerializeField] private float airAcceleration = 100.0f;
         [SerializeField] private float maxFallDamageHeight = 3.0f;
-        [SerializeField] private float landingHeight = 2.0f;        
+        [SerializeField] private float landingHeight = 2.0f;
+        [SerializeField] private float fallDamageMultiplier = 3.0f;
+        private int currentFallDamage;
         [SerializeField] private float defaultGravityScale;
         [SerializeField] private float groundDistance = 1.0f;
         [SerializeField] private float groundedRadius = 0.2f;
@@ -49,14 +51,15 @@ namespace JFM
         public float groundedY;
         public int groundedLayer;
         private float highestAirborneY;
-        private int numJumps;
+        private int numJumps;        
         public ParametersLessDelegate GroundedEvent { get; set; }
         public ParametersLessDelegate JumpedEvent { get; set; }
-        public SingleParameterDelegate LandedEvent { get; set; }
+        public IntegerParameterDelegate LandedEvent { get; set; }
 
         [Header("Attacking")]
         [SerializeField] private float attackCoolDownTime = 0.3f;
         private float attackCoolDownStartTime;
+        public IntegerParameterDelegate IsHurtEvent { get; set; }
 
         [Header("Collisions")]
         [SerializeField] private Vector2 spriteBoxProbeSize = new Vector2(0.9414063f, 0.3f);
@@ -325,6 +328,12 @@ namespace JFM
             get => wallIsToRight;
         }
 
+        public Vector2 MoveInput
+        {
+            get => moveInput;
+            set => moveInput = value;
+        }
+
         public void SetHighestAirborneY()
         {
             SetHighestAirborneY(false);
@@ -336,25 +345,7 @@ namespace JFM
             {
                 highestAirborneY = transform.position.y;
             }
-        }
-
-        public void Turn()
-        {
-            isFacingRight = !isFacingRight;
-            transform.localScale = new Vector3(isFacingRight ? 1 : -1, 1.0f, 1.0f);
-            rb.velocity = new Vector2(0.0f, rb.velocity.y);
-        }
-
-        public bool CanTurn()
-        {
-            return (isFacingRight && moveInput.x < 0) || (!isFacingRight && moveInput.x > 0);
-        }
-
-        public Vector2 MoveInput
-        {
-            get => moveInput;
-            set => moveInput = value;
-        }
+        }        
 
         public void SetAirborneInfo()
         {
@@ -404,8 +395,12 @@ namespace JFM
                 JumpedEvent();
             }
         }
+        
+        private int CalculateFallDamage(float yDifference)
+        {
+            return Mathf.FloorToInt(yDifference * fallDamageMultiplier);
+        }
 
-        private int currentFallDamage;
         // Will the Player go in Landing state?
         public bool WillLand()
         {
@@ -415,7 +410,7 @@ namespace JFM
             if (highestY - transform.position.y > maxFallDamageHeight)
             {
                 Debug.Log($" ~ ~ ~ D A M A G E ~ ~ ~ highestY={highestY} transform.position.y={transform.position.y}");
-                currentFallDamage = Mathf.FloorToInt(highestY - transform.position.y - maxFallDamageHeight);
+                currentFallDamage = CalculateFallDamage(highestY - transform.position.y - maxFallDamageHeight);
                 return true;
             }
             currentFallDamage = 0;
@@ -431,11 +426,25 @@ namespace JFM
         public void Land()
         {
             // Do fall damage here?
+            playerData.TakeDamage(currentFallDamage);
+            Debug.Log($"Taking {currentFallDamage} damage from falling.");
 
             if (LandedEvent is not null)
             {
                 LandedEvent(currentFallDamage);
             }
+        }
+
+        public void Turn()
+        {
+            isFacingRight = !isFacingRight;
+            transform.localScale = new Vector3(isFacingRight ? 1 : -1, 1.0f, 1.0f);
+            rb.velocity = new Vector2(0.0f, rb.velocity.y);
+        }
+
+        public bool CanTurn()
+        {
+            return (isFacingRight && moveInput.x < 0) || (!isFacingRight && moveInput.x > 0);
         }
 
         public bool IsAttackCooledDown()
@@ -478,8 +487,14 @@ namespace JFM
         {
             if (value <= 0)
             {
-                if (stateMachine.currentState != stateMachine.states[PlayerState.STATE.DEAD])
+                if (stateMachine.currentState != stateMachine.states[PlayerState.STATE.DEAD]
+                    // We want to prevent fall damage to activate HurtState
+                    && stateMachine.currentState != stateMachine.states[PlayerState.STATE.LAND])
                 {
+                    if(IsHurtEvent is not null)
+                    {
+                        IsHurtEvent(value);
+                    }
                     stateMachine.ChangeState(stateMachine.states[PlayerState.STATE.HURT]);
                 }
             }
