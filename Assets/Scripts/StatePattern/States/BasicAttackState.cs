@@ -45,7 +45,25 @@ namespace JFM
                 player.rb.velocity = Vector2.zero;
                 player.rb.totalForce = Vector2.zero;
                 //Debug.Log("walking on ladder");
-            }            
+            }
+
+            // Add force but limit speed
+            if (player.MoveInput.x != 0.0f && player.rb.velocity.magnitude < player.WalkSpeed)
+            {
+                Vector2 v = (player.IsFacingRight ? Vector2.right : -Vector2.right) * /*player.WalkSpeed **/ player.WalkAcceleration * Time.fixedDeltaTime;
+                player.rb.AddForce(v, ForceMode2D.Force);
+
+                //Debug.Log($"AddForce() player.rb.velocity.magnitude={player.rb.velocity.magnitude} v={v}");
+                //player.rb.velocity += v;
+                if (player.rb.velocity.magnitude > player.WalkSpeed)
+                {
+                    player.rb.velocity = player.rb.velocity.normalized * player.WalkSpeed;
+                }
+            }
+            else
+            {
+                player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
+            }
         }
 
         public override void Exit()
@@ -56,14 +74,14 @@ namespace JFM
             {
                 //player.animator.SetBool("IsAirborne", false);                
             }
-            
+
             UnsubscribeToAnimatorObserver();
             base.Exit();
         }
 
         public override void OnLeaveState()
         {
-            Debug.Log("OnLeaveState()");
+            //Debug.Log("OnLeaveState()");
 
             if (!player.IsGrounded())
             {

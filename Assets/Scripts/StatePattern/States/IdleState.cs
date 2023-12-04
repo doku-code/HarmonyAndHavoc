@@ -27,7 +27,12 @@ namespace JFM
         {           
             player.animator.SetBool("IsIdle", true);
 
-            player.rb.velocity = Vector2.zero;
+            //player.rb.velocity = Vector2.zero;
+            if (player.rb.velocity.magnitude > 0.0f)
+            {                
+                player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
+            }
+
             if (!overrideOldGravityScale)
             {
                 oldGravityScale = player.rb.gravityScale;
@@ -61,8 +66,7 @@ namespace JFM
             {
                 waitNFrames--;
                 return;
-            }
-                       
+            }                       
 
             //Debug.Log($"gravityScale = {player.rb.gravityScale}");
 

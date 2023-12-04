@@ -16,7 +16,7 @@ namespace charles
 
         private void UpdateHealthBar(int currentHealth)
         {
-            Debug.Log("is This Called " + "UpdateHealthBar");
+            //Debug.Log("is This Called " + "UpdateHealthBar");
             healthSlider.value = (float)currentHealth / enemyController.MaxHealth;
         }
         private void OnDestroy()

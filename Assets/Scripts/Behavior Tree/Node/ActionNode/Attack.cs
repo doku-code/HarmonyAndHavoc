@@ -1,8 +1,9 @@
-#define _DEBUG
+//#define _DEBUG
 
 using AF;
 using JFM;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 //Charles
 public class Attack : ActionNode
@@ -48,6 +49,16 @@ public class Attack : ActionNode
 #endif
         }
 
+        State returnedState = State.RUNNING;
+
+        float currentDirection = Mathf.Sign(player.transform.position.x - npc.transform.position.x);
+        RaycastHit2D playerHit = Physics2D.Raycast(npcRigidBody.position, Vector2.right * currentDirection, attackDistance, playerLayer);
+        Debug.DrawLine(npc.transform.position, npc.transform.position + Vector3.right * currentDirection * attackDistance, Color.yellow);
+        if(playerHit.collider is null)
+        {
+            returnedState = State.FAILURE;
+        }
+
         //Debug.Log($"Attack node. {attackClipName}");
         float distanceToPlayer = Vector3.Distance(npc.transform.position, player.transform.position);
 
@@ -75,15 +86,22 @@ public class Attack : ActionNode
 
             float elapsedTime = Time.time - lastAttackTime;
 
-
             if (hasAttacked && elapsedTime >= attackAnimationLength)
             {
 #if _DEBUG
                 Debug.Log($"Attack node. {attackClipName} Has attacked and finished animation after {elapsedTime}");
 #endif
 
-                npcAnimator.ResetTrigger(attackAnimString);
-                npcAnimator.SetBool("IsIdle", true);
+                if (!npcController.IsKnockedBack)
+                {
+                    npcAnimator.ResetTrigger(attackAnimString);
+                    npcAnimator.SetBool("IsIdle", true);
+                }
+
+                if (returnedState == State.FAILURE)
+                {
+                    return returnedState;
+                }                
             }
 
             if (npcController.Blackboard.lastHitTime < lastAttackTime + attackAnimationLength
@@ -98,17 +116,28 @@ public class Attack : ActionNode
             }
 
             //if (!isCooldown && !hasAttacked)
-            if (!hasAttacked 
-                || 
-                (elapsedTime >= attackCooldown && elapsedTime >= attackAnimationLength))
+            if (!npcController.IsKnockedBack 
+                &&
+                (
+                    !hasAttacked 
+                    || 
+                    (
+                        elapsedTime >= attackCooldown 
+                        && 
+                        elapsedTime >= attackAnimationLength)
+                    )
+                )
             {
                 if (hasAttacked)
                 {
 #if _DEBUG
                     Debug.Log($"Attack node. {attackClipName} Has attacked and returns SUCCESS.");
 #endif
-
-                    return State.SUCCESS;
+                    if(returnedState == State.RUNNING)
+                    {
+                        returnedState = State.SUCCESS;
+                    }
+                    return returnedState;
                 }
 
                 npcAnimator.SetBool("Run", false);
@@ -126,10 +155,10 @@ public class Attack : ActionNode
                 {
                     SoundManager.Instance.PlayNpcSounds(comboSoundIdx);
                 }
-                return State.RUNNING;
+                return returnedState;
             }
 
-            if (npcAnimator.GetBool("Run") && npcController.CanTakeDamage)
+            if (npcAnimator.GetBool("Run"))
             {
                 npcAnimator.SetBool("IsIdle", true);
                 npcAnimator.SetBool("Run", false);
@@ -142,7 +171,7 @@ public class Attack : ActionNode
 #if _DEBUG
             Debug.Log($"Attack node. {attackClipName} Failed to attack.");
 #endif
-            return State.RUNNING;
+            return returnedState;
         }
         else if(distanceToPlayer <= leaveDistance)
         {
@@ -150,8 +179,8 @@ public class Attack : ActionNode
             Debug.Log($"Attack node. {attackClipName} Approaching to attack...");
 #endif
 
-            Vector3 moveDirection = (player.transform.position - npc.transform.position).normalized;
-            if (npcAnimator.GetBool("IsIdle") && npcController.CanTakeDamage)
+            Vector3 moveDirection = new Vector3(Mathf.Sign(player.transform.position.x - npc.transform.position.x), 0.0f, 0.0f);
+            if (npcAnimator.GetBool("IsIdle"))
             {
                 npcAnimator.SetBool("IsIdle", false);
                 npcAnimator.SetBool("Run", true);
@@ -165,16 +194,19 @@ public class Attack : ActionNode
                 npc.transform.localScale = new Vector3(-1, 1, 1);
             }
 
-            if (npcRigidBody.velocity.magnitude < maxSpeed)
+            if (!npcController.IsKnockedBack && npcRigidBody.velocity.magnitude < maxSpeed)
             {
                 npcRigidBody.AddForce(moveDirection * moveSpeed * dt);
             }            
 
-            return State.RUNNING;
+            return returnedState;
         }
 
-        npcAnimator.SetBool("Run", false);
-        npcAnimator.SetBool("IsIdle", true);
+        if (!npcController.IsKnockedBack)
+        {
+            npcAnimator.SetBool("Run", false);
+            npcAnimator.SetBool("IsIdle", true);
+        }
 
 #if _DEBUG
         Debug.Log($"Attack node. {attackClipName} returns FAILURE. distanceToPlayer <= attackDistance {distanceToPlayer} <= {attackDistance} {leaveDistance}");

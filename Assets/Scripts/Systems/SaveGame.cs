@@ -47,8 +47,7 @@ namespace JFM
         public int armorUpgrade;
 
         public string currentMapName;
-        //public Vector2 currentPosition;
-
+        
         public SaveGame()
         {
         }
@@ -103,7 +102,7 @@ namespace JFM
             playerData.ArmorUpgrade = armorUpgrade;
         }
 
-        public static void Save(PlayerData pd, string filename)
+        public static void Save(PlayerData pd, string mapName, string filename)
         {
             // Creates an instance of the XmlSerializer class;
             // specifies the type of object to serialize.
@@ -111,13 +110,16 @@ namespace JFM
             TextWriter writer = new StreamWriter(filename);
 
             SaveGame sg = new SaveGame();
+
             sg.FromPlayerData(pd);
+
+            sg.currentMapName = mapName;
 
             serializer.Serialize(writer, sg);
             writer.Close();
         }
 
-        public static void Load(PlayerData pd, string filename)
+        public static void Load(PlayerData pd, out string mapName, string filename)
         {
             // Creates an instance of the XmlSerializer class;
             // specifies the type of object to be deserialized.
@@ -137,6 +139,8 @@ namespace JFM
             sg = (SaveGame)serializer.Deserialize(fs);
 
             sg.ToPlayerData(pd);
+
+            mapName = sg.currentMapName;
 
             // Reads the order date.
             //Debug.Log("ActualOrder: " + pd.ActualOrder);

@@ -67,7 +67,7 @@ namespace charles
                 Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
 
                 Attack(collision.gameObject.GetComponent<PlayerController>(), pushDirection);
-                //Debug.Log("Enemy hit");
+                //Debug.Log("Enemy has hit Player");
                 blackboard.lastHitTime = Time.time;
             }
         }
@@ -82,6 +82,7 @@ namespace charles
 
         public void TakeDamage(int damage, Vector2 pushDirection)
         {
+            Debug.Log($"Enemy taking damage");
             if (currentHealth <= 0 || !canTakeDamage)
             {
                 return;

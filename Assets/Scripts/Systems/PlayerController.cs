@@ -22,9 +22,7 @@ namespace JFM
     }
 
     public class PlayerController : MonoBehaviour
-    {
-        public delegate void ParameterLessDelegate();
-
+    {        
         private PlayerInput playerInputManager;
         public Dictionary<string, bool> inputTriggers = new Dictionary<string, bool>();
 
@@ -52,7 +50,9 @@ namespace JFM
         public int groundedLayer;
         private float highestAirborneY;
         private int numJumps;
-        public ParameterLessDelegate GroundedEvent { get; set; }
+        public ParametersLessDelegate GroundedEvent { get; set; }
+        public ParametersLessDelegate JumpedEvent { get; set; }
+        public SingleParameterDelegate LandedEvent { get; set; }
 
         [Header("Attacking")]
         [SerializeField] private float attackCoolDownTime = 0.3f;
@@ -398,8 +398,14 @@ namespace JFM
             rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
             //rb.velocity += Vector2.up * jumpForce;
             //Debug.Log($"rb.velocity={rb.velocity}");            
+
+            if (JumpedEvent is not null)
+            {
+                JumpedEvent();
+            }
         }
 
+        private int currentFallDamage;
         // Will the Player go in Landing state?
         public bool WillLand()
         {
@@ -409,16 +415,27 @@ namespace JFM
             if (highestY - transform.position.y > maxFallDamageHeight)
             {
                 Debug.Log($" ~ ~ ~ D A M A G E ~ ~ ~ highestY={highestY} transform.position.y={transform.position.y}");
-
+                currentFallDamage = Mathf.FloorToInt(highestY - transform.position.y - maxFallDamageHeight);
                 return true;
             }
+            currentFallDamage = 0;
 
             if (highestY - transform.position.y > landingHeight)
-            {
+            {                
                 return true;
             }
 
             return false;
+        }
+
+        public void Land()
+        {
+            // Do fall damage here?
+
+            if (LandedEvent is not null)
+            {
+                LandedEvent(currentFallDamage);
+            }
         }
 
         public bool IsAttackCooledDown()
@@ -491,7 +508,7 @@ namespace JFM
             Vector3 playerColliderOffset = new Vector3(colliderOffset.x, colliderOffset.y, 0.0f);
             Vector2 pushDirection = collision.transform.position + collisionOffset - (transform.position + playerColliderOffset);
             Vector2 newPushDirection = Platformer2DUtilities.RoundVector2Angle(pushDirection, Mathf.PI / 4.0f);
-            Debug.Log($"pushDirection={pushDirection} newPushDirection={newPushDirection}");
+            //Debug.Log($"pushDirection={pushDirection} newPushDirection={newPushDirection}");
 
             enemyController.TakeDamage(damage, newPushDirection.normalized);
         }

@@ -17,6 +17,7 @@ namespace JFM
             startTime = Time.time;
             player.rb.gravityScale = 0.0f;
 
+            player.Land();
             SubscribeToAnimatorObserver("Movement");
 
             base.Enter();

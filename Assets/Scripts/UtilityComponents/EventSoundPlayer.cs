@@ -11,41 +11,98 @@ namespace JFM
     public enum SoundGroupID
     {
         FOOTSTEPS,
-        ATTACKS
+        ATTACKS,
+        LANDING,
+        JUMPING
     }
 
     [Serializable]
     public struct SoundGroup
     {
-        public SoundGroupID id;
-        public int fromSoundID;
-        public int toSoundID;
+        public SoundGroupID id;        
+        public AudioClip[] sounds;
     }
 
     public class EventSoundPlayer : MonoBehaviour
     {
-        [SerializeField] private SoundGroup[] soundGroups;
+        [SerializeField] private SoundGroup[] soundGroups;        
 
-        public void PlaySound(int soundID)
+        private AudioSource soundSource;
+
+        private void Start()
         {
-            if(SoundManager.Instance is null)
-            {
-                return;
-            }
+            soundSource = GetComponent<AudioSource>();
 
-            SoundManager.Instance.PlayAClip(soundID);
+            PlayerController player = GetComponent<PlayerController>();
+            if(player is not null )
+            {
+                player.LandedEvent += OnLand;
+                player.JumpedEvent += OnJump;
+            }
+        }
+
+        private void OnLand(int value)
+        {
+            if (value == 0)
+            {
+                PlaySound(SoundGroupID.LANDING, 0);
+            }
+            else
+            {
+                PlayRandomSound(SoundGroupID.LANDING, 1, 3);
+            }
+        }
+
+        private void OnJump()
+        {
+            PlaySound(SoundGroupID.JUMPING, 0);
+        }
+        
+        public void PlaySound(SoundGroupID soundGroupID, int soundID)
+        {
+            SoundGroup group = soundGroups.First(x => x.id == soundGroupID);
+            try
+            {
+                soundSource.clip = group.sounds[soundID];
+                soundSource.Play();
+            }
+            catch(Exception e)
+            {
+
+            }
         }
 
         public void PlayRandomSound(SoundGroupID soundGroupID)
         {
-            if (SoundManager.Instance is null)
-            {
+            if (soundGroupID == SoundGroupID.ATTACKS)
                 return;
-            }
 
             SoundGroup group = soundGroups.First(x => x.id == soundGroupID);
-            int soundID = Random.Range(group.fromSoundID, group.toSoundID);
-            SoundManager.Instance.PlayAClip(soundID);
+            int soundID = Random.Range(0, group.sounds.Length);
+            //try
+            //{
+                soundSource.clip = group.sounds[soundID];
+                soundSource.Play();
+            /*}
+            catch (Exception e)
+            {
+
+            }*/
+        }
+
+        public void PlayRandomSound(SoundGroupID soundGroupID, int fromID, int toID)
+        {
+            SoundGroup group = soundGroups.First(x => x.id == soundGroupID);
+            int soundID = Random.Range(fromID, toID + 1);
+            try
+            {
+                soundSource.clip = group.sounds[soundID];
+                soundSource.Play();
+            }
+            catch( Exception e)
+            {
+
+            }
         }
     }
 }

@@ -32,6 +32,16 @@ public class Patrol : ActionNode
         {
             initialPosition = npcRigidBody.position;
         }
+
+        if (currentDirection == 0.0f)
+        {
+            currentDirection = Random.Range(0, 2) == 0 ? -1.0f : 1.0f;
+            nextPosition = npcRigidBody.position + currentDirection * Vector2.right * patrolRadius;
+        }
+        else
+        {
+            currentDirection = Mathf.Sign(player.transform.position.x - npcRigidBody.position.x);
+        }
     }
 
     protected override void OnStop()
@@ -45,19 +55,13 @@ public class Patrol : ActionNode
             return State.FAILURE;
         }
 
-        if (npcAnimator.GetBool("IsIdle") && npcController.CanTakeDamage)
+        if (npcAnimator.GetBool("IsIdle") && !npcController.IsKnockedBack)
         {
             npcAnimator.SetBool(PatrolAnimString, true);
             npcAnimator.SetBool("IsIdle", false);
-        }
+        }        
 
-        if (currentDirection == 0.0f)
-        {
-            currentDirection = Random.Range(0, 2) == 0 ? -1.0f : 1.0f;
-            nextPosition = npcRigidBody.position + currentDirection * Vector2.right * patrolRadius;
-        }
-
-        if (npcRigidBody.velocity.magnitude < maxSpeed)
+        if (!npcController.IsKnockedBack && npcRigidBody.velocity.magnitude < maxSpeed)
         {
             npcRigidBody.AddForce(Vector2.right * currentDirection * moveSpeed * dt);
         }
@@ -80,7 +84,7 @@ public class Patrol : ActionNode
             {
                 if (hit.collider.gameObject != npc)
                 {
-                    Debug.Log($"hit={hit.collider.gameObject.name}");
+                    //Debug.Log($"hit={hit.collider.gameObject.name}");
                     obstacleFound = true;
                 }
             }
@@ -112,7 +116,10 @@ public class Patrol : ActionNode
         {            
             currentDirection = -currentDirection;
             nextPosition = npcRigidBody.position + currentDirection * Vector2.right * 2.0f * patrolRadius;
-            npcRigidBody.AddForce(-npcRigidBody.velocity, ForceMode2D.Impulse);            
+            if (!npcController.IsKnockedBack)
+            {
+                npcRigidBody.AddForce(-npcRigidBody.velocity, ForceMode2D.Impulse);
+            }
         }
 
         return State.RUNNING;
