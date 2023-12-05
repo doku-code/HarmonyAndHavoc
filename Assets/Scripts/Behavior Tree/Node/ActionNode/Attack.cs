@@ -29,6 +29,7 @@ public class Attack : ActionNode
         npcAnimator.ResetTrigger(attackAnimString);
         lastAttackTime = Time.time;
     }
+
     protected override void OnStop() {        
         npcAnimator.ResetTrigger(attackAnimString);
         npcAnimator.SetBool("IsIdle", true);
@@ -70,14 +71,7 @@ public class Attack : ActionNode
 #endif
 
             // Turn NPC to face Player
-            if (player.transform.position.x - npc.transform.position.x > 0)
-            {
-                npc.transform.localScale = new Vector3(1, 1, 1);
-            }
-            else
-            {
-                npc.transform.localScale = new Vector3(-1, 1, 1);
-            }
+            npcController.TurnSide(Mathf.Sign(player.transform.position.x - npc.transform.position.x));            
 
             if (!npcController.IsKnockedBack)
             {

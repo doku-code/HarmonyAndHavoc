@@ -65,15 +65,8 @@ public class Patrol : ActionNode
         {
             npcRigidBody.AddForce(Vector2.right * currentDirection * moveSpeed * dt);
         }
-        
-        if (currentDirection > 0)
-        {
-            npc.transform.localScale = new Vector3(1, 1, 1);
-        }
-        else
-        {
-            npc.transform.localScale = new Vector3(-1, 1, 1);
-        }
+
+        npcController.TurnSide(currentDirection);
 
         RaycastHit2D[] obstacleHits = Physics2D.RaycastAll(npcRigidBody.position, Vector2.right * currentDirection, obstacleDistance, LayerMask.GetMask("Enemy") | LayerMask.GetMask("Ground"));        
 

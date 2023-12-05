@@ -40,6 +40,13 @@ namespace charles
             get => blackboard;
         }
 
+        public void TurnSide(float side)
+        {
+            transform.localScale = new Vector3(side, 1.0f, 1.0f);
+            blackboard.healthBar.localScale = new Vector3(side, 1.0f, 1.0f);
+            //Debug.Log($"blackboard.healthBar.localScale.x={blackboard.healthBar.localScale.x} side={side} blackboard.healthBar.gameObject={blackboard.healthBar.gameObject.name}");            
+        }
+
         void StartBehaviorTree()
         {
             tree = tree.Clone();
@@ -56,7 +63,13 @@ namespace charles
         private void Start()
         {
             npcAnimator = GetComponent<Animator>();
+
+            blackboard = blackboard.Clone();
+
+            blackboard.healthBar = GetComponentInChildren<Canvas>().GetComponent<RectTransform>();
+            Debug.Log($"GetComponentInChildren<Canvas>()={GetComponentInChildren<Canvas>().GetComponent<RectTransform>()}");
             currentHealth = maxHealth;
+
             StartBehaviorTree();
         }
 

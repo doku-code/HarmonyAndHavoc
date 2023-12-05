@@ -6,4 +6,10 @@ using UnityEngine;
 public class EnemyBlackboard : ScriptableObject
 {
     public float lastHitTime;
+    public RectTransform healthBar;
+
+    public EnemyBlackboard Clone()
+    {
+        return Instantiate(this);
+    }
 }
