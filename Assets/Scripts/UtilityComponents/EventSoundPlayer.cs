@@ -18,22 +18,22 @@ namespace JFM
     }
 
     [Serializable]
-    public struct SoundGroup
+    public class SoundGroup
     {
         public SoundGroupID id;        
         public AudioClip[] sounds;
-        public int sourceIndex;
+        public float volumeScale = 1.0f;
     }
 
     public class EventSoundPlayer : MonoBehaviour
     {
         [SerializeField] private SoundGroup[] soundGroups;        
 
-        private AudioSource[] soundSources;
+        private AudioSource soundSource;
 
         private void Start()
         {
-            soundSources = GetComponents<AudioSource>();
+            soundSource = GetComponent<AudioSource>();
 
             PlayerController player = GetComponent<PlayerController>();
             if(player is not null )
@@ -77,8 +77,7 @@ namespace JFM
             SoundGroup group = soundGroups.First(x => x.id == soundGroupID);
             try
             {
-                soundSources[group.sourceIndex].clip = group.sounds[soundID];
-                soundSources[group.sourceIndex].Play();
+                soundSource.PlayOneShot(group.sounds[soundID], group.volumeScale);
             }
             catch(Exception e)
             {
@@ -92,8 +91,7 @@ namespace JFM
             int soundID = Random.Range(0, group.sounds.Length);
             try
             {
-                soundSources[group.sourceIndex].clip = group.sounds[soundID];
-                soundSources[group.sourceIndex].Play();
+                soundSource.PlayOneShot(group.sounds[soundID], group.volumeScale);
             }
             catch (Exception e)
             {
@@ -107,8 +105,7 @@ namespace JFM
             int soundID = Random.Range(fromID, toID + 1);
             try
             {
-                soundSources[group.sourceIndex].clip = group.sounds[soundID];
-                soundSources[group.sourceIndex].Play();
+                soundSource.PlayOneShot(group.sounds[soundID], group.volumeScale);
             }
             catch( Exception e)
             {

@@ -108,7 +108,7 @@ namespace JFM
 
         [Header("Data")]
         [SerializeField] private PlayerData playerData;
-        private Knowledge lastKnowledge;
+        private Knowledge lastAttackKnowledge;
 
         private string[] knowledgeInputNames =
         {
@@ -548,12 +548,17 @@ namespace JFM
             inputTriggers[knowledgeInputNames[(int)knowledgePosition - 1]] = value;
         }
 
-        public void UseKnowledge(KnowledgeID knowledge)
+        public void UseKnowledge(KnowledgeID knowledgeID)
         {
-            lastKnowledge = playerData.EveryKnowledgeDictionary[knowledge];
+            Knowledge knowledge = playerData.EveryKnowledgeDictionary[knowledgeID];
+
+            if (!knowledge.isUtility)
+            {
+                lastAttackKnowledge = knowledge;
+            }
 
             KnowledgeState state = (KnowledgeState)stateMachine.states[PlayerState.STATE.KNOWLEDGE];
-            state.knowledge = playerData.GetKnowledgeByID(knowledge);
+            state.knowledge = playerData.GetKnowledgeByID(knowledgeID);
             stateMachine.ChangeState(state);
         }
 

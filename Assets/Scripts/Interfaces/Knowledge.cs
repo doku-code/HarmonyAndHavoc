@@ -10,6 +10,7 @@ namespace AF
     {
         public int damageBoost;
         public KnowledgeID ID;
+        public bool isUtility;
         public int chaosCost;
         public int slotCost;
         public float cooldown;
