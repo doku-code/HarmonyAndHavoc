@@ -55,7 +55,7 @@ namespace AF
             if (!isInventoryMenuOpen)
             {
                 if (SoundManager.Instance != null)
-                    SoundManager.Instance.PlayAClip(1);
+                    SoundManager.Instance.PlayFxClip(1);
                 PauseMenuPanel.SetActive(false);
                 InventoryPanel.SetActive(true);
                 Debug.Log("Opening the inventory menu");
@@ -66,7 +66,7 @@ namespace AF
             else
             {
                 if (SoundManager.Instance != null)
-                    SoundManager.Instance.PlayAClip(1);
+                    SoundManager.Instance.PlayFxClip(1);
                 InventoryPanel.SetActive(false);
                 isInventoryMenuOpen = false;
             }

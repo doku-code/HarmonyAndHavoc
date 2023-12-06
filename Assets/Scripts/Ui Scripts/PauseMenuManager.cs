@@ -65,7 +65,7 @@ namespace charles
                 if (!isPauseMenuOpen)
                 {
                     if (SoundManager.Instance != null)
-                        SoundManager.Instance.PlayAClip(1);
+                        SoundManager.Instance.PlayFxClip(1);
 
                     OpenPauseMenu();
 
@@ -78,7 +78,7 @@ namespace charles
                 else
                 {
                     if (SoundManager.Instance != null)
-                        SoundManager.Instance.PlayAClip(1);
+                        SoundManager.Instance.PlayFxClip(1);
 
                     ClosePauseMenu();
 
@@ -139,7 +139,7 @@ namespace charles
         
         public void OpenSettingsMenu()
         {
-            SoundManager.Instance.PlayAClip(1);
+            SoundManager.Instance.PlayFxClip(1);
             pausePanel.SetActive(false);
             settingsPanel.SetActive(true);
             if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
@@ -149,7 +149,7 @@ namespace charles
         }        
         public void ChangeWindowMode()
         {
-            SoundManager.Instance.PlayAClip(0);
+            SoundManager.Instance.PlayFxClip(0);
 
             switch (windowModePreset.value)
             {
@@ -173,7 +173,7 @@ namespace charles
         public void ChangeWindowSize()
         {
             if (SoundManager.Instance != null)
-                SoundManager.Instance.PlayAClip(0);
+                SoundManager.Instance.PlayFxClip(0);
             switch (windowSizePreset.value)
             {
                 case 0:

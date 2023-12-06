@@ -12,6 +12,7 @@ namespace AF
     public enum SpawnerPosition
     {
         BEGIN,
+        SAVING_SPOT,
         END,
     }
     public class GameManager : MonoBehaviour

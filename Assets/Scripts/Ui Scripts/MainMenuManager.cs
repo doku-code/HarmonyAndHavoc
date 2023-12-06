@@ -69,7 +69,7 @@ namespace AF
             mainPanel.SetActive(false);
             settingsPanel.SetActive(true);
             creditPanel.SetActive(false);
-            SoundManager.Instance.PlayAClip(1);
+            SoundManager.Instance.PlayFxClip(1);
 
             if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
             {
@@ -82,7 +82,7 @@ namespace AF
             mainPanel.SetActive(false);
             creditPanel.SetActive(true);
             settingsPanel.SetActive(false);
-            SoundManager.Instance.PlayAClip(1);
+            SoundManager.Instance.PlayFxClip(1);
 
             if (Gamepad.current != null && Mouse.current == null && Keyboard.current == null)
             {
@@ -92,7 +92,7 @@ namespace AF
 
         public void ChangeWindowMode()
         {
-            SoundManager.Instance.PlayAClip(0);
+            SoundManager.Instance.PlayFxClip(0);
 
             switch (windowModePreset.value)
             {
@@ -114,7 +114,7 @@ namespace AF
         
         public void ChangeWindowSize()
         {
-            SoundManager.Instance.PlayAClip(0);
+            SoundManager.Instance.PlayFxClip(0);
 
             switch (windowSizePreset.value)
             {

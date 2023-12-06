@@ -6,9 +6,14 @@ namespace AF
 {
     public class Spawner : MonoBehaviour
     {
-        [SerializeField] private MapManager mapManager;
+        private MapManager mapManager;
         [SerializeField] private SpawnerPosition spawnerPosition;
 
+        void Awake()
+        {
+            mapManager = transform.parent.gameObject.GetComponent<MapManager>();
+        }
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             if(other.gameObject.CompareTag("Player"))

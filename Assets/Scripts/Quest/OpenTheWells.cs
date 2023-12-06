@@ -28,7 +28,7 @@ public class OpenTheWells : MonoBehaviour
     {
         if (!wellsIsOpen)
         {
-            SoundManager.Instance.PlayAClip(4);
+            SoundManager.Instance.PlayFxClip(4);
             wellsCollider.SetActive(false);
             wellsIsOpen = true;
         }

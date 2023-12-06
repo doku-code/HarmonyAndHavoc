@@ -12,5 +12,7 @@ namespace AF
         [SerializeField] public Spawner despawnerEnd;
         [SerializeField] public GameObject spawnerBegin;
         [SerializeField] public GameObject spawnerEnd;
+        [SerializeField] public GameObject savingSpot;
+        [SerializeField] public LevelAudio levelAudio;
     }
 }

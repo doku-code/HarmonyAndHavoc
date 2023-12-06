@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 
 namespace AF
 {
@@ -12,7 +13,8 @@ namespace AF
         [NonSerialized] public string sAmbientVolume  = "Ambient";
 
         [SerializeField] private AudioMixer audioMixer;
-        [SerializeField] private AudioSource clipPlayerSource;
+        [SerializeField] private AudioSource fxSource;
+        [SerializeField] private AudioSource ambientSource;
         [SerializeField] private AudioClip[] clipsToPlay;
         [SerializeField] private AudioClip[] npcSounds;
         
@@ -49,16 +51,22 @@ namespace AF
             SaveSoundSettings(sMasterVolume,volume);
         }
 
-        public void PlayAClip(int index)
+        public void PlayFxClip(int index)
         {
-            clipPlayerSource.clip = clipsToPlay[index];
-            clipPlayerSource.Play();
+            fxSource.clip = clipsToPlay[index];
+            fxSource.Play();
+        }
+
+        public void PlayAmbientClip(AudioClip clip)
+        {
+            ambientSource.clip = clip;
+            ambientSource.Play();
         }
         
         public void PlayNpcSounds(int index)
         {
-            clipPlayerSource.clip = npcSounds[index];
-            clipPlayerSource.Play();
+            fxSource.clip = npcSounds[index];
+            fxSource.Play();
         }
         
         public void SaveSoundSettings(string settingName, float value)

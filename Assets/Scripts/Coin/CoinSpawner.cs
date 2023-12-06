@@ -42,7 +42,7 @@ namespace charles
                 coin.AddComponent<CoinPickup>();
                 if(SoundManager.Instance != null)
                 {
-                    SoundManager.Instance.PlayAClip(2);
+                    SoundManager.Instance.PlayFxClip(2);
                 }
 
                 yield return new WaitForSeconds(spawnDelay);
@@ -50,7 +50,7 @@ namespace charles
 
             if (SoundManager.Instance is not null)
             {
-                SoundManager.Instance.PlayAClip(2);
+                SoundManager.Instance.PlayFxClip(2);
             }
             callback.Invoke();
         }
