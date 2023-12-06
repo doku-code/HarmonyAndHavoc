@@ -59,6 +59,7 @@ MonoBehaviour:
   airAcceleration: 100
   maxFallDamageHeight: 12
   landingHeight: 7
+  fallDamageMultiplier: 3
   defaultGravityScale: 2
   groundDistance: 0.1
   groundedRadius: 0.14
@@ -83,7 +84,7 @@ MonoBehaviour:
   stairsUpMaxSlope: 2
   stairsDownHeight: 1.33
   stairsDownGroundX: 0.67
-  stairsDownDecelerationFactor: 0.3
+  stairsDownDecelerationFactor: 0.6
   stairsDownMinSlope: 0.4
   stairsDownMaxSlope: 2
   stairsUpAngle: 45
