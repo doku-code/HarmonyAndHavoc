@@ -53,12 +53,17 @@ namespace AF
 
         public void PlayFxClip(int index)
         {
-            fxSource.clip = clipsToPlay[index];
-            fxSource.Play();
+            fxSource.PlayOneShot(clipsToPlay[index]);
+        }
+
+        public void PlayFxClip(AudioClip clip)
+        {
+            fxSource.PlayOneShot(clip);
         }
 
         public void PlayAmbientClip(AudioClip clip)
         {
+            ambientSource.loop = true;
             ambientSource.clip = clip;
             ambientSource.Play();
         }
