@@ -15,10 +15,15 @@ public class BossSoundActivation : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isBossSoundPlaying)
-        {
-            //audioSourceLevel
-        }
-        
+        if(!isBossSoundPlaying && SoundManager.Instance != null)
+            SoundManager.Instance.PlayAmbientClip(mapManager.levelAudio.LevelBossAmbient);
+        isBossSoundPlaying = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(isBossSoundPlaying && SoundManager.Instance != null)
+            SoundManager.Instance.PlayAmbientClip(mapManager.levelAudio.LevelAmbient);
+        isBossSoundPlaying = false;
     }
 }

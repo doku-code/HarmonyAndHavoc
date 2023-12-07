@@ -11,7 +11,7 @@ namespace AF
 
         void Awake()
         {
-            mapManager = transform.parent.gameObject.GetComponent<MapManager>();
+            mapManager = transform.parent.parent.GetComponent<MapManager>();
         }
         
         private void OnTriggerEnter2D(Collider2D other)

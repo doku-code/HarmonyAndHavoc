@@ -14,5 +14,11 @@ namespace AF
         [SerializeField] public GameObject spawnerEnd;
         [SerializeField] public GameObject savingSpot;
         [SerializeField] public LevelAudio levelAudio;
+
+        void Awake()
+        {
+            if(SoundManager.Instance != null)
+                SoundManager.Instance.PlayAmbientClip(levelAudio.LevelAmbient);
+        }
     }
 }
