@@ -38,7 +38,7 @@ namespace JFM
     {
         public static ChaosOrderSystem Instance { get; private set; }    
 
-        [SerializeField] private PlayerData playerData;
+        [SerializeField] private PlayerData playerData;        
 
         [SerializeField] private int chaosAmount;
         public static int maxChaosAmount = 4;
@@ -51,6 +51,8 @@ namespace JFM
         //Faire une liste de gameobject pour les gameobject dans le village qui pourrais dependant du niveau du chaos changer de couleur
         private List<GameObject> colorChangingObjects = new List<GameObject>();
         private string[] colors = new string[maxChaosAmount];
+
+        private GameObject[] gridGameObjects;
 
         //Faire en sorte que si on gameover tout ce reactive et revienne comme couleur normal
         //Faire en sorte de changer le fullscreenpass material dependant du shader \
@@ -146,6 +148,8 @@ namespace JFM
                  
                 colorChangingObjects = villageConfig.colorChangingObjects;
                 colors = villageConfig.colors;
+
+                gridGameObjects = villageConfig.gridGameObjects;
             }
         }
 
@@ -156,44 +160,19 @@ namespace JFM
         }              
 
         private void ActivateGrids()
-        {
-            Grid[] grids = FindObjectsOfType<Grid>();
-            //Debug.Log("grids.Length=" +grids.Length);
-
-            if (grids is null)
-            {
-                return;
-            }
-
-            // Create a list of Grid objects that are on layer "ChaosGrids"
-            List<GridInfo> sortedGrids = new List<GridInfo>();
-            foreach (Grid grid in grids)
-            {
-                if (grid.gameObject.layer == LayerMask.NameToLayer("ChaosGrids"))
-                {
-                    Debug.Log($"id={grid.gameObject.name}");
-                    sortedGrids.Add(new GridInfo(grid));
-                }
-            }
-
-            sortedGrids.Sort();
-            /*foreach (GridInfo grid in sortedGrids)
-            {
-                Debug.Log($"sortedGrids= {grid.name}");
-            }*/
-
+        {            
             Debug.Log($"chaosAmount={chaosAmount}");
 
             for (int i = 0; i < chaosAmount; i++)
             {
-                sortedGrids[i].grid.enabled = false;
+                gridGameObjects[i].SetActive(false);
             }
 
-            sortedGrids[chaosAmount].grid.enabled = true;
+            gridGameObjects[chaosAmount].SetActive(true);
 
             for (int i = chaosAmount + 1; i < maxChaosAmount; i++)
             {
-                sortedGrids[i].grid.enabled = false;
+                gridGameObjects[i].SetActive(false);
             }
         }
 

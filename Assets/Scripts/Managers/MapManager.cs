@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AF
@@ -14,11 +12,27 @@ namespace AF
         [SerializeField] public GameObject spawnerEnd;
         [SerializeField] public GameObject savingSpot;
         [SerializeField] public LevelAudio levelAudio;
+        [SerializeField] public GameObject doorToNextLevel;
+
+        public static MapManager Instance;
 
         void Awake()
         {
             if(SoundManager.Instance != null)
                 SoundManager.Instance.PlayAmbientClip(levelAudio.LevelAmbient);
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
+
+        public void UnlockDoor()
+        {
+            doorToNextLevel.SetActive(false);
         }
     }
 }

@@ -1,4 +1,4 @@
-using AF;
+/*using AF;
 using UnityEngine;
 
 public class OpenTheWells : MonoBehaviour
@@ -37,4 +37,4 @@ public class OpenTheWells : MonoBehaviour
             return;
         }
     }
-}
+}*/

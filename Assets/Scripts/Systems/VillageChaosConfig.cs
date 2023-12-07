@@ -1,5 +1,3 @@
-using JFM;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +17,7 @@ namespace JFM
         //Faire en sorte que si on gameover tout ce reactive et revienne comme couleur normal
         //Faire en sorte de changer le fullscreenpass material dependant du shader \
 
-
+        // The GameObjects containing Grid components
+        public GameObject[] gridGameObjects;
     }
 }
