@@ -61,10 +61,6 @@ namespace AF
 
         public void LoadGame()
         {
-            Debug.Log("loadgame **************************************");
-
-            //LoadSceneMenu();
-
             LoadNextMap("Village", SpawnerPosition.END);
         }
 
@@ -73,14 +69,8 @@ namespace AF
             SceneManager.LoadScene("InGameUI", LoadSceneMode.Additive);
         }
 
-        public void UnloadSceneMenu()
-        {
-            SceneManager.UnloadSceneAsync("InGameUI");
-        }
-
         public void PlacePlayer(SpawnerPosition spawnPosition)
         {
-            //player = GameObject.FindWithTag("Player");
             GameObject playerGO = Instantiate(player);
             FindAnyObjectByType<CinemachineVirtualCamera>().Follow = playerGO.transform;
 
