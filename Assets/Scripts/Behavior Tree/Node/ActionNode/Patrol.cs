@@ -27,7 +27,7 @@ public class Patrol : ActionNode
     protected override void OnStart()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-                
+        Debug.Log($"OnStart()");
         if (initialPosition == Vector2.zero)
         {
             initialPosition = npcRigidBody.position;
@@ -63,6 +63,7 @@ public class Patrol : ActionNode
 
         if (!npcController.IsKnockedBack && npcRigidBody.velocity.magnitude < maxSpeed)
         {
+            Debug.Log($"Moving forward={Vector2.right * currentDirection * moveSpeed * dt}");
             npcRigidBody.AddForce(Vector2.right * currentDirection * moveSpeed * dt);
         }
 
@@ -93,20 +94,20 @@ public class Patrol : ActionNode
             }
         }
 
-        float facing = npcRigidBody.velocity.x > 0 ? 1.0f : -1.0f;
-
-        RaycastHit2D playerHit = Physics2D.Raycast(npcRigidBody.position, Vector2.right * facing, attackDistance, playerLayer);
-        Debug.DrawLine(npc.transform.position, npc.transform.position + Vector3.right * facing * attackDistance, Color.yellow);
+        RaycastHit2D playerHit = Physics2D.Raycast(npcRigidBody.position, Vector2.right * currentDirection, attackDistance, playerLayer);
+        Debug.DrawLine(npc.transform.position, npc.transform.position + Vector3.right * currentDirection * attackDistance, Color.yellow);
 
         if (playerHit.collider is not null)
         {
+            Debug.Log("Player is found!");
             return State.SUCCESS;
         }
 
         if (Mathf.Abs(nextPosition.x - npcRigidBody.position.x) < distBeforeChanging ||
             Mathf.Sign(nextPosition.x - npcRigidBody.position.x) != Mathf.Sign(currentDirection) ||
             obstacleFound)
-        {            
+        {
+            Debug.Log("Turning around!");
             currentDirection = -currentDirection;
             nextPosition = npcRigidBody.position + currentDirection * Vector2.right * 2.0f * patrolRadius;
             if (!npcController.IsKnockedBack)
@@ -114,6 +115,8 @@ public class Patrol : ActionNode
                 npcRigidBody.AddForce(-npcRigidBody.velocity, ForceMode2D.Impulse);
             }
         }
+
+        Debug.Log("Player is not found!");
 
         return State.RUNNING;
     }

@@ -8,10 +8,15 @@ namespace charles
     {
         [SerializeField] private GameObject coinPrefab;
         [SerializeField] private int numberOfCoins = 20;
-        [SerializeField] private float minForce = 300f;
-        [SerializeField] private float maxForce = 600f;
+        [Tooltip("Impulse force to apply when coin dropping")]
+        [SerializeField] private float minForce = 2.0f;
+        [SerializeField] private float maxForce = 5.0f;
+        [Tooltip("Angle variation according to Up vector (in degrees).")]
+        [SerializeField] private float angleVariance = 30.0f;
         [SerializeField] private float spawnDelay = 0.1f;
+
         private ParametersLessDelegate callback;
+
         public void SpawnCoins(ParametersLessDelegate callback)
         {
             this.callback = callback;
@@ -31,15 +36,27 @@ namespace charles
 
                 coin.transform.position = transform.position;
 
-                Vector2 trajectory = Random.insideUnitCircle * 200f;
-                float forceX = Random.Range(-minForce, maxForce) + trajectory.x;
-                float forceY = maxForce + trajectory.y;
+                // Old coin dropping code
+                /*float force = Random.Range(minForce, maxForce);
+                Vector2 trajectory = Random.insideUnitCircle;
+                float forceX = force * trajectory.x;
+                float forceY = force * Mathf.Abs(trajectory.y);
+                Vector2 vForce = new Vector2(forceX, forceY);
+                */
+
+                // Allow an angle variation (+/-) according to Vector2.up
+                // to obtain an impulse force
+                float angle = angleVariance * Mathf.Deg2Rad;
+                angle = Random.Range(-angle, angle) + Mathf.PI / 2.0f;
+                float force = Random.Range(minForce, maxForce);
+                Vector2 vForce = new Vector2(force * Mathf.Cos(angle), force * Mathf.Sin(angle));
 
                 Rigidbody2D coinRigidbody = coin.GetComponent<Rigidbody2D>();
                 coinRigidbody.velocity = Vector2.zero;
-                coinRigidbody.AddForce(new Vector2(forceX, forceY));
+                coinRigidbody.AddForce(vForce, ForceMode2D.Impulse);
 
-                coin.AddComponent<CoinPickup>();
+                Debug.Log($"Testing coin spawning. i={i} vForce={vForce}");                
+
                 if(SoundManager.Instance != null)
                 {
                     SoundManager.Instance.PlayFxClip(2);

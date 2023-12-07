@@ -8,13 +8,18 @@ namespace charles
     {
         void OnTriggerEnter2D(Collider2D other)
         {
+            // If Player touches the coin, deactivate its gameObject.
             if (other.CompareTag("Player") && other is CapsuleCollider2D)
             {
-                SoundManager.Instance.PlayFxClip(3);
+                if (SoundManager.Instance is not null)
+                {
+                    SoundManager.Instance.PlayFxClip(3);
+                }
                 gameObject.SetActive(false);
             }
         }
 
+        // Add to gold in PlayerData.
         public void Interact(GameObject gameObject) 
         {
             PlayerController pc = null;

@@ -1,4 +1,4 @@
-#define _DEBUG_INPUT
+//#define _DEBUG_INPUT
 
 using AF;
 using System;

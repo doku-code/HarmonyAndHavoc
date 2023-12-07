@@ -33,6 +33,7 @@ public abstract class Node : ScriptableObject
 
     public virtual Node Clone()
     {
+        started = false;
         return Instantiate(this);
     }
     public void Abort()

@@ -905,6 +905,7 @@ MonoBehaviour:
   numberOfCoins: 2
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &63284518
 MonoBehaviour:
@@ -1685,7 +1686,7 @@ CompositeCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 1408
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -2248,6 +2249,7 @@ MonoBehaviour:
   numberOfCoins: 1
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &188854472
 MonoBehaviour:
@@ -3641,6 +3643,7 @@ MonoBehaviour:
   numberOfCoins: 2
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &292607792
 MonoBehaviour:
@@ -12244,6 +12247,7 @@ MonoBehaviour:
   numberOfCoins: 2
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &656493469
 MonoBehaviour:
@@ -12858,6 +12862,7 @@ MonoBehaviour:
   numberOfCoins: 1
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &732978199
 MonoBehaviour:
@@ -14294,6 +14299,7 @@ MonoBehaviour:
   numberOfCoins: 1
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &868142662
 MonoBehaviour:
@@ -17123,6 +17129,7 @@ MonoBehaviour:
   numberOfCoins: 2
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1032169574
 MonoBehaviour:
@@ -18375,6 +18382,7 @@ MonoBehaviour:
   numberOfCoins: 2
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1206130281
 MonoBehaviour:
@@ -18740,8 +18748,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 1
-  minForce: 10
-  maxForce: 150
+  minForce: 0.2
+  maxForce: 1
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1232793249
 MonoBehaviour:
@@ -18760,7 +18769,7 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
+  tickInterval: 0.01
   tree: {fileID: 11400000, guid: a3489f9cadc6ce145bdc5c3ccb365aac, type: 2}
   blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1232793250
@@ -42506,6 +42515,7 @@ MonoBehaviour:
   numberOfCoins: 2
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1307303185
 MonoBehaviour:
@@ -42783,9 +42793,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 1
-  minForce: 10
-  maxForce: 150
-  spawnDelay: 0.1
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
+  spawnDelay: 2
 --- !u!114 &1329097545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407584,6 +407595,7 @@ MonoBehaviour:
   numberOfCoins: 2
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1521873542
 MonoBehaviour:
@@ -408197,6 +408209,7 @@ MonoBehaviour:
   numberOfCoins: 1
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1570236424
 MonoBehaviour:
@@ -408810,6 +408823,7 @@ MonoBehaviour:
   numberOfCoins: 2
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1600207943
 MonoBehaviour:
@@ -409880,6 +409894,7 @@ MonoBehaviour:
   numberOfCoins: 2
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1723928790
 MonoBehaviour:
@@ -411226,6 +411241,7 @@ MonoBehaviour:
   numberOfCoins: 1
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1849342171
 MonoBehaviour:
@@ -412042,6 +412058,7 @@ MonoBehaviour:
   numberOfCoins: 1
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1898092427
 MonoBehaviour:
@@ -414665,6 +414682,7 @@ MonoBehaviour:
   numberOfCoins: 2
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1989576971
 MonoBehaviour:
@@ -417855,6 +417873,7 @@ MonoBehaviour:
   numberOfCoins: 15
   minForce: 100
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!212 &1212361997311577782
 SpriteRenderer:
@@ -418634,6 +418653,9 @@ MonoBehaviour:
   despawnerEnd: {fileID: 4257967322322114441}
   spawnerBegin: {fileID: 214045963884701363}
   spawnerEnd: {fileID: 8666347694493483997}
+  savingSpot: {fileID: 0}
+  levelAudio: {fileID: 0}
+  doorToNextLevel: {fileID: 0}
 --- !u!1 &3111137561284740408
 GameObject:
   m_ObjectHideFlags: 0
@@ -418862,7 +418884,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c79253a55cf0c540987bc0a82461022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapManager: {fileID: 2992782725875440508}
   spawnerPosition: 1
 --- !u!4 &4376479885719181695
 Transform:
@@ -419746,7 +419767,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c79253a55cf0c540987bc0a82461022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapManager: {fileID: 2992782725875440508}
   spawnerPosition: 0
 --- !u!1 &6956104303692581764
 GameObject:
@@ -419935,8 +419955,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 10
-  minForce: 10
-  maxForce: 150
+  minForce: 0.2
+  maxForce: 1
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &8024168652293089366
 MonoBehaviour:
@@ -420057,6 +420078,7 @@ MonoBehaviour:
   numberOfCoins: 2
   minForce: 10
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &8828252214850132337
 MonoBehaviour:

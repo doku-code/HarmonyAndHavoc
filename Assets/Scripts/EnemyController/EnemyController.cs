@@ -30,7 +30,7 @@ namespace charles
 
         [Space]
         [Header("Behavior Tree")]
-        [SerializeField] float tickInterval;
+        [SerializeField] float tickInterval = 0.01f;
         public BehaviourTree tree;
         private IEnumerator tickCoroutine;
         [SerializeField] private EnemyBlackboard blackboard;
@@ -127,8 +127,14 @@ namespace charles
 
         private void Die()
         {
+            Debug.Log("Dying");
+            
+            // Hide the UI (health bar)
+            GetComponentInChildren<Canvas>().gameObject.SetActive(false);
+
             CoinSpawner coinSpawner = GetComponent<CoinSpawner>();
             coinSpawner.SpawnCoins(DestroyAfterAnim);
+            
             npcAnimator.SetTrigger("Death");
         }
 
