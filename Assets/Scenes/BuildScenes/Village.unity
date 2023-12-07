@@ -849,6 +849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a064f9abbab0cd74f9c9d33b586e0da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wellsIsOpen: 0
+  wellsCollider: {fileID: 0}
 --- !u!1 &81878814
 GameObject:
   m_ObjectHideFlags: 0
@@ -62520,14 +62522,14 @@ PrefabInstance:
     - target: {fileID: 4125121077574616502, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 69793878}
+      objectReference: {fileID: 438261363}
     - target: {fileID: 4125121077574616502, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnAcceptQuest
       objectReference: {fileID: 0}
     - target: {fileID: 4125121077574616502, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: OpenTheWells, Assembly-CSharp
+      value: charles.ConversationManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5724791317186332757, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_Pivot.x
@@ -335394,6 +335396,10 @@ PrefabInstance:
       propertyPath: previousMap
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5472724728977223842, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
+      propertyPath: doorToNextLevel
+      value: 
+      objectReference: {fileID: 69793875}
     - target: {fileID: 6405762081192537432, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -257
@@ -335456,7 +335462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7466808470851248157, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 78
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7466808470851248157, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
       propertyPath: m_LocalPosition.y

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-
+using AF;
 namespace charles
 {
     [System.Serializable]
@@ -35,6 +35,7 @@ namespace charles
         private int questionIndex = 0;
         private int currentUpgradePrice = 10;
         private bool repeatQuestion = true;
+        private bool wellsIsOpen = false;
 
         private void Start()
         {
@@ -109,6 +110,20 @@ namespace charles
                 questionIndex++;
             }
             LoadConversation(questionIndex);
+        }
+        
+        public void OnAcceptQuest()
+        {
+            if (!wellsIsOpen)
+            {
+                SoundManager.Instance.PlayFxClip(4);
+                MapManager.Instance.UnlockDoor();
+                wellsIsOpen = true;
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }
