@@ -1,4 +1,4 @@
-//#define _DEBUG_INPUT
+#define _DEBUG_INPUT
 
 using AF;
 using System;
@@ -423,11 +423,14 @@ namespace JFM
             return false;
         }
 
-        public void Land()
+        public void Land(bool takeDamage)
         {
-            // Do fall damage here?
-            playerData.TakeDamage(currentFallDamage);
-            Debug.Log($"Taking {currentFallDamage} damage from falling.");
+            if (takeDamage)
+            {
+                // Do fall damage here?
+                playerData.TakeDamage(currentFallDamage);
+                Debug.Log($"Taking {currentFallDamage} damage from falling.");
+            }
 
             if (LandedEvent is not null)
             {
@@ -515,7 +518,8 @@ namespace JFM
         private void HitEnemy(Collider2D collision)
         {
             EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
-            int damage = playerData.GetPlayerDamage(null);
+
+            int damage = playerData.GetPlayerDamage(lastAttackKnowledge);
 
             // Calculates pushback direction
             CapsuleCollider2D capsule = collision.gameObject.GetComponent<CapsuleCollider2D>();
@@ -548,13 +552,18 @@ namespace JFM
             inputTriggers[knowledgeInputNames[(int)knowledgePosition - 1]] = value;
         }
 
+        public void ResetLastAttackKnowledgeUsed()
+        {
+            lastAttackKnowledge = null;
+        }
+
         public void UseKnowledge(KnowledgeID knowledgeID)
         {
             Knowledge knowledge = playerData.EveryKnowledgeDictionary[knowledgeID];
 
             if (!knowledge.isUtility)
             {
-                lastAttackKnowledge = knowledge;
+                lastAttackKnowledge = knowledge;                
             }
 
             KnowledgeState state = (KnowledgeState)stateMachine.states[PlayerState.STATE.KNOWLEDGE];

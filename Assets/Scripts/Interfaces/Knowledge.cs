@@ -32,6 +32,7 @@ namespace AF
         public void Use()
         {
             activationTime = Time.time;
+            player.Data.UseChaos(chaosCost);
         }
 
         public abstract bool WillUse();

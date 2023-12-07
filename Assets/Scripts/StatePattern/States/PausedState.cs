@@ -21,7 +21,9 @@ namespace JFM
         public override void Enter()
         {           
             player.animator.SetBool("IsIdle", true);
+
             player.inputTriggers["Inventory"] = false;
+            player.MoveInput = Vector2.zero;
 
             player.rb.velocity = Vector2.zero;
             

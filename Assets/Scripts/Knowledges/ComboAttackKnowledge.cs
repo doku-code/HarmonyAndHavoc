@@ -6,14 +6,14 @@ namespace JFM
     [CreateAssetMenu(fileName = "ComboAttackKnowledge", menuName = "Knowledges/Combo Attack")]
     public class ComboAttackKnowledge : Knowledge
     {
-        private float startTime;
+        /*private float startTime;
         private float animationClipLength;
         private bool isAirborned;
         [SerializeField] private int animatorLayer = 2;
         [SerializeField] private string groundMotionName = "Player_Attack_1";
         [SerializeField] private string airMotionName = "Player_Air_Attack_1";
         private string motionName;
-
+        */
         public override void Activate()
         {
         }
@@ -25,14 +25,14 @@ namespace JFM
         public override void Enter()
         {
             // If airborne, use air attack animation
-            if (isAirborned = !player.IsGrounded())
+            if (/*isAirborned =*/ !player.IsGrounded())
             {
                 player.animator.SetBool("IsAirborne", true);
-                motionName = airMotionName;
+                //motionName = airMotionName;
             }
             else
             {
-                motionName = groundMotionName;
+                //motionName = groundMotionName;
             }
 
             player.CurrentState.SubscribeToAnimatorObserver("Attacks");
@@ -41,8 +41,7 @@ namespace JFM
             player.animator.SetInteger("KnowledgeAttackIndex", 1);
             AvailableKnowledgePosition knowledgePosition = player.Data.AvailableKnowledgeDictionary[KnowledgeID.COMBO_ATTACK];
             player.SetKnowledgeTrigger(knowledgePosition, false);
-            //player.rb.velocity = Vector2.zero;
-            startTime = Time.time;
+           //startTime = Time.time;
             player.Attack();
         }
 
@@ -54,13 +53,11 @@ namespace JFM
         public override void Exit()
         {
             player.animator.SetInteger("KnowledgeAttackIndex", 0);
-            player.CurrentState.UnsubscribeToAnimatorObserver();
+            player.CurrentState.UnsubscribeToAnimatorObserver();            
         }
 
         public override bool WillUse()
         {
-
-
             bool availableKnowledge = player.Data.KnownKnowledgeDictionary[KnowledgeID.COMBO_ATTACK];
             AvailableKnowledgePosition knowledgePosition = player.Data.AvailableKnowledgeDictionary[KnowledgeID.COMBO_ATTACK];
 
@@ -71,10 +68,7 @@ namespace JFM
                            && player.GetKnowledgeTrigger(knowledgePosition);
             if (willUse)
             {
-                if (willUse = player.Data.UseChaos(chaosCost))
-                {
-                    Use();
-                }
+                Use();
             }
             //Debug.Log($"willUse={willUse}");
             return willUse;

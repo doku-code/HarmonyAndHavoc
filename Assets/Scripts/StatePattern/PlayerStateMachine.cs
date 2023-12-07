@@ -1,6 +1,7 @@
 using JFM;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace JFM
@@ -30,6 +31,11 @@ namespace JFM
         public void ChangeState(PlayerState nextState)
         {
             currentState.SetNextState(nextState);
+        }
+
+        public PlayerState GetNextState()
+        {
+            return currentState.GetNextState();
         }
     }
 }

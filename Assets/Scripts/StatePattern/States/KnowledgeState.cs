@@ -26,6 +26,11 @@ namespace JFM
         {
             knowledge.Exit();
             base.Exit();
+
+            if (!knowledge.isUtility)
+            {
+                player.ResetLastAttackKnowledgeUsed();
+            }
         }
 
         public override void OnLeaveState() 

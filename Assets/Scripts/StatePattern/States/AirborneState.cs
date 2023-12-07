@@ -91,7 +91,7 @@ namespace JFM
                             if (stairsAreRightSide == player.IsFacingRight)
                             {
                                 //player.StateMachine.ChangeState(player.States[STATE.STAIRS_UP]);
-                                player.StateMachine.ChangeState(player.States[STATE.WALK]);
+                                player.StateMachine.ChangeState(player.States[STATE.WALK]);                                
                             }
                             else
                             {
@@ -324,6 +324,12 @@ namespace JFM
                 return;
             }
 
+            if (player.inputTriggers["Inventory"])
+            {
+                player.StateMachine.ChangeState(player.States[STATE.PAUSE]);
+                return;
+            }
+
             if (player.CanClimbLadder())
             {
                 //Debug.Log("Ladders on airborne");
@@ -351,6 +357,14 @@ namespace JFM
             //player.rb.gravityScale = player.DefaultGravityScale;
             player.animator.SetBool("IsFalling", false);
             player.animator.SetBool("IsAirborne", false);
+
+            PlayerState state = player.StateMachine.GetNextState();
+            if (state == player.StateMachine.states[PlayerState.STATE.WALK]
+                || state == player.StateMachine.states[PlayerState.STATE.IDLE])
+            {
+                player.Land(false);
+            }
+
             base.Exit();
         }
 

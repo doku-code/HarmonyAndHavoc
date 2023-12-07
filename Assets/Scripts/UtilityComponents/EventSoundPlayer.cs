@@ -22,19 +22,14 @@ namespace JFM
     {
         public SoundGroupID id;        
         public AudioClip[] sounds;
-        public float volumeScale = 1.0f;
     }
 
     public class EventSoundPlayer : MonoBehaviour
     {
         [SerializeField] private SoundGroup[] soundGroups;        
 
-        private AudioSource soundSource;
-
         private void Start()
         {
-            soundSource = GetComponent<AudioSource>();
-
             PlayerController player = GetComponent<PlayerController>();
             if(player is not null )
             {
@@ -77,7 +72,7 @@ namespace JFM
             SoundGroup group = soundGroups.First(x => x.id == soundGroupID);
             try
             {
-                soundSource.PlayOneShot(group.sounds[soundID], group.volumeScale);
+                SoundManager.Instance.PlayFxClip(group.sounds[soundID]);
             }
             catch(Exception e)
             {
@@ -91,7 +86,7 @@ namespace JFM
             int soundID = Random.Range(0, group.sounds.Length);
             try
             {
-                soundSource.PlayOneShot(group.sounds[soundID], group.volumeScale);
+                SoundManager.Instance.PlayFxClip(group.sounds[soundID]);
             }
             catch (Exception e)
             {
@@ -105,7 +100,7 @@ namespace JFM
             int soundID = Random.Range(fromID, toID + 1);
             try
             {
-                soundSource.PlayOneShot(group.sounds[soundID], group.volumeScale);
+                SoundManager.Instance.PlayFxClip(group.sounds[soundID]);
             }
             catch( Exception e)
             {

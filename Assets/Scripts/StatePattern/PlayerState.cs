@@ -51,6 +51,11 @@ namespace JFM
         protected PlayerState nextState;
         protected string animatorObserverName;
 
+        public PlayerState GetNextState()
+        {
+            return nextState;
+        }
+
         public void Initialize(PlayerController player)
         {
             this.player = player;

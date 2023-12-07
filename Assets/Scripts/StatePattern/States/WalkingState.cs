@@ -217,6 +217,12 @@ namespace JFM
                 return;
             }
 
+            if (player.inputTriggers["Inventory"])
+            {
+                player.StateMachine.ChangeState(player.States[STATE.PAUSE]);
+                return;
+            }
+
             // Add force but limit speed
             if ((player.rb.velocity.magnitude < player.WalkSpeed && !Platformer2DUtilities.AreNearlyEqual(lastposition.x, player.rb.position.x)) || hasTurned)
             {

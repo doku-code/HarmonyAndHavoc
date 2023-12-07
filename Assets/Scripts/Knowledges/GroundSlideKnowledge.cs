@@ -207,10 +207,7 @@ namespace JFM
 
             if (willUse)
             {
-                if (willUse = player.Data.UseChaos(chaosCost))
-                {
-                    Use();
-                }
+                Use();
             }
             //Debug.Log($"willUse={willUse}");
             return willUse;
