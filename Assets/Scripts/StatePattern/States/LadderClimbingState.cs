@@ -26,6 +26,12 @@ namespace JFM
             {
                 inputY = 1;
             }
+
+            // In case Crouch state was triggered right before going down the ladder,
+            // put the Player back in Idle state (it'll be overriden since it's an
+            // animator sub-layer
+            player.animator.SetBool("IsIdle", true);
+            
             player.animator.SetFloat("MotionSpeed", 1);
             player.animator.SetInteger("Ladder", inputY);
             oldGravityScale = player.rb.gravityScale;
@@ -48,6 +54,8 @@ namespace JFM
 
         public override void Update()
         {
+            //player.SetHighestAirborneY(true);
+
             if (player.GetBeneathObject() is null && !player.IsAboveLadder())
             {
                 //Debug.Break();
@@ -210,6 +218,7 @@ namespace JFM
 
         public override void Exit()
         {
+            player.animator.SetBool("IsIdle", false);
             player.animator.SetInteger("Ladder", 0);
             if (resetGravityScale)
             {
