@@ -76,7 +76,7 @@ namespace JFM
             }
             catch(Exception e)
             {
-                Debug.Log($"PlaySound(SoundGroupID, int) throwed an exception: {e.Message}");
+                //Debug.Log($"PlaySound(SoundGroupID, int) throwed an exception: {e.Message}");
             }
         }
 
@@ -90,7 +90,7 @@ namespace JFM
             }
             catch (Exception e)
             {
-                Debug.Log($"PlayRandomSound(SoundGroupID) throwed an exception: {e.Message}");
+                //Debug.Log($"PlayRandomSound(SoundGroupID) throwed an exception: {e.Message}");
             }
         }
 
@@ -104,7 +104,7 @@ namespace JFM
             }
             catch( Exception e)
             {
-                Debug.Log($"PlayRandomSound(SoundGroupID, int, int) throwed an exception: {e.Message}");
+                //Debug.Log($"PlayRandomSound(SoundGroupID, int, int) throwed an exception: {e.Message}");
             }
         }
     }

@@ -49,7 +49,7 @@ namespace JFM
         protected EVENT stage;        
         protected PlayerController player;
         protected PlayerState nextState;
-        protected string animatorObserverName;
+        private string _animatorObserverName;
 
         public PlayerState GetNextState()
         {
@@ -105,7 +105,7 @@ namespace JFM
 
         public void SubscribeToAnimatorObserver(string observerName)
         {
-            animatorObserverName = observerName;
+            _animatorObserverName = observerName;
 
             AnimatorObserver[] behaviors = player.animator.GetBehaviours<AnimatorObserver>();
             
@@ -128,7 +128,7 @@ namespace JFM
             AnimatorObserver[] behaviors = player.animator.GetBehaviours<AnimatorObserver>();
             foreach (AnimatorObserver behavior in behaviors)
             {
-                if (behavior is not null && behavior.name == animatorObserverName)
+                if (behavior is not null && behavior.name == _animatorObserverName)
                 {
                     behavior.onLeaveState -= OnLeaveState;
                 }

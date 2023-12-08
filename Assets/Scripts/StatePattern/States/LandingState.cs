@@ -12,6 +12,7 @@ namespace JFM
         public int animatorLayerIndex = 0;
         public string motionName = "Player_landing";
         private bool hasSubscribedToAnimatorObserver;
+        public string animatorObserverName = "Movement";
 
         public override void Enter()
         {
@@ -36,7 +37,7 @@ namespace JFM
             if (!hasSubscribedToAnimatorObserver 
                 && player.animator.GetCurrentAnimatorStateInfo(animatorLayerIndex).IsName(motionName))
             {
-                SubscribeToAnimatorObserver("Movement");
+                SubscribeToAnimatorObserver(animatorObserverName);
                 hasSubscribedToAnimatorObserver = true;                
             }
         }

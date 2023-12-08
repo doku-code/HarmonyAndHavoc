@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8090155612823236023
+--- !u!114 &-8421530712381887247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14,38 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 7b959e344eb5eb9448408c14e0414760
-  position: {x: 430, y: 735.50006}
+  guid: dd50da2f1e63360498e6c6917834faff
+  position: {x: 73, y: 674}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
   attackCooldown: 2
-  attackDistance: 3
-  attackAnimString: Combo2
+  attackDistance: 2
+  detectionDistance: 10000
+  detectForwardOnly: 0
+  leaveDistance: 5
+  attackAnimString: Combo1
+  attackClipName: Attack1
   comboSoundIdx: 0
---- !u!114 &-6614378293689732671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e22ff3ddcaa57f64193ad61c8d52fd69, type: 3}
-  m_Name: Parallel
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: d9f55008a88c4bd47b9fcfdd5e79a1bd
-  position: {x: 0, y: 166.00002}
-  Description: 
-  children:
-  - {fileID: 4751016770263260837}
-  - {fileID: -3283487033019449910}
---- !u!114 &-6020066099706955708
+  animatorLayer: 0
+  moveSpeed: 1000
+  maxSpeed: 2
+  holeDistance: {x: 1, y: 1.5}
+--- !u!114 &-3699512351861952237
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,11 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 5057d2efc1570074999da9b7cd36db4f
-  position: {x: 0, y: 43.899994}
+  guid: 6f506a2ab0d1f974ea0450decb7282ab
+  position: {x: 0, y: 0}
   Description: 
-  child: {fileID: -6614378293689732671}
---- !u!114 &-5630920074011657156
+  child: {fileID: 3374381720642658304}
+--- !u!114 &-298296971772436585
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,86 +60,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47689c60fb5ba8e44922f0c535e55d02, type: 3}
-  m_Name: Attack
+  m_Script: {fileID: 11500000, guid: d11ad825274de034f83e98e4ae8e9640, type: 3}
+  m_Name: Patrol
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 0fd943f43a4c2554c9112b90753a6240
-  position: {x: 580, y: 735.50006}
+  guid: 3d679d781546b31468fcf5b7ed1b193d
+  position: {x: -190, y: 676}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackCooldown: 2
-  attackDistance: 3
-  attackAnimString: Combo3
-  comboSoundIdx: 0
---- !u!114 &-3544352756054679891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcddb15bcd2925f4887c696f4baa3c36, type: 3}
-  m_Name: Sequencer
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 8be5d200dce8d594f9a7f1dbc628af81
-  position: {x: -202, y: 588}
-  Description: 
-  children:
-  - {fileID: 6293112812819813508}
-  - {fileID: 1699612787182715885}
---- !u!114 &-3283487033019449910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10e22483f73a7cb48a1a8f0d2f066df6, type: 3}
-  m_Name: RepeatNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: ec22fae4020a65f42a15772483f476ce
-  position: {x: 167, y: 373.00003}
-  Description: 
-  children:
-  - {fileID: 8136881546061674528}
---- !u!114 &-554837562087923809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47689c60fb5ba8e44922f0c535e55d02, type: 3}
-  m_Name: Attack
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: d30813dd523313a49a1e3afb52b69264
-  position: {x: 280, y: 735.50006}
-  Description: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  gameobjNpcName: 
-  attackCooldown: 2
-  attackDistance: 3
-  attackAnimString: Combo1
-  comboSoundIdx: 0
+  patrolRadius: 3
+  PatrolAnimString: Run
+  moveSpeed: 1000
+  maxSpeed: 2
+  distBeforeChanging: 1
+  obstacleDistance: 1.5
+  detectionDistance: 10000
+  detectForwardOnly: 0
+  holeDistance: {x: 1, y: 1.5}
+  isFlying: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,55 +94,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d52bd284d66f45409895549ec0dc050, type: 3}
   m_Name: Troll
   m_EditorClassIdentifier: 
-  rootNode: {fileID: -6020066099706955708}
+  rootNode: {fileID: -3699512351861952237}
   treeState: 0
   nodes:
-  - {fileID: -6020066099706955708}
-  - {fileID: -6614378293689732671}
-  - {fileID: -3283487033019449910}
-  - {fileID: 4751016770263260837}
-  - {fileID: -3544352756054679891}
-  - {fileID: 8136881546061674528}
-  - {fileID: 6293112812819813508}
-  - {fileID: 1699612787182715885}
-  - {fileID: 8710811692187415094}
-  - {fileID: -554837562087923809}
-  - {fileID: -8090155612823236023}
-  - {fileID: -5630920074011657156}
---- !u!114 &1699612787182715885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f59494be34770fd4b8486babe3b65c8d, type: 3}
-  m_Name: FollowPlayer
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 136d1aa5cd98ec743a72f5b7fc970d84
-  position: {x: -126.4375, y: 751.62506}
-  Description: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  gameobjNpcName: 
-  runAnimString: Run
-  followDistanceX: 0
-  followDistanceY: 0.2
-  maxDistance: 14
-  followSpeedX: 200
-  followSpeedY: 250
-  followOnY: 0
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  distanceOffset: 1
-  stoppingDistance: 1
---- !u!114 &4751016770263260837
+  - {fileID: -3699512351861952237}
+  - {fileID: 3374381720642658304}
+  - {fileID: 6059960973641363223}
+  - {fileID: -8421530712381887247}
+  - {fileID: 7672916494558790739}
+  - {fileID: -298296971772436585}
+  - {fileID: 4672512569165561839}
+--- !u!114 &3374381720642658304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,12 +118,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 06aaa8818ba1026408825e5c71f009db
-  position: {x: -202, y: 364.00006}
+  guid: cf729406e94ebd440b5774e36f99b022
+  position: {x: 0.7999878, y: 186}
   Description: 
   children:
-  - {fileID: -3544352756054679891}
---- !u!114 &6293112812819813508
+  - {fileID: 6059960973641363223}
+--- !u!114 &4672512569165561839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -240,27 +132,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a8b7c5f167cd2f4094eba272b83a09a, type: 3}
-  m_Name: NPCPathFinding
+  m_Script: {fileID: 11500000, guid: 47689c60fb5ba8e44922f0c535e55d02, type: 3}
+  m_Name: Attack
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: f60bfc3111606f9448b6d8edd0706f8f
-  position: {x: -297, y: 751.50006}
+  guid: 753e820c35b832a48b86691687e8a3c6
+  position: {x: 543, y: 672}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  POSPatrolRoute:
-  - {fileID: 8981031655952692514, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
-  - {fileID: 2657968460763939276, guid: 10a6be0cfd3cb2544b5af91845f22dfb, type: 3}
-  - {fileID: 8981031655952692514, guid: 51ac6b67eb6d96645a981ba085372bef, type: 3}
-  PatrolAnimString: Run
-  moveSpeed: 250
-  sphereCastRadius: 2
-  distBeforeChanging: 1
---- !u!114 &8136881546061674528
+  attackCooldown: 2
+  attackDistance: 2
+  detectionDistance: 10000
+  detectForwardOnly: 0
+  leaveDistance: 5
+  attackAnimString: Combo3
+  attackClipName: Attack3
+  comboSoundIdx: 0
+  animatorLayer: 0
+  moveSpeed: 1000
+  maxSpeed: 2
+  holeDistance: {x: 1, y: 1.5}
+--- !u!114 &6059960973641363223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -274,15 +170,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 62e4132898946cc4d8796ac3cc28216c
-  position: {x: 169, y: 588.00006}
+  guid: 03b0c1a04614ac043b13c754822ed21d
+  position: {x: -0.5999756, y: 397.2}
   Description: 
   children:
-  - {fileID: 8710811692187415094}
-  - {fileID: -554837562087923809}
-  - {fileID: -8090155612823236023}
-  - {fileID: -5630920074011657156}
---- !u!114 &8710811692187415094
+  - {fileID: -298296971772436585}
+  - {fileID: -8421530712381887247}
+  - {fileID: 7672916494558790739}
+  - {fileID: 4672512569165561839}
+--- !u!114 &7672916494558790739
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -291,16 +187,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8da4b99ece21cc4cb11bae562ac00dd, type: 3}
-  m_Name: CheckForTarget
+  m_Script: {fileID: 11500000, guid: 47689c60fb5ba8e44922f0c535e55d02, type: 3}
+  m_Name: Attack
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: b6fdb6660dd839e4ea252a9fef71219c
-  position: {x: 126.5, y: 735.50006}
+  guid: 185a710cc31d113488123a82d5c5835c
+  position: {x: 297, y: 676}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   gameobjNpcName: 
-  attackDistance: 5
+  attackCooldown: 2
+  attackDistance: 2
+  detectionDistance: 10000
+  detectForwardOnly: 0
+  leaveDistance: 5
+  attackAnimString: Combo2
+  attackClipName: Attack2
+  comboSoundIdx: 0
+  animatorLayer: 0
+  moveSpeed: 1000
+  maxSpeed: 2
+  holeDistance: {x: 1, y: 1.5}

@@ -668,7 +668,6 @@ GameObject:
   - component: {fileID: 63284514}
   - component: {fileID: 63284513}
   - component: {fileID: 63284512}
-  - component: {fileID: 63284511}
   - component: {fileID: 63284517}
   - component: {fileID: 63284518}
   - component: {fileID: 63284519}
@@ -695,20 +694,6 @@ Transform:
   - {fileID: 639897125}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &63284511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 63284509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 201bce417fabea846a1b1a26e5f0992f, type: 2}
 --- !u!61 &63284512
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -903,8 +888,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 2
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &63284518
 MonoBehaviour:
@@ -923,9 +909,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 23dd3da9f67943a4e8f01db7fbe15009, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &63284519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1730,7 +1717,6 @@ GameObject:
   - component: {fileID: 188854468}
   - component: {fileID: 188854467}
   - component: {fileID: 188854466}
-  - component: {fileID: 188854465}
   - component: {fileID: 188854471}
   - component: {fileID: 188854472}
   - component: {fileID: 188854473}
@@ -1757,20 +1743,6 @@ Transform:
   - {fileID: 478562568}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &188854465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 188854463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 10b8d8f4ee1927c49a97561a0ea68d43, type: 2}
 --- !u!61 &188854466
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1965,8 +1937,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 1
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &188854472
 MonoBehaviour:
@@ -1985,9 +1958,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: a3489f9cadc6ce145bdc5c3ccb365aac, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &188854473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3026,7 +3000,6 @@ GameObject:
   - component: {fileID: 292607788}
   - component: {fileID: 292607787}
   - component: {fileID: 292607786}
-  - component: {fileID: 292607785}
   - component: {fileID: 292607791}
   - component: {fileID: 292607792}
   - component: {fileID: 292607793}
@@ -3053,20 +3026,6 @@ Transform:
   - {fileID: 848244918}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &292607785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 292607783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 288b2986fd35eac4aa0fe4a136320434, type: 2}
 --- !u!61 &292607786
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3261,8 +3220,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 2
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &292607792
 MonoBehaviour:
@@ -3281,9 +3241,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 23dd3da9f67943a4e8f01db7fbe15009, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &292607793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11602,7 +11563,6 @@ GameObject:
   - component: {fileID: 656493465}
   - component: {fileID: 656493464}
   - component: {fileID: 656493463}
-  - component: {fileID: 656493462}
   - component: {fileID: 656493468}
   - component: {fileID: 656493469}
   - component: {fileID: 656493470}
@@ -11629,20 +11589,6 @@ Transform:
   - {fileID: 1102703775}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &656493462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 656493460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: fd0662f111725a841913a62bffcfc785, type: 2}
 --- !u!61 &656493463
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11837,8 +11783,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 2
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &656493469
 MonoBehaviour:
@@ -11857,9 +11804,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 23dd3da9f67943a4e8f01db7fbe15009, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &656493470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12211,7 +12159,6 @@ GameObject:
   - component: {fileID: 732978195}
   - component: {fileID: 732978194}
   - component: {fileID: 732978193}
-  - component: {fileID: 732978192}
   - component: {fileID: 732978198}
   - component: {fileID: 732978199}
   - component: {fileID: 732978200}
@@ -12238,20 +12185,6 @@ Transform:
   - {fileID: 1877239993}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &732978192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732978190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 2a8eeb9ec81132c448b2a411a02830cf, type: 2}
 --- !u!61 &732978193
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12446,8 +12379,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 1
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &732978199
 MonoBehaviour:
@@ -12466,9 +12400,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: a3489f9cadc6ce145bdc5c3ccb365aac, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &732978200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13602,7 +13537,6 @@ GameObject:
   - component: {fileID: 868142658}
   - component: {fileID: 868142657}
   - component: {fileID: 868142656}
-  - component: {fileID: 868142655}
   - component: {fileID: 868142661}
   - component: {fileID: 868142662}
   - component: {fileID: 868142663}
@@ -13629,20 +13563,6 @@ Transform:
   - {fileID: 23559275}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &868142655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868142653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 290086b71dc64344185ce73267406a49, type: 2}
 --- !u!61 &868142656
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13837,8 +13757,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 1
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &868142662
 MonoBehaviour:
@@ -13857,9 +13778,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: a3489f9cadc6ce145bdc5c3ccb365aac, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &868142663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16431,7 +16353,6 @@ GameObject:
   - component: {fileID: 1032169570}
   - component: {fileID: 1032169569}
   - component: {fileID: 1032169568}
-  - component: {fileID: 1032169567}
   - component: {fileID: 1032169573}
   - component: {fileID: 1032169574}
   - component: {fileID: 1032169575}
@@ -16458,20 +16379,6 @@ Transform:
   - {fileID: 687327929}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1032169567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1032169565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 1b7793007a3cd5341a8e7be8aa1b8f40, type: 2}
 --- !u!61 &1032169568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16666,8 +16573,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 2
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1032169574
 MonoBehaviour:
@@ -16686,9 +16594,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 23dd3da9f67943a4e8f01db7fbe15009, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1032169575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17627,7 +17536,6 @@ GameObject:
   - component: {fileID: 1206130277}
   - component: {fileID: 1206130276}
   - component: {fileID: 1206130275}
-  - component: {fileID: 1206130274}
   - component: {fileID: 1206130280}
   - component: {fileID: 1206130281}
   - component: {fileID: 1206130282}
@@ -17654,20 +17562,6 @@ Transform:
   - {fileID: 102828623}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1206130274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1206130272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 39dc6200189681949b4fd250ffab56ea, type: 2}
 --- !u!61 &1206130275
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17862,8 +17756,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 2
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1206130281
 MonoBehaviour:
@@ -17882,9 +17777,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 23dd3da9f67943a4e8f01db7fbe15009, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1206130282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17994,7 +17890,6 @@ GameObject:
   - component: {fileID: 1232793245}
   - component: {fileID: 1232793244}
   - component: {fileID: 1232793243}
-  - component: {fileID: 1232793242}
   - component: {fileID: 1232793248}
   - component: {fileID: 1232793249}
   - component: {fileID: 1232793250}
@@ -18021,20 +17916,6 @@ Transform:
   - {fileID: 239205023}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1232793242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1232793240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 208c31204bd83b147b0385085fe7e6fe, type: 2}
 --- !u!61 &1232793243
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18229,8 +18110,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 1
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1232793249
 MonoBehaviour:
@@ -18249,9 +18131,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: a3489f9cadc6ce145bdc5c3ccb365aac, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1232793250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41758,7 +41641,6 @@ GameObject:
   - component: {fileID: 1307303181}
   - component: {fileID: 1307303180}
   - component: {fileID: 1307303179}
-  - component: {fileID: 1307303178}
   - component: {fileID: 1307303184}
   - component: {fileID: 1307303185}
   - component: {fileID: 1307303186}
@@ -41785,20 +41667,6 @@ Transform:
   - {fileID: 1833654474}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1307303178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307303176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: eccc56ed340bcb147b591088a637c297, type: 2}
 --- !u!61 &1307303179
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -41993,8 +41861,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 2
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1307303185
 MonoBehaviour:
@@ -42013,9 +41882,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 23dd3da9f67943a4e8f01db7fbe15009, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1307303186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42125,7 +41995,6 @@ GameObject:
   - component: {fileID: 1329097541}
   - component: {fileID: 1329097540}
   - component: {fileID: 1329097539}
-  - component: {fileID: 1329097538}
   - component: {fileID: 1329097544}
   - component: {fileID: 1329097545}
   - component: {fileID: 1329097546}
@@ -42152,20 +42021,6 @@ Transform:
   - {fileID: 539055137}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1329097538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1329097536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: c52d5584a8e3d9146871be30907c826e, type: 2}
 --- !u!61 &1329097539
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -42360,8 +42215,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 1
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1329097545
 MonoBehaviour:
@@ -42380,9 +42236,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: a3489f9cadc6ce145bdc5c3ccb365aac, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1329097546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406851,7 +406708,6 @@ GameObject:
   - component: {fileID: 1521873538}
   - component: {fileID: 1521873537}
   - component: {fileID: 1521873536}
-  - component: {fileID: 1521873535}
   - component: {fileID: 1521873541}
   - component: {fileID: 1521873542}
   - component: {fileID: 1521873543}
@@ -406878,20 +406734,6 @@ Transform:
   - {fileID: 638244686}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1521873535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1521873533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 01a13a2bc7b4c314e936e8b3c119d343, type: 2}
 --- !u!61 &1521873536
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -407086,8 +406928,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 2
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1521873542
 MonoBehaviour:
@@ -407106,9 +406949,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 23dd3da9f67943a4e8f01db7fbe15009, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1521873543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407464,7 +407308,6 @@ GameObject:
   - component: {fileID: 1570236420}
   - component: {fileID: 1570236419}
   - component: {fileID: 1570236418}
-  - component: {fileID: 1570236417}
   - component: {fileID: 1570236423}
   - component: {fileID: 1570236424}
   - component: {fileID: 1570236425}
@@ -407491,20 +407334,6 @@ Transform:
   - {fileID: 668517266}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1570236417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570236415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 92e25a4ac7b4d0344807f3093348d046, type: 2}
 --- !u!61 &1570236418
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -407699,8 +407528,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 1
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1570236424
 MonoBehaviour:
@@ -407719,9 +407549,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: a3489f9cadc6ce145bdc5c3ccb365aac, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1570236425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408077,7 +407908,6 @@ GameObject:
   - component: {fileID: 1600207939}
   - component: {fileID: 1600207938}
   - component: {fileID: 1600207937}
-  - component: {fileID: 1600207936}
   - component: {fileID: 1600207942}
   - component: {fileID: 1600207943}
   - component: {fileID: 1600207944}
@@ -408104,20 +407934,6 @@ Transform:
   - {fileID: 2003447410}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1600207936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600207934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 47dab816a4888e245a84bd2b2f922810, type: 2}
 --- !u!61 &1600207937
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -408312,8 +408128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 2
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1600207943
 MonoBehaviour:
@@ -408332,9 +408149,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 23dd3da9f67943a4e8f01db7fbe15009, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1600207944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409147,7 +408965,6 @@ GameObject:
   - component: {fileID: 1723928786}
   - component: {fileID: 1723928785}
   - component: {fileID: 1723928784}
-  - component: {fileID: 1723928783}
   - component: {fileID: 1723928789}
   - component: {fileID: 1723928790}
   - component: {fileID: 1723928791}
@@ -409174,20 +408991,6 @@ Transform:
   - {fileID: 1633585897}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1723928783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723928781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 9252acacb2097694f9f7eac75e6f89ad, type: 2}
 --- !u!61 &1723928784
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -409382,8 +409185,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 2
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1723928790
 MonoBehaviour:
@@ -409402,9 +409206,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 23dd3da9f67943a4e8f01db7fbe15009, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1723928791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412910,7 +412715,6 @@ GameObject:
   - component: {fileID: 1849342167}
   - component: {fileID: 1849342166}
   - component: {fileID: 1849342165}
-  - component: {fileID: 1849342164}
   - component: {fileID: 1849342170}
   - component: {fileID: 1849342171}
   - component: {fileID: 1849342172}
@@ -412937,20 +412741,6 @@ Transform:
   - {fileID: 1432017494}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1849342164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1849342162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: bbf87bd6cc69ac14592037916bab20f6, type: 2}
 --- !u!61 &1849342165
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -413145,8 +412935,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 1
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1849342171
 MonoBehaviour:
@@ -413165,9 +412956,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: a3489f9cadc6ce145bdc5c3ccb365aac, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1849342172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413726,7 +413518,6 @@ GameObject:
   - component: {fileID: 1898092423}
   - component: {fileID: 1898092422}
   - component: {fileID: 1898092421}
-  - component: {fileID: 1898092420}
   - component: {fileID: 1898092426}
   - component: {fileID: 1898092427}
   - component: {fileID: 1898092428}
@@ -413753,20 +413544,6 @@ Transform:
   - {fileID: 352038360}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1898092420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898092418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 67d77091a4f5ee74eacebed2046d6b88, type: 2}
 --- !u!61 &1898092421
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -413961,8 +413738,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 1
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1898092427
 MonoBehaviour:
@@ -413981,9 +413759,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: a3489f9cadc6ce145bdc5c3ccb365aac, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1898092428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416303,7 +416082,6 @@ GameObject:
   - component: {fileID: 1989576967}
   - component: {fileID: 1989576966}
   - component: {fileID: 1989576965}
-  - component: {fileID: 1989576964}
   - component: {fileID: 1989576970}
   - component: {fileID: 1989576971}
   - component: {fileID: 1989576972}
@@ -416330,20 +416108,6 @@ Transform:
   - {fileID: 287217466}
   m_Father: {fileID: 2041733707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1989576964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989576962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 31cc1a6b8fc9ef742b05f91f1a463d7a, type: 2}
 --- !u!61 &1989576965
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -416538,8 +416302,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 2
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &1989576971
 MonoBehaviour:
@@ -416558,9 +416323,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 23dd3da9f67943a4e8f01db7fbe15009, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &1989576972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419595,20 +419361,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &485631617094929298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5587187720671963370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 70a70122cf92b91418e3f63f4d5bcde4, type: 2}
 --- !u!4 &737480819805687483
 Transform:
   m_ObjectHideFlags: 0
@@ -419643,9 +419395,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: da9a5bc0a3daed348b702fd384fce8a9, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!1 &805803094812297287
 GameObject:
   m_ObjectHideFlags: 0
@@ -419708,8 +419461,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 15
-  minForce: 100
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!212 &1212361997311577782
 SpriteRenderer:
@@ -419809,7 +419563,6 @@ GameObject:
   - component: {fileID: 2922015602076952665}
   - component: {fileID: 2051963887824164155}
   - component: {fileID: 2845566344326051328}
-  - component: {fileID: 7536122857125474238}
   - component: {fileID: 1211795116098788628}
   - component: {fileID: 765222703487289267}
   - component: {fileID: 2781204692164093619}
@@ -420363,7 +420116,6 @@ GameObject:
   - component: {fileID: 4869053933157946665}
   - component: {fileID: 4565265200988348750}
   - component: {fileID: 4238977736468225868}
-  - component: {fileID: 7996308814575183912}
   - component: {fileID: 8828252214850132336}
   - component: {fileID: 8828252214850132337}
   - component: {fileID: 8828252214850132338}
@@ -420763,6 +420515,10 @@ PrefabInstance:
       propertyPath: doorToNextLevel
       value: 
       objectReference: {fileID: 1808513665}
+    - target: {fileID: 7054033390371174245, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 1408
+      objectReference: {fileID: 0}
     - target: {fileID: 7264106409391978707, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -67.3
@@ -420844,7 +420600,6 @@ GameObject:
   - component: {fileID: 11477615462463464}
   - component: {fileID: 44408077837644591}
   - component: {fileID: 8024168652293089364}
-  - component: {fileID: 485631617094929298}
   - component: {fileID: 8024168652293089365}
   - component: {fileID: 8024168652293089366}
   - component: {fileID: 8024168652293089367}
@@ -421419,20 +421174,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7536122857125474238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373996881212869375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 65c304a75a81b914b902b769d069f55c, type: 2}
 --- !u!1 &7611776407940225465
 GameObject:
   m_ObjectHideFlags: 0
@@ -421465,20 +421206,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1353127574106069990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7996308814575183912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2931527273088561141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: be1d75fb866324e49865aa4900ba1b9a, type: 2}
 --- !u!61 &8024168652293089364
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -421538,8 +421265,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 10
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &8024168652293089366
 MonoBehaviour:
@@ -421558,9 +421286,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: a3489f9cadc6ce145bdc5c3ccb365aac, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &8024168652293089367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421642,8 +421371,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
   numberOfCoins: 2
-  minForce: 10
-  maxForce: 150
+  minForce: 2
+  maxForce: 5
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &8828252214850132337
 MonoBehaviour:
@@ -421662,9 +421392,10 @@ MonoBehaviour:
   knockBackImpulse: 0
   knockBackDuration: 0.5
   damageCooldown: 1.3
-  tickInterval: 0
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 11400000, guid: 23dd3da9f67943a4e8f01db7fbe15009, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &8828252214850132338
 MonoBehaviour:
   m_ObjectHideFlags: 0

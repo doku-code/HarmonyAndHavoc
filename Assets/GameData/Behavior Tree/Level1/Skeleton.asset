@@ -15,18 +15,23 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: dd50da2f1e63360498e6c6917834faff
-  position: {x: 307.40002, y: 678.4}
+  position: {x: 73, y: 672}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: Goblin
-  attackCooldown: 1.5
-  attackDistance: 3
+  gameobjNpcName: 
+  attackCooldown: 2
+  attackDistance: 2
+  detectionDistance: 4
+  leaveDistance: 5
   attackAnimString: Combo1
+  attackClipName: Attack1
   comboSoundIdx: 0
   animatorLayer: 0
-  moveForce: 10
+  moveSpeed: 1000
+  maxSpeed: 2
+  holeDistance: {x: 1, y: 1.5}
 --- !u!114 &-3699512351861952237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,28 +50,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   Description: 
   child: {fileID: 3374381720642658304}
---- !u!114 &-3516777944286751976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8da4b99ece21cc4cb11bae562ac00dd, type: 3}
-  m_Name: CheckForTarget
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 6d5cdd8b41fb2d04497bb96acd420514
-  position: {x: 95.20001, y: 678.2}
-  Description: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  gameobjNpcName: Goblin
-  attackDistance: 5
 --- !u!114 &-298296971772436585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,11 +65,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 3d679d781546b31468fcf5b7ed1b193d
-  position: {x: -121.04176, y: 678}
+  position: {x: -190.00005, y: 676.85004}
   Description: 
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   gameobjNpcName: 
   patrolRadius: 3
   PatrolAnimString: Run
@@ -94,6 +77,7 @@ MonoBehaviour:
   maxSpeed: 2
   distBeforeChanging: 1
   obstacleDistance: 1.5
+  detectionDistance: 4
   holeDistance: {x: 1, y: 1.5}
   isFlying: 0
 --- !u!114 &11400000
@@ -114,7 +98,6 @@ MonoBehaviour:
   - {fileID: -3699512351861952237}
   - {fileID: 3374381720642658304}
   - {fileID: 6059960973641363223}
-  - {fileID: -3516777944286751976}
   - {fileID: -8421530712381887247}
   - {fileID: 7672916494558790739}
   - {fileID: -298296971772436585}
@@ -156,8 +139,8 @@ MonoBehaviour:
   Description: 
   children:
   - {fileID: -298296971772436585}
-  - {fileID: -3516777944286751976}
   - {fileID: -8421530712381887247}
+  - {fileID: 7672916494558790739}
 --- !u!114 &7672916494558790739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,15 +156,20 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 185a710cc31d113488123a82d5c5835c
-  position: {x: 503.19995, y: 678}
+  position: {x: 326, y: 671}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: Goblin
-  attackCooldown: 1.5
-  attackDistance: 3
+  gameobjNpcName: 
+  attackCooldown: 2
+  attackDistance: 2
+  detectionDistance: 4
+  leaveDistance: 5
   attackAnimString: Combo2
+  attackClipName: Attack2
   comboSoundIdx: 0
   animatorLayer: 0
-  moveForce: 10
+  moveSpeed: 1000
+  maxSpeed: 2
+  holeDistance: {x: 1, y: 1.5}

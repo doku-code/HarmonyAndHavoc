@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   orderUpgradeValue: 5
-  playerBaseDamage: 1
+  playerBaseDamage: 1000
   knowledgeBank:
   - {fileID: 11400000, guid: 87a8dd8f50806b7438786f5bb5eedd43, type: 2}
   - {fileID: 11400000, guid: 4c31d22e5839bb84d8753d62889b1b04, type: 2}
@@ -25,7 +25,7 @@ MonoBehaviour:
   maxOrder: 100
   actualChaos: 100
   maxChaos: 100
-  gold: 953
+  gold: 961
   orderFragments: 0
   weaponUpgrade: 0
   armorUpgrade: 0

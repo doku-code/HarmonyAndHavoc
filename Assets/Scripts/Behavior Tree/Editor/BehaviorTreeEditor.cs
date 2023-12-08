@@ -87,9 +87,9 @@ public class BehaviorTreeEditor : EditorWindow
             if (Selection.activeGameObject)
             {
                 BehaviorTreeRunner treeRunner = Selection.activeGameObject.GetComponent<BehaviorTreeRunner>();
-                if (treeRunner)
+                if (treeRunner is not null)
                 {
-                    tree = treeRunner.tree;
+                    tree = treeRunner.GetBehaviorTree();
                 }
             }
         }

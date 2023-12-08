@@ -14,12 +14,9 @@ namespace charles
         [Tooltip("Angle variation according to Up vector (in degrees).")]
         [SerializeField] private float angleVariance = 30.0f;
         [SerializeField] private float spawnDelay = 0.1f;
-
-        private ParametersLessDelegate callback;
-
-        public void SpawnCoins(ParametersLessDelegate callback)
-        {
-            this.callback = callback;
+        
+        public void SpawnCoins()
+        {            
             StartCoroutine(SpawnCoinsWithDelay());
         }
 
@@ -68,8 +65,7 @@ namespace charles
             if (SoundManager.Instance is not null)
             {
                 SoundManager.Instance.PlayFxClip(2);
-            }
-            callback.Invoke();
+            }            
         }
     }
 }

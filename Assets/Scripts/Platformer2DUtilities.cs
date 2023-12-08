@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace JFM
 {
@@ -100,6 +101,15 @@ namespace JFM
                 }*/
                 rb.velocity = rb.velocity.normalized * maxVelocity;
             }
+        }
+
+        public static Vector2 CalculateGroundDifference(Vector2 position1, Vector2 offset1, Vector2 position2, Vector2 offset2)
+        {
+            /*Vector3 collisionOffset = new Vector3(offset1.x, offset1.y, 0.0f);
+            Vector3 playerColliderOffset = new Vector3(offset2.x, offset2.y, 0.0f);*/
+            Vector2 pushDirection = position1 + offset1 - (position2 + offset2);
+            return RoundVector2Angle(pushDirection, Mathf.PI / 4.0f);
+
         }
     }
 }

@@ -10,6 +10,8 @@ public class Attack : ActionNode
 {
     public float attackCooldown = 1.5f;
     public float attackDistance = 1.5f;
+    public float detectionDistance = 3.0f;
+    public bool detectForwardOnly = true;
     public float leaveDistance = 5.0f;
     public string attackAnimString;
     public string attackClipName;
@@ -17,6 +19,7 @@ public class Attack : ActionNode
     public int animatorLayer = 0;
     public float moveSpeed = 1000.0f;
     public float maxSpeed = 2.0f;
+    public Vector2 holeDistance = new Vector2(1.0f, 1.5f);
 
     private bool hasAttacked = false;
     private float lastAttackTime = 1.0f;
@@ -51,13 +54,47 @@ public class Attack : ActionNode
         }
 
         State returnedState = State.RUNNING;
-
+        bool playerIsSeen = Time.time - npcController.Blackboard.lastSeenPlayer <= 5.0f;
         float currentDirection = Mathf.Sign(player.transform.position.x - npc.transform.position.x);
-        RaycastHit2D playerHit = Physics2D.Raycast(npcRigidBody.position, Vector2.right * currentDirection, attackDistance, playerLayer);
-        Debug.DrawLine(npc.transform.position, npc.transform.position + Vector3.right * currentDirection * attackDistance, Color.yellow);
-        if(playerHit.collider is null)
+        if (!playerIsSeen)
         {
-            returnedState = State.FAILURE;
+            RaycastHit2D playerHit = Physics2D.Raycast(npcRigidBody.position, Vector2.right * currentDirection, detectionDistance, playerLayer);
+            Debug.DrawLine(npc.transform.position, npc.transform.position + Vector3.right * currentDirection * detectionDistance, Color.yellow);
+            //RaycastHit2D playerHit = Physics2D.CircleCast(npcRigidBody.position, detectionDistance, Vector2.zero, 0.0f, playerLayer);
+            //Platformer2DUtilities.DebugDrawCircle(npcRigidBody.position, detectionDistance, Color.yellow);
+
+            if (playerHit.collider is null)
+            {
+                RaycastHit2D backPlayerHit = Physics2D.Raycast(npcRigidBody.position, Vector2.right * currentDirection, detectionDistance, playerLayer);
+                Debug.DrawLine(npc.transform.position, npc.transform.position + Vector3.right * currentDirection * detectionDistance, Color.yellow);
+
+                if (backPlayerHit.collider is null)
+                {
+                    returnedState = State.FAILURE;
+                }
+                else
+                {
+                    playerIsSeen = true;
+                }
+            }
+            else
+            {
+                playerIsSeen = true;
+            }
+        }
+
+        if(playerIsSeen)
+        {
+            RaycastHit2D groundHit = Physics2D.Raycast(npcRigidBody.position + Vector2.right * currentDirection * holeDistance.x, Vector2.down, holeDistance.y, LayerMask.GetMask("Ground"));
+            /*Debug.DrawLine(npcRigidBody.position + Vector2.right * currentDirection * holeDistance.x, 
+                npcRigidBody.position + Vector2.right * currentDirection * holeDistance.x + Vector2.down * holeDistance.y);
+            */
+            if (groundHit.collider is null)
+            {
+                Debug.Log("No ground found!");
+                npcController.Blackboard.lastSeenPlayer = -999.0f;
+                return State.FAILURE;
+            }
         }
 
         //Debug.Log($"Attack node. {attackClipName}");
@@ -169,6 +206,7 @@ public class Attack : ActionNode
         }
         else if(distanceToPlayer <= leaveDistance)
         {
+            
 #if _DEBUG
             Debug.Log($"Attack node. {attackClipName} Approaching to attack...");
 #endif
@@ -195,16 +233,17 @@ public class Attack : ActionNode
 
             return returnedState;
         }
-
-        if (!npcController.IsKnockedBack)
+        
+        /*if (!npcController.IsKnockedBack)
         {
             npcAnimator.SetBool("Run", false);
             npcAnimator.SetBool("IsIdle", true);
-        }
-
+        }*/
+        
 #if _DEBUG
         Debug.Log($"Attack node. {attackClipName} returns FAILURE. distanceToPlayer <= attackDistance {distanceToPlayer} <= {attackDistance} {leaveDistance}");
 #endif
+        
         //npcAnimator.ResetTrigger(attackAnimString);
 
         return State.FAILURE;

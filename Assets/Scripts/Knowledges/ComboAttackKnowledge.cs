@@ -14,6 +14,8 @@ namespace JFM
         [SerializeField] private string airMotionName = "Player_Air_Attack_1";
         private string motionName;
         */
+        [SerializeField] private string animatorObserverName = "Attacks";
+
         public override void Activate()
         {
         }
@@ -35,7 +37,7 @@ namespace JFM
                 //motionName = groundMotionName;
             }
 
-            player.CurrentState.SubscribeToAnimatorObserver("Attacks");
+            player.CurrentState.SubscribeToAnimatorObserver(animatorObserverName);
 
             player.animator.SetBool("IsAttacking", true);
             player.animator.SetInteger("KnowledgeAttackIndex", 1);

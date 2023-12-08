@@ -9,18 +9,20 @@ namespace JFM
     {
         private float startTime;
         private bool isAirborned;
-       
+        public string airAttackAnimatorObserverName = "AirAttacks";
+        public string groundAttackAnimatorObserverName = "GroundAttacks";
+
         public override void Enter()
         {
             // If airborne, use air attack animation
             if (isAirborned = !player.IsGrounded())
             {
                 player.animator.SetBool("IsAirborne", true);
-                SubscribeToAnimatorObserver("AirAttacks");
+                SubscribeToAnimatorObserver(airAttackAnimatorObserverName);
             }
             else
             {
-                SubscribeToAnimatorObserver("GroundAttacks");
+                SubscribeToAnimatorObserver(groundAttackAnimatorObserverName);
             }
 
             player.animator.SetInteger("AttackIndex", Random.Range(1, 4));

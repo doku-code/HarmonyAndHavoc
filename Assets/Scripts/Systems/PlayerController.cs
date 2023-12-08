@@ -523,10 +523,15 @@ namespace JFM
 
             // Calculates pushback direction
             CapsuleCollider2D capsule = collision.gameObject.GetComponent<CapsuleCollider2D>();
-            Vector3 collisionOffset = new Vector3(capsule.offset.x, capsule.offset.y, 0.0f);
+            /*Vector3 collisionOffset = new Vector3(capsule.offset.x, capsule.offset.y, 0.0f);
             Vector3 playerColliderOffset = new Vector3(colliderOffset.x, colliderOffset.y, 0.0f);
             Vector2 pushDirection = collision.transform.position + collisionOffset - (transform.position + playerColliderOffset);
             Vector2 newPushDirection = Platformer2DUtilities.RoundVector2Angle(pushDirection, Mathf.PI / 4.0f);
+            */
+            Vector2 newPushDirection = Platformer2DUtilities.CalculateGroundDifference(collision.transform.position, 
+                                                                                       capsule.offset, 
+                                                                                       transform.position,
+                                                                                       colliderOffset);
             //Debug.Log($"pushDirection={pushDirection} newPushDirection={newPushDirection}");
 
             enemyController.TakeDamage(damage, newPushDirection.normalized);

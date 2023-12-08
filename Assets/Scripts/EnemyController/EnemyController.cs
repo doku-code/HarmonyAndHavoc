@@ -3,10 +3,11 @@ using JFM;
 using System.Collections;
 using System;
 using AF;
+using System.Text.RegularExpressions;
 
 namespace charles
 {
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : MonoBehaviour, BehaviorTreeRunner
     {
         [SerializeField] private int maxHealth = 100;
         [SerializeField] private int attackDamage = 10;
@@ -20,7 +21,7 @@ namespace charles
         private bool isKnockedBack;
         private bool canTakeDamage = true;
         [SerializeField] private float damageCooldown = 1.3f;
-
+        [SerializeField] private float deathDuration = 3.0f;
         public bool IsKnockedBack { get => isKnockedBack; }
         public bool CanTakeDamage { get => canTakeDamage; }
         public bool IsDead { get => currentHealth <= 0; }
@@ -38,6 +39,11 @@ namespace charles
         public EnemyBlackboard Blackboard
         {
             get => blackboard;
+        }
+
+        public BehaviourTree GetBehaviorTree()
+        {
+            return tree;
         }
 
         public void TurnSide(float side)
@@ -67,7 +73,7 @@ namespace charles
             blackboard = blackboard.Clone();
 
             blackboard.healthBar = GetComponentInChildren<Canvas>().GetComponent<RectTransform>();
-            Debug.Log($"GetComponentInChildren<Canvas>()={GetComponentInChildren<Canvas>().GetComponent<RectTransform>()}");
+            
             currentHealth = maxHealth;
 
             StartBehaviorTree();
@@ -77,7 +83,14 @@ namespace charles
         {
             if (collision.CompareTag("Player") && collision is CapsuleCollider2D)
             {
-                Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
+                CapsuleCollider2D capsule = collision.gameObject.GetComponent<CapsuleCollider2D>();
+                Vector2 colliderOffset = GetComponent<CapsuleCollider2D>().offset;
+                Vector2 pushDirection = Platformer2DUtilities.CalculateGroundDifference(collision.transform.position,
+                                                                                       capsule.offset,
+                                                                                       transform.position,
+                                                                                       colliderOffset);
+
+                //Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
 
                 Attack(collision.gameObject.GetComponent<PlayerController>(), pushDirection);
                 //Debug.Log("Enemy has hit Player");
@@ -133,13 +146,15 @@ namespace charles
             GetComponentInChildren<Canvas>().gameObject.SetActive(false);
 
             CoinSpawner coinSpawner = GetComponent<CoinSpawner>();
-            coinSpawner.SpawnCoins(DestroyAfterAnim);
+            coinSpawner.SpawnCoins();
             
             npcAnimator.SetTrigger("Death");
+            StartCoroutine(DestroyAfterAnim());
         }
 
-        private void DestroyAfterAnim()
+        private IEnumerator DestroyAfterAnim()
         {
+            yield return new WaitForSeconds(deathDuration);
             gameObject.SetActive(false);
         }
 

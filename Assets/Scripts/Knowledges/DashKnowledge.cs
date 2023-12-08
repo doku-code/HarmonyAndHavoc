@@ -25,6 +25,8 @@ namespace JFM
         // In degrees
         private float groundDashAngle = 0.0f;
 
+        [SerializeField] private string animatorObserverName = "Movement";
+
         public override void Activate()
         {
             player.GroundedEvent += OnGrounded;
@@ -46,7 +48,7 @@ namespace JFM
 
             //         lastKnowledge = player.Data.Knowledges.find_if()
 
-            player.CurrentState.SubscribeToAnimatorObserver("Movement");
+            player.CurrentState.SubscribeToAnimatorObserver(animatorObserverName);
         }
 
         public override void Update()

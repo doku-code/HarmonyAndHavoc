@@ -14,7 +14,7 @@ namespace JFM
         */
         private bool resetAnimatorParams;
         [SerializeField] private float clipLengthAdjustment = -0.02f;
-
+        [SerializeField] private string animatorObserverName = "Attacks";
         public override void Enter()
         {
             player.animator.SetBool("IsCrouched", true);
@@ -28,7 +28,7 @@ namespace JFM
 
             player.Attack();
 
-            SubscribeToAnimatorObserver("Attacks");
+            SubscribeToAnimatorObserver(animatorObserverName);
 
             base.Enter();
         }
