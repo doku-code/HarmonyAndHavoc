@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class FadeInFadeOutScreen : MonoBehaviour
 {
-    [SerializeField] private float fadeDelay = 2f;
-    [SerializeField] private float FadeInFadeOutDuration;
+    [SerializeField] private float fadeDelay;
+    [SerializeField] private float fadeInFadeOutDuration;
     
     private GameObject loadingCanvas;
     
@@ -23,7 +24,6 @@ public class FadeInFadeOutScreen : MonoBehaviour
         loadingScreenTexts = GetComponentsInChildren<TMP_Text>();
         loadingScreenRawImages = GetComponentsInChildren<RawImage>();
         
-        loadingCanvas.SetActive(false);
         
         foreach(var text in loadingScreenTexts)
         {
@@ -39,6 +39,8 @@ public class FadeInFadeOutScreen : MonoBehaviour
         {
             raw.color = new Color(raw.color.r, raw.color.g, raw.color.b, 0);
         }
+        
+        loadingCanvas.SetActive(false);
     }
 
     public void FadeInFadeOut()
@@ -49,7 +51,7 @@ public class FadeInFadeOutScreen : MonoBehaviour
     private IEnumerator FadeInFadeOutCoroutine()
     {
         StartCoroutine(FadeInCoroutine());
-        yield return new WaitForSeconds(FadeInFadeOutDuration * 0.5f);
+        yield return new WaitForSeconds(fadeInFadeOutDuration * 0.5f);
         StartCoroutine(FadeOutCoroutine());
     }
     
@@ -57,7 +59,7 @@ public class FadeInFadeOutScreen : MonoBehaviour
     {
         float timeLeft = fadeDelay;
         loadingCanvas.SetActive(true);
-        while (timeLeft >= 0f)
+        while (timeLeft > 0f)
         {
             timeLeft -= Time.deltaTime;
 
@@ -77,6 +79,8 @@ public class FadeInFadeOutScreen : MonoBehaviour
                 raw.color = new Color(raw.color.r, raw.color.g, raw.color.b,
                     (raw.color.a + 1 / fadeDelay * Time.deltaTime));
             }
+            
+            Debug.Log(loadingScreenImages[0].color.a);
 
             yield return null;
         }
@@ -86,7 +90,7 @@ public class FadeInFadeOutScreen : MonoBehaviour
     {
         float timeLeft = fadeDelay;
         
-        while (timeLeft >= 0f)
+        while (timeLeft > 0f)
         {
             timeLeft -= Time.deltaTime;
             
@@ -104,6 +108,7 @@ public class FadeInFadeOutScreen : MonoBehaviour
             {
                 raw.color = new Color(raw.color.r,raw.color.g,raw.color.b,(raw.color.a - 1 / fadeDelay * Time.deltaTime));
             }
+            Debug.Log(loadingScreenImages[0].color.a);
             yield return null;
         }
         loadingCanvas.SetActive(false);

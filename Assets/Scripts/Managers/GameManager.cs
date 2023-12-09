@@ -40,6 +40,8 @@ namespace AF
 
         public void LoadNextMap(string mapToLoad, SpawnerPosition spawnPosition)
         {
+            loadingScreen.FadeInFadeOut();
+            Debug.Log("Tell me if im called 2 times");
             StartCoroutine(LoadYourAsyncScene(mapToLoad, () =>
                 {
                     GetCurrentMapManager();                                    
@@ -95,7 +97,6 @@ namespace AF
 
         public IEnumerator LoadYourAsyncScene(string sceneName, ParametersLessDelegate callback)
         {
-            loadingScreen.FadeInFadeOut();
             AsyncOperation aSyncLoad = SceneManager.LoadSceneAsync(sceneName);
             aSyncLoad.allowSceneActivation = false;
 
