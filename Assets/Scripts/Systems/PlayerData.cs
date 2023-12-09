@@ -26,7 +26,9 @@ namespace AF
     
     [CreateAssetMenu(fileName = "PlayerData", menuName = "PlayerData")]
     public class PlayerData : ScriptableObject
-    {        
+    {
+        public bool isWellQuestDone;
+        
         [SerializeField] private int orderUpgradeValue;
         public int OrderUpgradeValue
         { 
@@ -47,6 +49,8 @@ namespace AF
         public IntegerParameterDelegate OnOrderDelegate;
         public ParametersLessDelegate OnChaosDelegate;
 
+        //CurrentProgression
+        public Dictionary<string, bool> CurrentPlayerMapProgression;
         public Dictionary<KnowledgeID, bool> KnownKnowledgeDictionary { get; set; }
         // Put a protection (range, 4 maximum possible knowledges at the same time).
         public Dictionary<KnowledgeID, AvailableKnowledgePosition> AvailableKnowledgeDictionary;
@@ -126,6 +130,7 @@ namespace AF
             KnownKnowledgeDictionary = new Dictionary<KnowledgeID, bool>();
             AvailableKnowledgeDictionary = new Dictionary<KnowledgeID, AvailableKnowledgePosition>();
             EveryKnowledgeDictionary = new Dictionary<KnowledgeID, Knowledge>();
+            CurrentPlayerMapProgression = new Dictionary<string, bool>();
 
             for (int i = 0; i < Enum.GetNames(typeof(KnowledgeID)).Length; i++)
             {
@@ -142,8 +147,6 @@ namespace AF
                     }
                 }
             }
-
-            Debug.Log($"actualOrder {actualOrder} = maxOrder {maxOrder}");
             actualOrder = maxOrder;
             actualChaos = maxChaos;
         }

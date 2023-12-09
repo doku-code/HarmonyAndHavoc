@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using AF;
+using JFM;
+
 namespace charles
 {
     [System.Serializable]
@@ -119,6 +121,7 @@ namespace charles
                 SoundManager.Instance.PlayFxClip(4);
                 MapManager.Instance.UnlockDoor();
                 wellsIsOpen = true;
+                GameManager.Instance.player.GetComponent<PlayerController>().Data.CurrentPlayerMapProgression[GameManager.Instance.currentMap] = true;
             }
             else
             {

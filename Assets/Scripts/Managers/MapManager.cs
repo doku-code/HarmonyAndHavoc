@@ -1,3 +1,4 @@
+using JFM;
 using UnityEngine;
 
 namespace AF
@@ -16,10 +17,10 @@ namespace AF
 
         public static MapManager Instance;
 
-        void Awake()
+        private PlayerData data;
+
+        void Start()
         {
-            if(SoundManager.Instance != null)
-                SoundManager.Instance.PlayAmbientClip(levelAudio.LevelAmbient);
             if (Instance != null)
             {
                 Destroy(gameObject);
@@ -28,6 +29,10 @@ namespace AF
             {
                 Instance = this;
             }
+            
+            if(SoundManager.Instance != null)
+                SoundManager.Instance.PlayAmbientClip(levelAudio.LevelAmbient);
+            
         }
 
         public void UnlockDoor()

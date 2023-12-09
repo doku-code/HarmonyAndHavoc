@@ -1,3 +1,4 @@
+using JFM;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -167,6 +168,12 @@ namespace AF
         }
 
         public void MakeNewGame()
+        {
+            GameManager.Instance.LoadGame();
+            GameManager.Instance.player.GetComponent<PlayerController>().Data.InitializeData();
+        }
+
+        public void ContinueGame()
         {
             GameManager.Instance.LoadGame();
         }

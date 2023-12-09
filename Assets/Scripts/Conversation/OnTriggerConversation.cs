@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using AF;
+using JFM;
 using UnityEngine;
 
 namespace charles
@@ -9,12 +11,18 @@ namespace charles
         [SerializeField] GameObject conversationPanel;
         [SerializeField] ConversationManager questionIdx;
         [SerializeField] bool resetConversation;
+        private PlayerData data;
 
         private Coroutine textCoroutine;
 
+        void Awake()
+        {
+            data = GameManager.Instance.player.GetComponent<PlayerController>().Data;
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("Player"))
+            if (collision.CompareTag("Player") && !data.CurrentPlayerMapProgression[GameManager.Instance.currentMap])
             {
 
                 if (textCoroutine != null)

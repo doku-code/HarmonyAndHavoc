@@ -25,7 +25,6 @@ public class FadeInFadeOutScreen : MonoBehaviour
         loadingScreenTexts = GetComponentsInChildren<TMP_Text>();
         loadingScreenRawImages = GetComponentsInChildren<RawImage>();
         
-        
         foreach(var text in loadingScreenTexts)
         {
             text.alpha = 0f;
@@ -81,8 +80,6 @@ public class FadeInFadeOutScreen : MonoBehaviour
                 raw.color = new Color(raw.color.r, raw.color.g, raw.color.b,
                     (raw.color.a + 1 / fadeDelay * Time.deltaTime));
             }
-            
-            Debug.Log(loadingScreenImages[0].color.a);
 
             yield return null;
         }
@@ -92,8 +89,6 @@ public class FadeInFadeOutScreen : MonoBehaviour
     
     private IEnumerator FadeOutCoroutine()
     {
-        Debug.Log("FadeOutCoroutine() called.");
-
         float timeLeft = fadeDelay;
         
         while (timeLeft > 0f)
@@ -114,7 +109,6 @@ public class FadeInFadeOutScreen : MonoBehaviour
             {
                 raw.color = new Color(raw.color.r,raw.color.g,raw.color.b,(raw.color.a - 1 / fadeDelay * Time.deltaTime));
             }
-            Debug.Log(loadingScreenImages[0].color.a);
             yield return null;
         }
         loadingCanvas.SetActive(false);
