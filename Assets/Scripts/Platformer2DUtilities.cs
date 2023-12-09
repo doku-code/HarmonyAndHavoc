@@ -111,5 +111,13 @@ namespace JFM
             return RoundVector2Angle(pushDirection, Mathf.PI / 4.0f);
 
         }
+
+        public static Vector2 GetReflectedVector2(Vector2 vector, Vector2 normal)
+        {
+            Vector2 inversedDirection = -vector;
+            float dot = Vector2.Dot(inversedDirection, normal);
+            Vector2 v = (normal * dot - inversedDirection) * 2.0f;
+            return inversedDirection + v;
+        }
     }
 }

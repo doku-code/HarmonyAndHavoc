@@ -22,7 +22,7 @@ namespace AF
         [SerializeField] private FadeInFadeOutScreen loadingScreen;
         [NonSerialized] public string actualMap = "MainMenu";
         [NonSerialized] public ParametersLessDelegate OnLoadMapDelegate;
-
+        [NonSerialized] public ParametersLessDelegate OnReadyToLoadMapDelegate;
         public static GameManager Instance { get; private set; }
 
         void Awake()
@@ -35,31 +35,41 @@ namespace AF
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
+
+                OnReadyToLoadMapDelegate += OnReadyToLoadMap;
             }
         }
 
+        private void OnReadyToLoadMap()
+        {
+            StartCoroutine(LoadYourAsyncScene(nextMapToLoad, () =>
+            {
+                GetCurrentMapManager();
+
+                actualMap = nextMapToLoad;
+
+                if (nextMapToLoad != "MainMenu")
+                {
+                    PlacePlayer(nextSpawnPosition);
+                    LoadSceneMenu();
+                }
+
+                if (OnLoadMapDelegate is not null)
+                {
+                    OnLoadMapDelegate();
+                }
+            }
+            ));
+        }
+
+        private string nextMapToLoad;
+        private SpawnerPosition nextSpawnPosition;
         public void LoadNextMap(string mapToLoad, SpawnerPosition spawnPosition)
         {
-            loadingScreen.FadeInFadeOut();
-            Debug.Log("Tell me if im called 2 times");
-            StartCoroutine(LoadYourAsyncScene(mapToLoad, () =>
-                {
-                    GetCurrentMapManager();                                    
+            nextMapToLoad = mapToLoad;
+            nextSpawnPosition = spawnPosition; 
 
-                    actualMap = mapToLoad;
-                    
-                    if (mapToLoad != "MainMenu")
-                    {
-                        PlacePlayer(spawnPosition);                        
-                        LoadSceneMenu();                        
-                    }                    
-
-                    if (OnLoadMapDelegate is not null)
-                    {
-                        OnLoadMapDelegate();
-                    }
-                }
-            ));
+            loadingScreen.FadeInFadeOut();            
         }
 
         public void LoadGame()

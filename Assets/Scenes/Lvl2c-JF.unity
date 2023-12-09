@@ -38479,8 +38479,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.5723503, y: -0.23595, z: 0}
-    m_Extent: {x: 9.38435, y: 1.56585, z: 0}
+    m_Center: {x: 2.5667503, y: -0.23500001, z: 0}
+    m_Extent: {x: 9.38655, y: 1.5554, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -40483,11 +40483,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5249900324331317818, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.51
+      value: 13.59
       objectReference: {fileID: 0}
     - target: {fileID: 5249900324331317818, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.710001
+      value: 5.25
       objectReference: {fileID: 0}
     - target: {fileID: 5249900324331317818, guid: 73da75d4e524f2247ad2b69e034d916f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -40628,11 +40628,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.51
+      value: 13.59
       objectReference: {fileID: 0}
     - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -25.51
+      value: 3.45
       objectReference: {fileID: 0}
     - target: {fileID: 8792474215422815423, guid: fe76cb0ff15bf084596dd82a5d9edc5b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -45792,7 +45792,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -45809,7 +45809,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05927372, y: 0.14225626}
+  m_Offset: {x: 0, y: 0.14225626}
   m_Size: {x: 0.6137681, y: 1.9414921}
   m_Direction: 0
 --- !u!50 &498163630
@@ -50956,8 +50956,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 14.37685, y: 2.68855, z: 0}
-    m_Extent: {x: 22.04945, y: 5.11425, z: 0}
+    m_Center: {x: 14.375351, y: 2.6882, z: 0}
+    m_Extent: {x: 22.05685, y: 5.1149, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -51450,7 +51450,7 @@ Transform:
   m_GameObject: {fileID: 944848459}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.51, y: -23.710001, z: -10}
+  m_LocalPosition: {x: 13.59, y: 5.25, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -127214,7 +127214,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -127231,7 +127231,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05927372, y: 0.14225626}
+  m_Offset: {x: 0, y: 0.14225626}
   m_Size: {x: 0.6137681, y: 1.9414921}
   m_Direction: 0
 --- !u!50 &1588325939
@@ -140499,13 +140499,17 @@ PrefabInstance:
       propertyPath: numberOfCoins
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1588999765766228475, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4288845440548645853, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.334547
+      value: -10.58
       objectReference: {fileID: 0}
     - target: {fileID: 4288845440548645853, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 41.895393
+      value: 35.86
       objectReference: {fileID: 0}
     - target: {fileID: 4288845440548645853, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
       propertyPath: m_LocalPosition.z
@@ -140539,6 +140543,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4497443909256801772, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497443909256801772, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 8252293517995306616, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -140555,7 +140567,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5483487203527408102, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

@@ -156,11 +156,8 @@ public class AirPatrol : ActionNode
         }
 
         if(obstacleFound)
-        {
-            Vector2 inversedDirection = -currentDirection;
-            float dot = Vector2.Dot(inversedDirection, obstacleNormal);
-            Vector2 v = (obstacleNormal * dot - inversedDirection) * 2.0f;
-            Vector2 newDirection = inversedDirection + v;
+        {                       
+            Vector2 newDirection = Platformer2DUtilities.GetReflectedVector2(currentDirection, obstacleNormal);
             float distanceFromInitialPosition = Vector2.Distance(npcRigidBody.position, initialPosition);
             float newDistance = Mathf.Max(patrolRadius - distanceFromInitialPosition, 1.0f);
             Debug.Log($"newDistance={newDistance}");

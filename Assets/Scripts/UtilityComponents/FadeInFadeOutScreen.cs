@@ -1,3 +1,4 @@
+using AF;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,6 +53,7 @@ public class FadeInFadeOutScreen : MonoBehaviour
     {
         StartCoroutine(FadeInCoroutine());
         yield return new WaitForSeconds(fadeInFadeOutDuration * 0.5f);
+        
         StartCoroutine(FadeOutCoroutine());
     }
     
@@ -84,10 +86,14 @@ public class FadeInFadeOutScreen : MonoBehaviour
 
             yield return null;
         }
+
+        GameManager.Instance.OnReadyToLoadMapDelegate();
     }    
     
     private IEnumerator FadeOutCoroutine()
     {
+        Debug.Log("FadeOutCoroutine() called.");
+
         float timeLeft = fadeDelay;
         
         while (timeLeft > 0f)
