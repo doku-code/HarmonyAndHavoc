@@ -875,7 +875,6 @@ namespace JFM
 
             stateMachine = new PlayerStateMachine(statesArray, this);
 
-            playerData.InitializeData();        // To remove in the future
             playerData.OnDeadDelegate += OnDead;
             playerData.OnOrderDelegate += OnOrderChange;
             InitializeKnowledges();
