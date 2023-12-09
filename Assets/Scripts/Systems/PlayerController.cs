@@ -875,6 +875,12 @@ namespace JFM
 
             stateMachine = new PlayerStateMachine(statesArray, this);
 
+            // For debug only
+            if(GameManager.Instance is null)
+            {
+                playerData.InitializeData();
+            }
+
             playerData.OnDeadDelegate += OnDead;
             playerData.OnOrderDelegate += OnOrderChange;
             InitializeKnowledges();

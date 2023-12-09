@@ -1,4 +1,5 @@
 using JFM;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 //Charles
@@ -9,10 +10,13 @@ public class AirPatrol : ActionNode
     public float moveSpeed = 1000.0f;
     public float maxSpeed = 2.0f;
     public float distBeforeChanging = 1.0f;
-    public float obstacleDistance = 1.5f;
+    public float obstacleDistance = 0.03f;
     public float detectionDistance = 3.0f;
-    public bool detectForwardOnly = true; 
-    
+    public bool detectForwardOnly = true;
+    [Tooltip("In degrees")]
+    public float angleMaxDeviance = 5.0f;
+    public float lastObstacleForgetTime = 5.0f;
+
     private Vector2 nextPosition;
     private Vector2 currentDirection;
     private Vector2 initialPosition;
@@ -58,19 +62,9 @@ public class AirPatrol : ActionNode
             return State.FAILURE;
         }
 
-        currentDirection = (nextPosition - npcRigidBody.position).normalized;
-
-        if (npcAnimator.GetBool("IsIdle") && !npcController.IsKnockedBack)
-        {
-            npcAnimator.SetBool(PatrolAnimString, true);
-            npcAnimator.SetBool("IsIdle", false);
-        }        
-
-        if (!npcController.IsKnockedBack && npcRigidBody.velocity.magnitude < maxSpeed)
-        {
-            //Debug.Log($"currentDirection={currentDirection} Moving forward={currentDirection * moveSpeed * dt}");
-            npcRigidBody.AddForce(currentDirection * moveSpeed * dt);
-        }
+        bool playerIsSeen = Time.time - npcController.Blackboard.lastSeenPlayer <= 5.0f;
+        Vector2 lastDirection = currentDirection;
+        currentDirection = (nextPosition - npcRigidBody.position).normalized;               
 
         if (Mathf.Sign(currentDirection.x) != sideFacing && nFramesFacingSide == 0)
         {
@@ -82,7 +76,7 @@ public class AirPatrol : ActionNode
         else
         {
             nFramesFacingSide--;
-            if(nFramesFacingSide < 0)
+            if (nFramesFacingSide < 0)
             {
                 nFramesFacingSide = 0;
             }
@@ -95,21 +89,20 @@ public class AirPatrol : ActionNode
 
         Vector2 position = npcRigidBody.position +
                             Vector2.up * capsule.offset.y -
-                            Vector2.up * (capsule.size.y / 2.0f - radius ) +
-                            Vector2.right * capsule.offset.x + 
-                            currentDirection * obstacleDistance;        
+                            Vector2.up * (capsule.size.y / 2.0f - radius) +
+                            Vector2.right * capsule.offset.x +
+                            currentDirection * obstacleDistance;
 
         Platformer2DUtilities.DebugDrawCircle(position, radius, Color.yellow);
         Platformer2DUtilities.DebugDrawCircle(position + Vector2.up * distance, radius, Color.yellow);
-        
+
         //RaycastHit2D[] obstacleHits = Physics2D.CircleCastAll(npcRigidBody.position, obstacleDistance, Vector2.zero, 0.0f, LayerMask.GetMask("Enemy") | LayerMask.GetMask("Ground"));        
         RaycastHit2D[] obstacleHits = Physics2D.CircleCastAll(position, radius, Vector2.up, distance, LayerMask.GetMask("Enemy") | LayerMask.GetMask("Ground"));
-        
+
         //RaycastHit2D[] obstacleHits = Physics2D.RaycastAll(npcRigidBody.position, currentDirection, obstacleDistance, LayerMask.GetMask("Enemy") | LayerMask.GetMask("Ground"));
         Debug.DrawRay(npcRigidBody.position, currentDirection * obstacleDistance, Color.yellow);
 
         bool obstacleFound = false;
-        bool collisionFound = false;
         Vector2 obstacleNormal = Vector2.zero;
         //Debug.Log("Testing for collisions");
         if (obstacleHits is not null)
@@ -118,8 +111,6 @@ public class AirPatrol : ActionNode
             {
                 if (hit.collider.gameObject != npc)
                 {
-                    collisionFound = true;
-
                     Debug.Log($"hit={hit.collider.gameObject.name} hit.normal={hit.normal}");
                     obstacleFound = true;
                     obstacleNormal = hit.normal;
@@ -130,42 +121,73 @@ public class AirPatrol : ActionNode
                     {
                         obstacleNormal = hit.normal;
                     }*/
-                    break;                                     
-                }                   
+                    //break;
+                }
             }
         }
 
-        bool playerIsSeen = Time.time - npcController.Blackboard.lastSeenPlayer <= 5.0f;
+        if (npcAnimator.GetBool("IsIdle") && !npcController.IsKnockedBack)
+        {
+            npcAnimator.SetBool(PatrolAnimString, true);
+            npcAnimator.SetBool("IsIdle", false);
+        }
+
+        float angleDifference = Mathf.Abs(Mathf.Atan2(lastDirection.y, lastDirection.x) - Mathf.Atan2(currentDirection.y, currentDirection.x));
+        Debug.Log($"angleDifference={angleDifference}");
+        bool angleHasChanged = angleDifference >= angleMaxDeviance * Mathf.Deg2Rad;
+
+        if(obstacleFound && playerIsSeen)
+        {            
+            npcController.Blackboard.lastSeenPlayer = -999.0f;
+            npcController.Blackboard.lastObstacle = Time.time;
+            playerIsSeen = false;            
+        }
+
+        if (!playerIsSeen && !npcController.IsKnockedBack && (npcRigidBody.velocity.magnitude < maxSpeed || angleHasChanged))
+        {
+            if (angleHasChanged)
+            {
+                npcRigidBody.AddForce(-npcRigidBody.velocity, ForceMode2D.Impulse);
+            }
+            //Debug.Log($"currentDirection={currentDirection} Moving forward={currentDirection * moveSpeed * dt}");
+            npcRigidBody.AddForce(currentDirection * moveSpeed * dt);
+            Debug.Log($"npcRigidBody.AddForce() obstacleFound={obstacleFound} currentDirection={currentDirection}");
+        }
+
         //Debug.Log($"Time.time={Time.time} playerIsSeen ={playerIsSeen}");
-        if (!obstacleFound && !playerIsSeen)
+        if (!obstacleFound)
         {
-            //Debug.Log("Checking for player.");
-            RaycastHit2D playerHit = Physics2D.CircleCast(npcRigidBody.position, detectionDistance, Vector2.zero, 0.0f, playerLayer);
-            Platformer2DUtilities.DebugDrawCircle(npcRigidBody.position, detectionDistance, Color.yellow);
+            if(!playerIsSeen && Time.time - npcController.Blackboard.lastObstacle >= lastObstacleForgetTime)
+            { 
+                Debug.Log("Checking for player.");
+                RaycastHit2D playerHit = Physics2D.CircleCast(npcRigidBody.position, detectionDistance, Vector2.zero, 0.0f, playerLayer);
+                Platformer2DUtilities.DebugDrawCircle(npcRigidBody.position, detectionDistance, Color.yellow);
 
-            if (playerHit.collider is not null && (Mathf.Sign(player.transform.position.x - npcRigidBody.position.x) == Mathf.Sign(currentDirection.x) || !detectForwardOnly))
+                if (playerHit.collider is not null)// && (Mathf.Sign(player.transform.position.x - npcRigidBody.position.x) == Mathf.Sign(currentDirection.x) || !detectForwardOnly))
+                {
+                    Debug.Log("Found player!");
+                    npcController.Blackboard.lastSeenPlayer = Time.time;
+                    playerIsSeen = true;
+                }
+            }
+
+            if (playerIsSeen)
             {                
-                playerIsSeen = true;
-            }            
+                Debug.Log($"Player is seen! npcController.Blackboard.lastSeenPlayer={npcController.Blackboard.lastSeenPlayer}");
+                return State.SUCCESS;
+            }
         }
-        if (playerIsSeen && !obstacleFound)
-        {
-            npcController.Blackboard.lastSeenPlayer = Time.time;
-            //Debug.Log($"Player is seen! npcController.Blackboard.lastSeenPlayer={npcController.Blackboard.lastSeenPlayer}");            
-            return State.SUCCESS;
-        }
-
-        if(obstacleFound)
+        else
         {                       
             Vector2 newDirection = Platformer2DUtilities.GetReflectedVector2(currentDirection, obstacleNormal);
             float distanceFromInitialPosition = Vector2.Distance(npcRigidBody.position, initialPosition);
             float newDistance = Mathf.Max(patrolRadius - distanceFromInitialPosition, 1.0f);
-            Debug.Log($"newDistance={newDistance}");
+            //Debug.Log($"newDistance={newDistance}");
 
             nextPosition = npcRigidBody.position + newDirection * newDistance;
             lastGoalDistance = Vector2.Distance(nextPosition, npcRigidBody.position);
             Debug.Log($"currentDir={currentDirection} newDir={newDirection} nextPosition={nextPosition}");
-            npcController.Blackboard.lastSeenPlayer = -999.0f;
+            
             return State.RUNNING;
         }
 
@@ -179,7 +201,7 @@ public class AirPatrol : ActionNode
             npcController.Blackboard.lastSeenPlayer = -999.0f;
             //Debug.Log("Turning around!");
             nextPosition = GetNextPosition();
-            Debug.Log($"nextPosition={nextPosition}");
+            //Debug.Log($"nextPosition={nextPosition}");
             if (!npcController.IsKnockedBack)
             {
                 npcRigidBody.AddForce(-npcRigidBody.velocity, ForceMode2D.Impulse);
@@ -201,7 +223,7 @@ public class AirPatrol : ActionNode
         Vector2 newPosition = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) 
                                     * patrolRadius + initialPosition;
         float newDistance = Vector2.Distance(newPosition, nextPosition);
-        Debug.Log($"GetNextPosition() says: newDistance={newDistance}");
+        //Debug.Log($"GetNextPosition() says: newDistance={newDistance}");
         return newPosition; 
         //return Random.insideUnitCircle * patrolRadius + initialPosition;
     }

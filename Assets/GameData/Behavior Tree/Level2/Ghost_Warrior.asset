@@ -27,14 +27,15 @@ MonoBehaviour:
   detectionDistance: 7
   detectForwardOnly: 1
   leaveDistance: 5
-  attackAnimString: 
-  attackClipName: 
+  attackAnimString: Combo1
+  attackClipName: Attack1
   comboSoundIdx: 0
   animatorLayer: 0
   moveSpeed: 1000
   maxSpeed: 2
   holeDistance: {x: 1, y: 1.5}
-  obstacleDistance: 1.5
+  obstacleDistance: 0.03
+  angleMaxDeviance: 1
   maxFramesFacingSide: 5
 --- !u!114 &11400000
 MonoBehaviour:
@@ -75,7 +76,7 @@ MonoBehaviour:
   Description: 
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   gameobjNpcName: 
   patrolRadius: 3
   PatrolAnimString: Run
@@ -85,6 +86,8 @@ MonoBehaviour:
   obstacleDistance: 0.03
   detectionDistance: 7
   detectForwardOnly: 1
+  angleMaxDeviance: 1
+  lastObstacleForgetTime: 5
   maxFramesFacingSide: 5
 --- !u!114 &2299061114749337135
 MonoBehaviour:

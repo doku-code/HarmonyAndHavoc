@@ -1,4 +1,4 @@
-//#define _DEBUG
+#define _DEBUG
 
 using AF;
 using JFM;
@@ -22,6 +22,8 @@ public class AirAttack : ActionNode
     public float maxSpeed = 2.0f;
     public Vector2 holeDistance = new Vector2(1.0f, 1.5f);
     public float obstacleDistance = 1.5f;
+    [Tooltip("In degrees")]
+    public float angleMaxDeviance = 5.0f;
 
     private bool hasAttacked = false;
     private float lastAttackTime = 1.0f;
@@ -41,6 +43,9 @@ public class AirAttack : ActionNode
         hasAttacked = false;        
         npcAnimator.ResetTrigger(attackAnimString);
         lastAttackTime = Time.time;
+
+        nFramesFacingSide = maxFramesFacingSide;
+        sideFacing = npc.transform.localScale.x;
     }
 
     protected override void OnStop() {        
@@ -65,7 +70,8 @@ public class AirAttack : ActionNode
 
         State returnedState = State.RUNNING;
         bool playerIsSeen = Time.time - npcController.Blackboard.lastSeenPlayer <= 5.0f;
-        currentDirection = (nextPosition - npcRigidBody.position).normalized;
+        Vector2 lastDirection = currentDirection;
+        currentDirection = (player.GetComponent<Rigidbody2D>().position - npcRigidBody.position).normalized;
 
         if (!playerIsSeen)
         {
@@ -86,8 +92,6 @@ public class AirAttack : ActionNode
 
         if(playerIsSeen)
         {
-
-
             CapsuleCollider2D capsule = npc.GetComponent<CapsuleCollider2D>();
             //Debug.Log($"obstacleDistance={obstacleDistance}");
 
@@ -132,6 +136,7 @@ public class AirAttack : ActionNode
 
             if (obstacleFound)
             {
+                /*
                 Vector2 newDirection = Platformer2DUtilities.GetReflectedVector2(currentDirection, obstacleNormal);
                 float distanceFromInitialPosition = Vector2.Distance(npcRigidBody.position, initialPosition);
                 float newDistance = Mathf.Max(patrolRadius - distanceFromInitialPosition, 1.0f);
@@ -140,13 +145,20 @@ public class AirAttack : ActionNode
                 nextPosition = npcRigidBody.position + newDirection * newDistance;
                 lastGoalDistance = Vector2.Distance(nextPosition, npcRigidBody.position);
                 Debug.Log($"currentDir={currentDirection} newDir={newDirection} nextPosition={nextPosition}");
+                */
+
                 npcController.Blackboard.lastSeenPlayer = -999.0f;
-                return State.RUNNING;
+                npcController.Blackboard.lastObstacle = Time.time;
+                 
+                return State.FAILURE; // RUNNING;
             }
 
         }
 
-        //Debug.Log($"Attack node. {attackClipName}");
+#if _DEBUG
+        Debug.Log($"Attack node. {attackClipName}");
+#endif
+
         float distanceToPlayer = Vector3.Distance(npc.transform.position, player.transform.position);
 
         // Manage distance to player
@@ -192,7 +204,7 @@ public class AirAttack : ActionNode
                 npcController.Blackboard.lastHitTime = lastAttackTime + attackAnimationLength;
 #if _DEBUG
                 Debug.Log($"Attack node. {attackClipName} &&&&&&&&&&&&& Has hit Player &&&&&&&&&&&&&");
-#endif                             
+#endif
             }
 
             if (!npcController.IsKnockedBack 
@@ -281,9 +293,13 @@ public class AirAttack : ActionNode
                 }
             }
 
-            if (!npcController.IsKnockedBack && npcRigidBody.velocity.magnitude < maxSpeed)
+            float angleDifference = Mathf.Abs(Mathf.Atan2(lastDirection.y, lastDirection.x) - Mathf.Atan2(currentDirection.y, currentDirection.x));
+            Debug.Log($"angleDifference={angleDifference}");
+
+            if (!npcController.IsKnockedBack && (npcRigidBody.velocity.magnitude < maxSpeed || angleDifference >= angleMaxDeviance * Mathf.Deg2Rad))
             {
                 npcRigidBody.AddForce(currentDirection * moveSpeed * dt);
+                Debug.Log($"currentDirection * moveSpeed * dt = {currentDirection * moveSpeed * dt}");
             }            
             
             //Debug.Log($"Player is not found! obstacleFound={obstacleFound}");
@@ -292,7 +308,7 @@ public class AirAttack : ActionNode
         }
         
 #if _DEBUG
-        Debug.Log($"Attack node. {attackClipName} returns FAILURE. distanceToPlayer <= attackDistance {distanceToPlayer} <= {attackDistance} {leaveDistance}");
+        Debug.Log($"Attack node. {attackClipName} returns FAILURE. distanceToPlayer <= attackDistance {distanceToPlayer} <= {attackDistance} || <= {leaveDistance}");
 #endif
 
         return State.FAILURE;
