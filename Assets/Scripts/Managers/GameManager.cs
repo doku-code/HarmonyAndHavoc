@@ -18,7 +18,8 @@ namespace AF
     public class GameManager : MonoBehaviour
     {
         private MapManager currentMapManager;
-        [SerializeField] private GameObject player;
+        [SerializeField] public GameObject player;
+        [SerializeField] private FadeInFadeOutScreen loadingScreen;
         [NonSerialized] public string actualMap = "MainMenu";
         [NonSerialized] public ParametersLessDelegate OnLoadMapDelegate;
 
@@ -94,6 +95,7 @@ namespace AF
 
         public IEnumerator LoadYourAsyncScene(string sceneName, ParametersLessDelegate callback)
         {
+            loadingScreen.FadeInFadeOut();
             AsyncOperation aSyncLoad = SceneManager.LoadSceneAsync(sceneName);
             aSyncLoad.allowSceneActivation = false;
 
