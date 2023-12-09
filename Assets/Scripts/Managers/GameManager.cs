@@ -1,6 +1,7 @@
 using Cinemachine;
 using System;
 using System.Collections;
+using JFM;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,11 +19,14 @@ namespace AF
     public class GameManager : MonoBehaviour
     {
         private MapManager currentMapManager;
-        [SerializeField] public GameObject player;
-        [SerializeField] private FadeInFadeOutScreen loadingScreen;
-        [NonSerialized] public string actualMap = "MainMenu";
+        private PlayerData data;
+        private FadeInFadeOutScreen loadingScreen;
+        [NonSerialized] public string currentMap = "MainMenu";
         [NonSerialized] public ParametersLessDelegate OnLoadMapDelegate;
         [NonSerialized] public ParametersLessDelegate OnReadyToLoadMapDelegate;
+        
+        [SerializeField] public GameObject player;
+        
         public static GameManager Instance { get; private set; }
 
         void Awake()
@@ -38,6 +42,9 @@ namespace AF
 
                 OnReadyToLoadMapDelegate += OnReadyToLoadMap;
             }
+
+            data = player.GetComponent<PlayerController>().Data;
+            loadingScreen = GetComponentInChildren<FadeInFadeOutScreen>();
         }
 
         private void OnReadyToLoadMap()
@@ -46,12 +53,13 @@ namespace AF
             {
                 GetCurrentMapManager();
 
-                actualMap = nextMapToLoad;
+                currentMap = nextMapToLoad;
 
                 if (nextMapToLoad != "MainMenu")
                 {
                     PlacePlayer(nextSpawnPosition);
                     LoadSceneMenu();
+                    CheckCurrentProgression();
                 }
 
                 if (OnLoadMapDelegate is not null)
@@ -97,6 +105,18 @@ namespace AF
                     playerGO.transform.position =
                         currentMapManager.spawnerEnd.transform.position;
                     break;
+            }
+        }
+
+        void CheckCurrentProgression()
+        {
+            if (!data.CurrentPlayerMapProgression.ContainsKey(currentMap))
+            {
+                data.CurrentPlayerMapProgression.Add(currentMap, false);
+            }
+            else if (data.CurrentPlayerMapProgression[currentMap])
+            {
+                currentMapManager.UnlockDoor();
             }
         }
 

@@ -97,7 +97,7 @@ namespace JFM
             //Debug.Log("OnLoadMap()");
 
             // Bail out if map is not the Village
-            if (GameManager.Instance.actualMap != "Village")
+            if (GameManager.Instance.currentMap != "Village")
             {
                 return;
             }
