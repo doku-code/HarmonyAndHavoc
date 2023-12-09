@@ -146,7 +146,6 @@ public class Attack : ActionNode
 #endif                             
             }
 
-            //if (!isCooldown && !hasAttacked)
             if (!npcController.IsKnockedBack 
                 &&
                 (
@@ -234,17 +233,9 @@ public class Attack : ActionNode
             return returnedState;
         }
         
-        /*if (!npcController.IsKnockedBack)
-        {
-            npcAnimator.SetBool("Run", false);
-            npcAnimator.SetBool("IsIdle", true);
-        }*/
-        
 #if _DEBUG
         Debug.Log($"Attack node. {attackClipName} returns FAILURE. distanceToPlayer <= attackDistance {distanceToPlayer} <= {attackDistance} {leaveDistance}");
 #endif
-        
-        //npcAnimator.ResetTrigger(attackAnimString);
 
         return State.FAILURE;
     }    

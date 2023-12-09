@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d52bd284d66f45409895549ec0dc050, type: 3}
+  m_Name: Ghost_Warrior
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 8090439598431157965}
+  treeState: 0
+  nodes:
+  - {fileID: 8090439598431157965}
+  - {fileID: 2838549528837533932}
+  - {fileID: 2299061114749337135}
+  - {fileID: 1289724694935706136}
+--- !u!114 &1289724694935706136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a08bf559c9db56b47b07eae359d05b4b, type: 3}
+  m_Name: AirPatrol
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: f494320cb97792e41a1e1f6d41c01178
+  position: {x: -1, y: 586.92}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  gameobjNpcName: 
+  patrolRadius: 3
+  PatrolAnimString: Run
+  moveSpeed: 1000
+  maxSpeed: 2
+  distBeforeChanging: 1
+  obstacleDistance: 1.5
+  detectionDistance: 7
+  detectForwardOnly: 1
+  holeDistance: {x: 1, y: 1.5}
+--- !u!114 &2299061114749337135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcddb15bcd2925f4887c696f4baa3c36, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 385e90386515a3847ac810ba882793f4
+  position: {x: -1, y: 371}
+  Description: 
+  children:
+  - {fileID: 1289724694935706136}
+--- !u!114 &2838549528837533932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e22483f73a7cb48a1a8f0d2f066df6, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 7cac494362613d4498ad095a2662d1d5
+  position: {x: -1, y: 195}
+  Description: 
+  children:
+  - {fileID: 2299061114749337135}
+--- !u!114 &8090439598431157965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc873a854b000144b392c20ae33d57b, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 470b11a9eccbbd84b8088dd069d3ad99
+  position: {x: 0, y: 0}
+  Description: 
+  child: {fileID: 2838549528837533932}

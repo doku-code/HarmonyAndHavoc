@@ -15,25 +15,19 @@ public class Patrol : ActionNode
     public float detectionDistance = 3.0f;
     public bool detectForwardOnly = true; 
     public Vector2 holeDistance = new Vector2(1.0f, 1.5f);
-    public bool isFlying;
     
     private Vector2 nextPosition;
     private float currentDirection;
-    private Vector2 initialPosition;
 
     void OnEnable()
     {
-        PatrolAnimString = "Run";
+        //PatrolAnimString = "Run";
     }
 
     protected override void OnStart()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         //Debug.Log($"OnStart()");
-        if (initialPosition == Vector2.zero)
-        {
-            initialPosition = npcRigidBody.position;
-        }
 
         if (currentDirection == 0.0f)
         {
@@ -91,7 +85,7 @@ public class Patrol : ActionNode
                 }
             }
         }
-        if (!obstacleFound && !isFlying)
+        if (!obstacleFound)
         {
             RaycastHit2D groundHit = Physics2D.Raycast(npcRigidBody.position + Vector2.right * currentDirection * holeDistance.x, Vector2.down, holeDistance.y, LayerMask.GetMask("Ground"));
             /*Debug.DrawLine(npcRigidBody.position + Vector2.right * currentDirection * holeDistance.x, 
@@ -103,15 +97,10 @@ public class Patrol : ActionNode
                 obstacleFound = true;
             }
         }
-        /*
-        if(npcRigidBody.velocity.magnitude == 0.0f)
-        {
-            obstacleFound = true;
-        }*/
 
         bool playerIsSeen = Time.time - npcController.Blackboard.lastSeenPlayer <= 5.0f;
         //Debug.Log($"Time.time={Time.time} playerIsSeen ={playerIsSeen}");
-        if (!obstacleFound && !isFlying)
+        if (!obstacleFound)
         {
             //Debug.Log("Checking for player.");
             RaycastHit2D playerHit = Physics2D.Raycast(npcRigidBody.position, Vector2.right * currentDirection, detectionDistance, playerLayer);
