@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   isWellQuestDone: 0
-  orderUpgradeValue: 5
-  playerBaseDamage: 1000
+  orderUpgradeValue: 10
+  playerBaseDamage: 1
   knowledgeBank:
   - {fileID: 11400000, guid: 87a8dd8f50806b7438786f5bb5eedd43, type: 2}
   - {fileID: 11400000, guid: 4c31d22e5839bb84d8753d62889b1b04, type: 2}
@@ -24,9 +24,9 @@ MonoBehaviour:
   knowledgeSlots: 4
   actualOrder: 100
   maxOrder: 100
-  actualChaos: 100
-  maxChaos: 100
-  gold: 100
+  actualChaos: 50
+  maxChaos: 50
+  gold: 0
   orderFragments: 0
   weaponUpgrade: 0
   armorUpgrade: 0

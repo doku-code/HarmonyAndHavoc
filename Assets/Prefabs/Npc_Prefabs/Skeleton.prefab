@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5658229950305216275}
   - component: {fileID: 3625217840915600244}
   - component: {fileID: 4019347367613984118}
-  - component: {fileID: 7200359050903951890}
   - component: {fileID: -198181064112137199}
   - component: {fileID: -403123580737752679}
   - component: {fileID: -7133742444373615152}
@@ -221,20 +220,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.8315573, y: 2.7766476}
   m_EdgeRadius: 0
---- !u!114 &7200359050903951890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2718670513770733007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 0}
 --- !u!114 &-198181064112137199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,9 +233,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 20
+  numberOfCoins: 8
   minForce: 100
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &-403123580737752679
 MonoBehaviour:
@@ -264,11 +250,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 7
+  attackDamage: 15
   knockBackImpulse: 0
-  knockBackInterval: 0.001
-  knockBackFriction: 5
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  deathDuration: 3
+  tickInterval: 0.02
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &-7133742444373615152
 MonoBehaviour:
   m_ObjectHideFlags: 0
