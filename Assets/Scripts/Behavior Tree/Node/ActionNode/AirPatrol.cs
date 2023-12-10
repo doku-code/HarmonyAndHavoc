@@ -15,7 +15,7 @@ public class AirPatrol : ActionNode
     public bool detectForwardOnly = true;
     [Tooltip("In degrees")]
     public float angleMaxDeviance = 5.0f;
-    public float lastObstacleForgetTime = 5.0f;
+    public float playerForgetDuration = 2.0f;
 
     private Vector2 nextPosition;
     private Vector2 currentDirection;
@@ -63,6 +63,7 @@ public class AirPatrol : ActionNode
         }
 
         bool playerIsSeen = Time.time - npcController.Blackboard.lastSeenPlayer <= 5.0f;
+        //Debug.Log($"playerIsSeen={playerIsSeen} Time.time - npcController.Blackboard.lastSeenPlayer={Time.time - npcController.Blackboard.lastSeenPlayer}");
         Vector2 lastDirection = currentDirection;
         currentDirection = (nextPosition - npcRigidBody.position).normalized;               
 
@@ -133,13 +134,13 @@ public class AirPatrol : ActionNode
         }
 
         float angleDifference = Mathf.Abs(Mathf.Atan2(lastDirection.y, lastDirection.x) - Mathf.Atan2(currentDirection.y, currentDirection.x));
-        Debug.Log($"angleDifference={angleDifference}");
+        //Debug.Log($"angleDifference={angleDifference}");
         bool angleHasChanged = angleDifference >= angleMaxDeviance * Mathf.Deg2Rad;
 
         if(obstacleFound && playerIsSeen)
         {            
             npcController.Blackboard.lastSeenPlayer = -999.0f;
-            npcController.Blackboard.lastObstacle = Time.time;
+            npcController.Blackboard.playerForgetTime = Time.time;
             playerIsSeen = false;            
         }
 
@@ -157,7 +158,7 @@ public class AirPatrol : ActionNode
         //Debug.Log($"Time.time={Time.time} playerIsSeen ={playerIsSeen}");
         if (!obstacleFound)
         {
-            if(!playerIsSeen && Time.time - npcController.Blackboard.lastObstacle >= lastObstacleForgetTime)
+            if(!playerIsSeen && Time.time - npcController.Blackboard.playerForgetTime >= playerForgetDuration)
             { 
                 Debug.Log("Checking for player.");
                 RaycastHit2D playerHit = Physics2D.CircleCast(npcRigidBody.position, detectionDistance, Vector2.zero, 0.0f, playerLayer);

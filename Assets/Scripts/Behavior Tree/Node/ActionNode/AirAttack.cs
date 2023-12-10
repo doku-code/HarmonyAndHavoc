@@ -24,6 +24,7 @@ public class AirAttack : ActionNode
     public float obstacleDistance = 1.5f;
     [Tooltip("In degrees")]
     public float angleMaxDeviance = 5.0f;
+    public float minMoveThreshold = 0.01f;
 
     private bool hasAttacked = false;
     private float lastAttackTime = 1.0f;
@@ -36,7 +37,10 @@ public class AirAttack : ActionNode
     public int maxFramesFacingSide = 5;
     private int nFramesFacingSide;
     private float sideFacing;
-
+    private Vector2 lastPosition;
+    private int nFrames;
+    private int noMoveFrameIndex;
+    private float totalMoveDistance;
     protected override void OnStart() 
     {
         player = GameObject.FindGameObjectWithTag("Player");        
@@ -46,6 +50,10 @@ public class AirAttack : ActionNode
 
         nFramesFacingSide = maxFramesFacingSide;
         sideFacing = npc.transform.localScale.x;
+        lastPosition = Vector2.zero;
+        nFrames = 0;
+        noMoveFrameIndex = -1;
+        totalMoveDistance = 0;
     }
 
     protected override void OnStop() {        
@@ -71,7 +79,8 @@ public class AirAttack : ActionNode
         State returnedState = State.RUNNING;
         bool playerIsSeen = Time.time - npcController.Blackboard.lastSeenPlayer <= 5.0f;
         Vector2 lastDirection = currentDirection;
-        currentDirection = (player.GetComponent<Rigidbody2D>().position - npcRigidBody.position).normalized;
+        Vector2 playerDistance = player.GetComponent<Rigidbody2D>().position - npcRigidBody.position;
+        currentDirection = playerDistance.normalized;
 
         if (!playerIsSeen)
         {
@@ -81,7 +90,8 @@ public class AirAttack : ActionNode
             Platformer2DUtilities.DebugDrawCircle(npcRigidBody.position, detectionDistance, Color.yellow);
 
             if (playerHit.collider is null)
-            {               
+            {
+                npcController.Blackboard.lastSeenPlayer = -999.0f;
                 returnedState = State.FAILURE;               
             }
             else
@@ -129,37 +139,43 @@ public class AirAttack : ActionNode
                         {
                             obstacleNormal = hit.normal;
                         }*/
-                        break;
+                        //break;
                     }
                 }
             }            
 
             if (obstacleFound)
             {
-                /*
-                Vector2 newDirection = Platformer2DUtilities.GetReflectedVector2(currentDirection, obstacleNormal);
-                float distanceFromInitialPosition = Vector2.Distance(npcRigidBody.position, initialPosition);
-                float newDistance = Mathf.Max(patrolRadius - distanceFromInitialPosition, 1.0f);
-                Debug.Log($"newDistance={newDistance}");
+                bool obstacleBetweenFound = false;
+                RaycastHit2D[] obstacleBetween = Physics2D.RaycastAll(npcRigidBody.position, currentDirection, playerDistance.magnitude, LayerMask.GetMask("Enemy") | LayerMask.GetMask("Ground"));
 
-                nextPosition = npcRigidBody.position + newDirection * newDistance;
-                lastGoalDistance = Vector2.Distance(nextPosition, npcRigidBody.position);
-                Debug.Log($"currentDir={currentDirection} newDir={newDirection} nextPosition={nextPosition}");
-                */
+                if (obstacleBetween is not null)
+                {
+                    foreach (RaycastHit2D hit in obstacleBetween)
+                    {
+                        if (hit.collider.gameObject != npc)
+                        {
+                            obstacleBetweenFound = true;
+                            Debug.Log("Found an obstacle between player and NPC.");
+                        }
+                    }
+                }
 
-                npcController.Blackboard.lastSeenPlayer = -999.0f;
-                npcController.Blackboard.lastObstacle = Time.time;
-                 
-                return State.FAILURE; // RUNNING;
+                if (obstacleBetweenFound)
+                {
+                    npcController.Blackboard.lastSeenPlayer = -999.0f;
+                    npcController.Blackboard.playerForgetTime = Time.time;
+
+                    return State.FAILURE; // RUNNING;
+                }                
             }
-
         }
 
 #if _DEBUG
         Debug.Log($"Attack node. {attackClipName}");
 #endif
 
-        float distanceToPlayer = Vector3.Distance(npc.transform.position, player.transform.position);
+        float distanceToPlayer = playerDistance.magnitude;
 
         // Manage distance to player
         if (distanceToPlayer <= attackDistance)
@@ -192,6 +208,7 @@ public class AirAttack : ActionNode
 
                 if (returnedState == State.FAILURE)
                 {
+                    npcController.Blackboard.lastSeenPlayer = -999.0f;
                     return returnedState;
                 }                
             }
@@ -294,16 +311,43 @@ public class AirAttack : ActionNode
             }
 
             float angleDifference = Mathf.Abs(Mathf.Atan2(lastDirection.y, lastDirection.x) - Mathf.Atan2(currentDirection.y, currentDirection.x));
-            Debug.Log($"angleDifference={angleDifference}");
+            //Debug.Log($"angleDifference={angleDifference}");
 
             if (!npcController.IsKnockedBack && (npcRigidBody.velocity.magnitude < maxSpeed || angleDifference >= angleMaxDeviance * Mathf.Deg2Rad))
             {
                 npcRigidBody.AddForce(currentDirection * moveSpeed * dt);
                 Debug.Log($"currentDirection * moveSpeed * dt = {currentDirection * moveSpeed * dt}");
-            }            
-            
+            }
+
             //Debug.Log($"Player is not found! obstacleFound={obstacleFound}");
 
+            // Check if moved distance is != 0
+            float movedDistance = Vector2.Distance(npcRigidBody.position, lastPosition);
+            if (movedDistance <= minMoveThreshold && noMoveFrameIndex == -1)
+            {
+                noMoveFrameIndex = nFrames;
+                totalMoveDistance = 0;
+            }
+
+            if(noMoveFrameIndex >= 0)
+            {
+                Debug.Log($"returnedState={returnedState} {noMoveFrameIndex} + 5 == {nFrames} totalMoveDistance={totalMoveDistance}");
+                totalMoveDistance += movedDistance;
+
+                if (noMoveFrameIndex + 5 == nFrames && totalMoveDistance <= minMoveThreshold * 5)
+                {
+                    Debug.Log($"Not moving enough! Back to patrolling...");
+                    npcController.Blackboard.lastSeenPlayer = -999.0f;
+                    return State.FAILURE;
+                }
+                else
+                {
+                    noMoveFrameIndex = -1;
+                }
+            }                      
+
+            lastPosition = npcRigidBody.position;
+            nFrames++;
             return returnedState;
         }
         
@@ -311,6 +355,7 @@ public class AirAttack : ActionNode
         Debug.Log($"Attack node. {attackClipName} returns FAILURE. distanceToPlayer <= attackDistance {distanceToPlayer} <= {attackDistance} || <= {leaveDistance}");
 #endif
 
+        npcController.Blackboard.lastSeenPlayer = -999.0f;
         return State.FAILURE;
     }    
 }

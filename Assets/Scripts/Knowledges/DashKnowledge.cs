@@ -22,6 +22,8 @@ namespace JFM
         [SerializeField] private float groundDashForce = 60.0f;
         [SerializeField] private float groundDashDeceleration = 1000.0f;
         [SerializeField] private float groundDashAcceleration = 500.0f;
+        [SerializeField] private float minVelocityThreshold = 0.05f;
+
         // In degrees
         private float groundDashAngle = 0.0f;
 
@@ -48,7 +50,7 @@ namespace JFM
 
             //         lastKnowledge = player.Data.Knowledges.find_if()
 
-            player.CurrentState.SubscribeToAnimatorObserver(animatorObserverName);
+           // player.CurrentState.SubscribeToAnimatorObserver(animatorObserverName);
         }
 
         public override void Update()
@@ -64,7 +66,7 @@ namespace JFM
                 return;
             }
 
-            if (dashDirection.y != 0.0f && player.rb.velocity.y < -0.01f && !grounded)
+            if (player.rb.velocity.y < -0.001f && !grounded)
             {
                 player.StateMachine.ChangeState(player.States[PlayerState.STATE.AIRBORNE]);
                 return;
@@ -84,18 +86,25 @@ namespace JFM
                 return;
             }
 
-            if (Mathf.Abs(player.rb.velocity.x) < 0.0005f && grounded && nFrames > 1)
+            if (nFrames > 1)
             {
-                OnLeave();
-                return;
-            }
-            // Let rigidbody have a little deceleration when dashing on the ground
-            else if (nFrames > 1)
-            {
-                player.rb.AddForce(Vector2.right * -player.rb.velocity.x * groundDashDeceleration * Time.fixedDeltaTime, ForceMode2D.Force);
+                if (Mathf.Abs(player.rb.velocity.x) < minVelocityThreshold && grounded)
+                {
+                    Debug.Log("Leaving state");
+                    player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
+                    OnLeave();
+                    return;
+                }
+                // Let rigidbody have a little deceleration when dashing on the ground
+                else 
+                {
+                    Debug.Log("Decelerating...");
+                    player.rb.AddForce(Vector2.right * -player.rb.velocity.x * groundDashDeceleration * Time.fixedDeltaTime, ForceMode2D.Force);
+                }
             }
             else
             {
+                Debug.Log("ContinueDash()");
                 ContinueDash();
             }
 
@@ -104,7 +113,7 @@ namespace JFM
 
         public override void Exit()
         {
-            player.CurrentState.UnsubscribeToAnimatorObserver();
+            //player.CurrentState.UnsubscribeToAnimatorObserver();
             player.animator.ResetTrigger("Dash");
             player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
         }
