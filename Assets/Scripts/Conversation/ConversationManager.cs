@@ -4,10 +4,12 @@ using TMPro;
 using System.Collections;
 using AF;
 using JFM;
+using System;
+using System.Text;
 
 namespace charles
 {
-    [System.Serializable]
+    [Serializable]
     public class Answer
     {
         [TextArea]
@@ -16,7 +18,7 @@ namespace charles
         public bool includePrice;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class Question
     {
         [TextArea]
@@ -27,21 +29,25 @@ namespace charles
     public class ConversationManager : MonoBehaviour
     {
         [SerializeField] public Question[] Conversations;
+
         [Header("UI")]
         [SerializeField] private Canvas questionCanvas;
         [SerializeField] private PlayerData pData;
-        [SerializeField] private Canvas thankYouCanvas;
         [SerializeField] private Button firstAnswerButton;
         [SerializeField] private Button secondAnswerButton;
         [SerializeField] private int goldForHealing = 50;
+        [SerializeField] private int goldForArmor = 10;
+        [SerializeField] private int goldForWeapon = 10;
 
+        public int questionIndex = 0;
+        [SerializeField] private float typingSpeed = 0.08f;
         private TMP_Text textComponent;
         private bool buttonPressed = false;
-        [SerializeField] private float typingSpeed = 0.08f;
-        private int questionIndex = 0;
         private int currentUpgradePrice = 10;
-        private bool repeatQuestion = true;
         private bool wellsIsOpen = false;
+
+        private bool isDisplayingMessage = false;
+        private float timeSinceTypingEnded = 0f;
 
         private void Start()
         {
@@ -49,7 +55,15 @@ namespace charles
             LoadConversation(questionIndex);
         }
 
-        public IEnumerator ShowText()
+        private void Update()
+        {
+            if (isDisplayingMessage)
+            {
+                timeSinceTypingEnded += Time.deltaTime;
+            }
+        }
+
+        private IEnumerator TellAStory() //  When a NPC want to only tell a story or say a message on multiple Question 
         {
             while (questionIndex < Conversations.Length)
             {
@@ -60,67 +74,29 @@ namespace charles
                 buttonPressed = false;
                 yield return new WaitUntil(() => buttonPressed);
 
-                currentUpgradePrice += 10;
+                questionIndex++;
 
-                if (repeatQuestion)
-                {
-                    LoadConversation(questionIndex);
-                }
-                else
-                {
-                    questionIndex++;
-                }
             }
         }
 
-        private IEnumerator DisplayMessage(string message)
+        public IEnumerator DisplayMessage(string message)
         {
-            textComponent.text = "";
+            isDisplayingMessage = true;
+
+            StringBuilder stringBuilder = new StringBuilder();
 
             for (int i = 0; i < message.Length; i++)
             {
-                textComponent.text += message[i];
+                stringBuilder.Append(message[i]);
+                textComponent.text = stringBuilder.ToString();
                 yield return new WaitForSeconds(typingSpeed);
             }
+            textComponent.text = message;
 
             yield return new WaitForSeconds(1.0f);
-        }
 
-        public void OnAnswerSubmitted()
-        {
-            Debug.Log("Answer submitted!");
-            if (thankYouCanvas != null)
-            {
-                thankYouCanvas.gameObject.SetActive(true);
-                questionCanvas.gameObject.SetActive(false);
-
-            }
-            else
-            {
-                questionIndex++;
-            }
-            currentUpgradePrice += 10;
-            buttonPressed = true;
-        }
-        public void healThePlayer()
-        {
-            if (pData.Gold >= goldForHealing && pData.ActualOrder < pData.MaxOrder)
-            {
-                pData.HealPlayer(pData.MaxOrder);
-                pData.Gold -= goldForHealing;
-
-                //Juste le slider qui update pas malgrer qui est call dans healplayer de Player data ?  
-
-
-                thankYouCanvas.gameObject.SetActive(true);
-                questionCanvas.gameObject.SetActive(false);
-            }
-            else
-            {
-                questionIndex++;
-                //Reussis pas a aller a la prochaine question dans le cas ou ta pas assez de cash 
-            }
-            buttonPressed = true;
+            isDisplayingMessage = false;
+            timeSinceTypingEnded = 0f;
         }
         public void LoadConversation(int index)
         {
@@ -130,6 +106,8 @@ namespace charles
                 Answer[] answers = Conversations[index].answers;
 
                 textComponent.text = Conversations[index].questionText;
+
+                StartCoroutine(DisplayMessage(Conversations[index].questionText));
 
                 for (int i = 0; i < 2; i++)
                 {
@@ -150,20 +128,77 @@ namespace charles
                 }
             }
         }
-
-        public void OnAcceptQuest()
+        public void BlackSmithArmor()
         {
-            if (!wellsIsOpen)
+            if (pData.Gold >= goldForArmor)
             {
-                SoundManager.Instance.PlayFxClip(4);
-                MapManager.Instance.UnlockDoor();
-                wellsIsOpen = true;
-                GameManager.Instance.player.GetComponent<PlayerController>().Data.CurrentPlayerMapProgression[GameManager.Instance.currentMap] = true;
+                pData.Gold -= goldForArmor;
+                pData.ArmorUpgrade += 1;
+                goldForArmor += 10;
+
+                LoadConversation(2);
             }
             else
             {
-                return;
+                LoadConversation(1);
             }
+            buttonPressed = true;
+        }
+
+        public void BlackSmithWeapon()
+        {
+            if (pData.Gold >= goldForWeapon)
+            {
+                pData.Gold -= goldForWeapon;
+                pData.WeaponUpgrade += 1;
+                goldForWeapon += 10;
+
+                LoadConversation(2);
+            }
+            else
+            {
+                LoadConversation(1);
+            }
+            buttonPressed = true;
+        }
+
+    public void healThePlayer()
+    {
+        if (!isDisplayingMessage)
+        {
+            if (pData.Gold >= goldForHealing && pData.ActualOrder < pData.MaxOrder)
+            {
+                pData.HealPlayer(pData.MaxOrder);
+                pData.Gold -= goldForHealing;
+
+                LoadConversation(2);
+            }
+            else if (pData.ActualOrder == pData.MaxOrder)
+            {
+                LoadConversation(3);
+            }
+            else
+            {
+                LoadConversation(1);
+            }
+
+            buttonPressed = true;
         }
     }
+    public void GraveDigger()
+    {
+        if (!wellsIsOpen)
+        {
+            SoundManager.Instance.PlayFxClip(4);
+            MapManager.Instance.UnlockDoor();
+            wellsIsOpen = true;
+            GameManager.Instance.player.GetComponent<PlayerController>().Data.CurrentPlayerMapProgression[GameManager.Instance.currentMap] = true;
+        }
+        else
+        {
+           ret
+        }
+    }
+
+}
 }
