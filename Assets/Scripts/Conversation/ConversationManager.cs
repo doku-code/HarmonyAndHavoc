@@ -162,43 +162,43 @@ namespace charles
             buttonPressed = true;
         }
 
-    public void healThePlayer()
-    {
-        if (!isDisplayingMessage)
+        public void healThePlayer()
         {
-            if (pData.Gold >= goldForHealing && pData.ActualOrder < pData.MaxOrder)
+            if (!isDisplayingMessage)
             {
-                pData.HealPlayer(pData.MaxOrder);
-                pData.Gold -= goldForHealing;
+                if (pData.Gold >= goldForHealing && pData.ActualOrder < pData.MaxOrder)
+                {
+                    pData.HealPlayer(pData.MaxOrder);
+                    pData.Gold -= goldForHealing;
 
-                LoadConversation(2);
+                    LoadConversation(2);
+                }
+                else if (pData.ActualOrder == pData.MaxOrder)
+                {
+                    LoadConversation(3);
+                }
+                else
+                {
+                    LoadConversation(1);
+                }
+
+                buttonPressed = true;
             }
-            else if (pData.ActualOrder == pData.MaxOrder)
+        }
+        public void GraveDigger()
+        {
+            if (!wellsIsOpen)
             {
-                LoadConversation(3);
+                SoundManager.Instance.PlayFxClip(4);
+                MapManager.Instance.UnlockDoor();
+                wellsIsOpen = true;
+                GameManager.Instance.player.GetComponent<PlayerController>().Data.CurrentPlayerMapProgression[GameManager.Instance.currentMap] = true;
             }
             else
             {
-                LoadConversation(1);
+                return;
             }
+        }
 
-            buttonPressed = true;
-        }
     }
-    public void GraveDigger()
-    {
-        if (!wellsIsOpen)
-        {
-            SoundManager.Instance.PlayFxClip(4);
-            MapManager.Instance.UnlockDoor();
-            wellsIsOpen = true;
-            GameManager.Instance.player.GetComponent<PlayerController>().Data.CurrentPlayerMapProgression[GameManager.Instance.currentMap] = true;
-        }
-        else
-        {
-           ret
-        }
-    }
-
-}
 }
