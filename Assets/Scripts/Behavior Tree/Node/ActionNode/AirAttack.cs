@@ -1,4 +1,4 @@
-#define _DEBUG
+//#define _DEBUG
 
 using AF;
 using JFM;
@@ -18,26 +18,27 @@ public class AirAttack : ActionNode
     public string attackClipName;
     public int comboSoundIdx;
     public int animatorLayer = 0;
+
     public float moveSpeed = 1000.0f;
     public float maxSpeed = 2.0f;
     public Vector2 holeDistance = new Vector2(1.0f, 1.5f);
     public float obstacleDistance = 1.5f;
     [Tooltip("In degrees")]
-    public float angleMaxDeviance = 5.0f;
-    public float minMoveThreshold = 0.01f;
+    public float angleMaxDeviance = 5.0f;   
 
     private bool hasAttacked = false;
     private float lastAttackTime = 1.0f;
     private float attackAnimationLength;
 
-    private Vector2 nextPosition;
     private Vector2 currentDirection;
-    private Vector2 initialPosition;
-    private float lastGoalDistance;
+    private Vector2 lastPosition;
+
     public int maxFramesFacingSide = 5;
     private int nFramesFacingSide;
-    private float sideFacing;
-    private Vector2 lastPosition;
+    private float sideFacing;    
+
+    public float minMoveThreshold = 0.01f;
+    public int maxFramesWithoutMoving = 5;
     private int nFrames;
     private int noMoveFrameIndex;
     private float totalMoveDistance;
@@ -209,6 +210,7 @@ public class AirAttack : ActionNode
                 if (returnedState == State.FAILURE)
                 {
                     npcController.Blackboard.lastSeenPlayer = -999.0f;
+                    npcController.Blackboard.playerForgetTime = Time.time;
                     return returnedState;
                 }                
             }
@@ -334,15 +336,16 @@ public class AirAttack : ActionNode
                 Debug.Log($"returnedState={returnedState} {noMoveFrameIndex} + 5 == {nFrames} totalMoveDistance={totalMoveDistance}");
                 totalMoveDistance += movedDistance;
 
-                if (noMoveFrameIndex + 5 == nFrames && totalMoveDistance <= minMoveThreshold * 5)
-                {
-                    Debug.Log($"Not moving enough! Back to patrolling...");
-                    npcController.Blackboard.lastSeenPlayer = -999.0f;
-                    return State.FAILURE;
-                }
-                else
+                if (nFrames >= noMoveFrameIndex + maxFramesWithoutMoving)
                 {
                     noMoveFrameIndex = -1;
+                    if (totalMoveDistance <= minMoveThreshold * maxFramesWithoutMoving)
+                    {
+                        Debug.Log($"Not moving enough! Back to patrolling...");
+                        npcController.Blackboard.lastSeenPlayer = -999.0f;
+                        npcController.Blackboard.playerForgetTime = Time.time;
+                        return State.FAILURE;
+                    }
                 }
             }                      
 
@@ -354,7 +357,7 @@ public class AirAttack : ActionNode
 #if _DEBUG
         Debug.Log($"Attack node. {attackClipName} returns FAILURE. distanceToPlayer <= attackDistance {distanceToPlayer} <= {attackDistance} || <= {leaveDistance}");
 #endif
-
+        npcController.Blackboard.playerForgetTime = Time.time;
         npcController.Blackboard.lastSeenPlayer = -999.0f;
         return State.FAILURE;
     }    

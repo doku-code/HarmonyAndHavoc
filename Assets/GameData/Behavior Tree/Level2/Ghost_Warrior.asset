@@ -36,8 +36,9 @@ MonoBehaviour:
   holeDistance: {x: 1, y: 1.5}
   obstacleDistance: 0.03
   angleMaxDeviance: 0.01
-  minMoveThreshold: 0.01
   maxFramesFacingSide: 5
+  minMoveThreshold: 0.01
+  maxFramesWithoutMoving: 5
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +74,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f494320cb97792e41a1e1f6d41c01178
-  position: {x: -197, y: 597}
+  position: {x: -197, y: 596}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -83,13 +84,15 @@ MonoBehaviour:
   PatrolAnimString: Run
   moveSpeed: 1000
   maxSpeed: 2
-  distBeforeChanging: 1
+  distBeforeChanging: 0.5
   obstacleDistance: 0.03
   detectionDistance: 7
   detectForwardOnly: 1
   angleMaxDeviance: 0.01
   playerForgetDuration: 2
+  minDistanceForNextPosition: 1.5
   maxFramesFacingSide: 5
+  maxTimeBeforeNewInitialPosition: 3
 --- !u!114 &2299061114749337135
 MonoBehaviour:
   m_ObjectHideFlags: 0
