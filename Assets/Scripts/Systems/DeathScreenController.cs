@@ -46,7 +46,9 @@ namespace JFM
 
         public void OnRetryClick()
         {
-            PlayAnimation(false);            
+            PlayAnimation(false);
+            playerData.ActualChaos = playerData.MaxChaos;
+            playerData.ActualOrder = playerData.MaxOrder;
             GameManager.Instance.LoadNextMap("Village", SpawnerPosition.END);
         }
 
