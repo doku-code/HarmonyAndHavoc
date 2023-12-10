@@ -31,6 +31,11 @@ namespace JFM
             return Mathf.Abs(f2 - f1) <= 0.001f;
         }
 
+        public static bool AreNearlyEqual(Vector2 v1, Vector2 v2)
+        {
+            return AreNearlyEqual(v1.x, v2.x) && AreNearlyEqual(v1.y, v2.y);
+        }
+
         public static void DebugDrawCircle(Vector2 position, float radius, Color color)
         {
             int numSegments = 16;

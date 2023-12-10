@@ -26,7 +26,7 @@ MonoBehaviour:
   attackDistance: 1.5
   detectionDistance: 7
   detectForwardOnly: 1
-  leaveDistance: 5
+  leaveDistance: 8
   attackAnimString: Combo1
   attackClipName: Attack1
   comboSoundIdx: 0
@@ -35,7 +35,8 @@ MonoBehaviour:
   maxSpeed: 2
   holeDistance: {x: 1, y: 1.5}
   obstacleDistance: 0.03
-  angleMaxDeviance: 1
+  angleMaxDeviance: 0.01
+  minMoveThreshold: 0.01
   maxFramesFacingSide: 5
 --- !u!114 &11400000
 MonoBehaviour:
@@ -86,8 +87,8 @@ MonoBehaviour:
   obstacleDistance: 0.03
   detectionDistance: 7
   detectForwardOnly: 1
-  angleMaxDeviance: 1
-  lastObstacleForgetTime: 5
+  angleMaxDeviance: 0.01
+  playerForgetDuration: 2
   maxFramesFacingSide: 5
 --- !u!114 &2299061114749337135
 MonoBehaviour:

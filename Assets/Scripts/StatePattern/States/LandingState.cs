@@ -24,7 +24,13 @@ namespace JFM
             player.rb.gravityScale = 0.0f;
 
             player.Land(true);
+
             hasSubscribedToAnimatorObserver = false;
+            if(player.animator.GetCurrentAnimatorStateInfo(animatorLayerIndex).IsName(motionName))
+            {
+                SubscribeToAnimatorObserver(animatorObserverName);
+                hasSubscribedToAnimatorObserver = true;
+            }
 
             base.Enter();
         }
