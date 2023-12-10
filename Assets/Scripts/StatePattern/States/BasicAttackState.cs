@@ -75,7 +75,7 @@ namespace JFM
             }
             else
             {
-                player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
+                //player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
             }
                         
         }
