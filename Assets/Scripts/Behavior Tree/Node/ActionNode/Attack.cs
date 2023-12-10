@@ -1,4 +1,4 @@
-//#define _DEBUG
+#define _DEBUG
 
 using AF;
 using JFM;
@@ -211,7 +211,11 @@ public class Attack : ActionNode
 #endif
 
             Vector3 moveDirection = new Vector3(Mathf.Sign(player.transform.position.x - npc.transform.position.x), 0.0f, 0.0f);
-            if (npcAnimator.GetBool("IsIdle"))
+
+            // "IsIdle" doesn't get set since attacks have "Exit Times", but "Idle" motion
+            // is played so we can check when it's actually the case
+            //if (npcAnimator.GetBool("IsIdle"))
+            if(npcAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
                 npcAnimator.SetBool("IsIdle", false);
                 npcAnimator.SetBool("Run", true);
