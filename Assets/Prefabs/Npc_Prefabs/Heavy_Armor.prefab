@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3706950329441137414}
   - component: {fileID: 482451724513659173}
   - component: {fileID: 3637562509203071390}
-  - component: {fileID: 5723241378898235679}
   - component: {fileID: 8000035976008550848}
   - component: {fileID: 2281428959766015154}
   - component: {fileID: -4158284810766522340}
@@ -221,20 +220,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &5723241378898235679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9125858477312548240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 8d49269ea05186147b47270c2891dd02, type: 2}
 --- !u!114 &8000035976008550848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +236,7 @@ MonoBehaviour:
   numberOfCoins: 20
   minForce: 100
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &2281428959766015154
 MonoBehaviour:
@@ -267,8 +253,12 @@ MonoBehaviour:
   maxHealth: 100
   attackDamage: 10
   knockBackImpulse: 0
-  knockBackInterval: 0.001
-  knockBackFriction: 5
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &-4158284810766522340
 MonoBehaviour:
   m_ObjectHideFlags: 0
