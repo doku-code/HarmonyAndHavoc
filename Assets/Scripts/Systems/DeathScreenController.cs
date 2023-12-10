@@ -47,7 +47,7 @@ namespace JFM
         public void OnRetryClick()
         {
             PlayAnimation(false);            
-            GameManager.Instance.LoadNextMap("Village", SpawnerPosition.BEGIN);
+            GameManager.Instance.LoadNextMap("Village", SpawnerPosition.END);
         }
 
         public void OnExitClick()
