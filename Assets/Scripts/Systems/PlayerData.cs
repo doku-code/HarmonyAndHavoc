@@ -175,9 +175,9 @@ namespace AF
 
         public void HealPlayer(int value)
         {
-            OnOrderDelegate(value);
-
             actualOrder = Mathf.Min(value + actualOrder, maxOrder);
+
+            OnOrderDelegate(value);
         }
 
         public bool UseChaos(int value)
