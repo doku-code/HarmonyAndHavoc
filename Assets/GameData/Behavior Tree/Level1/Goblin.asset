@@ -23,7 +23,9 @@ MonoBehaviour:
   gameobjNpcName: Goblin
   attackCooldown: 3
   attackDistance: 2
+  attackDamage: 5
   detectionDistance: 4
+  detectForwardOnly: 1
   leaveDistance: 5
   attackAnimString: Combo1
   attackClipName: Attack1
@@ -78,8 +80,8 @@ MonoBehaviour:
   distBeforeChanging: 1
   obstacleDistance: 1.5
   detectionDistance: 4
+  detectForwardOnly: 1
   holeDistance: {x: 1, y: 1.5}
-  isFlying: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +166,9 @@ MonoBehaviour:
   gameobjNpcName: Goblin
   attackCooldown: 3
   attackDistance: 2
+  attackDamage: 10
   detectionDistance: 4
+  detectForwardOnly: 1
   leaveDistance: 5
   attackAnimString: Combo2
   attackClipName: Attack2

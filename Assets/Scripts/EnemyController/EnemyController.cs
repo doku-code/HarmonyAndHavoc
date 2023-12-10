@@ -27,6 +27,11 @@ namespace charles
         public bool IsDead { get => currentHealth <= 0; }
         public int MaxHealth { get => maxHealth; }
 
+        public int AttackDamage
+        {
+            set => attackDamage = value;
+        }
+
         public event IntegerParameterDelegate OnHealthDecrease;
 
         [Space]

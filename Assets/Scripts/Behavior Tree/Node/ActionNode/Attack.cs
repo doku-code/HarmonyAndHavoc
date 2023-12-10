@@ -10,6 +10,7 @@ public class Attack : ActionNode
 {
     public float attackCooldown = 1.5f;
     public float attackDistance = 1.5f;
+    public int attackDamage = 1;
     public float detectionDistance = 3.0f;
     public bool detectForwardOnly = true;
     public float leaveDistance = 5.0f;
@@ -172,9 +173,9 @@ public class Attack : ActionNode
 
                 npcAnimator.SetBool("Run", false);
                 npcAnimator.SetBool("IsIdle", false);
-                npcAnimator.SetTrigger(attackAnimString);                
+                npcAnimator.SetTrigger(attackAnimString);
 
-                //isCooldown = true;
+                npcController.AttackDamage = attackDamage;
                 lastAttackTime = Time.time;
                 hasAttacked = true;
 #if _DEBUG
