@@ -25,7 +25,7 @@ MonoBehaviour:
   attackDistance: 2
   detectionDistance: 10000
   detectForwardOnly: 0
-  leaveDistance: 5
+  leaveDistance: 10000
   attackAnimString: Combo1
   attackClipName: Attack1
   comboSoundIdx: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 3d679d781546b31468fcf5b7ed1b193d
-  position: {x: -190, y: 676}
+  position: {x: -190, y: 675}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -81,7 +81,6 @@ MonoBehaviour:
   detectionDistance: 10000
   detectForwardOnly: 0
   holeDistance: {x: 1, y: 1.5}
-  isFlying: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +147,7 @@ MonoBehaviour:
   attackDistance: 2
   detectionDistance: 10000
   detectForwardOnly: 0
-  leaveDistance: 5
+  leaveDistance: 10000
   attackAnimString: Combo3
   attackClipName: Attack3
   comboSoundIdx: 0
@@ -203,7 +202,7 @@ MonoBehaviour:
   attackDistance: 2
   detectionDistance: 10000
   detectForwardOnly: 0
-  leaveDistance: 5
+  leaveDistance: 10000
   attackAnimString: Combo2
   attackClipName: Attack2
   comboSoundIdx: 0

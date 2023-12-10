@@ -8,12 +8,12 @@ public class EnemyBlackboard : ScriptableObject
     public float lastHitTime;
     public RectTransform healthBar;
     public float lastSeenPlayer;
-    public float lastObstacle;
+    public float playerForgetTime;
 
     private void OnEnable()
     {
         lastSeenPlayer = -999.0f;
-        lastObstacle = -999.0f;
+        playerForgetTime = -999.0f;
     }
 
     public EnemyBlackboard Clone()

@@ -63,6 +63,7 @@ namespace JFM
             }
 
             player.rb.velocity = Vector2.zero;
+            player.rb.totalForce = Vector2.zero;
         }
 
         public override void Exit()

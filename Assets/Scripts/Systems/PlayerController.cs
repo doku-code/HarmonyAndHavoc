@@ -876,7 +876,7 @@ namespace JFM
             stateMachine = new PlayerStateMachine(statesArray, this);
 
             // For debug only
-            if(GameManager.Instance is null)
+            if(GameManager.Instance is null || playerData.EveryKnowledgeDictionary is null)
             {
                 playerData.InitializeData();
             }
