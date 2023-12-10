@@ -28,12 +28,16 @@ namespace charles
     {
         [SerializeField] public Question[] Conversations;
         [Header("UI")]
-        [SerializeField] private TMP_Text questionText;
+        [SerializeField] private Canvas questionCanvas;
+        [SerializeField] private PlayerData pData;
+        [SerializeField] private Canvas thankYouCanvas;
         [SerializeField] private Button firstAnswerButton;
         [SerializeField] private Button secondAnswerButton;
+        [SerializeField] private int goldForHealing = 50;
 
+        private TMP_Text textComponent;
         private bool buttonPressed = false;
-        [SerializeField] private float typingSpeed = 0.2f;
+        [SerializeField] private float typingSpeed = 0.08f;
         private int questionIndex = 0;
         private int currentUpgradePrice = 10;
         private bool repeatQuestion = true;
@@ -41,6 +45,7 @@ namespace charles
 
         private void Start()
         {
+            textComponent = questionCanvas.GetComponentInChildren<TMP_Text>();
             LoadConversation(questionIndex);
         }
 
@@ -48,15 +53,9 @@ namespace charles
         {
             while (questionIndex < Conversations.Length)
             {
-                string question = Conversations[questionIndex].questionText;
+                string message = Conversations[questionIndex].questionText;
 
-                questionText.text = "";
-                for (int i = 0; i < question.Length; i++)
-                {
-                    questionText.text += question[i];
-                    yield return new WaitForSeconds(typingSpeed);
-                }
-                yield return new WaitForSeconds(1.0f);
+                yield return DisplayMessage(message);
 
                 buttonPressed = false;
                 yield return new WaitUntil(() => buttonPressed);
@@ -74,13 +73,63 @@ namespace charles
             }
         }
 
+        private IEnumerator DisplayMessage(string message)
+        {
+            textComponent.text = "";
+
+            for (int i = 0; i < message.Length; i++)
+            {
+                textComponent.text += message[i];
+                yield return new WaitForSeconds(typingSpeed);
+            }
+
+            yield return new WaitForSeconds(1.0f);
+        }
+
+        public void OnAnswerSubmitted()
+        {
+            Debug.Log("Answer submitted!");
+            if (thankYouCanvas != null)
+            {
+                thankYouCanvas.gameObject.SetActive(true);
+                questionCanvas.gameObject.SetActive(false);
+
+            }
+            else
+            {
+                questionIndex++;
+            }
+            currentUpgradePrice += 10;
+            buttonPressed = true;
+        }
+        public void healThePlayer()
+        {
+            if (pData.Gold >= goldForHealing && pData.ActualOrder < pData.MaxOrder)
+            {
+                pData.HealPlayer(pData.MaxOrder);
+                pData.Gold -= goldForHealing;
+
+                //Juste le slider qui update pas malgrer qui est call dans healplayer de Player data ?  
+
+
+                thankYouCanvas.gameObject.SetActive(true);
+                questionCanvas.gameObject.SetActive(false);
+            }
+            else
+            {
+                questionIndex++;
+                //Reussis pas a aller a la prochaine question dans le cas ou ta pas assez de cash 
+            }
+            buttonPressed = true;
+        }
         public void LoadConversation(int index)
         {
             buttonPressed = false;
             if (index < Conversations.Length)
             {
-                questionText.text = Conversations[index].questionText;
                 Answer[] answers = Conversations[index].answers;
+
+                textComponent.text = Conversations[index].questionText;
 
                 for (int i = 0; i < 2; i++)
                 {
@@ -102,18 +151,6 @@ namespace charles
             }
         }
 
-        public void OnAnswerSubmitted(int answerIndex)
-        {
-            buttonPressed = true;
-            currentUpgradePrice += 10;
-
-            if (!repeatQuestion)
-            {
-                questionIndex++;
-            }
-            LoadConversation(questionIndex);
-        }
-        
         public void OnAcceptQuest()
         {
             if (!wellsIsOpen)

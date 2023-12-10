@@ -150,6 +150,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -157,10 +170,10 @@ TextureImporter:
       name: Magic_Vendor_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 6
         y: 64
-        width: 32
-        height: 64
+        width: 19
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,10 +191,10 @@ TextureImporter:
       name: Magic_Vendor_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 38
         y: 64
-        width: 32
-        height: 64
+        width: 19
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,10 +212,10 @@ TextureImporter:
       name: Magic_Vendor_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 70
         y: 64
-        width: 32
-        height: 64
+        width: 19
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,10 +233,10 @@ TextureImporter:
       name: Magic_Vendor_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 102
         y: 64
-        width: 32
-        height: 64
+        width: 19
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,10 +254,10 @@ TextureImporter:
       name: Magic_Vendor_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 6
         y: 0
-        width: 32
-        height: 64
+        width: 19
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,10 +275,10 @@ TextureImporter:
       name: Magic_Vendor_5
       rect:
         serializedVersion: 2
-        x: 32
+        x: 38
         y: 0
-        width: 32
-        height: 64
+        width: 19
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
