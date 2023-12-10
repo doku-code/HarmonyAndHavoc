@@ -130,7 +130,9 @@ public class AirAttack : ActionNode
                 {
                     if (hit.collider.gameObject != npc)
                     {
+#if _DEBUG
                         Debug.Log($"hit={hit.collider.gameObject.name} hit.normal={hit.normal}");
+#endif
                         obstacleFound = true;
                         obstacleNormal = hit.normal;
                         /*Vector2 perpendicularDirection = Platformer2DUtilities.GetPerpendicularVector2(currentDirection);
@@ -157,7 +159,9 @@ public class AirAttack : ActionNode
                         if (hit.collider.gameObject != npc)
                         {
                             obstacleBetweenFound = true;
+#if _DEBUG
                             Debug.Log("Found an obstacle between player and NPC.");
+#endif
                         }
                     }
                 }
@@ -318,7 +322,9 @@ public class AirAttack : ActionNode
             if (!npcController.IsKnockedBack && (npcRigidBody.velocity.magnitude < maxSpeed || angleDifference >= angleMaxDeviance * Mathf.Deg2Rad))
             {
                 npcRigidBody.AddForce(currentDirection * moveSpeed * dt);
+#if _DEBUG
                 Debug.Log($"currentDirection * moveSpeed * dt = {currentDirection * moveSpeed * dt}");
+#endif
             }
 
             //Debug.Log($"Player is not found! obstacleFound={obstacleFound}");
@@ -333,7 +339,9 @@ public class AirAttack : ActionNode
 
             if(noMoveFrameIndex >= 0)
             {
+#if _DEBUG
                 Debug.Log($"returnedState={returnedState} {noMoveFrameIndex} + 5 == {nFrames} totalMoveDistance={totalMoveDistance}");
+#endif
                 totalMoveDistance += movedDistance;
 
                 if (nFrames >= noMoveFrameIndex + maxFramesWithoutMoving)
@@ -341,7 +349,9 @@ public class AirAttack : ActionNode
                     noMoveFrameIndex = -1;
                     if (totalMoveDistance <= minMoveThreshold * maxFramesWithoutMoving)
                     {
+#if _DEBUG
                         Debug.Log($"Not moving enough! Back to patrolling...");
+#endif
                         npcController.Blackboard.lastSeenPlayer = -999.0f;
                         npcController.Blackboard.playerForgetTime = Time.time;
                         return State.FAILURE;

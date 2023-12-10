@@ -48,7 +48,7 @@ public class AirPatrol : ActionNode
 
         if(initialPosition == Vector2.zero)
         {
-            initialPosition = npcRigidBody.position + Vector2.right * 10.0f;
+            initialPosition = npcRigidBody.position;
             lastTimeAroundInitialPosition = Time.time;
         }
 
