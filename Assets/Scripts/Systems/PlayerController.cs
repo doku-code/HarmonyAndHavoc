@@ -40,6 +40,7 @@ namespace JFM
         [SerializeField] private float jumpForce = 3.0f;
         [SerializeField] private int baseNumJumps = 1;
         [SerializeField] private float airAcceleration = 100.0f;
+        [SerializeField] private float airSpeed = 2.0f;
         [SerializeField] private float maxFallDamageHeight = 3.0f;
         [SerializeField] private float landingHeight = 2.0f;
         [SerializeField] private float fallDamageMultiplier = 3.0f;
@@ -177,6 +178,11 @@ namespace JFM
         public float AirAcceleration
         {
             get => airAcceleration;
+        }
+
+        public float AirSpeed
+        {
+            get => airSpeed;
         }
 
         public float LadderSpeed
@@ -333,7 +339,7 @@ namespace JFM
             get => moveInput;
             set => moveInput = value;
         }
-
+        
         public void SetHighestAirborneY()
         {
             SetHighestAirborneY(false);
@@ -706,6 +712,12 @@ namespace JFM
             //Vector2 colliderSize = cc.size;
 
             return Raycast2DHelper.CheckForCollisions(rb.position, collisionCheckRadius, colliderSize.y, colliderOffset.y, groundLayer, false);
+        }
+
+        public bool IsGroundedSlope()
+        {
+            bool foundSlopeBeneath = FindSlopeBeneath(out float slope);
+            return IsGrounded(groundLayer | ladderLayer, Vector2.zero, groundDistance * 2.0f, false) || (foundSlopeBeneath && Mathf.Abs(slope) > stairsUpMinSlope && Mathf.Abs(slope) < stairsUpMaxSlope);
         }
 
         public bool IsGrounded()

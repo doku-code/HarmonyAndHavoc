@@ -55,8 +55,7 @@ namespace JFM
 
         public override void Update()
         {
-            bool foundSlopeBeneath = player.FindSlopeBeneath(out float slope);
-            bool grounded = player.IsGrounded(player.GroundLayer | player.LadderLayer, Vector2.zero, player.GroundDistance * 2.0f, false) || (foundSlopeBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope && Mathf.Abs(slope) < player.StairsUpMaxSlope);
+            bool grounded = player.IsGroundedSlope();
 
             float elapsedTime = Time.time - activationTime;
 

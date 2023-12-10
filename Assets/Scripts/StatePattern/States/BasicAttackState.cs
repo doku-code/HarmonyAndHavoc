@@ -38,6 +38,8 @@ namespace JFM
 
         public override void Update()
         {
+            bool grounded = player.IsGroundedSlope();
+
             if (
                 !player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
                 player.Raycast(false, player.LadderLayer, Vector2.zero, 0.3f, Vector2.down)
@@ -49,23 +51,33 @@ namespace JFM
                 //Debug.Log("walking on ladder");
             }
 
-            // Add force but limit speed
-            if (player.MoveInput.x != 0.0f && player.rb.velocity.magnitude < player.WalkSpeed)
+            float speed = player.WalkSpeed;
+            float acceleration = player.WalkAcceleration;
+
+            if (grounded)
             {
-                Vector2 v = (player.IsFacingRight ? Vector2.right : -Vector2.right) * /*player.WalkSpeed **/ player.WalkAcceleration * Time.fixedDeltaTime;
+                speed = player.AirSpeed;
+                acceleration = player.AirAcceleration;
+            }
+
+            // Add force but limit speed
+            if (player.MoveInput.x != 0.0f && player.rb.velocity.magnitude < speed)
+            {
+                Vector2 v = (player.IsFacingRight ? Vector2.right : -Vector2.right) * /*speed **/ acceleration * Time.fixedDeltaTime;
                 player.rb.AddForce(v, ForceMode2D.Force);
 
                 //Debug.Log($"AddForce() player.rb.velocity.magnitude={player.rb.velocity.magnitude} v={v}");
                 //player.rb.velocity += v;
-                if (player.rb.velocity.magnitude > player.WalkSpeed)
+                if (player.rb.velocity.magnitude > speed)
                 {
-                    player.rb.velocity = player.rb.velocity.normalized * player.WalkSpeed;
+                    player.rb.velocity = player.rb.velocity.normalized * speed;
                 }
             }
             else
             {
                 player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
             }
+                        
         }
 
         public override void Exit()

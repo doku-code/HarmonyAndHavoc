@@ -301,13 +301,13 @@ namespace JFM
             }
 
             // Add force but limit speed
-            if (player.MoveInput.x != 0.0f && player.rb.velocity.magnitude < player.WalkSpeed)
+            if (player.MoveInput.x != 0.0f && player.rb.velocity.magnitude < player.AirSpeed)
             {
-                player.rb.AddForce((player.IsFacingRight ? Vector3.right : -Vector3.right) * player.WalkSpeed * player.AirAcceleration * Time.fixedDeltaTime);
+                player.rb.AddForce((player.IsFacingRight ? Vector3.right : -Vector3.right) * /*player.AirSpeed * */player.AirAcceleration * Time.fixedDeltaTime);
 
-                if (player.rb.velocity.magnitude > player.WalkSpeed)
+                if (player.rb.velocity.magnitude > player.AirSpeed)
                 {
-                    player.rb.velocity = player.rb.velocity.normalized * player.WalkSpeed;
+                    player.rb.velocity = player.rb.velocity.normalized * player.AirSpeed;
                 }
             }
 
