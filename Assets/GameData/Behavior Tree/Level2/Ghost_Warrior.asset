@@ -15,7 +15,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: fdf1bb95230476b40a317ef3f0c12e24
-  position: {x: 173, y: 599}
+  position: {x: 31, y: 594}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -24,6 +24,7 @@ MonoBehaviour:
   patrolRadius: 3
   attackCooldown: 1.5
   attackDistance: 1.5
+  attackDamage: 1
   detectionDistance: 7
   detectForwardOnly: 1
   leaveDistance: 8

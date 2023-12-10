@@ -53,8 +53,9 @@ MonoBehaviour:
   walkSpeed: 5
   walkAcceleration: 5000
   jumpForce: 11.3
-  baseNumJumps: 1
-  airAcceleration: 100
+  baseNumJumps: 2
+  airAcceleration: 5000
+  airSpeed: 5
   maxFallDamageHeight: 12
   landingHeight: 7
   fallDamageMultiplier: 3

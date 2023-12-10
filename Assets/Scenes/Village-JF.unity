@@ -46993,10 +46993,12 @@ MonoBehaviour:
     answers: []
   questionCanvas: {fileID: 0}
   pData: {fileID: 0}
-  thankYouCanvas: {fileID: 0}
   firstAnswerButton: {fileID: 785375695}
   secondAnswerButton: {fileID: 0}
   goldForHealing: 50
+  goldForArmor: 10
+  goldForWeapon: 10
+  questionIndex: 0
   typingSpeed: 0.08
 --- !u!1 &453240229
 GameObject:
@@ -56995,10 +56997,12 @@ MonoBehaviour:
       includePrice: 1
   questionCanvas: {fileID: 0}
   pData: {fileID: 0}
-  thankYouCanvas: {fileID: 0}
   firstAnswerButton: {fileID: 1471339659}
   secondAnswerButton: {fileID: 1471339658}
   goldForHealing: 50
+  goldForArmor: 10
+  goldForWeapon: 10
+  questionIndex: 0
   typingSpeed: 0.08
 --- !u!1 &628711534
 GameObject:
@@ -96548,10 +96552,12 @@ MonoBehaviour:
     answers: []
   questionCanvas: {fileID: 0}
   pData: {fileID: 0}
-  thankYouCanvas: {fileID: 0}
   firstAnswerButton: {fileID: 0}
   secondAnswerButton: {fileID: 0}
   goldForHealing: 50
+  goldForArmor: 10
+  goldForWeapon: 10
+  questionIndex: 0
   typingSpeed: 0.08
 --- !u!1 &1101098900
 GameObject:
