@@ -9,6 +9,7 @@ namespace charles
     public class OnTriggerConversation : MonoBehaviour
     {
         [SerializeField] GameObject conversationPanel;
+        [SerializeField] GameObject Canvas2;
         [SerializeField] ConversationManager questionIdx;
         [SerializeField] bool resetConversation;
         private PlayerData data;
@@ -42,6 +43,7 @@ namespace charles
 
         private void OnTriggerExit2D(Collider2D collision)
         {
+            DesactivateCanvas2();
             if (conversationPanel != null)
             {
                 conversationPanel.SetActive(false);
@@ -55,6 +57,14 @@ namespace charles
                 {
                     questionIdx.LoadConversation(0);
                 }
+            }
+        }
+
+        private void DesactivateCanvas2()
+        {
+            if (Canvas2 != null)
+            {
+                Canvas2.SetActive(false);
             }
         }
     }
