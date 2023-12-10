@@ -56,7 +56,17 @@ namespace JFM
 
         public override void OnLeaveState() 
         {
-            player.StateMachine.ChangeState(player.States[STATE.IDLE]);
+            bool foundSlopeBeneath = player.FindSlopeBeneath(out float slope);
+            bool grounded = player.IsGrounded(player.GroundLayer | player.LadderLayer, Vector2.zero, player.GroundDistance * 2.0f, false) || (foundSlopeBeneath && Mathf.Abs(slope) > player.StairsUpMinSlope && Mathf.Abs(slope) < player.StairsUpMaxSlope);
+
+            if (grounded)
+            {
+                player.StateMachine.ChangeState(player.States[STATE.IDLE]);
+            }
+            else
+            {
+                player.StateMachine.ChangeState(player.States[STATE.AIRBORNE]);
+            }
         }
     }
 }
