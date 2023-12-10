@@ -23,7 +23,7 @@ MonoBehaviour:
   gameobjNpcName: Goblin
   attackCooldown: 3
   attackDistance: 2
-  attackDamage: 5
+  attackDamage: 8
   detectionDistance: 4
   detectForwardOnly: 1
   leaveDistance: 5
@@ -67,7 +67,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 3d679d781546b31468fcf5b7ed1b193d
-  position: {x: -170, y: 670}
+  position: {x: -169.7143, y: 669.71423}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -158,7 +158,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 185a710cc31d113488123a82d5c5835c
-  position: {x: 215, y: 670}
+  position: {x: 213.85712, y: 669.71423}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -166,7 +166,7 @@ MonoBehaviour:
   gameobjNpcName: Goblin
   attackCooldown: 3
   attackDistance: 2
-  attackDamage: 10
+  attackDamage: 12
   detectionDistance: 4
   detectForwardOnly: 1
   leaveDistance: 5
