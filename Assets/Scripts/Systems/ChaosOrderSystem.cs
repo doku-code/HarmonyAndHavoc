@@ -117,7 +117,7 @@ namespace JFM
 
         private void OnPlayerDead()
         {
-            IncrementChaos();
+            IncrementChaosLevel();
         }
 
         private void InitializeVariables()
@@ -154,7 +154,12 @@ namespace JFM
             }
         }
 
-        private void IncrementChaos()
+        public void ResetChaosLevel()
+        {
+            chaosAmount = 0;
+        }
+
+        private void IncrementChaosLevel()
         {
             // Using the property here
             ChaosAmount++;
