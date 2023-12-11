@@ -73,29 +73,39 @@ namespace AF
         }
 
         [SerializeField] private int maxOrder;
-        public int MaxOrder         {
+        public int MaxOrder         
+        {
             get { return maxOrder;}
             set { maxOrder = value; }
         }
 
         [SerializeField] private int actualChaos;
-        public int ActualChaos         {
+        public int ActualChaos         
+        {
             get { return actualChaos;}
             set { actualChaos = value; }
         }
 
         [SerializeField] private int maxChaos;
-        public int MaxChaos         {
+        public int MaxChaos         
+        {
             get { return maxChaos;}
             set { maxChaos = value; }
         }
 
         [SerializeField] private int gold;
-        public int Gold         {
+        public int Gold         
+        {
             get { return gold;}
-            set { gold = value; }
+            set 
+            {
+                totalGold += Mathf.Max(value - gold, 0);
+                gold = value;                 
+            }
         }
 
+        [SerializeField] private int totalGold;
+        
         [SerializeField] private int orderFragments;
         public int OrderFragments
         {
