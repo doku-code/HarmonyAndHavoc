@@ -131,8 +131,12 @@ namespace AF
             set
             {
                 orderFragments = value;
-                orderFragments = orderFragments == 4 ? 0 : orderFragments;
-                maxOrder += orderUpgradeValue;
+
+                if (orderFragments == 4)
+                {
+                    maxOrder += orderUpgradeValue;
+                    orderFragments = 0;
+                }                
             }
         }
 
