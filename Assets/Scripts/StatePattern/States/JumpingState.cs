@@ -7,8 +7,8 @@ namespace JFM
     [CreateAssetMenu(fileName = "JumpingState", menuName = "States/Jumping")]
     public class JumpingState : PlayerState
     {
-        private int nFrames;       
-
+        private int nFrames;
+        private bool stopForce;
         public override void Enter()
         {
             player.animator.SetTrigger("Jump");
@@ -16,6 +16,8 @@ namespace JFM
             player.Jump();
             player.inputTriggers["Jump"] = false;
             nFrames = 0;
+
+            stopForce = false;
 
             base.Enter();
         }
@@ -71,13 +73,18 @@ namespace JFM
             }
 
             // Add force but limit speed
-            if (player.MoveInput.x != 0.0f && player.rb.velocity.magnitude < player.AirSpeed)
+            if (player.MoveInput.x != 0.0f && player.rb.velocity.magnitude < player.AirSpeed && !stopForce)
             {
                 player.rb.AddForce((player.IsFacingRight ? Vector3.right : -Vector3.right) * /*player.AirSpeed * */player.AirAcceleration * Time.fixedDeltaTime);
 
                 if (player.rb.velocity.magnitude > player.AirSpeed)
                 {
                     player.rb.velocity = player.rb.velocity.normalized * player.AirSpeed;
+                }
+
+                if (player.rb.velocity.magnitude == 0.0f)
+                {
+                    stopForce = true;
                 }
             }
 
@@ -98,6 +105,8 @@ namespace JFM
                 player.StateMachine.ChangeState(player.States[STATE.PAUSE]);
                 return;
             }*/
+
+            Debug.Log($"totalForces={player.rb.totalForce} vel={player.rb.velocity}");
 
             nFrames++;
         }

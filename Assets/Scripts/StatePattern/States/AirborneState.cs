@@ -16,6 +16,7 @@ namespace JFM
         private float coyoteTimeCounter;
         [NonSerialized] public bool wasGrounded = true;
         private bool hasDepletedJumps;
+        private bool stopForce;
 
         public override void Enter()
         {
@@ -44,6 +45,7 @@ namespace JFM
             }
 
             hasDepletedJumps = false;
+            stopForce = false;
 
             base.Enter();
         }
@@ -301,13 +303,18 @@ namespace JFM
             }
 
             // Add force but limit speed
-            if (player.MoveInput.x != 0.0f && player.rb.velocity.magnitude < player.AirSpeed)
+            if (player.MoveInput.x != 0.0f && player.rb.velocity.magnitude < player.AirSpeed && !stopForce)
             {
                 player.rb.AddForce((player.IsFacingRight ? Vector3.right : -Vector3.right) * /*player.AirSpeed * */player.AirAcceleration * Time.fixedDeltaTime);
 
                 if (player.rb.velocity.magnitude > player.AirSpeed)
                 {
                     player.rb.velocity = player.rb.velocity.normalized * player.AirSpeed;
+                }
+
+                if (player.rb.velocity.magnitude == 0.0f)
+                {
+                    stopForce = true;
                 }
             }
 
