@@ -10,6 +10,7 @@ namespace charles
         [SerializeField] ConversationManager questionIdx;
         private PlayerData data;
         private Coroutine displayCoroutine;
+        [SerializeField] private bool keepTriggerable = true;
 
         void Awake()
         {
@@ -18,7 +19,7 @@ namespace charles
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("Player") && !data.CurrentPlayerMapProgression[GameManager.Instance.currentMap])
+            if (collision.CompareTag("Player") && (!data.CurrentPlayerMapProgression[GameManager.Instance.currentMap] || keepTriggerable))
             {
                 conversationPanel.SetActive(true);
 
