@@ -543,9 +543,8 @@ namespace JFM
 
             if(enemyController.TakeDamage(damage, newPushDirection.normalized))
             {
-                Debug.Log($"Killed an enemy.");
-
-                playerData.ActualOrder += enemyController.MaxHealth;
+                playerData.ActualChaos += enemyController.MaxHealth;
+                playerData.TotalKills++;
             }
         }
 
@@ -717,7 +716,7 @@ namespace JFM
             Vector2 colliderOffset = cc.offset;
             //Vector2 colliderSize = cc.size;
 
-            return Raycast2DHelper.CheckForCollisions(rb.position, cc, groundLayer, true);
+            return Raycast2DHelper.CheckForCollisions(rb.position, cc, groundLayer, false);
         }
 
         public bool IsGroundedSlope()

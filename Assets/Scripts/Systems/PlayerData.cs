@@ -47,7 +47,7 @@ namespace AF
 
         public ParametersLessDelegate OnDeadDelegate;
         public IntegerParameterDelegate OnOrderDelegate;
-        public ParametersLessDelegate OnChaosDelegate;
+        public IntegerParameterDelegate OnChaosDelegate;
 
         //CurrentProgression
         public Dictionary<string, bool> CurrentPlayerMapProgression;
@@ -66,10 +66,16 @@ namespace AF
         [SerializeField] private int actualOrder;
         public int ActualOrder         
         {
-            get { return actualOrder;}
-            
-            // Todo: Limit actual order value
-            set { actualOrder = Mathf.Min(value, maxOrder); }
+            get { return actualOrder;}                       
+            set 
+            {
+                int change = value - actualOrder;
+                actualOrder = Mathf.Min(value, maxOrder);
+                if (OnOrderDelegate is not null)
+                {
+                    OnOrderDelegate(change);
+                }
+            }
         }
 
         [SerializeField] private int maxOrder;
@@ -83,7 +89,15 @@ namespace AF
         public int ActualChaos         
         {
             get { return actualChaos;}
-            set { actualChaos = Mathf.Min(value, maxChaos); }
+            set 
+            {
+                int change = value - actualOrder;
+                actualChaos = Mathf.Min(value, maxChaos);
+                if (OnChaosDelegate is not null)
+                {
+                    OnChaosDelegate(change);
+                }
+            }
         }
 
         [SerializeField] private int maxChaos;
@@ -105,7 +119,11 @@ namespace AF
         }
 
         [SerializeField] private int totalGold;
-        
+        public int TotalGold
+        {
+            get { return totalGold;}
+        }
+
         [SerializeField] private int orderFragments;
         public int OrderFragments
         {
@@ -128,6 +146,12 @@ namespace AF
         public int ArmorUpgrade         {
             get { return armorUpgrade;}
             set { armorUpgrade = value; }
+        }
+
+        [SerializeField] private int totalKills;
+        public int TotalKills
+        { 
+            get { return totalKills;}             
         }
 
         public Knowledge GetKnowledgeByID(KnowledgeID id)
@@ -157,14 +181,21 @@ namespace AF
                     }
                 }
             }
-            actualOrder = maxOrder;
-            actualChaos = maxChaos;
+
+            ActualOrder = maxOrder;
+            ActualChaos = maxChaos;
+            totalKills = 0;
+            totalGold = 0;
+            Gold = 0;
+            OrderFragments = 0;
+            WeaponUpgrade = 0;
+            ArmorUpgrade = 0;
         }
 
         public void TakeDamage(int dmg)
         {
             int actualDmg = Mathf.Max(dmg - ArmorUpgrade, 0);
-            actualOrder -= actualDmg;
+            ActualOrder -= actualDmg;
 
             if (actualOrder <= 0)
             {
@@ -172,7 +203,7 @@ namespace AF
             }
             else
             {
-                OnOrderDelegate(-actualDmg);
+                //OnOrderDelegate(-actualDmg);
             }
         }
 
@@ -185,21 +216,21 @@ namespace AF
 
         public void HealPlayer(int value)
         {
-            actualOrder = Mathf.Min(value + actualOrder, maxOrder);
+            ActualOrder = Mathf.Min(value + actualOrder, maxOrder);
 
-            OnOrderDelegate(value);
+            //OnOrderDelegate(value);
         }
 
         public bool UseChaos(int value)
         {
-            if(actualChaos >= value)
+            if(ActualChaos >= value)
             {
-                actualChaos -= value;
+                ActualChaos -= value;
 
-                if (OnChaosDelegate is not null)
+                /*if (OnChaosDelegate is not null)
                 {
                     OnChaosDelegate();
-                }
+                }*/
 
                 return true;
             }

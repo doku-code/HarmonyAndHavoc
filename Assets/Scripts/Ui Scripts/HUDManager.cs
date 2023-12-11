@@ -16,26 +16,25 @@ namespace AF
 
         void Awake()
         {
-            Debug.Log("*******************Load******************");
-            playerData.OnDeadDelegate += OnDeadSlider;
+            //playerData.OnDeadDelegate += OnDeadSlider;
             playerData.OnOrderDelegate += UpdateOrderSlider;
             playerData.OnChaosDelegate += UpdateChaosSlider;
 
             UpdateOrderSlider(0);
-            UpdateChaosSlider();
+            UpdateChaosSlider(0);
         }
-
+        /*
         private void OnDeadSlider()
         {
             order.value = 0;
-        }
+        }*/
 
         private void UpdateOrderSlider(int value)
         {
             order.value = playerData.ActualOrder / (float)playerData.MaxOrder;
         }
 
-        private void UpdateChaosSlider()
+        private void UpdateChaosSlider(int value)
         {
             chaos.value = playerData.ActualChaos / (float)playerData.MaxChaos;
         }
