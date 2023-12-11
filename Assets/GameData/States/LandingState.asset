@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: LandingState
   m_EditorClassIdentifier: 
   name: 8
+  animatorLayerIndex: 0
+  motionName: Player_landing
+  animatorObserverName: Movement
+  exitingMotionNames:
+  - Player_Run
+  - Player_Idle

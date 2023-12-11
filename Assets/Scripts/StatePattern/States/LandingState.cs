@@ -14,6 +14,8 @@ namespace JFM
         private bool hasSubscribedToAnimatorObserver;
         public string animatorObserverName = "Movement";
 
+        public string[] exitingMotionNames;
+            
         public override void Enter()
         {
             player.animator.SetBool("IsLanding", true);
@@ -45,6 +47,15 @@ namespace JFM
             {
                 SubscribeToAnimatorObserver(animatorObserverName);
                 hasSubscribedToAnimatorObserver = true;                
+            }
+
+            foreach (string motionName in exitingMotionNames)
+            {
+                if (player.animator.GetCurrentAnimatorStateInfo(animatorLayerIndex).IsName(motionName))
+                {
+                    OnLeaveState();
+                    break;
+                }
             }
         }
 

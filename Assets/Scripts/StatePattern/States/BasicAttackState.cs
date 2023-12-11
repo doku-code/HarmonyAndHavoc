@@ -12,10 +12,13 @@ namespace JFM
         public string airAttackAnimatorObserverName = "AirAttacks";
         public string groundAttackAnimatorObserverName = "GroundAttacks";
 
-        public int attackLayerIndex = 2;
+        public int animatorLayerIndex = 2;
         public string[] airAttackMotionNames;
         public string[] groundAttackMotionNames;
         private bool hasSubscribedToAnimatorObserver;
+
+        public string[] exitingMotionNames;
+
         public override void Enter()
         {
             hasSubscribedToAnimatorObserver = false;
@@ -36,34 +39,6 @@ namespace JFM
             SubscribeToAnimatorObserver(!isAirborned);
 
             base.Enter();
-        }
-
-        public void SubscribeToAnimatorObserver(bool isGrounded)
-        {
-            if (isGrounded)
-            {
-                foreach (string name in groundAttackMotionNames)
-                {                    
-                    if (player.animator.GetCurrentAnimatorStateInfo(attackLayerIndex).IsName(name))
-                    {
-                        SubscribeToAnimatorObserver(groundAttackAnimatorObserverName);
-                        hasSubscribedToAnimatorObserver = true;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                foreach (string name in airAttackMotionNames)
-                {
-                    if (player.animator.GetCurrentAnimatorStateInfo(attackLayerIndex).IsName(name))
-                    {
-                        SubscribeToAnimatorObserver(airAttackAnimatorObserverName);
-                        hasSubscribedToAnimatorObserver = true;
-                        break;
-                    }
-                }
-            }            
         }
 
         public override void Update()
@@ -115,7 +90,15 @@ namespace JFM
             {
                 //player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
             }
-                        
+
+            foreach (string motionName in exitingMotionNames)
+            {
+                if (player.animator.GetCurrentAnimatorStateInfo(animatorLayerIndex).IsName(motionName))
+                {
+                    OnLeaveState();
+                    break;
+                }
+            }
         }
 
         public override void Exit()
@@ -145,5 +128,35 @@ namespace JFM
                 player.StateMachine.ChangeState(player.States[STATE.IDLE]);
             }
         }
+
+        public void SubscribeToAnimatorObserver(bool isGrounded)
+        {
+            if (isGrounded)
+            {
+                foreach (string name in groundAttackMotionNames)
+                {
+                    if (player.animator.GetCurrentAnimatorStateInfo(animatorLayerIndex).IsName(name))
+                    {
+                        SubscribeToAnimatorObserver(groundAttackAnimatorObserverName);
+                        hasSubscribedToAnimatorObserver = true;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                foreach (string name in airAttackMotionNames)
+                {
+                    if (player.animator.GetCurrentAnimatorStateInfo(animatorLayerIndex).IsName(name))
+                    {
+                        SubscribeToAnimatorObserver(airAttackAnimatorObserverName);
+                        hasSubscribedToAnimatorObserver = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+
     }
 }
