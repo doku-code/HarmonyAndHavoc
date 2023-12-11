@@ -10,6 +10,7 @@ namespace JFM
     {
         [SerializeField] private PlayerData playerData;
 
+        [SerializeField] private Canvas canvas;
         [SerializeField] private Animator fxAnimator;
         [SerializeField] private Animator textAnimator;
         [SerializeField] private Animator btnRetryAnimator;
@@ -21,7 +22,8 @@ namespace JFM
         {
             playerData.OnDeadDelegate += OnDead;
 
-            PlayAnimation(false);
+            //PlayAnimation(false);
+            SetGOActive(false);
         }
 
         private void OnDestroy()
@@ -69,19 +71,16 @@ namespace JFM
             textAnimator.SetBool("On", isOn);
             btnRetryAnimator.SetBool("On", isOn);
             btnExitAnimator.SetBool("On", isOn);
-
-            if (!isOn)
-            {
-                SetGOActive(isOn);
-            }
         }
 
-        private void SetGOActive(bool isActive)
+        public void DeactivateGOs()
         {
-            fxAnimator.gameObject.SetActive(isActive);
-            textAnimator.gameObject.SetActive(isActive);
-            btnRetryAnimator.gameObject.SetActive(isActive);
-            btnExitAnimator.gameObject.SetActive(isActive);
+            SetGOActive(false);
+        }
+
+        private void SetGOActive(bool active)
+        { 
+            canvas.gameObject.SetActive(active);                
         }
     }
 }

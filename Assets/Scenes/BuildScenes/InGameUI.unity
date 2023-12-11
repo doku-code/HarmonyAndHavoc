@@ -15951,7 +15951,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.4708862, y: 3.2943115}
+  m_AnchoredPosition: {x: -2.4709473, y: 3.2943115}
   m_SizeDelta: {x: -44.4738, y: -56.0042}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2041997552
@@ -17559,7 +17559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.4745098}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17922,6 +17922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3022882797396960807}
   - component: {fileID: 8747760115295312303}
+  - component: {fileID: 8747760115295312304}
   m_Layer: 0
   m_Name: DeathScreen
   m_TagString: Untagged
@@ -18220,7 +18221,6 @@ GameObject:
   - component: {fileID: 8728616718751044544}
   - component: {fileID: 3966347820060615884}
   - component: {fileID: 2085084969427663795}
-  - component: {fileID: 9039087295375318497}
   m_Layer: 5
   m_Name: FadeInBlack
   m_TagString: Untagged
@@ -18392,11 +18392,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
-  fxAnimator: {fileID: 9039087295375318497}
+  canvas: {fileID: 6424241187955907904}
+  fxAnimator: {fileID: 8747760115295312304}
   textAnimator: {fileID: 6181764155615192813}
   btnRetryAnimator: {fileID: 3538177975043821962}
   btnExitAnimator: {fileID: 5937103876022127891}
   waitForDeadAnimation: 2
+--- !u!95 &8747760115295312304
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3365821612744127507}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d220a683f71031149a5aa9a00ef9dab1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8788133521712272824
 GameObject:
   m_ObjectHideFlags: 0
@@ -18512,27 +18534,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e301bdae5c98bdd42b6ae7051550585d, type: 3}
---- !u!95 &9039087295375318497
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7062242829125504582}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d220a683f71031149a5aa9a00ef9dab1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!222 &9172802676149859041
 CanvasRenderer:
   m_ObjectHideFlags: 0
