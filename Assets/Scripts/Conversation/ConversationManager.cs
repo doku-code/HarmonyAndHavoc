@@ -45,7 +45,7 @@ namespace charles
         private bool buttonPressed = false;
         private int currentUpgradePrice = 10;
         private bool wellsIsOpen = false;
-
+        public int numberOfTimeHealed;
         private bool isDisplayingMessage = false;
         private float timeSinceTypingEnded = 0f;
 
@@ -170,7 +170,7 @@ namespace charles
                 {
                     pData.HealPlayer(pData.MaxOrder);
                     pData.Gold -= goldForHealing;
-
+                    numberOfTimeHealed += 1;
                     LoadConversation(2);
                 }
                 else if (pData.ActualOrder == pData.MaxOrder)

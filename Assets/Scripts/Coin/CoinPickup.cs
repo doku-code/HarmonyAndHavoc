@@ -6,6 +6,7 @@ namespace charles
 {
     public class CoinPickup : MonoBehaviour, IInteractible
     {
+        public int totalCoins;
         void OnTriggerEnter2D(Collider2D other)
         {
             // If Player touches the coin, deactivate its gameObject.
@@ -27,6 +28,7 @@ namespace charles
             if(gameObject.TryGetComponent<PlayerController>(out pc))
             {
                 pc.Data.Gold++;
+                totalCoins++;
             }            
         }
     }
