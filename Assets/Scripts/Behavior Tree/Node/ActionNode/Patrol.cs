@@ -93,7 +93,7 @@ public class Patrol : ActionNode
             */
             if (groundHit.collider is null)
             {
-                Debug.Log("No ground found!");
+                //Debug.Log("No ground found!");
                 obstacleFound = true;
             }
         }
