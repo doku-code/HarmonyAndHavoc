@@ -20,7 +20,7 @@ namespace charles
         [SerializeField] private float knockBackDuration = 0.5f;
         private bool isKnockedBack;
         private bool canTakeDamage = true;
-        [SerializeField] private float damageCooldown = 1.3f;
+        //[SerializeField] private float damageCooldown = 0f;
         [SerializeField] private float deathDuration = 3.0f;
         public bool IsKnockedBack { get => isKnockedBack; }
         public bool CanTakeDamage { get => canTakeDamage; }
@@ -103,13 +103,13 @@ namespace charles
             }
         }
 
-        IEnumerator DamageCooldown()
-        {
-            canTakeDamage = false;
-            yield return new WaitForSeconds(damageCooldown);
-            npcAnimator.ResetTrigger("GetHit");
-            canTakeDamage = true;
-        }
+        //IEnumerator DamageCooldown()
+        //{
+        //    canTakeDamage = false;
+        //    yield return new WaitForSeconds(damageCooldown);
+        //    npcAnimator.ResetTrigger("GetHit");
+        //    canTakeDamage = true;
+        //}
 
         public void TakeDamage(int damage, Vector2 pushDirection)
         {
@@ -126,16 +126,16 @@ namespace charles
             {
                 Die();
             }
-            else
-            {
-                StartCoroutine(DamageCooldown());
+            //else
+            //{
+            //    //StartCoroutine(DamageCooldown());
 
-                npcAnimator.SetBool("IsIdle", false);
-                npcAnimator.SetBool("Run", false);
-                npcAnimator.SetTrigger("GetHit");
+            //    npcAnimator.SetBool("IsIdle", false);
+            //    npcAnimator.SetBool("Run", false);
+            //    npcAnimator.SetTrigger("GetHit");
 
-                KnockBack(pushDirection);
-            }
+            //    KnockBack(pushDirection);
+            //}
         }
 
         public void Attack(PlayerController player, Vector2 direction)
