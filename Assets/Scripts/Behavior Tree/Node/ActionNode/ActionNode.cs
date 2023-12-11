@@ -7,8 +7,7 @@ using UnityEngine;
 public abstract class ActionNode : Node
 {
     public LayerMask playerLayer;
-    public string gameobjNpcName;
-
+    
     protected GameObject player;
     protected GameObject npc;
     protected Animator npcAnimator;
@@ -27,7 +26,7 @@ public abstract class ActionNode : Node
         }
         else
         {
-            Debug.Log($"NPC not found : '{gameobjNpcName}' desc={Description}");
+            Debug.Log($"NPC not found : desc={Description}");
         }
     }
 
