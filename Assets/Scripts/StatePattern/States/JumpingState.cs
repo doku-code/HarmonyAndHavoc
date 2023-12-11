@@ -93,11 +93,11 @@ namespace JFM
                 player.inputTriggers["Jump"] = false;
             }
 
-            if (player.inputTriggers["Inventory"])
+            /*if (player.inputTriggers["Inventory"])
             {
                 player.StateMachine.ChangeState(player.States[STATE.PAUSE]);
                 return;
-            }
+            }*/
 
             nFrames++;
         }

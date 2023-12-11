@@ -194,12 +194,12 @@ namespace JFM
                 player.StateMachine.ChangeState(player.States[STATE.JUMP]);
                 return;
             }
-
+            /*
             if (player.inputTriggers["Inventory"])
             {
                 player.StateMachine.ChangeState(player.States[STATE.PAUSE]);
                 return;
-            }
+            }*/
 
             if (player.WillAttack())
             {
