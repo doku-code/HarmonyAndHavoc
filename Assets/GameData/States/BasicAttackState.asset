@@ -13,3 +13,14 @@ MonoBehaviour:
   m_Name: BasicAttackState
   m_EditorClassIdentifier: 
   name: 13
+  airAttackAnimatorObserverName: AirAttacks
+  groundAttackAnimatorObserverName: GroundAttacks
+  attackLayerIndex: 2
+  airAttackMotionNames:
+  - Player_Air_Attack_1
+  - Player_Air_Attack_2
+  - Player_Air_Attack_3
+  groundAttackMotionNames:
+  - Player_Attack_1
+  - Player_Attack_2
+  - Player_Attack_3

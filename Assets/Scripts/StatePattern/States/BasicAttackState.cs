@@ -12,18 +12,18 @@ namespace JFM
         public string airAttackAnimatorObserverName = "AirAttacks";
         public string groundAttackAnimatorObserverName = "GroundAttacks";
 
+        public int attackLayerIndex = 2;
+        public string[] airAttackMotionNames;
+        public string[] groundAttackMotionNames;
+        private bool hasSubscribedToAnimatorObserver;
         public override void Enter()
         {
+            hasSubscribedToAnimatorObserver = false;
             // If airborne, use air attack animation
             if (isAirborned = !player.IsGrounded())
             {
                 player.animator.SetBool("IsAirborne", true);
-                SubscribeToAnimatorObserver(airAttackAnimatorObserverName);
-            }
-            else
-            {
-                SubscribeToAnimatorObserver(groundAttackAnimatorObserverName);
-            }
+            }            
 
             player.animator.SetInteger("AttackIndex", Random.Range(1, 4));
             player.animator.SetTrigger("IsAttacking");
@@ -32,13 +32,54 @@ namespace JFM
             //player.rb.velocity = Vector2.zero;
             startTime = Time.time;
             player.Attack();
-            
+
+            SubscribeToAnimatorObserver(!isAirborned);
+
             base.Enter();
+        }
+
+        public void SubscribeToAnimatorObserver(bool isGrounded)
+        {
+            if (isGrounded)
+            {
+                foreach (string name in groundAttackMotionNames)
+                {                    
+                    if (player.animator.GetCurrentAnimatorStateInfo(attackLayerIndex).IsName(name))
+                    {
+                        Debug.Log($"{name} is found!");
+                        SubscribeToAnimatorObserver(groundAttackAnimatorObserverName);
+                        hasSubscribedToAnimatorObserver = true;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                foreach (string name in airAttackMotionNames)
+                {
+                    Debug.Log($"Searching {name}!");
+                    if (player.animator.GetCurrentAnimatorStateInfo(attackLayerIndex).IsName(name))
+                    {
+                        Debug.Log($"{name} is found!");
+                        SubscribeToAnimatorObserver(airAttackAnimatorObserverName);
+                        hasSubscribedToAnimatorObserver = true;
+                        break;
+                    }
+                }
+            }            
         }
 
         public override void Update()
         {
             bool grounded = player.IsGroundedSlope();
+            
+            if (!hasSubscribedToAnimatorObserver)
+            {
+                SubscribeToAnimatorObserver(grounded);
+            }         
+
+            player.animator.SetBool("IsAirborne", !grounded);
+            player.animator.SetBool("IsFalling", !grounded);
 
             if (
                 !player.Raycast(false, player.LadderLayer, Vector2.up * 0.4f, 0.01f, Vector2.up) && //, false, true) &&
