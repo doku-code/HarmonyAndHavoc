@@ -150,8 +150,9 @@ namespace AF
 
         [SerializeField] private int totalKills;
         public int TotalKills
-        { 
-            get { return totalKills;}             
+        {             
+            get { return totalKills;}
+            set { totalKills = value; }
         }
 
         [SerializeField] private int totalHeals;
