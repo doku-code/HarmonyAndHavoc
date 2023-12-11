@@ -1,4 +1,4 @@
-#define _DEBUG
+//#define _DEBUG
 
 using AF;
 using UnityEngine;

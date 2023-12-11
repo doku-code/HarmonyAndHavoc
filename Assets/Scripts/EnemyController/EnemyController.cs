@@ -113,7 +113,7 @@ namespace charles
 
         public bool TakeDamage(int damage, Vector2 pushDirection)
         {
-            Debug.Log($"Enemy taking damage");
+            //Debug.Log($"Enemy taking damage");
             if (currentHealth <= 0 || !canTakeDamage)
             {
                 return false;

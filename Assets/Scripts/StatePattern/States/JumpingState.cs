@@ -106,7 +106,7 @@ namespace JFM
                 return;
             }*/
 
-            Debug.Log($"totalForces={player.rb.totalForce} vel={player.rb.velocity}");
+            //Debug.Log($"totalForces={player.rb.totalForce} vel={player.rb.velocity}");
 
             nFrames++;
         }
