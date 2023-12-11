@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 654459837852979508}
   - component: {fileID: 6869342628956084989}
   - component: {fileID: 7388958670921499159}
-  - component: {fileID: 3533545198568730508}
   - component: {fileID: -3493954758978493800}
   - component: {fileID: 2512336722628578568}
   - component: {fileID: 2101421795954063744}
@@ -221,20 +220,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.25, y: 6.25}
   m_EdgeRadius: 0
---- !u!114 &3533545198568730508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7789302649102891911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 0}
 --- !u!114 &-3493954758978493800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +236,7 @@ MonoBehaviour:
   numberOfCoins: 20
   minForce: 100
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &2512336722628578568
 MonoBehaviour:
@@ -267,8 +253,12 @@ MonoBehaviour:
   maxHealth: 100
   attackDamage: 10
   knockBackImpulse: 0
-  knockBackInterval: 0.001
-  knockBackFriction: 5
+  knockBackDuration: 0.5
+  damageCooldown: 1.3
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &2101421795954063744
 MonoBehaviour:
   m_ObjectHideFlags: 0

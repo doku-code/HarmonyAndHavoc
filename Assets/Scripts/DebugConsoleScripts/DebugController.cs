@@ -203,8 +203,11 @@ namespace charles
 
         private void OnGUI()
         {
-            if (!showConsole) return;
-
+            if (!showConsole)
+            {
+                Time.timeScale = 1f;
+                return;
+            }
             float screenWidth = Screen.width;
             float screenHeight = Screen.height;
             float fontSize = Mathf.Min(screenWidth, screenHeight) * 0.03f;
@@ -212,6 +215,10 @@ namespace charles
 
             GUI.skin.textField.fontSize = (int)fontSize;
             GUI.skin.label.fontSize = (int)fontSize;
+           if(showConsole)
+            {
+                Time.timeScale = 0f;
+            }
 
             if (showHelp)
             {
@@ -238,7 +245,12 @@ namespace charles
 
             GUI.Box(new Rect(0, y, screenWidth, screenHeight * 0.05f), "");
             GUI.backgroundColor = new Color(0, 0, 0, 0);
+            GUI.SetNextControlName("DebugInput");
             input = GUI.TextField(new Rect(10f, y + screenHeight * 0.010f, screenWidth - 20f, screenHeight * 0.04f), input);
+            if (showConsole)
+            {
+                GUI.FocusControl("DebugInput");
+            }
         }
 
         private void HandleInput()
