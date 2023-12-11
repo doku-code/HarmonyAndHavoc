@@ -17242,6 +17242,7 @@ MonoBehaviour:
   goldForWeapon: 10
   questionIndex: 0
   typingSpeed: 0.08
+  numberOfTimeHealed: 0
 --- !u!1 &224933500
 GameObject:
   m_ObjectHideFlags: 0
@@ -27564,6 +27565,7 @@ MonoBehaviour:
   goldForWeapon: 10
   questionIndex: 0
   typingSpeed: 0.08
+  numberOfTimeHealed: 0
 --- !u!1 &453240229
 GameObject:
   m_ObjectHideFlags: 0
@@ -40207,6 +40209,7 @@ MonoBehaviour:
   goldForWeapon: 10
   questionIndex: 0
   typingSpeed: 0.08
+  numberOfTimeHealed: 0
 --- !u!1 &628711534
 GameObject:
   m_ObjectHideFlags: 0
@@ -83163,6 +83166,7 @@ MonoBehaviour:
   goldForWeapon: 10
   questionIndex: 0
   typingSpeed: 0.08
+  numberOfTimeHealed: 0
 --- !u!1 &1101098900
 GameObject:
   m_ObjectHideFlags: 0
@@ -294473,10 +294477,10 @@ MonoBehaviour:
   - B45CBA
   - 78287C
   gridGameObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 900790277}
+  - {fileID: 601218758}
+  - {fileID: 2122256313}
+  - {fileID: 787284581}
 --- !u!4 &1689277132
 Transform:
   m_ObjectHideFlags: 0
