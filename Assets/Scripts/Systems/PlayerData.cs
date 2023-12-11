@@ -154,6 +154,12 @@ namespace AF
             get { return totalKills;}             
         }
 
+        [SerializeField] private int totalHeals;
+        public int TotalHeals
+        {
+            get { return totalHeals; }
+        }
+
         public Knowledge GetKnowledgeByID(KnowledgeID id)
         {
             return EveryKnowledgeDictionary[id];
@@ -185,6 +191,7 @@ namespace AF
             ActualOrder = maxOrder;
             ActualChaos = maxChaos;
             totalKills = 0;
+            totalHeals = 0;
             totalGold = 0;
             Gold = 0;
             OrderFragments = 0;
@@ -217,6 +224,8 @@ namespace AF
         public void HealPlayer(int value)
         {
             ActualOrder = Mathf.Min(value + actualOrder, maxOrder);
+
+            totalHeals++;
 
             //OnOrderDelegate(value);
         }
