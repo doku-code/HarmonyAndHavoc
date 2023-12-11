@@ -1347,9 +1347,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AF.MainMenuManager, Assembly-CSharp
-        m_MethodName: OpenMainMenu
+      - m_Target: {fileID: 622016588}
+        m_TargetAssemblyTypeName: charles.EndingStats, Assembly-CSharp
+        m_MethodName: returnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1430,22 +1430,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
-  chaosLevel: {fileID: 1225895603}
-  enemyDeathCount: {fileID: 406483388}
-  goldCollected: {fileID: 8736247}
-  weaponUpgrade: {fileID: 1021897537}
-  armorUpgrade: {fileID: 181102121}
-  healAmount: {fileID: 1442425799}
-  video: {fileID: 0}
-  noChaos: {fileID: 0}
-  chaosOne: {fileID: 0}
-  chaosTwo: {fileID: 0}
-  chaosThree: {fileID: 0}
-  mp4Video: {fileID: 0}
-  noChaosRenderer: {fileID: 0}
-  chaosOneRenderer: {fileID: 0}
-  chaosTwoRenderer: {fileID: 0}
-  chaosThreeRenderer: {fileID: 0}
+  chaosLevel: {fileID: 1676624638}
+  enemyDeathCount: {fileID: 1592760924}
+  goldCollected: {fileID: 1099019285}
+  weaponUpgrade: {fileID: 321703496}
+  armorUpgrade: {fileID: 1997096598}
+  healAmount: {fileID: 1606948649}
+  video: {fileID: 1512686075}
+  noChaos: {fileID: 32900000, guid: 0ebe3b7c6352cef48b2393c00ba113a0, type: 3}
+  chaosOne: {fileID: 32900000, guid: 1c8c313eb10aa2f4c94d29bdf195679d, type: 3}
+  chaosTwo: {fileID: 32900000, guid: 56c6c0a1fb9440640a77658dac101241, type: 3}
+  chaosThree: {fileID: 32900000, guid: 1dbef079d74c8c641b9752a8c989dc9e, type: 3}
+  mp4Video: {fileID: 2016847271}
+  noChaosRenderer: {fileID: 8400000, guid: 47d30de7f507f5d489404713ea411cbd, type: 2}
+  chaosOneRenderer: {fileID: 8400000, guid: 90f677757ee55944fa196511d4e6b29c, type: 2}
+  chaosTwoRenderer: {fileID: 8400000, guid: 2996bed830bca6f4f875f69abc3b6390, type: 2}
+  chaosThreeRenderer: {fileID: 8400000, guid: 0b39b870958102f4f9adc4c8477357ff, type: 2}
 --- !u!114 &622016589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2006,9 +2006,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AF.MainMenuManager, Assembly-CSharp
-        m_MethodName: OpenMainMenu
+      - m_Target: {fileID: 1652956962}
+        m_TargetAssemblyTypeName: charles.EndingStats, Assembly-CSharp
+        m_MethodName: returnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3241,16 +3241,16 @@ MonoBehaviour:
   weaponUpgrade: {fileID: 321703496}
   armorUpgrade: {fileID: 1997096598}
   healAmount: {fileID: 1606948649}
-  video: {fileID: 0}
-  noChaos: {fileID: 0}
-  chaosOne: {fileID: 0}
-  chaosTwo: {fileID: 0}
-  chaosThree: {fileID: 0}
-  mp4Video: {fileID: 0}
-  noChaosRenderer: {fileID: 0}
-  chaosOneRenderer: {fileID: 0}
-  chaosTwoRenderer: {fileID: 0}
-  chaosThreeRenderer: {fileID: 0}
+  video: {fileID: 1512686075}
+  noChaos: {fileID: 32900000, guid: 0ebe3b7c6352cef48b2393c00ba113a0, type: 3}
+  chaosOne: {fileID: 32900000, guid: 1c8c313eb10aa2f4c94d29bdf195679d, type: 3}
+  chaosTwo: {fileID: 32900000, guid: 56c6c0a1fb9440640a77658dac101241, type: 3}
+  chaosThree: {fileID: 32900000, guid: 1dbef079d74c8c641b9752a8c989dc9e, type: 3}
+  mp4Video: {fileID: 2016847271}
+  noChaosRenderer: {fileID: 8400000, guid: 47d30de7f507f5d489404713ea411cbd, type: 2}
+  chaosOneRenderer: {fileID: 8400000, guid: 90f677757ee55944fa196511d4e6b29c, type: 2}
+  chaosTwoRenderer: {fileID: 8400000, guid: 2996bed830bca6f4f875f69abc3b6390, type: 2}
+  chaosThreeRenderer: {fileID: 8400000, guid: 0b39b870958102f4f9adc4c8477357ff, type: 2}
 --- !u!114 &1652956963
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using AF;
 using JFM;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -49,9 +50,7 @@ namespace charles
 
         private void SwitchVideoOnChaos()
         {
-            int chaosAmount = ChaosOrderSystem.Instance.ChaosAmount;
-
-            switch (chaosAmount)
+            switch (ChaosOrderSystem.Instance.ChaosAmount)
             {
                 case 0:
                     mp4Video.texture = noChaosRenderer;
@@ -74,6 +73,10 @@ namespace charles
                     video.targetTexture = chaosThreeRenderer;
                     break;
             }
+        }
+        public void returnToMainMenu()
+        {
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
         }
     }
 }
