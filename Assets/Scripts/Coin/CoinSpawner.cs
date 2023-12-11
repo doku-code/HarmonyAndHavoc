@@ -52,7 +52,7 @@ namespace charles
                 coinRigidbody.velocity = Vector2.zero;
                 coinRigidbody.AddForce(vForce, ForceMode2D.Impulse);
 
-                Debug.Log($"Testing coin spawning. i={i} vForce={vForce}");                
+                //Debug.Log($"Testing coin spawning. i={i} vForce={vForce}");                
 
                 if(SoundManager.Instance != null)
                 {

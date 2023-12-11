@@ -41,6 +41,11 @@ namespace JFM
         [SerializeField] private PlayerData playerData;        
 
         [SerializeField] private int chaosAmount;
+        public int ChaosAmount
+        {
+            get => chaosAmount;
+        }
+
         public static int maxChaosAmount = 4;
         private int previousChaosAmount;
 

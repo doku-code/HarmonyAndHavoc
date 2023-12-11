@@ -69,7 +69,7 @@ namespace AF
             get { return actualOrder;}
             
             // Todo: Limit actual order value
-            set { actualOrder = value; }
+            set { actualOrder = Mathf.Min(value, maxOrder); }
         }
 
         [SerializeField] private int maxOrder;
@@ -83,7 +83,7 @@ namespace AF
         public int ActualChaos         
         {
             get { return actualChaos;}
-            set { actualChaos = value; }
+            set { actualChaos = Mathf.Min(value, maxChaos); }
         }
 
         [SerializeField] private int maxChaos;

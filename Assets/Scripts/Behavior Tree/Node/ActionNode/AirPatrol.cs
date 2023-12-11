@@ -120,7 +120,9 @@ public class AirPatrol : ActionNode
             {
                 if (hit.collider.gameObject != npc)
                 {
+#if _DEBUG
                     Debug.Log($"hit={hit.collider.gameObject.name} hit.normal={hit.normal}");
+#endif
                     obstacleFound = true;
                     obstacleNormal = hit.normal;
                     /*Vector2 perpendicularDirection = Platformer2DUtilities.GetPerpendicularVector2(currentDirection);

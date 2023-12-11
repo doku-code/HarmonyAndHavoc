@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace JFM
@@ -147,39 +149,36 @@ namespace JFM
         }
 
         public static bool CheckForCollisions(Vector2 position,
-                                        float radius,
-                                        float upDistance,
-                                        float colliderYOffset,
-                                        int layerMask,
+                                        CapsuleCollider2D capsule,
+                                        int layerMask,                                        
                                         bool debug
                                       )
-        {
-            position += Vector2.up * colliderYOffset;
+        {         
+            float distance = capsule.size.y - capsule.size.x;
+            float radius = capsule.size.x / 2.0f;
+
+            position = position +
+                            Vector2.up * capsule.offset.y -
+                            Vector2.up * (capsule.size.y / 2.0f - radius) +
+                            Vector2.right * capsule.offset.x;
             
-            if (debug) { 
-                Debug.Log($"position={position} colliderYOffset ={colliderYOffset} upDistance={upDistance}");
+            if (debug)
+            {
+                Debug.Log($"position={position}");
             }
 
             RaycastHit2D collisionHit = Physics2D.CircleCast(
                 position,
                 radius,
                 Vector2.up,
-                upDistance,
+                distance,
                 layerMask
             );
             if (debug)
             {
-                Platformer2DUtilities.DebugDrawCircle(
-                    position,
-                    radius,
-                    Color.green
-                );
+                Platformer2DUtilities.DebugDrawCircle(position, radius, Color.yellow);
+                Platformer2DUtilities.DebugDrawCircle(position + Vector2.up * distance, radius, Color.yellow);
 
-                Platformer2DUtilities.DebugDrawCircle(
-                    position + Vector2.up * upDistance,
-                    radius,
-                    Color.green
-                );
                 //Debug.Break();
                 if (collisionHit.collider is not null)
                 {

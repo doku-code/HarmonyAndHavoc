@@ -541,7 +541,12 @@ namespace JFM
                                                                                        colliderOffset);
             //Debug.Log($"pushDirection={pushDirection} newPushDirection={newPushDirection}");
 
-            enemyController.TakeDamage(damage, newPushDirection.normalized);
+            if(enemyController.TakeDamage(damage, newPushDirection.normalized))
+            {
+                Debug.Log($"Killed an enemy.");
+
+                playerData.ActualOrder += enemyController.MaxHealth;
+            }
         }
 
         public bool GetKnowledgeTrigger(AvailableKnowledgePosition knowledgePosition)
@@ -712,7 +717,7 @@ namespace JFM
             Vector2 colliderOffset = cc.offset;
             //Vector2 colliderSize = cc.size;
 
-            return Raycast2DHelper.CheckForCollisions(rb.position, collisionCheckRadius, colliderSize.y, colliderOffset.y, groundLayer, false);
+            return Raycast2DHelper.CheckForCollisions(rb.position, cc, groundLayer, true);
         }
 
         public bool IsGroundedSlope()

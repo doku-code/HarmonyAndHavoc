@@ -46,7 +46,6 @@ namespace JFM
                 {                    
                     if (player.animator.GetCurrentAnimatorStateInfo(attackLayerIndex).IsName(name))
                     {
-                        Debug.Log($"{name} is found!");
                         SubscribeToAnimatorObserver(groundAttackAnimatorObserverName);
                         hasSubscribedToAnimatorObserver = true;
                         break;
@@ -57,10 +56,8 @@ namespace JFM
             {
                 foreach (string name in airAttackMotionNames)
                 {
-                    Debug.Log($"Searching {name}!");
                     if (player.animator.GetCurrentAnimatorStateInfo(attackLayerIndex).IsName(name))
                     {
-                        Debug.Log($"{name} is found!");
                         SubscribeToAnimatorObserver(airAttackAnimatorObserverName);
                         hasSubscribedToAnimatorObserver = true;
                         break;

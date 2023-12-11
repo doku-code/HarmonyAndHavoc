@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageBoost: 0
   ID: 4
-  chaosCost: 0
-  slotCost: 0
+  isUtility: 0
+  chaosCost: 35
+  slotCost: 5
   cooldown: 0
-  animatorLayer: 2
-  groundMotionName: Player_Attack_1
-  airMotionName: Player_Air_Attack_1
+  animatorObserverName: Attacks

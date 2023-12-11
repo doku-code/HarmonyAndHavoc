@@ -61,12 +61,14 @@ namespace JFM
                 //Debug.Log("Found a collision!");
                 //nFrames = 2;
             }
-
-            //Debug.Log($"nFrames={nFrames} collisionOverHead={collisionOverHead} currentCollisionOverHead={currentCollisionOverHead}");
+#if _DEBUG
+            Debug.Log($"nFrames={nFrames} collisionOverHead={collisionOverHead} currentCollisionOverHead={currentCollisionOverHead}");
+#endif
             if (nFrames >= minFrames && (collisionOverHead || !moving) && !currentCollisionOverHead)
             {
-
-                //Debug.Log($"GroundSlide end....idleFrames={idleFrames}");
+#if _DEBUG
+                Debug.Log($"GroundSlide end....idleFrames={idleFrames}");
+#endif
                 if (slideDirection.y != 0.0f && player.rb.velocity.y < -0.01f && !grounded)
                 {
                     player.StateMachine.ChangeState(player.States[PlayerState.STATE.AIRBORNE]);
