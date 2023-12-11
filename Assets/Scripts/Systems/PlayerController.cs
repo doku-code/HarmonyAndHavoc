@@ -41,9 +41,10 @@ namespace JFM
         [SerializeField] private int baseNumJumps = 1;
         [SerializeField] private float airAcceleration = 100.0f;
         [SerializeField] private float airSpeed = 2.0f;
+        [SerializeField] private bool canTakeFallDamage = false;
         [SerializeField] private float maxFallDamageHeight = 3.0f;
         [SerializeField] private float landingHeight = 2.0f;
-        [SerializeField] private float fallDamageMultiplier = 3.0f;
+        [SerializeField] private float fallDamageMultiplier = 3.0f;        
         private int currentFallDamage;
         [SerializeField] private float defaultGravityScale;
         [SerializeField] private float groundDistance = 1.0f;
@@ -428,10 +429,10 @@ namespace JFM
 
             return false;
         }
-
+       
         public void Land(bool takeDamage)
         {
-            if (takeDamage)
+            if (takeDamage && canTakeFallDamage)
             {
                 // Do fall damage here?
                 playerData.TakeDamage(currentFallDamage);
