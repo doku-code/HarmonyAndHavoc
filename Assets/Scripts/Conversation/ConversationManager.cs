@@ -52,7 +52,10 @@ namespace charles
         private void Start()
         {
             textComponent = questionCanvas.GetComponentInChildren<TMP_Text>();
-            LoadConversation(questionIndex);
+
+            // Why here? This method displays all the messages in the conversation at once in their
+            // respective TMP text property!?
+            // LoadConversation(questionIndex);
         }
 
         private void Update()
@@ -75,20 +78,19 @@ namespace charles
                 yield return new WaitUntil(() => buttonPressed);
 
                 questionIndex++;
-
             }
         }
 
         public IEnumerator DisplayMessage(string message)
-        {
+        {            
             isDisplayingMessage = true;
 
-            StringBuilder stringBuilder = new StringBuilder();
-
+            StringBuilder stringBuilder = new StringBuilder();         
             for (int i = 0; i < message.Length; i++)
             {
                 stringBuilder.Append(message[i]);
                 textComponent.text = stringBuilder.ToString();
+                
                 yield return new WaitForSeconds(typingSpeed);
             }
             textComponent.text = message;
