@@ -17,7 +17,10 @@ namespace JFM
         public string[] groundAttackMotionNames;
         private bool hasSubscribedToAnimatorObserver;
 
+        // Fail-safe to avoid being stuck when subscribing to the wrong state
         public string[] exitingMotionNames;
+        private int nFrames;
+        public int frameCountBeforeCanExitByMotionName = 2;
 
         public override void Enter()
         {
@@ -37,6 +40,8 @@ namespace JFM
             player.Attack();
 
             SubscribeToAnimatorObserver(!isAirborned);
+
+            nFrames = 0;
 
             base.Enter();
         }
@@ -91,14 +96,22 @@ namespace JFM
                 //player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
             }
 
-            foreach (string motionName in exitingMotionNames)
+            // Fail-safe to avoid being stuck when subscribing to the wrong state.
+            // Waiting nFrames prevents bailing out beforehand being already on "No Motion"
+            // motion.
+            if (nFrames >= frameCountBeforeCanExitByMotionName)
             {
-                if (player.animator.GetCurrentAnimatorStateInfo(animatorLayerIndex).IsName(motionName))
+                foreach (string motionName in exitingMotionNames)
                 {
-                    OnLeaveState();
-                    break;
+                    if (player.animator.GetCurrentAnimatorStateInfo(animatorLayerIndex).IsName(motionName))
+                    {
+                        OnLeaveState();
+                        return;
+                    }
                 }
             }
+
+            nFrames++;
         }
 
         public override void Exit()
