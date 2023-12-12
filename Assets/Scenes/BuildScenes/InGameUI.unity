@@ -1568,18 +1568,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 331427407110302178, guid: 1eee93169cba47e48977b210f96d6d90, type: 3}
-      propertyPath: m_VideoClip
-      value: 
-      objectReference: {fileID: 32900000, guid: e2d13f8c419f9a8488137908b0aebc3b, type: 3}
-    - target: {fileID: 741633910842729823, guid: 1eee93169cba47e48977b210f96d6d90, type: 3}
-      propertyPath: m_Texture
-      value: 
-      objectReference: {fileID: 8400000, guid: b8b5e941a7f58bd499dda7e59950cdb3, type: 2}
-    - target: {fileID: 1405219430108199218, guid: 1eee93169cba47e48977b210f96d6d90, type: 3}
-      propertyPath: m_text
-      value: Slide wall
-      objectReference: {fileID: 0}
     - target: {fileID: 6014024348584431991, guid: 1eee93169cba47e48977b210f96d6d90, type: 3}
       propertyPath: m_Name
       value: Slide_wall
@@ -1587,10 +1575,6 @@ PrefabInstance:
     - target: {fileID: 6014024348584431991, guid: 1eee93169cba47e48977b210f96d6d90, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7030892971178861426, guid: 1eee93169cba47e48977b210f96d6d90, type: 3}
-      propertyPath: m_text
-      value: You can slide wall to reach certain place.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4010,10 +3994,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 331427407110302178, guid: d0288f30748a1714a9e2374e6d1d9cc6, type: 3}
-      propertyPath: m_TargetTexture
-      value: 
-      objectReference: {fileID: 8400000, guid: 055a7348bbc48984d9db8a77d67103e9, type: 2}
     - target: {fileID: 6014024348584431991, guid: d0288f30748a1714a9e2374e6d1d9cc6, type: 3}
       propertyPath: m_Name
       value: Dash_Panel
@@ -4921,22 +4901,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 331427407110302178, guid: 6a691baf8423b29438b3abd4320ce94d, type: 3}
-      propertyPath: m_VideoClip
-      value: 
-      objectReference: {fileID: 32900000, guid: e383f83098a65ed4e98393694433e020, type: 3}
-    - target: {fileID: 331427407110302178, guid: 6a691baf8423b29438b3abd4320ce94d, type: 3}
-      propertyPath: m_TargetTexture
-      value: 
-      objectReference: {fileID: 8400000, guid: 0aae2c8555539904cb6a4af905d0e700, type: 2}
-    - target: {fileID: 741633910842729823, guid: 6a691baf8423b29438b3abd4320ce94d, type: 3}
-      propertyPath: m_Texture
-      value: 
-      objectReference: {fileID: 8400000, guid: 0aae2c8555539904cb6a4af905d0e700, type: 2}
-    - target: {fileID: 1405219430108199218, guid: 6a691baf8423b29438b3abd4320ce94d, type: 3}
-      propertyPath: m_text
-      value: Double jump
-      objectReference: {fileID: 0}
     - target: {fileID: 6014024348584431991, guid: 6a691baf8423b29438b3abd4320ce94d, type: 3}
       propertyPath: m_Name
       value: Double_Jump
@@ -4944,10 +4908,6 @@ PrefabInstance:
     - target: {fileID: 6014024348584431991, guid: 6a691baf8423b29438b3abd4320ce94d, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7030892971178861426, guid: 6a691baf8423b29438b3abd4320ce94d, type: 3}
-      propertyPath: m_text
-      value: You can make a double jump to reach higher place.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7689,6 +7649,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 331427407110302178, guid: d06bd40af8c768e46b42a285064f3a79, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: bfad8f788539091419717c512f751afa, type: 3}
     - target: {fileID: 6014024348584431991, guid: d06bd40af8c768e46b42a285064f3a79, type: 3}
       propertyPath: m_Name
       value: Rolling
