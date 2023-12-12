@@ -17,6 +17,7 @@ namespace JFM
         [SerializeField] private float minVelocity = 0.0005f;
         [SerializeField] private float maxVelocity = 5.0f;
         [SerializeField] private int minFrames = 5;
+        [SerializeField] private int maxIdleFrames = 4;
 
         private int idleFrames;
         private bool moving;
@@ -64,7 +65,7 @@ namespace JFM
 #if _DEBUG
             Debug.Log($"nFrames={nFrames} collisionOverHead={collisionOverHead} currentCollisionOverHead={currentCollisionOverHead}");
 #endif
-            if (nFrames >= minFrames && (collisionOverHead || !moving) && !currentCollisionOverHead)
+            if (nFrames >= minFrames && (collisionOverHead || !moving) && (!currentCollisionOverHead || idleFrames >= maxIdleFrames))
             {
 #if _DEBUG
                 Debug.Log($"GroundSlide end....idleFrames={idleFrames}");

@@ -27,6 +27,8 @@ namespace charles
         public bool IsDead { get => currentHealth <= 0; }
         public int MaxHealth { get => maxHealth; }
 
+        public ParametersLessDelegate OnDeadDelegate;
+
         public int AttackDamage
         {
             set => attackDamage = value;
@@ -154,16 +156,21 @@ namespace charles
             // Hide the UI (health bar)
             GetComponentInChildren<Canvas>().gameObject.SetActive(false);
 
-            CoinSpawner coinSpawner = GetComponent<CoinSpawner>();
-            coinSpawner.SpawnCoins();
-            
+            /*CoinSpawner coinSpawner = GetComponent<CoinSpawner>();
+            coinSpawner.SpawnCoins();*/
+
+            if (OnDeadDelegate is not null)
+            {
+                OnDeadDelegate();
+            }
+
             npcAnimator.SetTrigger("Death");
             StartCoroutine(DestroyAfterAnim());
         }
 
         private IEnumerator DestroyAfterAnim()
         {
-            yield return new WaitForSeconds(deathDuration);
+            yield return new WaitForSeconds(deathDuration);            
             gameObject.SetActive(false);
         }
 

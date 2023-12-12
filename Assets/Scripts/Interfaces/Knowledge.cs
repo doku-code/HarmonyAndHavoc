@@ -26,7 +26,7 @@ namespace AF
 
         public bool CanUse()
         {
-            return Time.time - activationTime >= cooldown;
+            return Time.time - activationTime >= cooldown && player.Data.ActualChaos >= chaosCost;
         }
 
         public void Use()
