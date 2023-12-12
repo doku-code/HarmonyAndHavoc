@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 20
+  numberOfCoins: 15
   minForce: 100
   maxForce: 150
   angleVariance: 30
@@ -250,15 +250,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
-  knockBackImpulse: 0
+  maxHealth: 30
+  attackDamage: 30
+  knockBackImpulse: 2
   knockBackDuration: 0.5
-  damageCooldown: 1.3
   deathDuration: 3
   tickInterval: 0.01
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  tree: {fileID: 11400000, guid: 18d0e2dcfd5442c4c957b4fa367b50e3, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &4184886249069148394
 MonoBehaviour:
   m_ObjectHideFlags: 0

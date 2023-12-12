@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 385583696819779983}
   - component: {fileID: 6468222234881983603}
   - component: {fileID: 6992088970029207480}
-  m_Layer: 0
+  - component: {fileID: 5729554208013187946}
+  m_Layer: 8
   m_Name: DarkKnight
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,9 +233,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 20
-  minForce: 100
-  maxForce: 150
+  numberOfCoins: 30
+  minForce: 2
+  maxForce: 5
   angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &6992088970029207480
@@ -249,15 +250,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
-  knockBackImpulse: 0
+  maxHealth: 24
+  attackDamage: 6
+  knockBackImpulse: 2
   knockBackDuration: 0.5
-  damageCooldown: 1.3
   deathDuration: 3
   tickInterval: 0.01
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  tree: {fileID: 11400000, guid: 596cce6ec421717489c56d97f10fbb19, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
+--- !u!114 &5729554208013187946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916055096298109937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 8036830219417508601}
 --- !u!1001 &2292221681911587732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266,9 +279,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 137113496597349427}
     m_Modifications:
+    - target: {fileID: 830106220857004453, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 900409348585197486, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1876031386845072779, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2669310596291767467, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4111949957502839374, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4229758479447274299, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Name
       value: Ennemy Health bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4229758479447274299, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Value
@@ -281,6 +318,10 @@ PrefabInstance:
     - target: {fileID: 8101720157146105950, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8354556803198035938, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
       propertyPath: m_Pivot.x
@@ -372,3 +413,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
   m_PrefabInstance: {fileID: 2292221681911587732}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8036830219417508601 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 2292221681911587732}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

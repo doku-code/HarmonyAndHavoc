@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: 7102874649931178669}
   - component: {fileID: -3487515393241271531}
   - component: {fileID: 572399140357376715}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Creature
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -172,8 +172,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.103155136, y: -0.18203735}
-  m_Size: {x: 1.237915, y: 1.7112122}
+  m_Offset: {x: -0.103155136, y: -0.14824295}
+  m_Size: {x: 1.237915, y: 1.6436234}
   m_Direction: 0
 --- !u!61 &7625923108501952319
 BoxCollider2D:
@@ -233,9 +233,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 20
-  minForce: 100
-  maxForce: 150
+  numberOfCoins: 3
+  minForce: 2
+  maxForce: 5
   angleVariance: 30
   spawnDelay: 0.1
 --- !u!114 &-3487515393241271531
@@ -250,15 +250,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27970246744e149815afd5bac08a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackDamage: 10
+  maxHealth: 10
+  attackDamage: 2
   knockBackImpulse: 0
   knockBackDuration: 0.5
-  damageCooldown: 1.3
   deathDuration: 3
   tickInterval: 0.01
-  tree: {fileID: 0}
-  blackboard: {fileID: 0}
+  tree: {fileID: 11400000, guid: 6c75dfc698a7b1242bdb5448bba665c1, type: 2}
+  blackboard: {fileID: 11400000, guid: 46822df5f1a9dcf498bf3fe91f4ff86b, type: 2}
 --- !u!114 &572399140357376715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122e4e28f1681824fb74ed2e139ee507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 0}
+  healthSlider: {fileID: 78634760631397233}
 --- !u!1001 &8165105412105179676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -377,6 +376,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+--- !u!114 &78634760631397233 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090459416736348525, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}
+  m_PrefabInstance: {fileID: 8165105412105179676}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &393085616984204510 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8369039775412172482, guid: 845c7d3c7fd9a6c48b4ce78b608d9627, type: 3}

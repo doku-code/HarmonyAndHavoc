@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8421530712381887247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47689c60fb5ba8e44922f0c535e55d02, type: 3}
+  m_Name: Attack
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: dd50da2f1e63360498e6c6917834faff
+  position: {x: 33, y: 672}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  attackCooldown: 3
+  attackDistance: 2
+  attackDamage: 25
+  detectionDistance: 4
+  detectForwardOnly: 1
+  leaveDistance: 5
+  attackAnimString: Combo1
+  attackClipName: Attack1
+  comboSoundIdx: 0
+  animatorLayer: 0
+  moveSpeed: 1000
+  maxSpeed: 2
+  holeDistance: {x: 1, y: 1.5}
+--- !u!114 &-3699512351861952237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc873a854b000144b392c20ae33d57b, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 6f506a2ab0d1f974ea0450decb7282ab
+  position: {x: 0, y: 0}
+  Description: 
+  child: {fileID: 3374381720642658304}
+--- !u!114 &-298296971772436585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11ad825274de034f83e98e4ae8e9640, type: 3}
+  m_Name: Patrol
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 3d679d781546b31468fcf5b7ed1b193d
+  position: {x: -169.7143, y: 669.71423}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  patrolRadius: 3
+  PatrolAnimString: Run
+  moveSpeed: 1000
+  maxSpeed: 2
+  distBeforeChanging: 1
+  obstacleDistance: 1.5
+  detectionDistance: 4
+  detectForwardOnly: 1
+  holeDistance: {x: 1, y: 1.5}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d52bd284d66f45409895549ec0dc050, type: 3}
+  m_Name: Ghost_Warrior_2
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: -3699512351861952237}
+  treeState: 0
+  nodes:
+  - {fileID: -3699512351861952237}
+  - {fileID: 3374381720642658304}
+  - {fileID: 6059960973641363223}
+  - {fileID: -8421530712381887247}
+  - {fileID: -298296971772436585}
+--- !u!114 &3374381720642658304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e22483f73a7cb48a1a8f0d2f066df6, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: cf729406e94ebd440b5774e36f99b022
+  position: {x: 0.7999878, y: 186}
+  Description: 
+  children:
+  - {fileID: 6059960973641363223}
+--- !u!114 &6059960973641363223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcddb15bcd2925f4887c696f4baa3c36, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 03b0c1a04614ac043b13c754822ed21d
+  position: {x: 0.2000122, y: 393.2}
+  Description: 
+  children:
+  - {fileID: -298296971772436585}
+  - {fileID: -8421530712381887247}
