@@ -9,8 +9,8 @@ namespace charles
         [SerializeField] private float AmountOfParallax;
         [SerializeField] private Camera MainCamera;
         [SerializeField] private bool activateYFollow;
-        [Min (0.01f)]
-        [SerializeField] private float yOffsetDelay = 0.5f; // Adjust this value for the desired Y offset delay
+
+        [SerializeField] private float yOffsetDelay = 0.0f;
 
         private void Start()
         {
