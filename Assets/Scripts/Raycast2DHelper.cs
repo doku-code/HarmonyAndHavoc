@@ -4,7 +4,10 @@ using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+#if UNITY_EDITOR
+
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+#endif
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace JFM

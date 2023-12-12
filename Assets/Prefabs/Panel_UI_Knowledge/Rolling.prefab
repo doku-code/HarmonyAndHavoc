@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can slide on  wall to reach certain place.
+  m_text: You can roll into small area
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ce034de9c1fb5949bd9a9da883e7bf4, type: 2}
   m_sharedMaterial: {fileID: -3359197029103750868, guid: 4ce034de9c1fb5949bd9a9da883e7bf4, type: 2}
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Slide on wall
+  m_text: Roll
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ce034de9c1fb5949bd9a9da883e7bf4, type: 2}
   m_sharedMaterial: {fileID: -3359197029103750868, guid: 4ce034de9c1fb5949bd9a9da883e7bf4, type: 2}
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 6606587576229381390}
   - component: {fileID: 8168751013403240053}
   m_Layer: 5
-  m_Name: Double_Jump
+  m_Name: Rolling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -547,7 +547,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: c05227aa9284b464594590c3357949cd, type: 2}
+  m_Texture: {fileID: 8400000, guid: 82a360b9cf2125e40b69ffb7083cced9, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -607,11 +607,11 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8026240042840422656}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 272a6eec0f7c72845a5d4779b8943a32, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: c7e36adfbd2d8724186e75f7d3090d8c, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 8400000, guid: c05227aa9284b464594590c3357949cd, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 82a360b9cf2125e40b69ffb7083cced9, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
