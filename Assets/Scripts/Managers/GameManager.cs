@@ -26,7 +26,10 @@ namespace AF
         [NonSerialized] public ParametersLessDelegate OnReadyToLoadMapDelegate;
         
         [SerializeField] public GameObject player;
-        
+
+        private string nextMapToLoad;
+        private SpawnerPosition nextSpawnPosition;
+
         public static GameManager Instance { get; private set; }
 
         void Awake()
@@ -70,8 +73,6 @@ namespace AF
             ));
         }
 
-        private string nextMapToLoad;
-        private SpawnerPosition nextSpawnPosition;
         public void LoadNextMap(string mapToLoad, SpawnerPosition spawnPosition)
         {
             nextMapToLoad = mapToLoad;
