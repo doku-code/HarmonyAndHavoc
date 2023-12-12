@@ -8822,8 +8822,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AF.MainMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 880611779}
+        m_TargetAssemblyTypeName: charles.PauseMenuManager, Assembly-CSharp
         m_MethodName: SetAmbientVolume
         m_Mode: 1
         m_Arguments:
@@ -10247,7 +10247,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 880611779}
+        m_TargetAssemblyTypeName: charles.PauseMenuManager, Assembly-CSharp
+        m_MethodName: ChangeWindowMode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0
 --- !u!222 &1343050251
 CanvasRenderer:
@@ -12642,8 +12654,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AF.MainMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 880611779}
+        m_TargetAssemblyTypeName: charles.PauseMenuManager, Assembly-CSharp
         m_MethodName: SetFXVolume
         m_Mode: 1
         m_Arguments:
@@ -14003,7 +14015,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 880611779}
+        m_TargetAssemblyTypeName: charles.PauseMenuManager, Assembly-CSharp
+        m_MethodName: ChangeWindowSize
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0
 --- !u!222 &1800672605
 CanvasRenderer:
@@ -16970,8 +16994,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AF.MainMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 880611779}
+        m_TargetAssemblyTypeName: charles.PauseMenuManager, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 1
         m_Arguments:
