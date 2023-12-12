@@ -5908,8 +5908,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -40.12295, y: 30.395699, z: 0}
-    m_Extent: {x: 65.065155, y: 13.0428, z: 0}
+    m_Center: {x: -40.12035, y: 30.4009, z: 0}
+    m_Extent: {x: 65.07735, y: 13.0338, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -26841,8 +26841,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1113657448}
-  - component: {fileID: 1113657447}
   - component: {fileID: 1113657446}
+  - component: {fileID: 1113657447}
   - component: {fileID: 1113657445}
   m_Layer: 0
   m_Name: Confiner
@@ -26903,7 +26903,7 @@ CompositeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113657444}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -26929,7 +26929,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -32223,8 +32223,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -40.1195, y: 30.388302, z: 0}
-    m_Extent: {x: 65.0675, y: 13.035001, z: 0}
+    m_Center: {x: -40.11385, y: 30.39215, z: 0}
+    m_Extent: {x: 65.06455, y: 13.028851, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -106034,8 +106034,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -40.12255, y: 30.396599, z: 0}
-    m_Extent: {x: 65.06585, y: 13.030399, z: 0}
+    m_Center: {x: -40.114, y: 30.392448, z: 0}
+    m_Extent: {x: 65.0683, y: 13.032649, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -106489,8 +106489,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -40.11675, y: 30.39095, z: 0}
-    m_Extent: {x: 65.06795, y: 13.02885, z: 0}
+    m_Center: {x: -40.1239, y: 30.395199, z: 0}
+    m_Extent: {x: 65.0675, y: 13.032001, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -107263,7 +107263,7 @@ Transform:
   m_GameObject: {fileID: 1760072147}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.762932, y: 16.654308, z: -10}
+  m_LocalPosition: {x: -11.762911, y: 9.96, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -108446,8 +108446,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -40.1255, y: 30.3953, z: 0}
-    m_Extent: {x: 65.0694, y: 13.0403, z: 0}
+    m_Center: {x: -40.1232, y: 30.394352, z: 0}
+    m_Extent: {x: 65.0666, y: 13.043851, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -109262,14 +109262,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2119880836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fba25a5cd15594e8f050a11e386c80, type: 3}
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ConfineMode: 0
-  m_BoundingVolume: {fileID: 0}
   m_BoundingShape2D: {fileID: 1113657446}
-  m_ConfineScreenEdges: 1
-  m_Damping: 0
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
 --- !u!1 &2122446520
 GameObject:
   m_ObjectHideFlags: 0
