@@ -15,6 +15,18 @@ namespace charles
         [SerializeField] private float angleVariance = 30.0f;
         [SerializeField] private float spawnDelay = 0.1f;
         
+        private void OnEnable()
+        {
+            EnemyController enemy = GetComponent<EnemyController>();
+            enemy.OnDeadDelegate += SpawnCoins;
+        }
+
+        private void OnDisable()
+        {
+            EnemyController enemy = GetComponent<EnemyController>();
+            enemy.OnDeadDelegate -= SpawnCoins;
+        }
+
         public void SpawnCoins()
         {            
             StartCoroutine(SpawnCoinsWithDelay());
