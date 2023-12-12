@@ -58,7 +58,7 @@ namespace AF
 
                 currentMap = nextMapToLoad;
 
-                if (nextMapToLoad != "MainMenu")
+                if (nextMapToLoad != "MainMenu" && nextMapToLoad != "Ending")
                 {
                     PlacePlayer(nextSpawnPosition);
                     LoadSceneMenu();

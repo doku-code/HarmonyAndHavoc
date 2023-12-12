@@ -117,7 +117,14 @@ namespace JFM
 
         private void OnPlayerDead()
         {
-            IncrementChaosLevel();
+            if (chaosAmount >= maxChaosAmount - 1)
+            {
+                GameManager.Instance.LoadNextMap("Ending", SpawnerPosition.BEGIN);
+            }
+            else
+            {
+                IncrementChaosLevel();
+            }
         }
 
         private void InitializeVariables()
