@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class OnBossKill : MonoBehaviour
 {
-    [SerializeField]private KnowledgeID knowledgeToDrop;
+    [SerializeField] private KnowledgeID knowledgeToDrop;
+    [SerializeField] private float waitDelay = 2.0f;
     private EnemyController controller;
-
 
     void Awake()
     {
@@ -23,11 +23,11 @@ public class OnBossKill : MonoBehaviour
 
     private IEnumerator OnKillCoroutine()
     {
+        yield return new WaitForSeconds(waitDelay);
+
         GameManager.Instance.player.GetComponent<PlayerController>()
             .Data.LearnKnowledge(knowledgeToDrop);
-        
-        yield return new WaitForSeconds(3.0f);
-        
+
         MapManager.Instance.UnlockDoor();
     }
 }

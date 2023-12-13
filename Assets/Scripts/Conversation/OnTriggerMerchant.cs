@@ -9,7 +9,6 @@ namespace charles
         [SerializeField] GameObject conversationPanel;
         [SerializeField] MerchantConversationManager merchant;
         private PlayerData data;
-        private Coroutine displayCoroutine;
         [SerializeField] private bool keepTriggerable = true;
 
         void Awake()
@@ -23,7 +22,7 @@ namespace charles
             {
                 conversationPanel.SetActive(true);
 
-                displayCoroutine = merchant.DisplayMerchantMessage(merchant.SellPitchMessage);
+                merchant.DisplayMerchantMessage(merchant.SellPitchMessage);
             }
         }
 
@@ -31,10 +30,7 @@ namespace charles
         {
             conversationPanel.SetActive(false);
 
-            if (displayCoroutine != null)
-            {
-                StopCoroutine(displayCoroutine);
-            }
+            merchant.StopMessage();
         }
     }
 }

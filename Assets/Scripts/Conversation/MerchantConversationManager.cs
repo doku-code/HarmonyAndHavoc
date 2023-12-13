@@ -76,6 +76,14 @@ namespace charles
             }
         }
 
+        public void StopMessage()
+        {
+            if (displayCoroutine != null)
+            {
+                StopCoroutine(displayCoroutine);
+            }
+        }
+
         public IEnumerator DisplayMessage(string message)
         {            
             isDisplayingMessage = true;
@@ -96,16 +104,14 @@ namespace charles
             timeSinceTypingEnded = 0f;
         }
 
-        public Coroutine DisplayMerchantMessage(MerchantMessage message)
-        {
-            Coroutine coroutine = null;
-
+        public void DisplayMerchantMessage(MerchantMessage message)
+        {           
             if(message.type == MerchantMessageType.SHOWITEMS
                 && (message.events.Length != answerButtons.Length 
                 || answerButtons.Length != Items.Length))
             {
                 Debug.LogError("Number of events, answer buttons and items must be equal for a message of type 'SHOWITEMS'!");
-                return coroutine;
+                return;
             }
 
             if (displayCoroutine != null)
@@ -118,8 +124,7 @@ namespace charles
             //textComponent.text = message.text;
 
             displayCoroutine = StartCoroutine(DisplayMessage(message.text));
-            coroutine = displayCoroutine;
-
+            
             DeactivateUnusedButtons(message);          
 
             for (int i = 0; i < message.events.Length; i++)
@@ -174,9 +179,7 @@ namespace charles
                         evt.Invoke(value); 
                     }
                 );
-            }            
-
-            return coroutine;
+            }                        
         }
 
         private void DeactivateUnusedButtons(MerchantMessage message)

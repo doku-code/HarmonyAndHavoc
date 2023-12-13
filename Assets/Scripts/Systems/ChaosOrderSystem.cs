@@ -174,7 +174,7 @@ namespace JFM
 
         private void ActivateGrids()
         {            
-            Debug.Log($"chaosAmount={chaosAmount}");
+            //Debug.Log($"chaosAmount={chaosAmount}");
 
             for (int i = 0; i < chaosAmount; i++)
             {
