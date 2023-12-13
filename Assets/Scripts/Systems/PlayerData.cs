@@ -27,7 +27,7 @@ namespace AF
     [CreateAssetMenu(fileName = "PlayerData", menuName = "PlayerData")]
     public class PlayerData : ScriptableObject
     {
-        public bool isWellQuestDone;
+        public delegate void KnowledgeIDParameterDelegate(KnowledgeID id);
         
         [SerializeField] private int orderUpgradeValue;
         public int OrderUpgradeValue
@@ -44,7 +44,9 @@ namespace AF
         }
 
         [SerializeField] private Knowledge[] knowledgeBank;
-
+        [SerializeField] public Sprite[] knowledgeImgBank;
+        
+        public KnowledgeIDParameterDelegate OnLearningKnowledge;
         public ParametersLessDelegate OnDeadDelegate;
         public IntegerParameterDelegate OnOrderDelegate;
         public IntegerParameterDelegate OnChaosDelegate;
@@ -213,10 +215,6 @@ namespace AF
             {
                 OnDeadDelegate();
             }
-            else
-            {
-                //OnOrderDelegate(-actualDmg);
-            }
         }
 
         public int GetPlayerDamage(Knowledge usedKnowledge)
@@ -231,8 +229,6 @@ namespace AF
             ActualOrder = Mathf.Min(value + actualOrder, maxOrder);
 
             totalHeals++;
-
-            //OnOrderDelegate(value);
         }
 
         public bool UseChaos(int value)
@@ -241,15 +237,16 @@ namespace AF
             {
                 ActualChaos -= value;
 
-                /*if (OnChaosDelegate is not null)
-                {
-                    OnChaosDelegate();
-                }*/
-
                 return true;
             }
 
             return false;
-        }        
+        }
+
+        public void LearnKnowledge(KnowledgeID id)
+        {
+            KnownKnowledgeDictionary[id] = true;
+            OnLearningKnowledge(id);
+        }
     }
 }

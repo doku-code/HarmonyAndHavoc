@@ -23,9 +23,11 @@ public class OnBossKill : MonoBehaviour
 
     private IEnumerator OnKillCoroutine()
     {
-        yield return new WaitForSeconds(3.0f);
-        MapManager.Instance.UnlockDoor();
         GameManager.Instance.player.GetComponent<PlayerController>()
-            .Data.KnownKnowledgeDictionary[knowledgeToDrop] = true;
+            .Data.LearnKnowledge(knowledgeToDrop);
+        
+        yield return new WaitForSeconds(3.0f);
+        
+        MapManager.Instance.UnlockDoor();
     }
 }
