@@ -78,6 +78,8 @@ namespace AF
             }
         }
 
+        [SerializeField] private const int initialMaxOrder = 200;
+
         [SerializeField] private int maxOrder;
         public int MaxOrder         
         {
@@ -103,8 +105,7 @@ namespace AF
         [SerializeField] private int maxChaos;
         public int MaxChaos         
         {
-            get { return maxChaos;}
-            set { maxChaos = value; }
+            get { return maxChaos;}            
         }
 
         [SerializeField] private int gold;
@@ -193,6 +194,7 @@ namespace AF
                 }
             }
 
+            maxOrder = initialMaxOrder;
             ActualOrder = maxOrder;
             ActualChaos = maxChaos;
             totalKills = 0;
