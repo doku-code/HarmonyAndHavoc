@@ -38,6 +38,9 @@ namespace charles
         [SerializeField] private int goldForHealing = 50;
         [SerializeField] private int goldForArmor = 10;
         [SerializeField] private int goldForWeapon = 10;
+        [SerializeField] private int priceIncrease = 10;
+        private int armorTotalInflation;
+        private int weaponTotalInflation;
 
         public int questionIndex = 0;
         [SerializeField] private float typingSpeed = 0.08f;
@@ -45,7 +48,6 @@ namespace charles
         private bool buttonPressed = false;
         private int currentUpgradePrice = 10;
         private bool wellsIsOpen = false;
-        public int numberOfTimeHealed;
         private bool isDisplayingMessage = false;
         private float timeSinceTypingEnded = 0f;
 
@@ -55,7 +57,7 @@ namespace charles
 
             // Why here? This method displays all the messages in the conversation at once in their
             // respective TMP text property!?
-            // LoadConversation(questionIndex);
+            // DisplayConversation(questionIndex);
         }
 
         private void Update()
@@ -100,8 +102,11 @@ namespace charles
             isDisplayingMessage = false;
             timeSinceTypingEnded = 0f;
         }
-        public void LoadConversation(int index)
+
+        public Coroutine DisplayConversation(int index)
         {
+            Coroutine coroutine = null;
+
             buttonPressed = false;
             if (index < Conversations.Length)
             {
@@ -109,7 +114,7 @@ namespace charles
 
                 textComponent.text = Conversations[index].questionText;
 
-                StartCoroutine(DisplayMessage(Conversations[index].questionText));
+                coroutine = StartCoroutine(DisplayMessage(Conversations[index].questionText));
 
                 for (int i = 0; i < 2; i++)
                 {
@@ -122,27 +127,30 @@ namespace charles
 
                         if (answers[i].includePrice)
                         {
-                            answerText += " - Price: $" + currentUpgradePrice;
+                            answerText += " - Price: $" + answers[i].price;
                         }
 
                         answerButton.GetComponentInChildren<TMP_Text>().text = answerText;
                     }
                 }
             }
+
+            return coroutine;
         }
+
         public void BlackSmithArmor()
         {
             if (pData.Gold >= goldForArmor)
             {
                 pData.Gold -= goldForArmor;
                 pData.ArmorUpgrade += 1;
-                goldForArmor += 10;
+                goldForArmor += priceIncrease;
 
-                LoadConversation(2);
+                DisplayConversation(2);
             }
             else
             {
-                LoadConversation(1);
+                DisplayConversation(1);
             }
             buttonPressed = true;
         }
@@ -153,35 +161,38 @@ namespace charles
             {
                 pData.Gold -= goldForWeapon;
                 pData.WeaponUpgrade += 1;
-                goldForWeapon += 10;
+                goldForWeapon += priceIncrease;
+                //weaponTotalInflation
 
-                LoadConversation(2);
+                DisplayConversation(2);
             }
             else
             {
-                LoadConversation(1);
+                DisplayConversation(1);
             }
             buttonPressed = true;
         }
 
         public void healThePlayer()
-        {
+        {            
             if (!isDisplayingMessage)
             {
                 if (pData.Gold >= goldForHealing && pData.ActualOrder < pData.MaxOrder)
                 {
+                    Debug.Log("HealThePlayer() actually healed the player.");
                     pData.HealPlayer(pData.MaxOrder);
-                    pData.Gold -= goldForHealing;
-                    numberOfTimeHealed += 1;
-                    LoadConversation(2);
+                    pData.Gold -= goldForHealing;                    
+                    DisplayConversation(2);
                 }
                 else if (pData.ActualOrder == pData.MaxOrder)
                 {
-                    LoadConversation(3);
+                    Debug.Log("HealThePlayer() pData.ActualOrder == pData.MaxOrder.");
+                    DisplayConversation(3);
                 }
                 else
                 {
-                    LoadConversation(1);
+                    Debug.Log("HealThePlayer() ...else");
+                    DisplayConversation(1);
                 }
 
                 buttonPressed = true;
@@ -189,17 +200,16 @@ namespace charles
         }
         public void GraveDigger()
         {
-            if (!wellsIsOpen)
-            {
+            /*if (!wellsIsOpen)
+            {*/
                 SoundManager.Instance.PlayFxClip(4);
                 MapManager.Instance.UnlockDoor();
-                wellsIsOpen = true;
-                GameManager.Instance.player.GetComponent<PlayerController>().Data.CurrentPlayerMapProgression[GameManager.Instance.currentMap] = true;
+                /*wellsIsOpen = true;                
             }
             else
             {
                 return;
-            }
+            }*/
         }
 
     }
