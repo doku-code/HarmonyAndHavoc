@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWellQuestDone: 0
   orderUpgradeValue: 25
-  playerBaseDamage: 1
+  playerBaseDamage: 3
   knowledgeBank:
   - {fileID: 11400000, guid: 87a8dd8f50806b7438786f5bb5eedd43, type: 2}
   - {fileID: 11400000, guid: 4c31d22e5839bb84d8753d62889b1b04, type: 2}
@@ -22,8 +22,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c53b854d66317474ab48c40e3747d57e, type: 2}
   - {fileID: 11400000, guid: 88556c138875f7047a6a2b2e1d16144a, type: 2}
   knowledgeSlots: 4
-  actualOrder: 100
-  maxOrder: 100
+  actualOrder: 200
+  maxOrder: 200
   actualChaos: 50
   maxChaos: 50
   gold: 0

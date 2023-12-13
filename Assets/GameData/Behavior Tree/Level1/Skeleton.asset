@@ -20,7 +20,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: 
   attackCooldown: 2
   attackDistance: 2
   attackDamage: 10
@@ -72,10 +71,9 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: 
   patrolRadius: 3
   PatrolAnimString: Run
-  moveSpeed: 1000
+  moveSpeed: 500
   maxSpeed: 2
   distBeforeChanging: 1
   obstacleDistance: 1.5
@@ -163,7 +161,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: 
   attackCooldown: 2
   attackDistance: 2
   attackDamage: 15
