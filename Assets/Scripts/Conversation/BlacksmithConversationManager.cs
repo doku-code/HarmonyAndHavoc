@@ -10,13 +10,13 @@ public class BlacksmithConversationManager : MerchantConversationManager
         switch(itemIndex)
         {
             case 0:
-                pData.ArmorUpgrade += 1;
+                pData.WeaponUpgrade += 1;
 
                 break;
 
             case 1:
 
-                pData.WeaponUpgrade += 1;
+                pData.ArmorUpgrade += 1;
                 break;
         }
     }
