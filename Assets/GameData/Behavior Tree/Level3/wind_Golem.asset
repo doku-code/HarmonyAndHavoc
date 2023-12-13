@@ -15,17 +15,18 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: fdf1bb95230476b40a317ef3f0c12e24
-  position: {x: -46.857117, y: 596}
+  position: {x: 31, y: 594}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  gameobjNpcName: 
   patrolRadius: 3
   attackCooldown: 1.5
   attackDistance: 1.5
   attackDamage: 1
   detectionDistance: 7
-  detectForwardOnly: 0
+  detectForwardOnly: 1
   leaveDistance: 8
   attackAnimString: Combo1
   attackClipName: Attack1
@@ -49,7 +50,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d52bd284d66f45409895549ec0dc050, type: 3}
-  m_Name: Ghost_Warrior
+  m_Name: wind_Golem
   m_EditorClassIdentifier: 
   rootNode: {fileID: 8090439598431157965}
   treeState: 0
@@ -79,6 +80,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  gameobjNpcName: 
   patrolRadius: 3
   PatrolAnimString: Run
   moveSpeed: 1000
@@ -86,7 +88,7 @@ MonoBehaviour:
   distBeforeChanging: 0.5
   obstacleDistance: 0.03
   detectionDistance: 7
-  detectForwardOnly: 0
+  detectForwardOnly: 1
   angleMaxDeviance: 0.01
   playerForgetDuration: 2
   minDistanceForNextPosition: 1.5

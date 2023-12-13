@@ -20,6 +20,8 @@ MonoBehaviour:
   children:
   - {fileID: 5369991617934305317}
   - {fileID: -873587940592716855}
+  - {fileID: 8312194035324035402}
+  - {fileID: 4735816726435342317}
 --- !u!114 &-873587940592716855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,19 +37,19 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 2157c62360b3f9d48b19248313459256
-  position: {x: 137.8608, y: 573.5019}
+  position: {x: 36.714294, y: 575.4285}
   Description: 
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   attackCooldown: 1.5
-  attackDistance: 1.5
-  attackDamage: 1
+  attackDistance: 2
+  attackDamage: 20
   detectionDistance: 3
   detectForwardOnly: 1
   leaveDistance: 5
-  attackAnimString: 
-  attackClipName: 
+  attackAnimString: Combo1
+  attackClipName: Attack1
   comboSoundIdx: 0
   animatorLayer: 0
   moveSpeed: 1000
@@ -92,6 +94,41 @@ MonoBehaviour:
   - {fileID: -8775744314945147007}
   - {fileID: -873587940592716855}
   - {fileID: 5369991617934305317}
+  - {fileID: 8312194035324035402}
+  - {fileID: 4735816726435342317}
+--- !u!114 &4735816726435342317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47689c60fb5ba8e44922f0c535e55d02, type: 3}
+  m_Name: Attack
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 87c8844ed4c286a458e3fa2b80623ece
+  position: {x: 336, y: 575.4285}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  attackCooldown: 1.5
+  attackDistance: 3
+  attackDamage: 30
+  detectionDistance: 3
+  detectForwardOnly: 1
+  leaveDistance: 5
+  attackAnimString: Combo3
+  attackClipName: Attack3
+  comboSoundIdx: 0
+  animatorLayer: 0
+  moveSpeed: 1000
+  maxSpeed: 2
+  holeDistance: {x: 1, y: 1.5}
 --- !u!114 &5369991617934305317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,11 +144,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 073a6d92f7b0eb74093a02e3dc13bb2f
-  position: {x: -122.43059, y: 575.42303}
+  position: {x: -113.714355, y: 574.8571}
   Description: 
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   patrolRadius: 3
   PatrolAnimString: Run
   moveSpeed: 1000
@@ -120,6 +157,39 @@ MonoBehaviour:
   obstacleDistance: 1.5
   detectionDistance: 3
   detectForwardOnly: 1
+  holeDistance: {x: 1, y: 1.5}
+--- !u!114 &8312194035324035402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47689c60fb5ba8e44922f0c535e55d02, type: 3}
+  m_Name: Attack
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: ee1fa645f4f21444695ccd4ed89d69ca
+  position: {x: 186.2857, y: 575.4285}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  attackCooldown: 1.5
+  attackDistance: 2
+  attackDamage: 22
+  detectionDistance: 3
+  detectForwardOnly: 1
+  leaveDistance: 5
+  attackAnimString: Combo1
+  attackClipName: Attack1
+  comboSoundIdx: 0
+  animatorLayer: 0
+  moveSpeed: 1000
+  maxSpeed: 2
   holeDistance: {x: 1, y: 1.5}
 --- !u!114 &8701698634258854972
 MonoBehaviour:
