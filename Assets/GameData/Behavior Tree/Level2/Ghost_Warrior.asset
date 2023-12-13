@@ -15,7 +15,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: fdf1bb95230476b40a317ef3f0c12e24
-  position: {x: -46.857117, y: 596}
+  position: {x: 74.285706, y: 593}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -59,6 +59,7 @@ MonoBehaviour:
   - {fileID: 2299061114749337135}
   - {fileID: 1289724694935706136}
   - {fileID: -2713852071079558149}
+  - {fileID: 2467904846967704362}
 --- !u!114 &1289724694935706136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,7 +75,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f494320cb97792e41a1e1f6d41c01178
-  position: {x: -197, y: 596}
+  position: {x: -76.00006, y: 593}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -107,11 +108,43 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 385e90386515a3847ac810ba882793f4
-  position: {x: -1, y: 371}
+  position: {x: -1.1428223, y: 364.85715}
   Description: 
   children:
-  - {fileID: 1289724694935706136}
+  - {fileID: 2467904846967704362}
   - {fileID: -2713852071079558149}
+--- !u!114 &2467904846967704362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59494be34770fd4b8486babe3b65c8d, type: 3}
+  m_Name: FollowPlayer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 00e2c14ede0a03d46b897bc8acf33cbb
+  position: {x: -217.42859, y: 629.1428}
+  Description: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  runAnimString: Run
+  followDistanceX: 0.2
+  followDistanceY: 0.2
+  maxDistance: 2
+  followSpeedX: 250
+  followSpeedY: 150
+  followOnY: 1
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  distanceOffset: 1
+  stoppingDistance: 0.1
 --- !u!114 &2838549528837533932
 MonoBehaviour:
   m_ObjectHideFlags: 0
