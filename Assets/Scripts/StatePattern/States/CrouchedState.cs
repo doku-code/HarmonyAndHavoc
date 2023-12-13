@@ -72,6 +72,7 @@ namespace JFM
 
             // Stop the player
             player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
+            player.rb.totalForce = Vector2.zero;
         }
 
         public override void Exit()
