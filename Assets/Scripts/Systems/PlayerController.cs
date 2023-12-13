@@ -918,15 +918,15 @@ namespace JFM
             SetBeneathObjectInfo();
 
             stateMachine.Update();           
-        }       
-        
+        }
+
         private void InitializeKnowledges()
         {
             foreach (var knowledge in playerData.EveryKnowledgeDictionary)
             {
                 knowledge.Value.Initialize(this);
             }
-            
+
             playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
             //playerData.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = true;
             //playerData.KnownKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = true;
@@ -944,11 +944,20 @@ namespace JFM
             //playerData.GetKnowledgeByID(KnowledgeID.WALL_SLIDE).Activate();
             //playerData.GetKnowledgeByID(KnowledgeID.DOUBLE_JUMP).Activate();
             //playerData.GetKnowledgeByID(KnowledgeID.GROUND_SLIDE).Activate();
-            
+
             //playerData.GetKnowledgeByID(KnowledgeID.COMBO_ATTACK).Activate();
             //playerData.GetKnowledgeByID(KnowledgeID.AOE_ATTACK).Activate();            
-        }
 
+            // Re-activate equipped knowledges
+            foreach (var knowledge in playerData.EveryKnowledgeDictionary)
+            {
+                if (playerData.AvailableKnowledgeDictionary[knowledge.Key] 
+                    != AvailableKnowledgePosition.NOT_AVAILABLE)
+                {
+                    knowledge.Value.Activate();
+                }
+            }
+        }
         private void InputSetup()
         {
             SetInputDictionnary();
