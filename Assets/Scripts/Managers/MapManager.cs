@@ -38,6 +38,9 @@ namespace AF
         public void UnlockDoor()
         {
             doorToNextLevel.SetActive(false);
+            
+            GameManager.Instance.player.GetComponent<PlayerController>().Data
+                .CurrentPlayerMapProgression[GameManager.Instance.currentMap] = true;
         }
     }
 }
