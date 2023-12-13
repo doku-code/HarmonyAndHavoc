@@ -18,7 +18,7 @@ public class OnBossKill : MonoBehaviour
 
     private void OnKill()
     {
-        StopCoroutine(OnKillCoroutine());
+        StartCoroutine(OnKillCoroutine());
     }
 
     private IEnumerator OnKillCoroutine()
