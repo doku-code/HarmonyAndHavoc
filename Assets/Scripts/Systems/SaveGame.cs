@@ -90,9 +90,7 @@ namespace JFM
             playerData.KnowledgeSlots = knowledgeSlots;
 
             playerData.ActualOrder = actualOrder;
-            playerData.MaxChaos = maxChaos;
-            playerData.ActualOrder = actualOrder;
-            playerData.MaxChaos = maxChaos;
+            //playerData.MaxChaos = maxChaos;
 
             playerData.Gold = gold;
 

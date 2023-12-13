@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace charles
 {
-    public class OnTriggerConversation : MonoBehaviour
+    public class OnTriggerMerchant : MonoBehaviour
     {
         [SerializeField] GameObject conversationPanel;
-        [SerializeField] ConversationManager questionIdx;
+        [SerializeField] MerchantConversationManager questionIdx;
         private PlayerData data;
         private Coroutine displayCoroutine;
         [SerializeField] private bool keepTriggerable = true;
@@ -23,19 +23,19 @@ namespace charles
             {
                 conversationPanel.SetActive(true);
 
-                /*if (questionIdx.Conversations.Length > 0)
+                /*if (questionIdx.Messages.Length > 0)
                 {
                     if (displayCoroutine != null)
                     {
                         StopCoroutine(displayCoroutine);
                     }
-                    displayCoroutine = StartCoroutine(questionIdx.DisplayMessage(questionIdx.Conversations[0].questionText));
+                    displayCoroutine = StartCoroutine(questionIdx.DisplayMessage(questionIdx.Messages[0].messageText));
                 }*/
                 if (displayCoroutine != null)
                 {
                     StopCoroutine(displayCoroutine);
                 }
-                displayCoroutine = questionIdx.DisplayConversation(0);
+                displayCoroutine = questionIdx.DisplayMerchantMessage(questionIdx.SellPitchMessage);
             }
         }
 
@@ -46,10 +46,6 @@ namespace charles
             if (displayCoroutine != null)
             {
                 StopCoroutine(displayCoroutine);
-            }
-            if (questionIdx.Conversations.Length > 0)
-            {  
-                questionIdx.questionIndex = 0;
             }
         }
     }

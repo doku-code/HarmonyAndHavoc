@@ -23,7 +23,6 @@ namespace charles
         public static DebugCommand<int> ACTUALORDER;
         public static DebugCommand<int> ACTUALCHAOS;
         public static DebugCommand<int> MAXORDER;
-        public static DebugCommand<int> MAXCHAOS;
         public static DebugCommand<int> GOLD;
         public static DebugCommand<int> ORDERFRAGMENTS;
         public static DebugCommand<int> WEAPONUPGRADE;
@@ -78,10 +77,6 @@ namespace charles
             {
                 playerData.MaxOrder = x;
             });
-            MAXCHAOS = new DebugCommand<int>("maxchaos", "Add max Chaos", "maxchaos", (x) =>
-            {
-                playerData.MaxChaos = x;
-            });
             ORDERFRAGMENTS = new DebugCommand<int>("orderfragments", "Add order Fragments", "orderfragments", (x) =>
             {
                 playerData.OrderFragments = x;
@@ -122,8 +117,7 @@ namespace charles
                 KNOWLEDGESLOT,
                 ACTUALORDER,
                 ACTUALCHAOS,
-                MAXORDER,
-                MAXCHAOS,
+                MAXORDER,                
                 GOLD,
                 ORDERFRAGMENTS,
                 WEAPONUPGRADE,
