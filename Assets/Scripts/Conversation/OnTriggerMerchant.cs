@@ -7,7 +7,7 @@ namespace charles
     public class OnTriggerMerchant : MonoBehaviour
     {
         [SerializeField] GameObject conversationPanel;
-        [SerializeField] MerchantConversationManager questionIdx;
+        [SerializeField] MerchantConversationManager merchant;
         private PlayerData data;
         private Coroutine displayCoroutine;
         [SerializeField] private bool keepTriggerable = true;
@@ -23,19 +23,7 @@ namespace charles
             {
                 conversationPanel.SetActive(true);
 
-                /*if (questionIdx.Messages.Length > 0)
-                {
-                    if (displayCoroutine != null)
-                    {
-                        StopCoroutine(displayCoroutine);
-                    }
-                    displayCoroutine = StartCoroutine(questionIdx.DisplayMessage(questionIdx.Messages[0].messageText));
-                }*/
-                if (displayCoroutine != null)
-                {
-                    StopCoroutine(displayCoroutine);
-                }
-                displayCoroutine = questionIdx.DisplayMerchantMessage(questionIdx.SellPitchMessage);
+                displayCoroutine = merchant.DisplayMerchantMessage(merchant.SellPitchMessage);
             }
         }
 

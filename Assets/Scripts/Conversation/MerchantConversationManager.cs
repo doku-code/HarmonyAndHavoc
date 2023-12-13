@@ -13,7 +13,7 @@ namespace charles
     public enum MerchantMessageType
     {
         NOBUTTONS,
-        SHOWPRICES,
+        SHOWITEMS,
         OKONLY,
         YESNO
     }
@@ -55,9 +55,8 @@ namespace charles
         [SerializeField] private Button[] answerButtons;        
 
         [SerializeField] private int priceIncrease = 10;
-
-        public int questionIndex = 0;
         [SerializeField] private float typingSpeed = 0.08f;
+        
         private TMP_Text textComponent;
         private bool buttonPressed = false;
         private bool isDisplayingMessage = false;
@@ -67,10 +66,6 @@ namespace charles
         private void Start()
         {
             textComponent = questionCanvas.GetComponentInChildren<TMP_Text>();
-
-            // Why here? This method displays all the messages in the conversation at once in their
-            // respective TMP text property!?
-            // DisplayConversation(questionIndex);
         }
 
         private void Update()
@@ -105,12 +100,13 @@ namespace charles
         {
             Coroutine coroutine = null;
 
-            /*if(message.events.Length != answerButtons.Length 
-                || answerButtons.Length != Items.Length)
+            if(message.type == MerchantMessageType.SHOWITEMS
+                && (message.events.Length != answerButtons.Length 
+                || answerButtons.Length != Items.Length))
             {
-                Debug.LogError("Number of events, answer buttons and items must be equal!");
+                Debug.LogError("Number of events, answer buttons and items must be equal for a message of type 'SHOWITEMS'!");
                 return coroutine;
-            }*/
+            }
 
             if (displayCoroutine != null)
             {
@@ -122,6 +118,7 @@ namespace charles
             //textComponent.text = message.text;
 
             displayCoroutine = StartCoroutine(DisplayMessage(message.text));
+            coroutine = displayCoroutine;
 
             DeactivateUnusedButtons(message);          
 
@@ -145,7 +142,7 @@ namespace charles
 
                 switch (message.type)
                 {
-                    case MerchantMessageType.SHOWPRICES:
+                    case MerchantMessageType.SHOWITEMS:
                         if (i < Items.Length)
                         {
                             MerchantItem item = Items[i];

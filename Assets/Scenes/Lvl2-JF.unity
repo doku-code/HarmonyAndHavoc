@@ -38257,8 +38257,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.5787003, y: -0.23374999, z: 0}
-    m_Extent: {x: 9.3844, y: 1.56695, z: 0}
+    m_Center: {x: 2.5762498, y: -0.23095, z: 0}
+    m_Extent: {x: 9.39045, y: 1.56045, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -45354,7 +45354,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &498163628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45367,8 +45367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: aefb3bcc6cec8c047b684333418fa2c4, type: 2}
 --- !u!70 &498163629
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -45579,7 +45577,11 @@ MonoBehaviour:
   maxHealth: 100
   attackDamage: 10
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &498163636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45596,6 +45598,7 @@ MonoBehaviour:
   numberOfCoins: 20
   minForce: 100
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!1 &508404086
 GameObject:
@@ -50212,8 +50215,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 14.3804, y: 2.6918998, z: 0}
-    m_Extent: {x: 22.0617, y: 5.1078, z: 0}
+    m_Center: {x: 14.38455, y: 2.6859498, z: 0}
+    m_Extent: {x: 22.05305, y: 5.11135, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -123592,7 +123595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1398941869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123605,8 +123608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 71108c7653e51f64397d336da123c560, type: 2}
 --- !u!50 &1398941870
 Rigidbody2D:
   serializedVersion: 4
@@ -123772,7 +123773,11 @@ MonoBehaviour:
   maxHealth: 100
   attackDamage: 10
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!61 &1398941876
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -123834,6 +123839,7 @@ MonoBehaviour:
   numberOfCoins: 20
   minForce: 100
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!1 &1403753061
 GameObject:
@@ -123919,28 +123925,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1408429749 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9125858477312548240, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
-  m_PrefabInstance: {fileID: 2446853775206420874}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1408429758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1408429749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fa71ca3f6c09c445b66d945594c1f33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 867058785333767718, guid: 63b527e02f95fd84884b7d2eef3981ee, type: 3}
-  numberOfCoins: 5
-  minForce: 300
-  maxForce: 600
-  spawnDelay: 0.2
 --- !u!1 &1425568354
 GameObject:
   m_ObjectHideFlags: 0
@@ -125803,7 +125787,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1588325937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125816,8 +125800,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a99fb6788e4b746bcccbd956e978c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickInterval: 0
-  tree: {fileID: 11400000, guid: 6fcb63807325abc4897b65093ad5eb19, type: 2}
 --- !u!70 &1588325938
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -126028,7 +126010,11 @@ MonoBehaviour:
   maxHealth: 100
   attackDamage: 10
   knockBackImpulse: 0
-  knockBackInterval: 0.001
+  knockBackDuration: 0.5
+  deathDuration: 3
+  tickInterval: 0.01
+  tree: {fileID: 0}
+  blackboard: {fileID: 0}
 --- !u!114 &1588325945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126045,6 +126031,7 @@ MonoBehaviour:
   numberOfCoins: 20
   minForce: 100
   maxForce: 150
+  angleVariance: 30
   spawnDelay: 0.1
 --- !u!1 &1591980596
 GameObject:
@@ -136326,6 +136313,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DarkKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 1916055096298109937, guid: 5286af92ef80838458203443a74ac32e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5867942646594363380, guid: 5286af92ef80838458203443a74ac32e, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
       value: 0.4615385
@@ -136352,11 +136343,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8043583929058929610, guid: 5286af92ef80838458203443a74ac32e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8043583929058929610, guid: 5286af92ef80838458203443a74ac32e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -136387,6 +136378,7 @@ MonoBehaviour:
   numberOfCoins: 20
   minForce: 300
   maxForce: 600
+  angleVariance: 30
   spawnDelay: 0.2
 --- !u!4 &353716591063399753
 Transform:
@@ -136476,6 +136468,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2281428959766015154, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: tree
+      value: 
+      objectReference: {fileID: 11400000, guid: a3489f9cadc6ce145bdc5c3ccb365aac, type: 2}
+    - target: {fileID: 2281428959766015154, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3171951329780551718, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.91
@@ -136540,6 +136540,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4262879904610639741, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: maxForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262879904610639741, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
+      propertyPath: minForce
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8000035976008550848, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
       propertyPath: maxForce
       value: 150
@@ -136559,10 +136567,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9125858477312548240, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1408429758}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03abda67aa3e26243b7cc29d85a2304e, type: 3}
 --- !u!212 &2618951601284857769
 SpriteRenderer:
@@ -136785,6 +136790,9 @@ MonoBehaviour:
   despawnerEnd: {fileID: 4257967322214617108}
   spawnerBegin: {fileID: 214045964021653806}
   spawnerEnd: {fileID: 8666347694381761600}
+  savingSpot: {fileID: 0}
+  levelAudio: {fileID: 0}
+  doorToNextLevel: {fileID: 0}
 --- !u!114 &3096786438778652990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136969,7 +136977,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c79253a55cf0c540987bc0a82461022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapManager: {fileID: 2992782726254484705}
   spawnerPosition: 1
 --- !u!4 &4441767478149365299
 Transform:
@@ -137651,7 +137658,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c79253a55cf0c540987bc0a82461022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapManager: {fileID: 2992782726254484705}
   spawnerPosition: 0
 --- !u!1 &6956104303316585497
 GameObject:
@@ -137865,15 +137871,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8252293517995306616, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8252293517995306616, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8838496778720078665, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
       propertyPath: m_Name
       value: Ghost_Warrior_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838496778720078665, guid: c0ba6cdd0972c2c468ea5da8446ad856, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -137904,6 +137914,7 @@ MonoBehaviour:
   numberOfCoins: 20
   minForce: 300
   maxForce: 600
+  angleVariance: 30
   spawnDelay: 0.2
 --- !u!1 &7926377196802219015
 GameObject:

@@ -17218,31 +17218,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 220606630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d865e667da21b444b62fd92314b3018, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e5f56a47299b6b4eb807cc958fcef98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Conversations:
-  - questionText: 'Hi, I can heal you for 50 Gold. '
-    answers:
-    - answerText: Heal
-      price: 50
-      includePrice: 1
-  - questionText: You don't have enough please come back later.
-    answers: []
-  - questionText: Thank you so much for the purchase!
-    answers: []
-  - questionText: 'You are already feeling well. '
-    answers: []
+  SellPitchMessage:
+    text: Hi, I can heal you for 50 Gold.
+    events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 220606635}
+          m_TargetAssemblyTypeName: charles.MerchantConversationManager, Assembly-CSharp
+          m_MethodName: SellItem
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      value: 0
+    type: 1
+  NotEnoughMoneyMessage:
+    text: You don't have enough please come back later.
+    events: []
+    type: 0
+  AlreadyFullMessage:
+    text: You are already feeling well.
+    events: []
+    type: 0
+  ThankYouMessage:
+    text: Thank you so much for the purchase!
+    events: []
+    type: 0
+  Items:
+  - label: Heal
+    price: 50
   questionCanvas: {fileID: 510750337}
   pData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
-  firstAnswerButton: {fileID: 510750336}
-  secondAnswerButton: {fileID: 0}
-  goldForHealing: 50
-  goldForArmor: 10
-  goldForWeapon: 10
-  questionIndex: 0
+  answerButtons:
+  - {fileID: 510750336}
+  priceIncrease: 10
   typingSpeed: 0.08
-  numberOfTimeHealed: 0
 --- !u!1 &224933500
 GameObject:
   m_ObjectHideFlags: 0
@@ -22137,21 +22155,45 @@ PrefabInstance:
     - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: questionIdx
       value: 
-      objectReference: {fileID: 628576837}
+      objectReference: {fileID: 0}
     - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: conversationPanel
       value: 
       objectReference: {fileID: 841940367}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6041548899316055027, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 292292942}
   m_SourcePrefab: {fileID: 100100000, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
 --- !u!4 &292292940 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3340638572530406421, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
   m_PrefabInstance: {fileID: 292292939}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &292292941 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6041548899316055027, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
+  m_PrefabInstance: {fileID: 292292939}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &292292942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292292941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75908d905ba2d9d499233ab25c978726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conversationPanel: {fileID: 841940367}
+  merchant: {fileID: 628576837}
+  keepTriggerable: 1
 --- !u!1 &308138681
 GameObject:
   m_ObjectHideFlags: 0
@@ -27563,9 +27605,9 @@ MonoBehaviour:
   goldForHealing: 50
   goldForArmor: 10
   goldForWeapon: 10
+  priceIncrease: 10
   questionIndex: 0
   typingSpeed: 0.08
-  numberOfTimeHealed: 0
 --- !u!1 &453240229
 GameObject:
   m_ObjectHideFlags: 0
@@ -28095,7 +28137,7 @@ PrefabInstance:
     - target: {fileID: 4125121077574616502, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 220606635}
+      objectReference: {fileID: 0}
     - target: {fileID: 4125121077574616502, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 1
@@ -40183,33 +40225,68 @@ MonoBehaviour:
   m_GameObject: {fileID: 628576832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d865e667da21b444b62fd92314b3018, type: 3}
+  m_Script: {fileID: 11500000, guid: d371a530d8a48794d86cc2143d54fb33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Conversations:
-  - questionText: 'Hey I do have some new armors and weapons for you if you can pay
-      the right price ! '
-    answers:
-    - answerText: Armor Upgrade
-      price: 0
-      includePrice: 1
-    - answerText: Weapon Upgrade
-      price: 0
-      includePrice: 1
-  - questionText: 'Hey you do not have enough come back later ! '
-    answers: []
-  - questionText: 'Thank you for the purchase ! '
-    answers: []
+  SellPitchMessage:
+    text: "Hey I do have some new armors and weapons for you if you can pay the right
+      price !\r"
+    events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 628576837}
+          m_TargetAssemblyTypeName: charles.MerchantConversationManager, Assembly-CSharp
+          m_MethodName: SellItem
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      value: 0
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 628576837}
+          m_TargetAssemblyTypeName: charles.MerchantConversationManager, Assembly-CSharp
+          m_MethodName: SellItem
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      value: 0
+    type: 1
+  NotEnoughMoneyMessage:
+    text: 'You do not have enough come back later ! '
+    events: []
+    type: 0
+  AlreadyFullMessage:
+    text: 
+    events: []
+    type: 0
+  ThankYouMessage:
+    text: 'Thank you for the purchase ! '
+    events: []
+    type: 0
+  Items:
+  - label: Weapon Upgrade
+    price: 10
+  - label: Armor Upgrade
+    price: 10
   questionCanvas: {fileID: 1471339657}
   pData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
-  firstAnswerButton: {fileID: 1471339659}
-  secondAnswerButton: {fileID: 1471339658}
-  goldForHealing: 50
-  goldForArmor: 10
-  goldForWeapon: 10
-  questionIndex: 0
+  answerButtons:
+  - {fileID: 1471339659}
+  - {fileID: 1471339658}
+  priceIncrease: 10
   typingSpeed: 0.08
-  numberOfTimeHealed: 0
 --- !u!1 &628711534
 GameObject:
   m_ObjectHideFlags: 0
@@ -83164,9 +83241,9 @@ MonoBehaviour:
   goldForHealing: 50
   goldForArmor: 10
   goldForWeapon: 10
+  priceIncrease: 10
   questionIndex: 0
   typingSpeed: 0.08
-  numberOfTimeHealed: 0
 --- !u!1 &1101098900
 GameObject:
   m_ObjectHideFlags: 0
@@ -203340,7 +203417,7 @@ PrefabInstance:
     - target: {fileID: 4125121077574616502, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 628576837}
+      objectReference: {fileID: 0}
     - target: {fileID: 4125121077574616502, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 1
@@ -203460,7 +203537,7 @@ PrefabInstance:
     - target: {fileID: 8562126649747504517, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 628576837}
+      objectReference: {fileID: 0}
     - target: {fileID: 8562126649747504517, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -293990,7 +294067,7 @@ PrefabInstance:
     - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: questionIdx
       value: 
-      objectReference: {fileID: 220606635}
+      objectReference: {fileID: 0}
     - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: conversationPanel
       value: 
@@ -294007,16 +294084,40 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: 0.41539764
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6041548899316055027, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1665714567}
   m_SourcePrefab: {fileID: 100100000, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
 --- !u!4 &1665714565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3340638572530406421, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
   m_PrefabInstance: {fileID: 1665714564}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1665714566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6041548899316055027, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
+  m_PrefabInstance: {fileID: 1665714564}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1665714567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665714566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75908d905ba2d9d499233ab25c978726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conversationPanel: {fileID: 510750334}
+  merchant: {fileID: 220606635}
+  keepTriggerable: 1
 --- !u!1 &1670745792
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,8 +39,6 @@ namespace charles
         [SerializeField] private int goldForArmor = 10;
         [SerializeField] private int goldForWeapon = 10;
         [SerializeField] private int priceIncrease = 10;
-        private int armorTotalInflation;
-        private int weaponTotalInflation;
 
         public int questionIndex = 0;
         [SerializeField] private float typingSpeed = 0.08f;
@@ -162,7 +160,6 @@ namespace charles
                 pData.Gold -= goldForWeapon;
                 pData.WeaponUpgrade += 1;
                 goldForWeapon += priceIncrease;
-                //weaponTotalInflation
 
                 DisplayConversation(2);
             }
