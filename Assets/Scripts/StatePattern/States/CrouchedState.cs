@@ -14,7 +14,8 @@ namespace JFM
             player.animator.SetBool("IsCrouched", true);
             //player.animator.SetBool("IsIdle", true);
 
-            player.rb.velocity = Vector2.zero;
+            // Stop the player
+            player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
 
             resetAnimatorParams = true;
 
@@ -68,6 +69,9 @@ namespace JFM
                 player.StateMachine.ChangeState(player.States[STATE.LADDER]);
                 return;
             }
+
+            // Stop the player
+            player.rb.AddForce(-player.rb.velocity, ForceMode2D.Impulse);
         }
 
         public override void Exit()

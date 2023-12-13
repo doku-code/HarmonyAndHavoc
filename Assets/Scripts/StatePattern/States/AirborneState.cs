@@ -312,7 +312,8 @@ namespace JFM
                     player.rb.velocity = player.rb.velocity.normalized * player.AirSpeed;
                 }
 
-                if (player.rb.velocity.magnitude == 0.0f)
+                //if (player.rb.velocity.magnitude == 0.0f)
+                if (player.rb.velocity.x == 0.0f)
                 {
                     stopForce = true;
                 }
