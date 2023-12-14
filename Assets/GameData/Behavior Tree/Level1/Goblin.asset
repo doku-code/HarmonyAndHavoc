@@ -20,7 +20,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: Goblin
   attackCooldown: 3
   attackDistance: 2
   attackDamage: 8
@@ -72,7 +71,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: 
   patrolRadius: 3
   PatrolAnimString: Run
   moveSpeed: 1000
@@ -82,6 +80,7 @@ MonoBehaviour:
   detectionDistance: 4
   detectForwardOnly: 1
   holeDistance: {x: 1, y: 1.5}
+  turningAroundWaitDuration: 2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +162,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: Goblin
   attackCooldown: 3
   attackDistance: 2
   attackDamage: 12

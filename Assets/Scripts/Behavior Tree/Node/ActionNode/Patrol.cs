@@ -15,9 +15,11 @@ public class Patrol : ActionNode
     public float detectionDistance = 3.0f;
     public bool detectForwardOnly = true; 
     public Vector2 holeDistance = new Vector2(1.0f, 1.5f);
-    
+    public float turningAroundWaitDuration = 1.0f;
+
     private Vector2 nextPosition;
     private float currentDirection;
+    private float turningAroundWaitStartTime = -1.0f;
 
     void OnEnable()
     {
@@ -44,6 +46,8 @@ public class Patrol : ActionNode
             npcAnimator.SetBool(PatrolAnimString, true);
             npcAnimator.SetBool("IsIdle", false);
         }
+
+        turningAroundWaitStartTime = -1.0f;
     }
 
     protected override void OnStop()
@@ -55,6 +59,21 @@ public class Patrol : ActionNode
         if (npcController.IsDead)
         {
             return State.FAILURE;
+        }
+
+        if(turningAroundWaitStartTime > 0.0f)
+        {
+            if (Time.time - turningAroundWaitStartTime >= turningAroundWaitDuration)
+            {
+                // Continue as normal
+                turningAroundWaitStartTime = -1.0f;
+            }
+            else
+            {
+                npcAnimator.SetBool(PatrolAnimString, false);
+                npcAnimator.SetBool("IsIdle", true);
+                return State.RUNNING;
+            }
         }
 
         if (npcAnimator.GetBool("IsIdle") && !npcController.IsKnockedBack)
@@ -142,6 +161,8 @@ public class Patrol : ActionNode
             {
                 npcRigidBody.AddForce(-npcRigidBody.velocity, ForceMode2D.Impulse);
             }
+
+            turningAroundWaitStartTime = Time.time;
         }
         //Debug.Log($"Player is not found! obstacleFound={obstacleFound}");
 
