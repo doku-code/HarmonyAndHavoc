@@ -11,7 +11,13 @@ public class OnBossKill : MonoBehaviour
     private EnemyController controller;
 
     void Awake()
-    {
+    {        
+        if (GameManager.Instance.data.CurrentPlayerMapProgression[GameManager.Instance.currentMap])
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         controller = GetComponent<EnemyController>();
         controller.OnDeadDelegate += OnKill;
     }
@@ -28,6 +34,8 @@ public class OnBossKill : MonoBehaviour
         GameManager.Instance.data.LearnKnowledge(knowledgeToDrop);
 
         MapManager.Instance.UnlockDoor();
-        MapManager.Instance.MakePortal(transform);
+
+        CapsuleCollider2D capsuleCollider = GetComponent<CapsuleCollider2D>(); 
+        MapManager.Instance.MakePortal(transform.position + new Vector3(capsuleCollider.offset.x, capsuleCollider.offset.y, 0.0f) - Vector3.up * capsuleCollider.size.y / 2.0f);
     }
 }

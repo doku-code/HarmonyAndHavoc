@@ -44,9 +44,9 @@ namespace AF
             GameManager.Instance.data.CurrentPlayerMapProgression[GameManager.Instance.currentMap] = true;
         }
 
-        public void MakePortal(Transform tr)
-        {
-            GameObject portalGO = Instantiate(portalPrefab,tr.position,Quaternion.identity);
+        public void MakePortal(Vector3 position)
+        {            
+            GameObject portalGO = Instantiate(portalPrefab, position - Vector3.up * portalPrefab.GetComponent<BoxCollider2D>().offset.y, Quaternion.identity);
         }
     }
 }

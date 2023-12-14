@@ -1,5 +1,7 @@
+using JFM;
 using System;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 using UnityEngine.Serialization;
 
 namespace AF
@@ -18,6 +20,9 @@ namespace AF
                         GameManager.Instance.LoadNextMap(MapManager.Instance.previousMap, SpawnerPosition.END);
                         break;
                     case SpawnerPosition.PORTAL:
+
+                        other.GetComponent<PlayerController>().Vanish();
+                        
                         if (GameManager.Instance.currentMap != "Village")
                             GameManager.Instance.PortalToVillage();
                         else

@@ -587,6 +587,19 @@ namespace JFM
             stateMachine.ChangeState(state);
         }
 
+        void OnGUI()
+        {
+            if (GUI.Button(new Rect(10, 10, 100, 30), "Vanish"))
+            {
+                Vanish();
+            }
+        }
+
+        public void Vanish()
+        {
+            stateMachine.ChangeState(stateMachine.states[PlayerState.STATE.VANISH]);
+        }
+
         private void SetBeneathObjectInfo()
         {
             if (beneathObject is null)
@@ -927,23 +940,23 @@ namespace JFM
                 knowledge.Value.Initialize(this);
             }
 
-            playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
-            playerData.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = true;
-            playerData.KnownKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = true;
-            playerData.KnownKnowledgeDictionary[KnowledgeID.GROUND_SLIDE] = true;
+            //playerData.KnownKnowledgeDictionary[KnowledgeID.DASH] = true;
+            //playerData.KnownKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = true;
+            //playerData.KnownKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = true;
+            //playerData.KnownKnowledgeDictionary[KnowledgeID.GROUND_SLIDE] = true;
             //playerData.KnownKnowledgeDictionary[KnowledgeID.COMBO_ATTACK] = true;
             //playerData.KnownKnowledgeDictionary[KnowledgeID.AOE_ATTACK] = true;
-            playerData.AvailableKnowledgeDictionary[KnowledgeID.DASH] = AvailableKnowledgePosition.POSITION1;
-            playerData.AvailableKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = AvailableKnowledgePosition.POSITION2;
-            playerData.AvailableKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = AvailableKnowledgePosition.POSITION4;
-            playerData.AvailableKnowledgeDictionary[KnowledgeID.GROUND_SLIDE] = AvailableKnowledgePosition.POSITION3;
+            //playerData.AvailableKnowledgeDictionary[KnowledgeID.DASH] = AvailableKnowledgePosition.POSITION1;
+            //playerData.AvailableKnowledgeDictionary[KnowledgeID.WALL_SLIDE] = AvailableKnowledgePosition.POSITION2;
+            //playerData.AvailableKnowledgeDictionary[KnowledgeID.DOUBLE_JUMP] = AvailableKnowledgePosition.POSITION4;
+            //playerData.AvailableKnowledgeDictionary[KnowledgeID.GROUND_SLIDE] = AvailableKnowledgePosition.POSITION3;
             //playerData.AvailableKnowledgeDictionary[KnowledgeID.COMBO_ATTACK] = AvailableKnowledgePosition.POSITION3;
             //playerData.AvailableKnowledgeDictionary[KnowledgeID.AOE_ATTACK] = AvailableKnowledgePosition.POSITION3;
 
-            playerData.GetKnowledgeByID(KnowledgeID.DASH).Activate();
-            playerData.GetKnowledgeByID(KnowledgeID.WALL_SLIDE).Activate();
-            playerData.GetKnowledgeByID(KnowledgeID.DOUBLE_JUMP).Activate();
-            playerData.GetKnowledgeByID(KnowledgeID.GROUND_SLIDE).Activate();
+            //playerData.GetKnowledgeByID(KnowledgeID.DASH).Activate();
+            //playerData.GetKnowledgeByID(KnowledgeID.WALL_SLIDE).Activate();
+            //playerData.GetKnowledgeByID(KnowledgeID.DOUBLE_JUMP).Activate();
+            //playerData.GetKnowledgeByID(KnowledgeID.GROUND_SLIDE).Activate();
 
             //playerData.GetKnowledgeByID(KnowledgeID.COMBO_ATTACK).Activate();
             //playerData.GetKnowledgeByID(KnowledgeID.AOE_ATTACK).Activate();            

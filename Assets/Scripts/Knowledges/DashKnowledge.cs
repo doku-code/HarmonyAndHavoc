@@ -179,7 +179,9 @@ namespace JFM
 
         public override void OnLeave()
         {
-            player.StateMachine.ChangeState(player.States[PlayerState.STATE.IDLE]);
+            IdleState state = (IdleState)player.States[PlayerState.STATE.IDLE];
+            state.waitNFrames = 3;
+            player.StateMachine.ChangeState(state);
         }
     }
 }

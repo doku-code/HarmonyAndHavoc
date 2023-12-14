@@ -10,15 +10,20 @@ public class BossSoundActivation : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(!isBossSoundPlaying && SoundManager.Instance != null)
+        bool isBossDead = GameManager.Instance.data.CurrentPlayerMapProgression[GameManager.Instance.currentMap];
+        if (isBossDead && !isBossSoundPlaying && SoundManager.Instance != null)
+        {
             SoundManager.Instance.PlayAmbientClip(MapManager.Instance.levelAudio.LevelBossAmbient);
-        isBossSoundPlaying = true;
+            isBossSoundPlaying = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(isBossSoundPlaying && SoundManager.Instance != null)
+        if (isBossSoundPlaying && SoundManager.Instance != null)
+        {
             SoundManager.Instance.PlayAmbientClip(MapManager.Instance.levelAudio.LevelAmbient);
-        isBossSoundPlaying = false;
+            isBossSoundPlaying = false;
+        }
     }
 }

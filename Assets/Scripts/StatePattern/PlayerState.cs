@@ -35,7 +35,8 @@ namespace JFM
             STAIRS_DOWN,            
             BASIC_ATTACK,
             HURT,
-            DEAD
+            DEAD,
+            VANISH
         };
 
         public enum EVENT

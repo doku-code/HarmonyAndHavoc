@@ -27,7 +27,7 @@ namespace AF
         private FadeInFadeOutScreen loadingScreen;
         private string nextMapToLoad;
         [NonSerialized] public string currentMap = "MainMenu";
-        private Transform portalMapPosition;
+        private Vector3 portalMapPosition;
         private string portalMap;
         private SpawnerPosition nextSpawnPosition;
 
@@ -110,13 +110,12 @@ namespace AF
                 case SpawnerPosition.PORTAL:
                     if (currentMap == "Village")
                     {
-                        Instantiate(MapManager.Instance.portalPrefab, MapManager.Instance.villagePortalSpot.transform.position,
-                            Quaternion.identity);
+                        MapManager.Instance.MakePortal(MapManager.Instance.villagePortalSpot.transform.position);
                         playerGO.transform.position = MapManager.Instance.villagePortalSpot.transform.position +
                                                       Vector3.right * 1.5f;
                     }
                     else
-                        playerGO.transform.position = portalMapPosition.position;
+                        playerGO.transform.position = portalMapPosition;
                     break;
                 case SpawnerPosition.END:
                     playerGO.transform.position =
@@ -140,7 +139,7 @@ namespace AF
         public void PortalToVillage()
         {
             portalMap = currentMap;
-            portalMapPosition = playerGO.transform;
+            portalMapPosition = playerGO.transform.position;
             LoadNextMap("Village", SpawnerPosition.PORTAL);
         }
 

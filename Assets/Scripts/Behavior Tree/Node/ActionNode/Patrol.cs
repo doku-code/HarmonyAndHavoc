@@ -15,7 +15,7 @@ public class Patrol : ActionNode
     public float detectionDistance = 3.0f;
     public bool detectForwardOnly = true; 
     public Vector2 holeDistance = new Vector2(1.0f, 1.5f);
-    public float turningAroundWaitDuration = 1.0f;
+    public float turningAroundWaitDuration = 2.0f;
 
     private Vector2 nextPosition;
     private float currentDirection;
