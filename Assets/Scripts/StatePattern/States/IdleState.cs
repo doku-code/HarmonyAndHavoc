@@ -26,6 +26,7 @@ namespace JFM
         public override void Enter()
         {           
             player.animator.SetBool("IsIdle", true);
+            player.animator.SetBool("IsCrouched", false);
 
             //player.rb.velocity = Vector2.zero;
             if (player.rb.velocity.magnitude > 0.0f)
