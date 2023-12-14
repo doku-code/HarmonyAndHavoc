@@ -14,20 +14,22 @@ namespace AF
     {
         BEGIN,
         SAVING_SPOT,
+        PORTAL,
         END,
     }
     public class GameManager : MonoBehaviour
     {
-        private MapManager currentMapManager;
-        private PlayerData data;
-        private FadeInFadeOutScreen loadingScreen;
-        [NonSerialized] public string currentMap = "MainMenu";
         [NonSerialized] public ParametersLessDelegate OnLoadMapDelegate;
         [NonSerialized] public ParametersLessDelegate OnReadyToLoadMapDelegate;
-        
         [SerializeField] public GameObject player;
-
+        [NonSerialized] public GameObject playerGO;
+        [NonSerialized] public PlayerData data;
+        private MapManager currentMapManager;
+        private FadeInFadeOutScreen loadingScreen;
         private string nextMapToLoad;
+        [NonSerialized] public string currentMap = "MainMenu";
+        private Transform portalMapPosition;
+        private string portalMap;
         private SpawnerPosition nextSpawnPosition;
 
         public static GameManager Instance { get; private set; }
@@ -93,7 +95,7 @@ namespace AF
 
         public void PlacePlayer(SpawnerPosition spawnPosition)
         {
-            GameObject playerGO = Instantiate(player);
+            playerGO = Instantiate(player);
             FindAnyObjectByType<CinemachineVirtualCamera>().Follow = playerGO.transform;
 
             switch (spawnPosition)
@@ -101,6 +103,13 @@ namespace AF
                 case SpawnerPosition.BEGIN:
                     playerGO.transform.position =
                         currentMapManager.spawnerBegin.transform.position;
+                    break;
+                case SpawnerPosition.SAVING_SPOT:
+                    playerGO.transform.position = 
+                        currentMapManager.savingSpot.transform.position;
+                    break;
+                case SpawnerPosition.PORTAL:
+                    playerGO.transform.position = portalMapPosition.position;
                     break;
                 case SpawnerPosition.END:
                     playerGO.transform.position =
@@ -124,6 +133,18 @@ namespace AF
         public void GetCurrentMapManager()
         {
             currentMapManager = FindObjectOfType<MapManager>();
+        }
+
+        void PortalToVillage()
+        {
+            portalMap = currentMap;
+            portalMapPosition = playerGO.transform;
+            LoadNextMap("Village", SpawnerPosition.END);
+        }
+
+        void PortalToMap()
+        {
+            
         }
 
         public IEnumerator LoadYourAsyncScene(string sceneName, ParametersLessDelegate callback)

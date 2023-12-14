@@ -7,13 +7,14 @@ namespace AF
     {
         [SerializeField] public string previousMap;
         [SerializeField] public string nextMap;
-        [SerializeField] public Spawner despawnerBegin;
-        [SerializeField] public Spawner despawnerEnd;
+        [SerializeField] public Despawner despawnerBegin;
+        [SerializeField] public Despawner despawnerEnd;
         [SerializeField] public GameObject spawnerBegin;
         [SerializeField] public GameObject spawnerEnd;
         [SerializeField] public GameObject savingSpot;
         [SerializeField] public LevelAudio levelAudio;
         [SerializeField] public GameObject doorToNextLevel;
+        [SerializeField] public GameObject portalPrefab;
 
         public static MapManager Instance;
 
@@ -41,6 +42,11 @@ namespace AF
             
             GameManager.Instance.player.GetComponent<PlayerController>().Data
                 .CurrentPlayerMapProgression[GameManager.Instance.currentMap] = true;
+        }
+
+        public void MakePortal()
+        {
+            
         }
     }
 }
