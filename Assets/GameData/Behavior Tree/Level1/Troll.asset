@@ -80,7 +80,8 @@ MonoBehaviour:
   detectionDistance: 10000
   detectForwardOnly: 0
   holeDistance: {x: 1, y: 1.5}
-  turningAroundWaitDuration: 2.5
+  turningAroundMinWaitDuration: 1
+  turningAroundMaxWaitDuration: 2.5
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,12 +15,13 @@ public class Patrol : ActionNode
     public float detectionDistance = 3.0f;
     public bool detectForwardOnly = true; 
     public Vector2 holeDistance = new Vector2(1.0f, 1.5f);
-    public float turningAroundWaitDuration = 2.0f;
+    public float turningAroundMinWaitDuration = 2.0f;
+    public float turningAroundMaxWaitDuration = 2.0f;
 
     private Vector2 nextPosition;
     private float currentDirection;
     private float turningAroundWaitStartTime = -1.0f;
-
+    private float turningAroundCurrentWaitDuration;
     void OnEnable()
     {
         //PatrolAnimString = "Run";
@@ -63,7 +64,7 @@ public class Patrol : ActionNode
 
         if(turningAroundWaitStartTime > 0.0f)
         {
-            if (Time.time - turningAroundWaitStartTime >= turningAroundWaitDuration)
+            if (Time.time - turningAroundWaitStartTime >= turningAroundCurrentWaitDuration)
             {
                 // Continue as normal
                 turningAroundWaitStartTime = -1.0f;
@@ -163,6 +164,7 @@ public class Patrol : ActionNode
             }
 
             turningAroundWaitStartTime = Time.time;
+            turningAroundCurrentWaitDuration = Random.Range(turningAroundMinWaitDuration, turningAroundMaxWaitDuration);
         }
         //Debug.Log($"Player is not found! obstacleFound={obstacleFound}");
 
