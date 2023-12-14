@@ -72,11 +72,16 @@ namespace JFM
             //Debug.Log($"gravityScale = {player.rb.gravityScale}");
 
             Vector2 v = player.IsFacingRight ? Vector2.right : -Vector2.right;
-                        
-            // Could reuse this raycast for player.WillClimbUpStairs() below
-            bool foundSlopeInFront = (Raycast2DHelper.FindSlopeAtPoint(player.rb.position, out float slopeFront, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? 1.0f : -1.0f) * 45.0f), player.StairsDownHeight, player.GroundLayer));//, true))
 
-            bool foundSlopeBehind = (Raycast2DHelper.FindSlopeAtPoint(player.rb.position, out float slopeBack, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? -1.0f : 1.0f) * 45.0f), player.StairsDownHeight, player.GroundLayer));//, true))
+            // Could reuse this raycast for player.WillClimbUpStairs() below
+            bool foundSlopeInFront = (Raycast2DHelper.FindSlopeAtPoint(player.rb.position, out float slopeFront, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? 1.0f : -1.0f) * 45.0f), player.StairsDownHeight, player.GroundLayer));//, true));
+
+            bool foundSlopeBehind = (Raycast2DHelper.FindSlopeAtPoint(player.rb.position, out float slopeBack, v * player.StairsUpDistanceHigh + Vector2.up * player.StairsUpHeight, Platformer2DUtilities.RotateVector2(Vector2.down, (player.IsFacingRight ? -1.0f : 1.0f) * 45.0f), player.StairsDownHeight, player.GroundLayer));//, true));
+
+            foundSlopeInFront &= (Mathf.Abs(slopeFront) >= player.StairsUpMinSlope || Mathf.Abs(slopeFront) >= player.StairsDownMinSlope) &&
+                (Mathf.Abs(slopeFront) <= player.StairsUpMaxSlope || Mathf.Abs(slopeFront) <= player.StairsDownMaxSlope);
+            foundSlopeBehind &= (Mathf.Abs(slopeBack) >= player.StairsUpMinSlope || Mathf.Abs(slopeBack) >= player.StairsDownMinSlope) &&
+                (Mathf.Abs(slopeBack) <= player.StairsUpMaxSlope || Mathf.Abs(slopeBack) <= player.StairsDownMaxSlope);
 
             if (!player.IsGrounded())
             {
@@ -85,7 +90,7 @@ namespace JFM
                     player.StateMachine.ChangeState(player.States[STATE.AIRBORNE]);
                     return;
                 }
-                //Debug.Log("!player.IsGrounded()");
+                Debug.Log($"!player.IsGrounded() {foundSlopeInFront} && {foundSlopeBehind} {slopeBack}");
                 player.rb.velocity = Vector2.zero;
                 player.rb.totalForce = Vector2.zero;
                 player.rb.gravityScale = 0.0f;
