@@ -20,7 +20,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: 
   attackCooldown: 2
   attackDistance: 2
   attackDamage: 20
@@ -72,7 +71,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: 
   patrolRadius: 3
   PatrolAnimString: Run
   moveSpeed: 1000
@@ -82,6 +80,7 @@ MonoBehaviour:
   detectionDistance: 10000
   detectForwardOnly: 0
   holeDistance: {x: 1, y: 1.5}
+  turningAroundWaitDuration: 2.5
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,7 +142,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: 
   attackCooldown: 2
   attackDistance: 2
   attackDamage: 25
@@ -199,7 +197,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  gameobjNpcName: 
   attackCooldown: 2
   attackDistance: 2
   attackDamage: 22
