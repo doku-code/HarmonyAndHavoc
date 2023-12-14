@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8671669194901172360}
   - component: {fileID: 4360999970376854753}
   - component: {fileID: 6558312450589845349}
-  - component: {fileID: 8972389363028899257}
+  - component: {fileID: 3460820123333563958}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5165962357874454076}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -231.38702, y: 19.75705, z: 0}
+  m_LocalPosition: {x: -231.38702, y: 19.766, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -144,7 +144,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.75, y: 1.375}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 0.75, y: 1.375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -153,7 +153,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.28292847, y: 1.163496}
   m_EdgeRadius: 0
---- !u!114 &8972389363028899257
+--- !u!114 &3460820123333563958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5165962357874454076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61a91329225734a379607d983d213dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c79253a55cf0c540987bc0a82461022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnerPosition: 2

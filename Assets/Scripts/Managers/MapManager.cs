@@ -15,6 +15,7 @@ namespace AF
         [SerializeField] public LevelAudio levelAudio;
         [SerializeField] public GameObject doorToNextLevel;
         [SerializeField] public GameObject portalPrefab;
+        [SerializeField] public GameObject villagePortalSpot;
 
         public static MapManager Instance;
 
@@ -40,13 +41,12 @@ namespace AF
         {
             doorToNextLevel.SetActive(false);
             
-            GameManager.Instance.player.GetComponent<PlayerController>().Data
-                .CurrentPlayerMapProgression[GameManager.Instance.currentMap] = true;
+            GameManager.Instance.data.CurrentPlayerMapProgression[GameManager.Instance.currentMap] = true;
         }
 
-        public void MakePortal()
+        public void MakePortal(Transform tr)
         {
-            
+            GameObject portalGO = Instantiate(portalPrefab,tr.position,Quaternion.identity);
         }
     }
 }

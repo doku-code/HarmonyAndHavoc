@@ -24,7 +24,6 @@ namespace AF
         [SerializeField] public GameObject player;
         [NonSerialized] public GameObject playerGO;
         [NonSerialized] public PlayerData data;
-        private MapManager currentMapManager;
         private FadeInFadeOutScreen loadingScreen;
         private string nextMapToLoad;
         [NonSerialized] public string currentMap = "MainMenu";
@@ -56,8 +55,6 @@ namespace AF
         {
             StartCoroutine(LoadYourAsyncScene(nextMapToLoad, () =>
             {
-                GetCurrentMapManager();
-
                 currentMap = nextMapToLoad;
 
                 if (nextMapToLoad != "MainMenu" && nextMapToLoad != "Ending")
@@ -77,6 +74,8 @@ namespace AF
 
         public void LoadNextMap(string mapToLoad, SpawnerPosition spawnPosition)
         {
+            //C'est un trou noir, a revoir completement la logique
+            //Cette fonction load belle et bien une map... croyez moi sur parole
             nextMapToLoad = mapToLoad;
             nextSpawnPosition = spawnPosition; 
 
@@ -102,18 +101,26 @@ namespace AF
             {
                 case SpawnerPosition.BEGIN:
                     playerGO.transform.position =
-                        currentMapManager.spawnerBegin.transform.position;
+                        MapManager.Instance.spawnerBegin.transform.position;
                     break;
                 case SpawnerPosition.SAVING_SPOT:
                     playerGO.transform.position = 
-                        currentMapManager.savingSpot.transform.position;
+                        MapManager.Instance.savingSpot.transform.position;
                     break;
                 case SpawnerPosition.PORTAL:
-                    playerGO.transform.position = portalMapPosition.position;
+                    if (currentMap == "Village")
+                    {
+                        Instantiate(MapManager.Instance.portalPrefab, MapManager.Instance.villagePortalSpot.transform.position,
+                            Quaternion.identity);
+                        playerGO.transform.position = MapManager.Instance.villagePortalSpot.transform.position +
+                                                      Vector3.right * 1.5f;
+                    }
+                    else
+                        playerGO.transform.position = portalMapPosition.position;
                     break;
                 case SpawnerPosition.END:
                     playerGO.transform.position =
-                        currentMapManager.spawnerEnd.transform.position;
+                        MapManager.Instance.spawnerEnd.transform.position;
                     break;
             }
         }
@@ -126,25 +133,20 @@ namespace AF
             }
             else if (data.CurrentPlayerMapProgression[currentMap])
             {
-                currentMapManager.UnlockDoor();
+                MapManager.Instance.UnlockDoor();
             }
         }
 
-        public void GetCurrentMapManager()
-        {
-            currentMapManager = FindObjectOfType<MapManager>();
-        }
-
-        void PortalToVillage()
+        public void PortalToVillage()
         {
             portalMap = currentMap;
             portalMapPosition = playerGO.transform;
-            LoadNextMap("Village", SpawnerPosition.END);
+            LoadNextMap("Village", SpawnerPosition.PORTAL);
         }
 
-        void PortalToMap()
+        public void PortalToMap()
         {
-            
+            LoadNextMap(portalMap,SpawnerPosition.PORTAL);
         }
 
         public IEnumerator LoadYourAsyncScene(string sceneName, ParametersLessDelegate callback)

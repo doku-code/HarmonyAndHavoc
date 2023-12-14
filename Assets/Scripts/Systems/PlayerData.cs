@@ -53,6 +53,7 @@ namespace AF
 
         //CurrentProgression
         public Dictionary<string, bool> CurrentPlayerMapProgression;
+        public string lastSafeSpotMap;
         public Dictionary<KnowledgeID, bool> KnownKnowledgeDictionary { get; set; }
         // Put a protection (range, 4 maximum possible knowledges at the same time).
         public Dictionary<KnowledgeID, AvailableKnowledgePosition> AvailableKnowledgeDictionary;
@@ -175,6 +176,7 @@ namespace AF
 
         public void InitializeData()
         {
+            lastSafeSpotMap = "";
             KnownKnowledgeDictionary = new Dictionary<KnowledgeID, bool>();
             AvailableKnowledgeDictionary = new Dictionary<KnowledgeID, AvailableKnowledgePosition>();
             EveryKnowledgeDictionary = new Dictionary<KnowledgeID, Knowledge>();

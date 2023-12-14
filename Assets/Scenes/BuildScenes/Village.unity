@@ -327898,6 +327898,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1876260329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1876260330}
+  m_Layer: 0
+  m_Name: PortalSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1876260330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876260329}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -64.99, y: -2.7818975, z: 0.32033294}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1899985767
 GameObject:
   m_ObjectHideFlags: 0
@@ -336435,9 +336466,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5472724728977223842, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
+      propertyPath: portalPrefab
+      value: 
+      objectReference: {fileID: 5165962357874454076, guid: 69fe11a86a7f24c48848e055dc35bf57, type: 3}
+    - target: {fileID: 5472724728977223842, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
       propertyPath: doorToNextLevel
       value: 
       objectReference: {fileID: 69793875}
+    - target: {fileID: 5472724728977223842, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
+      propertyPath: villagePortalSpot
+      value: 
+      objectReference: {fileID: 1876260329}
     - target: {fileID: 5796644582866440407, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
       propertyPath: spawnerPosition
       value: 3
@@ -337139,3 +337178,4 @@ SceneRoots:
   - {fileID: 2122256315}
   - {fileID: 787284583}
   - {fileID: 1606205012}
+  - {fileID: 1876260330}

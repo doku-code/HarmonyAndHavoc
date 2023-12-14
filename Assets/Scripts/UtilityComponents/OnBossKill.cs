@@ -25,9 +25,9 @@ public class OnBossKill : MonoBehaviour
     {
         yield return new WaitForSeconds(waitDelay);
 
-        GameManager.Instance.player.GetComponent<PlayerController>()
-            .Data.LearnKnowledge(knowledgeToDrop);
+        GameManager.Instance.data.LearnKnowledge(knowledgeToDrop);
 
         MapManager.Instance.UnlockDoor();
+        MapManager.Instance.MakePortal(transform);
     }
 }

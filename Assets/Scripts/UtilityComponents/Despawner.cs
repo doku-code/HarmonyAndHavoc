@@ -6,13 +6,7 @@ namespace AF
 {
     public class Despawner : MonoBehaviour
     {
-        private MapManager mapManager;
         [SerializeField] private SpawnerPosition spawnerPosition;
-
-        void Awake()
-        {
-            mapManager = transform.parent.parent.GetComponent<MapManager>();
-        }
         
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -21,10 +15,16 @@ namespace AF
                 switch (spawnerPosition)
                 {
                     case SpawnerPosition.BEGIN:
-                        GameManager.Instance.LoadNextMap(mapManager.previousMap, SpawnerPosition.END);
+                        GameManager.Instance.LoadNextMap(MapManager.Instance.previousMap, SpawnerPosition.END);
+                        break;
+                    case SpawnerPosition.PORTAL:
+                        if (GameManager.Instance.currentMap != "Village")
+                            GameManager.Instance.PortalToVillage();
+                        else
+                            GameManager.Instance.PortalToMap();
                         break;
                     case SpawnerPosition.END:
-                        GameManager.Instance.LoadNextMap(mapManager.nextMap, SpawnerPosition.BEGIN);
+                        GameManager.Instance.LoadNextMap(MapManager.Instance.nextMap, SpawnerPosition.BEGIN);
                         break;
                 }
             }
