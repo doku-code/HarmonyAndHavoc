@@ -35,12 +35,17 @@ namespace AF
 
         [Header("Keyboard Rebinding text"), Tooltip("Text array for the button mapping")]
         [SerializeField] private TMP_Text[] actionBtnText;
+        [Header("Music")]
+        [SerializeField] private AudioClip mainMenuMusic;
 
         void Start()
         {
             InitializeMixerAtStart();
             OpenMainMenu();
             Application.targetFrameRate = -1;
+
+            if(SoundManager.Instance != null)
+            SoundManager.Instance.PlayAmbientClip(mainMenuMusic);
         }
         
         void InitializeMixerAtStart()

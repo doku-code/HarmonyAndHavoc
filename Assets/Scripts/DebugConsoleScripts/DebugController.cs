@@ -3,7 +3,6 @@ using JFM;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 namespace charles
 {
@@ -39,11 +38,19 @@ namespace charles
 
         [Header("Command List")]
         public List<object> commandList;
-
+        private static DebugController instance;
         private void Awake()
         {
-            DontDestroyOnLoad(this);
-            CallTheCheatHere();
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+                CallTheCheatHere();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void CallTheCheatHere()

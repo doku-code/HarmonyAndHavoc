@@ -20,6 +20,7 @@ namespace charles
         [Header("Panel"), Tooltip("This is where all the panel goes")]
         [SerializeField] private GameObject pausePanel;
         [SerializeField] private GameObject settingsPanel;
+        [SerializeField] private GameObject exitPromptPanel;
 
         [Header("Event System Object"), Tooltip("It is use to change the main selected object in eventSystem GameObject")]
         [SerializeField] private GameObject pauseMenuFirstObj;
@@ -99,6 +100,7 @@ namespace charles
             pausePanel.SetActive(true);
             inventoryPanel.SetActive(false);
             HUDPanel.SetActive(false);
+            exitPromptPanel.SetActive(false);
             CloseOtherPanels();
 
             //Pause the Game
@@ -131,6 +133,11 @@ namespace charles
             }
         }
 
+        public void ExitPrompt()
+        {
+            pausePanel.SetActive(false);
+            exitPromptPanel.SetActive(true);
+        }
         public void ExitToMainMenu()
         {
             Time.timeScale = 1;

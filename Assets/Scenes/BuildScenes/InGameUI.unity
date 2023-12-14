@@ -5433,12 +5433,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 880611779}
+    - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ExitGame
+      value: OpenPauseMenu
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -5450,7 +5454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6679512160471329927, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_text
-      value: Exit
+      value: Cancel
       objectReference: {fileID: 0}
     - target: {fileID: 6679512160471329927, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_fontSize
@@ -5703,9 +5707,6 @@ GameObject:
   - component: {fileID: 845158624}
   - component: {fileID: 845158623}
   - component: {fileID: 845158622}
-  - component: {fileID: 845158621}
-  - component: {fileID: 845158620}
-  - component: {fileID: 845158619}
   m_Layer: 5
   m_Name: Exit_Prompt
   m_TagString: Untagged
@@ -5713,161 +5714,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &845158619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845158618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 18fe487ebbeb42a41a71899f8528c329, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4f33f252-067f-4785-83f4-8ba41f9447c0
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4f14ea5d-4854-4802-8a98-28db54cfa668
-    m_ActionName: Player/Jump[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 845158620}
-        m_TargetAssemblyTypeName: charles.PauseMenuManager, Assembly-CSharp
-        m_MethodName: PauseMenu
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 87c1551b-9792-43f0-9690-6dd086331f2c
-    m_ActionName: Player/Pause[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0ac979ae-1ff2-4d5a-95c4-4d526766ed49
-    m_ActionName: Player/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 26212655-a04c-4824-956f-43dd8c51fa64
-    m_ActionName: Player/BasicAttack[/Keyboard/i]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b9796594-904f-4632-a980-21a03394d74e
-    m_ActionName: Player/Knowledge1[/Keyboard/shift]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9ca74c14-c4a6-4e59-81cb-aae00018338b
-    m_ActionName: Player/Knowledge2[/Keyboard/j]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1350a012-6c9f-414c-a10b-a0a520528efd
-    m_ActionName: Player/Knowledge3[/Keyboard/k]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c76af7ee-c931-41df-a38e-bda8a97daa89
-    m_ActionName: Player/Knowledge4[/Keyboard/l]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c9941bf0-351a-4dc7-8ca5-1d00ba77002f
-    m_ActionName: Player/Interact[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b421025b-dc8d-4db9-b5ef-3d64ee703f8e
-    m_ActionName: Player/SlideDown[/Keyboard/ctrl]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1505230564}
-        m_TargetAssemblyTypeName: AF.InventoryManager, Assembly-CSharp
-        m_MethodName: InventoryButtonCallback
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 7e59b108-850f-4bd3-bcd7-cdbc73f58155
-    m_ActionName: Player/Inventory[/Keyboard/tab]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8eebc05e-4665-435b-bfaf-427ad683b2fa
-    m_ActionName: Player/ConsoleDebug[/Keyboard/backquote,/Keyboard/f1]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0d8ab6af-cac8-4d97-8844-471288f7892f
-    m_ActionName: Player/Return[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0d2d6541-a0e0-4f6f-96ef-4be19c25aa70
-    m_ActionName: Player/ArrowUp[/Keyboard/upArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c6364e17-bc2a-4957-ba67-8b4ad33407c8
-    m_ActionName: Player/ArrowDown[/Keyboard/downArrow]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &845158620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845158618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a42538733bef2944b65f235f7c11328, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 807142ccf2ec42845abc5fa0cbd1b10b, type: 2}
-  actionsToRebind: []
-  pausePanel: {fileID: 1354292303}
-  settingsPanel: {fileID: 0}
-  pauseMenuFirstObj: {fileID: 981224389}
-  settingFirstObj: {fileID: 0}
-  windowModePreset: {fileID: 0}
-  windowSizePreset: {fileID: 0}
-  ambientSlider: {fileID: 0}
-  fxSlider: {fileID: 0}
-  masterSlider: {fileID: 0}
-  inventoryPanel: {fileID: 1876738372}
-  HUDPanel: {fileID: 6263919141150625343}
---- !u!114 &845158621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845158618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5bfedaef0c74c86abbe3487050a70d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &845158622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6127,6 +5973,7 @@ MonoBehaviour:
   actionsToRebind: []
   pausePanel: {fileID: 308081177}
   settingsPanel: {fileID: 2100377908}
+  exitPromptPanel: {fileID: 845158618}
   pauseMenuFirstObj: {fileID: 2005708477}
   settingFirstObj: {fileID: 137703088}
   windowModePreset: {fileID: 1343050250}
@@ -7087,6 +6934,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 880611779}
+    - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 0}
@@ -7100,7 +6951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ContinueGame
+      value: ExitToMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -7132,7 +6983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6679512160471329927, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_text
-      value: Continue
+      value: Exit Game
       objectReference: {fileID: 0}
     - target: {fileID: 6679512160471329927, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_fontSize
@@ -7242,11 +7093,6 @@ PrefabInstance:
 --- !u!224 &981224388 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6679512160965867052, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
-  m_PrefabInstance: {fileID: 981224387}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &981224389 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6679512160965867053, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
   m_PrefabInstance: {fileID: 981224387}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &993992381
@@ -13163,7 +13009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ExitGame
+      value: ExitPrompt
       objectReference: {fileID: 0}
     - target: {fileID: 2354191720229449902, guid: 8f60256f1d922b94dac15708207241b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -14287,7 +14133,7 @@ RectTransform:
   m_GameObject: {fileID: 1808782148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1354292304}
@@ -18894,6 +18740,10 @@ PrefabInstance:
     - target: {fileID: 7965939674239171590, guid: e301bdae5c98bdd42b6ae7051550585d, type: 3}
       propertyPath: m_Name
       value: Loading_Screen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965939674239171590, guid: e301bdae5c98bdd42b6ae7051550585d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
