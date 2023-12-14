@@ -15,7 +15,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: fdf1bb95230476b40a317ef3f0c12e24
-  position: {x: 74.285706, y: 593}
+  position: {x: 148.57141, y: 465.85712}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -75,7 +75,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: f494320cb97792e41a1e1f6d41c01178
-  position: {x: -76.00006, y: 593}
+  position: {x: -150.85718, y: 465.85712}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -83,16 +83,16 @@ MonoBehaviour:
   patrolRadius: 3
   PatrolAnimString: Run
   moveSpeed: 1000
-  maxSpeed: 2
-  distBeforeChanging: 0.5
-  obstacleDistance: 0.03
-  detectionDistance: 7
-  detectForwardOnly: 0
-  angleMaxDeviance: 0.01
-  playerForgetDuration: 2
-  minDistanceForNextPosition: 1.5
-  maxFramesFacingSide: 5
-  maxTimeBeforeNewInitialPosition: 3
+  maxSpeed: 5
+  distBeforeChanging: 2
+  obstacleDistance: 4
+  detectionDistance: 4
+  detectForwardOnly: 1
+  angleMaxDeviance: 0
+  playerForgetDuration: 0
+  minDistanceForNextPosition: 0
+  maxFramesFacingSide: 0
+  maxTimeBeforeNewInitialPosition: 0
 --- !u!114 &2299061114749337135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,9 +108,10 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 385e90386515a3847ac810ba882793f4
-  position: {x: -1.1428223, y: 364.85715}
+  position: {x: -1.1428223, y: 281.85715}
   Description: 
   children:
+  - {fileID: 1289724694935706136}
   - {fileID: 2467904846967704362}
   - {fileID: -2713852071079558149}
 --- !u!114 &2467904846967704362
@@ -128,7 +129,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 00e2c14ede0a03d46b897bc8acf33cbb
-  position: {x: -217.42859, y: 629.1428}
+  position: {x: -1.1428223, y: 465.71423}
   Description: 
   playerLayer:
     serializedVersion: 2
@@ -160,7 +161,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 7cac494362613d4498ad095a2662d1d5
-  position: {x: -1, y: 195}
+  position: {x: -1.1428223, y: 169.7143}
   Description: 
   children:
   - {fileID: 2299061114749337135}
@@ -179,6 +180,6 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 470b11a9eccbbd84b8088dd069d3ad99
-  position: {x: 0, y: 0}
+  position: {x: -1.1428223, y: 55.925888}
   Description: 
   child: {fileID: 2838549528837533932}
