@@ -16,7 +16,7 @@ MonoBehaviour:
   ID: 3
   isUtility: 1
   chaosCost: 10
-  slotCost: 3
+  slotCost: 5
   cooldown: 0
   force: 60
   deceleration: 1000
@@ -24,3 +24,4 @@ MonoBehaviour:
   minVelocity: 3.5
   maxVelocity: 5
   minFrames: 15
+  maxIdleFrames: 4

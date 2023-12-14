@@ -1,12 +1,9 @@
-using static UnityEngine.InputSystem.InputAction;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using System;
 using System.Linq;
-using UnityEngine.Serialization;
-using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using static UnityEngine.InputSystem.InputAction;
 
 namespace AF
 {
@@ -26,16 +23,20 @@ namespace AF
         [SerializeField] private Button[] knowledgesEquippedInventory;
         [SerializeField] private Image[] knowledgesAvailableInHUD;
 
-        [Space] [Header("Misc")] 
+        [Space]
+        [Header("Misc")]
         [SerializeField] private TMP_Text armorUpgradeText;
         [SerializeField] private TMP_Text swordUpgradeText;
         [SerializeField] private TMP_Text quarterOrderCountText;
         [SerializeField] private TMP_Text goldCountText;
+        [SerializeField] private TMP_Text maxCapacityKnowledgeText;
         [SerializeField] private GameObject[] quarterOrderPieces;
         [Space]
         [SerializeField] private GameObject InventoryPanel;
         [SerializeField] private GameObject PauseMenuPanel;
         private bool isInventoryMenuOpen = false;
+        private int currentCapacityKnowledge;
+        private int maxCapacityKnowledge = 20;
 
         private void Start()
         {
@@ -50,12 +51,12 @@ namespace AF
             }
         }
 
-        private void OpenInventoryMenu() 
+        private void OpenInventoryMenu()
         {
             if (!isInventoryMenuOpen)
             {
                 if (SoundManager.Instance != null)
-                    SoundManager.Instance.PlayFxClip(1);                
+                    SoundManager.Instance.PlayFxClip(1);
 
                 PauseMenuPanel.SetActive(false);
                 InventoryPanel.SetActive(true);
@@ -87,7 +88,7 @@ namespace AF
             quarterOrderCountText.text = playerData.OrderFragments.ToString();
             //Gold Amount
             goldCountText.text = playerData.Gold.ToString();
-            //Gold Pieces Actualization
+            //Heart Pieces Actualization
             for (int i = 0; i < playerData.OrderFragments; i++)
             {
                 quarterOrderPieces[i].SetActive(true);
@@ -96,8 +97,8 @@ namespace AF
 
         private void InitializeKnowledgeSprites()
         {
-            for(int i = 0; i < knowledgesEquippedInventory.Length; i++)
-            {                
+            for (int i = 0; i < knowledgesEquippedInventory.Length; i++)
+            {
                 knowledgesEquippedInventory[i].GetComponent<Image>().sprite = disabledKnowledgeSprite;
                 knowledgesAvailableInHUD[i].sprite = disabledKnowledgeSprite;
                 knowledgesEquippedInventory[i].GetComponent<Button>().enabled = false;
@@ -106,12 +107,12 @@ namespace AF
             for (int i = 0; i < Enum.GetNames(typeof(KnowledgeID)).Length; i++)
             {
                 KnowledgeID currentID = (KnowledgeID)i;
-      
-                if(playerData.KnownKnowledgeDictionary[currentID])
+
+                if (playerData.KnownKnowledgeDictionary[currentID])
                 {
-                    knowledgesKnown[i].GetComponent<Button>().enabled = 
+                    knowledgesKnown[i].GetComponent<Button>().enabled =
                         playerData.AvailableKnowledgeDictionary[currentID] == AvailableKnowledgePosition.NOT_AVAILABLE;
-                    
+
                     knowledgesKnown[i].GetComponent<Image>().sprite = knowledgeKnownSprites[i];
                 }
                 else
@@ -121,21 +122,21 @@ namespace AF
                 }
 
                 AvailableKnowledgePosition position = playerData.AvailableKnowledgeDictionary[currentID];
-                if(position != AvailableKnowledgePosition.NOT_AVAILABLE)
+                if (position != AvailableKnowledgePosition.NOT_AVAILABLE)
                 {
                     knowledgesEquippedInventory[(int)position - 1].GetComponent<Image>().sprite = knowledgeKnownSprites[i];
                     knowledgesAvailableInHUD[(int)position - 1].sprite = knowledgeKnownSprites[i];
                     knowledgesEquippedInventory[(int)position - 1].GetComponent<Button>().enabled = true;
-                }                
+                }
             }
         }
 
         public void InteractEquipped(Transform tr)
-        {            
+        {
             for (int i = 0; i < knowledgesEquippedInventory.Length; i++)
             {
                 if (knowledgesEquippedInventory[i].transform == tr)
-                {                    
+                {
                     AvailableKnowledgePosition position = (AvailableKnowledgePosition)i + 1;
                     KnowledgeID knowledge = playerData.AvailableKnowledgeDictionary.FirstOrDefault(x => x.Value == position).Key;
 
@@ -143,9 +144,12 @@ namespace AF
                     playerData.EveryKnowledgeDictionary[knowledge].Deactivate();
 
                     knowledgesKnown[(int)knowledge].GetComponent<Button>().enabled = true;
-                    
+
                     InitializeKnowledgeSprites();
-                                        
+                    currentCapacityKnowledge = CalculateCurrentKnowledgeCost();
+
+                    maxCapacityKnowledgeText.text = $"Max capacity {currentCapacityKnowledge} / {maxCapacityKnowledge}";
+
                     break;
                 }
             }
@@ -154,20 +158,26 @@ namespace AF
         public void InteractKnowledgeKnown(Transform tr)
         {
             AvailableKnowledgePosition position;
+
             for (int i = 0; i < knowledgesKnown.Length; i++)
             {
-                if (knowledgesKnown[i].transform == tr)  
+                if (knowledgesKnown[i].transform == tr)
                 {
-                    if((position = GetNextKnowledgeSlot()) != AvailableKnowledgePosition.NOT_AVAILABLE)
+                    if ((position = GetNextKnowledgeSlot()) != AvailableKnowledgePosition.NOT_AVAILABLE)
                     {
                         KnowledgeID knowledge = (KnowledgeID)i;
-                        playerData.AvailableKnowledgeDictionary[knowledge] = position;
-                        playerData.EveryKnowledgeDictionary[knowledge].Activate();
+                        if (CanEquipKnowledge(knowledge))
+                        {
 
-                        knowledgesKnown[i].GetComponent<Button>().enabled = false;
-                        
-                        InitializeKnowledgeSprites();
+                            playerData.AvailableKnowledgeDictionary[knowledge] = position;
+                            playerData.EveryKnowledgeDictionary[knowledge].Activate();
 
+                            knowledgesKnown[i].GetComponent<Button>().enabled = false;
+                            currentCapacityKnowledge += playerData.EveryKnowledgeDictionary[knowledge].slotCost;
+                            maxCapacityKnowledgeText.text = $"Max capacity {currentCapacityKnowledge} / {maxCapacityKnowledge}";
+
+                            InitializeKnowledgeSprites();
+                        }
                         break;
                     }
                 }
@@ -185,6 +195,25 @@ namespace AF
             }
 
             return AvailableKnowledgePosition.NOT_AVAILABLE;
+        }
+        private bool CanEquipKnowledge(KnowledgeID knowledgeID)
+        {
+            currentCapacityKnowledge = CalculateCurrentKnowledgeCost();
+            return (currentCapacityKnowledge + playerData.EveryKnowledgeDictionary[knowledgeID].slotCost <= maxCapacityKnowledge);
+        }
+
+        private int CalculateCurrentKnowledgeCost()
+        {
+            int currentCapacityKnowledge = 0;
+
+            for (int i = 0; i < playerData.AvailableKnowledgeDictionary.Count; i++)
+            {
+                if (playerData.AvailableKnowledgeDictionary[(KnowledgeID)i] != AvailableKnowledgePosition.NOT_AVAILABLE)
+                {
+                    currentCapacityKnowledge += playerData.EveryKnowledgeDictionary[(KnowledgeID)i].slotCost;
+                }
+            }
+            return currentCapacityKnowledge;
         }
     }
 }

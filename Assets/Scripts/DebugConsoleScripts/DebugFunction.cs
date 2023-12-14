@@ -15,7 +15,10 @@ public class DebugFunction : MonoBehaviour
 
     public void ChangeScene(string index)
     {
-        GameManager.Instance.LoadNextMap(index, SpawnerPosition.BEGIN);
+        if(index == "Village")
+            GameManager.Instance.LoadNextMap(index, SpawnerPosition.END);
+        else
+            GameManager.Instance.LoadNextMap(index, SpawnerPosition.BEGIN);
     }
 
     public void HitPlayer(int damage)
