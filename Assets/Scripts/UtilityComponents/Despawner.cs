@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 
 namespace AF
 {
-    public class Spawner : MonoBehaviour
+    public class Despawner : MonoBehaviour
     {
         private MapManager mapManager;
         [SerializeField] private SpawnerPosition spawnerPosition;

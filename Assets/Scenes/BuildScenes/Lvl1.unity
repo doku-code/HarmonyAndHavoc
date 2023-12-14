@@ -420233,9 +420233,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5472724728977223842, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
+      propertyPath: portalPrefab
+      value: 
+      objectReference: {fileID: 5165962357874454076, guid: 69fe11a86a7f24c48848e055dc35bf57, type: 3}
+    - target: {fileID: 5472724728977223842, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
       propertyPath: doorToNextLevel
       value: 
       objectReference: {fileID: 1808513665}
+    - target: {fileID: 5796644582866440407, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
+      propertyPath: spawnerPosition
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7054033390371174245, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
       value: 1408
@@ -421227,6 +421235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knowledgeToDrop: 1
+  waitDelay: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
