@@ -9,64 +9,19 @@ using System.Text;
 using UnityEngine.Events;
 
 namespace charles
-{
-    public enum ConversationMessageType
+{       
+    public class GeneralConversationManager : MonoBehaviour
     {
-        NOBUTTONS,
-        SHOWITEMS,
-        SHOWLABELS,
-        OKONLY,
-        YESNO
-    }
-
-    [System.Serializable]
-    public class MyIntEvent : UnityEvent<int>
-    {
-        public int value;        
-    }
-
-    [Serializable]
-    public class ConversationButton
-    {
-        public MyIntEvent evt;
-        public string label;
-    }
-
-    [Serializable]
-    public class MerchantItem
-    {
-        [TextArea]
-        public string label;
-        public int price;
-    }
-
-    [Serializable]
-    public class ConversationMessage
-    {
-        [TextArea]
-        public string text;
-        public ConversationButton[] buttons;
-        public ConversationMessageType type;
-    }
-
-    public abstract class MerchantConversationManager : MonoBehaviour
-    {
-        [SerializeField] public ConversationMessage SellPitchMessage;
-        [SerializeField] public ConversationMessage NotEnoughMoneyMessage;
-        [SerializeField] public ConversationMessage AlreadyFullMessage;
-        [SerializeField] public ConversationMessage ThankYouMessage;
-        [SerializeField] public MerchantItem[] Items;
-
+        [SerializeField] public ConversationMessage[] messages;
+        
         [Header("UI")]
         [SerializeField] protected Canvas questionCanvas;
         [SerializeField] protected PlayerData pData;
         [SerializeField] protected Button[] answerButtons;        
-
-        [SerializeField] protected int priceIncrease = 10;
-        [SerializeField] protected float typingSpeed = 0.08f;
         
+        [SerializeField] protected float typingSpeed = 0.08f;
+
         protected TMP_Text textComponent;
-        protected bool buttonPressed = false;
         protected bool isDisplayingMessage = false;
         protected float timeSinceTypingEnded = 0f;
         protected Coroutine displayCoroutine;
@@ -112,30 +67,29 @@ namespace charles
             timeSinceTypingEnded = 0f;
         }
 
-        public void DisplayMerchantMessage(ConversationMessage message)
-        {           
-            if(message.type == ConversationMessageType.SHOWITEMS
-                && (message.buttons.Length != answerButtons.Length 
-                || answerButtons.Length != Items.Length))
-            {
-                Debug.LogError("Number of conversation buttons, answer buttons and items must be equal for a message of type 'SHOWITEMS'!");
-                return;
-            }
+        public void DisplayConversationMessage()
+        {
+            DisplayConversationMessage(messages[0]);
+        }
+        
+        public void DisplayConversationMessage(int messageIndex)
+        {
+            DisplayConversationMessage(messages[messageIndex]);
+        }
 
+        public void DisplayConversationMessage(ConversationMessage message)
+        {                       
             if (displayCoroutine != null)
             {
                 StopCoroutine(displayCoroutine);
             }
 
-            buttonPressed = false;
-
-            //textComponent.text = message.text;
-
             displayCoroutine = StartCoroutine(DisplayMessage(message.text));
             
             DeactivateUnusedButtons(message);
 
-            if (message.type == ConversationMessageType.NOBUTTONS)
+            if (message.type == ConversationMessageType.NOBUTTONS
+                || message.type == ConversationMessageType.SHOWITEMS)
             {
                 return;
             }
@@ -156,14 +110,6 @@ namespace charles
 
                 switch (message.type)
                 {
-                    case ConversationMessageType.SHOWITEMS:
-                        if (i < Items.Length)
-                        {
-                            MerchantItem item = Items[i];
-                            label = string.IsNullOrEmpty(Items[i].label) ? "No MerchantItem" : Items[i].label;
-                            label += " - Price: $" + Items[i].price;
-                        }
-                        break;
                     case ConversationMessageType.SHOWLABELS:
                         label = message.buttons[i].label;
                         break;
@@ -193,7 +139,7 @@ namespace charles
             }                        
         }
 
-        private void DeactivateUnusedButtons(ConversationMessage message)
+        protected void DeactivateUnusedButtons(ConversationMessage message)
         {
             int length = message.type == ConversationMessageType.NOBUTTONS ? 0 : message.buttons.Length;
             if (length < answerButtons.Length)
@@ -206,31 +152,6 @@ namespace charles
             }
         }
 
-        public void SellItem(int itemIndex)
-        {
-            //Debug.Log($"SellItem() called with arg {itemIndex} Items[itemIndex].price={Items[itemIndex].price}");
-
-            if(CheckIfFull())
-            {
-                DisplayMerchantMessage(AlreadyFullMessage);
-            }
-            else if (pData.Gold >= Items[itemIndex].price)
-            {
-                pData.Gold -= Items[itemIndex].price;
-                ItemEffect(itemIndex);
-                Items[itemIndex].price += priceIncrease;
-
-                DisplayMerchantMessage(ThankYouMessage);
-            }
-            else
-            {
-                DisplayMerchantMessage(NotEnoughMoneyMessage);
-            }
-            buttonPressed = true;
-        }
-
-        public abstract void ItemEffect(int itemIndex);
-
-        public abstract bool CheckIfFull();
+        public virtual void DoEffect() {}
     }
 }

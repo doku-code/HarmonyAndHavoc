@@ -17223,34 +17223,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SellPitchMessage:
     text: Hi, I can heal you for 50 Gold.
-    events:
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 220606635}
-          m_TargetAssemblyTypeName: charles.MerchantConversationManager, Assembly-CSharp
-          m_MethodName: SellItem
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      value: 0
+    buttons:
+    - evt:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 220606635}
+            m_TargetAssemblyTypeName: charles.MerchantConversationManager, Assembly-CSharp
+            m_MethodName: SellItem
+            m_Mode: 3
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+        value: 0
+      label: 
     type: 1
   NotEnoughMoneyMessage:
     text: You don't have enough please come back later.
-    events: []
+    buttons: []
     type: 0
   AlreadyFullMessage:
     text: You are already feeling well.
-    events: []
+    buttons: []
     type: 0
   ThankYouMessage:
     text: Thank you so much for the purchase!
-    events: []
+    buttons: []
     type: 0
   Items:
   - label: Heal
@@ -17523,7 +17525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6041548899316055027, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: m_Name
-      value: ConversationTriggerWell
+      value: ConversationTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 6041548899316055027, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: m_IsActive
@@ -17534,9 +17536,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
+      propertyPath: unlockable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: questionIdx
       value: 
-      objectReference: {fileID: 438261363}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
+      propertyPath: conversation
+      value: 
+      objectReference: {fileID: 438261362}
     - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: conversationPanel
       value: 
@@ -22146,7 +22156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6041548899316055027, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: m_Name
-      value: ConversationTriggerWell
+      value: ConversationTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: Canvas2
@@ -27379,10 +27389,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 438261359}
-  - component: {fileID: 438261363}
   - component: {fileID: 438261358}
   - component: {fileID: 438261357}
   - component: {fileID: 438261361}
+  - component: {fileID: 438261362}
   m_Layer: 0
   m_Name: Gravedigger
   m_TagString: Untagged
@@ -27576,7 +27586,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &438261363
+--- !u!114 &438261362
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27585,28 +27595,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 438261356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d865e667da21b444b62fd92314b3018, type: 3}
+  m_Script: {fileID: 11500000, guid: 4805683b7e164e6408aa1d4e4d0e673c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Conversations:
-  - questionText: Beware, seeker of realms unseen. To open the well, balance on a
-      razor's edge. The dance of good and evil awaits, a choice that echoes through
-      eternity. Prove your worth, and the well shall reveal its secrets.
-    answers:
-    - answerText: Open the well
-      price: 0
-      includePrice: 0
-  - questionText: 'I will start digging your grave. '
-    answers: []
-  questionCanvas: {fileID: 785375693}
+  messages:
+  - text: "Beware, seeker of realms unseen. To open the well, balance on a razor's
+      edge. The dance of good and evil awaits, a choice that echoes through eternity.
+      Prove your worth, and the well shall reveal its secrets.\r"
+    buttons:
+    - evt:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 438261362}
+            m_TargetAssemblyTypeName: GraveDiggerConversationManager, Assembly-CSharp
+            m_MethodName: DoEffect
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+        value: 0
+      label: Open the well
+    type: 2
+  - text: I will start digging your grave.
+    buttons: []
+    type: 0
+  questionCanvas: {fileID: 785375694}
   pData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
-  firstAnswerButton: {fileID: 785375695}
-  secondAnswerButton: {fileID: 0}
-  goldForHealing: 50
-  goldForArmor: 10
-  goldForWeapon: 10
-  priceIncrease: 10
-  questionIndex: 0
+  answerButtons:
+  - {fileID: 785375693}
   typingSpeed: 0.08
 --- !u!1 &453240229
 GameObject:
@@ -40231,49 +40252,53 @@ MonoBehaviour:
   SellPitchMessage:
     text: "Hey I do have some new armors and weapons for you if you can pay the right
       price !\r"
-    events:
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 628576837}
-          m_TargetAssemblyTypeName: charles.MerchantConversationManager, Assembly-CSharp
-          m_MethodName: SellItem
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      value: 0
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 628576837}
-          m_TargetAssemblyTypeName: charles.MerchantConversationManager, Assembly-CSharp
-          m_MethodName: SellItem
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 1
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      value: 0
+    buttons:
+    - evt:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 628576837}
+            m_TargetAssemblyTypeName: charles.MerchantConversationManager, Assembly-CSharp
+            m_MethodName: SellItem
+            m_Mode: 3
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+        value: 0
+      label: 
+    - evt:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 628576837}
+            m_TargetAssemblyTypeName: charles.MerchantConversationManager, Assembly-CSharp
+            m_MethodName: SellItem
+            m_Mode: 3
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 1
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+        value: 0
+      label: 
     type: 1
   NotEnoughMoneyMessage:
     text: 'You do not have enough come back later ! '
-    events: []
+    buttons: []
     type: 0
   AlreadyFullMessage:
     text: 
-    events: []
+    buttons: []
     type: 0
   ThankYouMessage:
     text: 'Thank you for the purchase ! '
-    events: []
+    buttons: []
     type: 0
   Items:
   - label: Weapon Upgrade
@@ -47629,11 +47654,11 @@ PrefabInstance:
     - target: {fileID: 4125121077574616502, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 438261363}
+      objectReference: {fileID: 0}
     - target: {fileID: 4125121077574616502, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 438261363}
+      objectReference: {fileID: 0}
     - target: {fileID: 4125121077574616502, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 1
@@ -47807,12 +47832,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5724791317186332757, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
   m_PrefabInstance: {fileID: 785375690}
   m_PrefabAsset: {fileID: 0}
---- !u!223 &785375693 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 3969171611862455871, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
-  m_PrefabInstance: {fileID: 785375690}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &785375695 stripped
+--- !u!114 &785375693 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4125121077574616502, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
   m_PrefabInstance: {fileID: 785375690}
@@ -47823,6 +47843,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &785375694 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 3969171611862455871, guid: ed88ca6ce763b774ab371139eae50d6c, type: 3}
+  m_PrefabInstance: {fileID: 785375690}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &786905673
 GameObject:
   m_ObjectHideFlags: 0
@@ -83108,9 +83133,9 @@ GameObject:
   - component: {fileID: 1099223241}
   - component: {fileID: 1099223240}
   - component: {fileID: 1099223239}
-  - component: {fileID: 1099223242}
+  - component: {fileID: 1099223243}
   m_Layer: 0
-  m_Name: Vendor
+  m_Name: Storyteller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83206,7 +83231,7 @@ Transform:
   - {fileID: 800373812}
   m_Father: {fileID: 1321231738}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1099223242
+--- !u!114 &1099223243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83215,14 +83240,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1099223238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d865e667da21b444b62fd92314b3018, type: 3}
+  m_Script: {fileID: 11500000, guid: 33c70e180188f0d4cad7b3889c2d6b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Conversations:
-  - questionText: 'In shadows deep, a gravedigger''s song,
+  messages:
+  - text: 'In shadows deep, a gravedigger''s song,
 
-      Wielding spade,
-      a well unlocks the throng.
+      Wielding spade, a well
+      unlocks the throng.
 
       A well between realms, where secrets swirl,
 
@@ -83233,16 +83258,11 @@ MonoBehaviour:
       moonlit spells,
 
       A gravedigger''s key, unlocking wells.'
-    answers: []
+    buttons: []
+    type: 0
   questionCanvas: {fileID: 7125326813862472713}
   pData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
-  firstAnswerButton: {fileID: 0}
-  secondAnswerButton: {fileID: 0}
-  goldForHealing: 50
-  goldForArmor: 10
-  goldForWeapon: 10
-  priceIncrease: 10
-  questionIndex: 0
+  answerButtons: []
   typingSpeed: 0.08
 --- !u!1 &1101098900
 GameObject:
@@ -294058,7 +294078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6041548899316055027, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: m_Name
-      value: ConversationTriggerWell
+      value: ConversationTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: Canvas2
@@ -336918,16 +336938,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6041548899316055027, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: m_Name
-      value: ConversationTriggerWell
+      value: ConversationTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 6041548899316055027, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
+      propertyPath: unlockable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: questionIdx
       value: 
-      objectReference: {fileID: 1099223242}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
+      propertyPath: conversation
+      value: 
+      objectReference: {fileID: 1099223243}
     - target: {fileID: 6903519198486465010, guid: ede9c3a664fa6944b9b947ffb7d32faa, type: 3}
       propertyPath: conversationPanel
       value: 

@@ -7,10 +7,10 @@ namespace charles
     public class OnTriggerConversation : MonoBehaviour
     {
         [SerializeField] GameObject conversationPanel;
-        [SerializeField] ConversationManager questionIdx;
+        [SerializeField] GeneralConversationManager conversation;
         private PlayerData data;
         private Coroutine displayCoroutine;
-        [SerializeField] private bool keepTriggerable = true;
+        [SerializeField] private bool unlockable = true;
 
         void Awake()
         {
@@ -19,23 +19,27 @@ namespace charles
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("Player") && (!data.CurrentPlayerMapProgression[GameManager.Instance.currentMap] || keepTriggerable))
+            if (collision.CompareTag("Player"))
             {
                 conversationPanel.SetActive(true);
 
-                /*if (questionIdx.Conversations.Length > 0)
+                if (!data.CurrentPlayerMapProgression[GameManager.Instance.currentMap] || !unlockable)
                 {
-                    if (displayCoroutine != null)
+                    /*if (conversation.Conversations.Length > 0)
                     {
-                        StopCoroutine(displayCoroutine);
-                    }
-                    displayCoroutine = StartCoroutine(questionIdx.DisplayMessage(questionIdx.Conversations[0].questionText));
-                }*/
-                if (displayCoroutine != null)
-                {
-                    StopCoroutine(displayCoroutine);
+                        if (displayCoroutine != null)
+                        {
+                            StopCoroutine(displayCoroutine);
+                        }
+                        displayCoroutine = StartCoroutine(conversation.DisplayMessage(conversation.Conversations[0].questionText));
+                    }*/
+
+                    conversation.DisplayConversationMessage();
                 }
-                displayCoroutine = questionIdx.DisplayConversation(0);
+                else
+                {
+                    conversation.DisplayConversationMessage(1);
+                }
             }
         }
 
@@ -43,14 +47,12 @@ namespace charles
         {
             conversationPanel.SetActive(false);
 
-            if (displayCoroutine != null)
-            {
-                StopCoroutine(displayCoroutine);
-            }
-            if (questionIdx.Conversations.Length > 0)
+            conversation.StopMessage();
+
+            /*if (conversation.messages.Length > 0)
             {  
-                questionIdx.questionIndex = 0;
-            }
+                conversation.questionIndex = 0;
+            }*/
         }
     }
 }
