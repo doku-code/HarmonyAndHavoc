@@ -88,6 +88,8 @@ namespace AF
             quarterOrderCountText.text = playerData.OrderFragments.ToString();
             //Gold Amount
             goldCountText.text = playerData.Gold.ToString();
+            //Calculate knowledge cost 
+            currentCapacityKnowledge = CalculateCurrentKnowledgeCost();
             //Heart Pieces Actualization
             for (int i = 0; i < playerData.OrderFragments; i++)
             {
