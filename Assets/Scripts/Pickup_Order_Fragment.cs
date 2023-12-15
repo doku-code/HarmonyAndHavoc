@@ -15,6 +15,7 @@ namespace charles
                 playerData.OrderFragments += 1;
                 gameObject.SetActive(false);
                 SoundManager.Instance.PlayFxClip(clip);
+                playerData.ActualOrder = playerData.MaxOrder;
             }
         }
     }
