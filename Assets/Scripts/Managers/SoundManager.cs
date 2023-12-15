@@ -61,6 +61,14 @@ namespace AF
             fxSource.PlayOneShot(clip);
         }
 
+        public void PlayFullTimeFxClip(AudioClip clip)
+        {
+            if (!fxSource.isPlaying)
+            {
+                fxSource.PlayOneShot(clip);
+            }
+        }
+
         public void PlayAmbientClip(AudioClip clip)
         {
             ambientSource.loop = true;
