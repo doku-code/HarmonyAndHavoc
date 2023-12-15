@@ -43,7 +43,7 @@ namespace charles
                     coin.SetActive(true);
                 }
 
-                coin.transform.position = transform.position;
+                coin.transform.position = transform.position + new Vector3(0,1f,0);
 
                 // Old coin dropping code
                 /*float force = Random.Range(minForce, maxForce);
