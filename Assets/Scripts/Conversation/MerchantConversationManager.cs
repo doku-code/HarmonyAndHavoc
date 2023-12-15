@@ -159,9 +159,10 @@ namespace charles
                     case ConversationMessageType.SHOWITEMS:
                         if (i < Items.Length)
                         {
+                            int newPrice = GetItemInflatedPrice(i);
                             MerchantItem item = Items[i];
                             label = string.IsNullOrEmpty(Items[i].label) ? "No MerchantItem" : Items[i].label;
-                            label += " - Price: $" + Items[i].price;
+                            label += " - Price: $" + newPrice;
                         }
                         break;
                     case ConversationMessageType.SHOWLABELS:
