@@ -13,7 +13,7 @@ namespace charles
             {
                 if (SoundManager.Instance is not null)
                 {
-                    SoundManager.Instance.PlayFxClip(3);
+                    SoundManager.Instance.PlayFxClip(2);
                 }
                 gameObject.SetActive(false);
             }

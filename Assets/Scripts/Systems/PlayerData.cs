@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace AF
 {
@@ -197,6 +199,8 @@ namespace AF
                     }
                 }
             }
+
+            CurrentPlayerMapProgression.Clear();
 
             maxOrder = initialMaxOrder;
             ActualOrder = maxOrder;
