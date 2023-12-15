@@ -4,8 +4,9 @@ using charles;
 using JFM;
 using UnityEngine;
 
-public class OnBossKill : MonoBehaviour
+public class DropKnowledge : MonoBehaviour
 {
+    [SerializeField] private KnowledgeID knowledgeToDrop;
     [SerializeField] private float waitDelay = 2.0f;
     private EnemyController controller;
 
@@ -13,8 +14,6 @@ public class OnBossKill : MonoBehaviour
     {        
         if (GameManager.Instance.data.CurrentPlayerMapProgression[GameManager.Instance.currentMap])
         {
-            //Destroy(gameObject);
-            transform.position = new Vector3(9999.0f, 0.0f, 0.0f);
             return;
         }
 
@@ -30,7 +29,7 @@ public class OnBossKill : MonoBehaviour
     private IEnumerator OnKillCoroutine()
     {
         yield return new WaitForSeconds(waitDelay);
-                
-        MapManager.Instance.UnlockDoor();        
+
+        GameManager.Instance.data.LearnKnowledge(knowledgeToDrop);
     }
 }

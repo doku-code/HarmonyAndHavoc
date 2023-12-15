@@ -14301,6 +14301,7 @@ GameObject:
   - component: {fileID: 876748736}
   - component: {fileID: 876748735}
   - component: {fileID: 876748734}
+  - component: {fileID: 876748742}
   m_Layer: 8
   m_Name: MiniBoss Skeleton
   m_TagString: Enemy
@@ -14555,6 +14556,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &876748742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876748732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21750a635f9e4d141947f9f096ca7754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knowledgeToDrop: 0
+  waitDelay: 2
 --- !u!1 &878758471
 GameObject:
   m_ObjectHideFlags: 0
@@ -419680,6 +419695,8 @@ GameObject:
   - component: {fileID: 1211795116098788628}
   - component: {fileID: 765222703487289267}
   - component: {fileID: 2781204692164093619}
+  - component: {fileID: 9008412938256993954}
+  - component: {fileID: 9008412938256993953}
   m_Layer: 8
   m_Name: Troll
   m_TagString: Enemy
@@ -421625,6 +421642,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c3286ffecfad2e4faac2c5e90704fe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitDelay: 2
+--- !u!114 &9008412938256993953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373996881212869375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ae38efe36fc184fbbffb2c52906f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitDelay: 2
+--- !u!114 &9008412938256993954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373996881212869375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21750a635f9e4d141947f9f096ca7754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   knowledgeToDrop: 1

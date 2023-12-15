@@ -416,7 +416,7 @@ namespace JFM
 
             if (highestY - transform.position.y > maxFallDamageHeight)
             {
-                Debug.Log($" ~ ~ ~ D A M A G E ~ ~ ~ highestY={highestY} transform.position.y={transform.position.y}");
+                //Debug.Log($" ~ ~ ~ D A M A G E ~ ~ ~ highestY={highestY} transform.position.y={transform.position.y}");
                 currentFallDamage = CalculateFallDamage(highestY - transform.position.y - maxFallDamageHeight);
                 return true;
             }
@@ -587,13 +587,13 @@ namespace JFM
             stateMachine.ChangeState(state);
         }
 
-        void OnGUI()
+        /*void OnGUI()
         {
             if (GUI.Button(new Rect(10, 10, 100, 30), "Vanish"))
             {
                 Vanish();
             }
-        }
+        }*/
 
         public void Vanish()
         {
