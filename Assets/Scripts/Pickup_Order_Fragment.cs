@@ -7,9 +7,17 @@ namespace charles
     {
         public PlayerData playerData;
         public AudioClip clip;
+
+        private void Awake()
+        {
+            if(GameManager.Instance.data.CurrentPlayerMapProgression[GameManager.Instance.currentMap])
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
-
             if (other.CompareTag("Player"))
             {
                 playerData.OrderFragments += 1;
