@@ -209,16 +209,16 @@ namespace charles
         public void SellItem(int itemIndex)
         {
             //Debug.Log($"SellItem() called with arg {itemIndex} Items[itemIndex].price={Items[itemIndex].price}");
+            int newPrice = GetItemInflatedPrice(itemIndex);
 
             if(CheckIfFull())
             {
                 DisplayMerchantMessage(AlreadyFullMessage);
             }
-            else if (pData.Gold >= Items[itemIndex].price)
+            else if (pData.Gold >= newPrice)
             {
-                pData.Gold -= Items[itemIndex].price;
-                ItemEffect(itemIndex);
-                Items[itemIndex].price += priceIncrease;
+                pData.Gold -= newPrice;
+                ItemEffect(itemIndex);                
 
                 DisplayMerchantMessage(ThankYouMessage);
             }
