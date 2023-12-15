@@ -920,6 +920,12 @@ namespace JFM
             attackCoolDownStartTime = Time.time;
         }
 
+        private void OnDestroy()
+        {
+            playerData.OnDeadDelegate -= OnDead;
+            playerData.OnOrderDelegate -= OnOrderChange;
+        }
+
         private void FixedUpdate()
         {
             SetAirborneInfo();
