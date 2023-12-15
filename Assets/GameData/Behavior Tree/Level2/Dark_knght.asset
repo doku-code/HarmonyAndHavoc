@@ -22,12 +22,12 @@ MonoBehaviour:
     m_Bits: 128
   attackCooldown: 3
   attackDistance: 2
-  attackDamage: 12
+  attackDamage: 20
   detectionDistance: 4
   detectForwardOnly: 1
   leaveDistance: 5
   attackAnimString: Combo1
-  attackClipName: Attack1
+  attackClipName: Combo1
   comboSoundIdx: 0
   animatorLayer: 0
   moveSpeed: 1000
@@ -66,21 +66,22 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 3d679d781546b31468fcf5b7ed1b193d
-  position: {x: -169.7143, y: 669.71423}
+  position: {x: -169.71426, y: 669.7143}
   Description: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  patrolRadius: 3
+  patrolRadius: 10
   PatrolAnimString: Run
   moveSpeed: 1000
-  maxSpeed: 2
+  maxSpeed: 6
   distBeforeChanging: 1
   obstacleDistance: 1.5
-  detectionDistance: 4
+  detectionDistance: 8
   detectForwardOnly: 1
   holeDistance: {x: 1, y: 1.5}
-  turningAroundWaitDuration: 2.5
+  turningAroundMinWaitDuration: 2
+  turningAroundMaxWaitDuration: 2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,12 +126,12 @@ MonoBehaviour:
     m_Bits: 128
   attackCooldown: 3
   attackDistance: 2
-  attackDamage: 14
+  attackDamage: 25
   detectionDistance: 4
   detectForwardOnly: 1
   leaveDistance: 5
   attackAnimString: Combo3
-  attackClipName: Attack3
+  attackClipName: Combo3
   comboSoundIdx: 0
   animatorLayer: 0
   moveSpeed: 1000
@@ -199,12 +200,12 @@ MonoBehaviour:
     m_Bits: 128
   attackCooldown: 3
   attackDistance: 2
-  attackDamage: 12
+  attackDamage: 22
   detectionDistance: 4
   detectForwardOnly: 1
   leaveDistance: 5
   attackAnimString: Combo2
-  attackClipName: Attack2
+  attackClipName: Combo2
   comboSoundIdx: 0
   animatorLayer: 0
   moveSpeed: 1000
