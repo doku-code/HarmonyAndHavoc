@@ -74,13 +74,14 @@ MonoBehaviour:
   patrolRadius: 3
   PatrolAnimString: Run
   moveSpeed: 1000
-  maxSpeed: 2
+  maxSpeed: 4
   distBeforeChanging: 1
   obstacleDistance: 1.5
-  detectionDistance: 4
+  detectionDistance: 8
   detectForwardOnly: 1
   holeDistance: {x: 1, y: 1.5}
-  turningAroundWaitDuration: 2.5
+  turningAroundMinWaitDuration: 2
+  turningAroundMaxWaitDuration: 2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
