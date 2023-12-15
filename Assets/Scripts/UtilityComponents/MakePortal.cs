@@ -9,10 +9,11 @@ public class MakePortal : MonoBehaviour
     [SerializeField] private float waitDelay = 2.0f;
     private EnemyController controller;
 
-    void Awake()
+    void Start()
     {        
         if (GameManager.Instance.data.CurrentPlayerMapProgression[GameManager.Instance.currentMap])
         {
+            Debug.Log($"GameManager.Instance.currentMap={GameManager.Instance.currentMap}");
             return;
         }
 

@@ -14,8 +14,7 @@ namespace AF
         [SerializeField] private PlayerData playerData;
         [Space]
         [Header("Knowledge Buttons"), Tooltip("All the Knowledge Button from the inventory UI")]
-        [SerializeField] private GameObject[] knowledgesKnown;
-        [SerializeField] private Sprite[] knowledgeKnownSprites;
+        [SerializeField] private GameObject[] knowledgesKnown;        
         [Space]
         [SerializeField] private Sprite disabledKnowledgeSprite;
         [Space]
@@ -115,7 +114,7 @@ namespace AF
                     knowledgesKnown[i].GetComponent<Button>().enabled =
                         playerData.AvailableKnowledgeDictionary[currentID] == AvailableKnowledgePosition.NOT_AVAILABLE;
 
-                    knowledgesKnown[i].GetComponent<Image>().sprite = knowledgeKnownSprites[i];
+                    knowledgesKnown[i].GetComponent<Image>().sprite = playerData.knowledgeImgBank[i];
                 }
                 else
                 {
@@ -126,8 +125,8 @@ namespace AF
                 AvailableKnowledgePosition position = playerData.AvailableKnowledgeDictionary[currentID];
                 if (position != AvailableKnowledgePosition.NOT_AVAILABLE)
                 {
-                    knowledgesEquippedInventory[(int)position - 1].GetComponent<Image>().sprite = knowledgeKnownSprites[i];
-                    knowledgesAvailableInHUD[(int)position - 1].sprite = knowledgeKnownSprites[i];
+                    knowledgesEquippedInventory[(int)position - 1].GetComponent<Image>().sprite = playerData.knowledgeImgBank[i];
+                    knowledgesAvailableInHUD[(int)position - 1].sprite = playerData.knowledgeImgBank[i];
                     knowledgesEquippedInventory[(int)position - 1].GetComponent<Button>().enabled = true;
                 }
             }
