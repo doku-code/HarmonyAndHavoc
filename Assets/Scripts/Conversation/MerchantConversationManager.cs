@@ -232,5 +232,7 @@ namespace charles
         public abstract void ItemEffect(int itemIndex);
 
         public abstract bool CheckIfFull();
+
+        public abstract int GetItemInflatedPrice(int itemIndex);
     }
 }

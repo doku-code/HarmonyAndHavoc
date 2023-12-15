@@ -55,7 +55,7 @@ namespace charles
 
         public void TurnSide(float side)
         {
-            transform.localScale = new Vector3(side, 1.0f, 1.0f);
+            transform.localScale = new Vector3(side * transform.localScale.x, 1.0f, 1.0f);
             blackboard.healthBar.localScale = new Vector3(-side, 1.0f, 1.0f);
             //Debug.Log($"blackboard.healthBar.localScale.x={blackboard.healthBar.localScale.x} side={side} blackboard.healthBar.gameObject={blackboard.healthBar.gameObject.name}");            
         }

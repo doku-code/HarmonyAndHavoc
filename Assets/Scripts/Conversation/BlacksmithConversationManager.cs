@@ -25,4 +25,18 @@ public class BlacksmithConversationManager : MerchantConversationManager
     {
         return false;
     }
+
+    public override int GetItemInflatedPrice(int itemIndex)
+    {
+        switch (itemIndex)
+        {
+            case 0:
+                return Items[itemIndex].price + pData.WeaponUpgrade * priceIncrease;
+
+            case 1:
+                return Items[itemIndex].price + pData.ArmorUpgrade * priceIncrease;
+        }
+
+        return 0;
+    }
 }

@@ -14,4 +14,9 @@ public class HealerConversationManager : MerchantConversationManager
     {
         return pData.ActualOrder == pData.MaxOrder;
     }
+
+    public override int GetItemInflatedPrice(int itemIndex)
+    {
+        return pData.TotalHeals * priceIncrease + Items[0].price;
+    }
 }

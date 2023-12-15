@@ -14,7 +14,7 @@ namespace JFM
 
             RaycastHit2D[] hitRecs = Physics2D.CircleCastAll(position, radius, direction, distance, layerMask);
             //Debug.Log($"hitRecs.Length={hitRecs.Length}");
-            Platformer2DUtilities.DebugDrawCircle(position, radius, Color.yellow);
+            //Platformer2DUtilities.DebugDrawCircle(position, radius, Color.yellow);
             if (hitRecs.Length > 0)
             {
                 int i = 0;
