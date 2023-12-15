@@ -21,7 +21,10 @@ namespace charles
         }
         private void OnDestroy()
         {
-            enemyController.OnHealthDecrease -= UpdateHealthBar;
+            if (enemyController is not null)
+            {
+                enemyController.OnHealthDecrease -= UpdateHealthBar;
+            }
         }
     }
 }

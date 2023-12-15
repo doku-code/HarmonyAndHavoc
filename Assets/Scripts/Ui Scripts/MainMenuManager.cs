@@ -174,9 +174,9 @@ namespace AF
 
         public void MakeNewGame()
         {
-            GameManager.Instance.LoadGame();
-            ChaosOrderSystem.Instance.ResetChaosLevel();
             GameManager.Instance.player.GetComponent<PlayerController>().Data.InitializeData();
+            GameManager.Instance.LoadGame();
+            ChaosOrderSystem.Instance.ResetChaosLevel();            
         }
 
         public void ContinueGame()

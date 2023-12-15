@@ -53,15 +53,14 @@ namespace AF
 
         private void OnReadyToLoadMap()
         {
-            StartCoroutine(LoadYourAsyncScene(nextMapToLoad, () =>
-            {
-                currentMap = nextMapToLoad;
+            currentMap = nextMapToLoad;
 
+            StartCoroutine(LoadYourAsyncScene(nextMapToLoad, () =>
+            {                
                 if (nextMapToLoad != "MainMenu" && nextMapToLoad != "Ending")
                 {
                     PlacePlayer(nextSpawnPosition);
-                    LoadSceneMenu();
-                    CheckCurrentProgression();
+                    LoadSceneMenu();                    
                 }
 
                 if (OnLoadMapDelegate is not null)
@@ -121,18 +120,6 @@ namespace AF
                     playerGO.transform.position =
                         MapManager.Instance.spawnerEnd.transform.position;
                     break;
-            }
-        }
-
-        void CheckCurrentProgression()
-        {
-            if (!data.CurrentPlayerMapProgression.ContainsKey(currentMap))
-            {
-                data.CurrentPlayerMapProgression.Add(currentMap, false);
-            }
-            else if (data.CurrentPlayerMapProgression[currentMap])
-            {
-                MapManager.Instance.UnlockDoor();
             }
         }
 

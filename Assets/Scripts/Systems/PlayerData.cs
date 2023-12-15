@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -201,6 +199,12 @@ namespace AF
             }
 
             CurrentPlayerMapProgression.Clear();
+            for(int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+            {
+                string sceneName = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
+                Debug.Log($"scene.name={sceneName}");
+                CurrentPlayerMapProgression.Add(sceneName, false);
+            }
 
             maxOrder = initialMaxOrder;
             ActualOrder = maxOrder;
@@ -255,6 +259,14 @@ namespace AF
         {
             KnownKnowledgeDictionary[id] = true;
             OnLearningKnowledge(id);
+        }
+
+        public void DebugDictionary<TKey, TValue>(Dictionary<TKey, TValue> dictionary)
+        {
+            foreach (var keyValue in dictionary)
+            {
+                Debug.Log($"{keyValue.Key} -> {keyValue.Value}");
+            }
         }
     }
 }

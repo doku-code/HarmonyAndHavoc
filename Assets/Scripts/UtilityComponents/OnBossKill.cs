@@ -10,11 +10,10 @@ public class OnBossKill : MonoBehaviour
     private EnemyController controller;
 
     void Awake()
-    {        
+    {
         if (GameManager.Instance.data.CurrentPlayerMapProgression[GameManager.Instance.currentMap])
         {
-            //Destroy(gameObject);
-            transform.position = new Vector3(9999.0f, 0.0f, 0.0f);
+            Destroy(gameObject);
             return;
         }
 

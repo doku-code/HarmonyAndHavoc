@@ -19,8 +19,6 @@ namespace AF
 
         public static MapManager Instance;
 
-        private PlayerData data;
-
         void Start()
         {
             if (Instance != null)
@@ -35,12 +33,17 @@ namespace AF
             if(SoundManager.Instance != null)
                 SoundManager.Instance.PlayAmbientClip(levelAudio.LevelAmbient);
             
+            if (GameManager.Instance.data.CurrentPlayerMapProgression[GameManager.Instance.currentMap])
+            {
+                UnlockDoor();
+            }
         }
 
         public void UnlockDoor()
         {
             doorToNextLevel.SetActive(false);
-            
+
+            Debug.Log($"UnlockDoor(): GameManager.Instance.currentMap={GameManager.Instance.currentMap}");
             GameManager.Instance.data.CurrentPlayerMapProgression[GameManager.Instance.currentMap] = true;
         }
 
