@@ -7,23 +7,30 @@ using UnityEngine;
 public class BossSoundActivation : MonoBehaviour
 {
     private bool isBossSoundPlaying;
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         bool isBossDead = GameManager.Instance.data.CurrentPlayerMapProgression[GameManager.Instance.currentMap];
-        if (isBossDead && !isBossSoundPlaying && SoundManager.Instance != null)
+
+        if (other.CompareTag("Player") && other is CapsuleCollider2D)
         {
-            SoundManager.Instance.PlayAmbientClip(MapManager.Instance.levelAudio.LevelBossAmbient);
-            isBossSoundPlaying = true;
+            if (!isBossDead && !isBossSoundPlaying && SoundManager.Instance != null)
+            {
+                SoundManager.Instance.PlayAmbientClip(MapManager.Instance.levelAudio.LevelBossAmbient);
+                isBossSoundPlaying = true;
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (isBossSoundPlaying && SoundManager.Instance != null)
+        if (other.CompareTag("Player") && other is CapsuleCollider2D)
         {
-            SoundManager.Instance.PlayAmbientClip(MapManager.Instance.levelAudio.LevelAmbient);
-            isBossSoundPlaying = false;
+            if (isBossSoundPlaying && SoundManager.Instance != null)
+            {
+                SoundManager.Instance.PlayAmbientClip(MapManager.Instance.levelAudio.LevelAmbient);
+                isBossSoundPlaying = false;
+            }
         }
     }
 }

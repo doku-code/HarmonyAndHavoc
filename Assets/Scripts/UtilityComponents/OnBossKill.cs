@@ -24,6 +24,7 @@ public class OnBossKill : MonoBehaviour
 
     private void OnKill()
     {
+        SoundManager.Instance.PlayAmbientClip(MapManager.Instance.levelAudio.LevelAmbient);
         StartCoroutine(OnKillCoroutine());
     }
 

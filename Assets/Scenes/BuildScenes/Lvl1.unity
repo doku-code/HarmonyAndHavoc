@@ -420655,8 +420655,12 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7054033390371174245, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054033390371174245, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
-      value: 1408
+      value: 5376
       objectReference: {fileID: 0}
     - target: {fileID: 7264106409391978707, guid: ac512faa345f363408b6c09604ec81b0, type: 3}
       propertyPath: m_LocalPosition.x
