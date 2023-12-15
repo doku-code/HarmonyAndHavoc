@@ -74,10 +74,10 @@ namespace charles
                 yield return new WaitForSeconds(spawnDelay);
             }
 
-            if (SoundManager.Instance is not null)
+            /*if (SoundManager.Instance is not null)
             {
                 SoundManager.Instance.PlayFxClip(2);
-            }            
+            }  */          
         }
     }
 }
