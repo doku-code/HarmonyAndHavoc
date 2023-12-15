@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   orderUpgradeValue: 25
-  playerBaseDamage: 4
+  playerBaseDamage: 2
   knowledgeBank:
   - {fileID: 11400000, guid: 87a8dd8f50806b7438786f5bb5eedd43, type: 2}
   - {fileID: 11400000, guid: 4c31d22e5839bb84d8753d62889b1b04, type: 2}
@@ -23,7 +23,7 @@ MonoBehaviour:
   knowledgeImgBank: []
   lastSafeSpotMap: 
   knowledgeSlots: 4
-  actualOrder: 192
+  actualOrder: 200
   maxOrder: 200
   actualChaos: 50
   maxChaos: 50
