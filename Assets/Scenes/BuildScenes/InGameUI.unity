@@ -4963,6 +4963,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694544027}
   m_CullTransparentMesh: 1
+--- !u!114 &705416883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2623961625652901500, guid: f38e014471da18541ac13e62be7ca415, type: 3}
+  m_PrefabInstance: {fileID: 1075236130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &713449520
 GameObject:
   m_ObjectHideFlags: 0
@@ -11405,13 +11416,6 @@ MonoBehaviour:
   - {fileID: 956584181}
   - {fileID: 1370964036}
   - {fileID: 442597183}
-  knowledgeKnownSprites:
-  - {fileID: 21300000, guid: 6e7a503b69e456647980d8369e786894, type: 3}
-  - {fileID: 21300000, guid: c3f85852f6d72b444976df19e4599a15, type: 3}
-  - {fileID: 21300000, guid: bb656f9720ed1844dace55e4fad5f2ed, type: 3}
-  - {fileID: 21300000, guid: 9e0afdbfaa7d3a540aff6b76879351ed, type: 3}
-  - {fileID: 21300000, guid: 9d03ca63aae3d9c45885e3c12605938b, type: 3}
-  - {fileID: 21300000, guid: 9039251667627064092153c68884c4bd, type: 3}
   disabledKnowledgeSprite: {fileID: 21300000, guid: f652f0d16b19d0f4e80cc05cadeaba9a, type: 3}
   knowledgesEquippedInventory:
   - {fileID: 1156605100}
@@ -13989,6 +13993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: aeda7b6a8df7f4a418a9b149cdc6141b, type: 2}
+  uiImage: {fileID: 705416883}
 --- !u!1 &1800672602
 GameObject:
   m_ObjectHideFlags: 0

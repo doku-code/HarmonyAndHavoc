@@ -41,14 +41,18 @@ namespace JFM
 
         private void OnLand(int value)
         {
-            if (value == 0)
-            {
-                PlaySound(SoundGroupID.LANDING);
-            }
+            //if (value == 0)
+            //{
+            //PlaySound(SoundGroupID.LANDING);
+            Debug.Log($"Land ={value}");
+            SoundGroupID soundGroupID = SoundGroupID.LANDING;
+            SoundGroup group = soundGroups.First(x => x.id == soundGroupID);
+            SoundManager.Instance.PlayFullTimeFxClip(group.sounds[0]);
+            /*}
             else
             {
                 PlayRandomSound(SoundGroupID.LANDING, 1, 3);
-            }
+            }*/
         }
 
         private void OnJump()

@@ -12,7 +12,7 @@ public class DropKnowledge : MonoBehaviour
 
     void Awake()
     {        
-        if (GameManager.Instance.data.CurrentPlayerMapProgression[GameManager.Instance.currentMap])
+        if (GameManager.Instance.data.KnownKnowledgeDictionary[knowledgeToDrop])
         {
             return;
         }
