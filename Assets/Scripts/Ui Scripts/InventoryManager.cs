@@ -90,6 +90,10 @@ namespace AF
             //Calculate knowledge cost 
             currentCapacityKnowledge = CalculateCurrentKnowledgeCost();
             //Heart Pieces Actualization
+            for (int i = 0; i < quarterOrderPieces.Length; i++)
+            {
+                quarterOrderPieces[i].SetActive(false);
+            }
             for (int i = 0; i < playerData.OrderFragments; i++)
             {
                 quarterOrderPieces[i].SetActive(true);
