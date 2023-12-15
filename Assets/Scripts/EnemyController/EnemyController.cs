@@ -22,6 +22,9 @@ namespace charles
         private bool canTakeDamage = true;
         //[SerializeField] private float damageCooldown = 0f;
         [SerializeField] private float deathDuration = 3.0f;
+
+        private float initialLocalScaleX;
+
         public bool IsKnockedBack { get => isKnockedBack; }
         public bool CanTakeDamage { get => canTakeDamage; }
         public bool IsDead { get => currentHealth <= 0; }
@@ -52,10 +55,10 @@ namespace charles
         {
             return tree;
         }
-
+        
         public void TurnSide(float side)
         {
-            transform.localScale = new Vector3(side * transform.localScale.x, 1.0f, 1.0f);
+            transform.localScale = new Vector3(side * initialLocalScaleX, 1.0f, 1.0f);
             blackboard.healthBar.localScale = new Vector3(-side, 1.0f, 1.0f);
             //Debug.Log($"blackboard.healthBar.localScale.x={blackboard.healthBar.localScale.x} side={side} blackboard.healthBar.gameObject={blackboard.healthBar.gameObject.name}");            
         }
@@ -83,6 +86,8 @@ namespace charles
             blackboard.healthBar.localScale = new Vector3(-transform.localScale.x, 1.0f, 1.0f);
 
             currentHealth = maxHealth;
+
+            initialLocalScaleX = transform.localScale.x;
 
             StartBehaviorTree();
         }
