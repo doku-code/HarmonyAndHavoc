@@ -9,8 +9,7 @@ public class DebugFunction : MonoBehaviour
 
     public void ModifyTimeScale(float timeScaleValue)
     {
-        Time.timeScale = timeScaleValue;
-        Debug.Log("This is called");
+        Time.timeScale = timeScaleValue;        
     }
 
     public void ChangeScene(string index)

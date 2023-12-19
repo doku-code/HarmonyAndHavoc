@@ -39,6 +39,11 @@ namespace charles
         [Header("Command List")]
         public List<object> commandList;
         private static DebugController instance;
+
+        private bool showErrorMessage;
+        private float showErrorStartTime;
+        [SerializeField] private float errorMessageDuration = 3.0f;
+
         private void Awake()
         {
             if (instance == null)
@@ -142,12 +147,22 @@ namespace charles
 
         public void OnToggleDebug(InputAction.CallbackContext value)
         {
-            showConsole = !showConsole;
+            if (value.phase == InputActionPhase.Performed)
+            {
+                showConsole = !showConsole;
+                Time.timeScale = showConsole ? 0 : 1;
+
+                // Let error message's duration start from now
+                if (showErrorMessage)
+                {
+                    showErrorStartTime = Time.time;
+                }
+            }
         }
 
         public void OnReturn(InputAction.CallbackContext value)
         {
-            if (showConsole)
+            if (showConsole && value.phase == InputActionPhase.Performed)
             {
                 HandleInput();
                 input = "";
@@ -155,7 +170,7 @@ namespace charles
         }
         public void OnTextInput(InputAction.CallbackContext value)
         {
-            if (showConsole)
+            if (showConsole && value.phase == InputActionPhase.Performed)
             {
                 object inputObject = value.ReadValueAsObject();
 
@@ -201,12 +216,12 @@ namespace charles
                 }
             }
         }
-
+        
         private void OnGUI()
         {
             if (!showConsole)
             {
-                Time.timeScale = 1f;
+                //Time.timeScale = 1f;
                 return;
             }
             float screenWidth = Screen.width;
@@ -216,11 +231,11 @@ namespace charles
 
             GUI.skin.textField.fontSize = (int)fontSize;
             GUI.skin.label.fontSize = (int)fontSize;
-           if(showConsole)
+            if(showConsole)
             {
-                Time.timeScale = 0f;
+                //Time.timeScale = 0f;
             }
-
+            int i = 0;
             if (showHelp)
             {
                 GUI.Box(new Rect(0f, y, screenWidth, screenHeight * 0.2f), "");
@@ -229,7 +244,7 @@ namespace charles
 
                 scroll = GUI.BeginScrollView(new Rect(0, y + screenHeight * 0.05f, screenWidth, screenHeight * 0.18f), scroll, viewport);
 
-                for (int i = 0; i < commandList.Count; i++)
+                for (; i < commandList.Count; i++)
                 {
                     DebugCommandBase command = commandList[i] as DebugCommandBase;
 
@@ -241,7 +256,23 @@ namespace charles
                 }
                 GUI.EndScrollView();
 
-                y += screenHeight * 0.2f;
+                y += screenHeight * 0.2f;            
+            }
+
+            if (showErrorMessage)
+            {
+                Debug.Log($"{Time.time} - {showErrorStartTime} < {errorMessageDuration}");
+                if (Time.time - showErrorStartTime < errorMessageDuration)
+                {
+                    Color oldColor = GUI.color;
+                    GUI.color = Color.red;
+                    GUI.Label(new Rect(5f, 0, screenWidth - 30f - 100f, screenHeight * 0.1f), "Command error!!!");
+                    GUI.color = oldColor;
+                }
+                else
+                {
+                    showErrorMessage = false;
+                }
             }
 
             GUI.Box(new Rect(0, y, screenWidth, screenHeight * 0.05f), "");
@@ -257,8 +288,8 @@ namespace charles
         private void HandleInput()
         {
             string[] properties = input.Split(' ');
-
-            for (int i = 0; i < commandList.Count; i++)
+            bool commandFound = false;
+            for (int i = 0; i < commandList.Count && !commandFound; i++)
             {
                 DebugCommandBase commandBase = commandList[i] as DebugCommandBase;
 
@@ -267,12 +298,14 @@ namespace charles
                     if (commandList[i] is DebugCommand)
                     {
                         (commandList[i] as DebugCommand).Invoke();
+                        commandFound = true;
                     }
                     else if (commandList[i] is DebugCommand<int>)
                     {
                         if (properties.Length > 1 && int.TryParse(properties[1], out int intValue))
                         {
                             (commandList[i] as DebugCommand<int>).Invoke(intValue);
+                            commandFound = true;
                         }
                     }
                     else if (commandList[i] is DebugCommand<float>)
@@ -280,6 +313,7 @@ namespace charles
                         if (properties.Length > 1 && float.TryParse(properties[1], out float floatValue))
                         {
                             (commandList[i] as DebugCommand<float>).Invoke(floatValue);
+                            commandFound = true;
                         }
                     }
                     else if (commandList[i] is DebugCommand<string>)
@@ -287,12 +321,27 @@ namespace charles
                         if (properties.Length > 1)
                         {
                             (commandList[i] as DebugCommand<string>).Invoke(properties[1]);
+                            commandFound = true;
                         }
                     }
                 }
             }
-            commandHistory.Add(input);
-            historyIndex = commandHistory.Count;
+            if(commandFound)
+            {
+                commandHistory.Add(input);
+                historyIndex = commandHistory.Count;
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
+        }
+
+        private void ShowErrorMessage()
+        {
+            showErrorMessage = true;
+            showErrorStartTime = Time.time;
+            Debug.Log("Called!!!");
         }
     }
 }

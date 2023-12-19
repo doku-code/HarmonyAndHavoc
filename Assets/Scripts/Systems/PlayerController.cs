@@ -914,7 +914,7 @@ namespace JFM
             playerData.OnDeadDelegate += OnDead;
             playerData.OnOrderDelegate += OnOrderChange;
             InitializeKnowledges();
-
+            Debug.Log($"Player's Y={transform.position.y}");
             SetHighestAirborneY(true);
 
             attackCoolDownStartTime = Time.time;

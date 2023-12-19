@@ -98,6 +98,7 @@ namespace AF
             {
                 quarterOrderPieces[i].SetActive(true);
             }
+
         }
 
         private void InitializeKnowledgeSprites()
